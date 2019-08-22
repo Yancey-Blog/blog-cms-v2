@@ -157,7 +157,7 @@
     "standard-version": "^7.0.0"
   },
   "lint-staged": {
-    "*.{js,css,json,md}": [
+    "*.{ts,js,scss,css}": [
       "prettier --write",
       "eslint",
       "git add"
