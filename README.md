@@ -14,14 +14,13 @@ The Content Management System for Yancey Blog.
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 ![Code Style](https://camo.githubusercontent.com/c83b8df34339bd302b7fd3fbb631f99ba25f87f8/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f636f64655f7374796c652d70726574746965722d6666363962342e737667)
 [![Version](https://img.shields.io/badge/version-0.1.1-blue.svg)](https://github.com/Yancey-Blog/blog-cms-v2)
-[![Node](https://img.shields.io/badge/node-%3E%3D10.0.0-black.svg)](https://github.com/Yancey-Blog/blog-cms-v2)
+[![Node](https://img.shields.io/badge/node-%3E%3D10.0.0-orange.svg)](https://github.com/Yancey-Blog/blog-cms-v2)
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/Yancey-Blog/BLOG_FE/pulls)
 [![Gitter](https://badges.gitter.im/yancey-official/community.svg)](https://gitter.im/yancey-official/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![David-Dm](https://david-dm.org/Yancey-Blog/blog-cms-v2.svg)](https://david-dm.org/Yancey-Blog/blog-cms-v2)
 [![David-Dm](https://david-dm.org/Yancey-Blog/blog-cms-v2/dev-status.svg)](https://david-dm.org/ant-design/ant-design?type=dev)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FYancey-Blog%2Fblog-cms-v2.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FYancey-Blog%2Fblog-cms-v2?ref=badge_shield)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-0.1.1-pink.svg)](https://conventionalcommits.org)
 
 </div>
 
