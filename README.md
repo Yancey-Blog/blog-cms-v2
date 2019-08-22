@@ -51,7 +51,11 @@ Uses `yarn commit` or `git cz` to instead the `git commit` command.
 
 ### `yarn release`
 
-Generates new Tag and CHANGELOG when you release a new version. Example: `yarn release -- --the-first-release`
+Generates new Tag and CHANGELOG when you release a new version.
+
+- yarn release -- --release-as patch
+- yarn release -- --release-as minor
+- yarn release -- --release-as major
 
 ## License
 
