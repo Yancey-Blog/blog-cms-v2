@@ -52,10 +52,10 @@ Uses `yarn commit` or `git cz` to instead the `git commit` command.
 
 Generates new Tag and CHANGELOG when you release a new version.
 
-- yarn release -- --release-as patch
-- yarn release -- --release-as minor
-- yarn release -- --release-as major
+- yarn release -- --release-as patch (v0.0.1)
+- yarn release -- --release-as minor (v0.1.0)
+- yarn release -- --release-as major (v1.0.0)
 
 ## License
 
-This project is licensed under the terms of the [MIT licensed](https://opensource.org/licenses/MIT).
+Blog CMS v2 is licensed under the terms of the [MIT licensed](https://opensource.org/licenses/MIT).
