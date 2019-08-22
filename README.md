@@ -13,7 +13,7 @@ The Content Management System for Yancey Blog.
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8301052718f145cb9be68a6a28717f41)](https://www.codacy.com/app/YanceyOfficial/blog-cms-v2?utm_source=github.com&utm_medium=referral&utm_content=Yancey-Blog/blog-cms-v2&utm_campaign=Badge_Grade)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 ![Code Style](https://camo.githubusercontent.com/c83b8df34339bd302b7fd3fbb631f99ba25f87f8/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f636f64655f7374796c652d70726574746965722d6666363962342e737667)
-[![Version](https://img.shields.io/badge/version-0.0.1-blue.svg)](https://github.com/Yancey-Blog/blog-cms-v2)
+[![Version](https://img.shields.io/badge/version-0.1.1-blue.svg)](https://github.com/Yancey-Blog/blog-cms-v2)
 [![Node](https://img.shields.io/badge/node-%3E%3D10.0.0-green.svg)](https://github.com/Yancey-Blog/blog-cms-v2)
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/Yancey-Blog/BLOG_FE/pulls)
