@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://ant.design">
-    <img width="200" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg">
+    <img width="200" src="https://camo.githubusercontent.com/77746c15b988a5f1b3f2579bd02f57f1e41444e1/68747470733a2f2f6d6174657269616c2d75692e636f6d2f7374617469632f696d616765732f6d6174657269616c2d75692d6c6f676f2e737667">
   </a>
 </p>
 
@@ -8,23 +8,21 @@
 
 <div align="center">
 
+The Content Management System for Yancey Blog.
+
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8301052718f145cb9be68a6a28717f41)](https://www.codacy.com/app/YanceyOfficial/blog-cms-v2?utm_source=github.com&utm_medium=referral&utm_content=Yancey-Blog/blog-cms-v2&utm_campaign=Badge_Grade)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 ![Code Style](https://camo.githubusercontent.com/c83b8df34339bd302b7fd3fbb631f99ba25f87f8/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f636f64655f7374796c652d70726574746965722d6666363962342e737667)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-0.0.1-yellow.svg)](https://opensource.org/licenses/MIT)
-
 [![Version](https://img.shields.io/badge/version-0.0.1-blue.svg)](https://github.com/Yancey-Blog/blog-cms-v2)
 [![Node](https://img.shields.io/badge/node-%3E%3D10.0.0-green.svg)](https://github.com/Yancey-Blog/blog-cms-v2)
+
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/Yancey-Blog/BLOG_FE/pulls)
 [![Gitter](https://badges.gitter.im/yancey-official/community.svg)](https://gitter.im/yancey-official/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-![David-Dm](https://david-dm.org/Yancey-Blog/blog-cms-v2.svg)
+[![David-Dm](https://david-dm.org/Yancey-Blog/blog-cms-v2.svg)](https://david-dm.org/Yancey-Blog/blog-cms-v2)
+[![David-Dm](https://david-dm.org/Yancey-Blog/blog-cms-v2/dev-status.svg)](https://david-dm.org/ant-design/ant-design?type=dev)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FYancey-Blog%2Fblog-cms-v2.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FYancey-Blog%2Fblog-cms-v2?ref=badge_shield)
 
 </div>
-
-## Introduction
-
-The official CMS for Yancey Blog.
 
 ## Environment Support
 
@@ -61,4 +59,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### License
 
-Copyright by [@marionebl](https://www.yanceyleo.com/). All **blog-be-v2** packages are released under the [MIT licensed](https://opensource.org/licenses/MIT).
+This project is licensed under the terms of the [MIT licensed](https://opensource.org/licenses/MIT).
