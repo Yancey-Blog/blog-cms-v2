@@ -1,5 +1,7 @@
 # Blog CMS v2
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3d967461c1d2478a91d1e9c539885d25)](https://app.codacy.com/app/YanceyOfficial/blog-cms-v2?utm_source=github.com&utm_medium=referral&utm_content=Yancey-Blog/blog-cms-v2&utm_campaign=Badge_Grade_Dashboard)
+
 ## Introduction
 
 The official CMS for Yancey Blog.
