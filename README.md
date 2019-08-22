@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://ant.design">
-    <img width="200" src="https://static.yancey.app/yancey-official-blog-logo.png">
+    <img width="200" src="https://static.yancey.app/logo_avatar.jpg">
   </a>
 </p>
 
