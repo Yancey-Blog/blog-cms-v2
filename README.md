@@ -1,5 +1,12 @@
 # Blog CMS v2
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8301052718f145cb9be68a6a28717f41)](https://www.codacy.com/app/YanceyOfficial/blog-cms-v2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Yancey-Blog/blog-cms-v2&amp;utm_campaign=Badge_Grade)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-0.0.1-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Version](https://img.shields.io/badge/version-0.0.1-blue.svg)](https://github.com/Yancey-Blog/blog-cms-v2)
+[![Node](https://img.shields.io/badge/node-%3E%3D10.0.0-green.svg)](https://github.com/Yancey-Blog/blog-cms-v2)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/Yancey-Blog/BLOG_FE/pulls)
+
 ## Introduction
 
 The official CMS for Yancey Blog.
@@ -31,6 +38,6 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-# License
+### License
 
 Copyright by [@marionebl](https://www.yanceyleo.com/). All **blog-be-v2** packages are released under the [MIT licensed](https://opensource.org/licenses/MIT).
