@@ -6,6 +6,7 @@
 [![Version](https://img.shields.io/badge/version-0.0.1-blue.svg)](https://github.com/Yancey-Blog/blog-cms-v2)
 [![Node](https://img.shields.io/badge/node-%3E%3D10.0.0-green.svg)](https://github.com/Yancey-Blog/blog-cms-v2)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/Yancey-Blog/BLOG_FE/pulls)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FYancey-Blog%2Fblog-cms-v2.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FYancey-Blog%2Fblog-cms-v2?ref=badge_shield)
 
 ## Introduction
 
@@ -41,3 +42,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### License
 
 Copyright by [@marionebl](https://www.yanceyleo.com/). All **blog-be-v2** packages are released under the [MIT licensed](https://opensource.org/licenses/MIT).
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FYancey-Blog%2Fblog-cms-v2.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FYancey-Blog%2Fblog-cms-v2?ref=badge_large)
