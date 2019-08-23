@@ -1,0 +1,10 @@
+$drawerWidth: 260px;
+
+.layouts {
+  min-height: 100vh;
+  background: $lightBg;
+}
+
+.drawer {
+  width: $drawerWidth;
+}
