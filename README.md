@@ -50,11 +50,11 @@ Builds the app for production to the `build` folder. It correctly bundles React 
 
 ### `yarn commit`
 
-Uses `yarn commit` or `git cz` to instead the `git commit` command.
+Uses `yarn commit` instead of `git commit`. [Commitizen](https://github.com/commitizen/cz-cli) will be installed when the app running at the first time. If install [Commitizen](https://github.com/commitizen/cz-cli) globally, you can also use `git cz` command (**Recommend**). We follow the Conventional Commits specification (Angular Team).
 
 ### `yarn release`
 
-Generates new Tag and CHANGELOG when you release a new version.
+Generates new Tag and CHANGELOG when you release a new version. For example:
 
 - yarn release -- --release-as patch (v0.0.1)
 - yarn release -- --release-as minor (v0.1.0)
