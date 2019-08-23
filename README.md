@@ -10,17 +10,21 @@
 
 The Content Management System for Yancey Blog.
 
+[![Build Status](https://travis-ci.com/Yancey-Blog/blog-cms-v2.svg?branch=master)](https://travis-ci.com/Yancey-Blog/blog-cms-v2)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8301052718f145cb9be68a6a28717f41)](https://www.codacy.com/app/YanceyOfficial/blog-cms-v2?utm_source=github.com&utm_medium=referral&utm_content=Yancey-Blog/blog-cms-v2&utm_campaign=Badge_Grade)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 ![Code Style](https://camo.githubusercontent.com/c83b8df34339bd302b7fd3fbb631f99ba25f87f8/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f636f64655f7374796c652d70726574746965722d6666363962342e737667)
+
 [![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/Yancey-Blog/blog-cms-v2)
 [![Node](https://img.shields.io/badge/node-%3E%3D10.0.0-orange.svg)](https://github.com/Yancey-Blog/blog-cms-v2)
-
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/Yancey-Blog/BLOG_FE/pulls)
 [![Gitter](https://badges.gitter.im/yancey-official/community.svg)](https://gitter.im/yancey-official/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![DependaBot](https://camo.githubusercontent.com/1fe7004c016a5ab641008b9579409c784eaa1725/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446570656e6461626f742d656e61626c65642d626c75652e737667)](https://dependabot.com/)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FYancey-Blog%2Fblog-cms-v2.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FYancey-Blog%2Fblog-cms-v2?ref=badge_shield)
+
 [![David-Dm](https://david-dm.org/Yancey-Blog/blog-cms-v2.svg)](https://david-dm.org/Yancey-Blog/blog-cms-v2)
 [![David-Dm](https://david-dm.org/Yancey-Blog/blog-cms-v2/dev-status.svg)](https://david-dm.org/ant-design/ant-design?type=dev)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FYancey-Blog%2Fblog-cms-v2.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FYancey-Blog%2Fblog-cms-v2?ref=badge_shield)
+[![David-Dm](https://david-dm.org/Yancey-Blog/blog-cms-v2/peer-status.svg)](https://david-dm.org/ant-design/ant-design?type=peer)
 
 </div>
 
