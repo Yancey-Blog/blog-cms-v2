@@ -1,10 +1,29 @@
-$drawerWidth: 260px;
+$drawerUnfold: 260px;
+$drawerFold: 56px;
 
-.layouts {
-  min-height: 100vh;
-  background: $lightBg;
+.root {
+  display: flex;
 }
 
 .drawer {
-  width: $drawerWidth;
+  width: $drawerUnfold;
+  white-space: nowrap;
+  transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+}
+
+.foldDrawer {
+  width: $drawerFold;
+  transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+}
+
+.main {
+  width: calc(100%-#{$drawerUnfold});
+  padding-left: $drawerUnfold;
+  transition: all 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+}
+
+.mainShift {
+  width: calc(100%-#{$drawerFold});
+  padding-left: $drawerFold;
+  transition: all 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
 }
