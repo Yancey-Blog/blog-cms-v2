@@ -2,8 +2,10 @@ import React, { FC, useState } from 'react'
 
 import Drawer from '@material-ui/core/Drawer'
 import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
 import List from '@material-ui/core/List'
+import Fab from '@material-ui/core/Fab'
+import Input from '@material-ui/core/Input'
+import Badge from '@material-ui/core/Badge'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
@@ -13,6 +15,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import InboxIcon from '@material-ui/icons/MoveToInbox'
 import MailIcon from '@material-ui/icons/Mail'
+import MoreVertIcon from '@material-ui/icons/MoreVert'
+import NotificationsIcon from '@material-ui/icons/Notifications'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 
 import styles from './Layouts.module.scss'
 import classNames from 'classnames'
@@ -32,20 +37,38 @@ const Layouts: FC = () => {
           [styles.mainShift]: !open,
         })}
       >
-        <AppBar position='relative'>
-          <Toolbar>
-            <IconButton
-              color='inherit'
-              aria-label='open drawer'
-              onClick={handleDrawerChange}
-              edge='start'
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant='h6' noWrap>
-              Mini variant drawer
+        <AppBar position='relative' className={styles.appBar}>
+          <div className={styles.left}>
+            <Fab size='small' aria-label='more' onClick={handleDrawerChange}>
+              <MoreVertIcon />
+            </Fab>
+            <Typography variant='h6' noWrap className={styles.title}>
+              CMS for Blog
             </Typography>
-          </Toolbar>
+          </div>
+          <div className={styles.right}>
+            <Input
+              placeholder='Search...'
+              inputProps={{
+                'aria-label': 'description',
+              }}
+            />
+            {[1, 2, 3, 4].map(val => (
+              <IconButton
+                aria-label='show 4 new mails'
+                color='inherit'
+                key={val}
+              >
+                <Badge badgeContent={val} color='secondary'>
+                  {val % 2 === 1 ? (
+                    <NotificationsIcon />
+                  ) : (
+                    <AccountCircleIcon />
+                  )}
+                </Badge>
+              </IconButton>
+            ))}
+          </div>
         </AppBar>
         <main className={styles.content}>
           <Typography paragraph>
@@ -65,18 +88,17 @@ const Layouts: FC = () => {
           </Typography>
         </main>
       </div>
-
       <Drawer variant='permanent'>
         <div
           className={classNames(styles.drawer, { [styles.foldDrawer]: !open })}
         >
-          <List>
+          <List className={styles.list}>
             {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
+              <ListItem button key={text}  >
+                <ListItemIcon className={styles.icon}>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={text} className={classNames(styles.drawerTxt,{[styles.hideDrawerTxt]: !open})} />
               </ListItem>
             ))}
           </List>
