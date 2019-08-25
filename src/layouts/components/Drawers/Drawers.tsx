@@ -18,6 +18,18 @@ const Drawers: FC<DrawersProps> = ({ open, active }) => {
   const handleDrawerChange = (path: string) => {
     setDrawerItem(path)
   }
+
+  const setItemStyle = (children: any[], curItem: string) => {
+    if (curItem === drawerItem) {
+      if (children.length > 0) {
+        return styles.activeDrawerItemHasChildren
+      } else {
+        return styles.activeDrawerItem
+      }
+    } else {
+      return false
+    }
+  }
   return (
     <Drawer
       variant='permanent'
@@ -62,9 +74,10 @@ const Drawers: FC<DrawersProps> = ({ open, active }) => {
             {routes.map(route => (
               <div className={styles.drawerList} key={route.name}>
                 <div
-                  className={classNames(styles.drawerItem, {
-                    [styles.activeDrawerItem]: active,
-                  })}
+                  className={classNames(
+                    styles.drawerItem,
+                    setItemStyle(route.children, route.path),
+                  )}
                   onClick={() => handleDrawerChange(route.path)}
                 >
                   <FontAwesomeIcon
@@ -79,33 +92,42 @@ const Drawers: FC<DrawersProps> = ({ open, active }) => {
                   >
                     <span className={styles.drawerTxt}>{route.name}</span>
                     {route.children.length !== 0 ? (
-                      <span className={styles.arrow} />
+                      <span
+                        className={classNames(styles.arrow, {
+                          [styles.reverseArrow]: drawerItem === route.path,
+                        })}
+                      />
                     ) : null}
                   </div>
                 </div>
-                <div
-                  className={classNames(styles.itemChildren, {
-                    [styles.activeItemChildren]: drawerItem === route.path,
-                  })}
-                >
-                  {route.children.map(child => (
-                    <div
-                      className={classNames(styles.drawerItem)}
-                      key={child.name}
-                    >
-                      <span className={styles.drawerItemIcon}>
-                        {getInitials(child.name)}
-                      </span>
+                {route.children.length !== 0 ? (
+                  <div
+                    className={classNames(styles.itemChildren, {
+                      [styles.activeItemChildren]: drawerItem === route.path,
+                    })}
+                  >
+                    {route.children.map(child => (
                       <div
-                        className={classNames(styles.drawerDetail, {
-                          [styles.hideDrawerDetail]: !open,
+                        className={classNames(styles.drawerItem, {
+                          [styles.activeDrawerItem]: drawerItem === child.path,
                         })}
+                        key={child.name}
+                        onClick={() => handleDrawerChange(child.path)}
                       >
-                        <span className={styles.drawerTxt}>{child.name}</span>
+                        <span className={styles.drawerItemIcon}>
+                          {getInitials(child.name)}
+                        </span>
+                        <div
+                          className={classNames(styles.drawerDetail, {
+                            [styles.hideDrawerDetail]: !open,
+                          })}
+                        >
+                          <span className={styles.drawerTxt}>{child.name}</span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                ) : null}
               </div>
             ))}
           </div>

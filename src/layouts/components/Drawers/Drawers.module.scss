@@ -114,6 +114,7 @@
   position: relative;
   margin-top: 10px;
   padding: 15px 0;
+  cursor: pointer;
   transition: all 300ms linear;
   &:hover {
     // background-color: rgba(200, 200, 200, 0.2);
@@ -127,6 +128,11 @@
     0 4px 20px 0 rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 172, 193, 0.2);
   background-color: #00acc1;
   border-radius: 3px;
+}
+
+.activeDrawerItemHasChildren {
+  border-radius: 3px;
+  background-color: rgba(200, 200, 200, 0.2);
 }
 
 .drawerItemIcon {
@@ -159,4 +165,10 @@
   transition: all 150ms ease-in;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
+  transition: all 300ms linear;
+}
+
+.reverseArrow {
+  transform: rotate(180deg);
+  transition: all 300ms linear;
 }
