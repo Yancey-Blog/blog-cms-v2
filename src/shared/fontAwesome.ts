@@ -9,6 +9,11 @@ import {
   faInfoCircle,
   faTachometerAlt,
   faCalendarAlt,
+  faHeadphonesAlt,
+  faHome,
+  faBlog,
+  faKissWinkHeart,
+  faCog,
 } from '@fortawesome/free-solid-svg-icons'
 
 import { faReact } from '@fortawesome/free-brands-svg-icons'
@@ -24,4 +29,9 @@ export default library.add(
   faReact,
   faTachometerAlt,
   faCalendarAlt,
+  faHeadphonesAlt,
+  faHome,
+  faBlog,
+  faKissWinkHeart,
+  faCog,
 )
