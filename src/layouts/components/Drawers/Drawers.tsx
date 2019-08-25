@@ -1,40 +1,110 @@
 import React, { FC } from 'react'
 import Drawer from '@material-ui/core/Drawer'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import InboxIcon from '@material-ui/icons/MoveToInbox'
-import MailIcon from '@material-ui/icons/Mail'
+import Avatar from '@material-ui/core/Avatar'
 import styles from './Drawers.module.scss'
 import classNames from 'classnames'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 interface DrawersProps {
   open: boolean
+  active: boolean
 }
 
-const Drawers: FC<DrawersProps> = ({ open }) => {
+const Drawers: FC<DrawersProps> = ({ open, active }) => {
   return (
-    <Drawer variant='permanent'>
-      <div
+    <Drawer
+      variant='permanent'
+      classes={{
+        paper: styles.drawerContainer,
+      }}
+    >
+      <section
         className={classNames(styles.drawer, { [styles.foldDrawer]: !open })}
       >
-        <List className={styles.drawerList}>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon className={styles.drawerListIcon}>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText
-                primary={text}
-                className={classNames(styles.drawerTxt, {
-                  [styles.hideDrawerTxt]: !open,
-                })}
+        <div className={styles.drawerContent}>
+          <div className={styles.drawerTitle}>
+            <FontAwesomeIcon
+              icon={['fab', 'react']}
+              className={styles.drawLogo}
+            />
+            <span
+              className={classNames(styles.drawerDetail, {
+                [styles.hideDrawerDetail]: !open,
+              })}
+            >
+              CREATIVE TIM
+            </span>
+          </div>
+          <div className={classNames(styles.drawerUser)}>
+            <Avatar
+              alt='Remy Sharp'
+              src='https://yancey-assets.oss-cn-beijing.aliyuncs.com/_Users_licaifan_Desktop_11532336786_.pic_hd.jpg'
+              className={styles.avater}
+            />
+            <div
+              className={classNames(styles.drawerDetail, {
+                [styles.hideDrawerDetail]: !open,
+              })}
+            >
+              <span className={styles.drawerTxt}>Yancey Leo</span>
+              <span className={styles.arrow} />
+            </div>
+          </div>
+          <div className={classNames(styles.drawerList)}>
+            <div className={classNames(styles.drawerItem)}>
+              <FontAwesomeIcon
+                icon='calendar-alt'
+                className={styles.drawerItemIcon}
               />
-            </ListItem>
-          ))}
-        </List>
-      </div>
+              <div
+                className={classNames(styles.drawerDetail, {
+                  [styles.hideDrawerDetail]: !open,
+                })}
+              >
+                <span className={styles.drawerTxt}>DashBoard</span>
+                <span className={styles.arrow} />
+              </div>
+            </div>
+          </div>
+          <div className={classNames(styles.drawerList)}>
+            <div className={classNames(styles.drawerItem)}>
+              <FontAwesomeIcon
+                icon='calendar-alt'
+                className={styles.drawerItemIcon}
+              />
+              <div
+                className={classNames(styles.drawerDetail, {
+                  [styles.hideDrawerDetail]: !open,
+                })}
+              >
+                <span className={styles.drawerTxt}>DashBoard</span>
+                <span className={styles.arrow} />
+              </div>
+            </div>
+          </div>
+          <div className={classNames(styles.drawerList)}>
+            <div
+              className={classNames(styles.drawerItem, {
+                [styles.activeDrawerItem]: active,
+              })}
+            >
+              <FontAwesomeIcon
+                icon='calendar-alt'
+                className={styles.drawerItemIcon}
+              />
+              <div
+                className={classNames(styles.drawerDetail, {
+                  [styles.hideDrawerDetail]: !open,
+                })}
+              >
+                <span className={styles.drawerTxt}>DashBoard</span>
+                <span className={styles.arrow} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </Drawer>
   )
 }
