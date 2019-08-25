@@ -434,8 +434,9 @@ module.exports = function(webpackEnv) {
               use: getStyleLoaders({
                 importLoaders: 1,
                 sourceMap: isEnvProduction && shouldUseSourceMap,
-                modules: true,
-                getLocalIdent: getCSSModuleLocalIdent,
+                modules: {
+                  localIdentName: '[name]__[local]___[hash:base64:5]',
+                },
               }),
             },
             // Opt-in support for SASS (using .scss or .sass extensions).
@@ -444,13 +445,21 @@ module.exports = function(webpackEnv) {
             {
               test: sassRegex,
               exclude: sassModuleRegex,
-              use: getStyleLoaders(
+              use: [
                 {
-                  importLoaders: 2,
-                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                  loader: require.resolve('style-loader'),
                 },
-                'sass-loader',
-              ),
+                {
+                  loader: require.resolve('css-loader'),
+                  options: {
+                    importLoaders: 2,
+                    sourceMap: isEnvProduction && shouldUseSourceMap,
+                  },
+                },
+                {
+                  loader: require.resolve('sass-loader'),
+                },
+              ],
               // Don't consider CSS imports dead code even if the
               // containing package claims to have no side effects.
               // Remove this when webpack adds a warning or an error for this.
@@ -461,15 +470,43 @@ module.exports = function(webpackEnv) {
             // using the extension .module.scss or .module.sass
             {
               test: sassModuleRegex,
-              use: getStyleLoaders(
+              use: [
                 {
-                  importLoaders: 2,
-                  sourceMap: isEnvProduction && shouldUseSourceMap,
-                  modules: true,
-                  getLocalIdent: getCSSModuleLocalIdent,
+                  loader: require.resolve('style-loader'),
                 },
-                'sass-loader',
-              ),
+                {
+                  loader: require.resolve('css-loader'),
+                  options: {
+                    importLoaders: 2,
+                    sourceMap: isEnvProduction && shouldUseSourceMap,
+                    modules: {
+                      localIdentName: '[name]__[local]___[hash:base64:5]',
+                    },
+                  },
+                },
+                {
+                  loader: require.resolve('sass-loader'),
+                },
+                {
+                  loader: require.resolve('sass-resources-loader'),
+                  options: {
+                    resources: [
+                      path.resolve(
+                        __dirname,
+                        '../src/assets/styles/_variables.scss',
+                      ),
+                      path.resolve(
+                        __dirname,
+                        '../src/assets/styles/_functions.scss',
+                      ),
+                      path.resolve(
+                        __dirname,
+                        '../src/assets/styles/_mixins.scss',
+                      ),
+                    ],
+                  },
+                },
+              ],
             },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
