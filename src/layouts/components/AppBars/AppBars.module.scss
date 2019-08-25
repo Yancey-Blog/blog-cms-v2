@@ -1,0 +1,19 @@
+.appBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row !important;
+  padding: 24px;
+  background: transparent !important;
+  color: $lightTxt !important;
+  box-shadow: none !important;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  padding-left: 30px;
+}
