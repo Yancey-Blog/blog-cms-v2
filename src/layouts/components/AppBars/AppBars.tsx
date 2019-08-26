@@ -5,9 +5,7 @@ import Input from '@material-ui/core/Input'
 import Badge from '@material-ui/core/Badge'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
-import NotificationsIcon from '@material-ui/icons/Notifications'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './AppBars.module.scss'
 
 const AppBars: FC<any> = ({ handleDrawerChange }) => {
@@ -15,7 +13,7 @@ const AppBars: FC<any> = ({ handleDrawerChange }) => {
     <AppBar position='relative' className={styles.appBar}>
       <div className={styles.left}>
         <Fab size='small' aria-label='more' onClick={handleDrawerChange}>
-          <MoreVertIcon />
+          <FontAwesomeIcon icon={['fab', 'react']} />
         </Fab>
         <Typography variant='h6' noWrap className={styles.title}>
           CMS for Blog
@@ -31,7 +29,7 @@ const AppBars: FC<any> = ({ handleDrawerChange }) => {
         {[1, 2, 3, 4].map(val => (
           <IconButton aria-label='show 4 new mails' color='inherit' key={val}>
             <Badge badgeContent={val} color='secondary'>
-              {val % 2 === 1 ? <NotificationsIcon /> : <AccountCircleIcon />}
+              <FontAwesomeIcon icon={['fab', 'react']} />
             </Badge>
           </IconButton>
         ))}

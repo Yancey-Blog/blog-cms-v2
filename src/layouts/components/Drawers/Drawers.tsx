@@ -1,17 +1,45 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import Drawer from '@material-ui/core/Drawer'
 import Avatar from '@material-ui/core/Avatar'
 import styles from './Drawers.module.scss'
 import classNames from 'classnames'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import routes, { BaseRoute } from './Routes'
+import { getInitials } from 'shared/utils'
 
 interface DrawersProps {
   open: boolean
-  active: boolean
 }
 
-const Drawers: FC<DrawersProps> = ({ open, active }) => {
+const Drawers: FC<DrawersProps> = ({ open }) => {
+  const [drawerItem, setDrawerItem] = useState({
+    parent: '',
+    child: '',
+  })
+
+  const handleDrawerChange = (route: any) =>
+    route.children
+      ? setDrawerItem({
+          ...drawerItem,
+          parent:
+            route.children.length !== 0
+              ? drawerItem.parent === route.path
+                ? ''
+                : route.path
+              : route.path,
+          child: route.children.length !== 0 ? drawerItem.child : '',
+        })
+      : setDrawerItem({ ...drawerItem, child: route.path })
+
+  const setItemStyle = (children: BaseRoute[], curItem: string) => {
+    if (curItem === drawerItem.parent) {
+      if (children.length > 0) {
+        return styles.activeDrawerItemHasChildren
+      } else {
+        return styles.activeDrawerItem
+      }
+    }
+  }
   return (
     <Drawer
       variant='permanent'
@@ -33,13 +61,13 @@ const Drawers: FC<DrawersProps> = ({ open, active }) => {
                 [styles.hideDrawerDetail]: !open,
               })}
             >
-              CREATIVE TIM
+              BLOG CMS
             </span>
           </div>
           <div className={classNames(styles.drawerUser)}>
             <Avatar
               alt='Remy Sharp'
-              src='https://yancey-assets.oss-cn-beijing.aliyuncs.com/_Users_licaifan_Desktop_11532336786_.pic_hd.jpg'
+              src='https://static.yanceyleo.com/_Users_licaifan_Desktop_11532336786_.pic_hd.jpg'
               className={styles.avater}
             />
             <div
@@ -51,58 +79,72 @@ const Drawers: FC<DrawersProps> = ({ open, active }) => {
               <span className={styles.arrow} />
             </div>
           </div>
-          <div className={classNames(styles.drawerList)}>
-            <div className={classNames(styles.drawerItem)}>
-              <FontAwesomeIcon
-                icon='calendar-alt'
-                className={styles.drawerItemIcon}
-              />
+
+          {routes.map(route => (
+            <div className={styles.drawerList} key={route.name}>
               <div
-                className={classNames(styles.drawerDetail, {
-                  [styles.hideDrawerDetail]: !open,
-                })}
+                className={classNames(
+                  styles.drawerItem,
+                  setItemStyle(route.children, route.path),
+                )}
+                onClick={() => handleDrawerChange(route)}
               >
-                <span className={styles.drawerTxt}>DashBoard</span>
-                <span className={styles.arrow} />
+                <FontAwesomeIcon
+                  // @ts-ignore
+                  icon={route.icon}
+                  className={styles.drawerItemIcon}
+                />
+                <div
+                  className={classNames(styles.drawerDetail, {
+                    [styles.hideDrawerDetail]: !open,
+                  })}
+                >
+                  <span className={styles.drawerTxt}>{route.name}</span>
+                  {route.children.length !== 0 ? (
+                    <span
+                      className={classNames(styles.arrow, {
+                        [styles.reverseArrow]: drawerItem.parent === route.path,
+                      })}
+                    />
+                  ) : null}
+                </div>
               </div>
+              {route.children.length !== 0 ? (
+                <div
+                  className={classNames(styles.itemChildren, {
+                    [styles.activeItemChildren]:
+                      drawerItem.parent === route.path,
+                  })}
+                >
+                  {route.children.map(child => (
+                    <div
+                      className={classNames(
+                        styles.drawerItem,
+                        styles.drawerItemChildren,
+                        {
+                          [styles.activeDrawerItem]:
+                            drawerItem.child === child.path,
+                        },
+                      )}
+                      key={child.name}
+                      onClick={() => handleDrawerChange(child)}
+                    >
+                      <span className={styles.drawerItemIcon}>
+                        {getInitials(child.name)}
+                      </span>
+                      <div
+                        className={classNames(styles.drawerDetail, {
+                          [styles.hideDrawerDetail]: !open,
+                        })}
+                      >
+                        <span className={styles.drawerTxt}>{child.name}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
             </div>
-          </div>
-          <div className={classNames(styles.drawerList)}>
-            <div className={classNames(styles.drawerItem)}>
-              <FontAwesomeIcon
-                icon='calendar-alt'
-                className={styles.drawerItemIcon}
-              />
-              <div
-                className={classNames(styles.drawerDetail, {
-                  [styles.hideDrawerDetail]: !open,
-                })}
-              >
-                <span className={styles.drawerTxt}>DashBoard</span>
-                <span className={styles.arrow} />
-              </div>
-            </div>
-          </div>
-          <div className={classNames(styles.drawerList)}>
-            <div
-              className={classNames(styles.drawerItem, {
-                [styles.activeDrawerItem]: active,
-              })}
-            >
-              <FontAwesomeIcon
-                icon='calendar-alt'
-                className={styles.drawerItemIcon}
-              />
-              <div
-                className={classNames(styles.drawerDetail, {
-                  [styles.hideDrawerDetail]: !open,
-                })}
-              >
-                <span className={styles.drawerTxt}>DashBoard</span>
-                <span className={styles.arrow} />
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
     </Drawer>
