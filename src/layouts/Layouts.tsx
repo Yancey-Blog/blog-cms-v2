@@ -24,7 +24,7 @@ const Layouts: FC = () => {
         <AppBars handleDrawerChange={handleDrawerChange} />
         <Mains />
       </div>
-      <Drawers open={open} active={true} />
+      <Drawers open={open} />
     </div>
   )
 }

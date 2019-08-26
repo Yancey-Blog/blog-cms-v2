@@ -9,25 +9,31 @@ import { getInitials } from 'shared/utils'
 
 interface DrawersProps {
   open: boolean
-  active: boolean
 }
 
-const Drawers: FC<DrawersProps> = ({ open, active }) => {
-  const [drawerItem, setDrawerItem] = useState('')
+const Drawers: FC<DrawersProps> = ({ open }) => {
+  const [drawerItem, setDrawerItem] = useState({
+    parent: '',
+    child: '',
+  })     
 
-  const handleDrawerChange = (path: string) => {
-    setDrawerItem(path)
+  const handleDrawerChange = (type: string, path: string) => {
+    type === 'parent'
+      ? setDrawerItem({
+          ...drawerItem,
+          parent: drawerItem.parent === path ? '' : path,
+          child: drawerItem.parent === path ? drawerItem.child : '',
+        })
+      : setDrawerItem({ ...drawerItem, child: path })
   }
 
   const setItemStyle = (children: any[], curItem: string) => {
-    if (curItem === drawerItem) {
+    if (curItem === drawerItem.parent) {
       if (children.length > 0) {
         return styles.activeDrawerItemHasChildren
       } else {
         return styles.activeDrawerItem
       }
-    } else {
-      return false
     }
   }
   return (
@@ -70,67 +76,71 @@ const Drawers: FC<DrawersProps> = ({ open, active }) => {
             </div>
           </div>
 
-          <div className={classNames(styles.xxxxxxxx)}>
-            {routes.map(route => (
-              <div className={styles.drawerList} key={route.name}>
+          {routes.map(route => (
+            <div className={styles.drawerList} key={route.name}>
+              <div
+                className={classNames(
+                  styles.drawerItem,
+                  setItemStyle(route.children, route.path),
+                )}
+                onClick={() => handleDrawerChange('parent', route.path)}
+              >
+                <FontAwesomeIcon
+                  // @ts-ignore
+                  icon={route.icon}
+                  className={styles.drawerItemIcon}
+                />
                 <div
-                  className={classNames(
-                    styles.drawerItem,
-                    setItemStyle(route.children, route.path),
-                  )}
-                  onClick={() => handleDrawerChange(route.path)}
+                  className={classNames(styles.drawerDetail, {
+                    [styles.hideDrawerDetail]: !open,
+                  })}
                 >
-                  <FontAwesomeIcon
-                    // @ts-ignore
-                    icon={route.icon}
-                    className={styles.drawerItemIcon}
-                  />
-                  <div
-                    className={classNames(styles.drawerDetail, {
-                      [styles.hideDrawerDetail]: !open,
-                    })}
-                  >
-                    <span className={styles.drawerTxt}>{route.name}</span>
-                    {route.children.length !== 0 ? (
-                      <span
-                        className={classNames(styles.arrow, {
-                          [styles.reverseArrow]: drawerItem === route.path,
-                        })}
-                      />
-                    ) : null}
-                  </div>
+                  <span className={styles.drawerTxt}>{route.name}</span>
+                  {route.children.length !== 0 ? (
+                    <span
+                      className={classNames(styles.arrow, {
+                        [styles.reverseArrow]: drawerItem.parent === route.path,
+                      })}
+                    />
+                  ) : null}
                 </div>
-                {route.children.length !== 0 ? (
-                  <div
-                    className={classNames(styles.itemChildren, {
-                      [styles.activeItemChildren]: drawerItem === route.path,
-                    })}
-                  >
-                    {route.children.map(child => (
-                      <div
-                        className={classNames(styles.drawerItem, {
-                          [styles.activeDrawerItem]: drawerItem === child.path,
-                        })}
-                        key={child.name}
-                        onClick={() => handleDrawerChange(child.path)}
-                      >
-                        <span className={styles.drawerItemIcon}>
-                          {getInitials(child.name)}
-                        </span>
-                        <div
-                          className={classNames(styles.drawerDetail, {
-                            [styles.hideDrawerDetail]: !open,
-                          })}
-                        >
-                          <span className={styles.drawerTxt}>{child.name}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : null}
               </div>
-            ))}
-          </div>
+              {route.children.length !== 0 ? (
+                <div
+                  className={classNames(styles.itemChildren, {
+                    [styles.activeItemChildren]:
+                      drawerItem.parent === route.path,
+                  })}
+                >
+                  {route.children.map(child => (
+                    <div
+                      className={classNames(
+                        styles.drawerItem,
+                        styles.drawerItemChildren,
+                        {
+                          [styles.activeDrawerItem]:
+                            drawerItem.child === child.path,
+                        },
+                      )}
+                      key={child.name}
+                      onClick={() => handleDrawerChange('child', child.path)}
+                    >
+                      <span className={styles.drawerItemIcon}>
+                        {getInitials(child.name)}
+                      </span>
+                      <div
+                        className={classNames(styles.drawerDetail, {
+                          [styles.hideDrawerDetail]: !open,
+                        })}
+                      >
+                        <span className={styles.drawerTxt}>{child.name}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          ))}
         </div>
       </section>
     </Drawer>
