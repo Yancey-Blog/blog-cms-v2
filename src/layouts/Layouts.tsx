@@ -5,7 +5,6 @@ import classNames from 'classnames'
 import AppBars from './components/AppBars/AppBars'
 import Drawers from './components/Drawers/Drawers'
 import Mains from './components/Mains/Mains'
-import './components/FontAwesome/FontAwesome'
 
 const Layouts: FC = () => {
   const [open, setOpen] = useState(true)
@@ -25,7 +24,7 @@ const Layouts: FC = () => {
         <AppBars handleDrawerChange={handleDrawerChange} />
         <Mains />
       </div>
-      <Drawers open={open} active={true} />
+      <Drawers open={open} />
     </div>
   )
 }
