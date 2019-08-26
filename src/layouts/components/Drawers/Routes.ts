@@ -1,4 +1,14 @@
-const routes = [
+export interface BaseRoute {
+  name: string
+  path: string
+}
+
+export interface Route extends BaseRoute {
+  icon: string
+  children: BaseRoute[]
+}
+
+const routes: Route[] = [
   {
     name: 'Dashborad',
     path: '/dashborad',

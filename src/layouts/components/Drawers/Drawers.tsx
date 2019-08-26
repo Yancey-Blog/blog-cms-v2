@@ -4,7 +4,7 @@ import Avatar from '@material-ui/core/Avatar'
 import styles from './Drawers.module.scss'
 import classNames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import routes from './Routes'
+import routes, { BaseRoute } from './Routes'
 import { getInitials } from 'shared/utils'
 
 interface DrawersProps {
@@ -15,19 +15,23 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
   const [drawerItem, setDrawerItem] = useState({
     parent: '',
     child: '',
-  })     
+  })
 
-  const handleDrawerChange = (type: string, path: string) => {
-    type === 'parent'
+  const handleDrawerChange = (route: any) =>
+    route.children
       ? setDrawerItem({
           ...drawerItem,
-          parent: drawerItem.parent === path ? '' : path,
-          child: drawerItem.parent === path ? drawerItem.child : '',
+          parent:
+            route.children.length !== 0
+              ? drawerItem.parent === route.path
+                ? ''
+                : route.path
+              : route.path,
+          child: route.children.length !== 0 ? drawerItem.child : '',
         })
-      : setDrawerItem({ ...drawerItem, child: path })
-  }
+      : setDrawerItem({ ...drawerItem, child: route.path })
 
-  const setItemStyle = (children: any[], curItem: string) => {
+  const setItemStyle = (children: BaseRoute[], curItem: string) => {
     if (curItem === drawerItem.parent) {
       if (children.length > 0) {
         return styles.activeDrawerItemHasChildren
@@ -63,7 +67,7 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
           <div className={classNames(styles.drawerUser)}>
             <Avatar
               alt='Remy Sharp'
-              src='https://yancey-assets.oss-cn-beijing.aliyuncs.com/_Users_licaifan_Desktop_11532336786_.pic_hd.jpg'
+              src='https://static.yanceyleo.com/_Users_licaifan_Desktop_11532336786_.pic_hd.jpg'
               className={styles.avater}
             />
             <div
@@ -83,7 +87,7 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
                   styles.drawerItem,
                   setItemStyle(route.children, route.path),
                 )}
-                onClick={() => handleDrawerChange('parent', route.path)}
+                onClick={() => handleDrawerChange(route)}
               >
                 <FontAwesomeIcon
                   // @ts-ignore
@@ -123,7 +127,7 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
                         },
                       )}
                       key={child.name}
-                      onClick={() => handleDrawerChange('child', child.path)}
+                      onClick={() => handleDrawerChange(child)}
                     >
                       <span className={styles.drawerItemIcon}>
                         {getInitials(child.name)}
