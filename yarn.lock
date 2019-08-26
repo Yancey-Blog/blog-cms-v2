@@ -756,7 +756,7 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-transform-typescript" "^7.3.2"
 
-"@babel/runtime@7.5.5", "@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.1", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.2", "@babel/runtime@^7.4.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.5":
+"@babel/runtime@7.5.5", "@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.2", "@babel/runtime@^7.4.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.5":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.5.5.tgz#74fba56d35efbeca444091c7850ccd494fd2f132"
   integrity sha512-28QvEGyQyNkB0/m2B4FU7IEZGK2NUrcMtT6BZEFALTguLk+AUT6ofsHtPk5QyjAdUkpMJ+/Em+quwz4HOt30AQ==
@@ -938,6 +938,39 @@
   version "10.1.0"
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
+
+"@devexpress/dx-core@2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-core/-/dx-core-2.0.3.tgz#6404957c50acb32dddae96cd09db35ffa750aa4e"
+  integrity sha512-VZR8SoFZihvNIzx1P5BTGcRhazCXuxVPji4wR+75KJldAqZRaQuaJtbYPxk63IXqsyk66m5LPFBjkUytdgqYsg==
+
+"@devexpress/dx-grid-core@2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-grid-core/-/dx-grid-core-2.0.3.tgz#c81990173117e94cfd259358a4bd36abffa8614a"
+  integrity sha512-iV9RAVC3ROHoKU7zuADY65QcU551tdM0D5vpLLfxnHQpbn0BFVbaYFdqX4wCOjKlMDfV3gKFJgh8ypntiavlFg==
+
+"@devexpress/dx-react-core@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-core/-/dx-react-core-2.0.3.tgz#6f222d7e1643289ef9bf9ea1d12bd27f4fefbb69"
+  integrity sha512-vlNMYqlyi7y0TEJt7kC65LoFiD85P/adYe/DIthufiLHiEt5yPj3ZmfQi8WT12z49Zzs22sG8F7hiGcoInRd6Q==
+  dependencies:
+    "@devexpress/dx-core" "2.0.3"
+    prop-types "^15.7.2"
+
+"@devexpress/dx-react-grid-material-ui@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-grid-material-ui/-/dx-react-grid-material-ui-2.0.3.tgz#09c0b0ab5c2e4e83279480d60c4b80424dfa8f64"
+  integrity sha512-MxymhliNYkbooYCeSE5I8IrrR8CEsRh3kx8KH6y0IpWyLP/1pvwTJBV+COzNW2ivn/kwFLzU5eXvvFO8hfHYqA==
+  dependencies:
+    classnames "^2.2.6"
+    prop-types "^15.7.2"
+
+"@devexpress/dx-react-grid@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-grid/-/dx-react-grid-2.0.3.tgz#68f849cde66ba9efe813ad4f9ab1b8f5d314afa0"
+  integrity sha512-L4QgFzK/mXvhnSqcqedfdGYqYoIE24MC1USElGmCPRTQruu5aBS4tpnGDcQcNqp4EpSoQ+FsA2kWQNjAXI+k1A==
+  dependencies:
+    "@devexpress/dx-grid-core" "2.0.3"
 
 "@emotion/hash@^0.7.1":
   version "0.7.2"
@@ -1188,6 +1221,13 @@
     prop-types "^15.7.2"
     react-transition-group "^4.0.0"
     warning "^4.0.1"
+
+"@material-ui/icons@^4.2.1":
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.2.1.tgz#fe2f1c4f60c24256d244a69d86d0c00e8ed4037e"
+  integrity sha512-FvSD5lUBJ66frI4l4AYAPy2CH14Zs2Dgm0o3oOMr33BdQtOAjCgbdOcvPBeaD1w6OQl31uNW3CKOE8xfPNxvUQ==
+  dependencies:
+    "@babel/runtime" "^7.2.0"
 
 "@material-ui/styles@^4.3.3":
   version "4.3.3"
