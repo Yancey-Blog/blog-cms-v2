@@ -161,7 +161,7 @@
     "commitlint-config-cz": "^0.12.1",
     "cz-customizable": "^6.2.0",
     "husky": "^3.0.4",
-    "lint-staged": ">=8",
+    "lint-staged": ">=9",
     "prettier": "^1.18.2",
     "standard-version": "^7.0.0"
   },
