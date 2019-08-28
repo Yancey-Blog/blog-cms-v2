@@ -23,6 +23,11 @@ import {
 } from '@devexpress/dx-react-grid-material-ui'
 import Loading from 'components/Loading/Loading'
 import TableWrapper from 'components/TableWrapper/TableWrapper'
+import {
+  dateFilterOperations,
+  currencyFilterOperations,
+  pageSizes,
+} from './constants'
 
 // mock
 import mock from './mock'
@@ -44,6 +49,7 @@ const CurrencyEditor = ({ onValueChange, value }: CurrencyEditorProps) => {
       onValueChange(undefined)
       return
     }
+
     onValueChange(parseInt(targetValue, 10))
   }
   return (
@@ -60,7 +66,11 @@ const CurrencyEditor = ({ onValueChange, value }: CurrencyEditorProps) => {
   )
 }
 
-const Announcement: FC<any> = () => {
+interface Props {
+  loading: boolean
+}
+
+const Tables: FC<Props> = ({ loading }) => {
   const [rows] = useState(mock)
   const [columns] = useState<any[]>([
     { name: 'name', title: 'Name' },
@@ -69,25 +79,9 @@ const Announcement: FC<any> = () => {
     { name: 'time', title: 'Time' },
   ])
   const [selection, setSelection] = useState<any[]>([])
-  const [loading, setLoading] = useState<boolean>(true)
   const [pageSize, setPageSize] = useState(10)
-  const [pageSizes] = useState([10, 20, 50, 0])
   const [dateColumns] = useState(['time'])
-  const [dateFilterOperations] = useState([
-    'month',
-    'contains',
-    'startsWith',
-    'endsWith',
-  ])
   const [currencyColumns] = useState(['amount'])
-  const [currencyFilterOperations] = useState([
-    'equal',
-    'notEqual',
-    'greaterThan',
-    'greaterThanOrEqual',
-    'lessThan',
-    'lessThanOrEqual',
-  ])
   const [filteringColumnExtensions] = useState([
     {
       columnName: 'time',
@@ -105,6 +99,7 @@ const Announcement: FC<any> = () => {
   return (
     <Paper>
       <TableWrapper tableName='Simple Table' icon='save'>
+        {/* rows 接收数据源 columns 接收 */}
         <Grid rows={rows} columns={columns}>
           <DataTypeProvider
             for={dateColumns}
@@ -145,4 +140,4 @@ const Announcement: FC<any> = () => {
   )
 }
 
-export default Announcement
+export default Tables
