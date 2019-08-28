@@ -1,9 +1,7 @@
-.layouts {
-  display: flex;
-  background: $lightBg;
-}
-
 .container {
+  display: flex;
+  flex-direction: column;
+  background: $lightBg;
   width: calc(100%-#{$drawerUnfold});
   min-height: 100vh;
   margin-left: $drawerUnfold;

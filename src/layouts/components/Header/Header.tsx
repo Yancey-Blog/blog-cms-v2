@@ -6,11 +6,11 @@ import Badge from '@material-ui/core/Badge'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import styles from './AppBars.module.scss'
+import styles from './Header.module.scss'
 
-const AppBars: FC<any> = ({ handleDrawerChange }) => {
+const Header: FC<any> = ({ handleDrawerChange }) => {
   return (
-    <AppBar position='relative' className={styles.appBar}>
+    <AppBar position='relative' className={styles.header}>
       <div className={styles.left}>
         <Fab size='small' aria-label='more' onClick={handleDrawerChange}>
           <FontAwesomeIcon icon={['fab', 'react']} />
@@ -38,4 +38,4 @@ const AppBars: FC<any> = ({ handleDrawerChange }) => {
   )
 }
 
-export default AppBars
+export default Header

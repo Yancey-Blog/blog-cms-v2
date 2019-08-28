@@ -1,9 +1,9 @@
-.appBar {
+.header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: row !important;
-  padding: 24px;
+  padding: 24px 24px 72px 24px;
   background: transparent !important;
   color: $lightTxt !important;
   box-shadow: none !important;
