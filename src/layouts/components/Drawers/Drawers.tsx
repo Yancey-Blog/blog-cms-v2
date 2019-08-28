@@ -3,6 +3,7 @@ import Drawer from '@material-ui/core/Drawer'
 import Avatar from '@material-ui/core/Avatar'
 import styles from './Drawers.module.scss'
 import classNames from 'classnames'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import routes, { BaseRoute } from './Routes'
 import { getInitials } from 'shared/utils'
@@ -90,8 +91,7 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
                 onClick={() => handleDrawerChange(route)}
               >
                 <FontAwesomeIcon
-                  // @ts-ignore
-                  icon={route.icon}
+                  icon={route.icon as IconProp}
                   className={styles.drawerItemIcon}
                 />
                 <div

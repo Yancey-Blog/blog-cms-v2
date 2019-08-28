@@ -1,15 +1,24 @@
 import React, { FC } from 'react'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './TableWrapper.module.scss'
 
-const TableWrapper: FC = ({ children }) => {
+interface Props {
+  tableName: string
+  icon: string
+}
+
+const TableWrapper: FC<Props> = ({ children, tableName, icon }) => {
   return (
     <section className={styles.tableWrapper}>
       <header className={styles.tableHeader}>
         <span className={styles.tableIconContainer}>
-          <FontAwesomeIcon icon='save' className={styles.tableIcon} />
+          <FontAwesomeIcon
+            icon={icon as IconProp}
+            className={styles.tableIcon}
+          />
         </span>
-        <h2 className={styles.tableTitle}>Simple Table</h2>
+        <h2 className={styles.tableTitle}>{tableName}</h2>
       </header>
       {children}
     </section>

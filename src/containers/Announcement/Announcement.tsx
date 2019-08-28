@@ -1,5 +1,7 @@
 import React, { FC, useState } from 'react'
 import Paper from '@material-ui/core/Paper'
+import Input from '@material-ui/core/Input'
+import DateRange from '@material-ui/icons/DateRange'
 import {
   SelectionState,
   PagingState,
@@ -7,6 +9,9 @@ import {
   IntegratedSelection,
   IntegratedSorting,
   SortingState,
+  DataTypeProvider,
+  IntegratedFiltering,
+  FilteringState,
 } from '@devexpress/dx-react-grid'
 import {
   Grid,
@@ -14,19 +19,45 @@ import {
   TableHeaderRow,
   TableSelection,
   PagingPanel,
+  TableFilterRow,
 } from '@devexpress/dx-react-grid-material-ui'
 import Loading from 'components/Loading/Loading'
 import TableWrapper from 'components/TableWrapper/TableWrapper'
-// import styles from './Announcement.module.scss'
 
 // mock
 import mock from './mock'
 
-interface TableData {
-  name: string
-  sex: string
-  city: string
-  car: string
+type CurrencyEditorProps = DataTypeProvider.ValueEditorProps
+
+const FilterIcon = ({ type, ...restProps }) => {
+  if (type === 'month') return <DateRange {...restProps} />
+  return <TableFilterRow.Icon type={type} {...restProps} />
+}
+
+const getInputValue = (value?: string): string =>
+  value === undefined ? '' : value
+
+const CurrencyEditor = ({ onValueChange, value }: CurrencyEditorProps) => {
+  const handleChange = event => {
+    const { value: targetValue } = event.target
+    if (targetValue.trim() === '') {
+      onValueChange(undefined)
+      return
+    }
+    onValueChange(parseInt(targetValue, 10))
+  }
+  return (
+    <Input
+      type='number'
+      fullWidth={true}
+      value={getInputValue(value)}
+      inputProps={{
+        min: 0,
+        placeholder: 'Filter...',
+      }}
+      onChange={handleChange}
+    />
+  )
 }
 
 const Announcement: FC<any> = () => {
@@ -35,17 +66,58 @@ const Announcement: FC<any> = () => {
     { name: 'name', title: 'Name' },
     { name: 'sex', title: 'Sex' },
     { name: 'city', title: 'City' },
-    { name: 'car', title: 'Car' },
+    { name: 'time', title: 'Time' },
   ])
   const [selection, setSelection] = useState<any[]>([])
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
   const [pageSize, setPageSize] = useState(10)
   const [pageSizes] = useState([10, 20, 50, 0])
+  const [dateColumns] = useState(['time'])
+  const [dateFilterOperations] = useState([
+    'month',
+    'contains',
+    'startsWith',
+    'endsWith',
+  ])
+  const [currencyColumns] = useState(['amount'])
+  const [currencyFilterOperations] = useState([
+    'equal',
+    'notEqual',
+    'greaterThan',
+    'greaterThanOrEqual',
+    'lessThan',
+    'lessThanOrEqual',
+  ])
+  const [filteringColumnExtensions] = useState([
+    {
+      columnName: 'time',
+      predicate: (value: any, filter: any, row: any) => {
+        if (!filter.value.length) return true
+        if (filter && filter.operation === 'month') {
+          const month = parseInt(value.split('-')[1], 10)
+          return month === parseInt(filter.value, 10)
+        }
+        return IntegratedFiltering.defaultPredicate(value, filter, row)
+      },
+    },
+  ])
 
   return (
     <Paper>
-      <TableWrapper>
+      <TableWrapper tableName='Simple Table' icon='save'>
         <Grid rows={rows} columns={columns}>
+          <DataTypeProvider
+            for={dateColumns}
+            availableFilterOperations={dateFilterOperations}
+          />
+          <DataTypeProvider
+            for={currencyColumns}
+            availableFilterOperations={currencyFilterOperations}
+            editorComponent={CurrencyEditor}
+          />
+          <FilteringState defaultFilters={[]} />
+          <IntegratedFiltering columnExtensions={filteringColumnExtensions} />
+
           <SortingState
             defaultSorting={[{ columnName: 'name', direction: 'asc' }]}
           />
@@ -63,6 +135,7 @@ const Announcement: FC<any> = () => {
           <IntegratedSelection />
           <Table />
           <TableHeaderRow showSortingControls />
+          <TableFilterRow showFilterSelector iconComponent={FilterIcon} />
           <TableSelection showSelectAll />
           <PagingPanel pageSizes={pageSizes} />
         </Grid>
