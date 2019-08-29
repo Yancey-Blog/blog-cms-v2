@@ -12,7 +12,12 @@ const Header: FC<any> = ({ handleDrawerChange }) => {
   return (
     <AppBar position='relative' className={styles.header}>
       <div className={styles.left}>
-        <Fab size='small' aria-label='more' onClick={handleDrawerChange}>
+        <Fab
+          size='small'
+          aria-label='more'
+          onClick={handleDrawerChange}
+          className={styles.foldIcon}
+        >
           <FontAwesomeIcon icon={['fab', 'react']} />
         </Fab>
         <Typography variant='h6' noWrap className={styles.title}>

@@ -12,6 +12,7 @@ import {
   DataTypeProvider,
   IntegratedFiltering,
   FilteringState,
+  DataTypeProviderProps,
 } from '@devexpress/dx-react-grid'
 import {
   Grid,
@@ -28,11 +29,10 @@ import {
   currencyFilterOperations,
   pageSizes,
 } from './constants'
+import { formatJSONDate } from 'shared/utils'
 
 // mock
 import mock from './mock'
-
-type CurrencyEditorProps = DataTypeProvider.ValueEditorProps
 
 const FilterIcon = ({ type, ...restProps }) => {
   if (type === 'month') return <DateRange {...restProps} />
@@ -42,14 +42,16 @@ const FilterIcon = ({ type, ...restProps }) => {
 const getInputValue = (value?: string): string =>
   value === undefined ? '' : value
 
-const CurrencyEditor = ({ onValueChange, value }: CurrencyEditorProps) => {
-  const handleChange = event => {
-    const { value: targetValue } = event.target
+const CurrencyEditor = ({
+  onValueChange,
+  value,
+}: DataTypeProvider.ValueEditorProps) => {
+  const handleChange = (e: any) => {
+    const { value: targetValue } = e.target
     if (targetValue.trim() === '') {
       onValueChange(undefined)
       return
     }
-
     onValueChange(parseInt(targetValue, 10))
   }
   return (
@@ -65,6 +67,10 @@ const CurrencyEditor = ({ onValueChange, value }: CurrencyEditorProps) => {
     />
   )
 }
+
+const DateFormatter = ({ value }: DataTypeProvider.ValueFormatterProps) => (
+  <span>{formatJSONDate(value)}</span>
+)
 
 interface Props {
   loading: boolean
@@ -99,35 +105,37 @@ const Tables: FC<Props> = ({ loading }) => {
   return (
     <Paper>
       <TableWrapper tableName='Simple Table' icon='save'>
-        {/* rows 接收数据源 columns 接收 */}
         <Grid rows={rows} columns={columns}>
+          <FilteringState defaultFilters={[]} />
+          <SortingState
+            defaultSorting={[{ columnName: 'name', direction: 'asc' }]}
+          />
+          <SelectionState
+            selection={selection}
+            onSelectionChange={setSelection}
+          />
+          <PagingState
+            defaultCurrentPage={0}
+            pageSize={pageSize}
+            onPageSizeChange={setPageSize}
+          />
+
+          <IntegratedFiltering columnExtensions={filteringColumnExtensions} />
+          <IntegratedSorting />
+          <IntegratedSelection />
+          <IntegratedPaging />
+
           <DataTypeProvider
             for={dateColumns}
             availableFilterOperations={dateFilterOperations}
+            formatterComponent={DateFormatter}
           />
           <DataTypeProvider
             for={currencyColumns}
             availableFilterOperations={currencyFilterOperations}
             editorComponent={CurrencyEditor}
           />
-          <FilteringState defaultFilters={[]} />
-          <IntegratedFiltering columnExtensions={filteringColumnExtensions} />
 
-          <SortingState
-            defaultSorting={[{ columnName: 'name', direction: 'asc' }]}
-          />
-          <IntegratedSorting />
-          <PagingState
-            defaultCurrentPage={0}
-            pageSize={pageSize}
-            onPageSizeChange={setPageSize}
-          />
-          <SelectionState
-            selection={selection}
-            onSelectionChange={setSelection}
-          />
-          <IntegratedPaging />
-          <IntegratedSelection />
           <Table />
           <TableHeaderRow showSortingControls />
           <TableFilterRow showFilterSelector iconComponent={FilterIcon} />
