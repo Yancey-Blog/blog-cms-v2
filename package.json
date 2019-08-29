@@ -60,7 +60,7 @@
     "redux": "^4.0.4",
     "resolve": "1.12.0",
     "resolve-url-loader": "3.1.0",
-    "sass-loader": "7.3.1",
+    "sass-loader": "8.0.0",
     "sass-resources-loader": "^2.0.1",
     "semver": "6.3.0",
     "style-loader": "1.0.0",
