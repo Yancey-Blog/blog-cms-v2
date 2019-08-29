@@ -115,6 +115,11 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
                     [styles.activeItemChildren]:
                       drawerItem.parent === route.path,
                   })}
+                  style={
+                    drawerItem.parent === route.path
+                      ? { maxHeight: `${50 * route.children.length}px` }
+                      : {}
+                  }
                 >
                   {route.children.map(child => (
                     <div
