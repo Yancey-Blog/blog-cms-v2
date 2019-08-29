@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react'
 import Paper from '@material-ui/core/Paper'
-import Input from '@material-ui/core/Input'
 import DateRange from '@material-ui/icons/DateRange'
 import {
   SelectionState,
@@ -12,7 +11,8 @@ import {
   DataTypeProvider,
   IntegratedFiltering,
   FilteringState,
-  DataTypeProviderProps,
+  Column,
+  Sorting,
 } from '@devexpress/dx-react-grid'
 import {
   Grid,
@@ -21,73 +21,47 @@ import {
   TableSelection,
   PagingPanel,
   TableFilterRow,
+  DragDropProvider,
 } from '@devexpress/dx-react-grid-material-ui'
 import Loading from 'components/Loading/Loading'
 import TableWrapper from 'components/TableWrapper/TableWrapper'
-import {
-  dateFilterOperations,
-  currencyFilterOperations,
-  pageSizes,
-} from './constants'
+import { dateFilterOperations } from './constants'
 import { formatJSONDate } from 'shared/utils'
-
-// mock
-import mock from './mock'
 
 const FilterIcon = ({ type, ...restProps }) => {
   if (type === 'month') return <DateRange {...restProps} />
   return <TableFilterRow.Icon type={type} {...restProps} />
 }
 
-const getInputValue = (value?: string): string =>
-  value === undefined ? '' : value
-
-const CurrencyEditor = ({
-  onValueChange,
-  value,
-}: DataTypeProvider.ValueEditorProps) => {
-  const handleChange = (e: any) => {
-    const { value: targetValue } = e.target
-    if (targetValue.trim() === '') {
-      onValueChange(undefined)
-      return
-    }
-    onValueChange(parseInt(targetValue, 10))
-  }
-  return (
-    <Input
-      type='number'
-      fullWidth={true}
-      value={getInputValue(value)}
-      inputProps={{
-        min: 0,
-        placeholder: 'Filter...',
-      }}
-      onChange={handleChange}
-    />
-  )
-}
-
 const DateFormatter = ({ value }: DataTypeProvider.ValueFormatterProps) => (
   <span>{formatJSONDate(value)}</span>
 )
 
+// 将每行的 id 设置为数据源的 id，默认行 id 为「索引」
+const getRowId = (row: any) => row._id
+
 interface Props {
   loading: boolean
+  rows: any[]
+  columns: Column[]
+  sorts: any[] // FIXME: sorts 的类型写成 Sorting[] 报错, 很迷
+  selectByRowClick: boolean // 当此属性为 true 时点击行的任意位置都可选中，默认 false
 }
 
-const Tables: FC<Props> = ({ loading }) => {
-  const [rows] = useState(mock)
-  const [columns] = useState<any[]>([
-    { name: 'name', title: 'Name' },
-    { name: 'sex', title: 'Sex' },
-    { name: 'city', title: 'City' },
-    { name: 'time', title: 'Time' },
-  ])
+const Tables: FC<Props> = ({
+  loading,
+  rows,
+  columns,
+  sorts,
+  selectByRowClick,
+}) => {
   const [selection, setSelection] = useState<any[]>([])
+
+  const [currentPage, setCurrentPage] = useState(0)
   const [pageSize, setPageSize] = useState(10)
+  const [pageSizes] = useState([10, 20, 50, 0])
+
   const [dateColumns] = useState(['time'])
-  const [currencyColumns] = useState(['amount'])
   const [filteringColumnExtensions] = useState([
     {
       columnName: 'time',
@@ -105,41 +79,38 @@ const Tables: FC<Props> = ({ loading }) => {
   return (
     <Paper>
       <TableWrapper tableName='Simple Table' icon='save'>
-        <Grid rows={rows} columns={columns}>
+        <Grid rows={rows} columns={columns} getRowId={getRowId}>
           <FilteringState defaultFilters={[]} />
-          <SortingState
-            defaultSorting={[{ columnName: 'name', direction: 'asc' }]}
-          />
+          <SortingState defaultSorting={sorts} />
           <SelectionState
             selection={selection}
             onSelectionChange={setSelection}
           />
           <PagingState
-            defaultCurrentPage={0}
+            currentPage={currentPage}
+            onCurrentPageChange={setCurrentPage}
             pageSize={pageSize}
             onPageSizeChange={setPageSize}
           />
 
           <IntegratedFiltering columnExtensions={filteringColumnExtensions} />
           <IntegratedSorting />
-          <IntegratedSelection />
+          {/* Place the IntegratedSelection plugin after IntegratedPaging to */}
+          {/* implement the Select All behavior within a visible page. */}
           <IntegratedPaging />
+          <IntegratedSelection />
 
           <DataTypeProvider
             for={dateColumns}
             availableFilterOperations={dateFilterOperations}
             formatterComponent={DateFormatter}
           />
-          <DataTypeProvider
-            for={currencyColumns}
-            availableFilterOperations={currencyFilterOperations}
-            editorComponent={CurrencyEditor}
-          />
+          <DragDropProvider />
 
           <Table />
           <TableHeaderRow showSortingControls />
           <TableFilterRow showFilterSelector iconComponent={FilterIcon} />
-          <TableSelection showSelectAll />
+          <TableSelection showSelectAll selectByRowClick={selectByRowClick} />
           <PagingPanel pageSizes={pageSizes} />
         </Grid>
         {loading && <Loading />}

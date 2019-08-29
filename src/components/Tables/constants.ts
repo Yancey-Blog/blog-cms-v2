@@ -5,7 +5,7 @@ export const dateFilterOperations = [
   'endsWith',
 ]
 
-export const currencyFilterOperations = [
+export const amountFilterOperations = [
   'equal',
   'notEqual',
   'greaterThan',
@@ -13,5 +13,3 @@ export const currencyFilterOperations = [
   'lessThan',
   'lessThanOrEqual',
 ]
-
-export const pageSizes = [10, 20, 50, 0]
