@@ -16,6 +16,7 @@ const tableProps = {
   ],
   sorts: [{ columnName: 'name', direction: 'asc' }],
   selectByRowClick: false,
+  totalCount: mock.length,
 }
 
 const Mains: FC = () => {

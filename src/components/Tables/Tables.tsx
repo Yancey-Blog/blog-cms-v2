@@ -13,6 +13,8 @@ import {
   FilteringState,
   Column,
   Sorting,
+  CustomPaging,
+  EditingState,
 } from '@devexpress/dx-react-grid'
 import {
   Grid,
@@ -22,6 +24,11 @@ import {
   PagingPanel,
   TableFilterRow,
   DragDropProvider,
+  TableColumnVisibility,
+  Toolbar,
+  ColumnChooser,
+  TableEditRow,
+  TableEditColumn,
 } from '@devexpress/dx-react-grid-material-ui'
 import Loading from 'components/Loading/Loading'
 import TableWrapper from 'components/TableWrapper/TableWrapper'
@@ -40,21 +47,30 @@ const DateFormatter = ({ value }: DataTypeProvider.ValueFormatterProps) => (
 // 将每行的 id 设置为数据源的 id，默认行 id 为「索引」
 const getRowId = (row: any) => row._id
 
+const getHiddenColumnsFilteringExtensions = hiddenColumnNames =>
+  hiddenColumnNames.map(columnName => ({
+    columnName,
+    predicate: () => false,
+  }))
+
 interface Props {
   loading: boolean
   rows: any[]
   columns: Column[]
   sorts: any[] // FIXME: sorts 的类型写成 Sorting[] 报错, 很迷
   selectByRowClick: boolean // 当此属性为 true 时点击行的任意位置都可选中，默认 false
+  totalCount: number
 }
 
 const Tables: FC<Props> = ({
   loading,
-  rows,
+  rows: rowData,
   columns,
   sorts,
   selectByRowClick,
+  totalCount,
 }) => {
+  const [rows, setRows] = useState(rowData)
   const [selection, setSelection] = useState<any[]>([])
 
   const [currentPage, setCurrentPage] = useState(0)
@@ -62,24 +78,71 @@ const Tables: FC<Props> = ({
   const [pageSizes] = useState([10, 20, 50, 0])
 
   const [dateColumns] = useState(['time'])
-  const [filteringColumnExtensions] = useState([
-    {
-      columnName: 'time',
-      predicate: (value: any, filter: any, row: any) => {
-        if (!filter.value.length) return true
-        if (filter && filter.operation === 'month') {
-          const month = parseInt(value.split('-')[1], 10)
-          return month === parseInt(filter.value, 10)
-        }
-        return IntegratedFiltering.defaultPredicate(value, filter, row)
-      },
-    },
-  ])
+
+  const [defaultHiddenColumnNames] = useState([])
+  const [filteringColumnExtensions, setFilteringColumnExtensions] = useState(
+    getHiddenColumnsFilteringExtensions(defaultHiddenColumnNames),
+  )
+  const onHiddenColumnNamesChange = hiddenColumnNames =>
+    setFilteringColumnExtensions(
+      getHiddenColumnsFilteringExtensions(hiddenColumnNames),
+    )
+
+    const [editingStateColumnExtensions] = useState([
+      { columnName: 'time', editingEnabled: false },
+    ]);
+
+  const [editingRowIds, setEditingRowIds] = useState([])
+  const [addedRows, setAddedRows] = useState([])
+  const [rowChanges, setRowChanges] = useState({})
+
+  const changeAddedRows = value => {
+    const initialized = value.map(row =>
+      Object.keys(row).length ? row : { name: 'Anna' },
+    )
+    setAddedRows(initialized)
+  }
+
+  const commitChanges = ({ added, changed, deleted }) => {
+    let changedRows
+    if (added) {
+      const startingAddedId = rows.length > 0 ? rows[rows.length - 1].id + 1 : 0
+      changedRows = [
+        ...rows,
+        ...added.map((row, index) => ({
+          id: startingAddedId + index,
+          ...row,
+        })),
+      ]
+    }
+    if (changed) {
+      changedRows = rows.map(row =>
+        changed[row.id] ? { ...row, ...changed[row.id] } : row,
+      )
+    }
+    if (deleted) {
+      const deletedSet = new Set(deleted)
+      changedRows = rows.filter(row => !deletedSet.has(row.id))
+    }
+    setRows(changedRows)
+  }
 
   return (
     <Paper>
       <TableWrapper tableName='Simple Table' icon='save'>
         <Grid rows={rows} columns={columns} getRowId={getRowId}>
+          <EditingState
+            editingRowIds={editingRowIds}
+            // @ts-ignore
+            onEditingRowIdsChange={setEditingRowIds}
+            rowChanges={rowChanges}
+            onRowChangesChange={setRowChanges}
+            addedRows={addedRows}
+            onAddedRowsChange={changeAddedRows}
+            // @ts-ignore
+            onCommitChanges={commitChanges}
+            columnExtensions={editingStateColumnExtensions}
+          />
           <FilteringState defaultFilters={[]} />
           <SortingState defaultSorting={sorts} />
           <SelectionState
@@ -92,23 +155,33 @@ const Tables: FC<Props> = ({
             pageSize={pageSize}
             onPageSizeChange={setPageSize}
           />
-
+          <CustomPaging totalCount={totalCount} />
           <IntegratedFiltering columnExtensions={filteringColumnExtensions} />
           <IntegratedSorting />
           {/* Place the IntegratedSelection plugin after IntegratedPaging to */}
           {/* implement the Select All behavior within a visible page. */}
           <IntegratedPaging />
           <IntegratedSelection />
-
           <DataTypeProvider
             for={dateColumns}
             availableFilterOperations={dateFilterOperations}
             formatterComponent={DateFormatter}
           />
           <DragDropProvider />
-
           <Table />
           <TableHeaderRow showSortingControls />
+          <TableEditRow />
+          <TableEditColumn
+            showAddCommand={!addedRows.length}
+            showEditCommand
+            showDeleteCommand
+          />
+          <TableColumnVisibility
+            defaultHiddenColumnNames={defaultHiddenColumnNames}
+            onHiddenColumnNamesChange={onHiddenColumnNamesChange}
+          />
+          <Toolbar />
+          <ColumnChooser />
           <TableFilterRow showFilterSelector iconComponent={FilterIcon} />
           <TableSelection showSelectAll selectByRowClick={selectByRowClick} />
           <PagingPanel pageSizes={pageSizes} />
