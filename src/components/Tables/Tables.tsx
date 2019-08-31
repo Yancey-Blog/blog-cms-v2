@@ -12,9 +12,10 @@ import {
   IntegratedFiltering,
   FilteringState,
   Column,
-  Sorting,
+  // Sorting,
   CustomPaging,
   EditingState,
+  SearchState,
 } from '@devexpress/dx-react-grid'
 import {
   Grid,
@@ -29,6 +30,8 @@ import {
   ColumnChooser,
   TableEditRow,
   TableEditColumn,
+  SearchPanel,
+  TableColumnReordering,
 } from '@devexpress/dx-react-grid-material-ui'
 import Loading from 'components/Loading/Loading'
 import TableWrapper from 'components/TableWrapper/TableWrapper'
@@ -88,13 +91,21 @@ const Tables: FC<Props> = ({
       getHiddenColumnsFilteringExtensions(hiddenColumnNames),
     )
 
-    const [editingStateColumnExtensions] = useState([
-      { columnName: 'time', editingEnabled: false },
-    ]);
+  const [editingStateColumnExtensions] = useState([
+    { columnName: 'time', editingEnabled: false },
+  ])
 
   const [editingRowIds, setEditingRowIds] = useState([])
   const [addedRows, setAddedRows] = useState([])
   const [rowChanges, setRowChanges] = useState({})
+
+  const [columnOrder, setColumnOrder] = useState([
+    'name',
+    'sex',
+    'city',
+    'time',
+    'amount',
+  ])
 
   const changeAddedRows = value => {
     const initialized = value.map(row =>
@@ -155,6 +166,7 @@ const Tables: FC<Props> = ({
             pageSize={pageSize}
             onPageSizeChange={setPageSize}
           />
+          <SearchState defaultValue='' />
           <CustomPaging totalCount={totalCount} />
           <IntegratedFiltering columnExtensions={filteringColumnExtensions} />
           <IntegratedSorting />
@@ -169,6 +181,10 @@ const Tables: FC<Props> = ({
           />
           <DragDropProvider />
           <Table />
+          <TableColumnReordering
+            order={columnOrder}
+            onOrderChange={setColumnOrder}
+          />
           <TableHeaderRow showSortingControls />
           <TableEditRow />
           <TableEditColumn
@@ -181,6 +197,7 @@ const Tables: FC<Props> = ({
             onHiddenColumnNamesChange={onHiddenColumnNamesChange}
           />
           <Toolbar />
+          <SearchPanel />
           <ColumnChooser />
           <TableFilterRow showFilterSelector iconComponent={FilterIcon} />
           <TableSelection showSelectAll selectByRowClick={selectByRowClick} />
