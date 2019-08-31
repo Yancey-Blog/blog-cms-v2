@@ -8,14 +8,18 @@ import IconButton from '@material-ui/core/IconButton'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './Header.module.scss'
 
-const Header: FC<any> = ({ handleDrawerChange }) => {
+interface Props {
+  handleDrawerChange: Function
+}
+
+const Header: FC<Props> = ({ handleDrawerChange }) => {
   return (
     <AppBar position='relative' className={styles.header}>
       <div className={styles.left}>
         <Fab
           size='small'
           aria-label='more'
-          onClick={handleDrawerChange}
+          onClick={() => handleDrawerChange()}
           className={styles.foldIcon}
         >
           <FontAwesomeIcon icon={['fab', 'react']} />
@@ -31,9 +35,9 @@ const Header: FC<any> = ({ handleDrawerChange }) => {
             'aria-label': 'description',
           }}
         />
-        {[1, 2, 3, 4].map(val => (
-          <IconButton aria-label='show 4 new mails' color='inherit' key={val}>
-            <Badge badgeContent={val} color='secondary'>
+        {[...new Int8Array(4)].map((val, key) => (
+          <IconButton aria-label='show 4 new mails' color='inherit' key={key}>
+            <Badge badgeContent={key} color='secondary'>
               <FontAwesomeIcon icon={['fab', 'react']} />
             </Badge>
           </IconButton>
