@@ -8,6 +8,7 @@ const tableProps = {
   loading: false,
   rows: mock,
   columns: [
+    { name: 'drag', title: 'Drag' },
     { name: 'name', title: 'Name' },
     { name: 'sex', title: 'Sex' },
     { name: 'city', title: 'City' },

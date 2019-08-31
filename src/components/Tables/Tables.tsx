@@ -33,6 +33,7 @@ import {
   SearchPanel,
   TableColumnReordering,
 } from '@devexpress/dx-react-grid-material-ui'
+
 import Loading from 'components/Loading/Loading'
 import TableWrapper from 'components/TableWrapper/TableWrapper'
 import { dateFilterOperations } from './constants'
