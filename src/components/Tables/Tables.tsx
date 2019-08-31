@@ -66,6 +66,10 @@ interface Props {
   totalCount: number
 }
 
+const defaultCurrentPage = 0
+const defaultPageSize = 10
+const pageSizes = [10, 20, 50, 0]
+
 const Tables: FC<Props> = ({
   loading,
   rows: rowData,
@@ -77,9 +81,8 @@ const Tables: FC<Props> = ({
   const [rows, setRows] = useState(rowData)
   const [selection, setSelection] = useState<any[]>([])
 
-  const [currentPage, setCurrentPage] = useState(0)
-  const [pageSize, setPageSize] = useState(10)
-  const [pageSizes] = useState([10, 20, 50, 0])
+  const [currentPage, setCurrentPage] = useState(defaultCurrentPage)
+  const [pageSize, setPageSize] = useState(defaultPageSize)
 
   const [dateColumns] = useState(['time'])
 
