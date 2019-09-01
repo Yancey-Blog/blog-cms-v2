@@ -5,17 +5,16 @@ import styles from './Mains.module.scss'
 import mock from './mock'
 
 const tableProps = {
+  tableName: 'Yancey Demo Table',
+  icon: 'save',
   loading: false,
   rows: mock,
   columns: [
-    { name: 'drag', title: 'Drag' },
     { name: 'name', title: 'Name' },
-    { name: 'sex', title: 'Sex' },
     { name: 'city', title: 'City' },
     { name: 'time', title: 'Time' },
     { name: 'amount', title: 'Amount' },
   ],
-  sorts: [{ columnName: 'name', direction: 'asc' }],
   selectByRowClick: false,
   totalCount: mock.length,
 }

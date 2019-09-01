@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import Paper from '@material-ui/core/Paper'
-import DateRange from '@material-ui/icons/DateRange'
+import { DateRange } from '@material-ui/icons'
 import {
   SelectionState,
   PagingState,
@@ -12,7 +12,6 @@ import {
   IntegratedFiltering,
   FilteringState,
   Column,
-  // Sorting,
   CustomPaging,
   EditingState,
   SearchState,
@@ -38,6 +37,7 @@ import Loading from 'components/Loading/Loading'
 import TableWrapper from 'components/TableWrapper/TableWrapper'
 import { dateFilterOperations } from './constants'
 import { formatJSONDate } from 'shared/utils'
+import { EDITOR } from './custom'
 
 const FilterIcon = ({ type, ...restProps }) => {
   if (type === 'month') return <DateRange {...restProps} />
@@ -58,10 +58,11 @@ const getHiddenColumnsFilteringExtensions = hiddenColumnNames =>
   }))
 
 interface Props {
+  tableName: string
+  icon: string
   loading: boolean
   rows: any[]
   columns: Column[]
-  sorts: any[] // FIXME: sorts 的类型写成 Sorting[] 报错, 很迷
   selectByRowClick: boolean // 当此属性为 true 时点击行的任意位置都可选中，默认 false
   totalCount: number
 }
@@ -71,10 +72,11 @@ const defaultPageSize = 10
 const pageSizes = [10, 20, 50, 0]
 
 const Tables: FC<Props> = ({
+  tableName,
+  icon,
   loading,
   rows: rowData,
   columns,
-  sorts,
   selectByRowClick,
   totalCount,
 }) => {
@@ -113,7 +115,7 @@ const Tables: FC<Props> = ({
 
   const changeAddedRows = value => {
     const initialized = value.map(row =>
-      Object.keys(row).length ? row : { name: 'Anna' },
+      Object.keys(row).length ? row : { name: '' },
     )
     setAddedRows(initialized)
   }
@@ -144,7 +146,7 @@ const Tables: FC<Props> = ({
 
   return (
     <Paper>
-      <TableWrapper tableName='Simple Table' icon='save'>
+      <TableWrapper tableName={tableName} icon={icon}>
         <Grid rows={rows} columns={columns} getRowId={getRowId}>
           <EditingState
             editingRowIds={editingRowIds}
@@ -159,7 +161,7 @@ const Tables: FC<Props> = ({
             columnExtensions={editingStateColumnExtensions}
           />
           <FilteringState defaultFilters={[]} />
-          <SortingState defaultSorting={sorts} />
+          <SortingState />
           <SelectionState
             selection={selection}
             onSelectionChange={setSelection}
@@ -195,6 +197,7 @@ const Tables: FC<Props> = ({
             showAddCommand={!addedRows.length}
             showEditCommand
             showDeleteCommand
+            commandComponent={EDITOR}
           />
           <TableColumnVisibility
             defaultHiddenColumnNames={defaultHiddenColumnNames}
