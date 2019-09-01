@@ -1,6 +1,5 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, ReactText } from 'react'
 import Paper from '@material-ui/core/Paper'
-import { DateRange } from '@material-ui/icons'
 import {
   SelectionState,
   PagingState,
@@ -32,30 +31,23 @@ import {
   SearchPanel,
   TableColumnReordering,
 } from '@devexpress/dx-react-grid-material-ui'
-
 import Loading from 'components/Loading/Loading'
 import TableWrapper from 'components/TableWrapper/TableWrapper'
-import { dateFilterOperations } from './constants'
-import { formatJSONDate } from 'shared/utils'
-import { EDITOR } from './custom'
-
-const FilterIcon = ({ type, ...restProps }) => {
-  if (type === 'month') return <DateRange {...restProps} />
-  return <TableFilterRow.Icon type={type} {...restProps} />
-}
-
-const DateFormatter = ({ value }: DataTypeProvider.ValueFormatterProps) => (
-  <span>{formatJSONDate(value)}</span>
-)
-
-// 将每行的 id 设置为数据源的 id，默认行 id 为「索引」
-const getRowId = (row: any) => row._id
-
-const getHiddenColumnsFilteringExtensions = hiddenColumnNames =>
-  hiddenColumnNames.map(columnName => ({
-    columnName,
-    predicate: () => false,
-  }))
+import {
+  dateFilterOperations,
+  defaultCurrentPage,
+  defaultPageSize,
+  pageSizes,
+} from './constants'
+import {
+  CustomEditorColumnTxt,
+  BatchDelete,
+  FilterIcon,
+  DateFormatter,
+  getHiddenColumnsFilteringExtensions,
+  getRowId,
+  CustomEditorColumn,
+} from './Custom'
 
 interface Props {
   tableName: string
@@ -63,13 +55,12 @@ interface Props {
   loading: boolean
   rows: any[]
   columns: Column[]
-  selectByRowClick: boolean // 当此属性为 true 时点击行的任意位置都可选中，默认 false
+  selectByRowClick: boolean
   totalCount: number
+  dateColumns: string[]
+  columnOrders: string[]
+  editingStateColumnExtensions: EditingState.ColumnExtension[]
 }
-
-const defaultCurrentPage = 0
-const defaultPageSize = 10
-const pageSizes = [10, 20, 50, 0]
 
 const Tables: FC<Props> = ({
   tableName,
@@ -79,15 +70,14 @@ const Tables: FC<Props> = ({
   columns,
   selectByRowClick,
   totalCount,
+  dateColumns,
+  columnOrders,
+  editingStateColumnExtensions,
 }) => {
   const [rows, setRows] = useState(rowData)
-  const [selection, setSelection] = useState<any[]>([])
-
+  const [selection, setSelection] = useState<ReactText[]>([])
   const [currentPage, setCurrentPage] = useState(defaultCurrentPage)
   const [pageSize, setPageSize] = useState(defaultPageSize)
-
-  const [dateColumns] = useState(['time'])
-
   const [defaultHiddenColumnNames] = useState([])
   const [filteringColumnExtensions, setFilteringColumnExtensions] = useState(
     getHiddenColumnsFilteringExtensions(defaultHiddenColumnNames),
@@ -96,22 +86,10 @@ const Tables: FC<Props> = ({
     setFilteringColumnExtensions(
       getHiddenColumnsFilteringExtensions(hiddenColumnNames),
     )
-
-  const [editingStateColumnExtensions] = useState([
-    { columnName: 'time', editingEnabled: false },
-  ])
-
   const [editingRowIds, setEditingRowIds] = useState([])
   const [addedRows, setAddedRows] = useState([])
   const [rowChanges, setRowChanges] = useState({})
-
-  const [columnOrder, setColumnOrder] = useState([
-    'name',
-    'sex',
-    'city',
-    'time',
-    'amount',
-  ])
+  const [columnOrder, setColumnOrder] = useState(columnOrders)
 
   const changeAddedRows = value => {
     const initialized = value.map(row =>
@@ -176,8 +154,6 @@ const Tables: FC<Props> = ({
           <CustomPaging totalCount={totalCount} />
           <IntegratedFiltering columnExtensions={filteringColumnExtensions} />
           <IntegratedSorting />
-          {/* Place the IntegratedSelection plugin after IntegratedPaging to */}
-          {/* implement the Select All behavior within a visible page. */}
           <IntegratedPaging />
           <IntegratedSelection />
           <DataTypeProvider
@@ -197,8 +173,9 @@ const Tables: FC<Props> = ({
             showAddCommand={!addedRows.length}
             showEditCommand
             showDeleteCommand
-            commandComponent={EDITOR}
+            commandComponent={CustomEditorColumnTxt}
           />
+          <CustomEditorColumn />
           <TableColumnVisibility
             defaultHiddenColumnNames={defaultHiddenColumnNames}
             onHiddenColumnNamesChange={onHiddenColumnNamesChange}
@@ -206,6 +183,7 @@ const Tables: FC<Props> = ({
           <Toolbar />
           <SearchPanel />
           <ColumnChooser />
+          <BatchDelete length={selection.length} />
           <TableFilterRow showFilterSelector iconComponent={FilterIcon} />
           <TableSelection showSelectAll selectByRowClick={selectByRowClick} />
           <PagingPanel pageSizes={pageSizes} />

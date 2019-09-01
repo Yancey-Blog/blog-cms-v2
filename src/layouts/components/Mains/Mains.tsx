@@ -17,6 +17,9 @@ const tableProps = {
   ],
   selectByRowClick: false,
   totalCount: mock.length,
+  dateColumns: ['time'],
+  columnOrders: ['name', 'sex', 'city', 'time', 'amount'],
+  editingStateColumnExtensions: [{ columnName: 'time', editingEnabled: false }],
 }
 
 const Mains: FC = () => {

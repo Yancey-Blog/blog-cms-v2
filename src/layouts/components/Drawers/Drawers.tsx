@@ -67,7 +67,7 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
           </div>
           <div className={classNames(styles.drawerUser)}>
             <Avatar
-              alt='Remy Sharp'
+              alt='Yancey Official Logo'
               src='https://static.yanceyleo.com/_Users_licaifan_Desktop_11532336786_.pic_hd.jpg'
               className={styles.avater}
             />
