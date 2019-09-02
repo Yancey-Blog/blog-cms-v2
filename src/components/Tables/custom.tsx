@@ -101,7 +101,7 @@ export const CustomEditorColumn = () => (
         {
           key: 'editCommand',
           type: TableEditColumn.COLUMN_TYPE,
-          width: 140,
+          width: 160,
         },
       ]
       return result

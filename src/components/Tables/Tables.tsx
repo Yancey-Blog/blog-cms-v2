@@ -114,6 +114,22 @@ const Tables: FC<Props> = ({
     }
   }
 
+  const cellComponent = ({ row, children }) => {
+    console.log(row)
+    return (
+      // @ts-ignore
+      <TableEditColumn.Cell
+        style={{
+          ...(addedRows.length !== 0
+            ? { pointerEvents: 'none', opacity: 0.5 }
+            : {}),
+        }}
+      >
+        {children}
+      </TableEditColumn.Cell>
+    )
+  }
+
   return (
     <Paper>
       <TableWrapper tableName={tableName} icon={icon}>
@@ -167,6 +183,8 @@ const Tables: FC<Props> = ({
             showEditCommand
             showDeleteCommand
             commandComponent={CustomEditorColumnTxt}
+            // @ts-ignore
+            // cellComponent={cellComponent}
           />
           <CustomEditorColumn />
           <TableColumnVisibility />
