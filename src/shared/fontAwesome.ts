@@ -1,4 +1,3 @@
-import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faSpinner,
   faTrashAlt,
@@ -14,11 +13,12 @@ import {
   faBlog,
   faKissWinkHeart,
   faCog,
+  faEdit,
 } from '@fortawesome/free-solid-svg-icons'
 
 import { faReact } from '@fortawesome/free-brands-svg-icons'
 
-export default library.add(
+const fontAwesomes = [
   faSpinner,
   faTrashAlt,
   faSave,
@@ -34,4 +34,7 @@ export default library.add(
   faBlog,
   faKissWinkHeart,
   faCog,
-)
+  faEdit,
+]
+
+export default fontAwesomes

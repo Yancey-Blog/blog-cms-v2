@@ -9,3 +9,13 @@ export const formatJSONDate = (jsonDate: string) =>
     .toISOString()
     .replace(/T/g, ' ')
     .replace(/\.[\d]{3}Z/, '')
+
+export const httpClient = (url: string, data: any, method = 'GET') => {
+  return fetch(url, {
+    body: method === 'GET' ? null : JSON.stringify(data),
+    headers: {
+      'content-type': 'application/json',
+    },
+    method: method,
+  }).then(response => response.json())
+}

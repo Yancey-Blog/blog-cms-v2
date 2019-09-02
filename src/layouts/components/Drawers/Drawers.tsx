@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Drawer from '@material-ui/core/Drawer'
 import Avatar from '@material-ui/core/Avatar'
 import styles from './Drawers.module.scss'
@@ -67,7 +68,7 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
           </div>
           <div className={classNames(styles.drawerUser)}>
             <Avatar
-              alt='Remy Sharp'
+              alt='Yancey Official Logo'
               src='https://static.yanceyleo.com/_Users_licaifan_Desktop_11532336786_.pic_hd.jpg'
               className={styles.avater}
             />
@@ -122,29 +123,30 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
                   }
                 >
                   {route.children.map(child => (
-                    <div
-                      className={classNames(
-                        styles.drawerItem,
-                        styles.drawerItemChildren,
-                        {
-                          [styles.activeDrawerItem]:
-                            drawerItem.child === child.path,
-                        },
-                      )}
-                      key={child.name}
-                      onClick={() => handleDrawerChange(child)}
-                    >
-                      <span className={styles.drawerItemIcon}>
-                        {getInitials(child.name)}
-                      </span>
+                    <Link to={child.path} key={child.name}>
                       <div
-                        className={classNames(styles.drawerDetail, {
-                          [styles.hideDrawerDetail]: !open,
-                        })}
+                        className={classNames(
+                          styles.drawerItem,
+                          styles.drawerItemChildren,
+                          {
+                            [styles.activeDrawerItem]:
+                              drawerItem.child === child.path,
+                          },
+                        )}
+                        onClick={() => handleDrawerChange(child)}
                       >
-                        <span className={styles.drawerTxt}>{child.name}</span>
+                        <span className={styles.drawerItemIcon}>
+                          {getInitials(child.name)}
+                        </span>
+                        <div
+                          className={classNames(styles.drawerDetail, {
+                            [styles.hideDrawerDetail]: !open,
+                          })}
+                        >
+                          <span className={styles.drawerTxt}>{child.name}</span>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               ) : null}

@@ -1,0 +1,15 @@
+.editorIcon {
+  padding: 12px;
+  background: none !important;
+  box-shadow: none !important;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.08) !important;
+    border-radius: 50%;
+  }
+}
+
+.batchdeleteIcon {
+  margin-right: 12px;
+}
