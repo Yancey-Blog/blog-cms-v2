@@ -58,11 +58,16 @@ export const CustomEditorColumnTxt = ({ id, text, onExecute }) => {
   }
 }
 
-export const BatchDelete = ({ length }) => (
+export const BatchDelete = ({ length, onClick }) => (
   <Plugin name='customToolbarMarkup'>
     <Template name='toolbarContent'>
       <TemplatePlaceholder />
-      <Button variant='contained' color='secondary' disabled={length === 0}>
+      <Button
+        variant='contained'
+        color='secondary'
+        disabled={length === 0}
+        onClick={onClick}
+      >
         <Delete className={styles.batchdeleteIcon} />
         Batch Delete
       </Button>

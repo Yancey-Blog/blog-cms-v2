@@ -44,7 +44,6 @@ import {
   BatchDelete,
   FilterIcon,
   DateFormatter,
-  getHiddenColumnsFilteringExtensions,
   getRowId,
   CustomEditorColumn,
 } from './Custom'
@@ -62,13 +61,16 @@ interface Props {
   editingStateColumnExtensions: EditingState.ColumnExtension[]
 
   POST: Function
+  PUT: Function
+  DELETE: Function
+  BATCHDELETE: Function
 }
 
 const Tables: FC<Props> = ({
   tableName,
   icon,
   loading,
-  rows: rowsData,
+  rows,
   columns,
   selectByRowClick,
   totalCount,
@@ -77,19 +79,13 @@ const Tables: FC<Props> = ({
   editingStateColumnExtensions,
 
   POST,
+  PUT,
+  DELETE,
+  BATCHDELETE,
 }) => {
-  const [rows, setRows] = useState(rowsData)
   const [selection, setSelection] = useState<ReactText[]>([])
   const [currentPage, setCurrentPage] = useState(defaultCurrentPage)
   const [pageSize, setPageSize] = useState(defaultPageSize)
-  const [defaultHiddenColumnNames] = useState([])
-  const [filteringColumnExtensions, setFilteringColumnExtensions] = useState(
-    getHiddenColumnsFilteringExtensions(defaultHiddenColumnNames),
-  )
-  const onHiddenColumnNamesChange = hiddenColumnNames =>
-    setFilteringColumnExtensions(
-      getHiddenColumnsFilteringExtensions(hiddenColumnNames),
-    )
   const [editingRowIds, setEditingRowIds] = useState([])
   const [addedRows, setAddedRows] = useState([])
   const [rowChanges, setRowChanges] = useState({})
@@ -99,34 +95,37 @@ const Tables: FC<Props> = ({
     setAddedRows(value)
   }
 
+  const handleBatchDeleteChange = () => {
+    BATCHDELETE(selection)
+    setSelection([])
+  }
+
   const commitChanges = ({ added, changed, deleted }) => {
     if (added) {
-      POST(addedRows)
+      POST(added)
     }
     if (changed) {
-      // changedRows = rows.map(row =>
-      //   changed[row._id] ? { ...row, ...changed[row._id] } : row,
-      // )
+      const id = Object.keys(changed)[0]
+      const params = Object.values(changed)[0]
+      PUT(id, params)
     }
     if (deleted) {
-      // const deletedSet = new Set(deleted)
-      // changedRows = rows.filter(row => !deletedSet.has(row._id))
+      DELETE(deleted)
     }
-    // setRows(changedRows)
   }
 
   return (
     <Paper>
       <TableWrapper tableName={tableName} icon={icon}>
-        <Grid rows={rowsData} columns={columns} getRowId={getRowId}>
+        <Grid rows={rows} columns={columns} getRowId={getRowId}>
           <EditingState
             editingRowIds={editingRowIds}
             // @ts-ignore
             onEditingRowIdsChange={setEditingRowIds}
-            rowChanges={rowChanges}
-            onRowChangesChange={setRowChanges}
             addedRows={addedRows}
             onAddedRowsChange={changeAddedRows}
+            rowChanges={rowChanges}
+            onRowChangesChange={setRowChanges}
             // @ts-ignore
             onCommitChanges={commitChanges}
             columnExtensions={editingStateColumnExtensions}
@@ -145,7 +144,7 @@ const Tables: FC<Props> = ({
           />
           <SearchState defaultValue='' />
           <CustomPaging totalCount={totalCount} />
-          <IntegratedFiltering columnExtensions={filteringColumnExtensions} />
+          <IntegratedFiltering />
           <IntegratedSorting />
           <IntegratedPaging />
           <IntegratedSelection />
@@ -170,14 +169,14 @@ const Tables: FC<Props> = ({
             commandComponent={CustomEditorColumnTxt}
           />
           <CustomEditorColumn />
-          <TableColumnVisibility
-            defaultHiddenColumnNames={defaultHiddenColumnNames}
-            onHiddenColumnNamesChange={onHiddenColumnNamesChange}
-          />
+          <TableColumnVisibility />
           <Toolbar />
           <SearchPanel />
           <ColumnChooser />
-          <BatchDelete length={selection.length} />
+          <BatchDelete
+            length={selection.length}
+            onClick={handleBatchDeleteChange}
+          />
           <TableFilterRow showFilterSelector iconComponent={FilterIcon} />
           <TableSelection showSelectAll selectByRowClick={selectByRowClick} />
           <PagingPanel pageSizes={pageSizes} />

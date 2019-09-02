@@ -43,6 +43,40 @@ const Announcement: FC = () => {
     )
   }
 
+  const PUT = (id: string, params: any) => {
+    setLoading(true)
+    httpClient(
+      `http://127.0.0.1:3002/api/announcements/${id}`,
+      params,
+      'PUT',
+    ).then(data => {
+      setLoading(false)
+      GET()
+    })
+  }
+
+  const DELETE = (id: string) => {
+    setLoading(true)
+    httpClient(
+      `http://127.0.0.1:3002/api/announcements/${id}`,
+      {},
+      'DELETE',
+    ).then(data => {
+      setLoading(false)
+      GET()
+    })
+  }
+
+  const BATCHDELETE = (ids: string[]) => {
+    setLoading(true)
+    httpClient(`http://127.0.0.1:3002/api/announcements`, ids, 'DELETE').then(
+      data => {
+        setLoading(false)
+        GET()
+      },
+    )
+  }
+
   useEffect(() => {
     setLoading(true)
     GET()
@@ -55,6 +89,9 @@ const Announcement: FC = () => {
       loading={loading}
       {...tableProps}
       POST={POST}
+      PUT={PUT}
+      DELETE={DELETE}
+      BATCHDELETE={BATCHDELETE}
     />
   )
 }
