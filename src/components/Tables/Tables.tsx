@@ -60,21 +60,25 @@ interface Props {
   dateColumns: string[]
   columnOrders: string[]
   editingStateColumnExtensions: EditingState.ColumnExtension[]
+
+  POST: Function
 }
 
 const Tables: FC<Props> = ({
   tableName,
   icon,
   loading,
-  rows: rowData,
+  rows: rowsData,
   columns,
   selectByRowClick,
   totalCount,
   dateColumns,
   columnOrders,
   editingStateColumnExtensions,
+
+  POST,
 }) => {
-  const [rows, setRows] = useState(rowData)
+  const [rows, setRows] = useState(rowsData)
   const [selection, setSelection] = useState<ReactText[]>([])
   const [currentPage, setCurrentPage] = useState(defaultCurrentPage)
   const [pageSize, setPageSize] = useState(defaultPageSize)
@@ -91,41 +95,30 @@ const Tables: FC<Props> = ({
   const [rowChanges, setRowChanges] = useState({})
   const [columnOrder, setColumnOrder] = useState(columnOrders)
 
-  const changeAddedRows = value => {
-    const initialized = value.map(row =>
-      Object.keys(row).length ? row : { name: '' },
-    )
-    setAddedRows(initialized)
+  const changeAddedRows = (value: any) => {
+    setAddedRows(value)
   }
 
   const commitChanges = ({ added, changed, deleted }) => {
-    let changedRows
     if (added) {
-      const startingAddedId = rows.length > 0 ? rows[rows.length - 1].id + 1 : 0
-      changedRows = [
-        ...rows,
-        ...added.map((row, index) => ({
-          id: startingAddedId + index,
-          ...row,
-        })),
-      ]
+      POST(addedRows)
     }
     if (changed) {
-      changedRows = rows.map(row =>
-        changed[row.id] ? { ...row, ...changed[row.id] } : row,
-      )
+      // changedRows = rows.map(row =>
+      //   changed[row._id] ? { ...row, ...changed[row._id] } : row,
+      // )
     }
     if (deleted) {
-      const deletedSet = new Set(deleted)
-      changedRows = rows.filter(row => !deletedSet.has(row.id))
+      // const deletedSet = new Set(deleted)
+      // changedRows = rows.filter(row => !deletedSet.has(row._id))
     }
-    setRows(changedRows)
+    // setRows(changedRows)
   }
 
   return (
     <Paper>
       <TableWrapper tableName={tableName} icon={icon}>
-        <Grid rows={rows} columns={columns} getRowId={getRowId}>
+        <Grid rows={rowsData} columns={columns} getRowId={getRowId}>
           <EditingState
             editingRowIds={editingRowIds}
             // @ts-ignore
@@ -162,6 +155,7 @@ const Tables: FC<Props> = ({
             formatterComponent={DateFormatter}
           />
           <DragDropProvider />
+
           <Table />
           <TableColumnReordering
             order={columnOrder}
