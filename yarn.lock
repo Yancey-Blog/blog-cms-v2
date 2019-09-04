@@ -2004,7 +2004,7 @@
   dependencies:
     "@babel/runtime" "^7.2.0"
 
-"@material-ui/pickers@^3.2.2", "@material-ui/pickers@^3.2.4":
+"@material-ui/pickers@^3.2.2":
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/@material-ui/pickers/-/pickers-3.2.4.tgz#be5dfcff71120de8c3711595d773ec3f2141b736"
   integrity sha512-px+vHVu1tMKHyOXNd7OPc0hF+SP+6ZDSMHLFzZPnnwOADu0GwbEoEs+428Vdp2ifpiojaCFneUO2uTMtQbywcQ==
@@ -2058,15 +2058,6 @@
     "@types/react" "*"
 
 "@material-ui/utils@^4.1.0", "@material-ui/utils@^4.4.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@material-ui/utils/-/utils-4.4.0.tgz#9275421e2798a067850d201212d46f12725828ad"
-  integrity sha512-UXoQVwArQEQWXxf2FPs0iJGT+MePQpKr0Qh0CPoLc1OdF0GSMTmQczcqCzwZkeHxHAOq/NkIKM1Pb/ih1Avicg==
-  dependencies:
-    "@babel/runtime" "^7.4.4"
-    prop-types "^15.7.2"
-    react-is "^16.8.6"
-
-"@material-ui/utils@^4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@material-ui/utils/-/utils-4.4.0.tgz#9275421e2798a067850d201212d46f12725828ad"
   integrity sha512-UXoQVwArQEQWXxf2FPs0iJGT+MePQpKr0Qh0CPoLc1OdF0GSMTmQczcqCzwZkeHxHAOq/NkIKM1Pb/ih1Avicg==

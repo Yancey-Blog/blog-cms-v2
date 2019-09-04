@@ -1,24 +1,46 @@
 import React, { FC, useState, useEffect } from 'react'
-import Tables from 'components/Tables/Tables'
+import MaterialTable from 'material-table'
 import { httpClient } from 'shared/utils'
+import { formatJSONDate } from 'shared/utils'
+import tableIcons from './config'
+
+interface IAnnouncement {
+  _id: string
+  announcement: string
+  createdAt: string
+  updatedAt: string
+}
 
 const tableProps = {
   tableName: 'Announcement',
   icon: 'save',
-  columns: [
-    { name: '_id', title: 'Id' },
-    { name: 'announcement', title: 'Announcement' },
-    { name: 'createdAt', title: 'CreatedAt' },
-    { name: 'updatedAt', title: 'UpdatedAt' },
-  ],
-  selectByRowClick: false,
-  dateColumns: ['createdAt', 'updatedAt'],
-  columnOrders: ['_id', 'announcement', 'createdAt', 'updatedAt'],
-  editingStateColumnExtensions: [
-    { columnName: '_id', editingEnabled: false },
-    { columnName: 'createdAt', editingEnabled: false },
-    { columnName: 'updatedAt', editingEnabled: false },
-  ],
+  // columns: [
+  //   { field: '_id', title: 'Id', editable: 'never' },
+  //   { field: 'announcement', title: 'Announcement' },
+  //   {
+  //     field: 'createdAt',
+  //     title: 'CreatedAt',
+  //     editable: 'never',
+  //     render: (rowData: any) => (
+  //       <span>{formatJSONDate(rowData.createdAt)}</span>
+  //     ),
+  //   },
+  //   {
+  //     field: 'updatedAt',
+  //     title: 'UpdatedAt',
+  //     editable: 'never',
+  //     render: (rowData: any) => (
+  //       <span>{formatJSONDate(rowData.updatedAt)}</span>
+  //     ),
+  //   },
+  // ],
+  options: {
+    actionsColumnIndex: -1,
+    filtering: true,
+    exportButton: true,
+    grouping: true,
+    selection: true,
+  },
 }
 
 const Announcement: FC = () => {
@@ -83,15 +105,63 @@ const Announcement: FC = () => {
   }, [])
 
   return (
-    <Tables
-      rows={dataSource}
-      totalCount={dataSource.length}
-      loading={loading}
+    <MaterialTable
+      columns={[
+        { field: '_id', title: 'Id', editable: 'never' },
+        { field: 'announcement', title: 'Announcement' },
+        {
+          field: 'createdAt',
+          title: 'CreatedAt',
+          editable: 'never',
+          render: (rowData: any) => (
+            <span>{formatJSONDate(rowData.createdAt)}</span>
+          ),
+        },
+        {
+          field: 'updatedAt',
+          title: 'UpdatedAt',
+          editable: 'never',
+          render: (rowData: any) => (
+            <span>{formatJSONDate(rowData.updatedAt)}</span>
+          ),
+        },
+      ]}
       {...tableProps}
-      POST={POST}
-      PUT={PUT}
-      DELETE={DELETE}
-      BATCHDELETE={BATCHDELETE}
+      data={dataSource}
+      icons={tableIcons}
+      editable={{
+        onRowAdd: newData =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              console.log(newData)
+              resolve()
+            }, 1000)
+          }),
+        onRowUpdate: (newData, oldData) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              {
+                const data = this.state.data
+                const index = data.indexOf(oldData)
+                data[index] = newData
+                this.setState({ data }, () => resolve())
+              }
+              resolve()
+            }, 1000)
+          }),
+        onRowDelete: oldData =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              {
+                let data = this.state.data
+                const index = data.indexOf(oldData)
+                data.splice(index, 1)
+                this.setState({ data }, () => resolve())
+              }
+              resolve()
+            }, 1000)
+          }),
+      }}
     />
   )
 }
