@@ -1,6 +1,5 @@
-export interface IAnnouncement {
-  _id: string
+import { IBaseParams } from './common'
+
+export interface IAnnouncement extends IBaseParams {
   announcement: string
-  createdAt: string
-  updatedAt: string
 }

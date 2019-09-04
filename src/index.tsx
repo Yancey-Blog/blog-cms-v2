@@ -1,20 +1,25 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Router } from 'react-router-dom'
-import history from 'shared/history'
 import * as serviceWorker from 'serviceWorker'
-
+import { Provider } from 'react-redux'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import configureStore from 'stores/rootStores'
+import history from 'shared/history'
 import fontAwesomes from 'shared/fontAwesome'
 import Layouts from 'layouts/Layouts'
 
+const store = configureStore()
 library.add(...fontAwesomes)
+serviceWorker.unregister()
+
 ReactDOM.render(
-  <BrowserRouter>
-    <Router history={history}>
-      <Layouts />
-    </Router>
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <Router history={history}>
+        <Layouts />
+      </Router>
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root'),
 )
-serviceWorker.unregister()
