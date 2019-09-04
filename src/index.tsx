@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Router } from 'react-router-dom'
+import history from 'shared/history'
 import * as serviceWorker from 'serviceWorker'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -10,7 +11,9 @@ import Layouts from 'layouts/Layouts'
 library.add(...fontAwesomes)
 ReactDOM.render(
   <BrowserRouter>
-    <Layouts />
+    <Router history={history}>
+      <Layouts />
+    </Router>
   </BrowserRouter>,
   document.getElementById('root'),
 )
