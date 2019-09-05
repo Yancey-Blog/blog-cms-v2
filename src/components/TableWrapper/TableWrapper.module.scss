@@ -19,7 +19,9 @@
 
 .tableHeader {
   @include flexMixin(flex-start);
-  margin-bottom: 40px;
+  position: relative;
+  top: 10px;
+  z-index: 9999;
 }
 
 .tableIcon {
@@ -30,7 +32,7 @@
 
 .tableTitle {
   position: relative;
-  top: 16px;
+  top: 18px;
   margin: 0;
   margin-left: 94px;
   font-size: 18px;

@@ -9,6 +9,9 @@ const AXIOS_DEFAULT_CONFIG: AxiosRequestConfig = {
   validateStatus: status => status >= 200 && status < 300,
 }
 
+const apiUrl = () =>
+  env === 'production' ? baseURL.production : baseURL.development
+
 const createRxios = function(baseURL: string) {
   return new Rxios({
     ...AXIOS_DEFAULT_CONFIG,
@@ -16,4 +19,4 @@ const createRxios = function(baseURL: string) {
   })
 }
 
-export default createRxios(baseURL[env])
+export default createRxios(apiUrl())
