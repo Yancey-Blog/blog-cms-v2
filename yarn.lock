@@ -1971,7 +1971,7 @@
   dependencies:
     "@babel/runtime" "^7.2.0"
 
-"@material-ui/pickers@^3.2.5":
+"@material-ui/pickers@^3.2.2":
   version "3.2.5"
   resolved "https://registry.yarnpkg.com/@material-ui/pickers/-/pickers-3.2.5.tgz#e5c9a56c8b57ceb8bca50c4fd7b7a03cb3c918e1"
   integrity sha512-UV5UKslOcmcP4cB2wwOg1SFoXS6RTRRvCNkDclHtOa+Ni+gyZLEt3WcSQWH7oDx8A94gmkiZTpfweNFV7sC4sw==
@@ -2121,11 +2121,6 @@
     once "^1.4.0"
     universal-user-agent "^3.0.0"
     url-template "^2.0.8"
-
-"@rooks/use-mutation-observer@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@rooks/use-mutation-observer/-/use-mutation-observer-1.1.0.tgz#db5f2e9b209956f3e25a9c257c41448f8a5ad24f"
-  integrity sha512-C5n6CAxn7TnMFimqAHi3vUtcoebu1GcYrgCgFjydGRNB/+VvQ768qS7Pc3H5VvNQu194NqviyEhVv4MQyqszsg==
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
@@ -3817,7 +3812,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@2.2.6, classnames@^2.2.6:
+classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
@@ -6132,16 +6127,6 @@ flush-write-stream@^1.0.0:
   dependencies:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
-
-focus-lock@^0.6.3:
-  version "0.6.5"
-  resolved "https://registry.yarnpkg.com/focus-lock/-/focus-lock-0.6.5.tgz#f6eb37832a9b1b205406175f5277396a28c0fce1"
-  integrity sha512-i/mVBOoa9o+tl+u9owOJUF8k8L85odZNIsctB+JAK2HFT8jckiBwmk+3uydlm6FN8czgnkIwQtBv6yyAbrzXjw==
-
-focus-outline-manager@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/focus-outline-manager/-/focus-outline-manager-1.0.2.tgz#7bf3658865341fb6b08d042a037b9d2868b119b5"
-  integrity sha1-e/NliGU0H7awjQQqA3udKGixGbU=
 
 follow-redirects@1.5.10:
   version "1.5.10"
@@ -8627,11 +8612,6 @@ lodash.clonedeep@^4.5.0, lodash.clonedeep@~4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
   integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
 
-lodash.debounce@4.0.8:
-  version "4.0.8"
-  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
-  integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
-
 lodash.get@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
@@ -8651,11 +8631,6 @@ lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
-
-lodash.pick@4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
-  integrity sha1-UvBWEP/53tQiYRRB7R/BI6AwAbM=
 
 lodash.set@^4.3.2:
   version "4.3.2"
@@ -11077,7 +11052,7 @@ promzard@^0.3.0:
   dependencies:
     read "1"
 
-prop-types@15.7.2, prop-types@^15.5.10, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -11304,13 +11279,6 @@ react-beautiful-dnd@11.0.3:
     tiny-invariant "^1.0.4"
     use-memo-one "^1.1.0"
 
-react-clientside-effect@^1.2.0:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/react-clientside-effect/-/react-clientside-effect-1.2.2.tgz#6212fb0e07b204e714581dd51992603d1accc837"
-  integrity sha512-nRmoyxeok5PBO6ytPvSjKp9xwXg9xagoTK1mMjwnQxqM9Hd7MNPl+LS1bOSOe+CV2+4fnEquc7H/S8QD3q697A==
-  dependencies:
-    "@babel/runtime" "^7.0.0"
-
 react-dev-utils@^9.0.3:
   version "9.0.3"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-9.0.3.tgz#7607455587abb84599451460eb37cef0b684131a"
@@ -11362,16 +11330,6 @@ react-error-overlay@^6.0.1:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.1.tgz#b8d3cf9bb991c02883225c48044cb3ee20413e0f"
   integrity sha512-V9yoTr6MeZXPPd4nV/05eCBvGH9cGzc52FN8fs0O0TVQ3HYYf1n7EgZVtHbldRq5xU9zEzoXIITjYNIfxDDdUw==
 
-react-focus-lock@^1.18.3:
-  version "1.19.1"
-  resolved "https://registry.yarnpkg.com/react-focus-lock/-/react-focus-lock-1.19.1.tgz#2f3429793edaefe2d077121f973ce5a3c7a0651a"
-  integrity sha512-TPpfiack1/nF4uttySfpxPk4rGZTLXlaZl7ncZg/ELAk24Iq2B1UUaUioID8H8dneUXqznT83JTNDHDj+kwryw==
-  dependencies:
-    "@babel/runtime" "^7.0.0"
-    focus-lock "^0.6.3"
-    prop-types "^15.6.2"
-    react-clientside-effect "^1.2.0"
-
 react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6, react-is@^16.9.0:
   version "16.9.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.9.0.tgz#21ca9561399aad0ff1a7701c01683e8ca981edcb"
@@ -11418,7 +11376,7 @@ react-router@5.0.1:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react-transition-group@^4.0.0, react-transition-group@^4.2.2:
+react-transition-group@^4.0.0:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.2.2.tgz#8b5252410180c27fd7eebf50b185256b41799b16"
   integrity sha512-uP0tjqewtvjb7kGZFpZYPoD/NlVZmIgts9eTt1w35pAaEApPxQGv94lD3VkqyXf2aMqrSGwhs6EV/DLaoKbLSw==
@@ -11436,21 +11394,6 @@ react@^16.9.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-
-reactour@^1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/reactour/-/reactour-1.15.0.tgz#37c57a0595aea572fbf03f6727a069a4df1313ea"
-  integrity sha512-GVppoFJoITexvVgoj3mQe1mvnFjvT30Fqfhw2KKgBHedvt6mN2dpPk5tlCCkfQeb7Mhcjjct+VfwWHoE/CJAMQ==
-  dependencies:
-    "@rooks/use-mutation-observer" "1.1.0"
-    classnames "2.2.6"
-    focus-outline-manager "^1.0.2"
-    lodash.debounce "4.0.8"
-    lodash.pick "4.4.0"
-    prop-types "15.7.2"
-    react-focus-lock "^1.18.3"
-    scroll-smooth "1.0.1"
-    scrollparent "2.0.1"
 
 read-cmd-shim@^1.0.1:
   version "1.0.4"
@@ -12170,16 +12113,6 @@ schema-utils@^2.0.0, schema-utils@^2.0.1, schema-utils@^2.1.0:
   dependencies:
     ajv "^6.1.0"
     ajv-keywords "^3.1.0"
-
-scroll-smooth@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/scroll-smooth/-/scroll-smooth-1.0.1.tgz#77be38594dc0ae4af58851383927b60ad9f3f842"
-  integrity sha1-d744WU3Arkr1iFE4OSe2Ctnz+EI=
-
-scrollparent@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/scrollparent/-/scrollparent-2.0.1.tgz#715d5b9cc57760fb22bdccc3befb5bfe06b1a317"
-  integrity sha1-cV1bnMV3YPsivczDvvtb/gaxoxc=
 
 scss-tokenizer@^0.2.3:
   version "0.2.3"
