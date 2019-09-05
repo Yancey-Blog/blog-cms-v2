@@ -17,7 +17,6 @@ const epicMiddleware = createEpicMiddleware<
 >({
   dependencies: services,
 })
-
 const routerMiddleware = createRouterMiddleware(history)
 
 export default function configureStore(initialState?: {}) {
@@ -34,6 +33,8 @@ export default function configureStore(initialState?: {}) {
   const composedEnhancers = composeWithDevTools(...enhancers)
 
   const store = createStore(rootReducers, initialState, composedEnhancers)
+
+  epicMiddleware.run(rootEpics)
 
   if (process.env.NODE_ENV !== 'production' && (module as any).hot) {
     ;(module as any).hot.accept('./rootReducers', () =>
