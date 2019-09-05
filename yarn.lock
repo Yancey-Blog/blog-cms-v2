@@ -1229,10 +1229,10 @@
   dependencies:
     "@babel/runtime" "^7.2.0"
 
-"@material-ui/pickers@^3.2.4":
-  version "3.2.4"
-  resolved "https://registry.yarnpkg.com/@material-ui/pickers/-/pickers-3.2.4.tgz#be5dfcff71120de8c3711595d773ec3f2141b736"
-  integrity sha512-px+vHVu1tMKHyOXNd7OPc0hF+SP+6ZDSMHLFzZPnnwOADu0GwbEoEs+428Vdp2ifpiojaCFneUO2uTMtQbywcQ==
+"@material-ui/pickers@^3.2.5":
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/@material-ui/pickers/-/pickers-3.2.5.tgz#e5c9a56c8b57ceb8bca50c4fd7b7a03cb3c918e1"
+  integrity sha512-UV5UKslOcmcP4cB2wwOg1SFoXS6RTRRvCNkDclHtOa+Ni+gyZLEt3WcSQWH7oDx8A94gmkiZTpfweNFV7sC4sw==
   dependencies:
     "@babel/runtime" "^7.2.0"
     "@types/styled-jsx" "^2.2.8"
