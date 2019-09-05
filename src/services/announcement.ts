@@ -1,7 +1,7 @@
-import { GET } from 'shared/axios'
-import { AxiosResponse } from 'axios'
+import { Observable } from 'rxjs'
+import http from 'configs/httpConfig'
 import { IAnnouncement } from 'typings/announcement'
 
-export const getAnnouncements = (): Promise<AxiosResponse<IAnnouncement>> => {
-  return GET('/announcements')
+export const getAnnouncements = (): Observable<IAnnouncement[]> => {
+  return http.get('/announcements', {})
 }

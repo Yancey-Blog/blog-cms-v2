@@ -12,19 +12,6 @@ interface IAnnouncement {
   updatedAt: string
 }
 
-const tableProps = {
-  title: '',
-  // tableName: 'Announcement',
-  // icon: 'save',
-  options: {
-    actionsColumnIndex: -1,
-    filtering: true,
-    exportButton: true,
-    grouping: true,
-    selection: true,
-  },
-}
-
 const Announcement: FC<{}> = (props) => {
   const [dataSource, setDataSource] = useState([])
   const [loading, setLoading] = useState(false)
@@ -69,20 +56,20 @@ const Announcement: FC<{}> = (props) => {
     })
   }
 
-  const BATCHDELETE = (ids: string[]) => {
-    return httpClient(
-      `http://127.0.0.1:3002/api/announcements`,
-      ids,
-      'DELETE',
-    ).then(data => {
-      GET()
-    })
-  }
+  // const BATCHDELETE = (ids: string[]) => {
+  //   return httpClient(
+  //     `http://127.0.0.1:3002/api/announcements`,
+  //     ids,
+  //     'DELETE',
+  //   ).then(data => {
+  //     GET()
+  //   })
+  // }
 
   useEffect(() => {
     GET()
     console.log(props)
-  }, [])
+  }, [props])
 
   return (
     <MaterialTable
