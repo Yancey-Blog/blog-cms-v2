@@ -10,8 +10,8 @@ export interface Route extends BaseRoute {
 
 const routes: Route[] = [
   {
-    name: 'Dashborad',
-    path: '/dashborad',
+    name: 'Dashboard',
+    path: '/dashboard',
     icon: 'tachometer-alt',
     children: [],
   },
