@@ -26,10 +26,10 @@ const mapDispatchToProps = {
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
 
 const Announcement: FC<Props> = ({ announcements, fetchAnnouncements }) => {
-  const [loading, setLoading] = useState(false)
+  const [loading] = useState(false)
   useEffect(() => {
     fetchAnnouncements({})
-  }, [])
+  })
   return (
     <TableWrapper tableName='Yancey Table' icon='save'>
       <MaterialTable
