@@ -1,8 +1,22 @@
 .footer {
+  @include flexMixin(space-between);
   margin: 0;
-  padding: 30px;
+  padding: 12px 24px;
   font-size: 14px;
   text-align: right;
   color: #3c4858;
   border-top: 1px solid #e7e7e7;
+}
+
+.footerList {
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  display: inline-block;
+  padding-right: 30px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #3c4858;
 }

@@ -8,15 +8,20 @@
   left: 16px;
   width: 62px;
   height: 65px;
-  background: linear-gradient(60deg, #ec407a, #d81b60);
   border-radius: 3px;
+  background: linear-gradient(60deg, #ab47bc, #8e24aa);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14),
+    0 7px 10px -5px rgba(156, 39, 176, 0.4);
+  background: linear-gradient(60deg, #ec407a, #d81b60);
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14),
     0 7px 10px -5px rgba(233, 30, 99, 0.4);
 }
 
 .tableHeader {
   @include flexMixin(flex-start);
-  margin-bottom: 40px;
+  position: relative;
+  top: 10px;
+  z-index: 9999;
 }
 
 .tableIcon {
@@ -27,7 +32,7 @@
 
 .tableTitle {
   position: relative;
-  top: 16px;
+  top: 18px;
   margin: 0;
   margin-left: 94px;
   font-size: 18px;

@@ -4,7 +4,15 @@ import styles from './Footer.module.scss'
 const Footer: FC = () => {
   return (
     <footer className={styles.footer}>
-      Copyright © {new Date().getFullYear()} Yancey Inc. All rights reserved.
+      <ul className={styles.footerList}>
+        <li>HOME</li>
+        <li>BLOG</li>
+        <li>GITHUB</li>
+        <li>GITHUB</li>
+      </ul>
+      <p className={styles.copyright}>
+        Copyright © {new Date().getFullYear()} Yancey Inc. All rights reserved.
+      </p>
     </footer>
   )
 }

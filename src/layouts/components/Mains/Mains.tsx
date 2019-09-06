@@ -1,29 +1,22 @@
-import React, { FC } from 'react'
-import Tables from 'components/Tables/Tables'
+import React, { FC, lazy, Suspense } from 'react'
+import { Route, Switch } from 'react-router-dom'
 import styles from './Mains.module.scss'
+import Loading from 'components/Loading/Loading'
 
-import mock from './mock'
-
-const tableProps = {
-  loading: false,
-  rows: mock,
-  columns: [
-    { name: 'drag', title: 'Drag' },
-    { name: 'name', title: 'Name' },
-    { name: 'sex', title: 'Sex' },
-    { name: 'city', title: 'City' },
-    { name: 'time', title: 'Time' },
-    { name: 'amount', title: 'Amount' },
-  ],
-  sorts: [{ columnName: 'name', direction: 'asc' }],
-  selectByRowClick: false,
-  totalCount: mock.length,
-}
+const Announcement = lazy(() =>
+  import('containers/Home/Announcement/Announcement'),
+)
+const Motto = lazy(() => import('containers/Home/Motto/Motto'))
 
 const Mains: FC = () => {
   return (
     <main className={styles.main}>
-      <Tables {...tableProps} />
+      <Suspense fallback={<Loading />}>
+        <Switch>
+          <Route path='/announcement' render={() => <Announcement />} />
+          <Route path='/motto' render={() => <Motto />} />
+        </Switch>
+      </Suspense>
     </main>
   )
 }
