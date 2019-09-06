@@ -5,8 +5,7 @@ import MaterialTable from 'material-table'
 import Checkbox from '@material-ui/core/Checkbox'
 import { formatJSONDate } from 'shared/utils'
 import tableIcons from 'configs/tableConfig'
-import { fetchAnnouncements } from 'stores/announcement/actions'
-import { IAnnouncement } from 'typings/announcement'
+import { getAnnouncements } from 'stores/announcement/actions'
 import TableWrapper from 'components/TableWrapper/TableWrapper'
 
 const mapStateToProps = (state: RootState) => {
@@ -20,16 +19,17 @@ const mapStateToProps = (state: RootState) => {
 }
 
 const mapDispatchToProps = {
-  fetchAnnouncements: fetchAnnouncements.request,
+  getAnnouncements: getAnnouncements.request,
 }
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
 
-const Announcement: FC<Props> = ({ announcements, fetchAnnouncements }) => {
+const Announcement: FC<Props> = ({ announcements, getAnnouncements }) => {
   const [loading] = useState(false)
   useEffect(() => {
-    fetchAnnouncements({})
-  })
+    getAnnouncements()
+    // 第二个参数应当是一个或多个原始类型参数组成的数组
+  }, [])
   return (
     <TableWrapper tableName='Yancey Table' icon='save'>
       <MaterialTable
@@ -49,7 +49,7 @@ const Announcement: FC<Props> = ({ announcements, fetchAnnouncements }) => {
             cellStyle: {
               width: '80px',
             },
-            render: (rowData: IAnnouncement) => (
+            render: rowData => (
               <Checkbox
                 value='checkedA'
                 inputProps={{ 'aria-label': 'Checkbox A' }}
@@ -62,7 +62,7 @@ const Announcement: FC<Props> = ({ announcements, fetchAnnouncements }) => {
             field: 'createdAt',
             title: 'CreatedAt',
             editable: 'never',
-            render: (rowData: IAnnouncement) => (
+            render: rowData => (
               <span>{rowData ? formatJSONDate(rowData.createdAt) : ''}</span>
             ),
           },
@@ -70,7 +70,7 @@ const Announcement: FC<Props> = ({ announcements, fetchAnnouncements }) => {
             field: 'updatedAt',
             title: 'UpdatedAt',
             editable: 'never',
-            render: (rowData: IAnnouncement) => (
+            render: rowData => (
               <span>{rowData ? formatJSONDate(rowData.createdAt) : ''}</span>
             ),
           },
