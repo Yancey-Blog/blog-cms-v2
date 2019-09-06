@@ -8,6 +8,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import routes, { BaseRoute } from './Routes'
 import { getInitials } from 'shared/utils'
+import history from 'shared/history'
 
 interface DrawersProps {
   open: boolean
@@ -19,7 +20,7 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
     child: '',
   })
 
-  const handleDrawerChange = (route: any) =>
+  const handleDrawerChange = (route: any) => {
     route.children
       ? setDrawerItem({
           ...drawerItem,
@@ -32,6 +33,11 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
           child: route.children.length !== 0 ? drawerItem.child : '',
         })
       : setDrawerItem({ ...drawerItem, child: route.path })
+
+    if (route.children && route.children.length === 0) {
+      history.push(route.path)
+    }
+  }
 
   const setItemStyle = (children: BaseRoute[], curItem: string) => {
     if (curItem === drawerItem.parent) {

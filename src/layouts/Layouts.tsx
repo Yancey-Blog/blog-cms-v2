@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import styles from './Layouts.module.scss'
 import classNames from 'classnames'
+import styles from './Layouts.module.scss'
 import Header from './components/Header/Header'
 import Drawers from './components/Drawers/Drawers'
 import Mains from './components/Mains/Mains'
@@ -15,7 +15,7 @@ const Layouts: FC = () => {
   }
 
   return (
-    <div className='layouts'>
+    <>
       <CssBaseline />
       <div
         className={classNames(styles.container, {
@@ -27,7 +27,7 @@ const Layouts: FC = () => {
         <Footer />
       </div>
       <Drawers open={open} />
-    </div>
+    </>
   )
 }
 

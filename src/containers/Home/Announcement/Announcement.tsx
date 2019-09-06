@@ -1,62 +1,103 @@
 import React, { FC, useState, useEffect } from 'react'
-import Tables from 'components/Tables/Tables'
-import { httpClient } from 'shared/utils'
+import { connect } from 'react-redux'
+import { RootState } from 'typesafe-actions'
+import MaterialTable from 'material-table'
+import Checkbox from '@material-ui/core/Checkbox'
+import { formatJSONDate } from 'shared/utils'
+import tableIcons from 'configs/tableConfig'
+import { fetchAnnouncements } from 'stores/announcement/actions'
+import { IAnnouncement } from 'typings/announcement'
+import TableWrapper from 'components/TableWrapper/TableWrapper'
 
-const tableProps = {
-  tableName: 'Announcement',
-  icon: 'save',
-  columns: [
-    { name: '_id', title: 'Id' },
-    { name: 'announcement', title: 'Announcement' },
-    { name: 'createdAt', title: 'CreatedAt' },
-    { name: 'updatedAt', title: 'UpdatedAt' },
-  ],
-  selectByRowClick: false,
-  dateColumns: ['createdAt', 'updatedAt'],
-  columnOrders: ['_id', 'announcement', 'createdAt', 'updatedAt'],
-  editingStateColumnExtensions: [
-    { columnName: '_id', editingEnabled: false },
-    { columnName: 'createdAt', editingEnabled: false },
-    { columnName: 'updatedAt', editingEnabled: false },
-  ],
+const mapStateToProps = (state: RootState) => {
+  const {
+    announcements: { announcements },
+  } = state
+
+  return {
+    announcements: announcements.allIds.map(id => announcements.byId[id]),
+  }
 }
 
-const Announcement: FC = () => {
+const mapDispatchToProps = {
+  fetchAnnouncements: fetchAnnouncements.request,
+}
+
+type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
+
+const Announcement: FC<Props> = ({ announcements, fetchAnnouncements }) => {
   const [loading, setLoading] = useState(false)
-  const [dataSource, setDataSource] = useState([])
-
-  const GET = () => {
-    setLoading(true)
-    httpClient('http://127.0.0.1:3002/api/announcements', {}).then(data => {
-      setLoading(false)
-      setDataSource(data)
-    })
-  }
-
-  const POST = (params: any) => {
-    setLoading(true)
-    httpClient('http://127.0.0.1:3002/api/announcements', params, 'POST').then(
-      data => {
-        setLoading(false)
-        GET()
-      },
-    )
-  }
-
   useEffect(() => {
-    setLoading(true)
-    GET()
+    fetchAnnouncements({})
   }, [])
-
   return (
-    <Tables
-      rows={dataSource}
-      totalCount={dataSource.length}
-      loading={loading}
-      {...tableProps}
-      POST={POST}
-    />
+    <TableWrapper tableName='Yancey Table' icon='save'>
+      <MaterialTable
+        isLoading={loading}
+        columns={[
+          {
+            field: undefined,
+            title: (
+              <Checkbox
+                value='checkedA'
+                inputProps={{ 'aria-label': 'Checkbox A' }}
+              />
+            ),
+            editable: 'never',
+            filtering: false,
+            sorting: false,
+            cellStyle: {
+              width: '80px',
+            },
+            render: (rowData: IAnnouncement) => (
+              <Checkbox
+                value='checkedA'
+                inputProps={{ 'aria-label': 'Checkbox A' }}
+              />
+            ),
+          },
+          { field: '_id', title: 'Id', editable: 'never' },
+          { field: 'announcement', title: 'Announcement' },
+          {
+            field: 'createdAt',
+            title: 'CreatedAt',
+            editable: 'never',
+            render: (rowData: IAnnouncement) => (
+              <span>{rowData ? formatJSONDate(rowData.createdAt) : ''}</span>
+            ),
+          },
+          {
+            field: 'updatedAt',
+            title: 'UpdatedAt',
+            editable: 'never',
+            render: (rowData: IAnnouncement) => (
+              <span>{rowData ? formatJSONDate(rowData.createdAt) : ''}</span>
+            ),
+          },
+        ]}
+        data={announcements}
+        icons={tableIcons}
+        // editable={{
+        //   onRowAdd: newData => POST(newData),
+        //   onRowUpdate: (newData, oldData) =>
+        //     PUT(newData._id, newData.announcement),
+        //   onRowDelete: oldData => DELETE(oldData._id),
+        // }}
+        options={{
+          showTitle: false,
+          actionsColumnIndex: -1,
+          filtering: true,
+          exportButton: true,
+          grouping: true,
+          pageSize: 10,
+          pageSizeOptions: [10, 20, 50],
+        }}
+      />
+    </TableWrapper>
   )
 }
 
-export default Announcement
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Announcement)
