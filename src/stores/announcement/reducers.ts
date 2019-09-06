@@ -1,26 +1,20 @@
 import { combineReducers } from 'redux'
 import { createReducer } from 'typesafe-actions'
+import { zipObj } from 'ramda'
 import { fetchAnnouncements } from './actions'
-import { IAnnouncement } from 'typings/announcement'
+import { IAnnouncementState } from 'typings/announcement'
 
-const initialState = {}
+const initialState: IAnnouncementState = {
+  byId: {},
+  allIds: [],
+}
 
-const announcements = createReducer([] as IAnnouncement[]).handleAction(
+const announcements = createReducer(initialState).handleAction(
   fetchAnnouncements.success,
   (state, action) => {
-    const newAll = action.payload.reduce((acc, curr) => {
-      return {
-        ...acc,
-        [curr._id]: curr,
-      }
-    }, {})
-
-    const xxx = {
-      byId: {
-        ...newAll,
-      },
-      allIds: action.payload.map(banner => banner._id),
-    }
+    const allIds = action.payload.map(item => item._id)
+    const byId = zipObj(allIds, action.payload)
+    return { ...state, byId, allIds }
   },
 )
 
