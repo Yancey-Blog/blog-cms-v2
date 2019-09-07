@@ -9,8 +9,6 @@ import {
 } from './actions'
 import { IAnnouncementState } from 'typings/announcement'
 
-import Toast from 'components/Toast/Toast'
-
 const initialState: IAnnouncementState = {
   byId: {},
   allIds: [],
@@ -41,9 +39,12 @@ const announcements = createReducer(initialState)
       addAnnouncement.failure,
       updateAnnouncement.failure,
       deleteAnnouncement.failure,
+      deleteAnnouncement.cancel,
+      deleteAnnouncement.cancel,
+      deleteAnnouncement.cancel,
+      deleteAnnouncement.cancel,
     ],
     (state, action) => {
-      Toast.error(action.payload)
       return { ...state, isFetching: false }
     },
   )

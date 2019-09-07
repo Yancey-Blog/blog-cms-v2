@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse, AxiosRequestConfig } from 'axios'
 import { Observable } from 'rxjs'
 import { baseURL } from 'shared/constants'
+import Toast from 'components/Toast/Toast'
 
 const CancelToken = axios.CancelToken
 
@@ -47,36 +48,13 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error: AxiosError) => {
-    // if (error && error.response) {
-    //   switch (error.response.status) {
-    //     case 400:
-    //       error.message = '400 Bad Request'
-    //       break
-    //     case 401:
-    //       error.message = '401 Unauthorized'
-    //       window.location.href = '/login'
-    //       break
-    //     case 403:
-    //       error.message = '403 Forbidden'
-    //       break
-    //     case 404:
-    //       error.message = '404 Not Found'
-    //       break
-    //     case 500:
-    //       error.message = '500 Internal Server Error'
-    //       break
-    //     case 502:
-    //       error.message = '502 Bad Gateway'
-    //       break
-    //     case 504:
-    //       error.message = '504 Internal Server Error'
-    //       break
-    //     default:
-    //       error.message = `Unkown error and the status code is ${error.response.status}`
-    //   }
-    // } else {
-    //   error.message = 'Unkown error'
-    // }
+    if (error && error.response) {
+      const errorMsg = error.response.data.message
+      Toast.error(errorMsg)
+      if (error.response.status === 401) {
+        window.location.href = '/login'
+      }
+    }
     return Promise.reject(error.message)
   },
 )

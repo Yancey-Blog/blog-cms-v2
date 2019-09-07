@@ -12,16 +12,16 @@ const notice = (
 }
 
 export default {
-  info(content: string, duration: 150000, onClose?: any) {
+  info(content: string, duration: 2000, onClose?: any) {
     return notice('info', content, duration, onClose)
   },
-  success(content: string, duration: 150000, onClose?: any) {
+  success(content: string, duration: 2000, onClose?: any) {
     return notice('success', content, duration, onClose)
   },
-  warning(content: string, duration: 150000, onClose?: any) {
+  warning(content: string, duration: 2000, onClose?: any) {
     return notice('warning', content, duration, onClose)
   },
-  error(content: string, duration = 150000, onClose?: any) {
+  error(content: string, duration = 2000, onClose?: any) {
     return notice('error', content, duration, onClose)
   },
 }
