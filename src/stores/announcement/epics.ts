@@ -2,7 +2,12 @@ import { Epic } from 'redux-observable'
 import { isActionOf, RootAction, RootState, Services } from 'typesafe-actions'
 import { catchError, filter, map, switchMap, takeUntil } from 'rxjs/operators'
 import { of } from 'rxjs'
-import { getAnnouncements, addAnnouncement } from './actions'
+import {
+  getAnnouncements,
+  addAnnouncement,
+  updateAnnouncement,
+  deleteAnnouncement,
+} from './actions'
 
 export const getAnnouncementsEpic: Epic<
   RootAction,
@@ -11,7 +16,6 @@ export const getAnnouncementsEpic: Epic<
   Services
 > = (action$, state$, { AnnoucementServices }) =>
   action$.pipe(
-    // isActionOf 接收 action-creator 并将第二个参数传递下去
     filter(isActionOf(getAnnouncements.request)),
     switchMap(action =>
       AnnoucementServices.getAnnouncements().pipe(
@@ -22,19 +26,66 @@ export const getAnnouncementsEpic: Epic<
     ),
   )
 
-// export const addAnnouncementEpic: Epic<
-//   RootAction,
-//   RootAction,
-//   RootState,
-//   Services
-// > = (action$, state$, { AnnoucementServices }) =>
-//   action$.pipe(
-//     filter(isActionOf(addAnnouncement.request)),
-//     switchMap(action =>
-//       AnnoucementServices.addAnnouncement(action.payload.announcement).pipe(
-//         map(addAnnouncement.success),
-//         takeUntil(action$.pipe(filter(isActionOf(addAnnouncement.cancel)))),
-//         catchError((message: string) => of(addAnnouncement.failure(message))),
-//       ),
-//     ),
-//   )
+export const addAnnouncementEpic: Epic<
+  RootAction,
+  RootAction,
+  RootState,
+  Services
+> = (action$, state$, { AnnoucementServices }) =>
+  action$.pipe(
+    filter(isActionOf(addAnnouncement.request)),
+    switchMap(action => {
+      const data = {
+        announcement: action.payload.announcement,
+      }
+      return AnnoucementServices.addAnnouncement(data).pipe(
+        map(addAnnouncement.success),
+        takeUntil(action$.pipe(filter(isActionOf(addAnnouncement.cancel)))),
+        catchError((message: string) => of(addAnnouncement.failure(message))),
+      )
+    }),
+  )
+
+export const updateAnnouncementEpic: Epic<
+  RootAction,
+  RootAction,
+  RootState,
+  Services
+> = (action$, state$, { AnnoucementServices }) =>
+  action$.pipe(
+    filter(isActionOf(updateAnnouncement.request)),
+    switchMap(action => {
+      const { payload } = action
+      const id = payload.id
+      const data = {
+        announcement: payload.announcement,
+      }
+      return AnnoucementServices.updateAnnouncement(id, data).pipe(
+        map(updateAnnouncement.success),
+        takeUntil(action$.pipe(filter(isActionOf(updateAnnouncement.cancel)))),
+        catchError((message: string) =>
+          of(updateAnnouncement.failure(message)),
+        ),
+      )
+    }),
+  )
+
+export const deleteAnnouncementEpic: Epic<
+  RootAction,
+  RootAction,
+  RootState,
+  Services
+> = (action$, state$, { AnnoucementServices }) =>
+  action$.pipe(
+    filter(isActionOf(deleteAnnouncement.request)),
+    switchMap(action => {
+      const id = action.payload.id
+      return AnnoucementServices.deleteAnnouncement(id).pipe(
+        map(deleteAnnouncement.success),
+        takeUntil(action$.pipe(filter(isActionOf(deleteAnnouncement.cancel)))),
+        catchError((message: string) =>
+          of(deleteAnnouncement.failure(message)),
+        ),
+      )
+    }),
+  )

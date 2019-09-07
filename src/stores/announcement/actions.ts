@@ -14,3 +14,17 @@ export const addAnnouncement = createAsyncAction(
   'announcement/ADD_ANNOUNCEMENT_FAILURE',
   'announcement/ADD_ANNOUNCEMENT_CANCEL',
 )<{ announcement: string }, IAnnouncement, string, void>()
+
+export const updateAnnouncement = createAsyncAction(
+  'announcement/UPDATE_ANNOUNCEMENT_REQUEST',
+  'announcement/UPDATE_ANNOUNCEMENT_SUCCESS',
+  'announcement/UPDATE_ANNOUNCEMENT_FAILURE',
+  'announcement/UPDATE_ANNOUNCEMENT_CANCEL',
+)<{ id: string; announcement: string }, IAnnouncement, string, void>()
+
+export const deleteAnnouncement = createAsyncAction(
+  'announcement/DELETE_ANNOUNCEMENT_REQUEST',
+  'announcement/DELETE_ANNOUNCEMENT_SUCCESS',
+  'announcement/DELETE_ANNOUNCEMENT_FAILURE',
+  'announcement/DELETE_ANNOUNCEMENT_CANCEL',
+)<{ id: string }, IAnnouncement, string, void>()

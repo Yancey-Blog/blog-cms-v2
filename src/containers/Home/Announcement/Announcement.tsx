@@ -3,9 +3,14 @@ import { connect } from 'react-redux'
 import { RootState } from 'typesafe-actions'
 import MaterialTable from 'material-table'
 import Checkbox from '@material-ui/core/Checkbox'
-import { formatJSONDate } from 'shared/utils'
+import { formatISO8601Date } from 'shared/utils'
 import tableIcons from 'configs/tableConfig'
-import { getAnnouncements } from 'stores/announcement/actions'
+import {
+  getAnnouncements,
+  addAnnouncement,
+  updateAnnouncement,
+  deleteAnnouncement,
+} from 'stores/announcement/actions'
 import TableWrapper from 'components/TableWrapper/TableWrapper'
 
 const mapStateToProps = (state: RootState) => {
@@ -20,15 +25,25 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = {
   getAnnouncements: getAnnouncements.request,
+  addAnnouncement: addAnnouncement.request,
+  updateAnnouncement: updateAnnouncement.request,
+  deleteAnnouncement: deleteAnnouncement.request,
 }
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
 
-const Announcement: FC<Props> = ({ announcements, getAnnouncements }) => {
+const Announcement: FC<Props> = ({
+  announcements,
+  getAnnouncements,
+  addAnnouncement,
+  updateAnnouncement,
+  deleteAnnouncement,
+}) => {
   const [loading] = useState(false)
   useEffect(() => {
     getAnnouncements()
-    // 第二个参数应当是一个或多个原始类型参数组成的数组
+    // FIXME:
+    // eslint-disable-next-line
   }, [])
   return (
     <TableWrapper tableName='Yancey Table' icon='save'>
@@ -63,7 +78,7 @@ const Announcement: FC<Props> = ({ announcements, getAnnouncements }) => {
             title: 'CreatedAt',
             editable: 'never',
             render: rowData => (
-              <span>{rowData ? formatJSONDate(rowData.createdAt) : ''}</span>
+              <span>{rowData ? formatISO8601Date(rowData.createdAt) : ''}</span>
             ),
           },
           {
@@ -71,26 +86,36 @@ const Announcement: FC<Props> = ({ announcements, getAnnouncements }) => {
             title: 'UpdatedAt',
             editable: 'never',
             render: rowData => (
-              <span>{rowData ? formatJSONDate(rowData.createdAt) : ''}</span>
+              <span>{rowData ? formatISO8601Date(rowData.createdAt) : ''}</span>
             ),
           },
         ]}
         data={announcements}
         icons={tableIcons}
-        // editable={{
-        //   onRowAdd: newData => POST(newData),
-        //   onRowUpdate: (newData, oldData) =>
-        //     PUT(newData._id, newData.announcement),
-        //   onRowDelete: oldData => DELETE(oldData._id),
-        // }}
+        editable={{
+          async onRowAdd(newData) {
+            await addAnnouncement({ announcement: newData.announcement })
+          },
+          async onRowUpdate(newData, oldData) {
+            await updateAnnouncement({
+              id: newData._id,
+              announcement: newData.announcement,
+            })
+          },
+          async onRowDelete(newData) {
+            await deleteAnnouncement({
+              id: newData._id,
+            })
+          },
+        }}
         options={{
           showTitle: false,
           actionsColumnIndex: -1,
           filtering: true,
           exportButton: true,
           grouping: true,
-          pageSize: 10,
-          pageSizeOptions: [10, 20, 50],
+          pageSize: 5,
+          pageSizeOptions: [5, 10, 20],
         }}
       />
     </TableWrapper>

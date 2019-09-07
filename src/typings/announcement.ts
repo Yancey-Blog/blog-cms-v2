@@ -8,3 +8,7 @@ export interface IAnnouncementState {
   byId: { [key: string]: IAnnouncement }
   allIds: string[]
 }
+
+export interface IAnnouncementParams {
+  announcement: string
+}

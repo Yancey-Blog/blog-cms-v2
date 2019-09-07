@@ -1,4 +1,6 @@
 import axios, { AxiosError, AxiosResponse, AxiosRequestConfig } from 'axios'
+import { Observable } from 'rxjs'
+import { baseURL } from 'shared/constants'
 
 const CancelToken = axios.CancelToken
 
@@ -12,7 +14,10 @@ axios.defaults.timeout = 30 * 1000
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 // config base url
-axios.defaults.baseURL = '127.0.0.1:3002/api'
+axios.defaults.baseURL =
+  process.env.NODE_ENV === 'production'
+    ? baseURL.production
+    : baseURL.development
 
 const pending: any[] = []
 const removePending = (config: any) => {
@@ -77,70 +82,73 @@ axios.interceptors.response.use(
 )
 
 // GET
-export function GET(url: string, params?: any): Promise<AxiosResponse> {
-  return new Promise((resolve, reject) => {
+export function GET<T>(url: string, params?: any): Observable<T> {
+  return new Observable(subscriber => {
     axios
       .get(url, {
         params,
       })
       .then(res => {
-        resolve(res)
+        subscriber.next(res.data)
+        subscriber.complete()
       })
-      .catch(err => {
-        reject(err)
+      .catch((err: Error) => {
+        subscriber.error(err)
+        subscriber.complete()
       })
   })
 }
 
 // POST
-export function POST(
+export function POST<T>(
   url: string,
   params?: any,
   config?: AxiosRequestConfig,
-): Promise<AxiosResponse> {
-  return new Promise((resolve, reject) => {
+): Observable<T> {
+  return new Observable(subscriber => {
     axios
       .post(url, params, config)
-      .then(
-        res => {
-          resolve(res)
-        },
-        err => {
-          reject(err)
-        },
-      )
-      .catch(err => {
-        reject(err)
+      .then(res => {
+        subscriber.next(res.data)
+        subscriber.complete()
+      })
+      .catch((err: Error) => {
+        subscriber.error(err)
+        subscriber.complete()
       })
   })
 }
 
 // PUT
-export function PUT(url: string, params?: any): Promise<AxiosResponse> {
-  return new Promise((resolve, reject) => {
+export function PUT<T>(url: string, params?: any): Observable<T> {
+  return new Observable(subscriber => {
     axios
       .put(url, params)
       .then(res => {
-        resolve(res)
+        subscriber.next(res.data)
+        subscriber.complete()
       })
-      .catch(err => {
-        reject(err)
+      .catch((err: Error) => {
+        subscriber.error(err)
+        subscriber.complete()
       })
   })
 }
 
 // DELETE
-export function DELETE(url: string, params?: any): Promise<AxiosResponse> {
-  return new Promise((resolve, reject) => {
+export function DELETE<T>(url: string, params?: any): Observable<T> {
+  return new Observable(subscriber => {
     axios
       .delete(url, {
         data: params,
       })
       .then(res => {
-        resolve(res)
+        subscriber.next(res.data)
+        subscriber.complete()
       })
-      .catch(err => {
-        reject(err)
+      .catch((err: Error) => {
+        subscriber.error(err)
+        subscriber.complete()
       })
   })
 }

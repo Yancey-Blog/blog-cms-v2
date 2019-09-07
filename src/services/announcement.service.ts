@@ -1,25 +1,28 @@
 import { Observable } from 'rxjs'
-import http from 'configs/httpConfig'
-import { IAnnouncement } from 'typings/announcement'
+import { IAnnouncement, IAnnouncementParams } from 'typings/announcement'
+import { GET, POST, PUT, DELETE } from 'shared/axios'
 
 export const getAnnouncements = (): Observable<IAnnouncement[]> => {
-  return http.get('/announcements', {})
+  return GET('/announcements', {})
 }
 
-// export const addAnnouncement = (
-//   announcement: string,
-// ): Observable<IAnnouncement> => {
-//   return http.post('/announcements', { announcement })
-// }
-
-export const updateAnnouncement = (): Observable<IAnnouncement> => {
-  return http.put('/announcements', {})
+export const addAnnouncement = (
+  data: IAnnouncementParams,
+): Observable<IAnnouncement> => {
+  return POST('/announcements', data)
 }
 
-// export const deleteAnnouncement = (): Observable<IAnnouncement[]> => {
-//   return http.delete('/announcements', {})
-// }
+export const updateAnnouncement = (
+  id: string,
+  data: IAnnouncementParams,
+): Observable<IAnnouncement> => {
+  return PUT(`/announcements/${id}`, data)
+}
 
-// export const deleteAnnouncements = (): Observable<IAnnouncement[]> => {
-//   return http.delete('/announcements', {})
-// }
+export const deleteAnnouncement = (id: string): Observable<IAnnouncement> => {
+  return DELETE(`/announcements/${id}`)
+}
+
+export const deleteAnnouncements = (): Observable<IAnnouncement[]> => {
+  return DELETE('/announcements', {})
+}
