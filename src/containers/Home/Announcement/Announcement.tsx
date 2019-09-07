@@ -112,7 +112,7 @@ const Announcement: FC<Props> = ({
         }}
         options={{
           showTitle: false,
-          actionsColumnIndex: -1,
+          actionsColumnIndex: -1, 
           filtering: true,
           exportButton: true,
           grouping: true,
