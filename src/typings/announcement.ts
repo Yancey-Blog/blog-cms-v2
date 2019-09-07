@@ -7,6 +7,8 @@ export interface IAnnouncement extends IBaseParams {
 export interface IAnnouncementState {
   byId: { [key: string]: IAnnouncement }
   allIds: string[]
+  isFetching: boolean
+  errorMsg: string
 }
 
 export interface IAnnouncementParams {

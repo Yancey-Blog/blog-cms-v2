@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { RootState } from 'typesafe-actions'
 import MaterialTable from 'material-table'
@@ -20,6 +20,7 @@ const mapStateToProps = (state: RootState) => {
 
   return {
     announcements: announcements.allIds.map(id => announcements.byId[id]),
+    isFetching: announcements.isFetching,
   }
 }
 
@@ -33,22 +34,21 @@ const mapDispatchToProps = {
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
 
 const Announcement: FC<Props> = ({
+  isFetching,
   announcements,
   getAnnouncements,
   addAnnouncement,
   updateAnnouncement,
   deleteAnnouncement,
 }) => {
-  const [loading] = useState(false)
   useEffect(() => {
     getAnnouncements()
-    // FIXME:
-    // eslint-disable-next-line
-  }, [])
+  }, [getAnnouncements])
+
   return (
     <TableWrapper tableName='Yancey Table' icon='save'>
       <MaterialTable
-        isLoading={loading}
+        isLoading={isFetching}
         columns={[
           {
             field: undefined,
@@ -86,7 +86,7 @@ const Announcement: FC<Props> = ({
             title: 'UpdatedAt',
             editable: 'never',
             render: rowData => (
-              <span>{rowData ? formatISO8601Date(rowData.createdAt) : ''}</span>
+              <span>{rowData ? formatISO8601Date(rowData.updatedAt) : ''}</span>
             ),
           },
         ]}
@@ -94,7 +94,9 @@ const Announcement: FC<Props> = ({
         icons={tableIcons}
         editable={{
           async onRowAdd(newData) {
-            await addAnnouncement({ announcement: newData.announcement })
+            await addAnnouncement({
+              announcement: newData.announcement,
+            })
           },
           async onRowUpdate(newData, oldData) {
             await updateAnnouncement({

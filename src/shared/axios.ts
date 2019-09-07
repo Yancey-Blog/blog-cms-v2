@@ -47,36 +47,36 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error: AxiosError) => {
-    if (error && error.response) {
-      switch (error.response.status) {
-        case 400:
-          error.message = '400 Bad Request'
-          break
-        case 401:
-          error.message = '401 Unauthorized'
-          window.location.href = '/login'
-          break
-        case 403:
-          error.message = '403 Forbidden'
-          break
-        case 404:
-          error.message = '404 Not Found'
-          break
-        case 500:
-          error.message = '500 Internal Server Error'
-          break
-        case 502:
-          error.message = '502 Bad Gateway'
-          break
-        case 504:
-          error.message = '504 Internal Server Error'
-          break
-        default:
-          error.message = `Unkown error and the status code is ${error.response.status}`
-      }
-    } else {
-      error.message = 'Unkown error'
-    }
+    // if (error && error.response) {
+    //   switch (error.response.status) {
+    //     case 400:
+    //       error.message = '400 Bad Request'
+    //       break
+    //     case 401:
+    //       error.message = '401 Unauthorized'
+    //       window.location.href = '/login'
+    //       break
+    //     case 403:
+    //       error.message = '403 Forbidden'
+    //       break
+    //     case 404:
+    //       error.message = '404 Not Found'
+    //       break
+    //     case 500:
+    //       error.message = '500 Internal Server Error'
+    //       break
+    //     case 502:
+    //       error.message = '502 Bad Gateway'
+    //       break
+    //     case 504:
+    //       error.message = '504 Internal Server Error'
+    //       break
+    //     default:
+    //       error.message = `Unkown error and the status code is ${error.response.status}`
+    //   }
+    // } else {
+    //   error.message = 'Unkown error'
+    // }
     return Promise.reject(error.message)
   },
 )

@@ -40,6 +40,11 @@ export const addAnnouncementEpic: Epic<
       }
       return AnnoucementServices.addAnnouncement(data).pipe(
         map(addAnnouncement.success),
+        switchMap(() =>
+          AnnoucementServices.getAnnouncements().pipe(
+            map(getAnnouncements.success),
+          ),
+        ),
         takeUntil(action$.pipe(filter(isActionOf(addAnnouncement.cancel)))),
         catchError((message: string) => of(addAnnouncement.failure(message))),
       )
@@ -62,6 +67,11 @@ export const updateAnnouncementEpic: Epic<
       }
       return AnnoucementServices.updateAnnouncement(id, data).pipe(
         map(updateAnnouncement.success),
+        switchMap(() =>
+          AnnoucementServices.getAnnouncements().pipe(
+            map(getAnnouncements.success),
+          ),
+        ),
         takeUntil(action$.pipe(filter(isActionOf(updateAnnouncement.cancel)))),
         catchError((message: string) =>
           of(updateAnnouncement.failure(message)),
@@ -82,6 +92,11 @@ export const deleteAnnouncementEpic: Epic<
       const id = action.payload.id
       return AnnoucementServices.deleteAnnouncement(id).pipe(
         map(deleteAnnouncement.success),
+        switchMap(() =>
+          AnnoucementServices.getAnnouncements().pipe(
+            map(getAnnouncements.success),
+          ),
+        ),
         takeUntil(action$.pipe(filter(isActionOf(deleteAnnouncement.cancel)))),
         catchError((message: string) =>
           of(deleteAnnouncement.failure(message)),
