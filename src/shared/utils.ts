@@ -6,5 +6,5 @@ export const getInitials = (txt: string) =>
     .map(v => v[0])
     .join('')
 
-export const formatISO8601Date = (ISO8601Date: string) =>
-  dayjs(ISO8601Date).format('YYYY-MM-DD HH:mm:ss')
+export const formatISODate = (ISODate: string) =>
+  dayjs(ISODate).format('YYYY-MM-DD HH:mm:ss')

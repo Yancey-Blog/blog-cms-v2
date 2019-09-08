@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Recaptcha from 'react-google-recaptcha'
+import { recaptchaKey } from 'shared/constants'
 import './login.scss'
 
 class Login extends Component {
@@ -11,7 +12,7 @@ class Login extends Component {
   componentDidMount() {}
 
   render() {
-    const { loginStore } = this.props
+    // @ts-ignore
     window.recaptchaOptions = {
       lang: 'ja',
     }
@@ -35,7 +36,7 @@ class Login extends Component {
               <input
                 id='account'
                 type='email'
-                onChange={e => loginStore.onEmailChange(e)}
+                // onChange={e => loginStore.onEmailChange(e)}
               />
             </label>
           </div>
@@ -45,25 +46,25 @@ class Login extends Component {
               <input
                 id='password'
                 type='password'
-                onChange={e => loginStore.onPasswordChange(e)}
+                // onChange={e => loginStore.onPasswordChange(e)}
               />
             </label>
           </div>
           <div className='user_input_group'>
             <span>Recaptcha</span>
             <Recaptcha
-              sitekey='6LdLTDgUAAAAAPq-N2YNVoqcYPLyDTypJ8SMvCEj'
-              onChange={value => loginStore.onCaptchaChange(value)}
+              sitekey={recaptchaKey}
+              // onChange={value => loginStore.onCaptchaChange(value)}
             />
           </div>
           <button
             type='button'
             className='login_btn'
-            onClick={loginStore.login}
-            disabled={!loginStore.isFilled || loginStore.loginStatus}
-            style={
-              !loginStore.isFilled || loginStore.loginStatus ? btnStyle : {}
-            }
+            // onClick={loginStore.login}
+            // disabled={!loginStore.isFilled || loginStore.loginStatus}
+            // style={
+            //   !loginStore.isFilled || loginStore.loginStatus ? btnStyle : {}
+            // }
           >
             login
           </button>

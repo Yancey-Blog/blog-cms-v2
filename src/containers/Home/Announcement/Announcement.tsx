@@ -2,8 +2,10 @@ import React, { FC, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { RootState } from 'typesafe-actions'
 import MaterialTable from 'material-table'
-import Checkbox from '@material-ui/core/Checkbox'
-import { formatISO8601Date } from 'shared/utils'
+
+import DeleteOutline from '@material-ui/icons/DeleteOutline'
+import Edit from '@material-ui/icons/Edit'
+import { formatISODate } from 'shared/utils'
 import tableIcons from 'configs/tableConfig'
 import {
   getAnnouncements,
@@ -50,74 +52,47 @@ const Announcement: FC<Props> = ({
       <MaterialTable
         isLoading={isFetching}
         columns={[
-          {
-            field: undefined,
-            title: (
-              <Checkbox
-                value='checkedA'
-                inputProps={{ 'aria-label': 'Checkbox A' }}
-              />
-            ),
-            editable: 'never',
-            filtering: false,
-            sorting: false,
-            cellStyle: {
-              width: '80px',
-            },
-            render: rowData => (
-              <Checkbox
-                value='checkedA'
-                inputProps={{ 'aria-label': 'Checkbox A' }}
-              />
-            ),
-          },
-          { field: '_id', title: 'Id', editable: 'never' },
+          { field: '_id', title: 'Id' },
           { field: 'announcement', title: 'Announcement' },
           {
             field: 'createdAt',
             title: 'CreatedAt',
-            editable: 'never',
             render: rowData => (
-              <span>{rowData ? formatISO8601Date(rowData.createdAt) : ''}</span>
+              <span>{formatISODate(rowData.createdAt)}</span>
             ),
           },
           {
             field: 'updatedAt',
             title: 'UpdatedAt',
-            editable: 'never',
             render: rowData => (
-              <span>{rowData ? formatISO8601Date(rowData.updatedAt) : ''}</span>
+              <span>{formatISODate(rowData.createdAt)}</span>
             ),
           },
         ]}
         data={announcements}
         icons={tableIcons}
-        editable={{
-          async onRowAdd(newData) {
-            await addAnnouncement({
-              announcement: newData.announcement,
-            })
+        actions={[
+          {
+            icon: () => <Edit />,
+            tooltip: 'Save User',
+            onClick: (event, rowData) => console.log('You saved '),
           },
-          async onRowUpdate(newData, oldData) {
-            await updateAnnouncement({
-              id: newData._id,
-              announcement: newData.announcement,
-            })
+          {
+            icon: () => <DeleteOutline />,
+            tooltip: 'Delete User',
+            onClick: (event, rowData) => console.log('You want to delete '),
           },
-          async onRowDelete(newData) {
-            await deleteAnnouncement({
-              id: newData._id,
-            })
-          },
-        }}
+        ]}
         options={{
           showTitle: false,
-          actionsColumnIndex: -1, 
+          actionsColumnIndex: -1,
           filtering: true,
           exportButton: true,
+          pageSize: 10,
+          pageSizeOptions: [10, 20, 50],
+          columnsButton: true,
+          // selection: true,
           grouping: true,
-          pageSize: 5,
-          pageSizeOptions: [5, 10, 20],
         }}
       />
     </TableWrapper>

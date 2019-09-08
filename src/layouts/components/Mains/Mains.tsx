@@ -13,8 +13,8 @@ const Mains: FC = () => {
     <main className={styles.main}>
       <Suspense fallback={<Loading />}>
         <Switch>
-          <Route path='/announcement' render={() => <Announcement />} />
-          <Route path='/motto' render={() => <Motto />} />
+          <Route path='/home/announcement' render={() => <Announcement />} />
+          <Route path='/home/motto' render={() => <Motto />} />
         </Switch>
       </Suspense>
     </main>

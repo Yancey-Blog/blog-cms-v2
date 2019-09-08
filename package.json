@@ -51,6 +51,7 @@
     "jest-watch-typeahead": "0.3.1",
     "material-table": "^1.50.0",
     "mini-css-extract-plugin": "0.8.0",
+    "mui-datatables": "^2.10.2",
     "node-sass": "^4.12.0",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.5.0",
@@ -169,6 +170,7 @@
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
     "@types/classnames": "^2.2.9",
+    "@types/mui-datatables": "^2.1.8",
     "@types/ramda": "^0.26.21",
     "@types/react-google-recaptcha": "^1.1.0",
     "@types/react-redux": "^7.1.2",
