@@ -7,6 +7,7 @@ import {
   addAnnouncement,
   updateAnnouncement,
   deleteAnnouncement,
+  deleteAnnouncements,
 } from './actions'
 
 export const getAnnouncementsEpic: Epic<
@@ -100,6 +101,31 @@ export const deleteAnnouncementEpic: Epic<
         takeUntil(action$.pipe(filter(isActionOf(deleteAnnouncement.cancel)))),
         catchError((message: string) =>
           of(deleteAnnouncement.failure(message)),
+        ),
+      )
+    }),
+  )
+
+export const deleteAnnouncementsEpic: Epic<
+  RootAction,
+  RootAction,
+  RootState,
+  Services
+> = (action$, state$, { AnnoucementServices }) =>
+  action$.pipe(
+    filter(isActionOf(deleteAnnouncements.request)),
+    switchMap(action => {
+      const ids = action.payload.ids
+      return AnnoucementServices.deleteAnnouncements(ids).pipe(
+        map(deleteAnnouncements.success),
+        switchMap(() =>
+          AnnoucementServices.getAnnouncements().pipe(
+            map(getAnnouncements.success),
+          ),
+        ),
+        takeUntil(action$.pipe(filter(isActionOf(deleteAnnouncements.cancel)))),
+        catchError((message: string) =>
+          of(deleteAnnouncements.failure(message)),
         ),
       )
     }),

@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs'
 import { IAnnouncement, IAnnouncementParams } from 'typings/announcement'
+import { IBatchDeleteRes } from 'typings/common'
 import { GET, POST, PUT, DELETE } from 'shared/axios'
 
 export const getAnnouncements = (): Observable<IAnnouncement[]> => {
@@ -23,6 +24,8 @@ export const deleteAnnouncement = (id: string): Observable<IAnnouncement> => {
   return DELETE(`/announcements/${id}`)
 }
 
-export const deleteAnnouncements = (): Observable<IAnnouncement[]> => {
-  return DELETE('/announcements', {})
+export const deleteAnnouncements = (
+  data: string[],
+): Observable<IBatchDeleteRes> => {
+  return DELETE('/announcements', data)
 }

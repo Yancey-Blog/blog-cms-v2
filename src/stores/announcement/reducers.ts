@@ -6,6 +6,7 @@ import {
   addAnnouncement,
   updateAnnouncement,
   deleteAnnouncement,
+  deleteAnnouncements,
 } from './actions'
 import { IAnnouncementState } from 'typings/announcement'
 
@@ -23,6 +24,7 @@ const announcements = createReducer(initialState)
       addAnnouncement.request,
       updateAnnouncement.request,
       deleteAnnouncement.request,
+      deleteAnnouncements.request,
     ],
     (state, action) => {
       return { ...state, isFetching: true }
@@ -39,10 +41,12 @@ const announcements = createReducer(initialState)
       addAnnouncement.failure,
       updateAnnouncement.failure,
       deleteAnnouncement.failure,
+      deleteAnnouncements.failure,
       deleteAnnouncement.cancel,
       deleteAnnouncement.cancel,
       deleteAnnouncement.cancel,
       deleteAnnouncement.cancel,
+      deleteAnnouncements.cancel,
     ],
     (state, action) => {
       return { ...state, isFetching: false }

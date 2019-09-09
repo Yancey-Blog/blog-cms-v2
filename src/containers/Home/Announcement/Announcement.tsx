@@ -6,6 +6,7 @@ import {
   addAnnouncement,
   updateAnnouncement,
   deleteAnnouncement,
+  deleteAnnouncements,
 } from 'stores/announcement/actions'
 import MUIDataTable, {
   MUIDataTableOptions,
@@ -48,6 +49,7 @@ const mapDispatchToProps = {
   addAnnouncement: addAnnouncement.request,
   updateAnnouncement: updateAnnouncement.request,
   deleteAnnouncement: deleteAnnouncement.request,
+  deleteAnnouncements: deleteAnnouncements.request,
 }
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
@@ -60,12 +62,14 @@ const Announcement: FC<Props> = ({
   addAnnouncement,
   updateAnnouncement,
   deleteAnnouncement,
+  deleteAnnouncements,
 }) => {
   useEffect(() => {
     getAnnouncements()
   }, [getAnnouncements])
 
   const [curId, setCurId] = useState('')
+  const [curIds, setCurIds] = useState<string[]>([])
 
   // Form
   const [announcementValue, setAnnouncementValue] = useState('')
@@ -100,10 +104,15 @@ const Announcement: FC<Props> = ({
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const handlePoperClick = (
     event: React.MouseEvent<HTMLElement>,
-    id: string,
+    id: string | string[],
   ) => {
     setAnchorEl(anchorEl ? null : event.currentTarget)
-    setCurId(id)
+
+    if (Array.isArray(id)) {
+      setCurIds(id)
+    } else {
+      setCurId(id)
+    }
   }
   const onPopperClose = () => {
     setAnchorEl(null)
@@ -167,11 +176,18 @@ const Announcement: FC<Props> = ({
     rowsPerPageOptions: [10, 20, 50],
     // @ts-ignore
     searchPlaceholder: 'Search...',
-    customToolbar: () => (
-      <Fab size='medium' className={styles.addIconFab}>
-        <AddBox className={styles.addIcon} onClick={() => onModalOpen()} />
-      </Fab>
-    ),
+    customToolbar() {
+      return (
+        <Fab size='medium' className={styles.addIconFab}>
+          <AddBox className={styles.addIcon} onClick={() => onModalOpen()} />
+        </Fab>
+      )
+    },
+    onRowsDelete(onRowsSelect) {
+      // @ts-ignore
+      const ids = onRowsSelect.data.map(row => announcements[row.index]._id)
+      deleteAnnouncements({ ids })
+    },
   }
 
   return (

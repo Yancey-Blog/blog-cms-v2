@@ -1,5 +1,6 @@
 import { createAsyncAction } from 'typesafe-actions'
 import { IAnnouncement } from 'typings/announcement'
+import { IBatchDeleteRes } from 'typings/common'
 
 export const getAnnouncements = createAsyncAction(
   'announcement/GET_ANNOUNCEMENTS_REQUEST',
@@ -28,3 +29,10 @@ export const deleteAnnouncement = createAsyncAction(
   'announcement/DELETE_ANNOUNCEMENT_FAILURE',
   'announcement/DELETE_ANNOUNCEMENT_CANCEL',
 )<{ id: string }, IAnnouncement, string, void>()
+
+export const deleteAnnouncements = createAsyncAction(
+  'announcement/DELETE_ANNOUNCEMENTS_REQUEST',
+  'announcement/DELETE_ANNOUNCEMENTS_SUCCESS',
+  'announcement/DELETE_ANNOUNCEMENTS_FAILURE',
+  'announcement/DELETE_ANNOUNCEMENTS_CANCEL',
+)<{ ids: string[] }, IBatchDeleteRes, string, void>()
