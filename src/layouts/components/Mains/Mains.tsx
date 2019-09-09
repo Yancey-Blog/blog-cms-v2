@@ -6,7 +6,7 @@ import Loading from 'components/Loading/Loading'
 const Announcement = lazy(() =>
   import('containers/Home/Announcement/Announcement'),
 )
-const Motto = lazy(() => import('containers/Home/Motto/Motto'))
+const Motto = lazy(() => import('containers/Home/Announcement/Announcement'))
 
 const Mains: FC = () => {
   return (

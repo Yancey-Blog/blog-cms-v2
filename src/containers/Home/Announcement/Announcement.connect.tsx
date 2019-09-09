@@ -29,11 +29,11 @@ const mapDispatchToProps = {
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
 
-const MottoConnect: FC<Props> = ({}) => {
+const AnnouncementConnect: FC<Props> = ({}) => {
   return <></>
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(MottoConnect)
+)(AnnouncementConnect)
