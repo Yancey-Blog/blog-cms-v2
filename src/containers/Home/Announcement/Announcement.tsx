@@ -219,3 +219,5 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(Announcement)
+
+
