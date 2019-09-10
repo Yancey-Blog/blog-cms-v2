@@ -7,20 +7,5 @@
   height: 100%;
   background: rgba($white, 0.4);
   border-radius: 4px;
-}
-
-.loadingIcon {
-  width: 32px !important;
-  height: 32px;
-  color: rgba($black, 0.3);
-  animation: spin 1500ms infinite linear;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
+  z-index: 9999;
 }

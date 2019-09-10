@@ -1,5 +1,7 @@
 import React, { FC, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { RootState } from 'typesafe-actions'
 import Drawer from '@material-ui/core/Drawer'
 import Avatar from '@material-ui/core/Avatar'
 import styles from './Drawers.module.scss'
@@ -14,7 +16,21 @@ interface DrawersProps {
   open: boolean
 }
 
-const Drawers: FC<DrawersProps> = ({ open }) => {
+const mapStateToProps = (state: RootState) => {
+  const {
+    router: {
+      location: { pathname },
+    },
+  } = state
+
+  return {
+    pathname,
+  }
+}
+
+type Props = DrawersProps & ReturnType<typeof mapStateToProps>
+
+const Drawers: FC<Props> = ({ open, pathname }) => {
   const [drawerItem, setDrawerItem] = useState({
     parent: '',
     child: '',
@@ -164,4 +180,4 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
   )
 }
 
-export default Drawers
+export default connect(mapStateToProps)(Drawers)

@@ -2,31 +2,131 @@ import { Epic } from 'redux-observable'
 import { isActionOf, RootAction, RootState, Services } from 'typesafe-actions'
 import { catchError, filter, map, switchMap, takeUntil } from 'rxjs/operators'
 import { of } from 'rxjs'
-import { fetchAnnouncements } from './actions'
+import {
+  getAnnouncements,
+  addAnnouncement,
+  updateAnnouncement,
+  deleteAnnouncement,
+  deleteAnnouncements,
+} from './actions'
 
-export const fetchAnnouncementsEpic: Epic<
+export const getAnnouncementsEpic: Epic<
   RootAction,
   RootAction,
   RootState,
   Services
 > = (action$, state$, { AnnoucementServices }) =>
   action$.pipe(
-    // isActionOf 接收 action-creator 并将第二个参数传递下去
-    // 以 fetchAnnouncements.request 为例
-    // 它的第一个参数，也就是 type 是 announcement/FETCH_ANNOUNCEMENTS_REQUEST
-    // 第二个参数，也就是 payload 是 page 和 pageSize
-
-    // isActionOf 也可以跟一个数组
-    // 如 filter(isActionOf([add, toggle]))
-    // 它将 add 和 toggle 的 action 都传递下去
-    filter(isActionOf(fetchAnnouncements.request)),
+    filter(isActionOf(getAnnouncements.request)),
     switchMap(action =>
       AnnoucementServices.getAnnouncements().pipe(
-        map(fetchAnnouncements.success),
-        takeUntil(action$.pipe(filter(isActionOf(fetchAnnouncements.cancel)))),
-        catchError((message: string) =>
-          of(fetchAnnouncements.failure(message)),
-        ),
+        map(getAnnouncements.success),
+        takeUntil(action$.pipe(filter(isActionOf(getAnnouncements.cancel)))),
+        catchError((message: string) => of(getAnnouncements.failure(message))),
       ),
     ),
+  )
+
+export const addAnnouncementEpic: Epic<
+  RootAction,
+  RootAction,
+  RootState,
+  Services
+> = (action$, state$, { AnnoucementServices }) =>
+  action$.pipe(
+    filter(isActionOf(addAnnouncement.request)),
+    switchMap(action => {
+      const data = {
+        announcement: action.payload.announcement,
+      }
+      return AnnoucementServices.addAnnouncement(data).pipe(
+        map(addAnnouncement.success),
+        switchMap(() =>
+          AnnoucementServices.getAnnouncements().pipe(
+            map(getAnnouncements.success),
+          ),
+        ),
+        takeUntil(action$.pipe(filter(isActionOf(addAnnouncement.cancel)))),
+        catchError((message: string) => of(addAnnouncement.failure(message))),
+      )
+    }),
+  )
+
+export const updateAnnouncementEpic: Epic<
+  RootAction,
+  RootAction,
+  RootState,
+  Services
+> = (action$, state$, { AnnoucementServices }) =>
+  action$.pipe(
+    filter(isActionOf(updateAnnouncement.request)),
+    switchMap(action => {
+      const { payload } = action
+      const id = payload.id
+      const data = {
+        announcement: payload.announcement,
+      }
+      return AnnoucementServices.updateAnnouncement(id, data).pipe(
+        map(updateAnnouncement.success),
+        switchMap(() =>
+          AnnoucementServices.getAnnouncements().pipe(
+            map(getAnnouncements.success),
+          ),
+        ),
+        takeUntil(action$.pipe(filter(isActionOf(updateAnnouncement.cancel)))),
+        catchError((message: string) =>
+          of(updateAnnouncement.failure(message)),
+        ),
+      )
+    }),
+  )
+
+export const deleteAnnouncementEpic: Epic<
+  RootAction,
+  RootAction,
+  RootState,
+  Services
+> = (action$, state$, { AnnoucementServices }) =>
+  action$.pipe(
+    filter(isActionOf(deleteAnnouncement.request)),
+    switchMap(action => {
+      const id = action.payload.id
+      return AnnoucementServices.deleteAnnouncement(id).pipe(
+        map(deleteAnnouncement.success),
+        switchMap(() =>
+          AnnoucementServices.getAnnouncements().pipe(
+            map(getAnnouncements.success),
+          ),
+        ),
+        takeUntil(action$.pipe(filter(isActionOf(deleteAnnouncement.cancel)))),
+        catchError((message: string) =>
+          of(deleteAnnouncement.failure(message)),
+        ),
+      )
+    }),
+  )
+
+export const deleteAnnouncementsEpic: Epic<
+  RootAction,
+  RootAction,
+  RootState,
+  Services
+> = (action$, state$, { AnnoucementServices }) =>
+  action$.pipe(
+    filter(isActionOf(deleteAnnouncements.request)),
+    switchMap(action => {
+      const ids = action.payload.ids
+      return AnnoucementServices.deleteAnnouncements(ids).pipe(
+        map(deleteAnnouncements.success),
+        switchMap(() =>
+          AnnoucementServices.getAnnouncements().pipe(
+            map(getAnnouncements.success),
+          ),
+        ),
+        takeUntil(action$.pipe(filter(isActionOf(deleteAnnouncements.cancel)))),
+        catchError((message: string) =>
+          of(deleteAnnouncements.failure(message)),
+        ),
+      )
+    }),
   )

@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import styles from './Loading.module.scss'
 
 const Loading: FC = () => {
   return (
     <section className={styles.mask}>
-      <FontAwesomeIcon icon='spinner' className={styles.loadingIcon} />
+      <CircularProgress />
     </section>
   )
 }
