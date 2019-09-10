@@ -1,7 +1,6 @@
-import React, { FC } from 'react'
 import { connect } from 'react-redux'
 import { RootState } from 'typesafe-actions'
-
+import Announcement from './Announcement'
 import {
   getAnnouncements,
   addAnnouncement,
@@ -30,13 +29,10 @@ const mapDispatchToProps = {
   deleteAnnouncements: deleteAnnouncements.request,
 }
 
-type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
-
-const AnnouncementConnect: FC<Props> = ({}) => {
-  return <></>
-}
+export type Props = ReturnType<typeof mapStateToProps> &
+  typeof mapDispatchToProps
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(AnnouncementConnect)
+)(Announcement)

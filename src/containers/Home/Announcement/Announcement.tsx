@@ -1,13 +1,4 @@
 import React, { FC, useState, useEffect } from 'react'
-import { connect } from 'react-redux'
-import { RootState } from 'typesafe-actions'
-import {
-  getAnnouncements,
-  addAnnouncement,
-  updateAnnouncement,
-  deleteAnnouncement,
-  deleteAnnouncements,
-} from 'stores/announcement/actions'
 import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
@@ -19,29 +10,8 @@ import Poppers from 'components/Poppers/Poppers'
 import Loading from 'components/Loading/Loading'
 import Modal from './components/Modal/Modal'
 import { formatISODate } from 'shared/utils'
+import { Props } from './Announcement.connect'
 import styles from './Announcement.module.scss'
-
-const mapStateToProps = (state: RootState) => {
-  const {
-    announcements: { announcements },
-  } = state
-
-  return {
-    announcements: announcements.allIds.map(id => announcements.byId[id]),
-    byId: announcements.byId,
-    isFetching: announcements.isFetching,
-  }
-}
-
-const mapDispatchToProps = {
-  getAnnouncements: getAnnouncements.request,
-  addAnnouncement: addAnnouncement.request,
-  updateAnnouncement: updateAnnouncement.request,
-  deleteAnnouncement: deleteAnnouncement.request,
-  deleteAnnouncements: deleteAnnouncements.request,
-}
-
-type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
 
 const Announcement: FC<Props> = ({
   isFetching,
@@ -215,9 +185,4 @@ const Announcement: FC<Props> = ({
   )
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Announcement)
-
-
+export default Announcement

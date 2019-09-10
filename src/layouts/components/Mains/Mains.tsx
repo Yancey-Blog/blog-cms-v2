@@ -4,9 +4,9 @@ import styles from './Mains.module.scss'
 import Loading from 'components/Loading/Loading'
 
 const Announcement = lazy(() =>
-  import('containers/Home/Announcement/Announcement'),
+  import('containers/Home/Announcement/Announcement.connect'),
 )
-const Motto = lazy(() => import('containers/Home/Announcement/Announcement'))
+const Motto = lazy(() => import('containers/Home/Motto/Motto'))
 
 const Mains: FC = () => {
   return (
