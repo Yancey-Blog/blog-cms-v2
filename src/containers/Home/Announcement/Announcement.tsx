@@ -13,22 +13,11 @@ import MUIDataTable, {
   MUIDataTableColumn,
 } from 'mui-datatables'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
-import {
-  TextField,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  DialogContentText,
-  FormControl,
-  Popper,
-  Fade,
-  Paper,
-  Fab,
-} from '@material-ui/core'
+import { FormControl, Fab } from '@material-ui/core'
 import TableWrapper from 'components/TableWrapper/TableWrapper'
+import Poppers from 'components/Poppers/Poppers'
 import Loading from 'components/Loading/Loading'
+import Modal from './components/Modal/Modal'
 import { formatISODate } from 'shared/utils'
 import styles from './Announcement.module.scss'
 
@@ -69,7 +58,7 @@ const Announcement: FC<Props> = ({
   }, [getAnnouncements])
 
   const [curId, setCurId] = useState('')
-  const [curIds, setCurIds] = useState<string[]>([])
+  // const [curIds, setCurIds] = useState<string[]>([])
 
   // Form
   const [announcementValue, setAnnouncementValue] = useState('')
@@ -104,15 +93,10 @@ const Announcement: FC<Props> = ({
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const handlePoperClick = (
     event: React.MouseEvent<HTMLElement>,
-    id: string | string[],
+    id: string,
   ) => {
     setAnchorEl(anchorEl ? null : event.currentTarget)
-
-    if (Array.isArray(id)) {
-      setCurIds(id)
-    } else {
-      setCurId(id)
-    }
+    setCurId(id)
   }
   const onPopperClose = () => {
     setAnchorEl(null)
@@ -143,7 +127,6 @@ const Announcement: FC<Props> = ({
     {
       name: 'action',
       label: 'Action',
-
       options: {
         filter: false,
         customBodyRender(value, tableMeta) {
@@ -188,6 +171,16 @@ const Announcement: FC<Props> = ({
       const ids = onRowsSelect.data.map(row => announcements[row.index]._id)
       deleteAnnouncements({ ids })
     },
+    customToolbarSelect() {
+      return (
+        <Fab size='medium' className={styles.addIconFab}>
+          <DeleteOutline
+            className={styles.addIcon}
+            onClick={(e: any) => handlePoperClick(e, '')}
+          />
+        </Fab>
+      )
+    },
   }
 
   return (
@@ -202,58 +195,22 @@ const Announcement: FC<Props> = ({
         {isFetching && <Loading />}
       </TableWrapper>
 
-      <Dialog
+      <Modal
+        title='announcement'
         open={open}
-        onClose={onModalClose}
-        aria-labelledby='form-dialog-title'
-      >
-        <DialogTitle id='form-dialog-title'>
-          {!curId ? 'Add' : 'Update'} Announcement
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin='dense'
-            label='Announcement'
-            type='text'
-            fullWidth
-            value={announcementValue}
-            onChange={handleAnnouncementChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={onModalClose} color='primary'>
-            Cancel
-          </Button>
-          <Button onClick={onModalSubmit} color='primary'>
-            Submit
-          </Button>
-        </DialogActions>
-      </Dialog>
+        isAdd={!!curId}
+        announcementValue={announcementValue}
+        onModalClose={onModalClose}
+        handleAnnouncementChange={(e: any) => handleAnnouncementChange(e)}
+        onModalSubmit={onModalSubmit}
+      />
 
-      <Popper open={!!anchorEl} anchorEl={anchorEl} transition>
-        {({ TransitionProps }) => (
-          <Fade {...TransitionProps} timeout={350}>
-            <Paper>
-              <DialogTitle id='form-dialog-title'>
-                Delete the announcement(s)?
-              </DialogTitle>
-              <DialogActions>
-                <Button onClick={onPopperClose} color='primary'>
-                  Cancel
-                </Button>
-                <Button onClick={onDeleteARow} color='primary'>
-                  OK
-                </Button>
-              </DialogActions>
-            </Paper>
-          </Fade>
-        )}
-      </Popper>
+      <Poppers
+        title='announcement'
+        anchorEl={anchorEl}
+        onPopperClose={onPopperClose}
+        onDeleteARow={onDeleteARow}
+      />
     </>
   )
 }

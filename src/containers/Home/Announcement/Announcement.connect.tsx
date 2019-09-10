@@ -7,6 +7,7 @@ import {
   addAnnouncement,
   updateAnnouncement,
   deleteAnnouncement,
+  deleteAnnouncements,
 } from 'stores/announcement/actions'
 
 const mapStateToProps = (state: RootState) => {
@@ -16,6 +17,7 @@ const mapStateToProps = (state: RootState) => {
 
   return {
     announcements: announcements.allIds.map(id => announcements.byId[id]),
+    byId: announcements.byId,
     isFetching: announcements.isFetching,
   }
 }
@@ -25,6 +27,7 @@ const mapDispatchToProps = {
   addAnnouncement: addAnnouncement.request,
   updateAnnouncement: updateAnnouncement.request,
   deleteAnnouncement: deleteAnnouncement.request,
+  deleteAnnouncements: deleteAnnouncements.request,
 }
 
 type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
