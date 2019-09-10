@@ -44,7 +44,6 @@ const Announcement: FC<Props> = ({
       setAnnouncementValue(byId[id].announcement)
     } else {
       setCurId('')
-      setEditModalOpen(false)
       setAnnouncementValue('')
     }
   }
