@@ -8,7 +8,8 @@ import { FormControl, Fab } from '@material-ui/core'
 import TableWrapper from 'components/TableWrapper/TableWrapper'
 import Poppers from 'components/Poppers/Poppers'
 import Loading from 'components/Loading/Loading'
-import Modal from './components/Modal/Modal'
+import EditModal from './components/EditModal/EditModal'
+import ConfirmModal from './components/ConfirmModal/ConfirmModal'
 import { formatISODate } from 'shared/utils'
 import { Props } from './Announcement.connect'
 import styles from './Announcement.module.scss'
@@ -27,28 +28,25 @@ const Announcement: FC<Props> = ({
     getAnnouncements()
   }, [getAnnouncements])
 
-  const [curId, setCurId] = useState('')
-  // const [curIds, setCurIds] = useState<string[]>([])
-
   // Form
   const [announcementValue, setAnnouncementValue] = useState('')
   const handleAnnouncementChange = (e: any) => {
     setAnnouncementValue(e.target.value)
   }
 
-  // Modal
-  const [open, setOpen] = useState(false)
-  const onModalOpen = (id?: string) => {
-    setOpen(true)
+  // EditModal
+  const [curId, setCurId] = useState('')
+  const [editModalOpen, setEditModalOpen] = useState(false)
+  const handleEditModal = (id?: string) => {
+    setEditModalOpen(!editModalOpen)
     if (id) {
       setCurId(id)
       setAnnouncementValue(byId[id].announcement)
+    } else {
+      setCurId('')
+      setEditModalOpen(false)
+      setAnnouncementValue('')
     }
-  }
-  const onModalClose = () => {
-    setCurId('')
-    setOpen(false)
-    setAnnouncementValue('')
   }
   const onModalSubmit = () => {
     if (curId) {
@@ -56,17 +54,26 @@ const Announcement: FC<Props> = ({
     } else {
       addAnnouncement({ announcement: announcementValue })
     }
-    onModalClose()
+    handleEditModal()
+  }
+
+  // ConfirmModal
+  const [curIds, setCurIds] = useState<string[]>([])
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false)
+  const handleConfirmModal = (ids?: string[]) => {
+    setConfirmModalOpen(!confirmModalOpen)
+    ids ? setCurIds(ids) : setCurIds([])
+  }
+  const onDeleteRows = () => {
+    deleteAnnouncements({ ids: curIds })
+    handleConfirmModal()
   }
 
   // Popper
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const handlePoperClick = (
-    event: React.MouseEvent<HTMLElement>,
-    id: string,
-  ) => {
-    setAnchorEl(anchorEl ? null : event.currentTarget)
+  const onPopperOpen = (event: React.MouseEvent<HTMLElement>, id: string) => {
     setCurId(id)
+    setAnchorEl(anchorEl ? null : event.currentTarget)
   }
   const onPopperClose = () => {
     setAnchorEl(null)
@@ -105,14 +112,12 @@ const Announcement: FC<Props> = ({
               <FormControl>
                 <Edit
                   style={{ marginRight: '10px' }}
-                  onClick={() => onModalOpen(tableMeta.rowData[0])}
+                  onClick={() => handleEditModal(tableMeta.rowData[0])}
                 />
               </FormControl>
               <FormControl>
                 <DeleteOutline
-                  onClick={(e: any) =>
-                    handlePoperClick(e, tableMeta.rowData[0])
-                  }
+                  onClick={(e: any) => onPopperOpen(e, tableMeta.rowData[0])}
                 />
               </FormControl>
             </>
@@ -132,21 +137,21 @@ const Announcement: FC<Props> = ({
     customToolbar() {
       return (
         <Fab size='medium' className={styles.addIconFab}>
-          <AddBox className={styles.addIcon} onClick={() => onModalOpen()} />
+          <AddBox
+            className={styles.addIcon}
+            onClick={() => handleEditModal()}
+          />
         </Fab>
       )
     },
-    onRowsDelete(onRowsSelect) {
+    customToolbarSelect(selectedRows) {
       // @ts-ignore
-      const ids = onRowsSelect.data.map(row => announcements[row.index]._id)
-      deleteAnnouncements({ ids })
-    },
-    customToolbarSelect() {
+      const ids = selectedRows.data.map(row => announcements[row.index]._id)
       return (
         <Fab size='medium' className={styles.addIconFab}>
           <DeleteOutline
             className={styles.addIcon}
-            onClick={(e: any) => handlePoperClick(e, '')}
+            onClick={() => handleConfirmModal(ids)}
           />
         </Fab>
       )
@@ -165,21 +170,27 @@ const Announcement: FC<Props> = ({
         {isFetching && <Loading />}
       </TableWrapper>
 
-      <Modal
+      <EditModal
         title='announcement'
-        open={open}
+        open={editModalOpen}
         isAdd={!!curId}
         announcementValue={announcementValue}
-        onModalClose={onModalClose}
         handleAnnouncementChange={(e: any) => handleAnnouncementChange(e)}
-        onModalSubmit={onModalSubmit}
+        onClose={handleEditModal}
+        onSubmit={onModalSubmit}
+      />
+
+      <ConfirmModal
+        open={confirmModalOpen}
+        onClose={handleConfirmModal}
+        onSubmit={onDeleteRows}
       />
 
       <Poppers
         title='announcement'
         anchorEl={anchorEl}
-        onPopperClose={onPopperClose}
-        onDeleteARow={onDeleteARow}
+        onClose={onPopperClose}
+        onSubmit={curIds.length > 0 ? onDeleteRows : onDeleteARow}
       />
     </>
   )

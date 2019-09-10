@@ -14,22 +14,22 @@ interface Props {
   open: boolean
   isAdd: boolean
   announcementValue: string
-  onModalClose: () => void
   handleAnnouncementChange: (e: any) => void
-  onModalSubmit: () => void
+  onClose: () => void
+  onSubmit: () => void
 }
 
-const Poppers: FC<Props> = ({
+const EditModal: FC<Props> = ({
   title,
   open,
   isAdd,
   announcementValue,
-  onModalClose,
   handleAnnouncementChange,
-  onModalSubmit,
+  onClose,
+  onSubmit,
 }) => {
   return (
-    <Dialog open={open} onClose={onModalClose}>
+    <Dialog open={open} onClose={onClose}>
       <DialogTitle>
         {!isAdd ? 'Add' : 'Update'} {title}
       </DialogTitle>
@@ -49,10 +49,10 @@ const Poppers: FC<Props> = ({
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onModalClose} color='primary'>
+        <Button onClick={onClose} color='primary'>
           Cancel
         </Button>
-        <Button onClick={onModalSubmit} color='primary'>
+        <Button onClick={onSubmit} color='primary'>
           Submit
         </Button>
       </DialogActions>
@@ -60,4 +60,4 @@ const Poppers: FC<Props> = ({
   )
 }
 
-export default Poppers
+export default EditModal

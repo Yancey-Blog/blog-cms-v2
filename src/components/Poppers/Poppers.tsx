@@ -11,16 +11,11 @@ import {
 interface Props {
   title: string
   anchorEl: any
-  onPopperClose: () => void
-  onDeleteARow: () => void
+  onClose: () => void
+  onSubmit: () => void
 }
 
-const Poppers: FC<Props> = ({
-  title,
-  anchorEl,
-  onPopperClose,
-  onDeleteARow,
-}) => {
+const Poppers: FC<Props> = ({ title, anchorEl, onClose, onSubmit }) => {
   return (
     <Popper open={!!anchorEl} anchorEl={anchorEl} transition>
       {({ TransitionProps }) => (
@@ -30,10 +25,10 @@ const Poppers: FC<Props> = ({
               Delete the {title}(s)?
             </DialogTitle>
             <DialogActions>
-              <Button onClick={onPopperClose} color='primary'>
+              <Button onClick={onClose} color='primary'>
                 Cancel
               </Button>
-              <Button onClick={onDeleteARow} color='primary'>
+              <Button onClick={onSubmit} color='primary'>
                 OK
               </Button>
             </DialogActions>
