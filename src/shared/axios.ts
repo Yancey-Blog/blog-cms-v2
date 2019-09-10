@@ -1,4 +1,7 @@
 import axios, { AxiosError, AxiosResponse, AxiosRequestConfig } from 'axios'
+import { Observable } from 'rxjs'
+import { baseURL } from 'shared/constants'
+import Toast from 'components/Toast/Toast'
 
 const CancelToken = axios.CancelToken
 
@@ -12,7 +15,10 @@ axios.defaults.timeout = 30 * 1000
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 // config base url
-axios.defaults.baseURL = '127.0.0.1:3002/api'
+axios.defaults.baseURL =
+  process.env.NODE_ENV === 'production'
+    ? baseURL.production
+    : baseURL.development
 
 const pending: any[] = []
 const removePending = (config: any) => {
@@ -43,104 +49,84 @@ axios.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error: AxiosError) => {
     if (error && error.response) {
-      switch (error.response.status) {
-        case 400:
-          error.message = '400 Bad Request'
-          break
-        case 401:
-          error.message = '401 Unauthorized'
-          window.location.href = '/login'
-          break
-        case 403:
-          error.message = '403 Forbidden'
-          break
-        case 404:
-          error.message = '404 Not Found'
-          break
-        case 500:
-          error.message = '500 Internal Server Error'
-          break
-        case 502:
-          error.message = '502 Bad Gateway'
-          break
-        case 504:
-          error.message = '504 Internal Server Error'
-          break
-        default:
-          error.message = `Unkown error and the status code is ${error.response.status}`
+      const errorMsg = error.response.data.message
+      Toast.error(errorMsg)
+      if (error.response.status === 401) {
+        window.location.href = '/login'
       }
-    } else {
-      error.message = 'Unkown error'
     }
     return Promise.reject(error.message)
   },
 )
 
 // GET
-export function GET(url: string, params?: any): Promise<AxiosResponse> {
-  return new Promise((resolve, reject) => {
+export function GET<T>(url: string, params?: any): Observable<T> {
+  return new Observable(subscriber => {
     axios
       .get(url, {
         params,
       })
       .then(res => {
-        resolve(res)
+        subscriber.next(res.data)
+        subscriber.complete()
       })
-      .catch(err => {
-        reject(err)
+      .catch((err: Error) => {
+        subscriber.error(err)
+        subscriber.complete()
       })
   })
 }
 
 // POST
-export function POST(
+export function POST<T>(
   url: string,
   params?: any,
   config?: AxiosRequestConfig,
-): Promise<AxiosResponse> {
-  return new Promise((resolve, reject) => {
+): Observable<T> {
+  return new Observable(subscriber => {
     axios
       .post(url, params, config)
-      .then(
-        res => {
-          resolve(res)
-        },
-        err => {
-          reject(err)
-        },
-      )
-      .catch(err => {
-        reject(err)
+      .then(res => {
+        subscriber.next(res.data)
+        subscriber.complete()
+      })
+      .catch((err: Error) => {
+        subscriber.error(err)
+        subscriber.complete()
       })
   })
 }
 
 // PUT
-export function PUT(url: string, params?: any): Promise<AxiosResponse> {
-  return new Promise((resolve, reject) => {
+export function PUT<T>(url: string, params?: any): Observable<T> {
+  return new Observable(subscriber => {
     axios
       .put(url, params)
       .then(res => {
-        resolve(res)
+        subscriber.next(res.data)
+        subscriber.complete()
       })
-      .catch(err => {
-        reject(err)
+      .catch((err: Error) => {
+        subscriber.error(err)
+        subscriber.complete()
       })
   })
 }
 
 // DELETE
-export function DELETE(url: string, params?: any): Promise<AxiosResponse> {
-  return new Promise((resolve, reject) => {
+export function DELETE<T>(url: string, params?: any): Observable<T> {
+  return new Observable(subscriber => {
     axios
       .delete(url, {
         data: params,
       })
       .then(res => {
-        resolve(res)
+        subscriber.next(res.data)
+        subscriber.complete()
       })
-      .catch(err => {
-        reject(err)
+      .catch((err: Error) => {
+        subscriber.error(err)
+        subscriber.complete()
       })
   })
 }

@@ -9,6 +9,8 @@ import history from 'shared/history'
 import fontAwesomes from 'shared/fontAwesome'
 import Layouts from 'layouts/Layouts'
 
+// import Login from 'containers/Login/Login'
+
 const store = configureStore()
 library.add(...fontAwesomes)
 serviceWorker.unregister()

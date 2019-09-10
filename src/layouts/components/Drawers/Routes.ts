@@ -17,24 +17,24 @@ const routes: Route[] = [
   },
   {
     name: 'Home',
-    path: '/',
+    path: '/home',
     icon: 'home',
     children: [
       {
         name: 'Motto',
-        path: '/motto',
+        path: '/home/motto',
       },
       {
         name: 'Announcement',
-        path: '/announcement',
+        path: '/home/announcement',
       },
       {
         name: 'Project',
-        path: '/project',
+        path: '/home/project',
       },
       {
         name: 'Cover',
-        path: '/cover',
+        path: '/home/cover',
       },
     ],
   },
@@ -45,19 +45,19 @@ const routes: Route[] = [
     children: [
       {
         name: 'Live Tours',
-        path: '/liveTours',
+        path: '/music/liveTours',
       },
       {
         name: 'Featured Records',
-        path: '/featuredRecords',
+        path: 'v/featuredRecords',
       },
       {
         name: 'Player',
-        path: '/player',
+        path: '/music/player',
       },
       {
         name: 'Yancey Music',
-        path: '/yanceyMusic',
+        path: '/music/yanceyMusic',
       },
     ],
   },
