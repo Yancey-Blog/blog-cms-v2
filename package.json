@@ -170,7 +170,7 @@
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
     "@types/classnames": "^2.2.9",
-    "@types/mui-datatables": "^2.1.8",
+    "@types/mui-datatables": "^2.10.0",
     "@types/ramda": "^0.26.21",
     "@types/react-google-recaptcha": "^1.1.0",
     "@types/react-redux": "^7.1.2",
