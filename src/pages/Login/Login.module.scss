@@ -20,7 +20,7 @@ body {
   width: calc(100% + 8px);
   height: calc(100% + 8px);
   z-index: -1;
-  background: url(./wew.png) no-repeat center top;
+  background: url('../../assets/images/loginBg.png') no-repeat center top;
   background-size: cover;
   -webkit-filter: blur(2px);
   filter: blur(2px);
@@ -41,7 +41,8 @@ body {
   width: 200px;
   height: 50px;
   margin: 25px auto;
-  background: url('./yancey-official-blog-logo.png') no-repeat center top;
+  background: url('../../assets/images/yancey-official-blog-logo.png') no-repeat
+    center top;
   background-size: contain;
   text-align: center;
 }
