@@ -9,7 +9,7 @@ import history from 'shared/history'
 import fontAwesomes from 'shared/fontAwesome'
 import Layouts from 'layouts/Layouts'
 
-// import Login from 'containers/Login/Login'
+import Login from 'containers/Login/Login'
 
 const store = configureStore()
 library.add(...fontAwesomes)
@@ -19,7 +19,8 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Router history={history}>
-        <Layouts />
+        {/* <Layouts /> */}
+        <Login />
       </Router>
     </BrowserRouter>
   </Provider>,
