@@ -13,6 +13,8 @@ import ConfirmModal from './components/ConfirmModal/ConfirmModal'
 import { formatISODate } from 'shared/utils'
 import { Props } from './Announcement.connect'
 import styles from './Announcement.module.scss'
+import history from 'shared/history'
+import { Router, Route } from 'react-router-dom'
 
 const Announcement: FC<Props> = ({
   isFetching,
@@ -169,15 +171,22 @@ const Announcement: FC<Props> = ({
         {isFetching && <Loading />}
       </TableWrapper>
 
-      <EditModal
-        title='announcement'
-        open={editModalOpen}
-        isAdd={!!curId}
-        announcementValue={announcementValue}
-        handleAnnouncementChange={(e: any) => handleAnnouncementChange(e)}
-        onClose={handleEditModal}
-        onSubmit={onModalSubmit}
-      />
+      <Router history={history}>
+        <Route
+          path='/home/xxxx'
+          render={() => (
+            <EditModal
+              title='announcement'
+              open={true}
+              isAdd={!!curId}
+              announcementValue={announcementValue}
+              handleAnnouncementChange={(e: any) => handleAnnouncementChange(e)}
+              onClose={handleEditModal}
+              onSubmit={onModalSubmit}
+            />
+          )}
+        />
+      </Router>
 
       <ConfirmModal
         open={confirmModalOpen}
