@@ -24,10 +24,6 @@ const Announcement: FC<Props> = ({
   deleteAnnouncement,
   deleteAnnouncements,
 }) => {
-  useEffect(() => {
-    getAnnouncements()
-  }, [getAnnouncements])
-
   // Form
   const [announcementValue, setAnnouncementValue] = useState('')
   const handleAnnouncementChange = (e: any) => {
@@ -55,6 +51,13 @@ const Announcement: FC<Props> = ({
     }
     handleEditModal()
   }
+
+  useEffect(() => {
+    if(!isFetching){
+      getAnnouncements()
+    }
+   
+  }, [])
 
   // ConfirmModal
   const [curIds, setCurIds] = useState<string[]>([])

@@ -1,7 +1,7 @@
 import { Epic } from 'redux-observable'
 import { isActionOf, RootAction, RootState, Services } from 'typesafe-actions'
 import { catchError, filter, map, switchMap, takeUntil } from 'rxjs/operators'
-import { of } from 'rxjs'
+import { of, from } from 'rxjs'
 import {
   getAnnouncements,
   addAnnouncement,
@@ -19,7 +19,7 @@ export const getAnnouncementsEpic: Epic<
   action$.pipe(
     filter(isActionOf(getAnnouncements.request)),
     switchMap(action =>
-      AnnoucementServices.getAnnouncements().pipe(
+      from(AnnoucementServices.getAnnouncements()).pipe(
         map(getAnnouncements.success),
         takeUntil(action$.pipe(filter(isActionOf(getAnnouncements.cancel)))),
         catchError((message: string) => of(getAnnouncements.failure(message))),
