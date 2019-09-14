@@ -1,4 +1,8 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
+import { connect } from 'react-redux'
+import { goBack } from 'connected-react-router'
+import { RootState } from 'typesafe-actions'
+import useReactRouter from 'use-react-router'
 import {
   Button,
   DialogActions,
@@ -8,31 +12,61 @@ import {
   DialogContentText,
   TextField,
 } from '@material-ui/core'
+import {
+  addAnnouncement,
+  updateAnnouncement,
+} from 'stores/announcement/actions'
 
-interface Props {
-  title: string
-  open: boolean
-  isAdd: boolean
-  announcementValue: string
-  handleAnnouncementChange: (e: any) => void
-  onClose: () => void
-  onSubmit: () => void
+const mapStateToProps = (state: RootState) => {
+  const {
+    announcements: { announcements },
+    router: {
+      location: { pathname },
+    },
+  } = state
+
+  return {
+    byId: announcements.byId,
+    pathname,
+  }
 }
 
+const mapDispatchToProps = {
+  addAnnouncement: addAnnouncement.request,
+  updateAnnouncement: updateAnnouncement.request,
+  goBack,
+}
+
+type Props = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps
+
 const EditModal: FC<Props> = ({
-  title,
-  open,
-  isAdd,
-  announcementValue,
-  handleAnnouncementChange,
-  onClose,
-  onSubmit,
+  byId,
+  goBack,
+  addAnnouncement,
+  updateAnnouncement,
 }) => {
+  const { match } = useReactRouter<{ id: string }>()
+
+  const [curId] = useState(match.params.id)
+
+  const [announcementValue, setAnnouncementValue] = useState(
+    curId ? byId[curId].announcement : '',
+  )
+  const handleAnnouncementChange = (e: any) => {
+    setAnnouncementValue(e.target.value)
+  }
+
+  const onSubmit = (announcement: string) => {
+    if (curId) {
+      updateAnnouncement({ id: curId, announcement })
+    } else {
+      addAnnouncement({ announcement })
+    }
+  }
+
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>
-        {!isAdd ? 'Add' : 'Update'} {title}
-      </DialogTitle>
+    <Dialog open onClose={goBack}>
+      <DialogTitle>{curId ? 'Update' : 'Add'} an Announcement</DialogTitle>
       <DialogContent>
         <DialogContentText>
           To subscribe to this website, please enter your email address here. We
@@ -49,10 +83,10 @@ const EditModal: FC<Props> = ({
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color='primary'>
+        <Button onClick={goBack} color='primary'>
           Cancel
         </Button>
-        <Button onClick={onSubmit} color='primary'>
+        <Button color='primary' onClick={() => onSubmit(announcementValue)}>
           Submit
         </Button>
       </DialogActions>
@@ -60,4 +94,7 @@ const EditModal: FC<Props> = ({
   )
 }
 
-export default EditModal
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(EditModal)

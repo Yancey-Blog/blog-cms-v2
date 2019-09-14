@@ -1,5 +1,6 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
+import useReactRouter from 'use-react-router'
 import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
@@ -17,42 +18,13 @@ import styles from './Announcement.module.scss'
 const Announcement: FC<Props> = ({
   isFetching,
   announcements,
-  byId,
   getAnnouncements,
-  addAnnouncement,
-  updateAnnouncement,
   deleteAnnouncement,
   deleteAnnouncements,
   push,
   pathname,
 }) => {
-  // Form
-  const [announcementValue, setAnnouncementValue] = useState('')
-  const handleAnnouncementChange = (e: any) => {
-    setAnnouncementValue(e.target.value)
-  }
-
-  // EditModal
-  const [curId, setCurId] = useState('')
-  const [editModalOpen, setEditModalOpen] = useState(false)
-  const handleEditModal = (id?: string) => {
-    setEditModalOpen(!editModalOpen)
-    if (id) {
-      setCurId(id)
-      setAnnouncementValue(byId[id].announcement)
-    } else {
-      setCurId('')
-      setAnnouncementValue('')
-    }
-  }
-  const onModalSubmit = () => {
-    if (curId) {
-      updateAnnouncement({ id: curId, announcement: announcementValue })
-    } else {
-      addAnnouncement({ announcement: announcementValue })
-    }
-    handleEditModal()
-  }
+  const { match } = useReactRouter<{ id: string }>()
 
   useEffect(() => {
     if (pathname === '/home/announcement') {
@@ -87,14 +59,17 @@ const Announcement: FC<Props> = ({
             <>
               <FormControl>
                 <Edit
-                  style={{ marginRight: '10px' }}
-                  onClick={() => handleEditModal(tableMeta.rowData[0])}
+                  style={{ marginRight: '12px', cursor: 'pointer' }}
+                  onClick={() =>
+                    push(`${match.url}/edit/${tableMeta.rowData[0]}`)
+                  }
                 />
               </FormControl>
               <FormControl>
                 <DeleteOutline
-                  onClick={(e: any) =>
-                    push('/home/announcement/delete', tableMeta.rowData[0])
+                  style={{ cursor: 'pointer' }}
+                  onClick={() =>
+                    push(`${match.url}/delete`, tableMeta.rowData[0])
                   }
                 />
               </FormControl>
@@ -117,7 +92,7 @@ const Announcement: FC<Props> = ({
         <Fab size='medium' className={styles.addIconFab}>
           <AddBox
             className={styles.addIcon}
-            onClick={() => handleEditModal()}
+            onClick={() => push(`${match.url}/create`)}
           />
         </Fab>
       )
@@ -129,7 +104,7 @@ const Announcement: FC<Props> = ({
         <Fab size='medium' className={styles.addIconFab}>
           <DeleteOutline
             className={styles.addIcon}
-            onClick={() => push('/home/announcement/delete', ids)}
+            onClick={() => push(`${match.url}/deletes`, ids)}
           />
         </Fab>
       )
@@ -158,24 +133,18 @@ const Announcement: FC<Props> = ({
 
       <Switch>
         <Route
-          path='/home/announcement/delete'
+          path={[`${match.url}/deletes`, `${match.url}/delete`]}
           render={() => (
             <ConfirmModal
               onSubmit={(ids: string | string[]) => onDelete(ids)}
             />
           )}
         />
+        <Route
+          path={[`${match.url}/create`, `${match.url}/edit/:id`]}
+          render={() => <EditModal />}
+        />
       </Switch>
-
-      <EditModal
-        title='announcement'
-        open={editModalOpen}
-        isAdd={!!curId}
-        announcementValue={announcementValue}
-        handleAnnouncementChange={(e: any) => handleAnnouncementChange(e)}
-        onClose={handleEditModal}
-        onSubmit={onModalSubmit}
-      />
     </>
   )
 }

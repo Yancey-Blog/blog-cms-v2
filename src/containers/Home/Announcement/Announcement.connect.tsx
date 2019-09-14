@@ -4,8 +4,6 @@ import { push } from 'connected-react-router'
 import Announcement from './Announcement'
 import {
   getAnnouncements,
-  addAnnouncement,
-  updateAnnouncement,
   deleteAnnouncement,
   deleteAnnouncements,
 } from 'stores/announcement/actions'
@@ -28,8 +26,6 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = {
   getAnnouncements: getAnnouncements.request,
-  addAnnouncement: addAnnouncement.request,
-  updateAnnouncement: updateAnnouncement.request,
   deleteAnnouncement: deleteAnnouncement.request,
   deleteAnnouncements: deleteAnnouncements.request,
   push,

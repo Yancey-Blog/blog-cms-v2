@@ -41,9 +41,13 @@ export const addAnnouncementEpic: Epic<
         announcement: action.payload.announcement,
       }
       return AnnoucementServices.addAnnouncement(data).pipe(
-        map(addAnnouncement.success),
+        switchMap(resp => {
+          return of(addAnnouncement.success(resp), goBack())
+        }),
         takeUntil(action$.pipe(filter(isActionOf(addAnnouncement.cancel)))),
-        catchError((message: string) => of(addAnnouncement.failure(message))),
+        catchError((message: string) =>
+          of(addAnnouncement.failure(message), goBack()),
+        ),
       )
     }),
   )
@@ -63,10 +67,12 @@ export const updateAnnouncementEpic: Epic<
         announcement: payload.announcement,
       }
       return AnnoucementServices.updateAnnouncement(id, data).pipe(
-        map(updateAnnouncement.success),
+        switchMap(resp => {
+          return of(updateAnnouncement.success(resp), goBack())
+        }),
         takeUntil(action$.pipe(filter(isActionOf(updateAnnouncement.cancel)))),
         catchError((message: string) =>
-          of(updateAnnouncement.failure(message)),
+          of(updateAnnouncement.failure(message), goBack()),
         ),
       )
     }),
@@ -88,7 +94,7 @@ export const deleteAnnouncementEpic: Epic<
         }),
         takeUntil(action$.pipe(filter(isActionOf(deleteAnnouncement.cancel)))),
         catchError((message: string) =>
-          of(deleteAnnouncement.failure(message)),
+          of(deleteAnnouncement.failure(message), goBack()),
         ),
       )
     }),
@@ -110,7 +116,7 @@ export const deleteAnnouncementsEpic: Epic<
         }),
         takeUntil(action$.pipe(filter(isActionOf(deleteAnnouncements.cancel)))),
         catchError((message: string) =>
-          of(deleteAnnouncements.failure(message)),
+          of(deleteAnnouncements.failure(message), goBack()),
         ),
       )
     }),
