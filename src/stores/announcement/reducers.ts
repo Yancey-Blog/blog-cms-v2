@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { createReducer, action } from 'typesafe-actions'
+import { createReducer } from 'typesafe-actions'
 import { zipObj } from 'ramda'
 import {
   getAnnouncements,
@@ -35,17 +35,6 @@ const announcements = createReducer(initialState)
     const byId = zipObj(allIds, action.payload)
     return { ...state, byId, allIds, isFetching: false }
   })
-  // .handleAction(
-  //   [
-  //     addAnnouncement.success,
-  //     updateAnnouncement.success,
-  //     deleteAnnouncement.success,
-  //     deleteAnnouncements.success,
-  //   ],
-  //   (state, action) => {
-  //     return { ...state, isFetching: false }
-  //   },
-  // )
   .handleAction(
     [
       getAnnouncements.failure,
