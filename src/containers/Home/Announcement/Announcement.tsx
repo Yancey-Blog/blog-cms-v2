@@ -13,7 +13,12 @@ import ConfirmModal from './components/ConfirmModal/ConfirmModal'
 import { formatISODate } from 'shared/utils'
 import { Props } from './Announcement.connect'
 import styles from './Announcement.module.scss'
+<<<<<<< HEAD
 import { Switch, Route } from 'react-router-dom'
+=======
+import history from 'shared/history'
+import { Router, Route } from 'react-router-dom'
+>>>>>>> b287af1b37aa961b56f4bbfe568e832faec0b84c
 
 const Announcement: FC<Props> = ({
   isFetching,

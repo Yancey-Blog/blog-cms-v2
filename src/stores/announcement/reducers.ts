@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { createReducer } from 'typesafe-actions'
+import { createReducer, action } from 'typesafe-actions'
 import { zipObj } from 'ramda'
 import {
   getAnnouncements,
