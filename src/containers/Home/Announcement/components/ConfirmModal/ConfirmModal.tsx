@@ -1,4 +1,7 @@
 import React, { FC } from 'react'
+import { RootState } from 'typesafe-actions'
+import { connect } from 'react-redux'
+import { goBack } from 'connected-react-router'
 import {
   Button,
   DialogActions,
@@ -8,15 +11,32 @@ import {
   DialogContentText,
 } from '@material-ui/core'
 
-interface Props {
-  open: boolean
-  onClose: () => void
-  onSubmit: () => void
+interface IConfirmModal {
+  onSubmit: (ids: string[]) => void
 }
 
-const ConfirmModal: FC<Props> = ({ open, onClose, onSubmit }) => {
+const mapStateToProps = (state: RootState) => {
+  const {
+    router: {
+      location: { state: routeState },
+    },
+  } = state
+  return {
+    routeState,
+  }
+}
+
+const mapDispatchToProps = {
+  goBack,
+}
+
+export type Props = ReturnType<typeof mapStateToProps> &
+  typeof mapDispatchToProps &
+  IConfirmModal
+
+const ConfirmModal: FC<Props> = ({ routeState, onSubmit, goBack }) => {
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open onClose={goBack}>
       <DialogTitle>Are you sure delete those items?</DialogTitle>
       <DialogContent>
         <DialogContentText>
@@ -25,10 +45,10 @@ const ConfirmModal: FC<Props> = ({ open, onClose, onSubmit }) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color='primary'>
+        <Button onClick={goBack} color='primary'>
           Cancel
         </Button>
-        <Button onClick={onSubmit} color='primary'>
+        <Button onClick={() => onSubmit(routeState)} color='primary'>
           OK
         </Button>
       </DialogActions>
@@ -36,4 +56,7 @@ const ConfirmModal: FC<Props> = ({ open, onClose, onSubmit }) => {
   )
 }
 
-export default ConfirmModal
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ConfirmModal)

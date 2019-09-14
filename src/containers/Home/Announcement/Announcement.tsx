@@ -13,6 +13,7 @@ import ConfirmModal from './components/ConfirmModal/ConfirmModal'
 import { formatISODate } from 'shared/utils'
 import { Props } from './Announcement.connect'
 import styles from './Announcement.module.scss'
+import { Switch, Route } from 'react-router-dom'
 
 const Announcement: FC<Props> = ({
   isFetching,
@@ -23,6 +24,8 @@ const Announcement: FC<Props> = ({
   updateAnnouncement,
   deleteAnnouncement,
   deleteAnnouncements,
+  push,
+  pathname,
 }) => {
   // Form
   const [announcementValue, setAnnouncementValue] = useState('')
@@ -53,23 +56,10 @@ const Announcement: FC<Props> = ({
   }
 
   useEffect(() => {
-    if(!isFetching){
+    if (pathname === '/home/announcement') {
       getAnnouncements()
     }
-   
-  }, [])
-
-  // ConfirmModal
-  const [curIds, setCurIds] = useState<string[]>([])
-  const [confirmModalOpen, setConfirmModalOpen] = useState(false)
-  const handleConfirmModal = (ids?: string[]) => {
-    setConfirmModalOpen(!confirmModalOpen)
-    ids ? setCurIds(ids) : setCurIds([])
-  }
-  const onDeleteRows = () => {
-    deleteAnnouncements({ ids: curIds })
-    handleConfirmModal()
-  }
+  }, [getAnnouncements, pathname])
 
   // Popper
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -153,7 +143,7 @@ const Announcement: FC<Props> = ({
         <Fab size='medium' className={styles.addIconFab}>
           <DeleteOutline
             className={styles.addIcon}
-            onClick={() => handleConfirmModal(ids)}
+            onClick={() => push('/home/announcement/batchDelete', ids)}
           />
         </Fab>
       )
@@ -172,6 +162,17 @@ const Announcement: FC<Props> = ({
         {isFetching && <Loading />}
       </TableWrapper>
 
+      <Switch>
+        <Route
+          path='/home/announcement/batchDelete'
+          render={() => (
+            <ConfirmModal
+              onSubmit={(ids: string[]) => deleteAnnouncements({ ids })}
+            />
+          )}
+        />
+      </Switch>
+
       <EditModal
         title='announcement'
         open={editModalOpen}
@@ -182,17 +183,11 @@ const Announcement: FC<Props> = ({
         onSubmit={onModalSubmit}
       />
 
-      <ConfirmModal
-        open={confirmModalOpen}
-        onClose={handleConfirmModal}
-        onSubmit={onDeleteRows}
-      />
-
       <Poppers
         title='announcement'
         anchorEl={anchorEl}
         onClose={onPopperClose}
-        onSubmit={curIds.length > 0 ? onDeleteRows : onDeleteARow}
+        onSubmit={onDeleteARow}
       />
     </>
   )

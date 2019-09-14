@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Router } from 'react-router-dom'
+import { ConnectedRouter } from 'connected-react-router'
 import * as serviceWorker from 'serviceWorker'
 import { Provider } from 'react-redux'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -17,12 +17,10 @@ serviceWorker.unregister()
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <Router history={history}>
-        <Layouts />
-        {/* <Login /> */}
-      </Router>
-    </BrowserRouter>
+    <ConnectedRouter history={history}>
+      <Layouts />
+      {/* <Login /> */}
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root'),
 )

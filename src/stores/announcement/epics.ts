@@ -2,6 +2,7 @@ import { Epic } from 'redux-observable'
 import { isActionOf, RootAction, RootState, Services } from 'typesafe-actions'
 import { catchError, filter, map, switchMap, takeUntil } from 'rxjs/operators'
 import { of, from } from 'rxjs'
+import { goBack } from 'connected-react-router'
 import {
   getAnnouncements,
   addAnnouncement,
@@ -102,7 +103,9 @@ export const deleteAnnouncementsEpic: Epic<
     switchMap(action => {
       const ids = action.payload.ids
       return AnnoucementServices.deleteAnnouncements(ids).pipe(
-        map(deleteAnnouncements.success),
+        switchMap(resp => {
+          return of(deleteAnnouncements.success(resp), goBack())
+        }),
         takeUntil(action$.pipe(filter(isActionOf(deleteAnnouncements.cancel)))),
         catchError((message: string) =>
           of(deleteAnnouncements.failure(message)),
