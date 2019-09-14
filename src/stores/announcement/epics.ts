@@ -83,7 +83,9 @@ export const deleteAnnouncementEpic: Epic<
     switchMap(action => {
       const id = action.payload.id
       return AnnoucementServices.deleteAnnouncement(id).pipe(
-        map(deleteAnnouncement.success),
+        switchMap(resp => {
+          return of(deleteAnnouncement.success(resp), goBack())
+        }),
         takeUntil(action$.pipe(filter(isActionOf(deleteAnnouncement.cancel)))),
         catchError((message: string) =>
           of(deleteAnnouncement.failure(message)),

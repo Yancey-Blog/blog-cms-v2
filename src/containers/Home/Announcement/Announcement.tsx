@@ -1,4 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
+import { Switch, Route } from 'react-router-dom'
 import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
@@ -6,14 +7,12 @@ import MUIDataTable, {
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab } from '@material-ui/core'
 import TableWrapper from 'components/TableWrapper/TableWrapper'
-import Poppers from 'components/Poppers/Poppers'
 import Loading from 'components/Loading/Loading'
 import EditModal from './components/EditModal/EditModal'
 import ConfirmModal from '../../../components/ConfirmModal/ConfirmModal'
 import { formatISODate } from 'shared/utils'
 import { Props } from './Announcement.connect'
 import styles from './Announcement.module.scss'
-import { Switch, Route } from 'react-router-dom'
 
 const Announcement: FC<Props> = ({
   isFetching,
@@ -61,21 +60,6 @@ const Announcement: FC<Props> = ({
     }
   }, [getAnnouncements, pathname])
 
-  // Popper
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const onPopperOpen = (event: React.MouseEvent<HTMLElement>, id: string) => {
-    setCurId(id)
-    setAnchorEl(anchorEl ? null : event.currentTarget)
-  }
-  const onPopperClose = () => {
-    setAnchorEl(null)
-    setCurId('')
-  }
-  const onDeleteARow = () => {
-    deleteAnnouncement({ id: curId })
-    onPopperClose()
-  }
-
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
     { name: 'announcement', label: 'Announcement' },
@@ -109,7 +93,9 @@ const Announcement: FC<Props> = ({
               </FormControl>
               <FormControl>
                 <DeleteOutline
-                  onClick={(e: any) => onPopperOpen(e, tableMeta.rowData[0])}
+                  onClick={(e: any) =>
+                    push('/home/announcement/delete', tableMeta.rowData[0])
+                  }
                 />
               </FormControl>
             </>
@@ -143,11 +129,19 @@ const Announcement: FC<Props> = ({
         <Fab size='medium' className={styles.addIconFab}>
           <DeleteOutline
             className={styles.addIcon}
-            onClick={() => push('/home/announcement/batchDelete', ids)}
+            onClick={() => push('/home/announcement/delete', ids)}
           />
         </Fab>
       )
     },
+  }
+
+  const onDelete = (ids: string | string[]) => {
+    if (Array.isArray(ids)) {
+      deleteAnnouncements({ ids })
+    } else {
+      deleteAnnouncement({ id: ids })
+    }
   }
 
   return (
@@ -164,10 +158,10 @@ const Announcement: FC<Props> = ({
 
       <Switch>
         <Route
-          path='/home/announcement/batchDelete'
+          path='/home/announcement/delete'
           render={() => (
             <ConfirmModal
-              onSubmit={(ids: string[]) => deleteAnnouncements({ ids })}
+              onSubmit={(ids: string | string[]) => onDelete(ids)}
             />
           )}
         />
@@ -181,13 +175,6 @@ const Announcement: FC<Props> = ({
         handleAnnouncementChange={(e: any) => handleAnnouncementChange(e)}
         onClose={handleEditModal}
         onSubmit={onModalSubmit}
-      />
-
-      <Poppers
-        title='announcement'
-        anchorEl={anchorEl}
-        onClose={onPopperClose}
-        onSubmit={onDeleteARow}
       />
     </>
   )
