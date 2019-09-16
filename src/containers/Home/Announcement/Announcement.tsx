@@ -1,4 +1,6 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
+import { Switch, Route } from 'react-router-dom'
+import useReactRouter from 'use-react-router'
 import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
@@ -6,10 +8,9 @@ import MUIDataTable, {
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab } from '@material-ui/core'
 import TableWrapper from 'components/TableWrapper/TableWrapper'
-import Poppers from 'components/Poppers/Poppers'
 import Loading from 'components/Loading/Loading'
 import EditModal from './components/EditModal/EditModal'
-import ConfirmModal from './components/ConfirmModal/ConfirmModal'
+import ConfirmModal from '../../../components/ConfirmModal/ConfirmModal'
 import { formatISODate } from 'shared/utils'
 import { Props } from './Announcement.connect'
 import styles from './Announcement.module.scss'
@@ -17,72 +18,19 @@ import styles from './Announcement.module.scss'
 const Announcement: FC<Props> = ({
   isFetching,
   announcements,
-  byId,
   getAnnouncements,
-  addAnnouncement,
-  updateAnnouncement,
   deleteAnnouncement,
   deleteAnnouncements,
+  push,
+  pathname,
 }) => {
+  const { match } = useReactRouter<{ id: string }>()
+
   useEffect(() => {
-    getAnnouncements()
-  }, [getAnnouncements])
-
-  // Form
-  const [announcementValue, setAnnouncementValue] = useState('')
-  const handleAnnouncementChange = (e: any) => {
-    setAnnouncementValue(e.target.value)
-  }
-
-  // EditModal
-  const [curId, setCurId] = useState('')
-  const [editModalOpen, setEditModalOpen] = useState(false)
-  const handleEditModal = (id?: string) => {
-    setEditModalOpen(!editModalOpen)
-    if (id) {
-      setCurId(id)
-      setAnnouncementValue(byId[id].announcement)
-    } else {
-      setCurId('')
-      setEditModalOpen(false)
-      setAnnouncementValue('')
+    if (pathname === '/home/announcement') {
+      getAnnouncements()
     }
-  }
-  const onModalSubmit = () => {
-    if (curId) {
-      updateAnnouncement({ id: curId, announcement: announcementValue })
-    } else {
-      addAnnouncement({ announcement: announcementValue })
-    }
-    handleEditModal()
-  }
-
-  // ConfirmModal
-  const [curIds, setCurIds] = useState<string[]>([])
-  const [confirmModalOpen, setConfirmModalOpen] = useState(false)
-  const handleConfirmModal = (ids?: string[]) => {
-    setConfirmModalOpen(!confirmModalOpen)
-    ids ? setCurIds(ids) : setCurIds([])
-  }
-  const onDeleteRows = () => {
-    deleteAnnouncements({ ids: curIds })
-    handleConfirmModal()
-  }
-
-  // Popper
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const onPopperOpen = (event: React.MouseEvent<HTMLElement>, id: string) => {
-    setCurId(id)
-    setAnchorEl(anchorEl ? null : event.currentTarget)
-  }
-  const onPopperClose = () => {
-    setAnchorEl(null)
-    setCurId('')
-  }
-  const onDeleteARow = () => {
-    deleteAnnouncement({ id: curId })
-    onPopperClose()
-  }
+  }, [getAnnouncements, pathname])
 
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
@@ -111,13 +59,18 @@ const Announcement: FC<Props> = ({
             <>
               <FormControl>
                 <Edit
-                  style={{ marginRight: '10px' }}
-                  onClick={() => handleEditModal(tableMeta.rowData[0])}
+                  style={{ marginRight: '12px', cursor: 'pointer' }}
+                  onClick={() =>
+                    push(`${match.url}/edit/${tableMeta.rowData[0]}`)
+                  }
                 />
               </FormControl>
               <FormControl>
                 <DeleteOutline
-                  onClick={(e: any) => onPopperOpen(e, tableMeta.rowData[0])}
+                  style={{ cursor: 'pointer' }}
+                  onClick={() =>
+                    push(`${match.url}/delete`, tableMeta.rowData[0])
+                  }
                 />
               </FormControl>
             </>
@@ -139,7 +92,7 @@ const Announcement: FC<Props> = ({
         <Fab size='medium' className={styles.addIconFab}>
           <AddBox
             className={styles.addIcon}
-            onClick={() => handleEditModal()}
+            onClick={() => push(`${match.url}/create`)}
           />
         </Fab>
       )
@@ -151,11 +104,19 @@ const Announcement: FC<Props> = ({
         <Fab size='medium' className={styles.addIconFab}>
           <DeleteOutline
             className={styles.addIcon}
-            onClick={() => handleConfirmModal(ids)}
+            onClick={() => push(`${match.url}/deletes`, ids)}
           />
         </Fab>
       )
     },
+  }
+
+  const onDelete = (ids: string | string[]) => {
+    if (Array.isArray(ids)) {
+      deleteAnnouncements({ ids })
+    } else {
+      deleteAnnouncement({ id: ids })
+    }
   }
 
   return (
@@ -170,28 +131,20 @@ const Announcement: FC<Props> = ({
         {isFetching && <Loading />}
       </TableWrapper>
 
-      <EditModal
-        title='announcement'
-        open={editModalOpen}
-        isAdd={!!curId}
-        announcementValue={announcementValue}
-        handleAnnouncementChange={(e: any) => handleAnnouncementChange(e)}
-        onClose={handleEditModal}
-        onSubmit={onModalSubmit}
-      />
-
-      <ConfirmModal
-        open={confirmModalOpen}
-        onClose={handleConfirmModal}
-        onSubmit={onDeleteRows}
-      />
-
-      <Poppers
-        title='announcement'
-        anchorEl={anchorEl}
-        onClose={onPopperClose}
-        onSubmit={curIds.length > 0 ? onDeleteRows : onDeleteARow}
-      />
+      <Switch>
+        <Route
+          path={[`${match.url}/deletes`, `${match.url}/delete`]}
+          render={() => (
+            <ConfirmModal
+              onSubmit={(ids: string | string[]) => onDelete(ids)}
+            />
+          )}
+        />
+        <Route
+          path={[`${match.url}/create`, `${match.url}/edit/:id`]}
+          render={() => <EditModal />}
+        />
+      </Switch>
     </>
   )
 }

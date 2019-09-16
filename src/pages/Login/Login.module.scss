@@ -9,21 +9,18 @@ body {
   height: 100vh;
   overflow: hidden;
   font-family: Lato, sans-serif;
-
-  figure {
-    margin: 0;
-    padding: 0;
-  }
 }
 
 .blurBg {
   position: absolute;
   top: -4px;
   left: -4px;
+  margin: 0;
+  padding: 0;
   width: calc(100% + 8px);
   height: calc(100% + 8px);
   z-index: -1;
-  background: url(./wew.png) no-repeat center top;
+  background: url('../../assets/images/loginBg.png') no-repeat center top;
   background-size: cover;
   -webkit-filter: blur(2px);
   filter: blur(2px);
@@ -40,10 +37,12 @@ body {
 }
 
 .titleImg {
+  margin: 0 auto;
   width: 200px;
   height: 50px;
   margin: 25px auto;
-  background: url('./yancey-official-blog-logo.png') no-repeat center top;
+  background: url('../../assets/images/yancey-official-blog-logo.png') no-repeat
+    center top;
   background-size: contain;
   text-align: center;
 }
@@ -61,6 +60,7 @@ body {
   display: inline-block;
 }
 .itemInput {
+  box-sizing: border-box;
   display: block;
   width: 100%;
   margin-top: 10px;
