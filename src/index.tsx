@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Router } from 'react-router-dom'
+import { ConnectedRouter } from 'connected-react-router'
 import * as serviceWorker from 'serviceWorker'
 import { Provider } from 'react-redux'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -9,7 +9,7 @@ import history from 'shared/history'
 import fontAwesomes from 'shared/fontAwesome'
 import Layouts from 'layouts/Layouts'
 
-// import Login from 'containers/Login/Login'
+// import Login from 'pages/Login/Login'
 
 const store = configureStore()
 library.add(...fontAwesomes)
@@ -17,11 +17,10 @@ serviceWorker.unregister()
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <Router history={history}>
-        <Layouts />
-      </Router>
-    </BrowserRouter>
+    <ConnectedRouter history={history}>
+      <Layouts />
+      {/* <Login /> */}
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root'),
 )

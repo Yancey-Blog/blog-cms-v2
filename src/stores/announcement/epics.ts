@@ -1,7 +1,8 @@
 import { Epic } from 'redux-observable'
 import { isActionOf, RootAction, RootState, Services } from 'typesafe-actions'
 import { catchError, filter, map, switchMap, takeUntil } from 'rxjs/operators'
-import { of } from 'rxjs'
+import { of, from } from 'rxjs'
+import { goBack } from 'connected-react-router'
 import {
   getAnnouncements,
   addAnnouncement,
@@ -19,7 +20,7 @@ export const getAnnouncementsEpic: Epic<
   action$.pipe(
     filter(isActionOf(getAnnouncements.request)),
     switchMap(action =>
-      AnnoucementServices.getAnnouncements().pipe(
+      from(AnnoucementServices.getAnnouncements()).pipe(
         map(getAnnouncements.success),
         takeUntil(action$.pipe(filter(isActionOf(getAnnouncements.cancel)))),
         catchError((message: string) => of(getAnnouncements.failure(message))),
@@ -40,14 +41,13 @@ export const addAnnouncementEpic: Epic<
         announcement: action.payload.announcement,
       }
       return AnnoucementServices.addAnnouncement(data).pipe(
-        map(addAnnouncement.success),
-        switchMap(() =>
-          AnnoucementServices.getAnnouncements().pipe(
-            map(getAnnouncements.success),
-          ),
-        ),
+        switchMap(resp => {
+          return of(addAnnouncement.success(resp), goBack())
+        }),
         takeUntil(action$.pipe(filter(isActionOf(addAnnouncement.cancel)))),
-        catchError((message: string) => of(addAnnouncement.failure(message))),
+        catchError((message: string) =>
+          of(addAnnouncement.failure(message), goBack()),
+        ),
       )
     }),
   )
@@ -67,15 +67,12 @@ export const updateAnnouncementEpic: Epic<
         announcement: payload.announcement,
       }
       return AnnoucementServices.updateAnnouncement(id, data).pipe(
-        map(updateAnnouncement.success),
-        switchMap(() =>
-          AnnoucementServices.getAnnouncements().pipe(
-            map(getAnnouncements.success),
-          ),
-        ),
+        switchMap(resp => {
+          return of(updateAnnouncement.success(resp), goBack())
+        }),
         takeUntil(action$.pipe(filter(isActionOf(updateAnnouncement.cancel)))),
         catchError((message: string) =>
-          of(updateAnnouncement.failure(message)),
+          of(updateAnnouncement.failure(message), goBack()),
         ),
       )
     }),
@@ -92,15 +89,12 @@ export const deleteAnnouncementEpic: Epic<
     switchMap(action => {
       const id = action.payload.id
       return AnnoucementServices.deleteAnnouncement(id).pipe(
-        map(deleteAnnouncement.success),
-        switchMap(() =>
-          AnnoucementServices.getAnnouncements().pipe(
-            map(getAnnouncements.success),
-          ),
-        ),
+        switchMap(resp => {
+          return of(deleteAnnouncement.success(resp), goBack())
+        }),
         takeUntil(action$.pipe(filter(isActionOf(deleteAnnouncement.cancel)))),
         catchError((message: string) =>
-          of(deleteAnnouncement.failure(message)),
+          of(deleteAnnouncement.failure(message), goBack()),
         ),
       )
     }),
@@ -117,15 +111,12 @@ export const deleteAnnouncementsEpic: Epic<
     switchMap(action => {
       const ids = action.payload.ids
       return AnnoucementServices.deleteAnnouncements(ids).pipe(
-        map(deleteAnnouncements.success),
-        switchMap(() =>
-          AnnoucementServices.getAnnouncements().pipe(
-            map(getAnnouncements.success),
-          ),
-        ),
+        switchMap(resp => {
+          return of(deleteAnnouncements.success(resp), goBack())
+        }),
         takeUntil(action$.pipe(filter(isActionOf(deleteAnnouncements.cancel)))),
         catchError((message: string) =>
-          of(deleteAnnouncements.failure(message)),
+          of(deleteAnnouncements.failure(message), goBack()),
         ),
       )
     }),

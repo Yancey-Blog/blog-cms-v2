@@ -1,5 +1,22 @@
-const dayjs = require('dayjs')
+const ramda = require('ramda')
+const zipObj = ramda.zipObj
 
-const xx = dayjs('2019-09-07T06:12:35.470Z').format('YYYY-MM-DD HH:mm:ss')
+const state = {
+  byId: {
+    1: {
+      announcement: 'sayaka',
+    },
+  },
+  ids: [1],
+}
 
-console.log(xx)
+const newId = 2
+const newContent = {
+  2: {
+    announcement: 'sayaka',
+  },
+}
+
+const f = { byId: { ...state.byId, ...newContent }, ids: [...state.ids, newId] }
+
+console.log(f)

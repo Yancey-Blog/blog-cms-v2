@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { RootState } from 'typesafe-actions'
 import Drawer from '@material-ui/core/Drawer'
@@ -145,7 +145,7 @@ const Drawers: FC<Props> = ({ open, pathname }) => {
                   }
                 >
                   {route.children.map(child => (
-                    <Link to={child.path} key={child.name}>
+                    <NavLink to={child.path} key={child.name}>
                       <div
                         className={classNames(
                           styles.drawerItem,
@@ -168,7 +168,7 @@ const Drawers: FC<Props> = ({ open, pathname }) => {
                           <span className={styles.drawerTxt}>{child.name}</span>
                         </div>
                       </div>
-                    </Link>
+                    </NavLink>
                   ))}
                 </div>
               ) : null}
