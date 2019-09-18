@@ -69,8 +69,8 @@ const EditModal: FC<Props> = ({
       <DialogTitle>{curId ? 'Update' : 'Add'} an Announcement</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          To subscribe to this website, please enter your email address here. We
-          will send updates occasionally.
+          To {curId ? 'Update' : 'Add'} an announcement, please enter the
+          announcement here. We will send updates occasionally.
         </DialogContentText>
         <TextField
           autoFocus
