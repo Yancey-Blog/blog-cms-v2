@@ -15,6 +15,21 @@ export const getType = (type: any) =>
     .slice(8, -1)
     .toLowerCase()
 
+export const matchPath = (path: string) => {
+  const _str = path.split('/').filter(v => v !== '')
+  if (_str.length > 1) {
+    return {
+      parent: `/${_str[0]}`,
+      child: `/${_str.join('/')}`,
+    }
+  } else {
+    return {
+      parent: `/${_str}`,
+      child: '',
+    }
+  }
+}
+
 export const isNumber = (type: any) => getType(type) === 'number'
 
 export const isString = (type: any) => getType(type) === 'string'
