@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { RootState } from 'typesafe-actions'
 import Drawer from '@material-ui/core/Drawer'
@@ -9,7 +9,7 @@ import classNames from 'classnames'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import routes, { BaseRoute } from './Routes'
-import { getInitials } from 'shared/utils'
+import { getInitials, matchPath } from 'shared/utils'
 import history from 'shared/history'
 
 interface DrawersProps {
@@ -31,10 +31,7 @@ const mapStateToProps = (state: RootState) => {
 type Props = DrawersProps & ReturnType<typeof mapStateToProps>
 
 const Drawers: FC<Props> = ({ open, pathname }) => {
-  const [drawerItem, setDrawerItem] = useState({
-    parent: '',
-    child: '',
-  })
+  const [drawerItem, setDrawerItem] = useState(matchPath(pathname))
 
   const handleDrawerChange = (route: any) => {
     route.children
@@ -145,7 +142,7 @@ const Drawers: FC<Props> = ({ open, pathname }) => {
                   }
                 >
                   {route.children.map(child => (
-                    <NavLink to={child.path} key={child.name}>
+                    <Link to={child.path} key={child.name}>
                       <div
                         className={classNames(
                           styles.drawerItem,
@@ -168,7 +165,7 @@ const Drawers: FC<Props> = ({ open, pathname }) => {
                           <span className={styles.drawerTxt}>{child.name}</span>
                         </div>
                       </div>
-                    </NavLink>
+                    </Link>
                   ))}
                 </div>
               ) : null}
