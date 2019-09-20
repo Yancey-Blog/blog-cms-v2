@@ -128,9 +128,7 @@ const Announcement: FC<Props> = ({
           columns={columns}
           options={options}
         />
-        {isFetching && <Loading />}
       </TableWrapper>
-
       <Switch>
         <Route
           path={[`${match.url}/deletes`, `${match.url}/delete`]}
@@ -145,6 +143,7 @@ const Announcement: FC<Props> = ({
           render={() => <EditModal />}
         />
       </Switch>
+      {isFetching && <Loading />}
     </>
   )
 }
