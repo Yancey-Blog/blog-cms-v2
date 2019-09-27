@@ -35,4 +35,6 @@ export const isNumber = (type: any) => getType(type) === 'number'
 
 export const isString = (type: any) => getType(type) === 'string'
 
+export const isBoolean = (type: any) => getType(type) === 'boolean'
+
 export const isArray = (type: any) => Array.isArray(type)
