@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import { createReducer } from 'typesafe-actions'
 import { zipObj } from 'ramda'
+import { IAnnouncementState } from 'typings/announcement'
 import {
   getAnnouncements,
   addAnnouncement,
@@ -8,7 +9,6 @@ import {
   deleteAnnouncement,
   deleteAnnouncements,
 } from './actions'
-import { IAnnouncementState } from 'typings/announcement'
 
 const initialState: IAnnouncementState = {
   byId: {},
@@ -26,12 +26,10 @@ const announcements = createReducer(initialState)
       deleteAnnouncement.request,
       deleteAnnouncements.request,
     ],
-    (state, action) => {
-      return { ...state, isFetching: true }
-    },
+    (state: any) => ({ ...state, isFetching: true }),
   )
   .handleAction(getAnnouncements.success, (state, action) => {
-    const allIds = action.payload.map(item => item._id)
+    const allIds = action.payload.map((item: any) => item._id)
     const byId = zipObj(allIds, action.payload)
     return { ...state, byId, allIds, isFetching: false }
   })
@@ -48,9 +46,7 @@ const announcements = createReducer(initialState)
       deleteAnnouncement.cancel,
       deleteAnnouncements.cancel,
     ],
-    (state, action) => {
-      return { ...state, isFetching: false }
-    },
+    (state: any) => ({ ...state, isFetching: false }),
   )
 
 const AnnouncementsReducer = combineReducers({
