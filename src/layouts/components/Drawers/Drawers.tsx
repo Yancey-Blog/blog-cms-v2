@@ -105,7 +105,7 @@ const Drawers: FC<Props> = ({ open, pathname }) => {
 
           {routes.map((route: any, key: number) => (
             <div className={styles.drawerList} key={route.name}>
-              <menuitem
+              <div
                 className={classNames(
                   styles.drawerItem,
                   setItemStyle(route.children, route.path),
@@ -130,7 +130,7 @@ const Drawers: FC<Props> = ({ open, pathname }) => {
                     />
                   ) : null}
                 </div>
-              </menuitem>
+              </div>
               {route.children.length !== 0 ? (
                 <div
                   className={classNames(styles.itemChildren, {
@@ -145,7 +145,7 @@ const Drawers: FC<Props> = ({ open, pathname }) => {
                 >
                   {route.children.map((child: any) => (
                     <Link to={child.path} key={child.name}>
-                      <menuitem
+                      <div
                         className={classNames(
                           styles.drawerItem,
                           styles.drawerItemChildren,
@@ -166,7 +166,7 @@ const Drawers: FC<Props> = ({ open, pathname }) => {
                         >
                           <span className={styles.drawerTxt}>{child.name}</span>
                         </div>
-                      </menuitem>
+                      </div>
                     </Link>
                   ))}
                 </div>
