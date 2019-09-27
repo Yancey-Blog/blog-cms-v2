@@ -1,16 +1,19 @@
+// FIXME:
+/* eslint-disable */
+
 import React, { FC, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { RootState } from 'typesafe-actions'
 import Drawer from '@material-ui/core/Drawer'
 import Avatar from '@material-ui/core/Avatar'
-import styles from './Drawers.module.scss'
 import classNames from 'classnames'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import routes, { BaseRoute } from './Routes'
 import { getInitials, matchPath } from 'shared/utils'
 import history from 'shared/history'
+import routes, { BaseRoute } from './Routes'
+import styles from './Drawers.module.scss'
 
 interface DrawersProps {
   open: boolean
@@ -56,9 +59,8 @@ const Drawers: FC<Props> = ({ open, pathname }) => {
     if (curItem === drawerItem.parent) {
       if (children.length > 0) {
         return styles.activeDrawerItemHasChildren
-      } else {
-        return styles.activeDrawerItem
       }
+      return styles.activeDrawerItem
     }
   }
   return (
@@ -101,7 +103,7 @@ const Drawers: FC<Props> = ({ open, pathname }) => {
             </div>
           </div>
 
-          {routes.map(route => (
+          {routes.map((route: any, key: number) => (
             <div className={styles.drawerList} key={route.name}>
               <div
                 className={classNames(
@@ -141,7 +143,7 @@ const Drawers: FC<Props> = ({ open, pathname }) => {
                       : {}
                   }
                 >
-                  {route.children.map(child => (
+                  {route.children.map((child: any) => (
                     <Link to={child.path} key={child.name}>
                       <div
                         className={classNames(

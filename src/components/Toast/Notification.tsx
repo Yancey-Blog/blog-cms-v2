@@ -36,8 +36,9 @@ class Notification extends React.Component<
 
   public addNotice(notice: any) {
     const { notices } = this.state
+    // eslint-disable-next-line
     notice.key = this.getNoticeKey()
-    if (notices.every(item => item.key !== notice.key)) {
+    if (notices.every((item: any) => item.key !== notice.key)) {
       if (notice.length > 0 && notices[notice.length - 1].type === 'loading') {
         notices.push(notice)
         setTimeout(() => {
@@ -61,7 +62,7 @@ class Notification extends React.Component<
   public removeNotice(key: any) {
     const { notices } = this.state
     this.setState({
-      notices: notices.filter(notice => {
+      notices: notices.filter((notice: any) => {
         if (notice.key === key) {
           if (notice.onClose) setTimeout(notice.onClose, this.transitionTime)
           return false
@@ -75,7 +76,7 @@ class Notification extends React.Component<
     const { notices } = this.state
     return (
       <TransitionGroup className='toast-notification'>
-        {notices.map(notice => (
+        {notices.map((notice: any) => (
           <CSSTransition
             key={notice.key}
             classNames='toast-notice-wrapper notice'
@@ -95,6 +96,7 @@ const createNotification = () => {
   const ref = React.createRef<any>()
   ReactDOM.render(<Notification ref={ref} />, div)
   return {
+    // eslint-disable-next-line
     addNotice(notice: any) {
       if (ref.current) {
         return ref.current.addNotice(notice)

@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 import { RootState } from 'typesafe-actions'
 import { push } from 'connected-react-router'
-import Announcement from './Announcement'
 import {
   getAnnouncements,
   deleteAnnouncement,
   deleteAnnouncements,
 } from 'stores/announcement/actions'
+import Announcement from './Announcement'
 
 const mapStateToProps = (state: RootState) => {
   const {
@@ -17,7 +17,9 @@ const mapStateToProps = (state: RootState) => {
   } = state
 
   return {
-    announcements: announcements.allIds.map(id => announcements.byId[id]),
+    announcements: announcements.allIds.map(
+      (id: string) => announcements.byId[id],
+    ),
     byId: announcements.byId,
     isFetching: announcements.isFetching,
     pathname,

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs'
 import { baseURL } from 'shared/constants'
 import Toast from 'components/Toast/Toast'
 
-const CancelToken = axios.CancelToken
+const { CancelToken } = axios
 
 // config timeout
 axios.defaults.timeout = 30 * 1000
@@ -22,27 +22,28 @@ axios.defaults.baseURL =
 
 const pending: any[] = []
 const removePending = (config: any) => {
-  for (const p in pending) {
-    if (pending[p].u === config.url + '&' + config.method) {
-      pending[p].f()
+  pending.forEach((p: any) => {
+    if (p.u === `${config.url}&${config.method}`) {
+      p.f()
       pending.splice(parseInt(p, 10), 1)
     }
-  }
+  })
 }
 
 // config request interceptors
 axios.interceptors.request.use(
-  config => {
+  (config: any) => {
     removePending(config)
-    config.cancelToken = new CancelToken(c => {
+    // eslint-disable-next-line
+    config.cancelToken = new CancelToken((c: any) => {
       pending.push({
-        u: config.url + '&' + config.method,
+        u: `${config.url}&${config.method}`,
         f: c,
       })
     })
     return config
   },
-  err => Promise.reject(err),
+  (err: Error) => Promise.reject(err),
 )
 // config response interceptors
 axios.interceptors.response.use(
@@ -61,12 +62,12 @@ axios.interceptors.response.use(
 
 // GET
 export function GET<T>(url: string, params?: any): Observable<T> {
-  return new Observable(subscriber => {
+  return new Observable((subscriber: any) => {
     axios
       .get(url, {
         params,
       })
-      .then(res => {
+      .then((res: any) => {
         subscriber.next(res.data)
         subscriber.complete()
       })
@@ -83,10 +84,10 @@ export function POST<T>(
   params?: any,
   config?: AxiosRequestConfig,
 ): Observable<T> {
-  return new Observable(subscriber => {
+  return new Observable((subscriber: any) => {
     axios
       .post(url, params, config)
-      .then(res => {
+      .then((res: any) => {
         subscriber.next(res.data)
         subscriber.complete()
       })
@@ -99,10 +100,10 @@ export function POST<T>(
 
 // PUT
 export function PUT<T>(url: string, params?: any): Observable<T> {
-  return new Observable(subscriber => {
+  return new Observable((subscriber: any) => {
     axios
       .put(url, params)
-      .then(res => {
+      .then((res: any) => {
         subscriber.next(res.data)
         subscriber.complete()
       })
@@ -115,12 +116,12 @@ export function PUT<T>(url: string, params?: any): Observable<T> {
 
 // DELETE
 export function DELETE<T>(url: string, params?: any): Observable<T> {
-  return new Observable(subscriber => {
+  return new Observable((subscriber: any) => {
     axios
       .delete(url, {
         data: params,
       })
-      .then(res => {
+      .then((res: any) => {
         subscriber.next(res.data)
         subscriber.complete()
       })

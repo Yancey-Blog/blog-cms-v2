@@ -12,39 +12,39 @@ interface Props {
   handleDrawerChange: Function
 }
 
-const Header: FC<Props> = ({ handleDrawerChange }) => {
-  return (
-    <AppBar position='relative' className={styles.header}>
-      <div className={styles.left}>
-        <Fab
-          size='small'
-          aria-label='more'
-          onClick={() => handleDrawerChange()}
-          className={styles.foldIcon}
-        >
-          <FontAwesomeIcon icon={['fab', 'react']} />
-        </Fab>
-        <Typography variant='h6' noWrap className={styles.title}>
-          CMS for Blog
-        </Typography>
-      </div>
-      <div className={styles.right}>
-        <Input
-          placeholder='Search...'
-          inputProps={{
-            'aria-label': 'description',
-          }}
-        />
-        {[...new Int8Array(4)].map((val, key) => (
-          <IconButton aria-label='show 4 new mails' color='inherit' key={key}>
-            <Badge badgeContent={key} color='secondary'>
-              <FontAwesomeIcon icon={['fab', 'react']} />
-            </Badge>
-          </IconButton>
-        ))}
-      </div>
-    </AppBar>
-  )
-}
+const Header: FC<Props> = ({ handleDrawerChange }) => (
+  <AppBar position='relative' className={styles.header}>
+    <div className={styles.left}>
+      <Fab
+        size='small'
+        aria-label='more'
+        onClick={() => handleDrawerChange()}
+        className={styles.foldIcon}
+      >
+        <FontAwesomeIcon icon={['fab', 'react']} />
+      </Fab>
+      <Typography variant='h6' noWrap className={styles.title}>
+        CMS for Blog
+      </Typography>
+    </div>
+    <div className={styles.right}>
+      <Input
+        placeholder='Search...'
+        inputProps={{
+          'aria-label': 'description',
+        }}
+      />
+      {[...new Int8Array(4)].map((val, key) => (
+        // FIXME:
+        // eslint-disable-next-line
+        <IconButton aria-label='show 4 new mails' color='inherit' key={key}>
+          <Badge badgeContent={key} color='secondary'>
+            <FontAwesomeIcon icon={['fab', 'react']} />
+          </Badge>
+        </IconButton>
+      ))}
+    </div>
+  </AppBar>
+)
 
 export default Header

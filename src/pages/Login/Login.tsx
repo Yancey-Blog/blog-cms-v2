@@ -17,11 +17,11 @@ class Login extends Component {
     window.recaptchaOptions = {
       lang: 'ja',
     }
-    const btnStyle = {
-      background: '#ccc',
-      boxShadow: '0 0 4px #ccc',
-      cursor: 'not-allowed',
-    }
+    // const btnStyle = {
+    //   background: '#ccc',
+    //   boxShadow: '0 0 4px #ccc',
+    //   cursor: 'not-allowed',
+    // }
     return (
       <main className={styles.loginWrapper}>
         <figure className={styles.blurBg} />

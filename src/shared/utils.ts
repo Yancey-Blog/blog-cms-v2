@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 export const getInitials = (txt: string) =>
   txt
     .split(' ')
-    .map(v => v[0])
+    .map((v: string) => v[0])
     .join('')
 
 export const formatISODate = (ISODate: string) =>
@@ -16,22 +16,25 @@ export const getType = (type: any) =>
     .toLowerCase()
 
 export const matchPath = (path: string) => {
-  const _str = path.split('/').filter(v => v !== '')
+  const _str = path.split('/').filter((v: string) => v !== '')
   if (_str.length > 1) {
     return {
       parent: `/${_str[0]}`,
       child: `/${_str.join('/')}`,
     }
-  } else {
-    return {
-      parent: `/${_str}`,
-      child: '',
-    }
+  }
+  return {
+    parent: `/${_str}`,
+    child: '',
   }
 }
+
+export const noop = () => {}
 
 export const isNumber = (type: any) => getType(type) === 'number'
 
 export const isString = (type: any) => getType(type) === 'string'
+
+export const isBoolean = (type: any) => getType(type) === 'boolean'
 
 export const isArray = (type: any) => Array.isArray(type)
