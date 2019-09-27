@@ -61,7 +61,7 @@ Builds the app for production to the `build` folder. It correctly bundles React 
 
 ### `yarn eslint`
 
-Checks your codes by eslint, we will lint your code when commit automatically.
+Checks the codes by eslint, we will lint them before commit automatically.
 
 ### `yarn commit`
 
