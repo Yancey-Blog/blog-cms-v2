@@ -1,6 +1,6 @@
 {
   "name": "blog-cms-v2",
-  "version": "0.5.3",
+  "version": "0.5.5",
   "private": true,
   "dependencies": {
     "@babel/core": "7.6.2",
@@ -193,7 +193,7 @@
     ]
   },
   "lint-staged": {
-    "*.{ts,js,scss,css,md}": [
+    "*.{ts,js,scss,css}": [
       "prettier --write",
       "yarn eslint",
       "git add"
