@@ -9,9 +9,9 @@ import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab } from '@material-ui/core'
 import TableWrapper from 'components/TableWrapper/TableWrapper'
 import Loading from 'components/Loading/Loading'
-import EditModal from './components/EditModal/EditModal'
-import ConfirmModal from '../../../components/ConfirmModal/ConfirmModal'
+import ConfirmModal from 'components/ConfirmModal/ConfirmModal'
 import { formatISODate } from 'shared/utils'
+import EditModal from './components/EditModal/EditModal'
 import { Props } from './Announcement.connect'
 import styles from './Announcement.module.scss'
 
@@ -39,14 +39,14 @@ const Announcement: FC<Props> = ({
       name: 'createdAt',
       label: 'CreatedAt',
       options: {
-        customBodyRender: value => <span>{formatISODate(value)}</span>,
+        customBodyRender: (value: any) => <span>{formatISODate(value)}</span>,
       },
     },
     {
       name: 'updatedAt',
       label: 'UpdatedAt',
       options: {
-        customBodyRender: value => <span>{formatISODate(value)}</span>,
+        customBodyRender: (value: any) => <span>{formatISODate(value)}</span>,
       },
     },
     {
@@ -98,8 +98,9 @@ const Announcement: FC<Props> = ({
       )
     },
     customToolbarSelect(selectedRows) {
-      // @ts-ignore
-      const ids = selectedRows.data.map(row => announcements[row.index]._id)
+      const ids = selectedRows.data.map(
+        (row: any) => announcements[row.index]._id,
+      )
       return (
         <Fab size='medium' className={styles.addIconFab}>
           <DeleteOutline
