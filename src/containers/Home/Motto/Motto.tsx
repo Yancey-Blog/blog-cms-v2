@@ -1,7 +1,5 @@
 import React, { FC } from 'react'
 
-const Motto: FC = () => {
-  return <section>hello</section>
-}
+const Motto: FC = () => <section>hello</section>
 
 export default Motto

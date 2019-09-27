@@ -66,7 +66,9 @@ const EditModal: FC<Props> = ({
 
   return (
     <Dialog open onClose={goBack}>
-      <DialogTitle>{curId ? 'Update' : 'Add'} an Announcement</DialogTitle>
+      <DialogTitle>
+        {curId ? 'Update an Announcement' : 'Add an Announcement'}
+      </DialogTitle>
       <DialogContent>
         <DialogContentText>
           To {curId ? 'Update' : 'Add'} an announcement, please enter the

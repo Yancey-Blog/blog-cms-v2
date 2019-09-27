@@ -4,10 +4,10 @@ import loggerMiddleware from 'redux-logger'
 import { createEpicMiddleware } from 'redux-observable'
 import { RootAction, RootState, Services } from 'typesafe-actions'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import rootReducers from './rootReducers'
-import rootEpics from './rootEpics'
 import history from 'shared/history'
 import services from 'services'
+import rootReducers from './rootReducers'
+import rootEpics from './rootEpics'
 
 const epicMiddleware = createEpicMiddleware<
   RootAction,
@@ -37,6 +37,7 @@ export default function configureStore(initialState?: {}) {
   epicMiddleware.run(rootEpics)
 
   if (process.env.NODE_ENV !== 'production' && (module as any).hot) {
+    // eslint-disable-next-line
     ;(module as any).hot.accept('./rootReducers', () =>
       store.replaceReducer(rootReducers),
     )

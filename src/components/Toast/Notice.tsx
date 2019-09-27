@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import ErrorIcon from '@material-ui/icons/Error'
 import InfoIcon from '@material-ui/icons/Info'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
@@ -17,18 +17,15 @@ const variantIcon = {
   info: InfoIcon,
 }
 
-class Notice extends React.Component<INoticeProps, {}> {
-  render() {
-    const { type, content } = this.props
-    const Icon = variantIcon[type]
+const Notice: FC<INoticeProps> = ({ type, content }) => {
+  const Icon = variantIcon[type]
 
-    return (
-      <div className={`toast-notice ${type}`}>
-        <Icon className='toast-icon' />
-        <span>{content}</span>
-      </div>
-    )
-  }
+  return (
+    <div className={`toast-notice ${type}`}>
+      <Icon className='toast-icon' />
+      <span>{content}</span>
+    </div>
+  )
 }
 
 export default Notice
