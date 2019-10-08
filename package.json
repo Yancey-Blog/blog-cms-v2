@@ -60,7 +60,7 @@
     "react": "^16.10.1",
     "react-app-polyfill": "^1.0.4",
     "react-dev-utils": "^9.0.4",
-    "react-dom": "^16.10.1",
+    "react-dom": "^16.10.2",
     "react-google-recaptcha": "^2.0.1",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
