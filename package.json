@@ -91,7 +91,7 @@
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
     "@types/classnames": "^2.2.9",
-    "@types/mui-datatables": "^2.10.3",
+    "@types/mui-datatables": "^2.10.4",
     "@types/ramda": "^0.26.26",
     "@types/react-google-recaptcha": "^1.1.0",
     "@types/react-redux": "^7.1.4",
