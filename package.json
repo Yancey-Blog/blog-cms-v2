@@ -98,7 +98,7 @@
     "@types/react-google-recaptcha": "^1.1.0",
     "@types/react-redux": "^7.1.4",
     "@types/redux-logger": "^3.0.7",
-    "@typescript-eslint/eslint-plugin": "^2.7.0",
+    "@typescript-eslint/eslint-plugin": "^2.8.0",
     "@typescript-eslint/parser": "^2.7.0",
     "commitizen": "^4.0.3",
     "commitlint-config-cz": "^0.12.1",
