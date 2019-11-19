@@ -79,7 +79,7 @@
     "style-loader": "1.0.0",
     "terser-webpack-plugin": "2.1.2",
     "ts-pnp": "1.1.4",
-    "typesafe-actions": "^4.4.2",
+    "typesafe-actions": "^5.1.0",
     "typescript": "^3.6.3",
     "url-loader": "2.2.0",
     "use-react-router": "^1.0.7",
