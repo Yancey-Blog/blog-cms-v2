@@ -29,7 +29,7 @@
     "classnames": "^2.2.6",
     "connected-react-router": "^6.5.2",
     "css-loader": "3.2.0",
-    "dayjs": "^1.8.16",
+    "dayjs": "^1.8.17",
     "dotenv": "8.1.0",
     "dotenv-expand": "5.1.0",
     "eslint-config-react-app": "^5.0.2",
