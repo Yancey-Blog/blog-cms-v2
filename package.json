@@ -94,7 +94,7 @@
     "@types/mui-datatables": "^2.12.2",
     "@types/ramda": "^0.26.26",
     "@types/mui-datatables": "^2.12.2",
-    "@types/ramda": "^0.26.34",
+    "@types/ramda": "^0.26.36",
     "@types/react-google-recaptcha": "^1.1.1",
     "@types/react-redux": "^7.1.5",
     "@types/redux-logger": "^3.0.7",
