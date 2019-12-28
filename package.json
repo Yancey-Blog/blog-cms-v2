@@ -115,7 +115,7 @@
     "prettier": "^1.19.1",
     "mockjs": "^1.1.0",
     "prettier": "^1.19.1",
-    "standard-version": "^7.0.0"
+    "standard-version": "^7.0.1"
   },
   "scripts": {
     "start": "node scripts/start.js",
