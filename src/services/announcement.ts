@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs'
-import { GET, POST, PUT, DELETE } from 'shared/axios'
+import { GET, POST, PUT, DELETE } from '../shared/axios'
 
 export const getAnnouncements = (): Observable<any[]> => GET('/announcements', {})
 

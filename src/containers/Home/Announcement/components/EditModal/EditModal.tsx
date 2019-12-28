@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react'
-import useReactRouter from 'use-react-router'
 import {
   Button,
   DialogActions,
@@ -11,7 +10,7 @@ import {
 } from '@material-ui/core'
 
 const EditModal: FC<any> = ({ byId, goBack, addAnnouncement, updateAnnouncement }) => {
-  const { match } = useReactRouter<{ id: string }>()
+  const match = { params: { id: '' } }
 
   const [curId] = useState(match.params.id)
 

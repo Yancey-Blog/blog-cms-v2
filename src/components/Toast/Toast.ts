@@ -1,12 +1,7 @@
 import notificationDOM from './Notification'
 
 let notification: any
-const notice = (
-  type: string,
-  content: string,
-  duration = 2000,
-  onClose: any,
-) => {
+const notice = (type: string, content: string, duration = 2000, onClose: any) => {
   if (!notification) notification = notificationDOM
   return notification.addNotice({ type, content, duration, onClose })
 }

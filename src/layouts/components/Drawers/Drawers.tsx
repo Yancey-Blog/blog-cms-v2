@@ -8,8 +8,8 @@ import Avatar from '@material-ui/core/Avatar'
 import classNames from 'classnames'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { getInitials } from 'shared/utils'
-import history from 'shared/history'
+import { getInitials } from '../../../shared/utils'
+import history from '../../../shared/history'
 import routes from './Routes'
 import styles from './Drawers.module.scss'
 
@@ -63,7 +63,7 @@ const Drawers: FC<any> = ({ open, pathname }) => {
                   })}
                 >
                   <span className={styles.drawerTxt}>{route.name}</span>
-                  {route.children.length !== 0 ? (
+                  {route.children && route.children.length !== 0 ? (
                     <span
                       className={classNames(styles.arrow, {
                         [styles.reverseArrow]: true,
@@ -72,7 +72,7 @@ const Drawers: FC<any> = ({ open, pathname }) => {
                   ) : null}
                 </div>
               </div>
-              {route.children.length !== 0 ? (
+              {route.children && route.children.length !== 0 ? (
                 <div
                   className={classNames(styles.itemChildren, {
                     [styles.activeItemChildren]: true,

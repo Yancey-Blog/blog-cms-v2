@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import moment from 'moment'
 
 export const getInitials = (txt: string) =>
   txt
@@ -6,7 +6,7 @@ export const getInitials = (txt: string) =>
     .map((v: string) => v[0])
     .join('')
 
-export const formatISODate = (ISODate: string) => dayjs(ISODate).format('YYYY-MM-DD HH:mm:ss')
+export const formatISODate = (ISODate: string) => moment(ISODate).format('YYYY-MM-DD HH:mm:ss')
 
 export const getType = (type: any) =>
   Object.prototype.toString
