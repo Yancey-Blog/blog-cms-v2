@@ -12,10 +12,9 @@ import Loading from 'components/Loading/Loading'
 import ConfirmModal from 'components/ConfirmModal/ConfirmModal'
 import { formatISODate } from 'shared/utils'
 import EditModal from './components/EditModal/EditModal'
-import { Props } from './Announcement.connect'
 import styles from './Announcement.module.scss'
 
-const Announcement: FC<Props> = ({
+const Announcement: FC<any> = ({
   isFetching,
   announcements,
   getAnnouncements,

@@ -3,8 +3,6 @@
 
 import React, { FC, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { RootState } from 'typesafe-actions'
 import Drawer from '@material-ui/core/Drawer'
 import Avatar from '@material-ui/core/Avatar'
 import classNames from 'classnames'
@@ -19,21 +17,7 @@ interface DrawersProps {
   open: boolean
 }
 
-const mapStateToProps = (state: RootState) => {
-  const {
-    router: {
-      location: { pathname },
-    },
-  } = state
-
-  return {
-    pathname,
-  }
-}
-
-type Props = DrawersProps & ReturnType<typeof mapStateToProps>
-
-const Drawers: FC<Props> = ({ open, pathname }) => {
+const Drawers: FC<any> = ({ open, pathname }) => {
   const [drawerItem, setDrawerItem] = useState(matchPath(pathname))
 
   const handleDrawerChange = (route: any) => {
@@ -65,20 +49,15 @@ const Drawers: FC<Props> = ({ open, pathname }) => {
   }
   return (
     <Drawer
-      variant='permanent'
+      variant="permanent"
       classes={{
         paper: styles.drawerContainer,
       }}
     >
-      <section
-        className={classNames(styles.drawer, { [styles.foldDrawer]: !open })}
-      >
+      <section className={classNames(styles.drawer, { [styles.foldDrawer]: !open })}>
         <div className={styles.drawerContent}>
           <div className={styles.drawerTitle}>
-            <FontAwesomeIcon
-              icon={['fab', 'react']}
-              className={styles.drawLogo}
-            />
+            <FontAwesomeIcon icon={['fab', 'react']} className={styles.drawLogo} />
             <span
               className={classNames(styles.drawerDetail, {
                 [styles.hideDrawerDetail]: !open,
@@ -89,8 +68,8 @@ const Drawers: FC<Props> = ({ open, pathname }) => {
           </div>
           <div className={classNames(styles.drawerUser)}>
             <Avatar
-              alt='Yancey Official Logo'
-              src='https://static.yanceyleo.com/_Users_licaifan_Desktop_11532336786_.pic_hd.jpg'
+              alt="Yancey Official Logo"
+              src="https://static.yanceyleo.com/_Users_licaifan_Desktop_11532336786_.pic_hd.jpg"
               className={styles.avater}
             />
             <div
@@ -106,16 +85,10 @@ const Drawers: FC<Props> = ({ open, pathname }) => {
           {routes.map((route: any, key: number) => (
             <div className={styles.drawerList} key={route.name}>
               <div
-                className={classNames(
-                  styles.drawerItem,
-                  setItemStyle(route.children, route.path),
-                )}
+                className={classNames(styles.drawerItem, setItemStyle(route.children, route.path))}
                 onClick={() => handleDrawerChange(route)}
               >
-                <FontAwesomeIcon
-                  icon={route.icon as IconProp}
-                  className={styles.drawerItemIcon}
-                />
+                <FontAwesomeIcon icon={route.icon as IconProp} className={styles.drawerItemIcon} />
                 <div
                   className={classNames(styles.drawerDetail, {
                     [styles.hideDrawerDetail]: !open,
@@ -134,8 +107,7 @@ const Drawers: FC<Props> = ({ open, pathname }) => {
               {route.children.length !== 0 ? (
                 <div
                   className={classNames(styles.itemChildren, {
-                    [styles.activeItemChildren]:
-                      drawerItem.parent === route.path,
+                    [styles.activeItemChildren]: drawerItem.parent === route.path,
                   })}
                   style={
                     drawerItem.parent === route.path
@@ -146,19 +118,12 @@ const Drawers: FC<Props> = ({ open, pathname }) => {
                   {route.children.map((child: any) => (
                     <Link to={child.path} key={child.name}>
                       <div
-                        className={classNames(
-                          styles.drawerItem,
-                          styles.drawerItemChildren,
-                          {
-                            [styles.activeDrawerItem]:
-                              drawerItem.child === child.path,
-                          },
-                        )}
+                        className={classNames(styles.drawerItem, styles.drawerItemChildren, {
+                          [styles.activeDrawerItem]: drawerItem.child === child.path,
+                        })}
                         onClick={() => handleDrawerChange(child)}
                       >
-                        <span className={styles.drawerItemIcon}>
-                          {getInitials(child.name)}
-                        </span>
+                        <span className={styles.drawerItemIcon}>{getInitials(child.name)}</span>
                         <div
                           className={classNames(styles.drawerDetail, {
                             [styles.hideDrawerDetail]: !open,
@@ -179,4 +144,4 @@ const Drawers: FC<Props> = ({ open, pathname }) => {
   )
 }
 
-export default connect(mapStateToProps)(Drawers)
+export default Drawers
