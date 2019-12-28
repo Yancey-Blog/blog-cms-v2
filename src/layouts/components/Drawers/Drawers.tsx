@@ -8,7 +8,7 @@ import Avatar from '@material-ui/core/Avatar'
 import classNames from 'classnames'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { getInitials, matchPath } from 'shared/utils'
+import { getInitials } from 'shared/utils'
 import history from 'shared/history'
 import routes, { BaseRoute } from './Routes'
 import styles from './Drawers.module.scss'
@@ -18,35 +18,6 @@ interface DrawersProps {
 }
 
 const Drawers: FC<any> = ({ open, pathname }) => {
-  const [drawerItem, setDrawerItem] = useState(matchPath(pathname))
-
-  const handleDrawerChange = (route: any) => {
-    route.children
-      ? setDrawerItem({
-          ...drawerItem,
-          parent:
-            route.children.length !== 0
-              ? drawerItem.parent === route.path
-                ? ''
-                : route.path
-              : route.path,
-          child: route.children.length !== 0 ? drawerItem.child : '',
-        })
-      : setDrawerItem({ ...drawerItem, child: route.path })
-
-    if (route.children && route.children.length === 0) {
-      history.push(route.path)
-    }
-  }
-
-  const setItemStyle = (children: BaseRoute[], curItem: string) => {
-    if (curItem === drawerItem.parent) {
-      if (children.length > 0) {
-        return styles.activeDrawerItemHasChildren
-      }
-      return styles.activeDrawerItem
-    }
-  }
   return (
     <Drawer
       variant="permanent"
@@ -69,7 +40,7 @@ const Drawers: FC<any> = ({ open, pathname }) => {
           <div className={classNames(styles.drawerUser)}>
             <Avatar
               alt="Yancey Official Logo"
-              src="https://static.yanceyleo.com/_Users_licaifan_Desktop_11532336786_.pic_hd.jpg"
+              src="http://yancey-assets.oss-cn-beijing.aliyuncs.com/_Users_licaifan_Desktop_11532336786_.pic_hd.jpg"
               className={styles.avater}
             />
             <div
@@ -84,10 +55,7 @@ const Drawers: FC<any> = ({ open, pathname }) => {
 
           {routes.map((route: any, key: number) => (
             <div className={styles.drawerList} key={route.name}>
-              <div
-                className={classNames(styles.drawerItem, setItemStyle(route.children, route.path))}
-                onClick={() => handleDrawerChange(route)}
-              >
+              <div className={styles.drawerItem} onClick={() => {}}>
                 <FontAwesomeIcon icon={route.icon as IconProp} className={styles.drawerItemIcon} />
                 <div
                   className={classNames(styles.drawerDetail, {
@@ -98,7 +66,7 @@ const Drawers: FC<any> = ({ open, pathname }) => {
                   {route.children.length !== 0 ? (
                     <span
                       className={classNames(styles.arrow, {
-                        [styles.reverseArrow]: drawerItem.parent === route.path,
+                        [styles.reverseArrow]: true,
                       })}
                     />
                   ) : null}
@@ -107,21 +75,17 @@ const Drawers: FC<any> = ({ open, pathname }) => {
               {route.children.length !== 0 ? (
                 <div
                   className={classNames(styles.itemChildren, {
-                    [styles.activeItemChildren]: drawerItem.parent === route.path,
+                    [styles.activeItemChildren]: true,
                   })}
-                  style={
-                    drawerItem.parent === route.path
-                      ? { maxHeight: `${50 * route.children.length}px` }
-                      : {}
-                  }
+                  style={true ? { maxHeight: `${50 * route.children.length}px` } : {}}
                 >
                   {route.children.map((child: any) => (
                     <Link to={child.path} key={child.name}>
                       <div
                         className={classNames(styles.drawerItem, styles.drawerItemChildren, {
-                          [styles.activeDrawerItem]: drawerItem.child === child.path,
+                          [styles.activeDrawerItem]: true,
                         })}
-                        onClick={() => handleDrawerChange(child)}
+                        onClick={() => {}}
                       >
                         <span className={styles.drawerItemIcon}>{getInitials(child.name)}</span>
                         <div
