@@ -1,7 +1,4 @@
-// FIXME:
-/* eslint-disable */
-
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 import Drawer from '@material-ui/core/Drawer'
 import Avatar from '@material-ui/core/Avatar'
@@ -9,8 +6,7 @@ import classNames from 'classnames'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getInitials } from '../../../../shared/utils'
-import history from '../../../../shared/history'
-import routes from './Routes'
+import routes from '../../../../config/Routes'
 import styles from './Drawers.module.scss'
 
 interface DrawersProps {

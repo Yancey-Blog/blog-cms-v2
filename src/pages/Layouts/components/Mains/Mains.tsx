@@ -9,7 +9,7 @@ const Mains: FC = () => (
   <main className={styles.main}>
     <Suspense fallback={<Loading />}>
       <Switch>
-        <Route path="/home/announcement" render={() => <Announcement />} />
+        <Route exact path="/announcement" render={() => <Announcement />} />
       </Switch>
     </Suspense>
   </main>

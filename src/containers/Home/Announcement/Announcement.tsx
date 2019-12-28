@@ -21,12 +21,6 @@ const Announcement: FC<any> = ({
 }) => {
   const match = { url: '' }
 
-  useEffect(() => {
-    if (pathname === '/home/announcement') {
-      getAnnouncements()
-    }
-  }, [getAnnouncements, pathname])
-
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
     { name: 'announcement', label: 'Announcement' },

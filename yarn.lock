@@ -1786,6 +1786,11 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/relay-runtime@^8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@types/relay-runtime/-/relay-runtime-8.0.0.tgz#49ee330be9367dfc61e52b91461f64137dbff207"
+  integrity sha512-FDHMdHCRI6nL5M40/gU3mG0e0c4Szx4NOupguIPhPA0ZbtMGZO2RLteT5q3jtHaCrtk1qDmlE7KoTmbNj+RljA==
+
 "@types/semver@^6.0.1":
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-6.2.0.tgz#d688d574400d96c5b0114968705366f431831e1a"
@@ -10303,10 +10308,10 @@ react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.0, react-is@^16.8.1, react-is
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
   integrity sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
 
-react-relay@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/react-relay/-/react-relay-8.0.0.tgz#b648da45c8280e6ad321b6260655092381f7479d"
-  integrity sha512-CiEODNIMyQXc3nwAUh5TbRnqPrv5fvEPCnAn1j5/qi0WP+Etjf/GQvSOkfI0CFxaHT63BMB5GbM9gBA+0i2XCg==
+react-relay@^0.0.0-experimental-5f1cb628:
+  version "0.0.0-experimental-5f1cb628"
+  resolved "https://registry.yarnpkg.com/react-relay/-/react-relay-0.0.0-experimental-5f1cb628.tgz#37df83345bf565ff7f7af88368f7e68e7772b0bc"
+  integrity sha512-VVHJsQtSgknZlncLtz3Wexs8AcGbYmWmcPrZDP7OJefOyKerfdw4spzNZUYHrqnpLckZxVQYpZ7cb76LW8D6iA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     fbjs "^1.0.0"
