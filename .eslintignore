@@ -2,3 +2,4 @@
 /dist
 /src/serviceWorker.ts
 /src/react-app-env.d.ts
+/config
