@@ -439,6 +439,12 @@ module.exports = function(webpackEnv) {
                 },
                 {
                   loader: require.resolve('sass-loader'),
+                  options: {
+                    implementation: require('sass'),
+                    sassOptions: {
+                      fiber: Fiber,
+                    },
+                  },
                 },
               ],
               // Don't consider CSS imports dead code even if the
@@ -467,6 +473,12 @@ module.exports = function(webpackEnv) {
                 },
                 {
                   loader: require.resolve('sass-loader'),
+                  options: {
+                    implementation: require('sass'),
+                    sassOptions: {
+                      fiber: Fiber,
+                    },
+                  },
                 },
                 {
                   loader: require.resolve('sass-resources-loader'),
