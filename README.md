@@ -4,7 +4,7 @@
 
 The **CMS** for Yancey blog with React, Redux, Redux-obseverble, Material-UI and GraphQL.
 
-_This library is part of the [BPG (Blog Program Group)](https://github.com/Yancey-Blog)_ ecosystem 📖
+_This library is part of the [BPG (Blog Project Group)](https://github.com/Yancey-Blog)_ ecosystem 📖
 
 [![Build Status](https://travis-ci.com/Yancey-Blog/blog-cms-v2.svg?branch=master)](https://travis-ci.com/Yancey-Blog/blog-cms-v2)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8301052718f145cb9be68a6a28717f41)](https://www.codacy.com/app/YanceyOfficial/blog-cms-v2?utm_source=github.com&utm_medium=referral&utm_content=Yancey-Blog/blog-cms-v2&utm_campaign=Badge_Grade)
@@ -26,14 +26,8 @@ _This library is part of the [BPG (Blog Program Group)](https://github.com/Yance
 
 ⭐️ _Found it cool? Want more updates?_ [**Show your support by giving a ⭐️**](https://github.com/Yancey-Blog/blog-cms-v2/stargazers)
 
-🎉 _The v0.6.0 version is released!_ 🎉
-
-<a href="https://www.paypal.me/yanceyleo">
-  <img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me a Coffee">
-</a>
-<a href="https://www.patreon.com/yancey">
-  <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" width="160">
-</a>
+<a href="https://www.paypal.me/yanceyleo" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
+<a href="https://twitter.com/YanceyOfficial" target="_blank"><img src="https://img.shields.io/twitter/follow/YanceyOfficial.svg?style=social&label=Follow"></a>
 
 </div>
 
@@ -42,10 +36,6 @@ _This library is part of the [BPG (Blog Program Group)](https://github.com/Yance
 ## Available Scripts
 
 In the project directory, you can run:
-
-### `yarn install`
-
-Installs dependencies for this app.
 
 ### `yarn start`
 
@@ -59,21 +49,13 @@ Launches the test runner in the interactive watch mode. See the section about [r
 
 Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes. Your app is ready to be deployed! See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eslint`
+### `yarn lint`
 
 Checks the codes by eslint, we will lint them before commit automatically.
 
-### `yarn commit`
+### yarn commit
 
-Uses `yarn commit` instead of `git commit`. [Commitizen](https://github.com/commitizen/cz-cli) will be installed when the app running at the first time. If install [Commitizen](https://github.com/commitizen/cz-cli) globally, you can also use `git cz` command (**Recommend**). We follow the Conventional Commits specification (Angular Team).
-
-### `yarn release`
-
-Generates new Tag and CHANGELOG when you release a new version. For example:
-
-- yarn release -- --release-as patch (v0.0.1)
-- yarn release -- --release-as minor (v0.1.0)
-- yarn release -- --release-as major (v1.0.0)
+An optional way to use `git cz` if you don't want to install `commitizen` globally.
 
 ## License
 
