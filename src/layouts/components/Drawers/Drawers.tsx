@@ -10,7 +10,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getInitials } from 'shared/utils'
 import history from 'shared/history'
-import routes, { BaseRoute } from './Routes'
+import routes from './Routes'
 import styles from './Drawers.module.scss'
 
 interface DrawersProps {
