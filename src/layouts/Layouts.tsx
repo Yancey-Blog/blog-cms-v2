@@ -10,7 +10,7 @@ import Footer from './components/Footer/Footer'
 const Layouts: FC = () => {
   const [open, setOpen] = useState(true)
 
-  function handleDrawerChange(): void {
+  function handleDrawerChange() {
     setOpen(!open)
   }
 

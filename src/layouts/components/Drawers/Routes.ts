@@ -1,89 +1,97 @@
-export interface BaseRoute {
+interface Route {
   name: string
   path: string
-}
-
-export interface Route extends BaseRoute {
   icon: string
-  children: BaseRoute[]
+  component?: string
+  children?: Array<{ hideInMenu?: boolean; name: string; path: string; component: string }>
 }
 
 const routes: Route[] = [
   {
     name: 'Dashboard',
-    path: '/dashboard',
+    path: 'dashboard',
     icon: 'tachometer-alt',
-    children: [],
+    component: 'DashBoard/DashBoard',
   },
   {
     name: 'Home',
-    path: '/home',
+    path: 'home',
     icon: 'home',
     children: [
       {
         name: 'Motto',
-        path: '/home/motto',
+        path: 'motto',
+        component: 'Home/Motto',
       },
       {
         name: 'Announcement',
-        path: '/home/announcement',
+        path: 'announcement',
+        component: 'Home/Announcement',
       },
       {
-        name: 'Project',
-        path: '/home/project',
+        name: 'Open Source',
+        path: 'open-source',
+        component: 'Home/OpenSource',
       },
       {
         name: 'Cover',
-        path: '/home/cover',
+        path: 'cover',
+        component: 'Home/Cover',
       },
     ],
   },
   {
     name: 'Music',
-    path: '/music',
+    path: 'music',
     icon: 'headphones-alt',
     children: [
       {
-        name: 'Live Tours',
-        path: '/music/liveTours',
+        name: 'Live Tour',
+        path: 'live-tour',
+        component: 'Music/LiveTour',
       },
       {
-        name: 'Featured Records',
-        path: 'v/featuredRecords',
+        name: 'Best Album',
+        path: 'best-album',
+        component: 'Music/BestAlbum',
       },
       {
         name: 'Player',
-        path: '/music/player',
+        path: 'player',
+        component: 'Music/Player',
       },
       {
         name: 'Yancey Music',
-        path: '/music/yanceyMusic',
+        path: 'yancey-music',
+        component: 'Music/YanceyMusic',
       },
     ],
   },
   {
     name: 'Article',
-    path: '/article',
+    path: 'article-list',
     icon: 'blog',
-    children: [],
+    component: 'Article/ArticleList',
+    children: [
+      {
+        name: 'Article Detail',
+        path: 'article-detail',
+        component: 'Article/ArticleDetail',
+        hideInMenu: true,
+      },
+    ],
   },
   {
     name: 'CV',
-    path: '/cv',
+    path: 'cv',
     icon: 'kiss-wink-heart',
-    children: [],
-  },
-  {
-    name: 'About',
-    path: '/about',
-    icon: 'cog',
-    children: [],
+    component: 'CV/CV',
   },
   {
     name: 'Setting',
-    path: '/setting',
+    path: 'setting',
     icon: 'cog',
-    children: [],
+    component: 'Setting/Setting',
   },
 ]
 
