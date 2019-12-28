@@ -5,7 +5,6 @@ $drawerHover: rgba(#c8c8c8, 0.2);
   border-right: none !important;
   box-shadow: 0 10px 30px -12px rgba($black, 0.42), 0 4px 25px 0px rgba($black, 0.12),
     0 8px 10px -5px rgba($black, 0.2) !important;
-  user-select: none;
 }
 
 .drawer {
@@ -171,11 +170,11 @@ $drawerHover: rgba(#c8c8c8, 0.2);
   border-top: 4px solid;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
-  transform: rotate(90deg);
+  transform: rotate(0deg);
   transition: transform 300ms ease 0ms;
 }
 
 .reverseArrow {
-  transform: rotate(0deg);
+  transform: rotate(180deg);
   transition: transform 300ms ease 0ms;
 }

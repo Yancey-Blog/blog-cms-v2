@@ -1,6 +1,6 @@
 # The Yancey Blog Logo
 
-This is the only official Yancey Blog logo.  
+This is the only official Yancey Blog Logo.  
 Don't use any other logos to represent Yancey Blog.
 
 It comes in several flavors.

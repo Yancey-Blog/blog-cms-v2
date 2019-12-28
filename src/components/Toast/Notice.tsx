@@ -10,7 +10,7 @@ interface INoticeProps {
   content: string
 }
 
-const variantIcon = {
+const variantIcon: any = {
   success: CheckCircleIcon,
   warning: WarningIcon,
   error: ErrorIcon,
@@ -18,11 +18,12 @@ const variantIcon = {
 }
 
 const Notice: FC<INoticeProps> = ({ type, content }) => {
+  // @ts-ignore
   const Icon = variantIcon[type]
 
   return (
     <div className={`toast-notice ${type}`}>
-      <Icon className='toast-icon' />
+      <Icon className="toast-icon" />
       <span>{content}</span>
     </div>
   )

@@ -1,11 +1,15 @@
+// FIXME:
+/* eslint-disable */
+
 import React, { FC, useState } from 'react'
-import { Link, useLocation, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Drawer from '@material-ui/core/Drawer'
 import Avatar from '@material-ui/core/Avatar'
 import classNames from 'classnames'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { getInitials } from '../../../shared/utils'
+import { getInitials } from '../../../../shared/utils'
+import history from '../../../../shared/history'
 import routes from './Routes'
 import styles from './Drawers.module.scss'
 
@@ -13,32 +17,7 @@ interface DrawersProps {
   open: boolean
 }
 
-const Drawers: FC<DrawersProps> = ({ open }) => {
-  const curPathName = useLocation().pathname
-  const history = useHistory()
-
-  const [fold, setFold] = useState('')
-
-  const matchCurRoute = (path: string) => {
-    return curPathName.includes(path)
-  }
-
-  const matchChilren = (chilren: any[]) => {
-    return !!chilren.find(child => curPathName.includes(child.path))
-  }
-
-  const onClickParent = (route: any) => {
-    if (route.path === fold) {
-      setFold('')
-    } else {
-      setFold(route.path)
-    }
-
-    if (!route.children) {
-      history.push(route.path)
-    }
-  }
-
+const Drawers: FC<any> = ({ open, pathname }) => {
   return (
     <Drawer
       variant="permanent"
@@ -76,12 +55,7 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
 
           {routes.map((route: any, key: number) => (
             <div className={styles.drawerList} key={route.name}>
-              <div
-                className={classNames(styles.drawerItem, {
-                  [styles.activeDrawerItem]: matchCurRoute(route.path),
-                })}
-                onClick={() => onClickParent(route)}
-              >
+              <div className={styles.drawerItem} onClick={() => {}}>
                 <FontAwesomeIcon icon={route.icon as IconProp} className={styles.drawerItemIcon} />
                 <div
                   className={classNames(styles.drawerDetail, {
@@ -92,28 +66,26 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
                   {route.children && route.children.length !== 0 ? (
                     <span
                       className={classNames(styles.arrow, {
-                        [styles.reverseArrow]: matchChilren(route.children) || route.path === fold,
+                        [styles.reverseArrow]: true,
                       })}
                     />
                   ) : null}
                 </div>
               </div>
-
               {route.children && route.children.length !== 0 ? (
                 <div
-                  className={classNames(styles.itemChildren)}
-                  style={
-                    matchChilren(route.children) || route.path === fold
-                      ? { maxHeight: `${50 * route.children.length}px` }
-                      : {}
-                  }
+                  className={classNames(styles.itemChildren, {
+                    [styles.activeItemChildren]: true,
+                  })}
+                  style={true ? { maxHeight: `${50 * route.children.length}px` } : {}}
                 >
                   {route.children.map((child: any) => (
                     <Link to={child.path} key={child.name}>
                       <div
                         className={classNames(styles.drawerItem, styles.drawerItemChildren, {
-                          [styles.activeDrawerItem]: matchCurRoute(child.path),
+                          [styles.activeDrawerItem]: true,
                         })}
+                        onClick={() => {}}
                       >
                         <span className={styles.drawerItemIcon}>{getInitials(child.name)}</span>
                         <div

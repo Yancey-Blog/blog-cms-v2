@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse, AxiosRequestConfig } from 'axios'
 import { Observable } from 'rxjs'
-import { baseURL } from 'shared/constants'
-import Toast from 'components/Toast/Toast'
+import { baseURL } from './constants'
+import Toast from '../components/Toast/Toast'
 
 const { CancelToken } = axios
 
@@ -16,9 +16,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 // config base url
 axios.defaults.baseURL =
-  process.env.NODE_ENV === 'production'
-    ? baseURL.production
-    : baseURL.development
+  process.env.NODE_ENV === 'production' ? baseURL.production : baseURL.development
 
 const pending: any[] = []
 const removePending = (config: any) => {
@@ -79,11 +77,7 @@ export function GET<T>(url: string, params?: any): Observable<T> {
 }
 
 // POST
-export function POST<T>(
-  url: string,
-  params?: any,
-  config?: AxiosRequestConfig,
-): Observable<T> {
+export function POST<T>(url: string, params?: any, config?: AxiosRequestConfig): Observable<T> {
   return new Observable((subscriber: any) => {
     axios
       .post(url, params, config)
