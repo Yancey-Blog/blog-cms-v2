@@ -2,7 +2,7 @@
 
 # Blog CMS v2
 
-The **CMS** for Yancey blog with React, Redux, Redux-obseverble, Material-UI and GraphQL.
+The **CMS** for Yancey blog with React, Relay Modern, Material-UI and GraphQL.
 
 _This library is part of the [BPG (Blog Project Group)](https://github.com/Yancey-Blog)_ ecosystem 📖
 

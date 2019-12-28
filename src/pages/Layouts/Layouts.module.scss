@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  background: $lightBg;
+  width: calc(100%-#{$drawerUnfold});
+  min-height: 100vh;
+  margin-left: $drawerUnfold;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+}
+
+.containerShift {
+  width: calc(100%-#{$drawerFold});
+  margin-left: $drawerFold;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+}
+
+a {
+  text-decoration: none;
+  color: $white;
+}

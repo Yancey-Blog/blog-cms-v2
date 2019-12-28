@@ -1,4 +1,4 @@
-import * as AnnoucementServices from './announcement.service'
+import * as AnnoucementServices from './announcement'
 
 export default {
   AnnoucementServices,

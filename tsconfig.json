@@ -1,12 +1,10 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
-    "target": "es6",
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -15,20 +13,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve",
-    "noImplicitReturns": false,
-    "noImplicitThis": false,
-    "noImplicitAny": false
+    "jsx": "react"
   },
-  "include": ["src"],
-  "exclude": [
-    "build",
-    "scripts",
-    "node_modules",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts",
-    "config"
-  ]
+  "include": ["src"]
 }

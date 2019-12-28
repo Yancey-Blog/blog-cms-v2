@@ -1,21 +1,16 @@
 import React, { FC, useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import useReactRouter from 'use-react-router'
-import MUIDataTable, {
-  MUIDataTableOptions,
-  MUIDataTableColumn,
-} from 'mui-datatables'
+import MUIDataTable, { MUIDataTableOptions, MUIDataTableColumn } from 'mui-datatables'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab } from '@material-ui/core'
-import TableWrapper from 'components/TableWrapper/TableWrapper'
-import Loading from 'components/Loading/Loading'
-import ConfirmModal from 'components/ConfirmModal/ConfirmModal'
-import { formatISODate } from 'shared/utils'
+import TableWrapper from '../../../components/TableWrapper/TableWrapper'
+import Loading from '../../../components/Loading/Loading'
+import ConfirmModal from '../../../components/ConfirmModal/ConfirmModal'
+import { formatISODate } from '../../../shared/utils'
 import EditModal from './components/EditModal/EditModal'
-import { Props } from './Announcement.connect'
 import styles from './Announcement.module.scss'
 
-const Announcement: FC<Props> = ({
+const Announcement: FC<any> = ({
   isFetching,
   announcements,
   getAnnouncements,
@@ -24,7 +19,7 @@ const Announcement: FC<Props> = ({
   push,
   pathname,
 }) => {
-  const { match } = useReactRouter<{ id: string }>()
+  const match = { url: '' }
 
   useEffect(() => {
     if (pathname === '/home/announcement') {
@@ -60,17 +55,13 @@ const Announcement: FC<Props> = ({
               <FormControl>
                 <Edit
                   style={{ marginRight: '12px', cursor: 'pointer' }}
-                  onClick={() =>
-                    push(`${match.url}/edit/${tableMeta.rowData[0]}`)
-                  }
+                  onClick={() => push(`${match.url}/edit/${tableMeta.rowData[0]}`)}
                 />
               </FormControl>
               <FormControl>
                 <DeleteOutline
                   style={{ cursor: 'pointer' }}
-                  onClick={() =>
-                    push(`${match.url}/delete`, tableMeta.rowData[0])
-                  }
+                  onClick={() => push(`${match.url}/delete`, tableMeta.rowData[0])}
                 />
               </FormControl>
             </>
@@ -89,20 +80,15 @@ const Announcement: FC<Props> = ({
     searchPlaceholder: 'Search...',
     customToolbar() {
       return (
-        <Fab size='medium' className={styles.addIconFab}>
-          <AddBox
-            className={styles.addIcon}
-            onClick={() => push(`${match.url}/create`)}
-          />
+        <Fab size="medium" className={styles.addIconFab}>
+          <AddBox className={styles.addIcon} onClick={() => push(`${match.url}/create`)} />
         </Fab>
       )
     },
     customToolbarSelect(selectedRows) {
-      const ids = selectedRows.data.map(
-        (row: any) => announcements[row.index]._id,
-      )
+      const ids = selectedRows.data.map((row: any) => announcements[row.index]._id)
       return (
-        <Fab size='medium' className={styles.addIconFab}>
+        <Fab size="medium" className={styles.addIconFab}>
           <DeleteOutline
             className={styles.addIcon}
             onClick={() => push(`${match.url}/deletes`, ids)}
@@ -122,22 +108,13 @@ const Announcement: FC<Props> = ({
 
   return (
     <>
-      <TableWrapper tableName='Yancey Table' icon='save'>
-        <MUIDataTable
-          title=''
-          data={announcements}
-          columns={columns}
-          options={options}
-        />
+      <TableWrapper tableName="Yancey Table" icon="save">
+        <MUIDataTable title="" data={announcements} columns={columns} options={options} />
       </TableWrapper>
       <Switch>
         <Route
           path={[`${match.url}/deletes`, `${match.url}/delete`]}
-          render={() => (
-            <ConfirmModal
-              onSubmit={(ids: string | string[]) => onDelete(ids)}
-            />
-          )}
+          render={() => <ConfirmModal onSubmit={(ids: string | string[]) => onDelete(ids)} />}
         />
         <Route
           path={[`${match.url}/create`, `${match.url}/edit/:id`]}

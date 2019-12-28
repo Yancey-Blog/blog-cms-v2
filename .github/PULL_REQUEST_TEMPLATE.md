@@ -16,6 +16,4 @@
 
 8. Make sure your code lints (yarn lint). Tip: yarn linc to only check changed files.
 
-9. Run the Flow typechecks (yarn flow).
-
-10. If you haven't already, complete the CLA.
+9. If you haven't already, complete the CLA.
