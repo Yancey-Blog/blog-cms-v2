@@ -170,11 +170,11 @@ $drawerHover: rgba(#c8c8c8, 0.2);
   border-top: 4px solid;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
-  transform: rotate(0deg);
+  transform: rotate(90deg);
   transition: transform 300ms ease 0ms;
 }
 
 .reverseArrow {
-  transform: rotate(180deg);
+  transform: rotate(0deg);
   transition: transform 300ms ease 0ms;
 }

@@ -9,73 +9,73 @@ interface Route {
 const routes: Route[] = [
   {
     name: 'Dashboard',
-    path: 'dashboard',
+    path: '/dashboard',
     icon: 'tachometer-alt',
     component: 'DashBoard/DashBoard',
   },
   {
     name: 'Home',
-    path: 'home',
+    path: '/home',
     icon: 'home',
     children: [
       {
         name: 'Motto',
-        path: 'motto',
+        path: '/motto',
         component: 'Home/Motto',
       },
       {
         name: 'Announcement',
-        path: 'announcement',
+        path: '/announcement',
         component: 'Home/Announcement',
       },
       {
         name: 'Open Source',
-        path: 'open-source',
+        path: '/open-source',
         component: 'Home/OpenSource',
       },
       {
         name: 'Cover',
-        path: 'cover',
+        path: '/cover',
         component: 'Home/Cover',
       },
     ],
   },
   {
     name: 'Music',
-    path: 'music',
+    path: '/music',
     icon: 'headphones-alt',
     children: [
       {
         name: 'Live Tour',
-        path: 'live-tour',
+        path: '/live-tour',
         component: 'Music/LiveTour',
       },
       {
         name: 'Best Album',
-        path: 'best-album',
+        path: '/best-album',
         component: 'Music/BestAlbum',
       },
       {
         name: 'Player',
-        path: 'player',
+        path: '/player',
         component: 'Music/Player',
       },
       {
         name: 'Yancey Music',
-        path: 'yancey-music',
+        path: '/yancey-music',
         component: 'Music/YanceyMusic',
       },
     ],
   },
   {
     name: 'Article',
-    path: 'article-list',
+    path: '/article-list',
     icon: 'blog',
     component: 'Article/ArticleList',
     children: [
       {
         name: 'Article Detail',
-        path: 'article-detail',
+        path: '/article-detail',
         component: 'Article/ArticleDetail',
         hideInMenu: true,
       },
@@ -83,13 +83,13 @@ const routes: Route[] = [
   },
   {
     name: 'CV',
-    path: 'cv',
+    path: '/cv',
     icon: 'kiss-wink-heart',
     component: 'CV/CV',
   },
   {
     name: 'Setting',
-    path: 'setting',
+    path: '/setting',
     icon: 'cog',
     component: 'Setting/Setting',
   },
