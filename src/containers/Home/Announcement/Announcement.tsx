@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import MUIDataTable, { MUIDataTableOptions, MUIDataTableColumn } from 'mui-datatables'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
