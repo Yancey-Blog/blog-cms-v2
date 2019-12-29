@@ -5,7 +5,7 @@ interface Operation {
 }
 
 async function fetchQuery(operation: Operation, variables: Variables) {
-  const response = await fetch('/graphql', {
+  const response = await fetch('http://localhost:3002/graphql', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
