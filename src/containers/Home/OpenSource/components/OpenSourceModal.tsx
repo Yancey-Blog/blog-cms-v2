@@ -13,18 +13,13 @@ import { Formik, Field, Form } from 'formik'
 import { TextField } from 'formik-material-ui'
 import styles from '../OpenSource.module.scss'
 
-interface Params {
-  title: string
-  description: string
-  url: string
-  posterUrl: string
+interface Location {
+  showModal?: boolean
+  id?: string
 }
 
 const OpenSourceModal: FC = () => {
-  const {
-    pathname,
-    state: { showModal },
-  } = useLocation()
+  const { pathname, state } = useLocation<Location>()
 
   const history = useHistory()
 
@@ -33,7 +28,7 @@ const OpenSourceModal: FC = () => {
   }
 
   return (
-    <Dialog open={showModal} onClose={goBack}>
+    <Dialog open={false} onClose={goBack}>
       <DialogTitle>Add an Open Source</DialogTitle>
       <DialogContent>
         <DialogContentText>
@@ -48,14 +43,14 @@ const OpenSourceModal: FC = () => {
             posterUrl: '',
           }}
           validationSchema={Yup.object().shape({
-            title: Yup.string().required('Required'),
-            description: Yup.string().required('Required'),
+            title: Yup.string().required('Title is required.'),
+            description: Yup.string().required('Description is required.'),
             url: Yup.string()
               .url()
-              .required('Required'),
+              .required('URL is required..'),
             posterUrl: Yup.string()
               .url()
-              .required('Required'),
+              .required('PostUrl is required.'),
           })}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
@@ -74,7 +69,7 @@ const OpenSourceModal: FC = () => {
                 component={TextField}
                 className={styles.field}
               />
-              <br />
+
               <Field
                 type="text"
                 label="Description"
@@ -84,7 +79,7 @@ const OpenSourceModal: FC = () => {
                 component={TextField}
                 className={styles.field}
               />
-              <br />
+
               <Field
                 type="text"
                 label="Url"
@@ -93,7 +88,7 @@ const OpenSourceModal: FC = () => {
                 component={TextField}
                 className={styles.field}
               />
-              <br />
+
               <Field
                 type="text"
                 label="PosterUrl"

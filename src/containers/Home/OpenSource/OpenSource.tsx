@@ -15,6 +15,7 @@ import TableWrapper from '../../../components/TableWrapper/TableWrapper'
 import styles from './OpenSource.module.scss'
 import { formatDate } from '../../../shared/utils'
 import OpenSourceModal from './components/OpenSourceModal'
+import DeleteOpenSourceByIdMutation from './DeleteOpenSourceByIdMutation'
 
 const OpenSource: FC = () => {
   const history = useHistory()
@@ -23,6 +24,10 @@ const OpenSource: FC = () => {
 
   const showModal = (id?: string) => {
     history.push(pathname, { showModal: true, id })
+  }
+
+  const handleDeleteOneChange = (id: string) => {
+    DeleteOpenSourceByIdMutation.commit(environment, id)
   }
 
   const columns: MUIDataTableColumn[] = [
@@ -107,7 +112,10 @@ const OpenSource: FC = () => {
                 />
               </FormControl>
               <FormControl>
-                <DeleteOutline style={{ cursor: 'pointer' }} onClick={() => {}} />
+                <DeleteOutline
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => handleDeleteOneChange(tableMeta.rowData[0])}
+                />
               </FormControl>
             </>
           )
