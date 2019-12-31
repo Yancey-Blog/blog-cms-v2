@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { graphql, QueryRenderer } from 'react-relay'
 import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
@@ -9,13 +8,11 @@ import MUIDataTable, {
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab, Button, Popover } from '@material-ui/core'
-import environment from '../../../shared/RelayEnvironment'
 import Loading from '../../../components/Loading/Loading'
 import TableWrapper from '../../../components/TableWrapper/TableWrapper'
 import styles from './OpenSource.module.scss'
 import { formatDate } from '../../../shared/utils'
 import OpenSourceModal from './components/OpenSourceModal'
-import DeleteOpenSourceByIdMutation from './DeleteOpenSourceByIdMutation'
 
 const OpenSource: FC = () => {
   const history = useHistory()
@@ -26,9 +23,7 @@ const OpenSource: FC = () => {
     history.push(pathname, { showModal: true, id })
   }
 
-  const handleDeleteOneChange = (id: string) => {
-    DeleteOpenSourceByIdMutation.commit(environment, id)
-  }
+  const handleDeleteOneChange = (id: string) => {}
 
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
@@ -148,45 +143,13 @@ const OpenSource: FC = () => {
   }
 
   return (
-    <QueryRenderer
-      environment={environment}
-      query={graphql`
-        query OpenSourcesQuery {
-          getOpenSources {
-            _id
-            title
-            description
-            url
-            posterUrl
-            createdAt
-            updatedAt
-          }
-        }
-      `}
-      variables={{}}
-      render={({ error, props }: { error: Error | null; props: any }) => {
-        if (error) {
-          return <div>Error!</div>
-        }
-        if (!props) {
-          return <Loading />
-        }
-        return (
-          <>
-            <TableWrapper tableName="Open Source" icon="save">
-              <MUIDataTable
-                title=""
-                data={props.getOpenSources}
-                columns={columns}
-                options={options}
-              />
-            </TableWrapper>
+    <>
+      <TableWrapper tableName="Open Source" icon="save">
+        <MUIDataTable title="" data={[]} columns={columns} options={options} />
+      </TableWrapper>
 
-            <OpenSourceModal />
-          </>
-        )
-      }}
-    />
+      <OpenSourceModal />
+    </>
   )
 }
 
