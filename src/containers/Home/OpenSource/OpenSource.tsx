@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { graphql, QueryRenderer } from 'react-relay'
 import MUIDataTable, {
   MUIDataTableOptions,
@@ -13,8 +14,17 @@ import Loading from '../../../components/Loading/Loading'
 import TableWrapper from '../../../components/TableWrapper/TableWrapper'
 import styles from './OpenSource.module.scss'
 import { formatDate } from '../../../shared/utils'
+import OpenSourceModal from './components/OpenSourceModal'
 
 const OpenSource: FC = () => {
+  const history = useHistory()
+
+  const { pathname } = useLocation()
+
+  const showModal = (id?: string) => {
+    history.push(pathname, { showModal: true, id })
+  }
+
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
     { name: 'title', label: 'Title' },
@@ -89,14 +99,17 @@ const OpenSource: FC = () => {
         filter: false,
         customBodyRender(value, tableMeta) {
           return (
-            <div style={{ width: '60px' }}>
+            <>
               <FormControl>
-                <Edit style={{ marginRight: '12px', cursor: 'pointer' }} onClick={() => {}} />
+                <Edit
+                  style={{ marginRight: '12px', cursor: 'pointer' }}
+                  onClick={() => showModal(tableMeta.rowData[0])}
+                />
               </FormControl>
               <FormControl>
                 <DeleteOutline style={{ cursor: 'pointer' }} onClick={() => {}} />
               </FormControl>
-            </div>
+            </>
           )
         },
       },
@@ -112,7 +125,7 @@ const OpenSource: FC = () => {
     customToolbar() {
       return (
         <Fab size="medium" className={styles.addIconFab}>
-          <AddBox className={styles.addIcon} onClick={() => {}} />
+          <AddBox className={styles.addIcon} onClick={() => showModal()} />
         </Fab>
       )
     },
@@ -151,14 +164,18 @@ const OpenSource: FC = () => {
           return <Loading />
         }
         return (
-          <TableWrapper tableName="Open Source" icon="save">
-            <MUIDataTable
-              title=""
-              data={props.getOpenSources}
-              columns={columns}
-              options={options}
-            />
-          </TableWrapper>
+          <>
+            <TableWrapper tableName="Open Source" icon="save">
+              <MUIDataTable
+                title=""
+                data={props.getOpenSources}
+                columns={columns}
+                options={options}
+              />
+            </TableWrapper>
+
+            <OpenSourceModal />
+          </>
         )
       }}
     />

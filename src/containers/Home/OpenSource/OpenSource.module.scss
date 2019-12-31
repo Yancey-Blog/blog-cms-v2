@@ -10,3 +10,11 @@
 .archor {
   color: #9c27b0;
 }
+
+:global(.MuiFormControl-root) {
+  width: 100%;
+}
+
+.field {
+  margin-bottom: 20px;
+}
