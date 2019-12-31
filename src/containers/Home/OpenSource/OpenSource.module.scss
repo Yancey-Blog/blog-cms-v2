@@ -1,0 +1,20 @@
+.addIconFab {
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.addIcon {
+  color: rgba($black, 0.54);
+}
+
+.archor {
+  color: #9c27b0;
+}
+
+.field {
+  display: block;
+  margin-bottom: 20px;
+  :global(.MuiInputBase-root) {
+    width: 100%;
+  }
+}

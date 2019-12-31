@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import MUIDataTable, { MUIDataTableOptions, MUIDataTableColumn } from 'mui-datatables'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
@@ -6,7 +6,7 @@ import { FormControl, Fab } from '@material-ui/core'
 import TableWrapper from '../../../components/TableWrapper/TableWrapper'
 import Loading from '../../../components/Loading/Loading'
 import ConfirmModal from '../../../components/ConfirmModal/ConfirmModal'
-import { formatISODate } from '../../../shared/utils'
+import { formatDate } from '../../../shared/utils'
 import EditModal from './components/EditModal/EditModal'
 import styles from './Announcement.module.scss'
 
@@ -21,12 +21,6 @@ const Announcement: FC<any> = ({
 }) => {
   const match = { url: '' }
 
-  useEffect(() => {
-    if (pathname === '/home/announcement') {
-      getAnnouncements()
-    }
-  }, [getAnnouncements, pathname])
-
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
     { name: 'announcement', label: 'Announcement' },
@@ -34,14 +28,14 @@ const Announcement: FC<any> = ({
       name: 'createdAt',
       label: 'CreatedAt',
       options: {
-        customBodyRender: (value: any) => <span>{formatISODate(value)}</span>,
+        customBodyRender: (value: any) => <span>{formatDate(value)}</span>,
       },
     },
     {
       name: 'updatedAt',
       label: 'UpdatedAt',
       options: {
-        customBodyRender: (value: any) => <span>{formatISODate(value)}</span>,
+        customBodyRender: (value: any) => <span>{formatDate(value)}</span>,
       },
     },
     {
