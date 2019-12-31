@@ -19,7 +19,7 @@ interface Location {
 }
 
 const OpenSourceModal: FC = () => {
-  const { pathname, state } = useLocation<Location>()
+  const { pathname } = useLocation<Location>()
 
   const history = useHistory()
 
