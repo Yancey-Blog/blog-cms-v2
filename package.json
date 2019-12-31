@@ -91,6 +91,8 @@
     "resolve-url-loader": "3.1.1",
     "sass-loader": "8.0.0",
     "semver": "7.1.1",
+    "style-loader": "1.1.2",
+    "semver": "7.1.1",
     "style-loader": "1.0.0",
     "terser-webpack-plugin": "2.2.1",
     "ts-pnp": "1.1.5",
