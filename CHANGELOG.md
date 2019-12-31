@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.1.0...v0.2.0) (2019-12-31)
+
+
+### Features
+
+* build relay environment ([533a4b9](https://github.com/Yancey-Blog/blog-cms-v2/commit/533a4b9377864824e215f1c9a6a853e69112039d))
+* cancel relay ([8b3f8bd](https://github.com/Yancey-Blog/blog-cms-v2/commit/8b3f8bdccb03f2d7aed939bc4154f13e93f2acee))
+* code OpenSourceModal ([ab3af2f](https://github.com/Yancey-Blog/blog-cms-v2/commit/ab3af2f253f88760d9760b884873e30df9bf7575))
+* config relay ([60a31c2](https://github.com/Yancey-Blog/blog-cms-v2/commit/60a31c2da66d9c65891bcd78b72b55667b1a79ec))
+* delete useless codes ([800e3e8](https://github.com/Yancey-Blog/blog-cms-v2/commit/800e3e8146a817d74405c20406ca8be698fef43b))
+* delete useless files ([631ffa0](https://github.com/Yancey-Blog/blog-cms-v2/commit/631ffa049eba852b26180ca28171896e5160bd13))
+* finish OpenSource ([0a9e511](https://github.com/Yancey-Blog/blog-cms-v2/commit/0a9e5117dbe33dab35bc3517ac89809949c972a0))
+* remove trace of relay ([f002ffa](https://github.com/Yancey-Blog/blog-cms-v2/commit/f002ffac6d4668319d9479bbccff0239c62b11c8))
+* try relay ([cd53e64](https://github.com/Yancey-Blog/blog-cms-v2/commit/cd53e6414dd3f7ef2fb08d007385f31f57ea28ed))
+* use apollo client ([0139a8e](https://github.com/Yancey-Blog/blog-cms-v2/commit/0139a8ef721dad67ec8180a0d7d712ca953e9ac3))
+* use relay ([1be877f](https://github.com/Yancey-Blog/blog-cms-v2/commit/1be877f62290dbd88155b4a7e40813a56f858799))
+* use yup and formik to control form ([e0b3ac1](https://github.com/Yancey-Blog/blog-cms-v2/commit/e0b3ac1016435e3e2a00d078d29609f5b49cdaf7))
+* write the first relay demo ([d8c4c21](https://github.com/Yancey-Blog/blog-cms-v2/commit/d8c4c2123f10900f1c852c958e7cb57cdae62e70))
+
 ## 0.1.0 (2019-12-28)
 
 
