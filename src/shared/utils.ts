@@ -1,4 +1,10 @@
 import moment from 'moment'
+import qs from 'query-string'
+import history from './history'
+
+interface Dict {
+  [index: string]: any
+}
 
 export const getInitials = (txt: string) =>
   txt
@@ -14,6 +20,15 @@ export const getType = (type: any) =>
     .call(type)
     .slice(8, -1)
     .toLowerCase()
+
+export const goBack = (resetForm?: Function) => {
+  history.goBack()
+  resetForm && resetForm()
+}
+
+export const parseSearch = (search: string) => qs.parse(search, { parseBooleans: true })
+
+export const stringfySearch = (searchObj: Dict) => qs.stringify(searchObj)
 
 export const noop = () => {}
 

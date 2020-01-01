@@ -62,3 +62,13 @@ declare module '*.module.sass' {
   const classes: { readonly [key: string]: string }
   export default classes
 }
+
+declare module '*.gql' {
+  const content: string
+  export default content
+}
+
+declare module '*.graqhql' {
+  const content: string
+  export default content
+}

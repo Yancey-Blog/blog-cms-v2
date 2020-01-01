@@ -10,8 +10,9 @@ import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab, Button, Popover } from '@material-ui/core'
 import { OPEN_SOURCES, DELETE_ONE_OPEN_SOURCE } from './gql'
+import { IOpenSource } from './interfaces/openSource.interface'
 import styles from './OpenSource.module.scss'
-import { formatDate } from '../../../shared/utils'
+import { formatDate, stringfySearch } from '../../../shared/utils'
 import TableWrapper from '../../../components/TableWrapper/TableWrapper'
 import Loading from '../../../components/Loading/Loading'
 import OpenSourceModal from './components/OpenSourceModal'
@@ -22,7 +23,7 @@ const OpenSource: FC = () => {
   const { pathname } = useLocation()
 
   const showModal = (id?: string) => {
-    history.push(pathname, { showModal: true, id })
+    history.push({ pathname, search: stringfySearch({ id, showModal: true }) })
   }
 
   const { loading, error, data } = useQuery(OPEN_SOURCES, {
@@ -39,7 +40,9 @@ const OpenSource: FC = () => {
       cache.writeQuery({
         query: OPEN_SOURCES,
         data: {
-          getOpenSources: getOpenSources.filter((v: any) => v._id !== deleteOpenSourceById._id),
+          getOpenSources: getOpenSources.filter(
+            (openSource: IOpenSource) => openSource._id !== deleteOpenSourceById._id,
+          ),
         },
       })
     },
