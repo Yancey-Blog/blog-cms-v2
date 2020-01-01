@@ -1,0 +1,7 @@
+input UpdateOpenSourceInput {
+  id: ID!
+  title: String!
+  description: String!
+  url: String!
+  posterUrl: String!
+}

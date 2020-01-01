@@ -9,9 +9,10 @@ import MUIDataTable, {
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab, Button, Popover } from '@material-ui/core'
-import { OPEN_SOURCES, DELETE_ONE_OPEN_SOURCE } from './gql'
+import { sortBy } from 'yancey-js-util'
+import { OPEN_SOURCES, DELETE_ONE_OPEN_SOURCE, BATCH_DELETE_OPEN_SOURCE } from './typeDefs'
 import { IOpenSource } from './interfaces/openSource.interface'
-import styles from './OpenSource.module.scss'
+import styles from './openSource.module.scss'
 import { formatDate, stringfySearch } from '../../../shared/utils'
 import TableWrapper from '../../../components/TableWrapper/TableWrapper'
 import Loading from '../../../components/Loading/Loading'
@@ -27,10 +28,7 @@ const OpenSource: FC = () => {
   }
 
   const { loading, error, data } = useQuery(OPEN_SOURCES, {
-    // variables: {},
-    // skip: !id, // 如果不存在 id, 则跳过该查询
-    // pollInterval: 500, // 轮询周期
-    notifyOnNetworkStatusChange: true, // 如果因为网络状况导致 query 失败, 告知用户手动 refetch
+    notifyOnNetworkStatusChange: true,
   })
 
   const [deleteOpenSourceById] = useMutation(DELETE_ONE_OPEN_SOURCE, {
@@ -42,6 +40,21 @@ const OpenSource: FC = () => {
         data: {
           getOpenSources: getOpenSources.filter(
             (openSource: IOpenSource) => openSource._id !== deleteOpenSourceById._id,
+          ),
+        },
+      })
+    },
+  })
+
+  const [deleteOpenSources] = useMutation(BATCH_DELETE_OPEN_SOURCE, {
+    update(cache, { data: { deleteOpenSources } }) {
+      // @ts-ignore
+      const { getOpenSources } = cache.readQuery({ query: OPEN_SOURCES })
+      cache.writeQuery({
+        query: OPEN_SOURCES,
+        data: {
+          getOpenSources: getOpenSources.filter(
+            (openSource: IOpenSource) => !deleteOpenSources.ids.includes(openSource._id),
           ),
         },
       })
@@ -160,10 +173,13 @@ const OpenSource: FC = () => {
       )
     },
     customToolbarSelect(selectedRows) {
-      // const ids = selectedRows.data.map((row: any) => getOpenSources[row.index]._id)
+      const ids = selectedRows.data.map((row: any) => data.getOpenSources[row.index]._id)
       return (
         <Fab size="medium" className={styles.addIconFab}>
-          <DeleteOutline className={styles.addIcon} onClick={() => {}} />
+          <DeleteOutline
+            className={styles.addIcon}
+            onClick={() => deleteOpenSources({ variables: { ids } })}
+          />
         </Fab>
       )
     },
@@ -175,7 +191,12 @@ const OpenSource: FC = () => {
   return (
     <>
       <TableWrapper tableName="Open Source" icon="save">
-        <MUIDataTable title="" data={data.getOpenSources} columns={columns} options={options} />
+        <MUIDataTable
+          title=""
+          data={data.getOpenSources.sort(sortBy('updatedAt')).reverse()}
+          columns={columns}
+          options={options}
+        />
       </TableWrapper>
 
       <OpenSourceModal />

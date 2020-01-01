@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import * as Yup from 'yup'
@@ -12,14 +12,22 @@ import {
 } from '@material-ui/core'
 import { Formik, Field, Form } from 'formik'
 import { TextField } from 'formik-material-ui'
-import { CREATE_ONE_OPEN_SOURCE, OPEN_SOURCES } from '../gql'
+import client from '../../../../shared/ApolloClient'
+import { CREATE_ONE_OPEN_SOURCE, UPDATE_ONE_OPEN_SOURCE, OPEN_SOURCES } from '../typeDefs'
 import { goBack, parseSearch } from '../../../../shared/utils'
-import styles from '../OpenSource.module.scss'
+import styles from '../openSource.module.scss'
 
 const OpenSourceModal: FC = () => {
   const { search } = useLocation()
 
   const { showModal, id } = parseSearch(search)
+
+  const [initialValues, setInitialValues] = useState({
+    title: '',
+    description: '',
+    url: '',
+    posterUrl: '',
+  })
 
   const [createOpenSource] = useMutation(CREATE_ONE_OPEN_SOURCE, {
     update(cache, { data: { createOpenSource } }) {
@@ -34,14 +42,21 @@ const OpenSourceModal: FC = () => {
     },
   })
 
+  const [updateOpenSourceById] = useMutation(UPDATE_ONE_OPEN_SOURCE)
+
+  useEffect(() => {
+    if (id) {
+      // @ts-ignore
+      const { title, description, url, posterUrl } = client.cache.data.get(`OpenSourceModel:${id}`)
+      setInitialValues({ ...initialValues, title, description, url, posterUrl })
+    }
+    // eslint-disable-next-line
+  }, [id])
+
   return (
     <Formik
-      initialValues={{
-        title: '',
-        description: '',
-        url: '',
-        posterUrl: '',
-      }}
+      initialValues={initialValues}
+      enableReinitialize={true}
       validationSchema={Yup.object().shape({
         title: Yup.string().required('Title is required.'),
         description: Yup.string().required('Description is required.'),
@@ -52,54 +67,75 @@ const OpenSourceModal: FC = () => {
           .url()
           .required('PostUrl is required.'),
       })}
-      onSubmit={(values, { setSubmitting, resetForm }) => {
-        // setSubmitting(false)
-        createOpenSource({ variables: { input: values } })
+      onSubmit={async (values, { resetForm }) => {
+        if (id) {
+          await updateOpenSourceById({ variables: { input: { ...values, id } } })
+        } else {
+          await createOpenSource({ variables: { input: values } })
+        }
         goBack(resetForm)
       }}
     >
-      {({ submitForm, isSubmitting, values, setFieldValue, resetForm }) => (
-        <Dialog open={!!showModal} onClose={() => goBack(resetForm)}>
-          <DialogTitle>Add an Open Source</DialogTitle>
-          <Form className={styles.customForm}>
-            <DialogContent>
-              <DialogContentText>
-                To Add an Open Source, please enter the following fields here. We will send updates
-                occasionally.
-              </DialogContentText>
+      {({ isSubmitting, resetForm }) => {
+        return (
+          <Dialog open={!!showModal} onClose={() => goBack(resetForm)}>
+            <DialogTitle>Add an Open Source</DialogTitle>
+            <Form className={styles.customForm}>
+              <DialogContent>
+                <DialogContentText>
+                  To Add an Open Source, please enter the following fields here. We will send
+                  updates occasionally.
+                </DialogContentText>
 
-              <Field type="text" label="Title" name="title" required component={TextField} />
+                <Field
+                  type="text"
+                  label="Title"
+                  name="title"
+                  required
+                  component={TextField}
+                  fullWidth
+                />
 
-              <Field
-                type="text"
-                label="Description"
-                name="description"
-                multiline
-                required
-                component={TextField}
-              />
+                <Field
+                  type="text"
+                  label="Description"
+                  name="description"
+                  multiline
+                  required
+                  component={TextField}
+                  fullWidth
+                />
 
-              <Field type="text" label="Url" name="url" required component={TextField} />
+                <Field
+                  type="text"
+                  label="Url"
+                  name="url"
+                  required
+                  component={TextField}
+                  fullWidth
+                />
 
-              <Field
-                type="text"
-                label="PosterUrl"
-                name="posterUrl"
-                required
-                component={TextField}
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={() => goBack(resetForm)} color="default">
-                Cancel
-              </Button>
-              <Button color="primary" type="submit" disabled={isSubmitting}>
-                Submit
-              </Button>
-            </DialogActions>
-          </Form>
-        </Dialog>
-      )}
+                <Field
+                  type="text"
+                  label="PosterUrl"
+                  name="posterUrl"
+                  required
+                  component={TextField}
+                  fullWidth
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={() => goBack(resetForm)} color="default">
+                  Cancel
+                </Button>
+                <Button color="primary" type="submit" disabled={isSubmitting}>
+                  Submit
+                </Button>
+              </DialogActions>
+            </Form>
+          </Dialog>
+        )
+      }}
     </Formik>
   )
 }

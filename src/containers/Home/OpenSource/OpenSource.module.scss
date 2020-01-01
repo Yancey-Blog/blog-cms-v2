@@ -13,10 +13,6 @@
 
 .customForm {
   :global(.MuiFormControl-root) {
-    display: block;
     margin-bottom: 20px;
-    :global(.MuiInputBase-root) {
-      width: 100%;
-    }
   }
 }
