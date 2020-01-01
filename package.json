@@ -202,6 +202,7 @@
   "lint-staged": {
     "*.{ts,js,scss,css}": [
       "prettier --write",
+      "yarn lint",
       "git add"
     ]
   }
