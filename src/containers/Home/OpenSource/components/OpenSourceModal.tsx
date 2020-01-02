@@ -46,6 +46,7 @@ const OpenSourceModal: FC = () => {
 
   useEffect(() => {
     if (id) {
+      console.log('hello')
       // @ts-ignore
       const { title, description, url, posterUrl } = client.cache.data.get(`OpenSourceModel:${id}`)
       setInitialValues({ ...initialValues, title, description, url, posterUrl })
@@ -79,12 +80,12 @@ const OpenSourceModal: FC = () => {
       {({ isSubmitting, resetForm }) => {
         return (
           <Dialog open={!!showModal} onClose={() => goBack(resetForm)}>
-            <DialogTitle>Add an Open Source</DialogTitle>
+            <DialogTitle>{id ? 'Update' : 'Add'} an Open Source</DialogTitle>
             <Form className={styles.customForm}>
               <DialogContent>
                 <DialogContentText>
-                  To Add an Open Source, please enter the following fields here. We will send
-                  updates occasionally.
+                  To {id ? 'Update' : 'Add'} an Open Source, please enter the following fields here.
+                  We will send data after clicking Submit button.
                 </DialogContentText>
 
                 <Field
