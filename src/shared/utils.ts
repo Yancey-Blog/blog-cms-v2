@@ -21,10 +21,7 @@ export const getType = (type: any) =>
     .slice(8, -1)
     .toLowerCase()
 
-export const goBack = (resetForm?: Function) => {
-  history.goBack()
-  resetForm && resetForm()
-}
+export const goBack = () => history.goBack()
 
 export const parseSearch = (search: string) => qs.parse(search, { parseBooleans: true })
 

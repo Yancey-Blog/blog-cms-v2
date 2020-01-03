@@ -46,10 +46,11 @@ const OpenSourceModal: FC = () => {
 
   useEffect(() => {
     if (id) {
-      console.log('hello')
       // @ts-ignore
       const { title, description, url, posterUrl } = client.cache.data.get(`OpenSourceModel:${id}`)
-      setInitialValues({ ...initialValues, title, description, url, posterUrl })
+      setInitialValues({ title, description, url, posterUrl })
+    } else {
+      setInitialValues({ title: '', description: '', url: '', posterUrl: '' })
     }
     // eslint-disable-next-line
   }, [id])
@@ -74,14 +75,14 @@ const OpenSourceModal: FC = () => {
         } else {
           await createOpenSource({ variables: { input: values } })
         }
-        goBack(resetForm)
+        goBack()
       }}
     >
-      {({ isSubmitting, resetForm }) => {
+      {({ isSubmitting, handleReset }) => {
         return (
-          <Dialog open={!!showModal} onClose={() => goBack(resetForm)}>
+          <Dialog open={!!showModal} onClose={goBack}>
             <DialogTitle>{id ? 'Update' : 'Add'} an Open Source</DialogTitle>
-            <Form className={styles.customForm}>
+            <Form className={styles.customForm} onReset={handleReset}>
               <DialogContent>
                 <DialogContentText>
                   To {id ? 'Update' : 'Add'} an Open Source, please enter the following fields here.
@@ -89,6 +90,7 @@ const OpenSourceModal: FC = () => {
                 </DialogContentText>
 
                 <Field
+                  autoFocus
                   type="text"
                   label="Title"
                   name="title"
@@ -126,7 +128,7 @@ const OpenSourceModal: FC = () => {
                 />
               </DialogContent>
               <DialogActions>
-                <Button onClick={() => goBack(resetForm)} color="default">
+                <Button color="primary" onClick={goBack}>
                   Cancel
                 </Button>
                 <Button color="primary" type="submit" disabled={isSubmitting}>
