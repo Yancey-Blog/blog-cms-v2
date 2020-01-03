@@ -33,6 +33,8 @@ _This library is part of the [BPG (Blog Project Group)](https://github.com/Yance
 
 ---
 
+![shot](https://yancey-assets.oss-cn-beijing.aliyuncs.com/Jietu20200103-115157@2x.jpg)
+
 ## Available Scripts
 
 In the project directory, you can run:
