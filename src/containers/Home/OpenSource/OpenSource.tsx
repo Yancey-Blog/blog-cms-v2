@@ -9,6 +9,7 @@ import MUIDataTable, {
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab, Button, Popover } from '@material-ui/core'
+import { useSnackbar } from 'notistack'
 import { sortBy } from 'yancey-js-util'
 import { OPEN_SOURCES, DELETE_ONE_OPEN_SOURCE, BATCH_DELETE_OPEN_SOURCE } from './typeDefs'
 import { IOpenSource } from './interfaces/openSource.interface'
@@ -23,15 +24,17 @@ const OpenSource: FC = () => {
 
   const { pathname } = useLocation()
 
+  const { enqueueSnackbar } = useSnackbar()
+
   const showModal = (id?: string) => {
     history.push({ pathname, search: stringfySearch({ id, showModal: true }) })
   }
 
-  const { loading, error, data } = useQuery(OPEN_SOURCES, {
+  const { loading: isFetching, error, data } = useQuery(OPEN_SOURCES, {
     notifyOnNetworkStatusChange: true,
   })
 
-  const [deleteOpenSourceById] = useMutation(DELETE_ONE_OPEN_SOURCE, {
+  const [deleteOpenSourceById, { loading: isDeleting }] = useMutation(DELETE_ONE_OPEN_SOURCE, {
     update(cache, { data: { deleteOpenSourceById } }) {
       // @ts-ignore
       const { getOpenSources } = cache.readQuery({ query: OPEN_SOURCES })
@@ -44,9 +47,12 @@ const OpenSource: FC = () => {
         },
       })
     },
+    onCompleted() {
+      enqueueSnackbar('delete success!', { variant: 'success' })
+    },
   })
 
-  const [deleteOpenSources] = useMutation(BATCH_DELETE_OPEN_SOURCE, {
+  const [deleteOpenSources, { loading: isBatchDeleting }] = useMutation(BATCH_DELETE_OPEN_SOURCE, {
     update(cache, { data: { deleteOpenSources } }) {
       // @ts-ignore
       const { getOpenSources } = cache.readQuery({ query: OPEN_SOURCES })
@@ -58,6 +64,9 @@ const OpenSource: FC = () => {
           ),
         },
       })
+    },
+    onCompleted() {
+      enqueueSnackbar('delete success!', { variant: 'success' })
     },
   })
 
@@ -84,38 +93,37 @@ const OpenSource: FC = () => {
       name: 'posterUrl',
       label: 'PosterUrl',
       options: {
-        customBodyRender: (value: string, tableMeta: MUIDataTableMeta) => (
-          <PopupState variant="popover" popupId="imagePoperOver">
-            {popupState => (
-              <div>
-                <img
-                  src={value}
-                  style={{ width: '150px' }}
-                  alt={tableMeta.rowData[1]}
-                  {...bindTrigger(popupState)}
-                />
-                <Popover
-                  {...bindPopover(popupState)}
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center',
-                  }}
-                  disableRestoreFocus
-                >
+        customBodyRender: (value: string, tableMeta: MUIDataTableMeta) => {
+          const curName = tableMeta.rowData[1]
+          return (
+            <PopupState variant="popover" popupId="imagePoperOver">
+              {popupState => (
+                <div>
                   <img
                     src={value}
-                    style={{ width: '800px', display: 'block' }}
-                    alt={tableMeta.rowData[1]}
+                    style={{ width: '150px' }}
+                    alt={curName}
+                    {...bindTrigger(popupState)}
                   />
-                </Popover>
-              </div>
-            )}
-          </PopupState>
-        ),
+                  <Popover
+                    {...bindPopover(popupState)}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'center',
+                    }}
+                    disableRestoreFocus
+                  >
+                    <img src={value} style={{ width: '800px', display: 'block' }} alt={curName} />
+                  </Popover>
+                </div>
+              )}
+            </PopupState>
+          )
+        },
       },
     },
     {
@@ -138,18 +146,19 @@ const OpenSource: FC = () => {
       options: {
         filter: false,
         customBodyRender(value, tableMeta) {
+          const curId = tableMeta.rowData[0]
           return (
             <>
               <FormControl>
                 <Edit
                   style={{ marginRight: '12px', cursor: 'pointer' }}
-                  onClick={() => showModal(tableMeta.rowData[0])}
+                  onClick={() => showModal(curId)}
                 />
               </FormControl>
               <FormControl>
                 <DeleteOutline
                   style={{ cursor: 'pointer' }}
-                  onClick={() => handleDeleteOneChange(tableMeta.rowData[0])}
+                  onClick={() => handleDeleteOneChange(curId)}
                 />
               </FormControl>
             </>
@@ -185,7 +194,6 @@ const OpenSource: FC = () => {
     },
   }
 
-  if (loading) return <Loading />
   if (error) return <p>Error :(</p>
 
   return (
@@ -193,10 +201,11 @@ const OpenSource: FC = () => {
       <TableWrapper tableName="Open Source" icon="save">
         <MUIDataTable
           title=""
-          data={data.getOpenSources.sort(sortBy('updatedAt')).reverse()}
+          data={data ? data.getOpenSources.sort(sortBy('updatedAt')).reverse() : []}
           columns={columns}
           options={options}
         />
+        {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
       </TableWrapper>
 
       <OpenSourceModal />

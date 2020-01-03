@@ -48,13 +48,6 @@ const OpenSourceModal: FC = () => {
       // @ts-ignore
       const { title, description, url, posterUrl } = client.cache.data.get(`OpenSourceModel:${id}`)
       setInitialValues({ title, description, url, posterUrl })
-    } else {
-      setInitialValues({
-        title: '',
-        description: '',
-        url: '',
-        posterUrl: '',
-      })
     }
   }, [id])
 
