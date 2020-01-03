@@ -2,7 +2,7 @@
 
 # Blog CMS v2
 
-The **CMS** for Yancey blog with React, Relay Modern, Material-UI and GraphQL.
+The **CMS** for Yancey blog with React, Apollo Client, Material-UI and GraphQL.
 
 _This library is part of the [BPG (Blog Project Group)](https://github.com/Yancey-Blog)_ ecosystem 📖
 
@@ -32,6 +32,8 @@ _This library is part of the [BPG (Blog Project Group)](https://github.com/Yance
 </div>
 
 ---
+
+![shot](https://yancey-assets.oss-cn-beijing.aliyuncs.com/Jietu20200103-115157@2x.jpg)
 
 ## Available Scripts
 
