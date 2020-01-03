@@ -21,18 +21,17 @@ const OpenSourceModal: FC = () => {
   const { search } = useLocation()
   const { showModal, id } = parseSearch(search)
 
-  const initValues = {
+  const [initialValues, setInitialValues] = useState({
     title: '',
     description: '',
     url: '',
     posterUrl: '',
-  }
-  const [initialValues, setInitialValues] = useState(initValues)
+  })
 
   const [createOpenSource] = useMutation(CREATE_ONE_OPEN_SOURCE, {
     update(cache, { data: { createOpenSource } }) {
-      // @ts-ignore
-      const { getOpenSources } = cache.readQuery({ query: OPEN_SOURCES })
+      // FIXME:
+      const { getOpenSources } = cache.readQuery({ query: OPEN_SOURCES }) as any
       cache.writeQuery({
         query: OPEN_SOURCES,
         data: {
@@ -50,9 +49,13 @@ const OpenSourceModal: FC = () => {
       const { title, description, url, posterUrl } = client.cache.data.get(`OpenSourceModel:${id}`)
       setInitialValues({ title, description, url, posterUrl })
     } else {
-      setInitialValues({ ...initValues })
+      setInitialValues({
+        title: '',
+        description: '',
+        url: '',
+        posterUrl: '',
+      })
     }
-    // eslint-disable-next-line
   }, [id])
 
   return (
@@ -78,7 +81,7 @@ const OpenSourceModal: FC = () => {
         goBack()
       }}
     >
-      {({ isSubmitting, handleReset }) => {
+      {({ isSubmitting }) => {
         return (
           <Dialog open={!!showModal} onClose={goBack}>
             <DialogTitle>{id ? 'Update' : 'Add'} an Open Source</DialogTitle>
