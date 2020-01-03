@@ -19,15 +19,15 @@ import styles from '../openSource.module.scss'
 
 const OpenSourceModal: FC = () => {
   const { search } = useLocation()
-
   const { showModal, id } = parseSearch(search)
 
-  const [initialValues, setInitialValues] = useState({
+  const initValues = {
     title: '',
     description: '',
     url: '',
     posterUrl: '',
-  })
+  }
+  const [initialValues, setInitialValues] = useState(initValues)
 
   const [createOpenSource] = useMutation(CREATE_ONE_OPEN_SOURCE, {
     update(cache, { data: { createOpenSource } }) {
@@ -50,7 +50,7 @@ const OpenSourceModal: FC = () => {
       const { title, description, url, posterUrl } = client.cache.data.get(`OpenSourceModel:${id}`)
       setInitialValues({ title, description, url, posterUrl })
     } else {
-      setInitialValues({ title: '', description: '', url: '', posterUrl: '' })
+      setInitialValues({ ...initValues })
     }
     // eslint-disable-next-line
   }, [id])
@@ -69,7 +69,7 @@ const OpenSourceModal: FC = () => {
           .url()
           .required('PostUrl is required.'),
       })}
-      onSubmit={async (values, { resetForm }) => {
+      onSubmit={async values => {
         if (id) {
           await updateOpenSourceById({ variables: { input: { ...values, id } } })
         } else {
@@ -82,7 +82,7 @@ const OpenSourceModal: FC = () => {
         return (
           <Dialog open={!!showModal} onClose={goBack}>
             <DialogTitle>{id ? 'Update' : 'Add'} an Open Source</DialogTitle>
-            <Form className={styles.customForm} onReset={handleReset}>
+            <Form className={styles.customForm}>
               <DialogContent>
                 <DialogContentText>
                   To {id ? 'Update' : 'Add'} an Open Source, please enter the following fields here.
