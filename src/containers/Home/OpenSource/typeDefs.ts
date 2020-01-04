@@ -1,4 +1,4 @@
-import { gql } from 'apollo-boost'
+import gql from 'graphql-tag'
 // eslint-disable-next-line
 import CreateOpenSourceInput from './graphql/createOpenSource.gql'
 // eslint-disable-next-line

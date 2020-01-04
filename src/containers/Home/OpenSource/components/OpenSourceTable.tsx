@@ -11,16 +11,16 @@ import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab, Button, Popover } from '@material-ui/core'
 import { useSnackbar } from 'notistack'
 import { sortBy } from 'yancey-js-util'
-import { OPEN_SOURCES, DELETE_ONE_OPEN_SOURCE, BATCH_DELETE_OPEN_SOURCE } from './typeDefs'
-import { IOpenSource } from './interfaces/openSource.interface'
+import { OPEN_SOURCES, DELETE_ONE_OPEN_SOURCE, BATCH_DELETE_OPEN_SOURCE } from '../typeDefs'
+import { IOpenSource } from '../interfaces/openSource.interface'
 import styles from './openSource.module.scss'
-import { formatDate, stringfySearch } from '../../../shared/utils'
-import TableWrapper from '../../../components/TableWrapper/TableWrapper'
-import Loading from '../../../components/Loading/Loading'
-import ConfirmPoper from '../../../components/ConfirmPoper/ConfirmPoper'
-import OpenSourceModal from './components/OpenSourceModal'
+import { formatDate, stringfySearch } from '../../../../shared/utils'
+import TableWrapper from '../../../../components/TableWrapper/TableWrapper'
+import Loading from '../../../../components/Loading/Loading'
+import ConfirmPoper from '../../../../components/ConfirmPoper/ConfirmPoper'
+import OpenSourceModal from '../components/OpenSourceModal'
 
-const OpenSource: FC = () => {
+const OpenSourceTable: FC = () => {
   const history = useHistory()
 
   const { pathname } = useLocation()
@@ -70,10 +70,6 @@ const OpenSource: FC = () => {
       enqueueSnackbar('delete success!', { variant: 'success' })
     },
   })
-
-  const handleDeleteOneChange = (id: string) => {
-    deleteOpenSourceById({ variables: { id } })
-  }
 
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
@@ -157,7 +153,7 @@ const OpenSource: FC = () => {
                 />
               </FormControl>
               <FormControl>
-                <ConfirmPoper onOk={() => handleDeleteOneChange(curId)}>
+                <ConfirmPoper onOk={() => deleteOpenSourceById({ variables: { id: curId } })}>
                   <DeleteOutline className={styles.addIcon} />
                 </ConfirmPoper>
               </FormControl>
@@ -212,4 +208,4 @@ const OpenSource: FC = () => {
   )
 }
 
-export default OpenSource
+export default OpenSourceTable

@@ -19,6 +19,7 @@ import styles from '../openSource.module.scss'
 
 const OpenSourceModal: FC = () => {
   const { search } = useLocation()
+
   const { showModal, id } = parseSearch(search)
 
   const [initialValues, setInitialValues] = useState({
