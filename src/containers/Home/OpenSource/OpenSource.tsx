@@ -13,7 +13,7 @@ import { IOpenSource } from './interfaces/openSource.interface'
 import OpenSourceTable from './components/OpenSourceTable'
 import OpenSourceModal from './components/OpenSourceModal'
 
-const OpenSourceView: FC = () => {
+const OpenSource: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
 
   const { loading: isFetching, data } = useQuery(OPEN_SOURCES, {
@@ -90,4 +90,4 @@ const OpenSourceView: FC = () => {
   )
 }
 
-export default OpenSourceView
+export default OpenSource
