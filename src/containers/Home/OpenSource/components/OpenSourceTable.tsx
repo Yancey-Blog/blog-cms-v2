@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { useQuery, useMutation } from '@apollo/react-hooks'
 import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
@@ -9,67 +8,38 @@ import MUIDataTable, {
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab, Button, Popover } from '@material-ui/core'
-import { useSnackbar } from 'notistack'
 import { sortBy } from 'yancey-js-util'
-import { OPEN_SOURCES, DELETE_ONE_OPEN_SOURCE, BATCH_DELETE_OPEN_SOURCE } from '../typeDefs'
 import { IOpenSource } from '../interfaces/openSource.interface'
-import styles from './openSource.module.scss'
+import styles from '../openSource.module.scss'
 import { formatDate, stringfySearch } from '../../../../shared/utils'
 import TableWrapper from '../../../../components/TableWrapper/TableWrapper'
 import Loading from '../../../../components/Loading/Loading'
 import ConfirmPoper from '../../../../components/ConfirmPoper/ConfirmPoper'
-import OpenSourceModal from '../components/OpenSourceModal'
 
-const OpenSourceTable: FC = () => {
+interface Props {
+  dataSource: IOpenSource[]
+  isFetching: boolean
+  isDeleting: boolean
+  isBatchDeleting: boolean
+  deleteOpenSourceById: Function
+  deleteOpenSources: Function
+}
+
+const OpenSourceTable: FC<Props> = ({
+  dataSource,
+  deleteOpenSourceById,
+  deleteOpenSources,
+  isFetching,
+  isDeleting,
+  isBatchDeleting,
+}) => {
   const history = useHistory()
 
   const { pathname } = useLocation()
 
-  const { enqueueSnackbar } = useSnackbar()
-
   const showModal = (id?: string) => {
     history.push({ pathname, search: stringfySearch({ id, showModal: true }) })
   }
-
-  const { loading: isFetching, error, data } = useQuery(OPEN_SOURCES, {
-    notifyOnNetworkStatusChange: true,
-  })
-
-  const [deleteOpenSourceById, { loading: isDeleting }] = useMutation(DELETE_ONE_OPEN_SOURCE, {
-    update(cache, { data: { deleteOpenSourceById } }) {
-      // @ts-ignore
-      const { getOpenSources } = cache.readQuery({ query: OPEN_SOURCES })
-      cache.writeQuery({
-        query: OPEN_SOURCES,
-        data: {
-          getOpenSources: getOpenSources.filter(
-            (openSource: IOpenSource) => openSource._id !== deleteOpenSourceById._id,
-          ),
-        },
-      })
-    },
-    onCompleted() {
-      enqueueSnackbar('delete success!', { variant: 'success' })
-    },
-  })
-
-  const [deleteOpenSources, { loading: isBatchDeleting }] = useMutation(BATCH_DELETE_OPEN_SOURCE, {
-    update(cache, { data: { deleteOpenSources } }) {
-      // @ts-ignore
-      const { getOpenSources } = cache.readQuery({ query: OPEN_SOURCES })
-      cache.writeQuery({
-        query: OPEN_SOURCES,
-        data: {
-          getOpenSources: getOpenSources.filter(
-            (openSource: IOpenSource) => !deleteOpenSources.ids.includes(openSource._id),
-          ),
-        },
-      })
-    },
-    onCompleted() {
-      enqueueSnackbar('delete success!', { variant: 'success' })
-    },
-  })
 
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
@@ -178,7 +148,7 @@ const OpenSourceTable: FC = () => {
       )
     },
     customToolbarSelect(selectedRows) {
-      const ids = selectedRows.data.map((row: any) => data.getOpenSources[row.index]._id)
+      const ids = selectedRows.data.map((row: any) => dataSource[row.index]._id)
       return (
         <Fab size="medium" className={styles.addIconFab}>
           <ConfirmPoper onOk={() => deleteOpenSources({ variables: { ids } })}>
@@ -189,22 +159,16 @@ const OpenSourceTable: FC = () => {
     },
   }
 
-  if (error) return <p>Error :(</p>
-
   return (
-    <>
-      <TableWrapper tableName="Open Source" icon="save">
-        <MUIDataTable
-          title=""
-          data={data ? data.getOpenSources.sort(sortBy('updatedAt')).reverse() : []}
-          columns={columns}
-          options={options}
-        />
-        {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
-      </TableWrapper>
-
-      <OpenSourceModal />
-    </>
+    <TableWrapper tableName="Open Source" icon="save">
+      <MUIDataTable
+        title=""
+        data={dataSource ? dataSource.sort(sortBy('updatedAt')).reverse() : []}
+        columns={columns}
+        options={options}
+      />
+      {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
+    </TableWrapper>
   )
 }
 

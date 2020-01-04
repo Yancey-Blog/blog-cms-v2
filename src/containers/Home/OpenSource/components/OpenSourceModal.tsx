@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useMutation } from '@apollo/react-hooks'
 import * as Yup from 'yup'
 import {
   Button,
@@ -13,11 +12,15 @@ import {
 import { Formik, Field, Form } from 'formik'
 import { TextField } from 'formik-material-ui'
 import client from '../../../../shared/ApolloClient'
-import { CREATE_ONE_OPEN_SOURCE, UPDATE_ONE_OPEN_SOURCE, OPEN_SOURCES } from '../typeDefs'
 import { goBack, parseSearch } from '../../../../shared/utils'
 import styles from '../openSource.module.scss'
 
-const OpenSourceModal: FC = () => {
+interface Props {
+  createOpenSource: Function
+  updateOpenSourceById: Function
+}
+
+const OpenSourceModal: FC<Props> = ({ createOpenSource, updateOpenSourceById }) => {
   const { search } = useLocation()
 
   const { showModal, id } = parseSearch(search)
@@ -28,21 +31,6 @@ const OpenSourceModal: FC = () => {
     url: '',
     posterUrl: '',
   })
-
-  const [createOpenSource] = useMutation(CREATE_ONE_OPEN_SOURCE, {
-    update(cache, { data: { createOpenSource } }) {
-      // FIXME:
-      const { getOpenSources } = cache.readQuery({ query: OPEN_SOURCES }) as any
-      cache.writeQuery({
-        query: OPEN_SOURCES,
-        data: {
-          getOpenSources: [createOpenSource, ...getOpenSources],
-        },
-      })
-    },
-  })
-
-  const [updateOpenSourceById] = useMutation(UPDATE_ONE_OPEN_SOURCE)
 
   useEffect(() => {
     if (id) {
