@@ -9,15 +9,14 @@ import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab, Button, Popover } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
-import { IOpenSource } from '../interfaces/openSource.interface'
 import styles from '../openSource.module.scss'
-import { formatDate, stringfySearch } from '../../../../shared/utils'
-import TableWrapper from '../../../../components/TableWrapper/TableWrapper'
-import Loading from '../../../../components/Loading/Loading'
-import ConfirmPoper from '../../../../components/ConfirmPoper/ConfirmPoper'
+import { formatDate, stringfySearch } from 'src/shared/utils'
+import TableWrapper from 'src/components/TableWrapper/TableWrapper'
+import Loading from 'src/components/Loading/Loading'
+import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
 
 interface Props {
-  dataSource: IOpenSource[]
+  data: any
   isFetching: boolean
   isDeleting: boolean
   isBatchDeleting: boolean
@@ -26,7 +25,7 @@ interface Props {
 }
 
 const OpenSourceTable: FC<Props> = ({
-  dataSource,
+  data,
   deleteOpenSourceById,
   deleteOpenSources,
   isFetching,
@@ -50,7 +49,12 @@ const OpenSourceTable: FC<Props> = ({
       label: 'Url',
       options: {
         customBodyRender: (value: string) => (
-          <Button href={value} color="secondary" target="_blank" rel="noopener noreferrer">
+          <Button
+            href={value}
+            color="secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {value}
           </Button>
         ),
@@ -84,7 +88,11 @@ const OpenSourceTable: FC<Props> = ({
                     }}
                     disableRestoreFocus
                   >
-                    <img src={value} style={{ width: '800px', display: 'block' }} alt={curName} />
+                    <img
+                      src={value}
+                      style={{ width: '800px', display: 'block' }}
+                      alt={curName}
+                    />
                   </Popover>
                 </div>
               )}
@@ -123,7 +131,11 @@ const OpenSourceTable: FC<Props> = ({
                 />
               </FormControl>
               <FormControl>
-                <ConfirmPoper onOk={() => deleteOpenSourceById({ variables: { id: curId } })}>
+                <ConfirmPoper
+                  onOk={() =>
+                    deleteOpenSourceById({ variables: { id: curId } })
+                  }
+                >
                   <DeleteOutline className={styles.addIcon} />
                 </ConfirmPoper>
               </FormControl>
@@ -148,7 +160,9 @@ const OpenSourceTable: FC<Props> = ({
       )
     },
     customToolbarSelect(selectedRows) {
-      const ids = selectedRows.data.map((row: any) => dataSource[row.index]._id)
+      const ids = selectedRows.data.map(
+        (row: any) => data.getOpenSources[row.index]._id,
+      )
       return (
         <Fab size="medium" className={styles.addIconFab}>
           <ConfirmPoper onOk={() => deleteOpenSources({ variables: { ids } })}>
@@ -163,7 +177,9 @@ const OpenSourceTable: FC<Props> = ({
     <TableWrapper tableName="Open Source" icon="save">
       <MUIDataTable
         title=""
-        data={dataSource ? dataSource.sort(sortBy('updatedAt')).reverse() : []}
+        data={
+          data ? data.getOpenSources.sort(sortBy('updatedAt')).reverse() : []
+        }
         columns={columns}
         options={options}
       />

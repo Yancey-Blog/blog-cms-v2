@@ -11,16 +11,19 @@ import {
 } from '@material-ui/core'
 import { Formik, Field, Form } from 'formik'
 import { TextField } from 'formik-material-ui'
-import client from '../../../../shared/ApolloClient'
-import { goBack, parseSearch } from '../../../../shared/utils'
 import styles from '../openSource.module.scss'
+import client from 'src/shared/ApolloClient'
+import { goBack, parseSearch } from 'src/shared/utils'
 
 interface Props {
   createOpenSource: Function
   updateOpenSourceById: Function
 }
 
-const OpenSourceModal: FC<Props> = ({ createOpenSource, updateOpenSourceById }) => {
+const OpenSourceModal: FC<Props> = ({
+  createOpenSource,
+  updateOpenSourceById,
+}) => {
   const { search } = useLocation()
 
   const { showModal, id } = parseSearch(search)
@@ -35,7 +38,9 @@ const OpenSourceModal: FC<Props> = ({ createOpenSource, updateOpenSourceById }) 
   useEffect(() => {
     if (id) {
       // @ts-ignore
-      const { title, description, url, posterUrl } = client.cache.data.get(`OpenSourceModel:${id}`)
+      const { title, description, url, posterUrl } = client.cache.data.get(
+        `OpenSourceModel:${id}`,
+      )
       setInitialValues({ title, description, url, posterUrl })
     }
   }, [id])
@@ -56,7 +61,9 @@ const OpenSourceModal: FC<Props> = ({ createOpenSource, updateOpenSourceById }) 
       })}
       onSubmit={async values => {
         if (id) {
-          await updateOpenSourceById({ variables: { input: { ...values, id } } })
+          await updateOpenSourceById({
+            variables: { input: { ...values, id } },
+          })
         } else {
           await createOpenSource({ variables: { input: values } })
         }
@@ -70,8 +77,9 @@ const OpenSourceModal: FC<Props> = ({ createOpenSource, updateOpenSourceById }) 
             <Form className={styles.customForm}>
               <DialogContent>
                 <DialogContentText>
-                  To {id ? 'Update' : 'Add'} an Open Source, please enter the following fields here.
-                  We will send data after clicking Submit button.
+                  To {id ? 'Update' : 'Add'} an Open Source, please enter the
+                  following fields here. We will send data after clicking Submit
+                  button.
                 </DialogContentText>
 
                 <Field

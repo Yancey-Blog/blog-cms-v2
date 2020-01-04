@@ -22,7 +22,6 @@ const OpenSource: FC = () => {
 
   const [createOpenSource] = useMutation(CREATE_ONE_OPEN_SOURCE, {
     update(cache, { data: { createOpenSource } }) {
-      // FIXME:
       const { getOpenSources } = cache.readQuery({ query: OPEN_SOURCES }) as any
       cache.writeQuery({
         query: OPEN_SOURCES,
@@ -31,50 +30,65 @@ const OpenSource: FC = () => {
         },
       })
     },
-  })
-
-  const [updateOpenSourceById] = useMutation(UPDATE_ONE_OPEN_SOURCE)
-
-  const [deleteOpenSourceById, { loading: isDeleting }] = useMutation(DELETE_ONE_OPEN_SOURCE, {
-    update(cache, { data: { deleteOpenSourceById } }) {
-      // @ts-ignore
-      const { getOpenSources } = cache.readQuery({ query: OPEN_SOURCES })
-      cache.writeQuery({
-        query: OPEN_SOURCES,
-        data: {
-          getOpenSources: getOpenSources.filter(
-            (openSource: IOpenSource) => openSource._id !== deleteOpenSourceById._id,
-          ),
-        },
-      })
-    },
     onCompleted() {
-      enqueueSnackbar('delete success!', { variant: 'success' })
+      enqueueSnackbar('create success!', { variant: 'success' })
     },
   })
 
-  const [deleteOpenSources, { loading: isBatchDeleting }] = useMutation(BATCH_DELETE_OPEN_SOURCE, {
-    update(cache, { data: { deleteOpenSources } }) {
-      // @ts-ignore
-      const { getOpenSources } = cache.readQuery({ query: OPEN_SOURCES })
-      cache.writeQuery({
-        query: OPEN_SOURCES,
-        data: {
-          getOpenSources: getOpenSources.filter(
-            (openSource: IOpenSource) => !deleteOpenSources.ids.includes(openSource._id),
-          ),
-        },
-      })
-    },
+  const [updateOpenSourceById] = useMutation(UPDATE_ONE_OPEN_SOURCE, {
     onCompleted() {
-      enqueueSnackbar('delete success!', { variant: 'success' })
+      enqueueSnackbar('update success!', { variant: 'success' })
     },
   })
+
+  const [deleteOpenSourceById, { loading: isDeleting }] = useMutation(
+    DELETE_ONE_OPEN_SOURCE,
+    {
+      update(cache, { data: { deleteOpenSourceById } }) {
+        // @ts-ignore
+        const { getOpenSources } = cache.readQuery({ query: OPEN_SOURCES })
+        cache.writeQuery({
+          query: OPEN_SOURCES,
+          data: {
+            getOpenSources: getOpenSources.filter(
+              (openSource: IOpenSource) =>
+                openSource._id !== deleteOpenSourceById._id,
+            ),
+          },
+        })
+      },
+      onCompleted() {
+        enqueueSnackbar('delete success!', { variant: 'success' })
+      },
+    },
+  )
+
+  const [deleteOpenSources, { loading: isBatchDeleting }] = useMutation(
+    BATCH_DELETE_OPEN_SOURCE,
+    {
+      update(cache, { data: { deleteOpenSources } }) {
+        // @ts-ignore
+        const { getOpenSources } = cache.readQuery({ query: OPEN_SOURCES })
+        cache.writeQuery({
+          query: OPEN_SOURCES,
+          data: {
+            getOpenSources: getOpenSources.filter(
+              (openSource: IOpenSource) =>
+                !deleteOpenSources.ids.includes(openSource._id),
+            ),
+          },
+        })
+      },
+      onCompleted() {
+        enqueueSnackbar('delete success!', { variant: 'success' })
+      },
+    },
+  )
 
   return (
     <>
       <OpenSourceTable
-        dataSource={data.getOpenSources}
+        data={data}
         isFetching={isFetching}
         isDeleting={isDeleting}
         isBatchDeleting={isBatchDeleting}
