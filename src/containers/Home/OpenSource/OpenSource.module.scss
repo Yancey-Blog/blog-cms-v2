@@ -11,10 +11,8 @@
   color: #9c27b0;
 }
 
-.field {
-  display: block;
-  margin-bottom: 20px;
-  :global(.MuiInputBase-root) {
-    width: 100%;
+.customForm {
+  :global(.MuiFormControl-root) {
+    margin-bottom: 20px;
   }
 }
