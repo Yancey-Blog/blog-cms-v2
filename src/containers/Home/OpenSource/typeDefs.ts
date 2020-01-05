@@ -1,8 +1,4 @@
-import { gql } from 'apollo-boost'
-// eslint-disable-next-line
-import CreateOpenSourceInput from './graphql/createOpenSource.gql'
-// eslint-disable-next-line
-import UpdateOpenSourceInput from './graphql/updateOpenSource.gql'
+import gql from 'graphql-tag'
 
 export const CREATE_ONE_OPEN_SOURCE = gql`
   mutation CreateOpenSource($input: CreateOpenSourceInput!) {
