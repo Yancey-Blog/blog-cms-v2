@@ -6,10 +6,22 @@ import { ApolloLink } from 'apollo-link'
 
 // https://www.apollographql.com/docs/react/migrating/boost-migration/#gatsby-focus-wrapper
 
+// @ts-ignore
 const cache = new InMemoryCache()
+
+// cache.writeData({
+//   data: {
+//     getOpenSources: [],
+//     networkStatus: {
+//       __typename: 'NetworkStatus',
+//       isConnected: false,
+//     },
+//   },
+// })
 
 const client = new ApolloClient({
   cache,
+  resolvers: {},
   link: ApolloLink.from([
     onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors) {

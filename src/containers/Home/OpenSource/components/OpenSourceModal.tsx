@@ -77,9 +77,9 @@ const OpenSourceModal: FC<Props> = ({
             <Form className={styles.customForm}>
               <DialogContent>
                 <DialogContentText>
-                  To {id ? 'Update' : 'Add'} an Open Source, please enter the
-                  following fields here. We will send data after clicking Submit
-                  button.
+                  To {id ? 'update' : 'add'} an Open Source, please enter the
+                  following fields here. We will send data after clicking the
+                  submit button.
                 </DialogContentText>
 
                 <Field
