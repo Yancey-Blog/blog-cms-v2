@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.2.0...v0.3.0) (2020-01-05)
+
+
+### Features
+
+* add env dict ([82f10b5](https://github.com/Yancey-Blog/blog-cms-v2/commit/82f10b5b7a10ddbb6c68d8be9c76b445e3050eb0))
+* clear data after close modal ([ea870e1](https://github.com/Yancey-Blog/blog-cms-v2/commit/ea870e188f485e50f916507f102230a89f4c8cd4))
+* delete useless files ([e586039](https://github.com/Yancey-Blog/blog-cms-v2/commit/e5860396a2172dba52a62da5c829bbadab041adb))
+* finish full of apollo client ([8247052](https://github.com/Yancey-Blog/blog-cms-v2/commit/82470520db95b1f72b11b4165861c44c95d89fc7))
+* format codes ([1f05750](https://github.com/Yancey-Blog/blog-cms-v2/commit/1f057503fec73850a9e76e2ec485e40673315faa))
+* ignore style ([832c9ac](https://github.com/Yancey-Blog/blog-cms-v2/commit/832c9ac60ee8c5d62aac2f132551449aff8eaf53))
+* package ConfirmPoper component ([717c422](https://github.com/Yancey-Blog/blog-cms-v2/commit/717c422221b47584545853aa736a7d965946e9e7))
+* rename OpenSource.tsx ([a4ac563](https://github.com/Yancey-Blog/blog-cms-v2/commit/a4ac563ec1b28abb7c17d8a0d5f8499635670614))
+* rename style file ([49e6386](https://github.com/Yancey-Blog/blog-cms-v2/commit/49e6386ada516610dd28bd60f9cadc226163ec54))
+* split request component ([af105fa](https://github.com/Yancey-Blog/blog-cms-v2/commit/af105fa32a9fe4c3d06b576ed8cf761bd3cf77de))
+* support resetForm ([2915f53](https://github.com/Yancey-Blog/blog-cms-v2/commit/2915f534e46acb3811dea6599dd9f3be6859944e))
+* support suucess feedback ([fdb6efc](https://github.com/Yancey-Blog/blog-cms-v2/commit/fdb6efc392767102e91c14eda66b95b52df73007))
+* update opensource ([f02dacc](https://github.com/Yancey-Blog/blog-cms-v2/commit/f02dacc2dcad42e5f7267b39c57d3a5794e02bb9))
+* update opensource ([56aa741](https://github.com/Yancey-Blog/blog-cms-v2/commit/56aa741e0fe91c3b066a3b10a165eb46d1c14f21))
+* update OpenSourceModal ([351ad8c](https://github.com/Yancey-Blog/blog-cms-v2/commit/351ad8c301e92146e5111d81b1b06037de6b84e6))
+* update README.md ([9c5dc85](https://github.com/Yancey-Blog/blog-cms-v2/commit/9c5dc85ff6a476fb6b54c0e1daedec0d7773d4b5))
+* update README.md ([fd77120](https://github.com/Yancey-Blog/blog-cms-v2/commit/fd77120e542083211e059c7ef301e4f3d05a8a71))
+* use alias for CRA3 ([81aab3a](https://github.com/Yancey-Blog/blog-cms-v2/commit/81aab3ab6070a86906a59331e27b63f757cf0f30))
+* use formik ([2c92f4b](https://github.com/Yancey-Blog/blog-cms-v2/commit/2c92f4b6a72cc8212da95c7d0ca3ceb38b166182))
+
 ## [0.2.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.1.0...v0.2.0) (2019-12-31)
 
 
