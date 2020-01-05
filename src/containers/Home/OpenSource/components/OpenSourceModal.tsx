@@ -37,6 +37,7 @@ const OpenSourceModal: FC<Props> = ({
 
   useEffect(() => {
     if (id) {
+      console.log(client.cache)
       // @ts-ignore
       const { title, description, url, posterUrl } = client.cache.data.get(
         `OpenSourceModel:${id}`,

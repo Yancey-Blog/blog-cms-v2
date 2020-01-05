@@ -6,17 +6,14 @@ import {
   Paper,
   DialogActions,
   DialogTitle,
-  DialogContent,
-  DialogContentText,
 } from '@material-ui/core'
 
 interface Props {
   title?: string
-  content?: string
   onOk: () => void
 }
 
-const ConfirmPoper: FC<Props> = ({ children, onOk }) => {
+const ConfirmPoper: FC<Props> = ({ children, onOk, title }) => {
   return (
     <PopupState variant="popover" popupId="deleteOnePoperOver">
       {popupState => (
@@ -37,10 +34,9 @@ const ConfirmPoper: FC<Props> = ({ children, onOk }) => {
             disableRestoreFocus
           >
             <Paper>
-              <DialogTitle>Use Google's location service?</DialogTitle>
-              <DialogContent>
-                <DialogContentText>Let Google help apps determine location.</DialogContentText>
-              </DialogContent>
+              <DialogTitle>
+                {title ? title : 'Are you sure you want to delete?'}
+              </DialogTitle>
               <DialogActions>
                 <Button onClick={popupState.close} color="primary">
                   Cancel

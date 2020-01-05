@@ -1,8 +1,4 @@
 import gql from 'graphql-tag'
-// eslint-disable-next-line
-import CreateOpenSourceInput from './graphql/createOpenSource.gql'
-// eslint-disable-next-line
-import UpdateOpenSourceInput from './graphql/updateOpenSource.gql'
 
 export const CREATE_ONE_OPEN_SOURCE = gql`
   mutation CreateOpenSource($input: CreateOpenSourceInput!) {

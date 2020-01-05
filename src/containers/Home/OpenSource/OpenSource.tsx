@@ -8,24 +8,20 @@ import {
   DELETE_ONE_OPEN_SOURCE,
   BATCH_DELETE_OPEN_SOURCE,
 } from './typeDefs'
-import { IOpenSource } from './interfaces/openSource.interface'
+import { IOpenSource, Query } from './types'
 import OpenSourceTable from './components/OpenSourceTable'
 import OpenSourceModal from './components/OpenSourceModal'
-
-interface ResData {
-  getOpenSources: IOpenSource[]
-}
 
 const OpenSource: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
 
-  const { loading: isFetching, data } = useQuery<ResData>(OPEN_SOURCES, {
+  const { loading: isFetching, data } = useQuery<Query>(OPEN_SOURCES, {
     notifyOnNetworkStatusChange: true,
   })
 
   const [createOpenSource] = useMutation(CREATE_ONE_OPEN_SOURCE, {
     update(proxy, { data: { createOpenSource } }) {
-      const data = proxy.readQuery<ResData>({ query: OPEN_SOURCES })
+      const data = proxy.readQuery<Query>({ query: OPEN_SOURCES })
 
       if (data) {
         proxy.writeQuery({
@@ -52,14 +48,14 @@ const OpenSource: FC = () => {
   const [deleteOpenSourceById, { loading: isDeleting }] = useMutation(
     DELETE_ONE_OPEN_SOURCE,
     {
-      update(cache, { data: { deleteOpenSourceById } }) {
-        const cacheData = cache.readQuery<ResData>({ query: OPEN_SOURCES })
+      update(proxy, { data: { deleteOpenSourceById } }) {
+        const data = proxy.readQuery<Query>({ query: OPEN_SOURCES })
 
-        if (cacheData) {
-          cache.writeQuery({
+        if (data) {
+          proxy.writeQuery({
             query: OPEN_SOURCES,
             data: {
-              getOpenSources: cacheData.getOpenSources.filter(
+              getOpenSources: data.getOpenSources.filter(
                 (openSource: IOpenSource) =>
                   openSource._id !== deleteOpenSourceById._id,
               ),
@@ -76,14 +72,14 @@ const OpenSource: FC = () => {
   const [deleteOpenSources, { loading: isBatchDeleting }] = useMutation(
     BATCH_DELETE_OPEN_SOURCE,
     {
-      update(cache, { data: { deleteOpenSources } }) {
-        const cacheData = cache.readQuery<ResData>({ query: OPEN_SOURCES })
+      update(proxy, { data: { deleteOpenSources } }) {
+        const data = proxy.readQuery<Query>({ query: OPEN_SOURCES })
 
-        if (cacheData) {
-          cache.writeQuery({
+        if (data) {
+          proxy.writeQuery({
             query: OPEN_SOURCES,
             data: {
-              getOpenSources: cacheData.getOpenSources.filter(
+              getOpenSources: data.getOpenSources.filter(
                 (openSource: IOpenSource) =>
                   !deleteOpenSources.ids.includes(openSource._id),
               ),
@@ -100,7 +96,7 @@ const OpenSource: FC = () => {
   return (
     <>
       <OpenSourceTable
-        data={data}
+        dataSource={data ? data.getOpenSources : []}
         isFetching={isFetching}
         isDeleting={isDeleting}
         isBatchDeleting={isBatchDeleting}

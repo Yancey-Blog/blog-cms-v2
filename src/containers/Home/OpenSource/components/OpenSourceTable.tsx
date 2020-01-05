@@ -14,9 +14,10 @@ import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
+import { IOpenSource } from '../types'
 
 interface Props {
-  data: any
+  dataSource: IOpenSource[]
   isFetching: boolean
   isDeleting: boolean
   isBatchDeleting: boolean
@@ -25,7 +26,7 @@ interface Props {
 }
 
 const OpenSourceTable: FC<Props> = ({
-  data,
+  dataSource,
   deleteOpenSourceById,
   deleteOpenSources,
   isFetching,
@@ -161,7 +162,8 @@ const OpenSourceTable: FC<Props> = ({
     },
     customToolbarSelect(selectedRows) {
       const ids = selectedRows.data.map(
-        (row: any) => data.getOpenSources[row.index]._id,
+        (row: { index: number; dataIndex: number }) =>
+          dataSource[row.index]._id,
       )
       return (
         <Fab size="medium" className={styles.addIconFab}>
@@ -177,9 +179,7 @@ const OpenSourceTable: FC<Props> = ({
     <TableWrapper tableName="Open Source" icon="save">
       <MUIDataTable
         title=""
-        data={
-          data ? data.getOpenSources.sort(sortBy('updatedAt')).reverse() : []
-        }
+        data={dataSource.sort(sortBy('updatedAt')).reverse()}
         columns={columns}
         options={options}
       />

@@ -7,3 +7,7 @@ export interface IOpenSource {
   createdAt: string
   updatedAt: string
 }
+
+export interface Query {
+  getOpenSources: IOpenSource[]
+}
