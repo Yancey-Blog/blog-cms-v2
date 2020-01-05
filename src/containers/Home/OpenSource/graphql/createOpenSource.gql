@@ -1,0 +1,6 @@
+input CreateOpenSourceInput {
+  title: String!
+  description: String!
+  url: String!
+  posterUrl: String!
+}

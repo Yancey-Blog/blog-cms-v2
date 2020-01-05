@@ -1,5 +1,6 @@
-import React, { FC } from 'react'
-import { useLocation, useHistory } from 'react-router-dom'
+import React, { FC, useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import { useMutation } from '@apollo/react-hooks'
 import * as Yup from 'yup'
 import {
   Button,
@@ -11,105 +12,134 @@ import {
 } from '@material-ui/core'
 import { Formik, Field, Form } from 'formik'
 import { TextField } from 'formik-material-ui'
-import styles from '../OpenSource.module.scss'
-
-interface Location {
-  showModal?: boolean
-  id?: string
-}
+import client from '../../../../shared/ApolloClient'
+import { CREATE_ONE_OPEN_SOURCE, UPDATE_ONE_OPEN_SOURCE, OPEN_SOURCES } from '../typeDefs'
+import { goBack, parseSearch } from '../../../../shared/utils'
+import styles from '../openSource.module.scss'
 
 const OpenSourceModal: FC = () => {
-  const { pathname } = useLocation<Location>()
+  const { search } = useLocation()
+  const { showModal, id } = parseSearch(search)
 
-  const history = useHistory()
-
-  const goBack = () => {
-    history.push(pathname, { showModal: false })
+  const initValues = {
+    title: '',
+    description: '',
+    url: '',
+    posterUrl: '',
   }
+  const [initialValues, setInitialValues] = useState(initValues)
+
+  const [createOpenSource] = useMutation(CREATE_ONE_OPEN_SOURCE, {
+    update(cache, { data: { createOpenSource } }) {
+      // @ts-ignore
+      const { getOpenSources } = cache.readQuery({ query: OPEN_SOURCES })
+      cache.writeQuery({
+        query: OPEN_SOURCES,
+        data: {
+          getOpenSources: [createOpenSource, ...getOpenSources],
+        },
+      })
+    },
+  })
+
+  const [updateOpenSourceById] = useMutation(UPDATE_ONE_OPEN_SOURCE)
+
+  useEffect(() => {
+    if (id) {
+      // @ts-ignore
+      const { title, description, url, posterUrl } = client.cache.data.get(`OpenSourceModel:${id}`)
+      setInitialValues({ title, description, url, posterUrl })
+    } else {
+      setInitialValues({ ...initValues })
+    }
+    // eslint-disable-next-line
+  }, [id])
 
   return (
-    <Dialog open={false} onClose={goBack}>
-      <DialogTitle>Add an Open Source</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          To Add an Open Source, please enter the following fields here. We will send updates
-          occasionally.
-        </DialogContentText>
-        <Formik
-          initialValues={{
-            title: '',
-            description: '',
-            url: '',
-            posterUrl: '',
-          }}
-          validationSchema={Yup.object().shape({
-            title: Yup.string().required('Title is required.'),
-            description: Yup.string().required('Description is required.'),
-            url: Yup.string()
-              .url()
-              .required('URL is required..'),
-            posterUrl: Yup.string()
-              .url()
-              .required('PostUrl is required.'),
-          })}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              setSubmitting(false)
-              alert(JSON.stringify(values, null, 2))
-            }, 500)
-          }}
-        >
-          {({ submitForm, isSubmitting, values, setFieldValue }) => (
-            <Form>
-              <Field
-                type="text"
-                label="Title"
-                name="title"
-                required
-                component={TextField}
-                className={styles.field}
-              />
+    <Formik
+      initialValues={initialValues}
+      enableReinitialize={true}
+      validationSchema={Yup.object().shape({
+        title: Yup.string().required('Title is required.'),
+        description: Yup.string().required('Description is required.'),
+        url: Yup.string()
+          .url()
+          .required('URL is required..'),
+        posterUrl: Yup.string()
+          .url()
+          .required('PostUrl is required.'),
+      })}
+      onSubmit={async values => {
+        if (id) {
+          await updateOpenSourceById({ variables: { input: { ...values, id } } })
+        } else {
+          await createOpenSource({ variables: { input: values } })
+        }
+        goBack()
+      }}
+    >
+      {({ isSubmitting, handleReset }) => {
+        return (
+          <Dialog open={!!showModal} onClose={goBack}>
+            <DialogTitle>{id ? 'Update' : 'Add'} an Open Source</DialogTitle>
+            <Form className={styles.customForm}>
+              <DialogContent>
+                <DialogContentText>
+                  To {id ? 'Update' : 'Add'} an Open Source, please enter the following fields here.
+                  We will send data after clicking Submit button.
+                </DialogContentText>
 
-              <Field
-                type="text"
-                label="Description"
-                name="description"
-                multiline
-                required
-                component={TextField}
-                className={styles.field}
-              />
+                <Field
+                  autoFocus
+                  type="text"
+                  label="Title"
+                  name="title"
+                  required
+                  component={TextField}
+                  fullWidth
+                />
 
-              <Field
-                type="text"
-                label="Url"
-                name="url"
-                required
-                component={TextField}
-                className={styles.field}
-              />
+                <Field
+                  type="text"
+                  label="Description"
+                  name="description"
+                  multiline
+                  required
+                  component={TextField}
+                  fullWidth
+                />
 
-              <Field
-                type="text"
-                label="PosterUrl"
-                name="posterUrl"
-                required
-                component={TextField}
-                className={styles.field}
-              />
+                <Field
+                  type="text"
+                  label="Url"
+                  name="url"
+                  required
+                  component={TextField}
+                  fullWidth
+                />
+
+                <Field
+                  type="text"
+                  label="PosterUrl"
+                  name="posterUrl"
+                  required
+                  component={TextField}
+                  fullWidth
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button color="primary" onClick={goBack}>
+                  Cancel
+                </Button>
+                <Button color="primary" type="submit" disabled={isSubmitting}>
+                  Submit
+                </Button>
+              </DialogActions>
             </Form>
-          )}
-        </Formik>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={goBack} color="default">
-          Cancel
-        </Button>
-        <Button color="primary" onClick={() => {}}>
-          Submit
-        </Button>
-      </DialogActions>
-    </Dialog>
+          </Dialog>
+        )
+      }}
+    </Formik>
   )
 }
 
