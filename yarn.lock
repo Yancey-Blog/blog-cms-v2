@@ -5564,10 +5564,10 @@ formik-material-ui@^1.0.0:
   resolved "https://registry.yarnpkg.com/formik-material-ui/-/formik-material-ui-1.0.0.tgz#87e36a7b3b8c54678aa484b1d89076fdfb63780b"
   integrity sha512-m9Q9PrebdT2XQRY8LbxAecXgXeQ8Sxa/UC/skG2ekwt+x5E1N3vvOw2A91GHi7rXkhNO32nQTDu6z7HJ3phLzA==
 
-formik@^2.0.8:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/formik/-/formik-2.1.0.tgz#5a59b358170049cebcaf03e661f5f9c6588714d1"
-  integrity sha512-GxH9uMX55UKQcX0hNBd/FuoYnYXKQY0nS9FH00vHyZzEvIfvvt+JMRWU515JbCvR9P2Sx3ZWMFgszjMugF3zNg==
+formik@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/formik/-/formik-2.1.1.tgz#a0f436d088e0aecaaa2e619682c323408a9e2c79"
+  integrity sha512-PdpgIPn7ipCzU5KBA+ED6Yy0kPqpZsWzoqI69ZJvcMtUfTzWrNfDeEdv2kd5aMAU3Iqs4PYFREAZjcthS/nqQw==
   dependencies:
     deepmerge "^2.1.1"
     hoist-non-react-statics "^3.3.0"
@@ -5943,7 +5943,6 @@ graphql-tag@^2.10.1:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.10.1.tgz#10aa41f1cd8fae5373eaf11f1f67260a3cad5e02"
   integrity sha512-jApXqWBzNXQ8jYa/HLkZJaVw9jgwNqZkywa2zfFn16Iv1Zb7ELNHkJaXHR7Quvd5SIGsy6Ny7SUKATgnu05uEg==
-
 
 graphql@^14.5.8:
   version "14.5.8"
