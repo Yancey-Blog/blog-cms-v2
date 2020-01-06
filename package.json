@@ -112,7 +112,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
-    "@commitlint/config-conventional": "^8.2.0",
+    "@commitlint/config-conventional": "^8.3.4",
     "@types/classnames": "^2.2.9",
     "@types/mui-datatables": "^2.13.3",
     "@types/ramda": "^0.26.39",
