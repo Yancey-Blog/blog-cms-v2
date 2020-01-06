@@ -5944,7 +5944,6 @@ graphql-tag@^2.10.1:
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.10.1.tgz#10aa41f1cd8fae5373eaf11f1f67260a3cad5e02"
   integrity sha512-jApXqWBzNXQ8jYa/HLkZJaVw9jgwNqZkywa2zfFn16Iv1Zb7ELNHkJaXHR7Quvd5SIGsy6Ny7SUKATgnu05uEg==
 
-
 graphql@^14.5.8:
   version "14.5.8"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-14.5.8.tgz#504f3d3114cb9a0a3f359bbbcf38d9e5bf6a6b3c"
@@ -10970,10 +10969,10 @@ sass-resources-loader@^2.0.1:
     glob "^7.1.1"
     loader-utils "^1.0.4"
 
-sass@^1.24.0:
-  version "1.24.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.24.0.tgz#e8b9931bc5d18a37d271749311ef2edc83102a77"
-  integrity sha512-1TsPyMhLTx+9DLlmwg02iBW2p4poGA7LlkWJLpUY/XticFKNhPcx+l4FsIJLKl6oSUfXmAKpVljHEez1hwjqiw==
+sass@^1.24.2:
+  version "1.24.2"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.24.2.tgz#0a0e0f00368be6808b2e94470172266ac45498fe"
+  integrity sha512-0JxdMMRd0fOmGFQFRI91vh4n0Ed766ib9JwPUa+1C37zn3VaqlHxbknUn/6LqP/MSfvNPxRYoCrYf5g8vu4OHw==
   dependencies:
     chokidar ">=2.0.0 <4.0.0"
 
