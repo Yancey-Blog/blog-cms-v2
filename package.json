@@ -111,7 +111,7 @@
     "yup": "^0.28.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.2.0",
+    "@commitlint/cli": "^8.3.4",
     "@commitlint/config-conventional": "^8.2.0",
     "@types/classnames": "^2.2.9",
     "@types/mui-datatables": "^2.13.3",
