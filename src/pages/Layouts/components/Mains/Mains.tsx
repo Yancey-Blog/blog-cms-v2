@@ -10,12 +10,15 @@ const OpenSource = lazy(() =>
   import('src/containers/Home/OpenSource/OpenSource'),
 )
 
+const Motto = lazy(() => import('src/containers/Home/Motto/Motto'))
+
 const Mains: FC = () => (
   <main className={styles.main}>
     <Suspense fallback={<Loading />}>
       <Switch>
         <Route exact path="/announcement" render={() => <Announcement />} />
         <Route exact path="/open-source" render={() => <OpenSource />} />
+        <Route exact path="/motto" render={() => <Motto />} />
       </Switch>
     </Suspense>
   </main>
