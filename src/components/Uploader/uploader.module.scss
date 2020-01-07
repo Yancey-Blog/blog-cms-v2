@@ -1,0 +1,29 @@
+.uploader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 128px;
+  height: 128px;
+}
+
+.addBtn {
+  width: 48px;
+  height: 48px;
+}
+
+.input {
+  position: absolute;
+  width: 128px;
+  height: 128px;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.img {
+  width: 114px;
+  height: 114px;
+  object-fit: cover;
+}
