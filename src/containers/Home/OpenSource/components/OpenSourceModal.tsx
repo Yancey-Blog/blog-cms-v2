@@ -10,7 +10,7 @@ import {
   DialogContentText,
 } from '@material-ui/core'
 import { useFormik } from 'formik'
-import { TextField } from '@material-ui/core'
+import { TextField, FormLabel } from '@material-ui/core'
 import styles from '../openSource.module.scss'
 import client from 'src/shared/ApolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
@@ -66,6 +66,7 @@ const OpenSourceModal: FC<Props> = ({
         await createOpenSource({ variables: { input: values } })
       }
       goBack()
+      resetForm()
     },
   })
 
@@ -119,11 +120,14 @@ const OpenSourceModal: FC<Props> = ({
             fullWidth
             {...getFieldProps('url')}
           />
+          <FormLabel required>PosterUrl</FormLabel>
           <TextField
+            style={{ display: 'none' }}
             required
             id="posterUrl"
             label="PosterUrl"
             fullWidth
+            disabled={true}
             {...getFieldProps('posterUrl')}
           />
           <Uploader onChange={onChange} />

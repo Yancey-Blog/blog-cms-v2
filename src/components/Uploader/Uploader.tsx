@@ -73,7 +73,7 @@ const Uploader: FC<Props> = ({
       <input
         type="file"
         accept={accept}
-        disabled={disabled}
+        disabled={disabled || uploading}
         onChange={e => onUpload(e)}
         className={styles.input}
       />
