@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.4.0...v0.4.1) (2020-01-08)
+
+
+### Features
+
+* add default value for Uploader ([5b079bf](https://github.com/Yancey-Blog/blog-cms-v2/commit/5b079bf45724b843eafd8548a9dc258722a7e790))
+* beauty opensource module ([b5dad49](https://github.com/Yancey-Blog/blog-cms-v2/commit/b5dad4905fd56bb10becdb46987613e023d25be9))
+* update types ([f70d51b](https://github.com/Yancey-Blog/blog-cms-v2/commit/f70d51b0b463b941668d0e4d653a519ea08a2524))
+* use useFormik instead of Formik component ([3d12a57](https://github.com/Yancey-Blog/blog-cms-v2/commit/3d12a5723ac20523fcb9a15ba9c6ef225b7b43b3))
+
 ## [0.4.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.3.0...v0.4.0) (2020-01-07)
 
 
