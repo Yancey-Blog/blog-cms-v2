@@ -3,7 +3,7 @@ export interface Error {
   code: string
 }
 
-export interface Data {
+export interface UploaderRes {
   name: string
   url: string
 }

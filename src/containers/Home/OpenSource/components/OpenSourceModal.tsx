@@ -15,6 +15,7 @@ import styles from '../openSource.module.scss'
 import client from 'src/shared/ApolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
+import { UploaderRes } from 'src/components/Uploader/types'
 
 interface Props {
   createOpenSource: Function
@@ -70,7 +71,7 @@ const OpenSourceModal: FC<Props> = ({
     },
   })
 
-  const onChange = (data: any) => {
+  const onChange = (data: UploaderRes) => {
     setFieldValue('posterUrl', data.url)
   }
 

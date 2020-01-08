@@ -2,7 +2,7 @@ import React, { FC, useState, ChangeEvent } from 'react'
 import { Card, CircularProgress } from '@material-ui/core'
 import { Add } from '@material-ui/icons'
 import { useSnackbar } from 'notistack'
-import { Data, Props } from './types'
+import { UploaderRes, Props } from './types'
 import styles from './uploader.module.scss'
 
 const Uploader: FC<Props> = ({
@@ -18,7 +18,7 @@ const Uploader: FC<Props> = ({
 
   const [uploading, setUploading] = useState(false)
 
-  const [curFile, setCurFile] = useState<Data>()
+  const [curFile, setCurFile] = useState<UploaderRes>()
 
   const onUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     setUploading(true)
