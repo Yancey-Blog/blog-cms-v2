@@ -3,7 +3,7 @@ export interface Error {
   code: string
 }
 
-export interface Data {
+export interface UploaderRes {
   name: string
   url: string
 }
@@ -23,5 +23,6 @@ export interface Props {
     | 'PATCH'
   disabled?: boolean
   name?: string
+  defaultFile?: string
   onChange: Function
 }
