@@ -23,5 +23,6 @@ export interface Props {
     | 'PATCH'
   disabled?: boolean
   name?: string
+  defaultFile?: string
   onChange: Function
 }

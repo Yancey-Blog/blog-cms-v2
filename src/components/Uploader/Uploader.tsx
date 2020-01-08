@@ -11,6 +11,7 @@ const Uploader: FC<Props> = ({
   method = 'POST',
   disabled = false,
   name = 'file',
+  defaultFile = '',
   onChange,
 }) => {
   const { enqueueSnackbar } = useSnackbar()
@@ -58,7 +59,9 @@ const Uploader: FC<Props> = ({
     if (uploading) {
       return <CircularProgress />
     } else {
-      if (curFile) {
+      if (defaultFile) {
+        return <img src={defaultFile} alt="default" className={styles.img} />
+      } else if (curFile) {
         const { name, url } = curFile
         return <img src={url} alt={name} className={styles.img} />
       } else {

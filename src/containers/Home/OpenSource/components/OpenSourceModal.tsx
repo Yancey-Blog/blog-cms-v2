@@ -120,17 +120,22 @@ const OpenSourceModal: FC<Props> = ({
             fullWidth
             {...getFieldProps('url')}
           />
-          <FormLabel required>PosterUrl</FormLabel>
-          <TextField
-            style={{ display: 'none' }}
-            required
-            id="posterUrl"
-            label="PosterUrl"
-            fullWidth
-            disabled={true}
-            {...getFieldProps('posterUrl')}
-          />
-          <Uploader onChange={onChange} />
+          <div className={styles.uploaderGroup}>
+            <FormLabel required>PosterUrl</FormLabel>
+            <TextField
+              style={{ display: 'none' }}
+              required
+              id="posterUrl"
+              label="PosterUrl"
+              fullWidth
+              disabled={true}
+              {...getFieldProps('posterUrl')}
+            />
+            <Uploader
+              onChange={onChange}
+              defaultFile={getFieldProps('posterUrl').value}
+            />
+          </div>
         </DialogContent>
         <DialogActions>
           <Button color="primary" onClick={goBack}>
