@@ -2,7 +2,7 @@ import React, { FC, useState, ChangeEvent } from 'react'
 import { Card, CircularProgress } from '@material-ui/core'
 import { Add } from '@material-ui/icons'
 import { useSnackbar } from 'notistack'
-import { Data, Props } from './types'
+import { UploaderRes, Props } from './types'
 import styles from './uploader.module.scss'
 
 const Uploader: FC<Props> = ({
@@ -11,13 +11,14 @@ const Uploader: FC<Props> = ({
   method = 'POST',
   disabled = false,
   name = 'file',
+  defaultFile = '',
   onChange,
 }) => {
   const { enqueueSnackbar } = useSnackbar()
 
   const [uploading, setUploading] = useState(false)
 
-  const [curFile, setCurFile] = useState<Data>()
+  const [curFile, setCurFile] = useState<UploaderRes>()
 
   const onUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     setUploading(true)
@@ -58,7 +59,9 @@ const Uploader: FC<Props> = ({
     if (uploading) {
       return <CircularProgress />
     } else {
-      if (curFile) {
+      if (defaultFile) {
+        return <img src={defaultFile} alt="default" className={styles.img} />
+      } else if (curFile) {
         const { name, url } = curFile
         return <img src={url} alt={name} className={styles.img} />
       } else {
@@ -73,7 +76,7 @@ const Uploader: FC<Props> = ({
       <input
         type="file"
         accept={accept}
-        disabled={disabled}
+        disabled={disabled || uploading}
         onChange={e => onUpload(e)}
         className={styles.input}
       />

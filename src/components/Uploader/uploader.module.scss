@@ -1,8 +1,9 @@
 .uploader {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  margin-left: 24px;
   width: 128px;
   height: 128px;
 }
