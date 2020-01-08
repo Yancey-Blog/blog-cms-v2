@@ -7,7 +7,7 @@ import styles from './uploader.module.scss'
 
 const Uploader: FC<Props> = ({
   accept = 'image/*',
-  action = process.env.DOMAIN || '',
+  action = process.env.REACT_APP_UPLOADER_DOMAIN || '',
   method = 'POST',
   disabled = false,
   name = 'file',

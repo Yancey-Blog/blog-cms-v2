@@ -17,7 +17,7 @@ const client = new ApolloClient({
       }
     }),
     new HttpLink({
-      uri: process.env.GRAPHQL_DOMAIN,
+      uri: process.env.REACT_APP_GRAPHQL_DOMAIN,
     }),
   ]),
 })
