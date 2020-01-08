@@ -125,7 +125,7 @@
     "husky": "^4.0.0",
     "lint-staged": "^9.5.0",
     "prettier": "^1.19.1",
-    "sass": "^1.24.2",
+    "sass": "^1.24.3",
     "sass-resources-loader": "^2.0.1",
     "standard-version": "^7.0.1"
   },
