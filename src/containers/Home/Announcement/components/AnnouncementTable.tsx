@@ -3,32 +3,30 @@ import { useHistory, useLocation } from 'react-router-dom'
 import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
-  MUIDataTableMeta,
 } from 'mui-datatables'
-import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
-import { FormControl, Fab, Button, Popover } from '@material-ui/core'
+import { FormControl, Fab } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
 import styles from '../openSource.module.scss'
 import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
-import { IOpenSource } from '../types'
+import { IAnnouncement } from '../types'
 
 interface Props {
-  dataSource: IOpenSource[]
+  dataSource: IAnnouncement[]
   isFetching: boolean
   isDeleting: boolean
   isBatchDeleting: boolean
-  deleteOpenSourceById: Function
-  deleteOpenSources: Function
+  deleteAnnouncementById: Function
+  deleteAnnouncements: Function
 }
 
-const OpenSourceTable: FC<Props> = ({
+const AnnouncementTable: FC<Props> = ({
   dataSource,
-  deleteOpenSourceById,
-  deleteOpenSources,
+  deleteAnnouncementById,
+  deleteAnnouncements,
   isFetching,
   isDeleting,
   isBatchDeleting,
@@ -43,65 +41,7 @@ const OpenSourceTable: FC<Props> = ({
 
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
-    { name: 'title', label: 'Title' },
-    { name: 'description', label: 'Description' },
-    {
-      name: 'url',
-      label: 'Url',
-      options: {
-        customBodyRender: (value: string) => (
-          <Button
-            href={value}
-            color="secondary"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {value}
-          </Button>
-        ),
-      },
-    },
-    {
-      name: 'posterUrl',
-      label: 'PosterUrl',
-      options: {
-        customBodyRender: (value: string, tableMeta: MUIDataTableMeta) => {
-          const curName = tableMeta.rowData[1]
-          return (
-            <PopupState variant="popover" popupId="imagePoperOver">
-              {popupState => (
-                <div>
-                  <img
-                    src={value}
-                    style={{ width: '150px' }}
-                    alt={curName}
-                    {...bindTrigger(popupState)}
-                  />
-                  <Popover
-                    {...bindPopover(popupState)}
-                    anchorOrigin={{
-                      vertical: 'bottom',
-                      horizontal: 'left',
-                    }}
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'center',
-                    }}
-                    disableRestoreFocus
-                  >
-                    <img
-                      src={value}
-                      style={{ width: '800px', display: 'block' }}
-                      alt={curName}
-                    />
-                  </Popover>
-                </div>
-              )}
-            </PopupState>
-          )
-        },
-      },
-    },
+    { name: 'content', label: 'Content' },
     {
       name: 'createdAt',
       label: 'CreatedAt',
@@ -134,7 +74,7 @@ const OpenSourceTable: FC<Props> = ({
               <FormControl>
                 <ConfirmPoper
                   onOk={() =>
-                    deleteOpenSourceById({ variables: { id: curId } })
+                    deleteAnnouncementById({ variables: { id: curId } })
                   }
                 >
                   <DeleteOutline className={styles.addIcon} />
@@ -167,7 +107,9 @@ const OpenSourceTable: FC<Props> = ({
       )
       return (
         <Fab size="medium" className={styles.addIconFab}>
-          <ConfirmPoper onOk={() => deleteOpenSources({ variables: { ids } })}>
+          <ConfirmPoper
+            onOk={() => deleteAnnouncements({ variables: { ids } })}
+          >
             <DeleteOutline className={styles.addIcon} />
           </ConfirmPoper>
         </Fab>
@@ -176,7 +118,7 @@ const OpenSourceTable: FC<Props> = ({
   }
 
   return (
-    <TableWrapper tableName="Open Source" icon="save">
+    <TableWrapper tableName="Announcement" icon="save">
       <MUIDataTable
         title=""
         data={dataSource.sort(sortBy('updatedAt')).reverse()}
@@ -188,4 +130,4 @@ const OpenSourceTable: FC<Props> = ({
   )
 }
 
-export default OpenSourceTable
+export default AnnouncementTable
