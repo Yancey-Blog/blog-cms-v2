@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.5.0...v0.6.0) (2020-01-09)
+
+
+### Features
+
+* finish Announcement components ([5878a8d](https://github.com/Yancey-Blog/blog-cms-v2/commit/5878a8d63d0b96dc797b7b9be8ca822b5fc4198a))
+* finish AnnouncementModal component ([9727a3b](https://github.com/Yancey-Blog/blog-cms-v2/commit/9727a3b7492201a466785b8bdb67ac9d4b56deb5))
+* finish AnnouncementsModel ([e4ecbff](https://github.com/Yancey-Blog/blog-cms-v2/commit/e4ecbff3819ab906b092a6cd9f690b3f2fd5f565))
+* finish AnnouncementTable components ([d559f40](https://github.com/Yancey-Blog/blog-cms-v2/commit/d559f409101005ec4eecad5c4341ed84f1f86b2a))
+* finish typeDefs ([2b4fe14](https://github.com/Yancey-Blog/blog-cms-v2/commit/2b4fe1419fc504481bc04eb21b12d762e043c552))
+* update style file ([eeb4320](https://github.com/Yancey-Blog/blog-cms-v2/commit/eeb4320b84c0ecababf2ed752ca91fdb1c3bcafd))
+* update style files ([d552285](https://github.com/Yancey-Blog/blog-cms-v2/commit/d55228595a8d322d6708e2050d61352e9b5f013e))
+* update typeDefs ([b7a6119](https://github.com/Yancey-Blog/blog-cms-v2/commit/b7a6119efab0b03a26435e8520b78d0202fe13c3))
+* update types ([c2ce89d](https://github.com/Yancey-Blog/blog-cms-v2/commit/c2ce89d916c7dcf51a4a6f23fd9696bb0586f73e))
+
 ## [0.5.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.4.1...v0.5.0) (2020-01-09)
 
 
