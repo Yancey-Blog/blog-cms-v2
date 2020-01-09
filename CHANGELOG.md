@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.4.1...v0.5.0) (2020-01-09)
+
+
+### Features
+
+* config env ([47069c1](https://github.com/Yancey-Blog/blog-cms-v2/commit/47069c1300b73bbb60e2006daf46e14059807014))
+* support env config ([51e8149](https://github.com/Yancey-Blog/blog-cms-v2/commit/51e8149f01169133e0e9f75f988728cc82fb5317))
+* update env name ([35974a5](https://github.com/Yancey-Blog/blog-cms-v2/commit/35974a56a7e6cec12d9189164d5d095cebd29fa9))
+
 ### [0.4.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.4.0...v0.4.1) (2020-01-08)
 
 
