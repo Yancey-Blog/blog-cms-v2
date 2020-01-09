@@ -2,33 +2,33 @@ import React, { FC } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { useSnackbar } from 'notistack'
 import {
-  OPEN_SOURCES,
-  CREATE_ONE_OPEN_SOURCE,
-  UPDATE_ONE_OPEN_SOURCE,
-  DELETE_ONE_OPEN_SOURCE,
-  BATCH_DELETE_OPEN_SOURCE,
+  ANNOUNCEMENTS,
+  CREATE_ONE_ANNOUNCEMENT,
+  UPDATE_ONE_ANNOUNCEMENT,
+  DELETE_ONE_ANNOUNCEMENT,
+  BATCH_DELETE_ANNOUNCEMENT,
 } from './typeDefs'
-import { IOpenSource, Query } from './types'
-import OpenSourceTable from './components/OpenSourceTable'
-import OpenSourceModal from './components/OpenSourceModal'
+import { IAnnouncement, Query } from './types'
+import AnnouncementTable from './components/AnnouncementTable'
+import AnnouncementModal from './components/AnnouncementModal'
 
-const OpenSource: FC = () => {
+const Announcement: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
 
-  const { loading: isFetching, data } = useQuery<Query>(OPEN_SOURCES, {
+  const { loading: isFetching, data } = useQuery<Query>(ANNOUNCEMENTS, {
     notifyOnNetworkStatusChange: true,
   })
 
-  const [createOpenSource] = useMutation(CREATE_ONE_OPEN_SOURCE, {
-    update(proxy, { data: { createOpenSource } }) {
-      const data = proxy.readQuery<Query>({ query: OPEN_SOURCES })
+  const [createAnnouncement] = useMutation(CREATE_ONE_ANNOUNCEMENT, {
+    update(proxy, { data: { createAnnouncement } }) {
+      const data = proxy.readQuery<Query>({ query: ANNOUNCEMENTS })
 
       if (data) {
         proxy.writeQuery({
-          query: OPEN_SOURCES,
+          query: ANNOUNCEMENTS,
           data: {
             ...data,
-            getOpenSources: [createOpenSource, ...data.getOpenSources],
+            getAnnouncements: [createAnnouncement, ...data.getAnnouncements],
           },
         })
       }
@@ -39,25 +39,25 @@ const OpenSource: FC = () => {
     },
   })
 
-  const [updateOpenSourceById] = useMutation(UPDATE_ONE_OPEN_SOURCE, {
+  const [updateAnnouncementById] = useMutation(UPDATE_ONE_ANNOUNCEMENT, {
     onCompleted() {
       enqueueSnackbar('update success!', { variant: 'success' })
     },
   })
 
-  const [deleteOpenSourceById, { loading: isDeleting }] = useMutation(
-    DELETE_ONE_OPEN_SOURCE,
+  const [deleteAnnouncementById, { loading: isDeleting }] = useMutation(
+    DELETE_ONE_ANNOUNCEMENT,
     {
-      update(proxy, { data: { deleteOpenSourceById } }) {
-        const data = proxy.readQuery<Query>({ query: OPEN_SOURCES })
+      update(proxy, { data: { deleteAnnouncementById } }) {
+        const data = proxy.readQuery<Query>({ query: ANNOUNCEMENTS })
 
         if (data) {
           proxy.writeQuery({
-            query: OPEN_SOURCES,
+            query: ANNOUNCEMENTS,
             data: {
-              getOpenSources: data.getOpenSources.filter(
-                (openSource: IOpenSource) =>
-                  openSource._id !== deleteOpenSourceById._id,
+              getAnnouncements: data.getAnnouncements.filter(
+                (openSource: IAnnouncement) =>
+                  openSource._id !== deleteAnnouncementById._id,
               ),
             },
           })
@@ -69,19 +69,19 @@ const OpenSource: FC = () => {
     },
   )
 
-  const [deleteOpenSources, { loading: isBatchDeleting }] = useMutation(
-    BATCH_DELETE_OPEN_SOURCE,
+  const [deleteAnnouncements, { loading: isBatchDeleting }] = useMutation(
+    BATCH_DELETE_ANNOUNCEMENT,
     {
-      update(proxy, { data: { deleteOpenSources } }) {
-        const data = proxy.readQuery<Query>({ query: OPEN_SOURCES })
+      update(proxy, { data: { deleteAnnouncements } }) {
+        const data = proxy.readQuery<Query>({ query: ANNOUNCEMENTS })
 
         if (data) {
           proxy.writeQuery({
-            query: OPEN_SOURCES,
+            query: ANNOUNCEMENTS,
             data: {
-              getOpenSources: data.getOpenSources.filter(
-                (openSource: IOpenSource) =>
-                  !deleteOpenSources.ids.includes(openSource._id),
+              getAnnouncements: data.getAnnouncements.filter(
+                (openSource: IAnnouncement) =>
+                  !deleteAnnouncements.ids.includes(openSource._id),
               ),
             },
           })
@@ -95,21 +95,21 @@ const OpenSource: FC = () => {
 
   return (
     <>
-      <OpenSourceTable
-        dataSource={data ? data.getOpenSources : []}
+      <AnnouncementTable
+        dataSource={data ? data.getAnnouncements : []}
         isFetching={isFetching}
         isDeleting={isDeleting}
         isBatchDeleting={isBatchDeleting}
-        deleteOpenSourceById={deleteOpenSourceById}
-        deleteOpenSources={deleteOpenSources}
+        deleteAnnouncementById={deleteAnnouncementById}
+        deleteAnnouncements={deleteAnnouncements}
       />
 
-      <OpenSourceModal
-        createOpenSource={createOpenSource}
-        updateOpenSourceById={updateOpenSourceById}
+      <AnnouncementModal
+        createAnnouncement={createAnnouncement}
+        updateAnnouncementById={updateAnnouncementById}
       />
     </>
   )
 }
 
-export default OpenSource
+export default Announcement
