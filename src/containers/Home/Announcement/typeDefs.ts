@@ -1,64 +1,48 @@
 import gql from 'graphql-tag'
 
-export const CREATE_ONE_OPEN_SOURCE = gql`
-  mutation CreateOpenSource($input: CreateOpenSourceInput!) {
-    createOpenSource(input: $input) {
+export const CREATE_ONE_ANNOUNCEMENT = gql`
+  mutation CreateAnnouncement($input: CreateAnnouncementInput!) {
+    createAnnouncement(input: $input) {
       _id
-      title
-      description
-      url
-      posterUrl
       createdAt
       updatedAt
     }
   }
 `
 
-export const UPDATE_ONE_OPEN_SOURCE = gql`
-  mutation UpdateOpenSourceById($input: UpdateOpenSourceInput!) {
-    updateOpenSourceById(input: $input) {
+export const UPDATE_ONE_ANNOUNCEMENT = gql`
+  mutation UpdateAnnouncementById($input: UpdateAnnouncementInput!) {
+    updateAnnouncementById(input: $input) {
       _id
-      title
-      description
-      url
-      posterUrl
       createdAt
       updatedAt
     }
   }
 `
 
-export const OPEN_SOURCES = gql`
-  query GetOpenSources {
-    getOpenSources {
+export const ANNOUNCEMENTS = gql`
+  query GetAnnouncements {
+    getAnnouncements {
       _id
-      title
-      description
-      url
-      posterUrl
       createdAt
       updatedAt
     }
   }
 `
 
-export const DELETE_ONE_OPEN_SOURCE = gql`
-  mutation DeleteOpenSourceById($id: ID!) {
-    deleteOpenSourceById(id: $id) {
+export const DELETE_ONE_ANNOUNCEMENT = gql`
+  mutation DeleteAnnouncementById($id: ID!) {
+    deleteAnnouncementById(id: $id) {
       _id
-      title
-      description
-      url
-      posterUrl
       createdAt
       updatedAt
     }
   }
 `
 
-export const BATCH_DELETE_OPEN_SOURCE = gql`
-  mutation DeleteOpenSources($ids: [ID!]!) {
-    deleteOpenSources(ids: $ids) {
+export const BATCH_DELETE_ANNOUNCEMENT = gql`
+  mutation DeleteAnnouncements($ids: [ID!]!) {
+    deleteAnnouncements(ids: $ids) {
       n
       ok
       deletedCount
