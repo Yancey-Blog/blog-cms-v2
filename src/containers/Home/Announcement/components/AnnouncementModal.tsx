@@ -42,6 +42,7 @@ const AnnouncementModal: FC<Props> = ({
     setValues,
     resetForm,
     isSubmitting,
+    errors,
   } = useFormik({
     initialValues,
     validationSchema,
@@ -81,6 +82,8 @@ const AnnouncementModal: FC<Props> = ({
             button.
           </DialogContentText>
           <TextField
+            error={!!errors.content}
+            helperText={errors.content}
             autoFocus
             required
             id="content"
