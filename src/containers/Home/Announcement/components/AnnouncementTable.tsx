@@ -7,7 +7,7 @@ import MUIDataTable, {
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
-import styles from '../openSource.module.scss'
+import styles from '../announcement.module.scss'
 import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
