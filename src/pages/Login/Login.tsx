@@ -1,80 +1,99 @@
-import React, { Component } from 'react'
-import classNames from 'classnames'
-import Recaptcha from 'react-google-recaptcha'
-import { recaptchaKey } from '../../shared/constants'
+import React, { FC } from 'react'
+import * as Yup from 'yup'
+import { useFormik } from 'formik'
 import styles from './Login.module.scss'
 
-class Login extends Component {
-  constructor(props: any) {
-    super(props)
-    this.state = {}
+const Login: FC = () => {
+  const initialValues = {
+    email: '',
+    password: '',
   }
 
-  componentDidMount() {}
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().required('Email is required.'),
+    password: Yup.string().required('Password is required.'),
+  })
 
-  render() {
-    // @ts-ignore
-    window.recaptchaOptions = {
-      lang: 'ja',
-    }
-    // const btnStyle = {
-    //   background: '#ccc',
-    //   boxShadow: '0 0 4px #ccc',
-    //   cursor: 'not-allowed',
-    // }
-    return (
-      <main className={styles.loginWrapper}>
-        <figure className={styles.blurBg} />
-        <section className={styles.loginContainer}>
-          <h1>
-            <a href="https://www.yanceyleo.com/">
-              <figure className={styles.titleImg} />
-            </a>
-          </h1>
-          <div className={styles.userInputGroup}>
-            <label htmlFor="account" className={styles.itemLabel}>
-              Email Address
-              <input
-                id="account"
-                className={styles.itemInput}
-                type="email"
-                // onChange={e => loginStore.onEmailChange(e)}
-              />
-            </label>
-          </div>
-          <div className={styles.userInputGroup}>
-            <label htmlFor="password" className={styles.itemLabel}>
-              Password
-              <input
-                id="password"
-                className={styles.itemInput}
-                type="password"
-                // onChange={e => loginStore.onPasswordChange(e)}
-              />
-            </label>
-          </div>
-          <div className={styles.userInputGroup}>
-            <span className={classNames(styles.itemLabel, styles.itemSpan)}>Recaptcha</span>
-            <Recaptcha
-              sitekey={recaptchaKey}
-              // onChange={value => loginStore.onCaptchaChange(value)}
-            />
-          </div>
-          <button
-            type="button"
-            className={styles.loginBtn}
-            // onClick={loginStore.login}
-            // disabled={!loginStore.isFilled || loginStore.loginStatus}
-            // style={
-            //   !loginStore.isFilled || loginStore.loginStatus ? btnStyle : {}
-            // }
+  const {
+    handleSubmit,
+    getFieldProps,
+    resetForm,
+    isSubmitting,
+    errors,
+  } = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: async values => {
+      // TODO:
+      resetForm()
+    },
+  })
+
+  return (
+    <main className={styles.loginWrapper}>
+      <form className={styles.loginForm} onSubmit={handleSubmit}>
+        <div className={styles.header}>Create an Account</div>
+        <label htmlFor="email" className={styles.label}>
+          Email
+          <input
+            id="email"
+            type="text"
+            className={styles.inputTxt}
+            {...getFieldProps('email')}
+          />
+        </label>
+
+        <label htmlFor="username" className={styles.label}>
+          Username
+          <input
+            id="username"
+            type="text"
+            className={styles.inputTxt}
+            {...getFieldProps('username')}
+          />
+        </label>
+
+        <label htmlFor="password" className={styles.label}>
+          Password
+          <input
+            id="password"
+            type="password"
+            className={styles.inputTxt}
+            {...getFieldProps('password')}
+          />
+        </label>
+
+        <button
+          className={styles.submitBtn}
+          type="submit"
+          disabled={isSubmitting}
+        >
+          Continue
+        </button>
+
+        <p className={styles.toLogin}>Already have an account?</p>
+        <p className={styles.license}>
+          By registering, you agree to Yancey Inc.'s{' '}
+          <a
+            rel="noreferrer noopener"
+            target="_blank"
+            href="https://m.yanceyleo.com/policy/service"
           >
-            login
-          </button>
-        </section>
-      </main>
-    )
-  }
+            Terms of Service
+          </a>{' '}
+          and{' '}
+          <a
+            rel="noreferrer noopener"
+            target="_blank"
+            href="https://m.yanceyleo.com/policy/privacy"
+          >
+            Privacy and Policy
+          </a>
+          .
+        </p>
+      </form>
+    </main>
+  )
 }
 
 export default Login
