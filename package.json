@@ -20,6 +20,8 @@
     "@devexpress/dx-react-chart": "^2.4.0",
     "@devexpress/dx-react-chart-material-ui": "^2.4.0",
     "@devexpress/dx-react-core": "^2.4.0",
+    "@devexpress/dx-react-scheduler": "^2.4.0",
+    "@devexpress/dx-react-scheduler-material-ui": "^2.4.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
     "@fortawesome/free-brands-svg-icons": "^5.12.0",
     "@fortawesome/free-solid-svg-icons": "^5.12.0",

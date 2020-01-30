@@ -1159,6 +1159,18 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
+"@date-io/core@^1.3.13":
+  version "1.3.13"
+  resolved "https://registry.yarnpkg.com/@date-io/core/-/core-1.3.13.tgz#90c71da493f20204b7a972929cc5c482d078b3fa"
+  integrity sha512-AlEKV7TxjeK+jxWVKcCFrfYAk8spX9aCyiToFIiLPtfQbsjmRGLIhb5VZgptQcJdHtLXo7+m0DuurwFgUToQuA==
+
+"@date-io/moment@^1.3.11":
+  version "1.3.13"
+  resolved "https://registry.yarnpkg.com/@date-io/moment/-/moment-1.3.13.tgz#56c2772bc4f6675fc6970257e6033e7a7c2960f0"
+  integrity sha512-3kJYusJtQuOIxq6byZlzAHoW/18iExJer9qfRF5DyyzdAk074seTuJfdofjz4RFfTd/Idk8WylOQpWtERqvFuQ==
+  dependencies:
+    "@date-io/core" "^1.3.13"
+
 "@devexpress/dx-chart-core@2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@devexpress/dx-chart-core/-/dx-chart-core-2.4.0.tgz#974086ad3af3f65aff76a6c5633094b5495e2d76"
@@ -1197,6 +1209,32 @@
   dependencies:
     "@devexpress/dx-core" "2.4.0"
     prop-types "^15.7.2"
+
+"@devexpress/dx-react-scheduler-material-ui@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-scheduler-material-ui/-/dx-react-scheduler-material-ui-2.4.0.tgz#2b26351ef5d838a1ec94c76e0df1fc8aed4f31ae"
+  integrity sha512-FA6zDCsjvz6I9A5ulyBk6UUWgTjlbOclvszLMGFQ/c2W+lW7D9P+cG4hpQ3Z5imV2X7kqINVcIDddXp9NZ9vjA==
+  dependencies:
+    "@date-io/moment" "^1.3.11"
+    "@material-ui/pickers" "^3.2.8"
+    clsx "^1.0.4"
+    moment "^2.24.0"
+    prop-types "^15.7.2"
+
+"@devexpress/dx-react-scheduler@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-react-scheduler/-/dx-react-scheduler-2.4.0.tgz#6618933384005495398578d2f16fc40456e748e6"
+  integrity sha512-Owd8L9IsuiU6CoyqdSrl7rx+m9OKZG6Tw5u38pqZNJqIYkmJK3bA509IyTvKnz7Z6cldINoazLahupEJrZCDZA==
+  dependencies:
+    "@devexpress/dx-scheduler-core" "2.4.0"
+
+"@devexpress/dx-scheduler-core@2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@devexpress/dx-scheduler-core/-/dx-scheduler-core-2.4.0.tgz#0ac10e95daec758c25f3196adeb74960e905a154"
+  integrity sha512-gn9VkgaDnb0jO9AT6i1Xl15EQF5ppIuTwBD89FPr9scpuIAgwoEzCvJOiaDzeANEPoV9LdYZlT0LvSMjecuycQ==
+  dependencies:
+    moment "^2.24.0"
+    rrule "^2.6.2"
 
 "@emotion/hash@^0.7.4":
   version "0.7.4"
@@ -8046,6 +8084,11 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
+luxon@^1.21.3:
+  version "1.22.0"
+  resolved "https://registry.yarnpkg.com/luxon/-/luxon-1.22.0.tgz#639525c7c69e594953c7b142794466b8ea85b868"
+  integrity sha512-3sLvlfbFo+AxVEY3IqxymbumtnlgBwjDExxK60W3d+trrUzErNAz/PfvPT+mva+vEUrdIodeCOs7fB6zHtRSrw==
+
 make-dir@^2.0.0, make-dir@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-2.1.0.tgz#5f0310e18b8be898cc07009295a30ae41e91e6f5"
@@ -10925,6 +10968,15 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^3.0.0"
     inherits "^2.0.1"
+
+rrule@^2.6.2:
+  version "2.6.4"
+  resolved "https://registry.yarnpkg.com/rrule/-/rrule-2.6.4.tgz#7f4f31fda12bc7249bb176c891109a9bc448e035"
+  integrity sha512-sLdnh4lmjUqq8liFiOUXD5kWp/FcnbDLPwq5YAc/RrN6120XOPb86Ae5zxF7ttBVq8O3LxjjORMEit1baluahA==
+  dependencies:
+    tslib "^1.10.0"
+  optionalDependencies:
+    luxon "^1.21.3"
 
 rsvp@^4.8.4:
   version "4.8.5"
