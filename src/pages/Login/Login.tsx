@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
+import classNames from 'classnames'
 import styles from './Login.module.scss'
 
 const Login: FC = () => {
@@ -10,8 +11,10 @@ const Login: FC = () => {
   }
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required.'),
-    password: Yup.string().required('Password is required.'),
+    email: Yup.string()
+      .email()
+      .required('This field is required.'),
+    password: Yup.string().required('This field is required.'),
   })
 
   const {
@@ -34,11 +37,20 @@ const Login: FC = () => {
       <form className={styles.loginForm} onSubmit={handleSubmit}>
         <div className={styles.header}>Create an Account</div>
         <label htmlFor="email" className={styles.label}>
-          Email
+          {errors.email ? (
+            <span className={styles.error}>
+              Email - <span className={styles.errorMsg}>{errors.email}</span>
+            </span>
+          ) : (
+            'Email'
+          )}
           <input
             id="email"
             type="text"
-            className={styles.inputTxt}
+            className={classNames(
+              { [styles.errorInputTxt]: errors.email },
+              styles.inputTxt,
+            )}
             {...getFieldProps('email')}
           />
         </label>
@@ -54,11 +66,21 @@ const Login: FC = () => {
         </label>
 
         <label htmlFor="password" className={styles.label}>
-          Password
+          {errors.password ? (
+            <span className={styles.error}>
+              Password -
+              <span className={styles.errorMsg}>{errors.password}</span>
+            </span>
+          ) : (
+            'Password'
+          )}
           <input
             id="password"
             type="password"
-            className={styles.inputTxt}
+            className={classNames(
+              { [styles.errorInputTxt]: errors.password },
+              styles.inputTxt,
+            )}
             {...getFieldProps('password')}
           />
         </label>

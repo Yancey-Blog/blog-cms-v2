@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { ApolloProvider } from '@apollo/react-hooks'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -26,8 +26,10 @@ ReactDOM.render(
         autoHideDuration={2000}
       >
         <CssBaseline />
-        {/* <Layouts /> */}
-        <Login />
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/" component={Layouts} />
+        </Switch>
       </SnackbarProvider>
     </BrowserRouter>
   </ApolloProvider>,

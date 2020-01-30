@@ -5,6 +5,7 @@
   background: url('../../assets/images/login-bg-dark.jpg') no-repeat center
     center;
   background-size: cover;
+  text-rendering: optimizeLegibility;
 }
 
 .header {
@@ -74,7 +75,7 @@
 
 .toLogin {
   margin-top: 8px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: #7289da;
   cursor: pointer;
@@ -93,5 +94,22 @@
     &:hover {
       text-decoration: underline;
     }
+  }
+}
+
+.error {
+  color: #f04747;
+}
+
+.errorMsg {
+  font-style: italic;
+  text-transform: initial;
+}
+
+.errorInputTxt {
+  border-color: #f04747;
+  &:hover,
+  &:focus {
+    border-color: #f04747;
   }
 }
