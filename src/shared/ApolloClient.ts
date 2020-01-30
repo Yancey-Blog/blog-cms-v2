@@ -4,6 +4,8 @@ import { HttpLink } from 'apollo-link-http'
 import { onError } from 'apollo-link-error'
 import { ApolloLink } from 'apollo-link'
 
+const token = window.localStorage.getItem('token')
+
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   resolvers: {},
@@ -18,6 +20,9 @@ const client = new ApolloClient({
     }),
     new HttpLink({
       uri: process.env.REACT_APP_GRAPHQL_URL,
+      headers: {
+        authorization: token ? `Bearer ${token}` : '',
+      },
     }),
   ]),
 })
