@@ -109,7 +109,7 @@ const Login: FC = () => {
             target="_blank"
             href="https://m.yanceyleo.com/policy/privacy"
           >
-            Privacy and Policy
+            Privacy Policy
           </a>
           .
         </p>
