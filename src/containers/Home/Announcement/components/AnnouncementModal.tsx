@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import styles from '../announcement.module.scss'
-import client from 'src/shared/ApolloClient'
+import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 
 interface Props {

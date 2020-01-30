@@ -7,7 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { SnackbarProvider } from 'notistack'
 import * as serviceWorker from './serviceWorker'
 import fontAwesomes from './shared/fontAwesome'
-import client from './shared/ApolloClient'
+import client from './shared/apolloClient'
 import Layouts from './pages/Layouts/Layouts'
 import Login from './pages/Login/Login'
 
