@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.7.0...v0.7.1) (2020-01-31)
+
+
+### Bug Fixes
+
+* fix bugs of router ([28c1900](https://github.com/Yancey-Blog/blog-cms-v2/commit/28c1900a0eadd90983e80d41316582af4cbc21be))
+
 ## [0.7.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.6.0...v0.7.0) (2020-01-31)
 
 
