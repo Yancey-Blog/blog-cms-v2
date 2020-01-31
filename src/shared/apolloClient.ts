@@ -3,8 +3,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { BatchHttpLink } from 'apollo-link-batch-http'
 import { onError } from 'apollo-link-error'
 import { setContext } from 'apollo-link-context'
-import history from './history'
 import SnackbarUtils from 'src/components/Toast/Toast'
+import history from './history'
 
 const httpLink = new BatchHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_URL,
@@ -20,13 +20,18 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-const errorHandler = onError(({ graphQLErrors, networkError }) => {
+const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
-    graphQLErrors.forEach(err => SnackbarUtils.error(err.message))
+    graphQLErrors.forEach(err => {
+      SnackbarUtils.error(err.message)
 
-    // history.replace('/login')
-    // window.localStorage.removeItem('token')
+      if (err.extensions && err.extensions.code === 'UNAUTHENTICATED') {
+        history.replace('/login')
+        window.localStorage.removeItem('token')
+      }
+    })
   }
+
   if (networkError) {
     SnackbarUtils.error(networkError.message)
   }
@@ -35,7 +40,7 @@ const errorHandler = onError(({ graphQLErrors, networkError }) => {
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   resolvers: {},
-  link: authLink.concat(errorHandler).concat(httpLink),
+  link: errorLink.concat(authLink).concat(httpLink),
 })
 
 export default client

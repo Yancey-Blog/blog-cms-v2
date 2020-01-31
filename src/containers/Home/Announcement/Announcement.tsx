@@ -38,6 +38,7 @@ const Announcement: FC = () => {
     onCompleted() {
       enqueueSnackbar('Create success!', { variant: 'success' })
     },
+    onError() {},
   })
 
   const [updateAnnouncementById] = useMutation(UPDATE_ONE_ANNOUNCEMENT, {
@@ -45,6 +46,7 @@ const Announcement: FC = () => {
     onCompleted() {
       enqueueSnackbar('Update success!', { variant: 'success' })
     },
+    onError() {},
   })
 
   const [deleteAnnouncementById, { loading: isDeleting }] = useMutation(
@@ -69,6 +71,7 @@ const Announcement: FC = () => {
       onCompleted() {
         enqueueSnackbar('Delete success!', { variant: 'success' })
       },
+      onError() {},
     },
   )
 
@@ -94,6 +97,7 @@ const Announcement: FC = () => {
       onCompleted() {
         enqueueSnackbar('Delete success!', { variant: 'success' })
       },
+      onError() {},
     },
   )
 

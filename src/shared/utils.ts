@@ -1,5 +1,6 @@
 import moment from 'moment'
 import qs from 'query-string'
+import { ApolloError } from 'apollo-client'
 import history from './history'
 
 interface Dict {
@@ -23,7 +24,8 @@ export const getType = (type: any) =>
 
 export const goBack = () => history.goBack()
 
-export const parseSearch = (search: string) => qs.parse(search, { parseBooleans: true })
+export const parseSearch = (search: string) =>
+  qs.parse(search, { parseBooleans: true })
 
 export const stringfySearch = (searchObj: Dict) => qs.stringify(searchObj)
 
@@ -36,3 +38,8 @@ export const isString = (type: any) => getType(type) === 'string'
 export const isBoolean = (type: any) => getType(type) === 'boolean'
 
 export const isArray = (type: any) => Array.isArray(type)
+
+export const handleUnauthenticated = (e: ApolloError) => {
+  history.replace('/login')
+  window.localStorage.removeItem('token')
+}
