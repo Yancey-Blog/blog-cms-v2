@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import ReactDOM from 'react-dom'
 import { Switch, Route, Redirect, Router } from 'react-router-dom'
 import { ApolloProvider } from '@apollo/react-hooks'
@@ -9,9 +9,14 @@ import * as serviceWorker from './serviceWorker'
 import fontAwesomes from './shared/fontAwesome'
 import client from './shared/apolloClient'
 import history from './shared/history'
+import Loading from './components/Loading/Loading'
 import { SnackbarUtilsConfigurator } from './components/Toast/Toast'
-import Layouts from './pages/Layouts/Layouts'
-import Login from './pages/Login/Login'
+
+const Login = lazy(() => import('src/pages/Login/Login'))
+
+const Register = lazy(() => import('src/pages/Register/Register'))
+
+const Layouts = lazy(() => import('src/pages/Layouts/Layouts'))
 
 library.add(...fontAwesomes)
 serviceWorker.unregister()
@@ -29,26 +34,31 @@ ReactDOM.render(
       <SnackbarUtilsConfigurator />
       <CssBaseline />
       <Router history={history}>
-        <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route
-            path="/"
-            render={({ location }) =>
-              window.localStorage.getItem('token') ? (
-                <Layouts />
-              ) : (
-                <Redirect
-                  to={{
-                    pathname: '/login',
-                    state: { from: location },
-                  }}
-                />
-              )
-            }
-          />
-        </Switch>
+        <Suspense fallback={<Loading />}>
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/register">
+              <Register />
+            </Route>
+            <Route
+              path="/"
+              render={({ location }) =>
+                window.localStorage.getItem('token') ? (
+                  <Layouts />
+                ) : (
+                  <Redirect
+                    to={{
+                      pathname: '/login',
+                      state: { from: location },
+                    }}
+                  />
+                )
+              }
+            />
+          </Switch>
+        </Suspense>
       </Router>
     </SnackbarProvider>
   </ApolloProvider>,

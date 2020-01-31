@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
@@ -90,7 +91,11 @@ const Register: FC = () => {
         <button className={styles.submitBtn} type="submit">
           Register
         </button>
-        <p className={styles.link}>Already have an account?</p>¬
+
+        <p className={styles.link}>
+          <Link to="/login">Already have an account? </Link>
+        </p>
+
         <p className={styles.license}>
           By registering, you agree to Yancey Inc.'s{' '}
           <a

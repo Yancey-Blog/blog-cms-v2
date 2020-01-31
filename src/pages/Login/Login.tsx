@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import { useLazyQuery } from '@apollo/react-hooks'
 import { CircularProgress } from '@material-ui/core'
 import * as Yup from 'yup'
@@ -99,7 +99,10 @@ const Login: FC = () => {
 
         <>
           <span className={styles.registerTip}>Need an account?</span>
-          <span className={styles.link}> Register</span>
+
+          <span className={styles.link}>
+            <Link to="/register"> Register</Link>
+          </span>
         </>
       </form>
     </main>
