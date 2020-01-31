@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { ApolloProvider } from '@apollo/react-hooks'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -27,8 +27,22 @@ ReactDOM.render(
       <CssBaseline />
       <BrowserRouter>
         <Switch>
+          <Route
+            exact
+            path="/"
+            render={() =>
+              window.localStorage.getItem('token') ? (
+                <Layouts />
+              ) : (
+                <Redirect
+                  to={{
+                    pathname: '/login',
+                  }}
+                />
+              )
+            }
+          />
           <Route path="/login" component={Login} />
-          <Route path="/" component={Layouts} />
         </Switch>
       </BrowserRouter>
     </SnackbarProvider>
