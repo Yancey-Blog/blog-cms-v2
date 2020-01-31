@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.6.0...v0.7.0) (2020-01-31)
+
+
+### Features
+
+* add Whitney fonts ([bcea660](https://github.com/Yancey-Blog/blog-cms-v2/commit/bcea66026f5be6eeebeb0a90fe52c90b67f4b136))
+* delete useless components ([15b7150](https://github.com/Yancey-Blog/blog-cms-v2/commit/15b7150f5f9a3a22c85de549f9d9eeae1fd4c64a))
+* delete useless files ([7b27847](https://github.com/Yancey-Blog/blog-cms-v2/commit/7b278471b1e7d0ed1d69383b12c2b434b403c9d9))
+* finish a login logic ([9fef2f3](https://github.com/Yancey-Blog/blog-cms-v2/commit/9fef2f36aa0fa9352e696239a0f9d6a95e2f4383))
+* finish Login logic ([6d7fa81](https://github.com/Yancey-Blog/blog-cms-v2/commit/6d7fa8151286bfdebd37d6923939a9f47de02657))
+* finish Login page ([787409c](https://github.com/Yancey-Blog/blog-cms-v2/commit/787409c0f4d3828f87ce4ab093dd3c8a663bbb99))
+* finish Register page ([061fa95](https://github.com/Yancey-Blog/blog-cms-v2/commit/061fa950f982d6d6b32f3edc83672d98150f826b))
+* jump to root path after login success ([b7ed2ff](https://github.com/Yancey-Blog/blog-cms-v2/commit/b7ed2ff6d7c8c222790914d7801c91eac0cda584))
+* resolve conflict ([87d590b](https://github.com/Yancey-Blog/blog-cms-v2/commit/87d590b46eb232c1a9cec6b812af39f9d551ce98))
+* support route for Login ([747e25a](https://github.com/Yancey-Blog/blog-cms-v2/commit/747e25a50ecadee8698aa912db3c626c2aae0520))
+* update file name of apolloClient ([9ee97d5](https://github.com/Yancey-Blog/blog-cms-v2/commit/9ee97d5bf769683dbe12a6af4efb7f06120c13c3))
+* update filename ([015bdfb](https://github.com/Yancey-Blog/blog-cms-v2/commit/015bdfbeed51a45f1895df9b134237a026a5dc40))
+
 ## [0.6.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.5.0...v0.6.0) (2020-01-09)
 
 
