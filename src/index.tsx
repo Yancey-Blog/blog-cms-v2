@@ -8,6 +8,7 @@ import { SnackbarProvider } from 'notistack'
 import * as serviceWorker from './serviceWorker'
 import fontAwesomes from './shared/fontAwesome'
 import client from './shared/apolloClient'
+import { SnackbarUtilsConfigurator } from './components/Toast/Toast'
 import Layouts from './pages/Layouts/Layouts'
 import Login from './pages/Login/Login'
 
@@ -24,6 +25,7 @@ ReactDOM.render(
       }}
       autoHideDuration={3000}
     >
+      <SnackbarUtilsConfigurator />
       <CssBaseline />
       <BrowserRouter>
         <Switch>

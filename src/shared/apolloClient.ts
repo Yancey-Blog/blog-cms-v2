@@ -1,11 +1,12 @@
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import { createHttpLink } from 'apollo-link-http'
+import { BatchHttpLink } from 'apollo-link-batch-http'
 import { onError } from 'apollo-link-error'
 import { setContext } from 'apollo-link-context'
 import history from './history'
+import SnackbarUtils from 'src/components/Toast/Toast'
 
-const httpLink = createHttpLink({
+const httpLink = new BatchHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_URL,
 })
 
@@ -26,6 +27,7 @@ const errorHandler = onError(({ graphQLErrors, networkError }) => {
     )
 
     if (isUnauthorized) {
+      SnackbarUtils.error('token 过期了')
       history.replace('/login')
       window.localStorage.removeItem('token')
     }
