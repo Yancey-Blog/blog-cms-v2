@@ -1,32 +1,43 @@
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import { HttpLink } from 'apollo-link-http'
+import { createHttpLink } from 'apollo-link-http'
 import { onError } from 'apollo-link-error'
-import { ApolloLink } from 'apollo-link'
-// import history from './history'
+import { setContext } from 'apollo-link-context'
+import history from './history'
 
-const token = window.localStorage.getItem('token')
+const httpLink = createHttpLink({
+  uri: process.env.REACT_APP_GRAPHQL_URL,
+})
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('token')
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  }
+})
+
+const errorHandler = onError(({ graphQLErrors, networkError }) => {
+  // if (graphQLErrors) {
+  //   const isUnauthorized = graphQLErrors.find(graphQLError =>
+  //     graphQLError.message.includes('Unauthorized'),
+  //   )
+
+  //   if (isUnauthorized) {
+  //     history.push('/login')
+  //     window.localStorage.removeItem('token')
+  //   }
+  // }
+  history.push('/login')
+  window.localStorage.removeItem('token')
+})
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   resolvers: {},
-  link: ApolloLink.from([
-    onError(({ graphQLErrors, networkError }) => {
-      if (graphQLErrors) {
-        // if (typeof graphQLErrors[0].message === 'object') {
-        //   history.push('/login')
-        // }
-      }
-      if (networkError) {
-      }
-    }),
-    new HttpLink({
-      uri: process.env.REACT_APP_GRAPHQL_URL,
-      headers: token && {
-        authorization: `Bearer ${token}`,
-      },
-    }),
-  ]),
+  link: authLink.concat(errorHandler).concat(httpLink),
 })
 
 export default client

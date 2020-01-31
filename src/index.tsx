@@ -22,7 +22,7 @@ ReactDOM.render(
         vertical: 'top',
         horizontal: 'center',
       }}
-      autoHideDuration={2000}
+      autoHideDuration={3000}
     >
       <CssBaseline />
       <BrowserRouter>
