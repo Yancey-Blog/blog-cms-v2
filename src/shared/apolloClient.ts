@@ -22,15 +22,13 @@ const authLink = setContext((_, { headers }) => {
 
 const errorHandler = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
-    const isUnauthorized = graphQLErrors.find(graphQLError =>
-      graphQLError.message.includes('Unauthorized'),
-    )
+    graphQLErrors.forEach(err => SnackbarUtils.error(err.message))
 
-    if (isUnauthorized) {
-      SnackbarUtils.error('token 过期了')
-      history.replace('/login')
-      window.localStorage.removeItem('token')
-    }
+    // history.replace('/login')
+    // window.localStorage.removeItem('token')
+  }
+  if (networkError) {
+    SnackbarUtils.error(networkError.message)
   }
 })
 

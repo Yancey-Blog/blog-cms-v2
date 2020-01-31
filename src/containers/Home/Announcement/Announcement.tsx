@@ -36,14 +36,14 @@ const Announcement: FC = () => {
     },
 
     onCompleted() {
-      enqueueSnackbar('create success!', { variant: 'success' })
+      enqueueSnackbar('Create success!', { variant: 'success' })
     },
   })
 
   const [updateAnnouncementById] = useMutation(UPDATE_ONE_ANNOUNCEMENT, {
     errorPolicy: 'all',
     onCompleted() {
-      enqueueSnackbar('update success!', { variant: 'success' })
+      enqueueSnackbar('Update success!', { variant: 'success' })
     },
   })
 
@@ -67,7 +67,7 @@ const Announcement: FC = () => {
         }
       },
       onCompleted() {
-        enqueueSnackbar('delete success!', { variant: 'success' })
+        enqueueSnackbar('Delete success!', { variant: 'success' })
       },
     },
   )
@@ -92,7 +92,7 @@ const Announcement: FC = () => {
         }
       },
       onCompleted() {
-        enqueueSnackbar('delete success!', { variant: 'success' })
+        enqueueSnackbar('Delete success!', { variant: 'success' })
       },
     },
   )
