@@ -12,7 +12,7 @@ import {
 import { useFormik } from 'formik'
 import { TextField } from '@material-ui/core'
 import styles from '../announcement.module.scss'
-import client from 'src/shared/ApolloClient'
+import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 
 interface Props {
