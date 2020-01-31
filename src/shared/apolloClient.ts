@@ -20,18 +20,16 @@ const authLink = setContext((_, { headers }) => {
 })
 
 const errorHandler = onError(({ graphQLErrors, networkError }) => {
-  // if (graphQLErrors) {
-  //   const isUnauthorized = graphQLErrors.find(graphQLError =>
-  //     graphQLError.message.includes('Unauthorized'),
-  //   )
+  if (graphQLErrors) {
+    const isUnauthorized = graphQLErrors.find(graphQLError =>
+      graphQLError.message.includes('Unauthorized'),
+    )
 
-  //   if (isUnauthorized) {
-  //     history.push('/login')
-  //     window.localStorage.removeItem('token')
-  //   }
-  // }
-  history.push('/login')
-  window.localStorage.removeItem('token')
+    if (isUnauthorized) {
+      history.replace('/login')
+      window.localStorage.removeItem('token')
+    }
+  }
 })
 
 const client = new ApolloClient({
