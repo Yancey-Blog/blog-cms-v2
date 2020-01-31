@@ -1,39 +1,21 @@
 import React, { FC } from 'react'
-import { useHistory } from 'react-router-dom'
-import { useSnackbar } from 'notistack'
-import { useLazyQuery } from '@apollo/react-hooks'
-import { CircularProgress } from '@material-ui/core'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
-import { LOGIN } from './typeDefs'
-import styles from './Login.module.scss'
+import styles from '../Login/Login.module.scss'
 
-const Login: FC = () => {
-  const history = useHistory()
-
-  const { enqueueSnackbar } = useSnackbar()
-
+const Register: FC = () => {
   const initialValues = {
     email: '',
+    username: '',
     password: '',
   }
-
-  const [login, { called, loading }] = useLazyQuery(LOGIN, {
-    notifyOnNetworkStatusChange: true,
-    onCompleted(data) {
-      window.localStorage.setItem('token', data.login.authorization)
-      history.push('/')
-    },
-    onError(error) {
-      enqueueSnackbar(error.message, { variant: 'error' })
-    },
-  })
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email()
       .required('This field is required.'),
+    username: Yup.string().required('This field is required.'),
     password: Yup.string().required('This field is required.'),
   })
 
@@ -41,20 +23,14 @@ const Login: FC = () => {
     initialValues,
     validationSchema,
     onSubmit: async values => {
-      login({
-        variables: { input: values },
-      })
       resetForm()
     },
   })
 
   return (
-    <main className={styles.loginWrapper} id="xxxx">
+    <main className={styles.loginWrapper}>
       <form className={styles.loginForm} onSubmit={handleSubmit}>
-        <div className={styles.header}>Welcome back!</div>
-        <div className={styles.headerExtra}>
-          We're so excited to see you again!
-        </div>
+        <div className={styles.header}>Create an Account</div>
         <label htmlFor="email" className={styles.label}>
           {errors.email ? (
             <span className={styles.error}>
@@ -73,7 +49,25 @@ const Login: FC = () => {
             {...getFieldProps('email')}
           />
         </label>
-
+        <label htmlFor="username" className={styles.label}>
+          {errors.username ? (
+            <span className={styles.error}>
+              Username -{' '}
+              <span className={styles.errorMsg}>{errors.username}</span>
+            </span>
+          ) : (
+            'Username'
+          )}
+          <input
+            id="username"
+            type="text"
+            className={classNames(
+              { [styles.errorInputTxt]: errors.username },
+              styles.inputTxt,
+            )}
+            {...getFieldProps('username')}
+          />
+        </label>
         <label htmlFor="password" className={styles.label}>
           {errors.password ? (
             <span className={styles.error}>
@@ -93,23 +87,32 @@ const Login: FC = () => {
             {...getFieldProps('password')}
           />
         </label>
-        <p className={styles.link}>Forgot your password?</p>
-
-        <button
-          className={styles.submitBtn}
-          type="submit"
-          disabled={called && loading}
-        >
-          {called && loading ? <CircularProgress size={30} /> : 'Login'}
+        <button className={styles.submitBtn} type="submit">
+          Register
         </button>
-
-        <>
-          <span className={styles.registerTip}>Need an account?</span>
-          <span className={styles.link}> Register</span>
-        </>
+        <p className={styles.link}>Already have an account?</p>¬
+        <p className={styles.license}>
+          By registering, you agree to Yancey Inc.'s{' '}
+          <a
+            rel="noreferrer noopener"
+            target="_blank"
+            href="https://m.yanceyleo.com/policy/service"
+          >
+            Terms of Service
+          </a>{' '}
+          and{' '}
+          <a
+            rel="noreferrer noopener"
+            target="_blank"
+            href="https://m.yanceyleo.com/policy/privacy"
+          >
+            Privacy Policy
+          </a>
+          .
+        </p>
       </form>
     </main>
   )
 }
 
-export default Login
+export default Register

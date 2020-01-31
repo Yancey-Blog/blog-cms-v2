@@ -8,11 +8,12 @@ import {
   Dialog,
   DialogContent,
   DialogContentText,
+  TextField,
+  FormLabel,
 } from '@material-ui/core'
 import { useFormik } from 'formik'
-import { TextField, FormLabel } from '@material-ui/core'
 import styles from '../openSource.module.scss'
-import client from 'src/shared/ApolloClient'
+import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
