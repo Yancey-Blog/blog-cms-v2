@@ -16,9 +16,9 @@ const Mains: FC = () => (
   <main className={styles.main}>
     <Suspense fallback={<Loading />}>
       <Switch>
-        <Route exact path="/announcement" render={() => <Announcement />} />
-        <Route exact path="/open-source" render={() => <OpenSource />} />
-        <Route exact path="/motto" render={() => <Motto />} />
+        <Route path="/announcement" component={Announcement} />
+        <Route path="/open-source" component={OpenSource} />
+        <Route path="/motto" component={Motto} />
       </Switch>
     </Suspense>
   </main>
