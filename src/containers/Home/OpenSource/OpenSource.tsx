@@ -35,13 +35,14 @@ const OpenSource: FC = () => {
     },
 
     onCompleted() {
-      enqueueSnackbar('create success!', { variant: 'success' })
+      enqueueSnackbar('Create success!', { variant: 'success' })
     },
+    onError() {},
   })
 
   const [updateOpenSourceById] = useMutation(UPDATE_ONE_OPEN_SOURCE, {
     onCompleted() {
-      enqueueSnackbar('update success!', { variant: 'success' })
+      enqueueSnackbar('Update success!', { variant: 'success' })
     },
   })
 
@@ -64,8 +65,9 @@ const OpenSource: FC = () => {
         }
       },
       onCompleted() {
-        enqueueSnackbar('delete success!', { variant: 'success' })
+        enqueueSnackbar('Delete success!', { variant: 'success' })
       },
+      onError() {},
     },
   )
 
@@ -88,8 +90,9 @@ const OpenSource: FC = () => {
         }
       },
       onCompleted() {
-        enqueueSnackbar('delete success!', { variant: 'success' })
+        enqueueSnackbar('Delete success!', { variant: 'success' })
       },
+      onError() {},
     },
   )
 
