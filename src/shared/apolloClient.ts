@@ -3,6 +3,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { HttpLink } from 'apollo-link-http'
 import { onError } from 'apollo-link-error'
 import { ApolloLink } from 'apollo-link'
+// import history from './history'
 
 const token = window.localStorage.getItem('token')
 
@@ -12,16 +13,17 @@ const client = new ApolloClient({
   link: ApolloLink.from([
     onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors) {
-        // 统一的 GraphQL 请求错误处理
+        // if (typeof graphQLErrors[0].message === 'object') {
+        //   history.push('/login')
+        // }
       }
       if (networkError) {
-        // 网络错误
       }
     }),
     new HttpLink({
       uri: process.env.REACT_APP_GRAPHQL_URL,
-      headers: {
-        authorization: token ? `Bearer ${token}` : '',
+      headers: token && {
+        authorization: `Bearer ${token}`,
       },
     }),
   ]),

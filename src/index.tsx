@@ -16,22 +16,22 @@ serviceWorker.unregister()
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <BrowserRouter>
-      <SnackbarProvider
-        maxSnack={1}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-        autoHideDuration={2000}
-      >
-        <CssBaseline />
+    <SnackbarProvider
+      maxSnack={1}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'center',
+      }}
+      autoHideDuration={2000}
+    >
+      <CssBaseline />
+      <BrowserRouter>
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/" component={Layouts} />
         </Switch>
-      </SnackbarProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </SnackbarProvider>
   </ApolloProvider>,
   document.getElementById('root'),
 )

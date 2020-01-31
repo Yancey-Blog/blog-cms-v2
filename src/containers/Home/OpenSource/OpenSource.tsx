@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { useSnackbar } from 'notistack'
 import {
@@ -14,6 +15,8 @@ import OpenSourceModal from './components/OpenSourceModal'
 
 const OpenSource: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
+
+  const history = useHistory()
 
   const { loading: isFetching, data } = useQuery<Query>(OPEN_SOURCES, {
     notifyOnNetworkStatusChange: true,
@@ -65,6 +68,10 @@ const OpenSource: FC = () => {
       },
       onCompleted() {
         enqueueSnackbar('delete success!', { variant: 'success' })
+      },
+      onError(error) {
+        enqueueSnackbar(error.message, { variant: 'error' })
+        history.push('/login')
       },
     },
   )
