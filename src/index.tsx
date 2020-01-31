@@ -27,22 +27,24 @@ ReactDOM.render(
       <CssBaseline />
       <BrowserRouter>
         <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
           <Route
-            exact
             path="/"
-            render={() =>
+            render={({ location }) =>
               window.localStorage.getItem('token') ? (
                 <Layouts />
               ) : (
                 <Redirect
                   to={{
                     pathname: '/login',
+                    state: { from: location },
                   }}
                 />
               )
             }
           />
-          <Route path="/login" component={Login} />
         </Switch>
       </BrowserRouter>
     </SnackbarProvider>
