@@ -1,11 +1,11 @@
 import React, { ReactElement } from 'react'
 import {
-  Dashboard,
+  // Dashboard,
   Home,
-  Headset,
-  Settings,
-  PostAdd,
-  LinkedIn,
+  // Headset,
+  // PostAdd,
+  // LinkedIn,
+  // Settings,
   Event,
 } from '@material-ui/icons'
 
