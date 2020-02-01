@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect, Router } from 'react-router-dom'
 import { ApolloProvider } from '@apollo/react-hooks'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -8,8 +8,15 @@ import { SnackbarProvider } from 'notistack'
 import * as serviceWorker from './serviceWorker'
 import fontAwesomes from './shared/fontAwesome'
 import client from './shared/apolloClient'
-import Layouts from './pages/Layouts/Layouts'
-import Login from './pages/Login/Login'
+import history from './shared/history'
+import Loading from './components/Loading/Loading'
+import { SnackbarUtilsConfigurator } from './components/Toast/Toast'
+
+const Login = lazy(() => import('src/pages/Login/Login'))
+
+const Register = lazy(() => import('src/pages/Register/Register'))
+
+const Layouts = lazy(() => import('src/pages/Layouts/Layouts'))
 
 library.add(...fontAwesomes)
 serviceWorker.unregister()
@@ -22,29 +29,37 @@ ReactDOM.render(
         vertical: 'top',
         horizontal: 'center',
       }}
-      autoHideDuration={2000}
+      autoHideDuration={3000}
     >
+      <SnackbarUtilsConfigurator />
       <CssBaseline />
-      <BrowserRouter>
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() =>
-              window.localStorage.getItem('token') ? (
-                <Layouts />
-              ) : (
-                <Redirect
-                  to={{
-                    pathname: '/login',
-                  }}
-                />
-              )
-            }
-          />
-          <Route path="/login" component={Login} />
-        </Switch>
-      </BrowserRouter>
+      <Router history={history}>
+        <Suspense fallback={<Loading />}>
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/register">
+              <Register />
+            </Route>
+            <Route
+              path="/"
+              render={({ location }) =>
+                window.localStorage.getItem('token') ? (
+                  <Layouts />
+                ) : (
+                  <Redirect
+                    to={{
+                      pathname: '/login',
+                      state: { from: location },
+                    }}
+                  />
+                )
+              }
+            />
+          </Switch>
+        </Suspense>
+      </Router>
     </SnackbarProvider>
   </ApolloProvider>,
   document.getElementById('root'),

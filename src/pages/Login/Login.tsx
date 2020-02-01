@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
-import { useHistory } from 'react-router-dom'
-import { useSnackbar } from 'notistack'
+import { useHistory, Link } from 'react-router-dom'
 import { useLazyQuery } from '@apollo/react-hooks'
 import { CircularProgress } from '@material-ui/core'
 import * as Yup from 'yup'
@@ -12,8 +11,6 @@ import styles from './Login.module.scss'
 const Login: FC = () => {
   const history = useHistory()
 
-  const { enqueueSnackbar } = useSnackbar()
-
   const initialValues = {
     email: '',
     password: '',
@@ -24,9 +21,6 @@ const Login: FC = () => {
     onCompleted(data) {
       window.localStorage.setItem('token', data.login.authorization)
       history.push('/')
-    },
-    onError(error) {
-      enqueueSnackbar(error.message, { variant: 'error' })
     },
   })
 
@@ -105,7 +99,10 @@ const Login: FC = () => {
 
         <>
           <span className={styles.registerTip}>Need an account?</span>
-          <span className={styles.link}> Register</span>
+
+          <span className={styles.link}>
+            <Link to="/register"> Register</Link>
+          </span>
         </>
       </form>
     </main>

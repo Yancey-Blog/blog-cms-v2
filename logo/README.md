@@ -11,11 +11,11 @@ It comes in several flavors.
 
 Download as [PNG](./logo.jpg)
 
-## Logo with the Title
+## Logo with Text
 
-<img src='./logo-title.png' alt='Yancey Blog Logo with the Title' width='500'>
+<img src='./logo-with-text.png' alt='Yancey Blog Logo with text' width='500'>
 
-Download as [PNG](./logo-title.png).
+Download as [PNG](./logo-with-text.png).
 
 ## Modifications
 
