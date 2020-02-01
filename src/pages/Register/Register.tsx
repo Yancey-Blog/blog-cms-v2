@@ -1,11 +1,25 @@
 import React, { FC } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { useMutation } from '@apollo/react-hooks'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
+import { REGISTER } from './typeDefs'
 import styles from '../Login/Login.module.scss'
 
 const Register: FC = () => {
+  const history = useHistory()
+
+  const [register] = useMutation(REGISTER, {
+    errorPolicy: 'all',
+    onCompleted(data) {
+      window.localStorage.setItem('token', data.register.authorization)
+      history.push('/')
+    },
+    onError() {},
+  })
+
   const initialValues = {
     email: '',
     username: '',
@@ -24,6 +38,7 @@ const Register: FC = () => {
     initialValues,
     validationSchema,
     onSubmit: async values => {
+      register({ variables: { input: values } })
       resetForm()
     },
   })
