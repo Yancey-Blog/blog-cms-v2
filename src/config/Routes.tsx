@@ -6,6 +6,7 @@ import {
   Settings,
   PostAdd,
   LinkedIn,
+  Event,
 } from '@material-ui/icons'
 
 interface Route {
@@ -36,22 +37,22 @@ const routes: Route[] = [
       {
         name: 'Motto',
         path: 'motto',
-        component: 'Home/Motto',
+        component: 'Home/Motto/Motto',
       },
       {
         name: 'Announcement',
         path: 'announcement',
-        component: 'Home/Announcement',
+        component: 'Home/Announcement/Announcement',
       },
       {
         name: 'Open Source',
         path: 'open-source',
-        component: 'Home/OpenSource',
+        component: 'Home/OpenSource/OpenSource',
       },
       {
         name: 'Cover',
         path: 'cover',
-        component: 'Home/Cover',
+        component: 'Home/Cover/Cover',
       },
     ],
   },
@@ -63,22 +64,22 @@ const routes: Route[] = [
       {
         name: 'Live Tour',
         path: 'live-tour',
-        component: 'Music/LiveTour',
+        component: 'Music/LiveTour/LiveTour',
       },
       {
         name: 'Best Album',
         path: 'best-album',
-        component: 'Music/BestAlbum',
+        component: 'Music/BestAlbum/BestAlbum',
       },
       {
         name: 'Player',
         path: 'player',
-        component: 'Music/Player',
+        component: 'Music/Player/Player',
       },
       {
         name: 'Yancey Music',
         path: 'yancey-music',
-        component: 'Music/YanceyMusic',
+        component: 'Music/YanceyMusic/YanceyMusic',
       },
     ],
   },
@@ -86,12 +87,12 @@ const routes: Route[] = [
     name: 'Article',
     path: 'article-list',
     icon: <PostAdd />,
-    component: 'Article/ArticleList',
+    component: 'Article/ArticleList/ArticleList',
     children: [
       {
         name: 'Article Detail',
         path: 'article-detail',
-        component: 'Article/ArticleDetail',
+        component: 'Article/ArticleDetail/ArticleDetail',
         hideInMenu: true,
       },
     ],
@@ -107,6 +108,12 @@ const routes: Route[] = [
     path: 'setting',
     icon: <Settings />,
     component: 'Setting/Setting',
+  },
+  {
+    name: 'Agenda',
+    path: 'agenda',
+    icon: <Event />,
+    component: 'Agenda/Agenda',
   },
 ]
 

@@ -12,12 +12,15 @@ const OpenSource = lazy(() =>
 
 const Motto = lazy(() => import('src/containers/Home/Motto/Motto'))
 
+const Agenda = lazy(() => import('src/containers/Agenda/Agenda'))
+
 const Mains: FC = () => (
   <main className={styles.main}>
     <Switch>
       <Route path="/announcement" component={Announcement} />
       <Route path="/open-source" component={OpenSource} />
       <Route path="/motto" component={Motto} />
+      <Route path="/agenda" component={Agenda} />
     </Switch>
   </main>
 )
