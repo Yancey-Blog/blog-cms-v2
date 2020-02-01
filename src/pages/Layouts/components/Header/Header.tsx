@@ -1,4 +1,6 @@
 import React, { FC } from 'react'
+import { Menu, MenuItem, Divider } from '@material-ui/core'
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state'
 import classNames from 'classnames'
 import {
   AppBar,
@@ -16,6 +18,7 @@ import {
   Search,
   ViewList,
 } from '@material-ui/icons'
+import { logout } from 'src/shared/utils'
 import useStyles from './styles'
 
 interface Props {
@@ -58,9 +61,25 @@ const Header: FC<Props> = ({ open, handleDrawerChange }) => {
             <Notifications fontSize="small" />
           </Badge>
         </IconButton>
-        <IconButton>
-          <Person fontSize="small" />
-        </IconButton>
+
+        <PopupState variant="popover" popupId="deleteOnePoperOver">
+          {popupState => (
+            <>
+              <IconButton
+                style={{ cursor: 'pointer' }}
+                {...bindTrigger(popupState)}
+              >
+                <Person fontSize="small" />
+              </IconButton>
+              <Menu {...bindMenu(popupState)}>
+                <MenuItem onClick={popupState.close}>Profile</MenuItem>
+                <MenuItem onClick={popupState.close}>Setting</MenuItem>
+                <Divider />
+                <MenuItem onClick={popupState.close && logout}>Logout</MenuItem>
+              </Menu>
+            </>
+          )}
+        </PopupState>
       </section>
     </AppBar>
   )
