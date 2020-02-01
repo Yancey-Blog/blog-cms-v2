@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { useHistory } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { useSnackbar } from 'notistack'
 import {
@@ -15,8 +14,6 @@ import OpenSourceModal from './components/OpenSourceModal'
 
 const OpenSource: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
-
-  const history = useHistory()
 
   const { loading: isFetching, data } = useQuery<Query>(OPEN_SOURCES, {
     notifyOnNetworkStatusChange: true,
@@ -38,13 +35,14 @@ const OpenSource: FC = () => {
     },
 
     onCompleted() {
-      enqueueSnackbar('create success!', { variant: 'success' })
+      enqueueSnackbar('Create success!', { variant: 'success' })
     },
+    onError() {},
   })
 
   const [updateOpenSourceById] = useMutation(UPDATE_ONE_OPEN_SOURCE, {
     onCompleted() {
-      enqueueSnackbar('update success!', { variant: 'success' })
+      enqueueSnackbar('Update success!', { variant: 'success' })
     },
   })
 
@@ -67,12 +65,9 @@ const OpenSource: FC = () => {
         }
       },
       onCompleted() {
-        enqueueSnackbar('delete success!', { variant: 'success' })
+        enqueueSnackbar('Delete success!', { variant: 'success' })
       },
-      onError(error) {
-        enqueueSnackbar(error.message, { variant: 'error' })
-        history.push('/login')
-      },
+      onError() {},
     },
   )
 
@@ -95,8 +90,9 @@ const OpenSource: FC = () => {
         }
       },
       onCompleted() {
-        enqueueSnackbar('delete success!', { variant: 'success' })
+        enqueueSnackbar('Delete success!', { variant: 'success' })
       },
+      onError() {},
     },
   )
 

@@ -1,16 +1,16 @@
 @font-face {
   font-family: 'Whitney-400';
-  src: url('../../assets/fonts/Whitney-400.woff') format('woff');
+  src: url('https://static.yancey.app/fonts/Whitney-400.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Whitney-500';
-  src: url('../../assets/fonts/Whitney-500.woff') format('woff');
+  src: url('https://static.yancey.app/fonts/Whitney-500.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Whitney-600';
-  src: url('../../assets/fonts/Whitney-600.woff') format('woff');
+  src: url('https://static.yancey.app/fonts/Whitney-600.woff') format('woff');
 }
 
 .loginWrapper {
@@ -114,6 +114,10 @@
   text-transform: initial;
   &:hover {
     text-decoration: underline;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 }
 

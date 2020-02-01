@@ -20,6 +20,7 @@ const Announcement: FC = () => {
   })
 
   const [createAnnouncement] = useMutation(CREATE_ONE_ANNOUNCEMENT, {
+    errorPolicy: 'all',
     update(proxy, { data: { createAnnouncement } }) {
       const data = proxy.readQuery<Query>({ query: ANNOUNCEMENTS })
 
@@ -35,19 +36,23 @@ const Announcement: FC = () => {
     },
 
     onCompleted() {
-      enqueueSnackbar('create success!', { variant: 'success' })
+      enqueueSnackbar('Create success!', { variant: 'success' })
     },
+    onError() {},
   })
 
   const [updateAnnouncementById] = useMutation(UPDATE_ONE_ANNOUNCEMENT, {
+    errorPolicy: 'all',
     onCompleted() {
-      enqueueSnackbar('update success!', { variant: 'success' })
+      enqueueSnackbar('Update success!', { variant: 'success' })
     },
+    onError() {},
   })
 
   const [deleteAnnouncementById, { loading: isDeleting }] = useMutation(
     DELETE_ONE_ANNOUNCEMENT,
     {
+      errorPolicy: 'all',
       update(proxy, { data: { deleteAnnouncementById } }) {
         const data = proxy.readQuery<Query>({ query: ANNOUNCEMENTS })
 
@@ -64,14 +69,16 @@ const Announcement: FC = () => {
         }
       },
       onCompleted() {
-        enqueueSnackbar('delete success!', { variant: 'success' })
+        enqueueSnackbar('Delete success!', { variant: 'success' })
       },
+      onError() {},
     },
   )
 
   const [deleteAnnouncements, { loading: isBatchDeleting }] = useMutation(
     BATCH_DELETE_ANNOUNCEMENT,
     {
+      errorPolicy: 'all',
       update(proxy, { data: { deleteAnnouncements } }) {
         const data = proxy.readQuery<Query>({ query: ANNOUNCEMENTS })
 
@@ -88,8 +95,9 @@ const Announcement: FC = () => {
         }
       },
       onCompleted() {
-        enqueueSnackbar('delete success!', { variant: 'success' })
+        enqueueSnackbar('Delete success!', { variant: 'success' })
       },
+      onError() {},
     },
   )
 
