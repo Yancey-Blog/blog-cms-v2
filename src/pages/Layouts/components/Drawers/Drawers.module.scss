@@ -123,12 +123,12 @@ $drawerHover: rgba(#c8c8c8, 0.2);
 }
 
 .activeDrawerItem {
-  background-color: $lightBlue;
+  background-color: $lightGreen;
   border-radius: 3px;
-  box-shadow: 0 12px 20px -10px rgba($lightBlue, 0.28), 0 4px 20px 0 rgba($black, 0.12),
-    0 7px 8px -5px rgba($lightBlue, 0.2);
+  box-shadow: 0 12px 20px -10px rgba($lightGreen, 0.28), 0 4px 20px 0 rgba($black, 0.12),
+    0 7px 8px -5px rgba($lightGreen, 0.2);
   &:hover {
-    background-color: $lightBlue;
+    background-color: $lightGreen;
   }
 }
 

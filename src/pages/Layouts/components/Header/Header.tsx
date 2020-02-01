@@ -14,14 +14,16 @@ import {
   Notifications,
   Person,
   Search,
+  ViewList,
 } from '@material-ui/icons'
 import useStyles from './styles'
 
 interface Props {
+  open: boolean
   handleDrawerChange: Function
 }
 
-const Header: FC<Props> = ({ handleDrawerChange }) => {
+const Header: FC<Props> = ({ open, handleDrawerChange }) => {
   const classes = useStyles()
 
   return (
@@ -33,19 +35,14 @@ const Header: FC<Props> = ({ handleDrawerChange }) => {
           onClick={() => handleDrawerChange()}
           className={classes.fabIcon}
         >
-          <MoreVert fontSize="small" />
+          {open ? <MoreVert fontSize="small" /> : <ViewList fontSize="small" />}
         </Fab>
         <Typography variant="h6" noWrap className={classes.title}>
           CMS
         </Typography>
       </section>
       <section>
-        <Input
-          placeholder="Search..."
-          inputProps={{
-            'aria-label': 'description',
-          }}
-        />
+        <Input placeholder="Search..." />
         <Fab
           size="small"
           aria-label="search"
