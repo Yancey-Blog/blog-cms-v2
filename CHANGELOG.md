@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.7.1...v0.8.0) (2020-02-01)
+
+
+### Features
+
+* finish basic login and register ([5890d19](https://github.com/Yancey-Blog/blog-cms-v2/commit/5890d19573b028a80d1a5d4b567c7e4eefd57ad8))
+* finish login logic ([52b6374](https://github.com/Yancey-Blog/blog-cms-v2/commit/52b6374a8b53895b6c986da20335a896cdb64b22))
+* finish register page's UI ([9815ad8](https://github.com/Yancey-Blog/blog-cms-v2/commit/9815ad883d0fab182119d0551a7b80c556be0807))
+* try errorPolicy ([3054e9b](https://github.com/Yancey-Blog/blog-cms-v2/commit/3054e9bd9f204fc0854068bd44ff1228e61ab55a))
+* update index.html ([9b8235a](https://github.com/Yancey-Blog/blog-cms-v2/commit/9b8235ae47fd49d3fc5f29ec39aae369de24e840))
+* update opensource component ([687b4b9](https://github.com/Yancey-Blog/blog-cms-v2/commit/687b4b97e212342c2038c7af8c7e6ad28a9ba243))
+* update root router ([16eb2b1](https://github.com/Yancey-Blog/blog-cms-v2/commit/16eb2b156f9bdb1cb7eb06dffaf2617964060955))
+* updatee apollo client ([d6e7851](https://github.com/Yancey-Blog/blog-cms-v2/commit/d6e7851b4418cabefc6100c562ff1aea0a393dcb))
+
 ### [0.7.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.7.0...v0.7.1) (2020-01-31)
 
 
