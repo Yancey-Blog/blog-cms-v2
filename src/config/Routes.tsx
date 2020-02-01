@@ -1,22 +1,37 @@
+import React, { ReactElement } from 'react'
+import {
+  Dashboard,
+  Home,
+  Headset,
+  Settings,
+  PostAdd,
+  LinkedIn,
+} from '@material-ui/icons'
+
 interface Route {
   name: string
   path: string
-  icon: string
+  icon: ReactElement | string
   component?: string
-  children?: Array<{ hideInMenu?: boolean; name: string; path: string; component: string }>
+  children?: Array<{
+    hideInMenu?: boolean
+    name: string
+    path: string
+    component: string
+  }>
 }
 
 const routes: Route[] = [
   {
     name: 'Dashboard',
     path: 'dashboard',
-    icon: 'tachometer-alt',
+    icon: <Dashboard />,
     component: 'DashBoard/DashBoard',
   },
   {
     name: 'Home',
     path: 'home',
-    icon: 'home',
+    icon: <Home />,
     children: [
       {
         name: 'Motto',
@@ -43,7 +58,7 @@ const routes: Route[] = [
   {
     name: 'Music',
     path: 'music',
-    icon: 'headphones-alt',
+    icon: <Headset />,
     children: [
       {
         name: 'Live Tour',
@@ -70,7 +85,7 @@ const routes: Route[] = [
   {
     name: 'Article',
     path: 'article-list',
-    icon: 'blog',
+    icon: <PostAdd />,
     component: 'Article/ArticleList',
     children: [
       {
@@ -84,13 +99,13 @@ const routes: Route[] = [
   {
     name: 'CV',
     path: 'cv',
-    icon: 'kiss-wink-heart',
+    icon: <LinkedIn />,
     component: 'CV/CV',
   },
   {
     name: 'Setting',
     path: 'setting',
-    icon: 'cog',
+    icon: <Settings />,
     component: 'Setting/Setting',
   },
 ]

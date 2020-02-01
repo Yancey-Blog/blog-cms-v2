@@ -1,13 +1,11 @@
 import React, { FC, useState } from 'react'
 import { Link, useLocation, useHistory } from 'react-router-dom'
-import Drawer from '@material-ui/core/Drawer'
-import Avatar from '@material-ui/core/Avatar'
+import { Drawer, Avatar } from '@material-ui/core'
+import { Home } from '@material-ui/icons'
 import classNames from 'classnames'
-import { IconProp } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { getInitials } from '../../../../shared/utils'
-import routes from '../../../../config/Routes'
 import styles from './Drawers.module.scss'
+import { getInitials } from 'src/shared/utils'
+import routes from 'src/config/Routes'
 
 interface DrawersProps {
   open: boolean
@@ -46,10 +44,12 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
         paper: styles.drawerContainer,
       }}
     >
-      <section className={classNames(styles.drawer, { [styles.foldDrawer]: !open })}>
+      <section
+        className={classNames(styles.drawer, { [styles.foldDrawer]: !open })}
+      >
         <div className={styles.drawerContent}>
           <div className={styles.drawerTitle}>
-            <FontAwesomeIcon icon={['fab', 'react']} className={styles.drawLogo} />
+            <Home className={styles.drawLogo} />
             <span
               className={classNames(styles.drawerDetail, {
                 [styles.hideDrawerDetail]: !open,
@@ -82,7 +82,7 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
                 })}
                 onClick={() => onClickParent(route)}
               >
-                <FontAwesomeIcon icon={route.icon as IconProp} className={styles.drawerItemIcon} />
+                <span className={styles.drawerItemIcon}>{route.icon}</span>
                 <div
                   className={classNames(styles.drawerDetail, {
                     [styles.hideDrawerDetail]: !open,
@@ -92,7 +92,8 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
                   {route.children && route.children.length !== 0 ? (
                     <span
                       className={classNames(styles.arrow, {
-                        [styles.reverseArrow]: matchChilren(route.children) || route.path === fold,
+                        [styles.reverseArrow]:
+                          matchChilren(route.children) || route.path === fold,
                       })}
                     />
                   ) : null}
@@ -111,11 +112,19 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
                   {route.children.map((child: any) => (
                     <Link to={child.path} key={child.name}>
                       <div
-                        className={classNames(styles.drawerItem, styles.drawerItemChildren, {
-                          [styles.activeDrawerItem]: matchCurRoute(child.path),
-                        })}
+                        className={classNames(
+                          styles.drawerItem,
+                          styles.drawerItemChildren,
+                          {
+                            [styles.activeDrawerItem]: matchCurRoute(
+                              child.path,
+                            ),
+                          },
+                        )}
                       >
-                        <span className={styles.drawerItemIcon}>{getInitials(child.name)}</span>
+                        <span className={styles.drawerItemIcon}>
+                          {getInitials(child.name)}
+                        </span>
                         <div
                           className={classNames(styles.drawerDetail, {
                             [styles.hideDrawerDetail]: !open,
