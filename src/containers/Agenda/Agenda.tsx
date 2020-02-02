@@ -24,8 +24,9 @@ import {
   CurrentTimeIndicator,
 } from '@devexpress/dx-react-scheduler-material-ui'
 import ExternalViewSwitcher from './components/ExternalViewSwitcher/ExternalViewSwitcher'
-import NavigationButton from './components/NavigationButton/NavigationButton'
+import CustomNavigationButton from './components/CustomNavigationButton/CustomNavigationButton'
 import CustomTodayButton from './components/CustomTodayButton/CustomTodayButton'
+import CustomOpenButton from './components/CustomOpenButton/CustomOpenButton'
 import { appointments } from './mock'
 import useStyles from './styles'
 
@@ -76,7 +77,10 @@ const Agenda: FC = () => {
         <WeekView />
         <MonthView />
         <Toolbar />
-        <DateNavigator navigationButtonComponent={NavigationButton} />
+        <DateNavigator
+          navigationButtonComponent={CustomNavigationButton}
+          openButtonComponent={CustomOpenButton}
+        />
         <TodayButton buttonComponent={CustomTodayButton} />
         <Appointments />
         <AppointmentTooltip showCloseButton showOpenButton showDeleteButton />

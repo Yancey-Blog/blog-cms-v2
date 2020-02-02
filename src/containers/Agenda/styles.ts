@@ -16,6 +16,17 @@ const useStyles = makeStyles({
   customPaper: {
     position: 'relative',
   },
+  navigationButtonSpace: {
+    margin: '0 4px',
+  },
+  customTitle: {
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    transform: 'translate3d(-50%, -50%, 0)',
+    fontSize: '34px',
+    fontWeight: 300,
+  },
 })
 
 export default useStyles

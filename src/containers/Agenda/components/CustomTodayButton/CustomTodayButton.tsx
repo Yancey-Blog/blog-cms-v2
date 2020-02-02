@@ -4,8 +4,8 @@ import { TodayButton } from '@devexpress/dx-react-scheduler-material-ui'
 
 const CustomTodayButton: FC<TodayButton.ButtonProps> = ({ setCurrentDate }) => (
   <Button
-    variant="outlined"
-    color="secondary"
+    variant="contained"
+    color="primary"
     onClick={() => setCurrentDate(new Date())}
   >
     Today
