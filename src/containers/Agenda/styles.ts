@@ -7,6 +7,15 @@ const useStyles = makeStyles({
     justifyContent: 'space-between',
     padding: '0 24px',
   },
+  viewSwitcher: {
+    position: 'absolute',
+    top: '14px',
+    right: '24px',
+    zIndex: 1,
+  },
+  customPaper: {
+    position: 'relative',
+  },
 })
 
 export default useStyles

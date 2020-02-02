@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { Paper, Typography } from '@material-ui/core'
+import { Paper } from '@material-ui/core'
 import {
   ViewState,
   EditingState,
@@ -25,15 +25,16 @@ import {
 } from '@devexpress/dx-react-scheduler-material-ui'
 import ExternalViewSwitcher from './components/ExternalViewSwitcher/ExternalViewSwitcher'
 import NavigationButton from './components/NavigationButton/NavigationButton'
+import CustomTodayButton from './components/CustomTodayButton/CustomTodayButton'
 import { appointments } from './mock'
 import useStyles from './styles'
 
 const Agenda: FC = () => {
+  const classes = useStyles()
+
   const [currentViewName, setCurrentViewName] = useState('Day')
 
   const [data, setData] = useState(appointments)
-
-  const classes = useStyles()
 
   const commitChanges = ({ added, changed, deleted }: ChangeSet) => {
     if (added) {
@@ -61,20 +62,12 @@ const Agenda: FC = () => {
   }
 
   return (
-    <Paper>
-      <header className={classes.header}>
-        <ExternalViewSwitcher
-          currentViewName={currentViewName}
-          onChange={(val: string) => setCurrentViewName(val)}
-        />
-        <Typography variant="h3">February 2020</Typography>
-        <ExternalViewSwitcher
-          currentViewName={currentViewName}
-          onChange={(val: string) => setCurrentViewName(val)}
-        />
-      </header>
-
+    <Paper className={classes.customPaper}>
       <Scheduler data={data}>
+        <ExternalViewSwitcher
+          currentViewName={currentViewName}
+          onChange={(val: string) => setCurrentViewName(val)}
+        />
         <ViewState currentViewName={currentViewName} />
         <EditingState onCommitChanges={commitChanges} />
         <EditRecurrenceMenu />
@@ -84,7 +77,7 @@ const Agenda: FC = () => {
         <MonthView />
         <Toolbar />
         <DateNavigator navigationButtonComponent={NavigationButton} />
-        <TodayButton />
+        <TodayButton buttonComponent={CustomTodayButton} />
         <Appointments />
         <AppointmentTooltip showCloseButton showOpenButton showDeleteButton />
         <AppointmentForm />
