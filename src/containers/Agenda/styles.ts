@@ -9,7 +9,7 @@ const useStyles = makeStyles({
   },
   viewSwitcher: {
     position: 'absolute',
-    top: '14px',
+    top: '18px',
     right: '24px',
     zIndex: 1,
   },
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     margin: '0 4px',
   },
   customTitle: {
-    position: 'relative',
+    position: 'absolute',
     left: '50%',
     top: '34px',
     transform: 'translate3d(-50%, -50%, 0)',
