@@ -13,12 +13,17 @@ const ExternalViewSwitcher: FC<IExternalViewSwitcher> = ({ onChange }) => {
 
   return (
     <ButtonGroup
-      color="secondary"
-      aria-label="outlined secondary button group"
+      size="small"
+      variant="outlined"
+      color="primary"
       className={classes.viewSwitcher}
     >
       {viewDate.map(val => (
-        <Button key={val} onClick={() => onChange(val)}>
+        <Button
+          key={val}
+          onClick={() => onChange(val)}
+          className={classes.customBtn}
+        >
           {val}
         </Button>
       ))}

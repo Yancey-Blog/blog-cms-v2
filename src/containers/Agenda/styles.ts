@@ -27,6 +27,10 @@ const useStyles = makeStyles({
     fontSize: '34px',
     fontWeight: 300,
   },
+  customBtn: {
+    borderRadius: '24px',
+    textTransform: 'capitalize',
+  },
 })
 
 export default useStyles

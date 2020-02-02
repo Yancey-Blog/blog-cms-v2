@@ -10,7 +10,11 @@ const CustomOpenButton: FC<DateNavigator.OpenButtonProps> = ({
   const classes = useStyles()
 
   return (
-    <Button onClick={onVisibilityToggle} className={classes.customTitle}>
+    <Button
+      size="small"
+      onClick={onVisibilityToggle}
+      className={classes.customTitle}
+    >
       {text}
     </Button>
   )
