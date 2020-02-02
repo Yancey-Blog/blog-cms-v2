@@ -1,1 +1,1 @@
-export const ViewDate = ['Day', 'Week', 'Month']
+export const viewDate = ['Day', 'Week', 'Month']
