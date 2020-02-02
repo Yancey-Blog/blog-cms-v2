@@ -20,9 +20,9 @@ const useStyles = makeStyles({
     margin: '0 4px',
   },
   customTitle: {
-    position: 'absolute',
+    position: 'relative',
     left: '50%',
-    top: '50%',
+    top: '34px',
     transform: 'translate3d(-50%, -50%, 0)',
     fontSize: '34px',
     fontWeight: 300,
