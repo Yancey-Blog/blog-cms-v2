@@ -9,6 +9,14 @@ import {
 import { IAgenda, Query } from './types'
 import Schedule from './components/Schedule/Schedule'
 
+const dateStringToDate = (agendaList: IAgenda[]) =>
+  agendaList.map(agenda => ({
+    ...agenda,
+    id: agenda._id,
+    startDate: new Date(agenda.startDate),
+    endDate: new Date(agenda.endDate),
+  }))
+
 const Agenda: FC = () => {
   const { data } = useQuery<Query>(AGENDAS, {
     notifyOnNetworkStatusChange: true,
@@ -44,7 +52,7 @@ const Agenda: FC = () => {
         proxy.writeQuery({
           query: AGENDAS,
           data: {
-            getAgendas: data.getAgenda.filter(
+            getAgenda: data.getAgenda.filter(
               (agenda: IAgenda) => agenda._id !== deleteAgendaById._id,
             ),
           },
@@ -56,7 +64,7 @@ const Agenda: FC = () => {
 
   return (
     <Schedule
-      data={data}
+      dataSource={data ? dateStringToDate(data.getAgenda) : []}
       createAgenda={createAgenda}
       updateAgendaById={updateAgendaById}
       deleteAgendaById={deleteAgendaById}

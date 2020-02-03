@@ -27,45 +27,35 @@ import ExternalViewSwitcher from '../ExternalViewSwitcher/ExternalViewSwitcher'
 import CustomNavigationButton from '../CustomNavigationButton/CustomNavigationButton'
 import CustomTodayButton from '../CustomTodayButton/CustomTodayButton'
 import CustomOpenButton from '../CustomOpenButton/CustomOpenButton'
-import { appointments } from '../../mock'
 import useStyles from '../../styles'
 import { ScheduleProps } from '../../types'
 
-const Schedule: FC<ScheduleProps> = () => {
+const Schedule: FC<ScheduleProps> = ({
+  dataSource,
+  createAgenda,
+  updateAgendaById,
+  deleteAgendaById,
+}) => {
   const classes = useStyles()
 
   const [currentViewName, setCurrentViewName] = useState('Day')
 
-  const [data, setData] = useState(appointments)
-
   const commitChanges = ({ added, changed, deleted }: ChangeSet) => {
     if (added) {
-      const startingAddedId = '9999'
-      setData([
-        ...data,
-        { id: startingAddedId, ...added },
-      ] as AppointmentModel[])
+      createAgenda({ variables: { input: added } })
     }
     if (changed) {
-      setData(
-        data.map(appointment =>
-          changed[appointment.id ? appointment.id : 0]
-            ? {
-                ...appointment,
-                ...changed[appointment.id ? appointment.id : 0],
-              }
-            : appointment,
-        ),
-      )
+      console.log(changed)
+      // updateAgendaById({ variables: { input: changed } })
     }
     if (deleted !== undefined) {
-      setData(data.filter(appointment => appointment.id !== deleted))
+      deleteAgendaById({ variables: { id: deleted } })
     }
   }
 
   return (
     <Paper className={classes.customPaper}>
-      <Scheduler data={data}>
+      <Scheduler data={dataSource as AppointmentModel[]}>
         <ExternalViewSwitcher
           currentViewName={currentViewName}
           onChange={(val: string) => setCurrentViewName(val)}

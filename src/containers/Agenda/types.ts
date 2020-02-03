@@ -1,10 +1,12 @@
 export interface IAgenda {
   _id: string
   title: string
-  startDate: string
-  endDate?: string
-  rRule?: string
-  exDate?: string
+  startDate: Date
+  endDate: Date
+  allDay: boolean
+  notes: string | null
+  rRule: string | null
+  exDate: string | null
   createdAt: string
   updatedAt: string
 }
@@ -14,7 +16,7 @@ export interface Query {
 }
 
 export interface ScheduleProps {
-  data: Query | undefined
+  dataSource: IAgenda[]
   createAgenda: Function
   updateAgendaById: Function
   deleteAgendaById: Function

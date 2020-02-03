@@ -7,6 +7,8 @@ export const CREATE_ONE_AGENDA = gql`
       title
       startDate
       endDate
+      allDay
+      notes
       rRule
       exDate
     }
@@ -20,6 +22,8 @@ export const UPDATE_ONE_AGENDA = gql`
       title
       startDate
       endDate
+      allDay
+      notes
       rRule
       exDate
     }
@@ -27,12 +31,14 @@ export const UPDATE_ONE_AGENDA = gql`
 `
 
 export const AGENDAS = gql`
-  query GetAgendas {
-    getAgendas {
+  query GetAgenda {
+    getAgenda {
       _id
       title
       startDate
       endDate
+      allDay
+      notes
       rRule
       exDate
     }
@@ -46,6 +52,8 @@ export const DELETE_ONE_AGENDA = gql`
       title
       startDate
       endDate
+      allDay
+      notes
       rRule
       exDate
     }
