@@ -26,6 +26,7 @@ const useStyles = makeStyles({
     transform: 'translate3d(-50%, -50%, 0)',
     fontSize: '34px',
     fontWeight: 300,
+    textTransform: 'capitalize',
   },
   customBtn: {
     borderRadius: '24px',
