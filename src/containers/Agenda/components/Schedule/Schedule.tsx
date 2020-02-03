@@ -15,6 +15,7 @@ import {
   Toolbar,
   DateNavigator,
   TodayButton,
+  ConfirmationDialog,
   Appointments,
   AppointmentTooltip,
   AppointmentForm,
@@ -38,7 +39,7 @@ const Schedule: FC<ScheduleProps> = ({
 }) => {
   const classes = useStyles()
 
-  const [currentViewName, setCurrentViewName] = useState('Day')
+  const [currentViewName, setCurrentViewName] = useState('Month')
 
   const commitChanges = ({ added, changed, deleted }: ChangeSet) => {
     if (added) {
@@ -54,7 +55,7 @@ const Schedule: FC<ScheduleProps> = ({
 
   return (
     <Paper className={classes.customPaper}>
-      <Scheduler data={dataSource as AppointmentModel[]}>
+      <Scheduler data={dataSource as AppointmentModel[]} height={700}>
         <ExternalViewSwitcher
           currentViewName={currentViewName}
           onChange={(val: string) => setCurrentViewName(val)}
@@ -71,12 +72,17 @@ const Schedule: FC<ScheduleProps> = ({
           openButtonComponent={CustomOpenButton}
         />
         <TodayButton buttonComponent={CustomTodayButton} />
+        <ConfirmationDialog />
         <Appointments />
         <AppointmentTooltip showCloseButton showOpenButton showDeleteButton />
         <AppointmentForm />
         <AllDayPanel />
         <DragDropProvider allowDrag={() => true} />
-        <CurrentTimeIndicator updateInterval={60} />
+        <CurrentTimeIndicator
+          updateInterval={60}
+          shadePreviousCells
+          shadePreviousAppointments
+        />
       </Scheduler>
     </Paper>
   )
