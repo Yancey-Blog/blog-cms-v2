@@ -21,3 +21,7 @@ export interface ScheduleProps {
   updateAgendaById: Function
   deleteAgendaById: Function
 }
+
+export interface Dict {
+  [x: string]: any
+}

@@ -8,14 +8,7 @@ import {
 } from './typeDefs'
 import { IAgenda, Query } from './types'
 import Schedule from './components/Schedule/Schedule'
-
-const dateStringToDate = (agendaList: IAgenda[]) =>
-  agendaList.map(agenda => ({
-    ...agenda,
-    id: agenda._id,
-    startDate: new Date(agenda.startDate),
-    endDate: new Date(agenda.endDate),
-  }))
+import { dateStringToDate } from './tools'
 
 const Agenda: FC = () => {
   const { data } = useQuery<Query>(AGENDAS, {

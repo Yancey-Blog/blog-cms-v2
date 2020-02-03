@@ -3,7 +3,6 @@ import { Paper } from '@material-ui/core'
 import {
   ViewState,
   EditingState,
-  IntegratedEditing,
   ChangeSet,
   AppointmentModel,
 } from '@devexpress/dx-react-scheduler'
@@ -29,6 +28,7 @@ import CustomTodayButton from '../CustomTodayButton/CustomTodayButton'
 import CustomOpenButton from '../CustomOpenButton/CustomOpenButton'
 import useStyles from '../../styles'
 import { ScheduleProps } from '../../types'
+import { formatChangedData } from '../../tools'
 
 const Schedule: FC<ScheduleProps> = ({
   dataSource,
@@ -45,10 +45,9 @@ const Schedule: FC<ScheduleProps> = ({
       createAgenda({ variables: { input: added } })
     }
     if (changed) {
-      console.log(changed)
-      // updateAgendaById({ variables: { input: changed } })
+      updateAgendaById({ variables: { input: formatChangedData(changed) } })
     }
-    if (deleted !== undefined) {
+    if (deleted) {
       deleteAgendaById({ variables: { id: deleted } })
     }
   }
@@ -63,7 +62,6 @@ const Schedule: FC<ScheduleProps> = ({
         <ViewState currentViewName={currentViewName} />
         <EditingState onCommitChanges={commitChanges} />
         <EditRecurrenceMenu />
-        <IntegratedEditing />
         <DayView />
         <WeekView />
         <MonthView />
