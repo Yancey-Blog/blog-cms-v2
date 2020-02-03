@@ -1,95 +1,66 @@
-import React, { FC, useState } from 'react'
-import { Paper } from '@material-ui/core'
+import React, { FC } from 'react'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import {
-  ViewState,
-  EditingState,
-  IntegratedEditing,
-  ChangeSet,
-  AppointmentModel,
-} from '@devexpress/dx-react-scheduler'
-import {
-  Scheduler,
-  EditRecurrenceMenu,
-  DayView,
-  WeekView,
-  MonthView,
-  Toolbar,
-  DateNavigator,
-  TodayButton,
-  Appointments,
-  AppointmentTooltip,
-  AppointmentForm,
-  AllDayPanel,
-  DragDropProvider,
-  CurrentTimeIndicator,
-} from '@devexpress/dx-react-scheduler-material-ui'
-import ExternalViewSwitcher from './components/ExternalViewSwitcher/ExternalViewSwitcher'
-import CustomNavigationButton from './components/CustomNavigationButton/CustomNavigationButton'
-import CustomTodayButton from './components/CustomTodayButton/CustomTodayButton'
-import CustomOpenButton from './components/CustomOpenButton/CustomOpenButton'
-import { appointments } from './mock'
-import useStyles from './styles'
+  AGENDAS,
+  CREATE_ONE_AGENDA,
+  UPDATE_ONE_AGENDA,
+  DELETE_ONE_AGENDA,
+} from './typeDefs'
+import { IAgenda, Query } from './types'
+import Schedule from './components/Schedule/Schedule'
 
 const Agenda: FC = () => {
-  const classes = useStyles()
+  const { data } = useQuery<Query>(AGENDAS, {
+    notifyOnNetworkStatusChange: true,
+  })
 
-  const [currentViewName, setCurrentViewName] = useState('Day')
+  const [createAgenda] = useMutation(CREATE_ONE_AGENDA, {
+    update(proxy, { data: { createAgenda } }) {
+      const data = proxy.readQuery<Query>({ query: AGENDAS })
 
-  const [data, setData] = useState(appointments)
+      if (data) {
+        proxy.writeQuery({
+          query: AGENDAS,
+          data: {
+            ...data,
+            getAgenda: [createAgenda, ...data.getAgenda],
+          },
+        })
+      }
+    },
 
-  const commitChanges = ({ added, changed, deleted }: ChangeSet) => {
-    if (added) {
-      const startingAddedId = '9999'
-      setData([
-        ...data,
-        { id: startingAddedId, ...added },
-      ] as AppointmentModel[])
-    }
-    if (changed) {
-      setData(
-        data.map(appointment =>
-          changed[appointment.id ? appointment.id : 0]
-            ? {
-                ...appointment,
-                ...changed[appointment.id ? appointment.id : 0],
-              }
-            : appointment,
-        ),
-      )
-    }
-    if (deleted !== undefined) {
-      setData(data.filter(appointment => appointment.id !== deleted))
-    }
-  }
+    onError() {},
+  })
+
+  const [updateAgendaById] = useMutation(UPDATE_ONE_AGENDA, {
+    onError() {},
+  })
+
+  const [deleteAgendaById] = useMutation(DELETE_ONE_AGENDA, {
+    update(proxy, { data: { deleteAgendaById } }) {
+      const data = proxy.readQuery<Query>({ query: AGENDAS })
+
+      if (data) {
+        proxy.writeQuery({
+          query: AGENDAS,
+          data: {
+            getAgendas: data.getAgenda.filter(
+              (agenda: IAgenda) => agenda._id !== deleteAgendaById._id,
+            ),
+          },
+        })
+      }
+    },
+    onError() {},
+  })
 
   return (
-    <Paper className={classes.customPaper}>
-      <Scheduler data={data}>
-        <ExternalViewSwitcher
-          currentViewName={currentViewName}
-          onChange={(val: string) => setCurrentViewName(val)}
-        />
-        <ViewState currentViewName={currentViewName} />
-        <EditingState onCommitChanges={commitChanges} />
-        <EditRecurrenceMenu />
-        <IntegratedEditing />
-        <DayView />
-        <WeekView />
-        <MonthView />
-        <Toolbar />
-        <DateNavigator
-          navigationButtonComponent={CustomNavigationButton}
-          openButtonComponent={CustomOpenButton}
-        />
-        <TodayButton buttonComponent={CustomTodayButton} />
-        <Appointments />
-        <AppointmentTooltip showCloseButton showOpenButton showDeleteButton />
-        <AppointmentForm />
-        <AllDayPanel />
-        <DragDropProvider allowDrag={() => true} />
-        <CurrentTimeIndicator updateInterval={60} />
-      </Scheduler>
-    </Paper>
+    <Schedule
+      data={data}
+      createAgenda={createAgenda}
+      updateAgendaById={updateAgendaById}
+      deleteAgendaById={deleteAgendaById}
+    />
   )
 }
 
