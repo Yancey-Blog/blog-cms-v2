@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.9.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.8.0...v0.9.0) (2020-02-04)
+
+
+### Features
+
+* add CustomAppointment ([482eb0e](https://github.com/Yancey-Blog/blog-cms-v2/commit/482eb0e12d6c1a53beba32496872a646e7648c33))
+* add dateStringToDate ([54d2e4a](https://github.com/Yancey-Blog/blog-cms-v2/commit/54d2e4ac358c93654b9d3f3a53adfc7991669511))
+* add header for agenda ([b7402df](https://github.com/Yancey-Blog/blog-cms-v2/commit/b7402dfde8b805dd772975849a6fafc3b29cae87))
+* add menu for Header component's user icon ([afc4e0f](https://github.com/Yancey-Blog/blog-cms-v2/commit/afc4e0f1671803d4e3022040f6568e1eb9ee6f8d))
+* beauty styles of Agenda's buttton ([407c9c8](https://github.com/Yancey-Blog/blog-cms-v2/commit/407c9c81f72ab5ba99cd4cc4371d6ce2a315b524))
+* clear the denpendencies of fontawasome ([b6998b2](https://github.com/Yancey-Blog/blog-cms-v2/commit/b6998b21b545b0840f11a5c0011d82fa5bc85475))
+* comment out useless routes temporarily ([900814b](https://github.com/Yancey-Blog/blog-cms-v2/commit/900814bbca658eefb5ca6da89381a170143d8ed4))
+* comment useless imports temporarily ([8a75386](https://github.com/Yancey-Blog/blog-cms-v2/commit/8a753868be5dc97547d7b343a9e786d57eec64b8))
+* custom the title styles of Agenda component ([a651c7a](https://github.com/Yancey-Blog/blog-cms-v2/commit/a651c7a35dc4bea20f2e406f4db8e210a528243b))
+* delete useless files ([af8b7d1](https://github.com/Yancey-Blog/blog-cms-v2/commit/af8b7d1f3a951315af7aa27a59508b6791fe0913))
+* finish CustomTodayButton component ([5e0a302](https://github.com/Yancey-Blog/blog-cms-v2/commit/5e0a3027ebba13538cf6dc444809cd80277792a2))
+* finish schedule edit ([d467561](https://github.com/Yancey-Blog/blog-cms-v2/commit/d467561f3dffa0ce29e6fa44e8d793304488aa93))
+* format NavigationButton ([1ff6075](https://github.com/Yancey-Blog/blog-cms-v2/commit/1ff60759662cf1bbdc1bb43c46e1f9f21db6220d))
+* package ExternalViewSwitcher components ([d870259](https://github.com/Yancey-Blog/blog-cms-v2/commit/d87025926c5125b16b57dc185ac04dcf07a8cded))
+* register routes automatically ([c94f66b](https://github.com/Yancey-Blog/blog-cms-v2/commit/c94f66b60671d22da718998b84db32a450e2117f))
+* try material-ui/styles ([7b34b9a](https://github.com/Yancey-Blog/blog-cms-v2/commit/7b34b9aa23019540e07efbd6b06e0d72f4573ec0))
+* update Agenda component ([8364987](https://github.com/Yancey-Blog/blog-cms-v2/commit/83649873419a79e0a97b09ead45edb1cd59e14d1))
+* update ConfirmPoper component ([6b7b5da](https://github.com/Yancey-Blog/blog-cms-v2/commit/6b7b5da735ad84f02dfccfceffa4b77b62ab9480))
+* update CurrentTimeIndicator ([0b3d1e9](https://github.com/Yancey-Blog/blog-cms-v2/commit/0b3d1e95743001c4948511595e6398414bd62e8a))
+* update Router ([0ce17fb](https://github.com/Yancey-Blog/blog-cms-v2/commit/0ce17fb406b79f37890c85275739b3a9da44bace))
+* update style of customTitle ([8501dcf](https://github.com/Yancey-Blog/blog-cms-v2/commit/8501dcfe9e29049476815ce53031d2fa5d948c2c))
+* update style of drawerItemIcon ([cbe1d67](https://github.com/Yancey-Blog/blog-cms-v2/commit/cbe1d67c7e4b80f679cc1baa03dd2980ebd2b999))
+* update styles of agenda ([4f7d5d4](https://github.com/Yancey-Blog/blog-cms-v2/commit/4f7d5d4a0f08224edfb23de77b54b622dd6bb02b))
+* update styles of Agenda ([e7880ae](https://github.com/Yancey-Blog/blog-cms-v2/commit/e7880ae805c3d8240a49869427f9b00e919bd8e0))
+* update styles of Drawer component ([f5bc6ff](https://github.com/Yancey-Blog/blog-cms-v2/commit/f5bc6ff017098b09c72173bcd6f6d48b1d0d7e59))
+
 ## [0.8.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.7.1...v0.8.0) (2020-02-01)
 
 
