@@ -22,6 +22,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     minWidth: `calc(100% - ${drawerWidth}px)`,
+    width: `calc(100% - ${foldDrawerWidth}px)`,
   },
 })
 

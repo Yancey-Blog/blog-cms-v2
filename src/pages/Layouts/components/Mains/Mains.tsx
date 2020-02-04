@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Route } from 'react-router-dom'
 // import Routes from 'src/config/Routes'
-import styles from './Mains.module.scss'
+import useStyles from './styles'
 
 import Announcement from 'src/containers/Home/Announcement/Announcement'
 import OpenSource from 'src/containers/Home/OpenSource/OpenSource'
@@ -37,9 +37,12 @@ import Agenda from 'src/containers/Agenda/Agenda'
 
 // const routeList = getRoutes()
 
-const Mains: FC = () => (
-  <main className={styles.main}>
-    {/* {routeList.map(route => (
+const Mains: FC = () => {
+  const classes = useStyles()
+
+  return (
+    <main className={classes.main}>
+      {/* {routeList.map(route => (
       <Route
         exact
         key={route.path}
@@ -47,19 +50,20 @@ const Mains: FC = () => (
         component={lazy(() => import(`src/containers/${route.component}`))}
       />
     ))} */}
-    <Route exact path={`/announcement`}>
-      <Announcement />
-    </Route>
-    <Route exact path={`/motto`}>
-      <Motto />
-    </Route>
-    <Route exact path={`/open-source`}>
-      <OpenSource />
-    </Route>
-    <Route exact path={`/agenda`}>
-      <Agenda />
-    </Route>
-  </main>
-)
+      <Route exact path={`/announcement`}>
+        <Announcement />
+      </Route>
+      <Route exact path={`/motto`}>
+        <Motto />
+      </Route>
+      <Route exact path={`/open-source`}>
+        <OpenSource />
+      </Route>
+      <Route exact path={`/agenda`}>
+        <Agenda />
+      </Route>
+    </main>
+  )
+}
 
 export default Mains
