@@ -17,7 +17,7 @@ const ConfirmPoper: FC<Props> = ({ children, onOk, title }) => {
   return (
     <PopupState variant="popover" popupId="deleteOnePoperOver">
       {popupState => (
-        <div>
+        <>
           <div style={{ cursor: 'pointer' }} {...bindTrigger(popupState)}>
             {children}
           </div>
@@ -53,7 +53,7 @@ const ConfirmPoper: FC<Props> = ({ children, onOk, title }) => {
               </DialogActions>
             </Paper>
           </Popover>
-        </div>
+        </>
       )}
     </PopupState>
   )

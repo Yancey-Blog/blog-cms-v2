@@ -1,23 +1,47 @@
 import React, { FC, lazy } from 'react'
 import { Route, Switch } from 'react-router-dom'
-
+import Routes from 'src/config/Routes'
 import styles from './Mains.module.scss'
 
-const Announcement = lazy(() =>
-  import('src/containers/Home/Announcement/Announcement'),
-)
-const OpenSource = lazy(() =>
-  import('src/containers/Home/OpenSource/OpenSource'),
-)
+interface IRoute {
+  path: string
+  component: string
+}
 
-const Motto = lazy(() => import('src/containers/Home/Motto/Motto'))
+function getRoutes() {
+  const routers: IRoute[] = []
+
+  Routes.forEach(route => {
+    if (route.children) {
+      route.children.forEach(routeChild => {
+        routers.push({
+          path: routeChild.path,
+          component: routeChild.component,
+        })
+      })
+    } else {
+      routers.push({
+        path: route.path,
+        component: route.component as string,
+      })
+    }
+  })
+
+  return routers
+}
+
+const routeList = getRoutes()
 
 const Mains: FC = () => (
   <main className={styles.main}>
     <Switch>
-      <Route path="/announcement" component={Announcement} />
-      <Route path="/open-source" component={OpenSource} />
-      <Route path="/motto" component={Motto} />
+      {routeList.map(route => (
+        <Route
+          key={route.path}
+          path={`/${route.path}`}
+          component={lazy(() => import(`src/containers/${route.component}`))}
+        />
+      ))}
     </Switch>
   </main>
 )
