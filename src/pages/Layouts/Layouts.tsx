@@ -20,7 +20,7 @@ const Layouts: FC = () => {
           [styles.containerShift]: !open,
         })}
       >
-        <Header handleDrawerChange={handleDrawerChange} />
+        <Header open={open} handleDrawerChange={handleDrawerChange} />
         <Mains />
         <Footer />
       </div>

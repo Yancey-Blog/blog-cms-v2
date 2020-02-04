@@ -61,8 +61,8 @@ const Announcement: FC = () => {
             query: ANNOUNCEMENTS,
             data: {
               getAnnouncements: data.getAnnouncements.filter(
-                (openSource: IAnnouncement) =>
-                  openSource._id !== deleteAnnouncementById._id,
+                (announcement: IAnnouncement) =>
+                  announcement._id !== deleteAnnouncementById._id,
               ),
             },
           })
@@ -87,8 +87,8 @@ const Announcement: FC = () => {
             query: ANNOUNCEMENTS,
             data: {
               getAnnouncements: data.getAnnouncements.filter(
-                (openSource: IAnnouncement) =>
-                  !deleteAnnouncements.ids.includes(openSource._id),
+                (announcement: IAnnouncement) =>
+                  !deleteAnnouncements.ids.includes(announcement._id),
               ),
             },
           })

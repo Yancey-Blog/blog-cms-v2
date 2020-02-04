@@ -1,48 +1,88 @@
 import React, { FC } from 'react'
-import AppBar from '@material-ui/core/AppBar'
-import Fab from '@material-ui/core/Fab'
-import Input from '@material-ui/core/Input'
-import Badge from '@material-ui/core/Badge'
-import Typography from '@material-ui/core/Typography'
-import IconButton from '@material-ui/core/IconButton'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import styles from './Header.module.scss'
+import { Menu, MenuItem, Divider } from '@material-ui/core'
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state'
+import classNames from 'classnames'
+import {
+  AppBar,
+  Input,
+  Fab,
+  Badge,
+  Typography,
+  IconButton,
+} from '@material-ui/core'
+import {
+  MoreVert,
+  Dashboard,
+  Notifications,
+  Person,
+  Search,
+  ViewList,
+} from '@material-ui/icons'
+import { logout } from 'src/shared/utils'
+import useStyles from './styles'
 
 interface Props {
+  open: boolean
   handleDrawerChange: Function
 }
 
-const Header: FC<Props> = ({ handleDrawerChange }) => (
-  <AppBar position="relative" className={styles.header}>
-    <div className={styles.left}>
-      <Fab
-        size="small"
-        aria-label="more"
-        onClick={() => handleDrawerChange()}
-        className={styles.foldIcon}
-      >
-        <FontAwesomeIcon icon={['fab', 'react']} />
-      </Fab>
-      <Typography variant="h6" noWrap className={styles.title}>
-        CMS for Blog
-      </Typography>
-    </div>
-    <div className={styles.right}>
-      <Input
-        placeholder="Search..."
-        inputProps={{
-          'aria-label': 'description',
-        }}
-      />
-      {[0, 1, 2, 3].map((val, key) => (
-        <IconButton aria-label="show 4 new mails" color="inherit" key={key}>
-          <Badge badgeContent={key} color="secondary">
-            <FontAwesomeIcon icon={['fab', 'react']} />
+const Header: FC<Props> = ({ open, handleDrawerChange }) => {
+  const classes = useStyles()
+
+  return (
+    <AppBar position="relative" className={classes.header}>
+      <section className={classes.left}>
+        <Fab
+          size="small"
+          aria-label="more"
+          onClick={() => handleDrawerChange()}
+          className={classes.fabIcon}
+        >
+          {open ? <MoreVert fontSize="small" /> : <ViewList fontSize="small" />}
+        </Fab>
+        <Typography variant="h6" noWrap className={classes.title}>
+          CMS
+        </Typography>
+      </section>
+      <section>
+        <Input placeholder="Search..." />
+        <Fab
+          size="small"
+          aria-label="search"
+          className={classNames(classes.fabIcon, classes.marginRight)}
+        >
+          <Search fontSize="small" />
+        </Fab>
+        <IconButton>
+          <Dashboard fontSize="small" />
+        </IconButton>
+        <IconButton>
+          <Badge badgeContent={4} color="secondary">
+            <Notifications fontSize="small" />
           </Badge>
         </IconButton>
-      ))}
-    </div>
-  </AppBar>
-)
+
+        <PopupState variant="popover" popupId="deleteOnePoperOver">
+          {popupState => (
+            <>
+              <IconButton
+                style={{ cursor: 'pointer' }}
+                {...bindTrigger(popupState)}
+              >
+                <Person fontSize="small" />
+              </IconButton>
+              <Menu {...bindMenu(popupState)}>
+                <MenuItem onClick={popupState.close}>Profile</MenuItem>
+                <MenuItem onClick={popupState.close}>Setting</MenuItem>
+                <Divider />
+                <MenuItem onClick={popupState.close && logout}>Logout</MenuItem>
+              </Menu>
+            </>
+          )}
+        </PopupState>
+      </section>
+    </AppBar>
+  )
+}
 
 export default Header
