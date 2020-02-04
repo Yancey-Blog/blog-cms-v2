@@ -12,8 +12,8 @@ function getRoutes() {
   const routers: IRoute[] = []
 
   Routes.forEach(route => {
-    if (route.children) {
-      route.children.forEach(routeChild => {
+    if (route.routes) {
+      route.routes.forEach(routeChild => {
         routers.push({
           path: routeChild.path,
           component: routeChild.component,

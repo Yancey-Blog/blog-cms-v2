@@ -14,7 +14,7 @@ interface Route {
   path: string
   icon: ReactElement | string
   component?: string
-  children?: Array<{
+  routes?: Array<{
     hideInMenu?: boolean
     name: string
     path: string
@@ -33,7 +33,7 @@ const routes: Route[] = [
     name: 'Home',
     path: 'home',
     icon: <Home />,
-    children: [
+    routes: [
       {
         name: 'Motto',
         path: 'motto',
@@ -60,7 +60,7 @@ const routes: Route[] = [
   //   name: 'Music',
   //   path: 'music',
   //   icon: <Headset />,
-  //   children: [
+  //   routes: [
   //     {
   //       name: 'Live Tour',
   //       path: 'live-tour',
@@ -88,7 +88,7 @@ const routes: Route[] = [
   //   path: 'article-list',
   //   icon: <PostAdd />,
   //   component: 'Article/ArticleList/ArticleList',
-  //   children: [
+  //   routes: [
   //     {
   //       name: 'Article Detail',
   //       path: 'article-detail',

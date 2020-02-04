@@ -21,8 +21,8 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
     return curPathName.includes(path)
   }
 
-  const matchChilren = (chilren: any[]) => {
-    return !!chilren.find(child => curPathName.includes(child.path))
+  const matchChilren = (children: any[]) => {
+    return !!children.find(child => curPathName.includes(child.path))
   }
 
   const onClickParent = (route: any) => {
@@ -32,7 +32,7 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
       setFold(route.path)
     }
 
-    if (!route.children) {
+    if (!route.routes) {
       history.push(route.path)
     }
   }
@@ -89,27 +89,27 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
                   })}
                 >
                   <span className={styles.drawerTxt}>{route.name}</span>
-                  {route.children && route.children.length !== 0 ? (
+                  {route.routes && route.routes.length !== 0 ? (
                     <span
                       className={classNames(styles.arrow, {
                         [styles.reverseArrow]:
-                          matchChilren(route.children) || route.path === fold,
+                          matchChilren(route.routes) || route.path === fold,
                       })}
                     />
                   ) : null}
                 </div>
               </div>
 
-              {route.children && route.children.length !== 0 ? (
+              {route.routes && route.routes.length !== 0 ? (
                 <div
                   className={classNames(styles.itemChildren)}
                   style={
-                    matchChilren(route.children) || route.path === fold
-                      ? { maxHeight: `${50 * route.children.length}px` }
+                    matchChilren(route.routes) || route.path === fold
+                      ? { maxHeight: `${50 * route.routes.length}px` }
                       : {}
                   }
                 >
-                  {route.children.map((child: any) => (
+                  {route.routes.map((child: any) => (
                     <Link to={child.path} key={child.name}>
                       <div
                         className={classNames(
