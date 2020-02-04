@@ -27,6 +27,7 @@ import ExternalViewSwitcher from '../ExternalViewSwitcher/ExternalViewSwitcher'
 import CustomNavigationButton from '../CustomNavigationButton/CustomNavigationButton'
 import CustomTodayButton from '../CustomTodayButton/CustomTodayButton'
 import CustomOpenButton from '../CustomOpenButton/CustomOpenButton'
+import CustomAppointment from '../CustomAppointment/CustomAppointment'
 import useStyles from '../../styles'
 import { ScheduleProps } from '../../types'
 import { formatChangedData } from '../../tools'
@@ -55,7 +56,7 @@ const Schedule: FC<ScheduleProps> = ({
 
   return (
     <Paper className={classes.customPaper}>
-      <Scheduler data={dataSource as AppointmentModel[]} height={700}>
+      <Scheduler data={dataSource as AppointmentModel[]} height={691}>
         <ExternalViewSwitcher
           currentViewName={currentViewName}
           onChange={(val: string) => setCurrentViewName(val)}
@@ -73,7 +74,7 @@ const Schedule: FC<ScheduleProps> = ({
         />
         <TodayButton buttonComponent={CustomTodayButton} />
         <ConfirmationDialog />
-        <Appointments />
+        <Appointments appointmentComponent={CustomAppointment} />
         <AppointmentTooltip showCloseButton showOpenButton showDeleteButton />
         <AppointmentForm />
         <AllDayPanel />
