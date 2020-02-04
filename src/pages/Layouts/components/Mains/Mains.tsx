@@ -1,5 +1,5 @@
 import React, { FC, lazy } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import Routes from 'src/config/Routes'
 import styles from './Mains.module.scss'
 
