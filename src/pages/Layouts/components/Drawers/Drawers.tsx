@@ -5,7 +5,7 @@ import { Home } from '@material-ui/icons'
 import classNames from 'classnames'
 import styles from './Drawers.module.scss'
 import { getInitials } from 'src/shared/utils'
-import routes from 'src/config/Routes'
+import routes from 'src/config/routes'
 
 interface DrawersProps {
   open: boolean
