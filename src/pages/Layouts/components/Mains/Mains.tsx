@@ -34,15 +34,14 @@ const routeList = getRoutes()
 
 const Mains: FC = () => (
   <main className={styles.main}>
-    <Switch>
-      {routeList.map(route => (
-        <Route
-          key={route.path}
-          path={`/${route.path}`}
-          component={lazy(() => import(`src/containers/${route.component}`))}
-        />
-      ))}
-    </Switch>
+    {routeList.map(route => (
+      <Route
+        exact
+        key={route.path}
+        path={`/${route.path}`}
+        component={lazy(() => import(`src/containers/${route.component}`))}
+      />
+    ))}
   </main>
 )
 
