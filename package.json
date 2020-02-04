@@ -89,7 +89,7 @@
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "4.0.1",
     "query-string": "^6.10.1",
-    "ramda": "^0.26.1",
+    "ramda": "^0.27.0",
     "react": "^16.12.0",
     "react-app-polyfill": "^1.0.5",
     "react-copy-to-clipboard": "^5.0.2",
