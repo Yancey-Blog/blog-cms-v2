@@ -20,7 +20,7 @@ const Layouts: FC = () => {
       <Drawer open={open} />
       <section
         className={classNames(
-          classes.main,
+          classes.mainWrapper,
           open ? classes.expand : classes.shrink,
         )}
       >

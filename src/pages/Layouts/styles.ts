@@ -1,10 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles'
-import { drawerWidth } from './constants'
+import { drawerWidth, foldDrawerWidth } from './constants'
 import { transition } from './tools'
 
 const useStyles = makeStyles({
   layouts: {
     display: 'flex',
+    overflowX: 'hidden',
   },
 
   expand: {
@@ -13,14 +14,14 @@ const useStyles = makeStyles({
   },
 
   shrink: {
-    marginLeft: `-${drawerWidth}px`,
+    marginLeft: `-${drawerWidth - foldDrawerWidth}px`,
     transition: transition('margin-left'),
   },
 
-  main: {
+  mainWrapper: {
     display: 'flex',
     flexDirection: 'column',
-    flex: 1,
+    minWidth: `calc(100% - ${drawerWidth}px)`,
   },
 })
 

@@ -1,13 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles'
-import { drawerWidth } from '../../constants'
+import { drawerWidth, foldDrawerWidth } from '../../constants'
 import { transition } from '../../tools'
 
 const useStyles = makeStyles({
   menu: {
     margin: 0,
     padding: 0,
-    width: `${drawerWidth}px`,
-    height: '100vh',
+    minWidth: `${drawerWidth}px`,
+    minHeight: '100vh',
     backgroundColor: 'green',
   },
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 
   shrink: {
-    transform: `translateX(-${drawerWidth}px)`,
+    transform: `translateX(-${drawerWidth - foldDrawerWidth}px)`,
     transition: transition('transform'),
   },
 })
