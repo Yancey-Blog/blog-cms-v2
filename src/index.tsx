@@ -9,9 +9,9 @@ import client from './shared/apolloClient'
 import history from './shared/history'
 import Loading from './components/Loading/Loading'
 import { SnackbarUtilsConfigurator } from './components/Toast/Toast'
-import Login from 'src/pages/Login/Login'
-import Register from 'src/pages/Register/Register'
 
+const Login = lazy(() => import('src/pages/Login/Login'))
+const Register = lazy(() => import('src/pages/Register/Register'))
 const Layouts = lazy(() => import('src/pages/Layouts/Layouts'))
 
 serviceWorker.unregister()
