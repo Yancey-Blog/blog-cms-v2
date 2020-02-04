@@ -1976,10 +1976,10 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@types/yup@^0.26.27":
-  version "0.26.27"
-  resolved "https://registry.yarnpkg.com/@types/yup/-/yup-0.26.27.tgz#b928b1d644ffe98766e1440131222aefd3ca8f89"
-  integrity sha512-Rlsq3DExOHfWur75nQUAa5I0fXA2vSrw0u0qK3SI4PAkyOWjNzZsTaK+U9/sofWm3ttwWYn+C92pSq0s4rob4w==
+"@types/yup@^0.26.29":
+  version "0.26.29"
+  resolved "https://registry.yarnpkg.com/@types/yup/-/yup-0.26.29.tgz#5a533ad6f74e442436698e20b1441c68a7a1c931"
+  integrity sha512-M81oZOgLap0b0I/BySnpLwHjOj1BFxUKV1ytG2Kqj3jmkh8F3H11PEnk658UniftpjTXdueloOL+KZYn+SMQ9w==
 
 "@types/zen-observable@^0.8.0":
   version "0.8.0"
