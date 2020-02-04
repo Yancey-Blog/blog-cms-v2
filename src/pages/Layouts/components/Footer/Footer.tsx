@@ -7,10 +7,9 @@ const Footer: FC = () => (
       <li>HOME</li>
       <li>BLOG</li>
       <li>GITHUB</li>
-      <li>GITHUB</li>
     </ul>
     <p className={styles.copyright}>
-      {`Copyright © ${new Date().getFullYear()} Yancey Inc. All rights reserved.`}
+      {`Copyright © ${new Date().getFullYear()} Yancey Inc. and its affiliates.`}
     </p>
   </footer>
 )
