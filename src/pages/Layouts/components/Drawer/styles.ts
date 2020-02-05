@@ -30,6 +30,16 @@ const useStyles = makeStyles({
       transform: 'translateX(0)',
       transition: transition('transform'),
     },
+
+    '&:hover $hidenItem': {
+      width: '100%',
+      transform: 'translateX(0)',
+    },
+
+    '&:hover $hideDetail': {
+      opacity: 1,
+      visibility: 'visible',
+    },
   },
 
   expand: {
@@ -116,7 +126,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
     position: 'relative',
     marginTop: '10px',
-    padding: '15px 0',
+    padding: '15px 0 15px 12px',
     cursor: 'pointer',
     transform: 'translateX(0)',
     transition: 'background-color 300ms ease 0ms, transform 300ms ease 0ms',
@@ -125,6 +135,10 @@ const useStyles = makeStyles({
       borderRadius: '3px',
       transition: 'background-color 300ms ease 0ms',
     },
+  },
+
+  childItem: {
+    padding: '10px 0 10px 12px',
   },
 
   hidenItem: {
@@ -136,9 +150,12 @@ const useStyles = makeStyles({
   },
 
   itemIcon: {
-    marginLeft: '12px',
+    height: '24px',
+  },
+
+  itemAbbrTxt: {
+    minWidth: '24px',
     marginRight: '18px',
-    width: '24px',
     textAlign: 'center',
   },
 
@@ -147,11 +164,7 @@ const useStyles = makeStyles({
     fontWeight: 300,
   },
 
-  childItem: {
-    padding: '10px 0',
-  },
-
-  showDetail: {
+  detail: {
     display: 'flex',
     alignItems: 'center',
     opacity: 1,
@@ -163,6 +176,22 @@ const useStyles = makeStyles({
     opacity: 0,
     visibility: 'hidden',
     transition: 'visibility 300ms ease 0ms, opacity 300ms ease 0ms',
+  },
+
+  formatArrowTag: {
+    color: '#ffffff',
+    textDecoration: 'none',
+  },
+
+  active: {
+    display: 'block',
+    borderRadius: '3px',
+    background: '#4caf50',
+    boxShadow: `0 12px 20px -10px rgba(76, 175, 80, 0.28),
+    0 4px 20px 0 rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(76, 175, 80,  0.2)`,
+    '&:hover': {
+      backgroundColor: 'rgba(76, 175, 80, 1)',
+    },
   },
 })
 
