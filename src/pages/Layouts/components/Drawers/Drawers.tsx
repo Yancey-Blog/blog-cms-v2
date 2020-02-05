@@ -75,7 +75,7 @@ const Drawers: FC<DrawersProps> = ({ open }) => {
           </div>
 
           {routes.map((route: any, key: number) => (
-            <div className={styles.drawerList} key={route.name}>
+            <div key={route.name}>
               <div
                 className={classNames(styles.drawerItem, {
                   [styles.activeDrawerItem]: matchCurRoute(route.path),

@@ -68,6 +68,7 @@ $drawerHover: rgba(#c8c8c8, 0.2);
 }
 
 .hideDrawerDetail {
+  padding: 10px 0;
   opacity: 0;
   visibility: hidden;
   transition: opacity 300ms ease 0ms, visibility 300ms ease 0ms;
@@ -155,10 +156,6 @@ $drawerHover: rgba(#c8c8c8, 0.2);
 
 .activeItemChildren {
   transition: max-height 300ms ease 0ms;
-}
-
-.drawerItemChildren {
-  padding: 10px 0;
 }
 
 .arrow {
