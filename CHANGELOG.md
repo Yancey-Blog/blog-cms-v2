@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.9.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.9.0...v0.9.1) (2020-02-06)
+
+
+### Features
+
+* add activeParent ([70f71a9](https://github.com/Yancey-Blog/blog-cms-v2/commit/70f71a9250407e506716ed75280c3583dd43f54c))
+* add hidenNotItem ([8b248f3](https://github.com/Yancey-Blog/blog-cms-v2/commit/8b248f3386b9621a880068d38c2ed577162ce4ef))
+* delete Drawers ([95df33c](https://github.com/Yancey-Blog/blog-cms-v2/commit/95df33c079bf7cc00a6f6d7c38f1aa4b22739c79))
+* delete uesless codes ([1fbbe7d](https://github.com/Yancey-Blog/blog-cms-v2/commit/1fbbe7d5018498941584167a5fb143e38f4d6fad))
+* delete useless code ([b576418](https://github.com/Yancey-Blog/blog-cms-v2/commit/b5764182c3829a695d465647b41e6c2d16f45fe7))
+* delete useless files ([e943a24](https://github.com/Yancey-Blog/blog-cms-v2/commit/e943a24514981ad021f0575a8349da9f18ba8595))
+* delete useless files ([caa9c82](https://github.com/Yancey-Blog/blog-cms-v2/commit/caa9c824d0ddcbc92afd7583fe385414c7554c1c))
+* delete useless Switch componentt ([bcff0e8](https://github.com/Yancey-Blog/blog-cms-v2/commit/bcff0e8132f4928f687c4f6186fcf753cc32bb43))
+* do not use lazy temporarily ([ffb9b1f](https://github.com/Yancey-Blog/blog-cms-v2/commit/ffb9b1f355075b9f75dc69a39d4e9f9d1533df45))
+* finish menu matcher ([5a150f0](https://github.com/Yancey-Blog/blog-cms-v2/commit/5a150f03ef51155329593954f65bf0bd84f02547))
+* make Login component lazyable ([a13ab6c](https://github.com/Yancey-Blog/blog-cms-v2/commit/a13ab6c80e071860e429ba43bd3bfeb4f5a0b93f))
+* package HideWrapper components ([400a589](https://github.com/Yancey-Blog/blog-cms-v2/commit/400a589e3fde040c00153db9e3df3c878e7d29cf))
+* package LinkItem component ([d888624](https://github.com/Yancey-Blog/blog-cms-v2/commit/d888624c9731de2118ca3970d2868dd879f3d6c6))
+* pause HideWrapper temporarily ([2d1e994](https://github.com/Yancey-Blog/blog-cms-v2/commit/2d1e9949ee8a2add1fb212d01413e972d93e69a9))
+* pause LinkItem temporarily ([0d54783](https://github.com/Yancey-Blog/blog-cms-v2/commit/0d54783d8e5e96c2b8e19b57cd353b64f681b9e9))
+* rename routes.tsx ([7947b01](https://github.com/Yancey-Blog/blog-cms-v2/commit/7947b01be670128bfd8f46103e383521a79bbcd6))
+* support active className ([117de3d](https://github.com/Yancey-Blog/blog-cms-v2/commit/117de3d790617b15d27217d3e8fdf5026ab4b1f8))
+* support unfold ([e3c5a59](https://github.com/Yancey-Blog/blog-cms-v2/commit/e3c5a59485762a8f8292c6a4b1efe29d3b6baa29))
+* update copyright ([fefb050](https://github.com/Yancey-Blog/blog-cms-v2/commit/fefb050b33ecbd6408bdde8ca71dd88051de0278))
+* update routes ([2aa1694](https://github.com/Yancey-Blog/blog-cms-v2/commit/2aa1694806c7647b4c32fc93439d4401773ad054))
+* update routes config ([45d7088](https://github.com/Yancey-Blog/blog-cms-v2/commit/45d7088fd8edbc71f9b2305a876b2c0bb2141741))
+* update style of Drawer ([b3cad7e](https://github.com/Yancey-Blog/blog-cms-v2/commit/b3cad7e7a0bfb9ff7288f840168c996c88daadf0))
+* update styles ([b02e203](https://github.com/Yancey-Blog/blog-cms-v2/commit/b02e203cea729a4d53db4ea69a9c239544e265c2))
+* update styles ([b4cc488](https://github.com/Yancey-Blog/blog-cms-v2/commit/b4cc48886f2dcc5e753d498444adb5356b861ea7))
+* update styles ([64850e6](https://github.com/Yancey-Blog/blog-cms-v2/commit/64850e6a62feb8ed50b93ec65f983afe765c5896))
+* update styles of main ([2afbf70](https://github.com/Yancey-Blog/blog-cms-v2/commit/2afbf701246f07f68d1cc2e6ab8ffc16a0cabda0))
+* use @loadable/component ([7a1d8f6](https://github.com/Yancey-Blog/blog-cms-v2/commit/7a1d8f6770ec02a9c664c9de8380db52d1d9cdaf))
+* use HideWrapper component ([2b52b85](https://github.com/Yancey-Blog/blog-cms-v2/commit/2b52b859ab4407f067dcdc681ee71a91d91c85d5))
+* use translateX instead of width ([1df6d9b](https://github.com/Yancey-Blog/blog-cms-v2/commit/1df6d9b62efe3ad2a853ea54af5ebefe89206f24))
+
 ## [0.9.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.8.0...v0.9.0) (2020-02-04)
 
 
