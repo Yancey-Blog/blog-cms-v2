@@ -2,10 +2,10 @@ import React, { FC, Fragment, useState } from 'react'
 import { Avatar } from '@material-ui/core'
 import { Home } from '@material-ui/icons'
 import classNames from 'classnames'
-import LinkItem, { ItemType } from './components/LinkItem'
 import HideWrapper from './components/HideWrapper'
 import useStyles from './styles'
 import routes from 'src/config/routes'
+import { getInitials, noop } from 'src/shared/utils'
 
 interface Props {
   open: boolean
@@ -56,15 +56,24 @@ const Drawer: FC<Props> = ({ open }) => {
 
       {routes.map(route => (
         <Fragment key={route.name}>
-          <LinkItem
-            path={route.path}
-            open={open}
-            mode={ItemType.Parent}
-            name={route.name}
-            icon={route.icon}
-            hasChild={!!route.routes}
-            setFold={() => setFold(!fold)}
-          />
+          <div
+            className={classNames(classes.item, {
+              [classes.hidenItem]: !open,
+            })}
+            onClick={route.routes ? () => setFold(!fold) : noop}
+          >
+            <span
+              className={classNames(classes.itemAbbrTxt, classes.itemIcon, {
+                [classes.hidenItem]: !open,
+              })}
+            >
+              {route.icon}
+            </span>
+            <HideWrapper open={open}>
+              <span className={classes.itemTxt}>{route.name}</span>
+              {!!route.routes && <span className={classes.arrow} />}
+            </HideWrapper>
+          </div>
 
           <div
             className={classNames(classes.childrenGroup, {
@@ -78,13 +87,23 @@ const Drawer: FC<Props> = ({ open }) => {
           >
             {route.routes &&
               route.routes.map(childRoute => (
-                <LinkItem
-                  key={childRoute.path}
-                  open={open}
-                  mode={ItemType.Child}
-                  name={childRoute.name}
-                  path={childRoute.path}
-                />
+                <div
+                  key={childRoute.name}
+                  className={classNames(classes.item, classes.childItem, {
+                    [classes.hidenItem]: !open,
+                  })}
+                >
+                  <span
+                    className={classNames(classes.itemAbbrTxt, {
+                      [classes.hidenItem]: !open,
+                    })}
+                  >
+                    {getInitials(childRoute.name)}
+                  </span>
+                  <HideWrapper open={open}>
+                    <span className={classes.itemTxt}>{childRoute.name}</span>
+                  </HideWrapper>
+                </div>
               ))}
           </div>
         </Fragment>
