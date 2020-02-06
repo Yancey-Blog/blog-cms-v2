@@ -9,7 +9,7 @@ import {
   Event,
 } from '@material-ui/icons'
 
-interface Route {
+export interface Route {
   name: string
   path: string
   icon: ReactElement

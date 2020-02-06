@@ -1,10 +1,11 @@
-import React, { FC, Fragment, useState } from 'react'
+import React, { FC, Fragment, useState, useEffect } from 'react'
+import { NavLink, useLocation } from 'react-router-dom'
 import { Avatar } from '@material-ui/core'
 import { Home } from '@material-ui/icons'
 import classNames from 'classnames'
 import useStyles from './styles'
-import routes from 'src/config/routes'
-import { getInitials, noop } from 'src/shared/utils'
+import routes, { Route } from 'src/config/routes'
+import { getInitials } from 'src/shared/utils'
 
 interface Props {
   open: boolean
@@ -13,7 +14,30 @@ interface Props {
 const Drawer: FC<Props> = ({ open }) => {
   const classes = useStyles()
 
-  const [fold, setFold] = useState(true)
+  const { pathname } = useLocation()
+
+  const [foldName, setfoldName] = useState('')
+
+  const handleFoldNameChange = (name: string) => {
+    if (foldName === name) {
+      setfoldName('')
+    } else {
+      setfoldName(name)
+    }
+  }
+
+  useEffect(() => {
+    const matchChilren = (routeList: Route[]) => {
+      const curRoute = routeList.find(
+        route =>
+          route.routes &&
+          route.routes.find(childRoute => pathname.includes(childRoute.path)),
+      )
+      curRoute && setfoldName(curRoute.name)
+    }
+
+    matchChilren(routes)
+  }, [pathname])
 
   return (
     <menu
@@ -63,62 +87,101 @@ const Drawer: FC<Props> = ({ open }) => {
 
       {routes.map(route => (
         <Fragment key={route.name}>
-          <div
-            className={classNames(classes.item, {
-              [classes.hidenItem]: !open,
-            })}
-            onClick={route.routes ? () => setFold(!fold) : noop}
-          >
-            <span
-              className={classNames(classes.itemAbbrTxt, classes.itemIcon, {
+          {route.routes ? (
+            <div
+              className={classNames(classes.item, {
                 [classes.hidenItem]: !open,
               })}
+              onClick={() => handleFoldNameChange(route.name)}
             >
-              {route.icon}
-            </span>
-            <div
-              className={classNames(classes.detail, {
-                [classes.hideDetail]: !open,
-              })}
-            >
-              <span className={classes.itemTxt}>{route.name}</span>
-              {!!route.routes && <span className={classes.arrow} />}
+              <span
+                className={classNames(classes.itemAbbrTxt, classes.itemIcon, {
+                  [classes.hidenItem]: !open,
+                })}
+              >
+                {route.icon}
+              </span>
+              <div
+                className={classNames(classes.detail, {
+                  [classes.hideDetail]: !open,
+                })}
+              >
+                <span className={classes.itemTxt}>{route.name}</span>
+                <span className={classes.arrow} />
+              </div>
             </div>
-          </div>
+          ) : (
+            <NavLink
+              exact
+              activeClassName={classes.active}
+              className={classes.formatArrowTag}
+              to={route.path}
+            >
+              <div
+                className={classNames(classes.item, {
+                  [classes.hidenItem]: !open,
+                })}
+              >
+                <span
+                  className={classNames(classes.itemAbbrTxt, classes.itemIcon, {
+                    [classes.hidenItem]: !open,
+                  })}
+                >
+                  {route.icon}
+                </span>
+                <div
+                  className={classNames(classes.detail, {
+                    [classes.hideDetail]: !open,
+                  })}
+                >
+                  <span className={classes.itemTxt}>{route.name}</span>
+                </div>
+              </div>
+            </NavLink>
+          )}
 
           <div
             className={classNames(classes.childrenGroup, {
-              [classes.unfoldChildren]: !fold,
+              [classes.unfoldChildren]: foldName === route.name,
             })}
             style={{
               maxHeight: `${
-                !fold ? route.routes && 50 * route.routes.length : 0
+                foldName === route.name
+                  ? route.routes && 50 * route.routes.length
+                  : 0
               }px`,
             }}
           >
             {route.routes &&
               route.routes.map(childRoute => (
-                <div
+                <NavLink
+                  exact
+                  activeClassName={classes.active}
+                  className={classes.formatArrowTag}
+                  to={childRoute.path}
                   key={childRoute.name}
-                  className={classNames(classes.item, classes.childItem, {
-                    [classes.hidenItem]: !open,
-                  })}
                 >
-                  <span
-                    className={classNames(classes.itemAbbrTxt, {
+                  <div
+                    className={classNames(classes.item, classes.childItem, {
                       [classes.hidenItem]: !open,
                     })}
                   >
-                    {getInitials(childRoute.name)}
-                  </span>
-                  <div
-                    className={classNames(classes.detail, {
-                      [classes.hideDetail]: !open,
-                    })}
-                  >
-                    <span className={classes.itemTxt}>{childRoute.name}</span>
+                    <span
+                      className={classNames(classes.itemAbbrTxt, {
+                        [classes.hidenItem]: !open,
+                      })}
+                    >
+                      {getInitials(childRoute.name)}
+                    </span>
+                    <div
+                      className={classNames(classes.detail, {
+                        [classes.hideDetail]: !open,
+                      })}
+                    >
+                      <span className={classes.itemTxt}>{childRoute.name}</span>
+                    </div>
                   </div>
-                </div>
+                </NavLink>
               ))}
           </div>
         </Fragment>

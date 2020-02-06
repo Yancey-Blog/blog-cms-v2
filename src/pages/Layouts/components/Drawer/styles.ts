@@ -206,7 +206,6 @@ const useStyles = makeStyles({
   },
 
   unfoldChildren: {
-    maxHeight: '200px',
     transition: 'max-height 300ms ease 0ms',
   },
 })
