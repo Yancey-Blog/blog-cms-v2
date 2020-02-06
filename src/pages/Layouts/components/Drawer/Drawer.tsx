@@ -43,6 +43,7 @@ const Drawer: FC<Props> = ({ open }) => {
           src="http://yancey-assets.oss-cn-beijing.aliyuncs.com/_Users_licaifan_Desktop_11532336786_.pic_hd.jpg"
           className={classes.avater}
         />
+
         <HideWrapper open={open}>
           <span className={classes.userName}>Yancey Leo</span>
           <span className={classes.arrow} />

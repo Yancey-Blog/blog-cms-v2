@@ -32,7 +32,7 @@ const useStyles = makeStyles({
     },
 
     '&:hover $hidenItem': {
-      width: '100%',
+      width: 'auto',
       transform: 'translateX(0)',
     },
 
@@ -144,7 +144,7 @@ const useStyles = makeStyles({
   hidenItem: {
     width: '48px',
     whiteSpace: 'nowrap',
-    transform: `translateX(${drawerWidth - foldDrawerWidth}px)`,
+    transform: `translateX(${(drawerWidth - foldDrawerWidth) / 2}px)`,
     textAlign: 'center',
     transition: 'transform 300ms ease 0ms',
   },
