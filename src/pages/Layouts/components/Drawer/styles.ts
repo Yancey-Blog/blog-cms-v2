@@ -149,6 +149,10 @@ const useStyles = makeStyles({
     transition: 'transform 300ms ease 0ms',
   },
 
+  hidenNotItem: {
+    transform: `translateX(${drawerWidth - foldDrawerWidth}px)`,
+  },
+
   itemIcon: {
     height: '24px',
   },

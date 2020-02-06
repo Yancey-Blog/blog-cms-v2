@@ -24,6 +24,7 @@ const Drawer: FC<Props> = ({ open }) => {
       <div
         className={classNames(classes.drawerTitle, {
           [classes.hidenItem]: !open,
+          [classes.hidenNotItem]: !open,
         })}
       >
         <Home className={classes.logo} />
@@ -36,6 +37,7 @@ const Drawer: FC<Props> = ({ open }) => {
       <div
         className={classNames(classes.drawerUser, {
           [classes.hidenItem]: !open,
+          [classes.hidenNotItem]: !open,
         })}
       >
         <Avatar
