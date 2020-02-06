@@ -206,7 +206,6 @@ const useStyles = makeStyles({
   foldActive: {
     width: '48px',
     transform: `translateX(${drawerWidth - foldDrawerWidth}px)`,
-    whiteSpace: 'nowrap',
 
     '& $hidenItem': {
       transform: 'translateX(0)',
