@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles'
 import { drawerWidth, foldDrawerWidth } from '../../constants'
-import { transition } from '../../tools'
+import { transition } from '../../styles'
 
 const useStyles = makeStyles({
   menu: {
