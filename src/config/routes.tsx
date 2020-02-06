@@ -1,11 +1,11 @@
 import React, { ReactElement } from 'react'
 import {
-  Dashboard,
+  // Dashboard,
   Home,
-  Headset,
-  PostAdd,
-  LinkedIn,
-  Settings,
+  // Headset,
+  // PostAdd,
+  // LinkedIn,
+  // Settings,
   Event,
 } from '@material-ui/icons'
 
@@ -23,12 +23,12 @@ export interface Route {
 }
 
 const routes: Route[] = [
-  {
-    name: 'Dashboard',
-    path: 'dashboard',
-    icon: <Dashboard />,
-    component: 'DashBoard/DashBoard',
-  },
+  // {
+  //   name: 'Dashboard',
+  //   path: 'dashboard',
+  //   icon: <Dashboard />,
+  //   component: 'DashBoard/DashBoard',
+  // },
   {
     name: 'Home',
     path: 'home',
@@ -56,59 +56,59 @@ const routes: Route[] = [
       },
     ],
   },
-  {
-    name: 'Music',
-    path: 'music',
-    icon: <Headset />,
-    routes: [
-      {
-        name: 'Live Tour',
-        path: 'live-tour',
-        component: 'Music/LiveTour/LiveTour',
-      },
-      {
-        name: 'Best Album',
-        path: 'best-album',
-        component: 'Music/BestAlbum/BestAlbum',
-      },
-      {
-        name: 'Player',
-        path: 'player',
-        component: 'Music/Player/Player',
-      },
-      {
-        name: 'Yancey Music',
-        path: 'yancey-music',
-        component: 'Music/YanceyMusic/YanceyMusic',
-      },
-    ],
-  },
-  {
-    name: 'Article',
-    path: 'article-list',
-    icon: <PostAdd />,
-    component: 'Article/ArticleList/ArticleList',
-    routes: [
-      {
-        name: 'Article Detail',
-        path: 'article-detail',
-        component: 'Article/ArticleDetail/ArticleDetail',
-        hideInMenu: true,
-      },
-    ],
-  },
-  {
-    name: 'CV',
-    path: 'cv',
-    icon: <LinkedIn />,
-    component: 'CV/CV',
-  },
-  {
-    name: 'Setting',
-    path: 'setting',
-    icon: <Settings />,
-    component: 'Setting/Setting',
-  },
+  // {
+  //   name: 'Music',
+  //   path: 'music',
+  //   icon: <Headset />,
+  //   routes: [
+  //     {
+  //       name: 'Live Tour',
+  //       path: 'live-tour',
+  //       component: 'Music/LiveTour/LiveTour',
+  //     },
+  //     {
+  //       name: 'Best Album',
+  //       path: 'best-album',
+  //       component: 'Music/BestAlbum/BestAlbum',
+  //     },
+  //     {
+  //       name: 'Player',
+  //       path: 'player',
+  //       component: 'Music/Player/Player',
+  //     },
+  //     {
+  //       name: 'Yancey Music',
+  //       path: 'yancey-music',
+  //       component: 'Music/YanceyMusic/YanceyMusic',
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: 'Article',
+  //   path: 'article-list',
+  //   icon: <PostAdd />,
+  //   component: 'Article/ArticleList/ArticleList',
+  //   routes: [
+  //     {
+  //       name: 'Article Detail',
+  //       path: 'article-detail',
+  //       component: 'Article/ArticleDetail/ArticleDetail',
+  //       hideInMenu: true,
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: 'CV',
+  //   path: 'cv',
+  //   icon: <LinkedIn />,
+  //   component: 'CV/CV',
+  // },
+  // {
+  //   name: 'Setting',
+  //   path: 'setting',
+  //   icon: <Settings />,
+  //   component: 'Setting/Setting',
+  // },
   {
     name: 'Agenda',
     path: 'agenda',
