@@ -2,7 +2,8 @@ import React, { FC, Fragment } from 'react'
 import { Avatar } from '@material-ui/core'
 import { Home } from '@material-ui/icons'
 import classNames from 'classnames'
-import LinkItem, { ItemType } from './components/Item'
+import LinkItem, { ItemType } from './components/LinkItem'
+import HideWrapper from './components/HideWrapper'
 import useStyles from './styles'
 import routes from 'src/config/routes'
 
@@ -26,13 +27,10 @@ const Drawer: FC<Props> = ({ open }) => {
         })}
       >
         <Home className={classes.logo} />
-        <div
-          className={classNames(classes.detail, {
-            [classes.hideDetail]: !open,
-          })}
-        >
+
+        <HideWrapper open={open}>
           <span className={classes.title}>BLOG CMS</span>
-        </div>
+        </HideWrapper>
       </div>
 
       <div
@@ -45,14 +43,10 @@ const Drawer: FC<Props> = ({ open }) => {
           src="http://yancey-assets.oss-cn-beijing.aliyuncs.com/_Users_licaifan_Desktop_11532336786_.pic_hd.jpg"
           className={classes.avater}
         />
-        <div
-          className={classNames(classes.detail, {
-            [classes.hideDetail]: !open,
-          })}
-        >
+        <HideWrapper open={open}>
           <span className={classes.userName}>Yancey Leo</span>
           <span className={classes.arrow} />
-        </div>
+        </HideWrapper>
       </div>
 
       {routes.map(route => (

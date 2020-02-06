@@ -1,6 +1,7 @@
 import React, { FC, ReactElement } from 'react'
 import { NavLink } from 'react-router-dom'
 import classNames from 'classnames'
+import HideWrapper from './HideWrapper'
 import useStyles from '../styles'
 import { getInitials } from 'src/shared/utils'
 
@@ -41,14 +42,10 @@ const Item: FC<IItem> = ({ open, mode, name, icon, hasChild }) => {
       >
         {isChildMode ? getInitials(name) : icon}
       </span>
-      <div
-        className={classNames(classes.detail, {
-          [classes.hideDetail]: !open,
-        })}
-      >
+      <HideWrapper open={open}>
         <span className={classes.itemTxt}>{name}</span>
         {hasChild && <span className={classes.arrow} />}
-      </div>
+      </HideWrapper>
     </div>
   )
 }
