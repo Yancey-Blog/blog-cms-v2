@@ -2,7 +2,6 @@ import React, { FC, Fragment, useState } from 'react'
 import { Avatar } from '@material-ui/core'
 import { Home } from '@material-ui/icons'
 import classNames from 'classnames'
-import HideWrapper from './components/HideWrapper'
 import useStyles from './styles'
 import routes from 'src/config/routes'
 import { getInitials, noop } from 'src/shared/utils'
@@ -31,9 +30,13 @@ const Drawer: FC<Props> = ({ open }) => {
       >
         <Home className={classes.logo} />
 
-        <HideWrapper open={open}>
+        <div
+          className={classNames(classes.detail, {
+            [classes.hideDetail]: !open,
+          })}
+        >
           <span className={classes.title}>BLOG CMS</span>
-        </HideWrapper>
+        </div>
       </div>
 
       <div
@@ -48,10 +51,14 @@ const Drawer: FC<Props> = ({ open }) => {
           className={classes.avater}
         />
 
-        <HideWrapper open={open}>
+        <div
+          className={classNames(classes.detail, {
+            [classes.hideDetail]: !open,
+          })}
+        >
           <span className={classes.userName}>Yancey Leo</span>
           <span className={classes.arrow} />
-        </HideWrapper>
+        </div>
       </div>
 
       {routes.map(route => (
@@ -69,10 +76,14 @@ const Drawer: FC<Props> = ({ open }) => {
             >
               {route.icon}
             </span>
-            <HideWrapper open={open}>
+            <div
+              className={classNames(classes.detail, {
+                [classes.hideDetail]: !open,
+              })}
+            >
               <span className={classes.itemTxt}>{route.name}</span>
               {!!route.routes && <span className={classes.arrow} />}
-            </HideWrapper>
+            </div>
           </div>
 
           <div
@@ -100,9 +111,13 @@ const Drawer: FC<Props> = ({ open }) => {
                   >
                     {getInitials(childRoute.name)}
                   </span>
-                  <HideWrapper open={open}>
+                  <div
+                    className={classNames(classes.detail, {
+                      [classes.hideDetail]: !open,
+                    })}
+                  >
                     <span className={classes.itemTxt}>{childRoute.name}</span>
-                  </HideWrapper>
+                  </div>
                 </div>
               ))}
           </div>
