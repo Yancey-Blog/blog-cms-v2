@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Switch, Route, Redirect, Router } from 'react-router-dom'
+import loadable from '@loadable/component'
 import { ApolloProvider } from '@apollo/react-hooks'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { SnackbarProvider } from 'notistack'
@@ -10,7 +11,11 @@ import history from './shared/history'
 import { SnackbarUtilsConfigurator } from './components/Toast/Toast'
 import Login from 'src/pages/Login/Login'
 import Register from 'src/pages/Register/Register'
-import Layouts from 'src/pages/Layouts/Layouts'
+import TwitterLoading from 'src/components/TwitterLoading/TwitterLoading'
+
+const Layouts = loadable(() => import('src/pages/Layouts/Layouts'), {
+  fallback: <TwitterLoading />,
+})
 
 serviceWorker.unregister()
 
