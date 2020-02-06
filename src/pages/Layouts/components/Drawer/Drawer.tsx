@@ -91,7 +91,6 @@ const Drawer: FC<Props> = ({ open }) => {
             <div
               className={classNames(classes.item, {
                 [classes.hidenItem]: !open,
-                // [classes.activeParent]: foldName === route.name,
               })}
               onClick={() => handleFoldNameChange(route.name)}
             >
