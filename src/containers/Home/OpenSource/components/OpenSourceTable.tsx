@@ -149,7 +149,6 @@ const OpenSourceTable: FC<Props> = ({
 
   const options: MUIDataTableOptions = {
     filterType: 'textField',
-    responsive: 'stacked',
     rowsPerPage: 10,
     rowsPerPageOptions: [10, 20, 50],
     searchPlaceholder: 'Search...',
