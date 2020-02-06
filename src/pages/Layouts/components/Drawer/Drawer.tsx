@@ -1,11 +1,10 @@
 import React, { FC, Fragment } from 'react'
-import { NavLink } from 'react-router-dom'
 import { Avatar } from '@material-ui/core'
 import { Home } from '@material-ui/icons'
 import classNames from 'classnames'
+import LinkItem, { ItemType } from './components/Item'
 import useStyles from './styles'
 import routes from 'src/config/routes'
-import { getInitials } from 'src/shared/utils'
 
 interface Props {
   open: boolean
@@ -58,50 +57,24 @@ const Drawer: FC<Props> = ({ open }) => {
 
       {routes.map(route => (
         <Fragment key={route.name}>
-          <div
-            className={classNames(classes.item, {
-              [classes.hidenItem]: !open,
-            })}
-          >
-            <span className={classNames(classes.itemIcon, classes.itemAbbrTxt)}>
-              {route.icon}
-            </span>
-            <div
-              className={classNames(classes.detail, {
-                [classes.hideDetail]: !open,
-              })}
-            >
-              <span className={classes.itemTxt}>{route.name}</span>
-              {route.routes && <span className={classes.arrow} />}
-            </div>
-          </div>
+          <LinkItem
+            path={route.path}
+            open={open}
+            mode={ItemType.Parent}
+            name={route.name}
+            icon={route.icon}
+            hasChild={!!route.routes}
+          />
 
           {route.routes &&
             route.routes.map(childRoute => (
-              <NavLink
-                exact
-                activeClassName={classes.active}
-                to={childRoute.path}
-                key={childRoute.name}
-                className={classes.formatArrowTag}
-              >
-                <div
-                  className={classNames(classes.item, classes.childItem, {
-                    [classes.hidenItem]: !open,
-                  })}
-                >
-                  <span className={classes.itemAbbrTxt}>
-                    {getInitials(childRoute.name)}
-                  </span>
-                  <div
-                    className={classNames(classes.detail, {
-                      [classes.hideDetail]: !open,
-                    })}
-                  >
-                    <span className={classes.itemTxt}>{childRoute.name}</span>
-                  </div>
-                </div>
-              </NavLink>
+              <LinkItem
+                key={childRoute.path}
+                open={open}
+                mode={ItemType.Child}
+                name={childRoute.name}
+                path={childRoute.path}
+              />
             ))}
         </Fragment>
       ))}
