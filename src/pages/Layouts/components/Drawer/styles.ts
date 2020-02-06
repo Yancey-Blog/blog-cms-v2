@@ -198,6 +198,11 @@ const useStyles = makeStyles({
     },
   },
 
+  activeParent: {
+    borderRadius: '3px',
+    backgroundColor: 'rgba(200, 200, 200, 0.2)',
+  },
+
   childrenGroup: {
     height: 'auto',
     maxHeight: 0,
