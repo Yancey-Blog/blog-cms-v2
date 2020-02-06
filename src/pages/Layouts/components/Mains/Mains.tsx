@@ -1,7 +1,9 @@
-import React, { FC, lazy } from 'react'
-import { Route, Switch } from 'react-router-dom'
-import Routes from 'src/config/Routes'
-import styles from './Mains.module.scss'
+import React, { FC } from 'react'
+import { Route } from 'react-router-dom'
+import loadable from '@loadable/component'
+import routes from 'src/config/routes'
+import Loading from 'src/components/Loading/Loading'
+import useStyles from './styles'
 
 interface IRoute {
   path: string
@@ -11,9 +13,9 @@ interface IRoute {
 function getRoutes() {
   const routers: IRoute[] = []
 
-  Routes.forEach(route => {
-    if (route.children) {
-      route.children.forEach(routeChild => {
+  routes.forEach(route => {
+    if (route.routes) {
+      route.routes.forEach(routeChild => {
         routers.push({
           path: routeChild.path,
           component: routeChild.component,
@@ -32,18 +34,26 @@ function getRoutes() {
 
 const routeList = getRoutes()
 
-const Mains: FC = () => (
-  <main className={styles.main}>
-    <Switch>
+const Mains: FC = () => {
+  const classes = useStyles()
+
+  return (
+    <main className={classes.main}>
       {routeList.map(route => (
         <Route
+          exact
           key={route.path}
           path={`/${route.path}`}
-          component={lazy(() => import(`src/containers/${route.component}`))}
+          component={loadable(
+            () => import(`src/containers/${route.component}`),
+            {
+              fallback: <Loading />,
+            },
+          )}
         />
       ))}
-    </Switch>
-  </main>
-)
+    </main>
+  )
+}
 
 export default Mains
