@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.9.2](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.9.1...v0.9.2) (2020-02-06)
+
+
+### Bug Fixes
+
+* remove unimplemented components temporarily ([9cc6d5e](https://github.com/Yancey-Blog/blog-cms-v2/commit/9cc6d5ec88323318c29704af5ad22934d9c11dfc))
+
 ### [0.9.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.9.0...v0.9.1) (2020-02-06)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "blog-cms-v2",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "private": true,
   "scripts": {
     "start": "node scripts/start.js",
