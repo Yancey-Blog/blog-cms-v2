@@ -31,6 +31,11 @@ const useStyles = makeStyles({
       transition: transition('transform'),
     },
 
+    '&:hover $foldActive': {
+      width: 'auto',
+      transform: `translateX(0)`,
+    },
+
     '&:hover $hidenItem': {
       width: 'auto',
       transform: 'translateX(0)',
@@ -195,6 +200,16 @@ const useStyles = makeStyles({
     0 4px 20px 0 rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(76, 175, 80,  0.2)`,
     '&:hover': {
       backgroundColor: 'rgba(76, 175, 80, 1)',
+    },
+  },
+
+  foldActive: {
+    width: '48px',
+    transform: `translateX(${drawerWidth - foldDrawerWidth}px)`,
+    whiteSpace: 'nowrap',
+
+    '& $hidenItem': {
+      transform: 'translateX(0)',
     },
   },
 

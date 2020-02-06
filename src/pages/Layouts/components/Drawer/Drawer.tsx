@@ -91,7 +91,7 @@ const Drawer: FC<Props> = ({ open }) => {
             <div
               className={classNames(classes.item, {
                 [classes.hidenItem]: !open,
-                [classes.activeParent]: foldName === route.name,
+                // [classes.activeParent]: foldName === route.name,
               })}
               onClick={() => handleFoldNameChange(route.name)}
             >
@@ -114,7 +114,9 @@ const Drawer: FC<Props> = ({ open }) => {
           ) : (
             <NavLink
               exact
-              activeClassName={classes.active}
+              activeClassName={classNames(classes.active, {
+                [classes.foldActive]: !open,
+              })}
               className={classes.formatArrowTag}
               to={route.path}
             >
@@ -157,7 +159,9 @@ const Drawer: FC<Props> = ({ open }) => {
               route.routes.map(childRoute => (
                 <NavLink
                   exact
-                  activeClassName={classes.active}
+                  activeClassName={classNames(classes.active, {
+                    [classes.foldActive]: !open,
+                  })}
                   className={classes.formatArrowTag}
                   to={childRoute.path}
                   key={childRoute.name}
