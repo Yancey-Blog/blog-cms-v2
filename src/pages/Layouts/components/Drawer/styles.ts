@@ -197,6 +197,18 @@ const useStyles = makeStyles({
       backgroundColor: 'rgba(76, 175, 80, 1)',
     },
   },
+
+  childrenGroup: {
+    height: 'auto',
+    maxHeight: 0,
+    overflow: 'hidden',
+    transition: 'max-height 300ms ease 0ms',
+  },
+
+  unfoldChildren: {
+    maxHeight: '200px',
+    transition: 'max-height 300ms ease 0ms',
+  },
 })
 
 export default useStyles

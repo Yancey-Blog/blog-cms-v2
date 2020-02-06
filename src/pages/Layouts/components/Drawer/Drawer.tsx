@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from 'react'
+import React, { FC, Fragment, useState } from 'react'
 import { Avatar } from '@material-ui/core'
 import { Home } from '@material-ui/icons'
 import classNames from 'classnames'
@@ -13,6 +13,8 @@ interface Props {
 
 const Drawer: FC<Props> = ({ open }) => {
   const classes = useStyles()
+
+  const [fold, setFold] = useState(true)
 
   return (
     <menu
@@ -61,18 +63,30 @@ const Drawer: FC<Props> = ({ open }) => {
             name={route.name}
             icon={route.icon}
             hasChild={!!route.routes}
+            setFold={() => setFold(!fold)}
           />
 
-          {route.routes &&
-            route.routes.map(childRoute => (
-              <LinkItem
-                key={childRoute.path}
-                open={open}
-                mode={ItemType.Child}
-                name={childRoute.name}
-                path={childRoute.path}
-              />
-            ))}
+          <div
+            className={classNames(classes.childrenGroup, {
+              [classes.unfoldChildren]: !fold,
+            })}
+            style={{
+              maxHeight: `${
+                !fold ? route.routes && 50 * route.routes.length : 0
+              }px`,
+            }}
+          >
+            {route.routes &&
+              route.routes.map(childRoute => (
+                <LinkItem
+                  key={childRoute.path}
+                  open={open}
+                  mode={ItemType.Child}
+                  name={childRoute.name}
+                  path={childRoute.path}
+                />
+              ))}
+          </div>
         </Fragment>
       ))}
     </menu>

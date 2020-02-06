@@ -16,13 +16,14 @@ interface IItem {
   name: string
   icon?: ReactElement
   hasChild?: boolean
+  setFold?: Function
 }
 
 interface ILinkItem extends IItem {
   path: string
 }
 
-const Item: FC<IItem> = ({ open, mode, name, icon, hasChild }) => {
+const Item: FC<IItem> = ({ open, mode, name, icon, hasChild, setFold }) => {
   const classes = useStyles()
 
   const isChildMode = mode === ItemType.Child
@@ -33,6 +34,7 @@ const Item: FC<IItem> = ({ open, mode, name, icon, hasChild }) => {
         [classes.childItem]: isChildMode,
         [classes.hidenItem]: !open,
       })}
+      onClick={setFold ? () => setFold() : () => {}}
     >
       <span
         className={classNames(classes.itemAbbrTxt, {
@@ -57,6 +59,7 @@ const LinkItem: FC<ILinkItem> = ({
   icon,
   hasChild,
   path,
+  setFold,
 }) => {
   const classes = useStyles()
   return (
@@ -79,6 +82,7 @@ const LinkItem: FC<ILinkItem> = ({
         </NavLink>
       ) : (
         <Item
+          setFold={setFold}
           open={open}
           mode={mode}
           name={name}
