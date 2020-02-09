@@ -11,10 +11,10 @@ import history from './shared/history'
 import { SnackbarUtilsConfigurator } from './components/Toast/Toast'
 import Login from 'src/pages/Login/Login'
 import Register from 'src/pages/Register/Register'
-import InstagramLoading from 'src/components/Loading/InstagramLoading'
+import Loading from 'src/components/Loading/InstagramLoading'
 
 const Layouts = loadable(() => import('src/pages/Layouts/Layouts'), {
-  fallback: <InstagramLoading />,
+  fallback: <Loading />,
 })
 
 serviceWorker.unregister()
