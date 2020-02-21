@@ -49,11 +49,11 @@ const routes: Route[] = [
         path: 'open-source',
         component: 'Home/OpenSource/OpenSource',
       },
-      {
-        name: 'Cover',
-        path: 'cover',
-        component: 'Home/Cover/Cover',
-      },
+      // {
+      //   name: 'Cover',
+      //   path: 'cover',
+      //   component: 'Home/Cover/Cover',
+      // },
     ],
   },
   // {
