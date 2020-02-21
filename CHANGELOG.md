@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.9.3](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.9.2...v0.9.3) (2020-02-21)
+
+
+### Features
+
+* update Loading component ([4e33895](https://github.com/Yancey-Blog/blog-cms-v2/commit/4e33895aa1ad18766a8c81b15ccd2c4fac982185))
+* update routers ([8e6bcb8](https://github.com/Yancey-Blog/blog-cms-v2/commit/8e6bcb88448259ac0e259fc8fc05de2623c17efa))
+* use InstagramLoading ([211c8b2](https://github.com/Yancey-Blog/blog-cms-v2/commit/211c8b28dd16869971d0dafeaab3d7b8eaefa06b))
+* use InstagramLoading for fallback ([ca7d54b](https://github.com/Yancey-Blog/blog-cms-v2/commit/ca7d54b62cb76adb7938dc5f7133b55bb502ba8c))
+
 ### [0.9.2](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.9.1...v0.9.2) (2020-02-06)
 
 
