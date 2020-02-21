@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Route } from 'react-router-dom'
 import loadable from '@loadable/component'
 import routes from 'src/config/routes'
-import Loading from 'src/components/Loading/Loading'
+import Loading from 'src/components/Loading/InstagramLoading'
 import useStyles from './styles'
 
 interface IRoute {
