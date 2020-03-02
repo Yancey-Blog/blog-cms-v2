@@ -133,6 +133,9 @@
     "sass-resources-loader": "^2.0.1",
     "standard-version": "^7.1.0"
   },
+  "peerDependencies": {
+    "@date-io/moment": "1.x"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
