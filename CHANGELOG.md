@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.10.0...v0.10.1) (2020-03-02)
+
+
+### Features
+
+* migrate to unejected CRA ([eb1c55b](https://github.com/Yancey-Blog/blog-cms-v2/commit/eb1c55b3c3b0d6cf44a2c3d43756161fe31e5bb2))
+
 ## [0.10.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.9.3...v0.10.0) (2020-03-02)
 
 
