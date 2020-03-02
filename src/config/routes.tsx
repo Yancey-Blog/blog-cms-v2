@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react'
 import {
   // Dashboard,
   Home,
-  // Headset,
+  Headset,
   // PostAdd,
   // LinkedIn,
   // Settings,
@@ -56,33 +56,33 @@ const routes: Route[] = [
       // },
     ],
   },
-  // {
-  //   name: 'Music',
-  //   path: 'music',
-  //   icon: <Headset />,
-  //   routes: [
-  //     {
-  //       name: 'Live Tour',
-  //       path: 'live-tour',
-  //       component: 'Music/LiveTour/LiveTour',
-  //     },
-  //     {
-  //       name: 'Best Album',
-  //       path: 'best-album',
-  //       component: 'Music/BestAlbum/BestAlbum',
-  //     },
-  //     {
-  //       name: 'Player',
-  //       path: 'player',
-  //       component: 'Music/Player/Player',
-  //     },
-  //     {
-  //       name: 'Yancey Music',
-  //       path: 'yancey-music',
-  //       component: 'Music/YanceyMusic/YanceyMusic',
-  //     },
-  //   ],
-  // },
+  {
+    name: 'Music',
+    path: 'music',
+    icon: <Headset />,
+    routes: [
+      {
+        name: 'Live Tour',
+        path: 'live-tour',
+        component: 'Music/LiveTour/LiveTour',
+      },
+      // {
+      //   name: 'Best Album',
+      //   path: 'best-album',
+      //   component: 'Music/BestAlbum/BestAlbum',
+      // },
+      // {
+      //   name: 'Player',
+      //   path: 'player',
+      //   component: 'Music/Player/Player',
+      // },
+      // {
+      //   name: 'Yancey Music',
+      //   path: 'yancey-music',
+      //   component: 'Music/YanceyMusic/YanceyMusic',
+      // },
+    ],
+  },
   // {
   //   name: 'Article',
   //   path: 'article-list',
