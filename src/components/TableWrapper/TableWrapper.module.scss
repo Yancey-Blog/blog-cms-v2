@@ -3,20 +3,26 @@
 }
 
 .tableIconContainer {
-  @include flexMixin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   left: 16px;
   width: 62px;
   height: 65px;
   border-radius: 3px;
   background: linear-gradient(60deg, #ab47bc, #8e24aa);
-  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14),
+    0 7px 10px -5px rgba(156, 39, 176, 0.4);
   background: linear-gradient(60deg, #ec407a, #d81b60);
-  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(233, 30, 99, 0.4);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14),
+    0 7px 10px -5px rgba(233, 30, 99, 0.4);
 }
 
 .tableHeader {
-  @include flexMixin(flex-start);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   position: relative;
   top: 16px;
   z-index: 120;
@@ -25,7 +31,7 @@
 .tableIcon {
   width: 20px !important;
   height: 20px;
-  color: $white;
+  color: #ffffff;
 }
 
 .tableTitle {
