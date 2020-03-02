@@ -111,6 +111,7 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
           />
 
           <KeyboardDateTimePicker
+            label="ShowTime"
             value={values.showTime}
             error={!!errors.posterUrl}
             helperText={errors.posterUrl}
