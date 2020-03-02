@@ -1,5 +1,7 @@
 .footer {
-  @include flexMixin(space-between);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 0;
   padding: 12px 24px;
   font-size: 14px;
