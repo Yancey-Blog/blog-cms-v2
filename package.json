@@ -118,7 +118,7 @@
     "@types/classnames": "^2.2.9",
     "@types/loadable__component": "^5.10.0",
     "@types/mui-datatables": "^2.13.4",
-    "@types/ramda": "^0.26.39",
+    "@types/ramda": "^0.26.41",
     "@types/react-copy-to-clipboard": "^4.3.0",
     "@types/react-google-recaptcha": "^1.1.1",
     "@types/react-router-dom": "^5.1.3",
