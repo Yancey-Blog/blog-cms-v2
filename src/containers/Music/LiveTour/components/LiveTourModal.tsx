@@ -12,38 +12,32 @@ import {
   FormLabel,
 } from '@material-ui/core'
 import { useFormik } from 'formik'
-import styles from '../openSource.module.scss'
+import { KeyboardDateTimePicker } from '@material-ui/pickers'
+import styles from '../liveTour.module.scss'
 import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
 
 interface Props {
-  createOpenSource: Function
-  updateOpenSourceById: Function
+  createLiveTour: Function
+  updateLiveTourById: Function
 }
 
-const OpenSourceModal: FC<Props> = ({
-  createOpenSource,
-  updateOpenSourceById,
-}) => {
+const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
   const { search } = useLocation()
 
   const { showModal, id } = parseSearch(search)
 
   const initialValues = {
     title: '',
-    description: '',
-    url: '',
+    showTime: new Date(),
     posterUrl: '',
   }
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required.'),
-    description: Yup.string().required('Description is required.'),
-    url: Yup.string()
-      .url()
-      .required('URL is required.'),
+    showTime: Yup.string().required('ShowTime is required.'),
     posterUrl: Yup.string()
       .url()
       .required('PostUrl is required.'),
@@ -57,16 +51,17 @@ const OpenSourceModal: FC<Props> = ({
     resetForm,
     isSubmitting,
     errors,
+    values,
   } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async values => {
       if (id) {
-        await updateOpenSourceById({
+        await updateLiveTourById({
           variables: { input: { ...values, id } },
         })
       } else {
-        await createOpenSource({ variables: { input: values } })
+        await createLiveTour({ variables: { input: values } })
       }
       goBack()
       resetForm()
@@ -80,10 +75,14 @@ const OpenSourceModal: FC<Props> = ({
   useEffect(() => {
     if (id) {
       // @ts-ignore
-      const { title, description, url, posterUrl } = client.cache.data.get(
-        `OpenSourceModel:${id}`,
+      const { title, showTime, posterUrl } = client.cache.data.get(
+        `LiveTourModel:${id}`,
       )
-      setValues({ title, description, url, posterUrl })
+      setValues({
+        title,
+        showTime: new Date(parseInt(showTime, 10)),
+        posterUrl,
+      })
     }
 
     return () => {
@@ -93,13 +92,12 @@ const OpenSourceModal: FC<Props> = ({
 
   return (
     <Dialog open={!!showModal} onClose={goBack}>
-      <DialogTitle>{id ? 'Update' : 'Add'} an Open Source</DialogTitle>
+      <DialogTitle>{id ? 'Update' : 'Add'} an Live Tour</DialogTitle>
       <form className={styles.customForm} onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
-            To {id ? 'update' : 'add'} an Open Source, please enter the
-            following fields here. We will send data after clicking the submit
-            button.
+            To {id ? 'update' : 'add'} an Live Tour, please enter the following
+            fields here. We will send data after clicking the submit button.
           </DialogContentText>
           <TextField
             error={!!errors.title}
@@ -111,24 +109,18 @@ const OpenSourceModal: FC<Props> = ({
             fullWidth
             {...getFieldProps('title')}
           />
-          <TextField
-            error={!!errors.description}
-            helperText={errors.description}
-            required
-            id="description"
-            label="Description"
-            fullWidth
-            {...getFieldProps('description')}
+
+          <KeyboardDateTimePicker
+            label="ShowTime"
+            value={values.showTime}
+            error={!!errors.posterUrl}
+            helperText={errors.posterUrl}
+            showTodayButton={true}
+            ampm={false}
+            onChange={date => setFieldValue('showTime', date, true)}
+            format="YYYY/MM/DD HH:mm:ss"
           />
-          <TextField
-            error={!!errors.url}
-            helperText={errors.url}
-            required
-            id="url"
-            label="Url"
-            fullWidth
-            {...getFieldProps('url')}
-          />
+
           <div className={styles.uploaderGroup}>
             <FormLabel required>PosterUrl</FormLabel>
             <TextField
@@ -161,4 +153,4 @@ const OpenSourceModal: FC<Props> = ({
   )
 }
 
-export default OpenSourceModal
+export default LiveTourModal
