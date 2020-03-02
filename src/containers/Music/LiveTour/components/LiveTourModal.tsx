@@ -12,6 +12,7 @@ import {
   FormLabel,
 } from '@material-ui/core'
 import { useFormik } from 'formik'
+import { KeyboardDateTimePicker } from '@material-ui/pickers'
 import styles from '../liveTour.module.scss'
 import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
@@ -30,7 +31,7 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
 
   const initialValues = {
     title: '',
-    showTime: '',
+    showTime: new Date(),
     posterUrl: '',
   }
 
@@ -50,6 +51,7 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
     resetForm,
     isSubmitting,
     errors,
+    values,
   } = useFormik({
     initialValues,
     validationSchema,
@@ -76,7 +78,11 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
       const { title, showTime, posterUrl } = client.cache.data.get(
         `LiveTourModel:${id}`,
       )
-      setValues({ title, showTime, posterUrl })
+      setValues({
+        title,
+        showTime: new Date(parseInt(showTime, 10)),
+        posterUrl,
+      })
     }
 
     return () => {
@@ -103,15 +109,17 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
             fullWidth
             {...getFieldProps('title')}
           />
-          <TextField
-            error={!!errors.showTime}
-            helperText={errors.showTime}
-            required
-            id="showTime"
-            label="ShowTime"
-            fullWidth
-            {...getFieldProps('showTime')}
+
+          <KeyboardDateTimePicker
+            value={values.showTime}
+            error={!!errors.posterUrl}
+            helperText={errors.posterUrl}
+            showTodayButton={true}
+            ampm={false}
+            onChange={date => setFieldValue('showTime', date, true)}
+            format="YYYY/MM/DD HH:mm:ss"
           />
+
           <div className={styles.uploaderGroup}>
             <FormLabel required>PosterUrl</FormLabel>
             <TextField

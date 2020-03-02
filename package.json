@@ -66,8 +66,6 @@
     "eslint-plugin-react-hooks": "^1.6.1",
     "file-loader": "5.0.2",
     "formik": "^2.1.4",
-    "formik-material-ui": "^2.0.0-beta.1",
-    "formik-material-ui-pickers": "^0.0.8",
     "fs-extra": "^8.1.0",
     "graphql-tag": "^2.10.3",
     "history": "^4.10.1",
