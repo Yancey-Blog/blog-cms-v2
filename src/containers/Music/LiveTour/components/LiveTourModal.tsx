@@ -86,13 +86,12 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
 
   return (
     <Dialog open={!!showModal} onClose={goBack}>
-      <DialogTitle>{id ? 'Update' : 'Add'} an Open Source</DialogTitle>
+      <DialogTitle>{id ? 'Update' : 'Add'} an Live Tour</DialogTitle>
       <form className={styles.customForm} onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
-            To {id ? 'update' : 'add'} an Open Source, please enter the
-            following fields here. We will send data after clicking the submit
-            button.
+            To {id ? 'update' : 'add'} an Live Tour, please enter the following
+            fields here. We will send data after clicking the submit button.
           </DialogContentText>
           <TextField
             error={!!errors.title}
