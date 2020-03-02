@@ -43,7 +43,7 @@ const OpenSourceModal: FC<Props> = ({
     description: Yup.string().required('Description is required.'),
     url: Yup.string()
       .url()
-      .required('URL is required..'),
+      .required('URL is required.'),
     posterUrl: Yup.string()
       .url()
       .required('PostUrl is required.'),
@@ -56,6 +56,7 @@ const OpenSourceModal: FC<Props> = ({
     setValues,
     resetForm,
     isSubmitting,
+    errors,
   } = useFormik({
     initialValues,
     validationSchema,
@@ -101,6 +102,8 @@ const OpenSourceModal: FC<Props> = ({
             button.
           </DialogContentText>
           <TextField
+            error={!!errors.title}
+            helperText={errors.title}
             autoFocus
             required
             id="title"
@@ -109,6 +112,8 @@ const OpenSourceModal: FC<Props> = ({
             {...getFieldProps('title')}
           />
           <TextField
+            error={!!errors.description}
+            helperText={errors.description}
             required
             id="description"
             label="Description"
@@ -116,6 +121,8 @@ const OpenSourceModal: FC<Props> = ({
             {...getFieldProps('description')}
           />
           <TextField
+            error={!!errors.url}
+            helperText={errors.url}
             required
             id="url"
             label="Url"
@@ -125,6 +132,8 @@ const OpenSourceModal: FC<Props> = ({
           <div className={styles.uploaderGroup}>
             <FormLabel required>PosterUrl</FormLabel>
             <TextField
+              error={!!errors.posterUrl}
+              helperText={errors.posterUrl}
               style={{ display: 'none' }}
               required
               id="posterUrl"
