@@ -1061,24 +1061,12 @@
   resolved "https://registry.yarnpkg.com/@date-io/core/-/core-1.3.13.tgz#90c71da493f20204b7a972929cc5c482d078b3fa"
   integrity sha512-AlEKV7TxjeK+jxWVKcCFrfYAk8spX9aCyiToFIiLPtfQbsjmRGLIhb5VZgptQcJdHtLXo7+m0DuurwFgUToQuA==
 
-"@date-io/core@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@date-io/core/-/core-2.4.0.tgz#59e1c6de1d48ee63c6e97681b415076d04e7b5bf"
-  integrity sha512-XUr4TSwFmthcCn5QYnGqobbnBqOsSyCggRfvieMQHPSz5zei8KYpw4xlvFFQfu/MI3CmCHDjWMkVaPy/uFIDNA==
-
-"@date-io/moment@^1.3.11":
+"@date-io/moment@1.x", "@date-io/moment@^1.3.11":
   version "1.3.13"
   resolved "https://registry.yarnpkg.com/@date-io/moment/-/moment-1.3.13.tgz#56c2772bc4f6675fc6970257e6033e7a7c2960f0"
   integrity sha512-3kJYusJtQuOIxq6byZlzAHoW/18iExJer9qfRF5DyyzdAk074seTuJfdofjz4RFfTd/Idk8WylOQpWtERqvFuQ==
   dependencies:
     "@date-io/core" "^1.3.13"
-
-"@date-io/moment@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@date-io/moment/-/moment-2.4.0.tgz#84612f4cf175ec8093c43a6b6176f874d2d1f007"
-  integrity sha512-857C9idmZGpD8NygxQsOXPa3OePC6UFAhU996dCUv8cY17p1tkjgj7/JZ3J7PTV2i8ybeUDUD/tAadACEtI05g==
-  dependencies:
-    "@date-io/core" "^2.4.0"
 
 "@devexpress/dx-chart-core@2.4.1":
   version "2.4.1"
@@ -1676,6 +1664,13 @@
     "@types/events" "*"
     "@types/minimatch" "*"
     "@types/node" "*"
+
+"@types/graphql-iso-date@^3.3.3":
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/@types/graphql-iso-date/-/graphql-iso-date-3.3.3.tgz#a368aa7370512a9cc87a5035c3701949ed7db9e2"
+  integrity sha512-lchvlAox/yqk2Rcrgqh+uvwc1UC9i1hap+0tqQqyYYcAica6Uw2D4mUkCNcw+WeZ8dvSS5QdtIlJuDYUf4nLXQ==
+  dependencies:
+    graphql "^14.5.3"
 
 "@types/history@*":
   version "4.7.5"
@@ -6063,7 +6058,7 @@ graphql-tag@^2.10.3:
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.10.3.tgz#ea1baba5eb8fc6339e4c4cf049dabe522b0edf03"
   integrity sha512-4FOv3ZKfA4WdOKJeHdz6B3F/vxBLSgmBcGeAFPf4n1F64ltJUvOOerNj0rsJxONQGdhUMynQIvd6LzB+1J5oKA==
 
-graphql@^14.6.0:
+graphql@^14.5.3, graphql@^14.6.0:
   version "14.6.0"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-14.6.0.tgz#57822297111e874ea12f5cd4419616930cd83e49"
   integrity sha512-VKzfvHEKybTKjQVpTFrA5yUq2S9ihcZvfJAtsDBBCuV6wauPu1xl/f9ehgVf0FcEJJs4vz6ysb/ZMkGigQZseg==

@@ -13,31 +13,38 @@ import {
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import { KeyboardDateTimePicker } from '@material-ui/pickers'
-import styles from '../liveTour.module.scss'
+import styles from '../yanceyMusic.module.scss'
 import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
 
 interface Props {
-  createLiveTour: Function
-  updateLiveTourById: Function
+  createYanceyMusic: Function
+  updateYanceyMusicById: Function
 }
 
-const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
+const YanceyMusicModal: FC<Props> = ({
+  createYanceyMusic,
+  updateYanceyMusicById,
+}) => {
   const { search } = useLocation()
 
   const { showModal, id } = parseSearch(search)
 
   const initialValues = {
     title: '',
-    showTime: new Date(),
+    soundCloudUrl: '',
+    releaseDate: new Date(),
     posterUrl: '',
   }
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required.'),
-    showTime: Yup.string().required('ShowTime is required.'),
+    releaseDate: Yup.string().required('ReleaseDate is required.'),
+    soundCloudUrl: Yup.string()
+      .url()
+      .required('SoundCloudUrl is required.'),
     posterUrl: Yup.string()
       .url()
       .required('PostUrl is required.'),
@@ -57,11 +64,11 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
     validationSchema,
     onSubmit: async values => {
       if (id) {
-        await updateLiveTourById({
+        await updateYanceyMusicById({
           variables: { input: { ...values, id } },
         })
       } else {
-        await createLiveTour({ variables: { input: values } })
+        await createYanceyMusic({ variables: { input: values } })
       }
       goBack()
       resetForm()
@@ -74,13 +81,17 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
 
   useEffect(() => {
     if (id) {
-      // @ts-ignore
-      const { title, showTime, posterUrl } = client.cache.data.get(
-        `LiveTourModel:${id}`,
-      )
+      const {
+        title,
+        soundCloudUrl,
+        releaseDate,
+        posterUrl,
+        // @ts-ignore
+      } = client.cache.data.get(`YanceyMusicModel:${id}`)
       setValues({
         title,
-        showTime: new Date(parseInt(showTime, 10)),
+        soundCloudUrl,
+        releaseDate: new Date(parseInt(releaseDate, 10)),
         posterUrl,
       })
     }
@@ -92,12 +103,13 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
 
   return (
     <Dialog open={!!showModal} onClose={goBack}>
-      <DialogTitle>{id ? 'Update' : 'Add'} an Live Tour</DialogTitle>
+      <DialogTitle>{id ? 'Update' : 'Add'} an Yancey Music</DialogTitle>
       <form className={styles.customForm} onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
-            To {id ? 'update' : 'add'} an Live Tour, please enter the following
-            fields here. We will send data after clicking the submit button.
+            To {id ? 'update' : 'add'} an Yancey Music, please enter the
+            following fields here. We will send data after clicking the submit
+            button.
           </DialogContentText>
           <TextField
             error={!!errors.title}
@@ -110,15 +122,24 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
             {...getFieldProps('title')}
           />
 
-          <KeyboardDateTimePicker
-            label="ShowTime"
+          <TextField
+            error={!!errors.soundCloudUrl}
+            helperText={errors.soundCloudUrl}
             required
-            value={values.showTime}
-            error={!!errors.showTime}
-            helperText={errors.showTime}
+            id="soundCloudUrl"
+            label="SoundCloudUrl"
+            fullWidth
+            {...getFieldProps('soundCloudUrl')}
+          />
+
+          <KeyboardDateTimePicker
+            label="ReleaseDate"
+            value={values.releaseDate}
+            error={!!errors.releaseDate}
+            helperText={errors.releaseDate}
             showTodayButton={true}
             ampm={false}
-            onChange={date => setFieldValue('showTime', date, true)}
+            onChange={date => setFieldValue('releaseDate', date, true)}
             format="YYYY/MM/DD HH:mm:ss"
           />
 
@@ -154,4 +175,4 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
   )
 }
 
-export default LiveTourModal
+export default YanceyMusicModal
