@@ -76,11 +76,11 @@ const routes: Route[] = [
       //   path: 'player',
       //   component: 'Music/Player/Player',
       // },
-      // {
-      //   name: 'Yancey Music',
-      //   path: 'yancey-music',
-      //   component: 'Music/YanceyMusic/YanceyMusic',
-      // },
+      {
+        name: 'Yancey Music',
+        path: 'yancey-music',
+        component: 'Music/YanceyMusic/YanceyMusic',
+      },
     ],
   },
   // {
