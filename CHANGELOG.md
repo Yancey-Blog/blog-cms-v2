@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.11.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.10.1...v0.11.0) (2020-03-03)
+
+
+### Features
+
+* update showTime of LiveTour ([5eb849d](https://github.com/Yancey-Blog/blog-cms-v2/commit/5eb849d9636fa5236f9fc1171676652ce3bca747))
+
 ### [0.10.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.10.0...v0.10.1) (2020-03-02)
 
 
