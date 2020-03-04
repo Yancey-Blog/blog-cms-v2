@@ -28,7 +28,7 @@ const BestAlbum: FC = () => {
           query: BEST_ALBUMS,
           data: {
             ...data,
-            getBestAlbum: [createBestAlbum, ...data.getBestAlbum],
+            getBestAlbums: [createBestAlbum, ...data.getBestAlbums],
           },
         })
       }
@@ -56,7 +56,7 @@ const BestAlbum: FC = () => {
           proxy.writeQuery({
             query: BEST_ALBUMS,
             data: {
-              getBestAlbum: data.getBestAlbum.filter(
+              getBestAlbums: data.getBestAlbums.filter(
                 (bestAlbum: IBestAlbum) =>
                   bestAlbum._id !== deleteBestAlbumById._id,
               ),
@@ -81,7 +81,7 @@ const BestAlbum: FC = () => {
           proxy.writeQuery({
             query: BEST_ALBUMS,
             data: {
-              getBestAlbum: data.getBestAlbum.filter(
+              getBestAlbums: data.getBestAlbums.filter(
                 (bestAlbum: IBestAlbum) =>
                   !deleteBestAlbums.ids.includes(bestAlbum._id),
               ),
@@ -99,7 +99,7 @@ const BestAlbum: FC = () => {
   return (
     <>
       <BestAlbumTable
-        dataSource={data ? data.getBestAlbum : []}
+        dataSource={data ? data.getBestAlbums : []}
         isFetching={isFetching}
         isDeleting={isDeleting}
         isBatchDeleting={isBatchDeleting}

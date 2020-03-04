@@ -10,5 +10,5 @@ export interface IBestAlbum {
 }
 
 export interface Query {
-  getBestAlbum: IBestAlbum[]
+  getBestAlbums: IBestAlbum[]
 }
