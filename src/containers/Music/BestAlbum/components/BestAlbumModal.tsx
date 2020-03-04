@@ -43,7 +43,9 @@ const BestAlbumModal: FC<Props> = ({
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required.'),
     artist: Yup.string().required('Artist is required.'),
-    mvUrl: Yup.string().required('MvUrl is required.'),
+    mvUrl: Yup.string()
+      .url()
+      .required('MvUrl is required.'),
     releaseDate: Yup.string().required('ReleaseDate is required.'),
     coverUrl: Yup.string()
       .url()
