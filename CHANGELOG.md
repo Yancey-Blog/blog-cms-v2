@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.12.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.11.0...v0.12.0) (2020-03-04)
+
+
+### Features
+
+* define BestAlbum ([da6c913](https://github.com/Yancey-Blog/blog-cms-v2/commit/da6c9135c95869aeb5626700bd78193a9b49b385))
+* define BestAlbumModal ([78462dd](https://github.com/Yancey-Blog/blog-cms-v2/commit/78462ddf38c6d2ab99de526321e7483ac453a054))
+* define BestAlbumTable ([796418c](https://github.com/Yancey-Blog/blog-cms-v2/commit/796418c55cffb9688ac0a8dbc5265c73edde91ed))
+* define interface of BestAlbum ([7311a43](https://github.com/Yancey-Blog/blog-cms-v2/commit/7311a4322c3536e423102135b11a12d35d4fb111))
+* define styles for BestAlbum ([5f349f6](https://github.com/Yancey-Blog/blog-cms-v2/commit/5f349f666f3f4baa75ca63d46d95e6e231e2cf5f))
+* define typeDefs of BestAlbum ([389bf0a](https://github.com/Yancey-Blog/blog-cms-v2/commit/389bf0ab3a96f1bbaffb4aff9aa130a2abb6329b))
+* finish graphql time system ([55527f8](https://github.com/Yancey-Blog/blog-cms-v2/commit/55527f855b4d5343e9387d894fca5b7f8bbcec11))
+* mvUrl is url type ([3aebb30](https://github.com/Yancey-Blog/blog-cms-v2/commit/3aebb308673159581264078d8f5099295c3c80a8))
+* update BestAlbumTable ([a2441bd](https://github.com/Yancey-Blog/blog-cms-v2/commit/a2441bd156eb77a856f9101e60f67984acfae0dc))
+* update BestAlbumTable ([2be4b05](https://github.com/Yancey-Blog/blog-cms-v2/commit/2be4b05219e52b7446bd0ccc4c954a9b3ab7723a))
+* update CreateBestAlbum ([45e52c8](https://github.com/Yancey-Blog/blog-cms-v2/commit/45e52c8621441d8dff096053de813858c9dd5a15))
+* update getBestAlbums ([08e127d](https://github.com/Yancey-Blog/blog-cms-v2/commit/08e127dc6c8e25279f575a5ffca79814bd5b3fbb))
+* update routes ([953a50e](https://github.com/Yancey-Blog/blog-cms-v2/commit/953a50e6ce8d5704c07cb3993e31e486d8ccb135))
+
 ## [0.11.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.10.1...v0.11.0) (2020-03-03)
 
 
