@@ -5,8 +5,9 @@ export const CREATE_ONE_BEST_ALBUM = gql`
     createBestAlbum(input: $input) {
       _id
       title
-      soundCloudUrl
-      posterUrl
+      artist
+      coverUrl
+      mvUrl
       releaseDate
       createdAt
       updatedAt
