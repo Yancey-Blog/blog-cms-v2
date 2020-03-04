@@ -71,10 +71,10 @@ const BestAlbum: FC = () => {
     },
   )
 
-  const [deleteBestAlbum, { loading: isBatchDeleting }] = useMutation(
+  const [deleteBestAlbums, { loading: isBatchDeleting }] = useMutation(
     BATCH_DELETE_BEST_ALBUMS,
     {
-      update(proxy, { data: { deleteBestAlbum } }) {
+      update(proxy, { data: { deleteBestAlbums } }) {
         const data = proxy.readQuery<Query>({ query: BEST_ALBUMS })
 
         if (data) {
@@ -83,7 +83,7 @@ const BestAlbum: FC = () => {
             data: {
               getBestAlbum: data.getBestAlbum.filter(
                 (bestAlbum: IBestAlbum) =>
-                  !deleteBestAlbum.ids.includes(bestAlbum._id),
+                  !deleteBestAlbums.ids.includes(bestAlbum._id),
               ),
             },
           })
@@ -104,7 +104,7 @@ const BestAlbum: FC = () => {
         isDeleting={isDeleting}
         isBatchDeleting={isBatchDeleting}
         deleteBestAlbumById={deleteBestAlbumById}
-        deleteBestAlbum={deleteBestAlbum}
+        deleteBestAlbums={deleteBestAlbums}
       />
 
       <BestAlbumModal
