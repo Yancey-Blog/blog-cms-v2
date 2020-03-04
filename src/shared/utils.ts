@@ -12,8 +12,8 @@ export const getInitials = (txt: string) =>
     .map((v: string) => v[0])
     .join('')
 
-export const formatDate = (timestamp: string) =>
-  moment(parseInt(timestamp)).format('YYYY-MM-DD HH:mm:ss')
+export const formatDate = (ISOString: string) =>
+  moment(ISOString).format('YYYY-MM-DD HH:mm:ss')
 
 export const getType = (type: any) =>
   Object.prototype.toString

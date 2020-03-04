@@ -13,20 +13,20 @@ import {
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import { KeyboardDateTimePicker } from '@material-ui/pickers'
-import styles from '../yanceyMusic.module.scss'
+import styles from '../bestAlbum.module.scss'
 import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
 
 interface Props {
-  createYanceyMusic: Function
-  updateYanceyMusicById: Function
+  createBestAlbum: Function
+  updateBestAlbumById: Function
 }
 
-const YanceyMusicModal: FC<Props> = ({
-  createYanceyMusic,
-  updateYanceyMusicById,
+const BestAlbumModal: FC<Props> = ({
+  createBestAlbum,
+  updateBestAlbumById,
 }) => {
   const { search } = useLocation()
 
@@ -34,18 +34,20 @@ const YanceyMusicModal: FC<Props> = ({
 
   const initialValues = {
     title: '',
-    soundCloudUrl: '',
+    artist: '',
+    mvUrl: '',
     releaseDate: new Date(),
-    posterUrl: '',
+    coverUrl: '',
   }
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required.'),
-    releaseDate: Yup.string().required('ReleaseDate is required.'),
-    soundCloudUrl: Yup.string()
+    artist: Yup.string().required('Artist is required.'),
+    mvUrl: Yup.string()
       .url()
-      .required('SoundCloudUrl is required.'),
-    posterUrl: Yup.string()
+      .required('MvUrl is required.'),
+    releaseDate: Yup.string().required('ReleaseDate is required.'),
+    coverUrl: Yup.string()
       .url()
       .required('PostUrl is required.'),
   })
@@ -64,11 +66,15 @@ const YanceyMusicModal: FC<Props> = ({
     validationSchema,
     onSubmit: async values => {
       if (id) {
-        await updateYanceyMusicById({
+        await updateBestAlbumById({
           variables: { input: { ...values, id } },
         })
       } else {
-        await createYanceyMusic({ variables: { input: values } })
+        await createBestAlbum({
+          variables: {
+            input: { ...values },
+          },
+        })
       }
       goBack()
       resetForm()
@@ -76,23 +82,25 @@ const YanceyMusicModal: FC<Props> = ({
   })
 
   const onChange = (data: UploaderRes) => {
-    setFieldValue('posterUrl', data.url)
+    setFieldValue('coverUrl', data.url)
   }
 
   useEffect(() => {
     if (id) {
       const {
         title,
-        soundCloudUrl,
+        artist,
+        mvUrl,
         releaseDate,
-        posterUrl,
+        coverUrl,
         // @ts-ignore
-      } = client.cache.data.get(`YanceyMusicModel:${id}`)
+      } = client.cache.data.get(`BestAlbumModel:${id}`)
       setValues({
         title,
-        soundCloudUrl,
+        artist,
+        mvUrl,
         releaseDate,
-        posterUrl,
+        coverUrl,
       })
     }
 
@@ -103,13 +111,12 @@ const YanceyMusicModal: FC<Props> = ({
 
   return (
     <Dialog open={!!showModal} onClose={goBack}>
-      <DialogTitle>{id ? 'Update' : 'Add'} an Yancey Music</DialogTitle>
+      <DialogTitle>{id ? 'Update' : 'Add'} an Best Album</DialogTitle>
       <form className={styles.customForm} onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
-            To {id ? 'update' : 'add'} an Yancey Music, please enter the
-            following fields here. We will send data after clicking the submit
-            button.
+            To {id ? 'update' : 'add'} an Best Album, please enter the following
+            fields here. We will send data after clicking the submit button.
           </DialogContentText>
           <TextField
             error={!!errors.title}
@@ -123,13 +130,23 @@ const YanceyMusicModal: FC<Props> = ({
           />
 
           <TextField
-            error={!!errors.soundCloudUrl}
-            helperText={errors.soundCloudUrl}
+            error={!!errors.artist}
+            helperText={errors.artist}
             required
-            id="soundCloudUrl"
-            label="SoundCloudUrl"
+            id="artist"
+            label="Artist"
             fullWidth
-            {...getFieldProps('soundCloudUrl')}
+            {...getFieldProps('artist')}
+          />
+
+          <TextField
+            error={!!errors.mvUrl}
+            helperText={errors.mvUrl}
+            required
+            id="mvUrl"
+            label="MvUrl"
+            fullWidth
+            {...getFieldProps('mvUrl')}
           />
 
           <KeyboardDateTimePicker
@@ -144,21 +161,21 @@ const YanceyMusicModal: FC<Props> = ({
           />
 
           <div className={styles.uploaderGroup}>
-            <FormLabel required>PosterUrl</FormLabel>
+            <FormLabel required>CoverUrl</FormLabel>
             <TextField
-              error={!!errors.posterUrl}
-              helperText={errors.posterUrl}
+              error={!!errors.coverUrl}
+              helperText={errors.coverUrl}
               style={{ display: 'none' }}
               required
-              id="posterUrl"
-              label="PosterUrl"
+              id="coverUrl"
+              label="CoverUrl"
               fullWidth
               disabled={true}
-              {...getFieldProps('posterUrl')}
+              {...getFieldProps('coverUrl')}
             />
             <Uploader
               onChange={onChange}
-              defaultFile={getFieldProps('posterUrl').value}
+              defaultFile={getFieldProps('coverUrl').value}
             />
           </div>
         </DialogContent>
@@ -175,4 +192,4 @@ const YanceyMusicModal: FC<Props> = ({
   )
 }
 
-export default YanceyMusicModal
+export default BestAlbumModal

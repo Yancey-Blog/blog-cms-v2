@@ -80,7 +80,7 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
       )
       setValues({
         title,
-        showTime: new Date(parseInt(showTime, 10)),
+        showTime,
         posterUrl,
       })
     }

@@ -66,11 +66,11 @@ const routes: Route[] = [
         path: 'live-tour',
         component: 'Music/LiveTour/LiveTour',
       },
-      // {
-      //   name: 'Best Album',
-      //   path: 'best-album',
-      //   component: 'Music/BestAlbum/BestAlbum',
-      // },
+      {
+        name: 'Best Album',
+        path: 'best-album',
+        component: 'Music/BestAlbum/BestAlbum',
+      },
       // {
       //   name: 'Player',
       //   path: 'player',
