@@ -7,7 +7,7 @@ import MUIDataTable, {
 } from 'mui-datatables'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
-import { FormControl, Fab, Popover } from '@material-ui/core'
+import { FormControl, Fab, Popover, Button } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
 import styles from '../bestAlbum.module.scss'
 import { formatDate, stringfySearch } from 'src/shared/utils'
@@ -45,7 +45,22 @@ const BestAlbumTable: FC<Props> = ({
     { name: '_id', label: 'Id' },
     { name: 'title', label: 'Title' },
     { name: 'artist', label: 'Artist' },
-    { name: 'mvUrl', label: 'mvUrl' },
+    {
+      name: 'mvUrl',
+      label: 'mvUrl',
+      options: {
+        customBodyRender: (value: string) => (
+          <Button
+            href={value}
+            color="secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {value.slice(0, 20)}...
+          </Button>
+        ),
+      },
+    },
     {
       name: 'coverUrl',
       label: 'CoverUrl',
@@ -76,7 +91,7 @@ const BestAlbumTable: FC<Props> = ({
                   >
                     <img
                       src={value}
-                      style={{ width: '800px', display: 'block' }}
+                      style={{ width: '400px', display: 'block' }}
                       alt={curName}
                     />
                   </Popover>
