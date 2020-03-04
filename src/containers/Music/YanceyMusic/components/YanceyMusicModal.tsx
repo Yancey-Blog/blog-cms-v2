@@ -91,7 +91,7 @@ const YanceyMusicModal: FC<Props> = ({
       setValues({
         title,
         soundCloudUrl,
-        releaseDate: new Date(parseInt(releaseDate, 10)),
+        releaseDate,
         posterUrl,
       })
     }

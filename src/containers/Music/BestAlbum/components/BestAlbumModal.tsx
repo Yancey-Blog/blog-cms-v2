@@ -68,7 +68,11 @@ const BestAlbumModal: FC<Props> = ({
           variables: { input: { ...values, id } },
         })
       } else {
-        await createBestAlbum({ variables: { input: values } })
+        await createBestAlbum({
+          variables: {
+            input: { ...values },
+          },
+        })
       }
       goBack()
       resetForm()
@@ -93,7 +97,7 @@ const BestAlbumModal: FC<Props> = ({
         title,
         artist,
         mvUrl,
-        releaseDate: new Date(parseInt(releaseDate, 10)),
+        releaseDate,
         coverUrl,
       })
     }
