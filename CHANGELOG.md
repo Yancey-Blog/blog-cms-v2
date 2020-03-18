@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.12.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.12.0...v0.12.1) (2020-03-18)
+
+
+### Features
+
+* update vulnerabilities dependencies ([17d7885](https://github.com/Yancey-Blog/blog-cms-v2/commit/17d788565330c028d14636fd934637cd4ef90ee9))
+
 ## [0.12.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.11.0...v0.12.0) (2020-03-04)
 
 
