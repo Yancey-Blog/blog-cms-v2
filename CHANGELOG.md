@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.13.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.12.1...v0.13.0) (2020-03-22)
+
+
+### Features
+
+* add types for snackbarAnchorOrigin ([be1cf13](https://github.com/Yancey-Blog/blog-cms-v2/commit/be1cf13d7e2133af623c8b684c6bcce310a83657))
+* adjust position of Toast's import ([45290d1](https://github.com/Yancey-Blog/blog-cms-v2/commit/45290d142ac613e6e9ab025ed3b32eab6a958b2e))
+* define Player ([23fa590](https://github.com/Yancey-Blog/blog-cms-v2/commit/23fa590c25301167652714801ab55f1182bcd927))
+* define player.module.scss ([27954b5](https://github.com/Yancey-Blog/blog-cms-v2/commit/27954b5e5c235fccd78b6b0057ad65c849f5a2f8))
+* define PlayerModal ([4bb0385](https://github.com/Yancey-Blog/blog-cms-v2/commit/4bb03851ac98e48f8ff0382e8d1415dd7b16d43f))
+* define PlayerTable ([de55c5f](https://github.com/Yancey-Blog/blog-cms-v2/commit/de55c5f952cdd1fd0ea8f193276bc9c0da05a742))
+* define typeDefs ([34a5d5b](https://github.com/Yancey-Blog/blog-cms-v2/commit/34a5d5bc399b8fb3ef65cc0e7346c3fc1ea2bf23))
+* defined types of Player ([141c933](https://github.com/Yancey-Blog/blog-cms-v2/commit/141c93378640471bacfabc4a5bb658fea3a8a0e9))
+* delete useless constants ([24b1efc](https://github.com/Yancey-Blog/blog-cms-v2/commit/24b1efc46d4ddcf785bc0a658be183b5687a0424))
+* finish lrc display ([24f05a0](https://github.com/Yancey-Blog/blog-cms-v2/commit/24f05a0719193711aa27d97e555e643257ec35c1))
+* finish PlayerTable ([8bea82b](https://github.com/Yancey-Blog/blog-cms-v2/commit/8bea82b4f1b5e16683d47addfc281bdb1c4b7d20))
+* format pre tag ([87f879a](https://github.com/Yancey-Blog/blog-cms-v2/commit/87f879a941fb2eb3d9703a3724c8af82039294f7))
+* optimization Switch component ([45c6397](https://github.com/Yancey-Blog/blog-cms-v2/commit/45c6397cda06293fd1141157d1ad7729d8ff6364))
+* resolve conflict ([5e046b5](https://github.com/Yancey-Blog/blog-cms-v2/commit/5e046b51926feba209dbd6764bfec9d1424b0d83))
+* support audio/* ([9243344](https://github.com/Yancey-Blog/blog-cms-v2/commit/92433445fa5eb8cc42201c1f7419f7ce1b698032))
+* update BestAlbumTable ([47d57c2](https://github.com/Yancey-Blog/blog-cms-v2/commit/47d57c22c3bbce234773aeda15f2ee86478f88f7))
+* update ConfirmPoper ([2f91fae](https://github.com/Yancey-Blog/blog-cms-v2/commit/2f91fae7578b60b0e2c1b12f0916c0d5e47c7b71))
+* update LiveTourTable ([b409041](https://github.com/Yancey-Blog/blog-cms-v2/commit/b4090413394ac092202acd887e609885ffde469b))
+* update lrcTxt styles ([39a2be8](https://github.com/Yancey-Blog/blog-cms-v2/commit/39a2be829c2eed4b0a2827de3a6387712f7743a6))
+* update onCoverUrlChange ([9e4187b](https://github.com/Yancey-Blog/blog-cms-v2/commit/9e4187bac1fd8c538af91fc01d683924ed2abc95))
+* update OpenSourceTable ([e3621eb](https://github.com/Yancey-Blog/blog-cms-v2/commit/e3621ebd319c1fa96c4cd253b853a120e9520c71))
+* update Player txt ([a58c722](https://github.com/Yancey-Blog/blog-cms-v2/commit/a58c722723edbccdc32b05fdd803371d338d2532))
+* update PlayerTable ([7ac2aae](https://github.com/Yancey-Blog/blog-cms-v2/commit/7ac2aaeaa9b421a14afb5f89e732018a8114520f))
+* update routes for Player component ([129668d](https://github.com/Yancey-Blog/blog-cms-v2/commit/129668dad8a37adc3e896efab0e7604f16bec370))
+* update simple uploader ([5d7f437](https://github.com/Yancey-Blog/blog-cms-v2/commit/5d7f43769d71739eecac893b87ad789d91d3bdd3))
+* update SnackbarProvider props ([933a4be](https://github.com/Yancey-Blog/blog-cms-v2/commit/933a4bee952b87c67bb382fa8f8320e6a3639b20))
+* update Switch ([b91af6d](https://github.com/Yancey-Blog/blog-cms-v2/commit/b91af6db13a5ea3ff4b946320c9de543a125e715))
+* update Uploader ([6686f99](https://github.com/Yancey-Blog/blog-cms-v2/commit/6686f995656f79153ea882b3a370f15202b52950))
+* update Uploader style ([b5315ca](https://github.com/Yancey-Blog/blog-cms-v2/commit/b5315ca970ae5c2326cce9367554626b28c1ec47))
+* update YanceyMusicTable ([85dc666](https://github.com/Yancey-Blog/blog-cms-v2/commit/85dc666269239ee2813a086012c694dadc3cbdd0))
+
 ### [0.12.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.12.0...v0.12.1) (2020-03-18)
 
 
