@@ -1,6 +1,5 @@
 import axios, { AxiosError, AxiosResponse, AxiosRequestConfig } from 'axios'
 import { Observable } from 'rxjs'
-import { baseURL } from './constants'
 
 const { CancelToken } = axios
 
@@ -14,10 +13,7 @@ axios.defaults.timeout = 30 * 1000
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 // config base url
-axios.defaults.baseURL =
-  process.env.NODE_ENV === 'production'
-    ? baseURL.production
-    : baseURL.development
+axios.defaults.baseURL = process.env.REACT_APP_GRAPHQL_URL
 
 const pending: any[] = []
 const removePending = (config: any) => {

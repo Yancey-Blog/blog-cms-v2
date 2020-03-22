@@ -8,14 +8,19 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import MomentUtils from '@date-io/moment'
 import { SnackbarProvider } from 'notistack'
 import * as serviceWorker from './serviceWorker'
+import { SnackbarUtilsConfigurator } from './components/Toast/Toast'
+import Login from './pages/Login/Login'
+import Register from './pages/Register/Register'
+import Loading from './components/Loading/InstagramLoading'
 import client from './shared/apolloClient'
 import history from './shared/history'
-import { SnackbarUtilsConfigurator } from './components/Toast/Toast'
-import Login from 'src/pages/Login/Login'
-import Register from 'src/pages/Register/Register'
-import Loading from 'src/components/Loading/InstagramLoading'
+import {
+  snackbarAnchorOrigin,
+  snackbarMaxNum,
+  snackbarAutoHideDuration,
+} from './shared/constants'
 
-const Layouts = loadable(() => import('src/pages/Layouts/Layouts'), {
+const Layouts = loadable(() => import('./pages/Layouts/Layouts'), {
   fallback: <Loading />,
 })
 
@@ -24,12 +29,9 @@ serviceWorker.unregister()
 ReactDOM.render(
   <ApolloProvider client={client}>
     <SnackbarProvider
-      maxSnack={1}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'center',
-      }}
-      autoHideDuration={3000}
+      maxSnack={snackbarMaxNum}
+      anchorOrigin={snackbarAnchorOrigin}
+      autoHideDuration={snackbarAutoHideDuration}
     >
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <SnackbarUtilsConfigurator />

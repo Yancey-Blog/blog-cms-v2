@@ -71,11 +71,11 @@ const routes: Route[] = [
         path: 'best-album',
         component: 'Music/BestAlbum/BestAlbum',
       },
-      // {
-      //   name: 'Player',
-      //   path: 'player',
-      //   component: 'Music/Player/Player',
-      // },
+      {
+        name: 'Player',
+        path: 'player',
+        component: 'Music/Player/Player',
+      },
       {
         name: 'Yancey Music',
         path: 'yancey-music',

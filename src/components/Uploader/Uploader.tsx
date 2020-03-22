@@ -1,15 +1,17 @@
 import React, { FC, useState, ChangeEvent } from 'react'
-import { Card, CircularProgress } from '@material-ui/core'
-import { Add } from '@material-ui/icons'
+import classNames from 'classnames'
+import { Card, CircularProgress, Button } from '@material-ui/core'
+import { Add, CloudUpload } from '@material-ui/icons'
 import { useSnackbar } from 'notistack'
+import { getURLPathName } from 'src/shared/utils'
 import { UploaderRes, Props } from './types'
 import styles from './uploader.module.scss'
 
 const Uploader: FC<Props> = ({
+  type = 'avatar',
   accept = 'image/*',
   action = process.env.REACT_APP_UPLOADER_URL || '',
   method = 'POST',
-  disabled = false,
   name = 'file',
   defaultFile = '',
   onChange,
@@ -55,32 +57,72 @@ const Uploader: FC<Props> = ({
     setUploading(false)
   }
 
-  const configUploaderContent = () => {
+  const avatarContent = () => {
     if (uploading) {
       return <CircularProgress />
+    }
+
+    if (defaultFile) {
+      return <img src={defaultFile} alt="default" className={styles.img} />
+    } else if (curFile) {
+      const { name, url } = curFile
+      return <img src={url} alt={name} className={styles.img} />
     } else {
-      if (defaultFile) {
-        return <img src={defaultFile} alt="default" className={styles.img} />
-      } else if (curFile) {
-        const { name, url } = curFile
-        return <img src={url} alt={name} className={styles.img} />
-      } else {
-        return <Add className={styles.addBtn} />
-      }
+      return <Add className={styles.addBtn} />
+    }
+  }
+
+  const simpleContent = () => {
+    if (curFile) {
+      const { url } = curFile
+      return <p className={styles.simpleContent}>{getURLPathName(url)}</p>
+    } else if (defaultFile) {
+      return (
+        <p className={styles.simpleContent}>{getURLPathName(defaultFile)}</p>
+      )
     }
   }
 
   return (
-    <Card className={styles.uploader}>
-      {configUploaderContent()}
-      <input
-        type="file"
-        accept={accept}
-        disabled={disabled || uploading}
-        onChange={e => onUpload(e)}
-        className={styles.input}
-      />
-    </Card>
+    <>
+      {type === 'avatar' ? (
+        <Card
+          className={classNames(styles.avatarUploader, styles.simpleUploader)}
+        >
+          {avatarContent()}
+          <input
+            type="file"
+            accept={accept}
+            onChange={e => onUpload(e)}
+            className={styles.customInput}
+          />
+        </Card>
+      ) : (
+        <div className={styles.simpleUploader}>
+          <Button
+            variant="contained"
+            color="primary"
+            disabled={uploading}
+            startIcon={<CloudUpload />}
+          >
+            {uploading && (
+              <CircularProgress
+                size={24}
+                className={styles.customLoadingCircle}
+              />
+            )}
+            Upload
+            <input
+              type="file"
+              accept={accept}
+              className={styles.customInput}
+              onChange={e => onUpload(e)}
+            />
+          </Button>
+          {simpleContent()}
+        </div>
+      )}
+    </>
   )
 }
 
