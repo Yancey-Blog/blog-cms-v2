@@ -56,11 +56,11 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
     resetForm,
     isSubmitting,
     errors,
+    values,
   } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async values => {
-      console.log(values)
       if (id) {
         await updatePlayerById({
           variables: { input: { ...values, id } },
@@ -200,8 +200,8 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
             <FormLabel required>IsPublic</FormLabel>
             <Switch
               color="primary"
-              defaultChecked
-              {...getFieldProps('isPublic')}
+              defaultChecked={values.isPublic || true}
+              onChange={e => setFieldValue('isPublic', e.target.checked, true)}
             />
           </div>
         </DialogContent>
