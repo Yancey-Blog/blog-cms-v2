@@ -1,5 +1,5 @@
-import { useSnackbar, VariantType, WithSnackbarProps } from 'notistack'
 import React from 'react'
+import { useSnackbar, VariantType, WithSnackbarProps } from 'notistack'
 
 interface Props {
   setUseSnackbarRef: (showSnackbar: WithSnackbarProps) => void

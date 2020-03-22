@@ -7,9 +7,9 @@ import MUIDataTable, {
 } from 'mui-datatables'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
-import { FormControl, Fab, Popover } from '@material-ui/core'
+import { FormControl, Fab, Popover, Switch, Button } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
-import styles from '../yanceyMusic.module.scss'
+import styles from '../player.module.scss'
 import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
@@ -18,21 +18,21 @@ import {
   popoverAnchorOrigin,
   popoverTransformOrigin,
 } from 'src/shared/constants'
-import { IYanceyMusic } from '../types'
+import { IPlayer } from '../types'
 
 interface Props {
-  dataSource: IYanceyMusic[]
+  dataSource: IPlayer[]
   isFetching: boolean
   isDeleting: boolean
   isBatchDeleting: boolean
-  deleteYanceyMusicById: Function
-  deleteYanceyMusic: Function
+  deletePlayerById: Function
+  deletePlayers: Function
 }
 
-const YanceyMusicTable: FC<Props> = ({
+const PlayerTable: FC<Props> = ({
   dataSource,
-  deleteYanceyMusicById,
-  deleteYanceyMusic,
+  deletePlayerById,
+  deletePlayers,
   isFetching,
   isDeleting,
   isBatchDeleting,
@@ -48,10 +48,41 @@ const YanceyMusicTable: FC<Props> = ({
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
     { name: 'title', label: 'Title' },
-    { name: 'soundCloudUrl', label: 'SoundCloudUrl' },
+    { name: 'artist', label: 'Artist' },
     {
-      name: 'posterUrl',
-      label: 'PosterUrl',
+      name: 'lrc',
+      label: 'LRC',
+      options: {
+        customBodyRender: (value: string) => {
+          return (
+            <PopupState variant="popover" popupId="lrcPoperOver">
+              {popupState => (
+                <div>
+                  <Button
+                    color="secondary"
+                    variant="contained"
+                    {...bindTrigger(popupState)}
+                  >
+                    Click me!
+                  </Button>
+                  <Popover
+                    {...bindPopover(popupState)}
+                    anchorOrigin={popoverAnchorOrigin}
+                    transformOrigin={popoverTransformOrigin}
+                    disableRestoreFocus
+                  >
+                    <pre className={styles.lrcTxt}>{value}</pre>
+                  </Popover>
+                </div>
+              )}
+            </PopupState>
+          )
+        },
+      },
+    },
+    {
+      name: 'coverUrl',
+      label: 'CoverUrl',
       options: {
         customBodyRender: (value: string, tableMeta: MUIDataTableMeta) => {
           const curName = tableMeta.rowData[1]
@@ -73,7 +104,7 @@ const YanceyMusicTable: FC<Props> = ({
                   >
                     <img
                       src={value}
-                      style={{ width: '800px', display: 'block' }}
+                      style={{ height: '400px', display: 'block' }}
                       alt={curName}
                     />
                   </Popover>
@@ -85,10 +116,25 @@ const YanceyMusicTable: FC<Props> = ({
       },
     },
     {
-      name: 'releaseDate',
-      label: 'ReleaseDate',
+      name: 'musicFileUrl',
+      label: 'MusicFileUrl',
       options: {
-        customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
+        customBodyRender: (value: string) => {
+          return (
+            <audio src={value} controls>
+              Your browser does not support the audio element.
+            </audio>
+          )
+        },
+      },
+    },
+    {
+      name: 'isPublic',
+      label: 'IsPublic',
+      options: {
+        customBodyRender: (value: boolean) => {
+          return <Switch checked={value} />
+        },
       },
     },
     {
@@ -122,9 +168,7 @@ const YanceyMusicTable: FC<Props> = ({
               </FormControl>
               <FormControl>
                 <ConfirmPoper
-                  onOk={() =>
-                    deleteYanceyMusicById({ variables: { id: curId } })
-                  }
+                  onOk={() => deletePlayerById({ variables: { id: curId } })}
                 >
                   <DeleteOutline className={styles.addIcon} />
                 </ConfirmPoper>
@@ -155,7 +199,7 @@ const YanceyMusicTable: FC<Props> = ({
       )
       return (
         <Fab size="medium" className={styles.addIconFab}>
-          <ConfirmPoper onOk={() => deleteYanceyMusic({ variables: { ids } })}>
+          <ConfirmPoper onOk={() => deletePlayers({ variables: { ids } })}>
             <DeleteOutline className={styles.addIcon} />
           </ConfirmPoper>
         </Fab>
@@ -164,7 +208,7 @@ const YanceyMusicTable: FC<Props> = ({
   }
 
   return (
-    <TableWrapper tableName="Yancey Music" icon="save">
+    <TableWrapper tableName="Player" icon="save">
       <MUIDataTable
         title=""
         data={dataSource.sort(sortBy('updatedAt')).reverse()}
@@ -176,4 +220,4 @@ const YanceyMusicTable: FC<Props> = ({
   )
 }
 
-export default YanceyMusicTable
+export default PlayerTable

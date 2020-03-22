@@ -42,3 +42,6 @@ export const logout = () => {
   history.replace('/login')
   window.localStorage.removeItem('token')
 }
+
+export const getURLPathName = (url: string) =>
+  decodeURI(new URL(url).pathname.slice(1))

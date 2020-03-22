@@ -9,6 +9,7 @@ export interface UploaderRes {
 }
 
 export interface Props {
+  type?: 'avatar' | 'simple'
   accept?: string
   action?: string
   method?:
@@ -21,7 +22,6 @@ export interface Props {
     | 'OPTIONS'
     | 'TRACE'
     | 'PATCH'
-  disabled?: boolean
   name?: string
   defaultFile?: string
   onChange: Function
