@@ -13,6 +13,7 @@ import {
   Switch,
 } from '@material-ui/core'
 import { useFormik } from 'formik'
+import classNames from 'classnames'
 import styles from '../player.module.scss'
 import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
@@ -169,7 +170,12 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
             />
           </div>
 
-          <div className={styles.uploaderGroup}>
+          <div
+            className={classNames(
+              styles.uploaderGroup,
+              styles.btnUploaderGroup,
+            )}
+          >
             <FormLabel required>MusicFileUrl</FormLabel>
             <TextField
               error={!!errors.musicFileUrl}
@@ -184,7 +190,8 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
             />
             <Uploader
               onChange={onMusicFileUrlChange}
-              // accept="audio/*"
+              type="simple"
+              accept="audio/*"
               defaultFile={getFieldProps('musicFileUrl').value}
             />
           </div>

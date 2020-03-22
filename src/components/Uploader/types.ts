@@ -9,6 +9,7 @@ export interface UploaderRes {
 }
 
 export interface Props {
+  type?: 'avatar' | 'simple'
   accept?: string
   action?: string
   method?:
