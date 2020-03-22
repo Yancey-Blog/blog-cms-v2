@@ -44,7 +44,7 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
     lrc: Yup.string().required('LRC is required.'),
     coverUrl: Yup.string().required('CoverUrl is required.'),
     musicFileUrl: Yup.string().required('MusicFileUrl is required.'),
-    isPublic: Yup.string().required('IsPublic is required.'),
+    isPublic: Yup.boolean().required('IsPublic is required.'),
   })
 
   const {
@@ -59,6 +59,7 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
     initialValues,
     validationSchema,
     onSubmit: async values => {
+      console.log(values)
       if (id) {
         await updatePlayerById({
           variables: { input: { ...values, id } },
@@ -71,8 +72,12 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
     },
   })
 
-  const onChange = (data: UploaderRes) => {
-    setFieldValue('posterUrl', data.url)
+  const onCoverUrlChange = (data: UploaderRes) => {
+    setFieldValue('coverUrl', data.url)
+  }
+
+  const onMusicFileUrlChange = (data: UploaderRes) => {
+    setFieldValue('musicFileUrl', data.url)
   }
 
   useEffect(() => {
@@ -156,7 +161,7 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
               {...getFieldProps('coverUrl')}
             />
             <Uploader
-              onChange={onChange}
+              onChange={onCoverUrlChange}
               defaultFile={getFieldProps('coverUrl').value}
             />
           </div>
@@ -175,15 +180,19 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
               {...getFieldProps('musicFileUrl')}
             />
             <Uploader
-              onChange={onChange}
-              accept="audio/*"
+              onChange={onMusicFileUrlChange}
+              // accept="audio/*"
               defaultFile={getFieldProps('musicFileUrl').value}
             />
           </div>
 
           <div className={styles.uploaderGroup}>
             <FormLabel required>IsPublic</FormLabel>
-            <Switch required color="primary" {...getFieldProps('isPublic')} />
+            <Switch
+              color="primary"
+              defaultChecked
+              {...getFieldProps('isPublic')}
+            />
           </div>
         </DialogContent>
         <DialogActions>
