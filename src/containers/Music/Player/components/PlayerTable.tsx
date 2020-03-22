@@ -7,14 +7,7 @@ import MUIDataTable, {
 } from 'mui-datatables'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
-import {
-  FormControl,
-  Fab,
-  Popover,
-  Switch,
-  Paper,
-  Button,
-} from '@material-ui/core'
+import { FormControl, Fab, Popover, Switch, Button } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
 import styles from '../player.module.scss'
 import { formatDate, stringfySearch } from 'src/shared/utils'
@@ -80,7 +73,7 @@ const PlayerTable: FC<Props> = ({
                     }}
                     disableRestoreFocus
                   >
-                    <Paper>{value}</Paper>
+                    <pre className={styles.lrcTxt}>{value}</pre>
                   </Popover>
                 </div>
               )}

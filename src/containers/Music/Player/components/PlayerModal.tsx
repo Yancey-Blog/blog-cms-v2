@@ -144,6 +144,8 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
             id="lrc"
             label="LRC"
             fullWidth
+            multiline
+            rows="10"
             {...getFieldProps('lrc')}
           />
 

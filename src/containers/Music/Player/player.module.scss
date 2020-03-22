@@ -1,23 +1,29 @@
 .addIconFab {
-    box-shadow: none !important;
-    background: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.archor {
+  color: #9c27b0;
+}
+
+.addIcon {
+  color: rgba(#000000, 0.54);
+}
+
+.customForm {
+  :global(.MuiFormControl-root) {
+    margin-bottom: 20px;
   }
-  
-  .archor {
-    color: #9c27b0;
-  }
-  
-  .addIcon {
-    color: rgba(#000000, 0.54);
-  }
-  
-  .customForm {
-    :global(.MuiFormControl-root) {
-      margin-bottom: 20px;
-    }
-  }
-  
-  .uploaderGroup {
-    display: flex;
-    align-items: center;
-  }
+}
+
+.uploaderGroup {
+  display: flex;
+  align-items: center;
+}
+
+.lrcTxt {
+  margin: 0;
+  padding: 12px;
+  font-family: inherit;
+}
