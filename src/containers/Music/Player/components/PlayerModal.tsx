@@ -108,12 +108,13 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
 
   return (
     <Dialog open={!!showModal} onClose={goBack}>
-      <DialogTitle>{id ? 'Update' : 'Add'} an Player</DialogTitle>
+      <DialogTitle>{id ? 'Update' : 'Add'} an Music Track</DialogTitle>
       <form className={styles.customForm} onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
-            To {id ? 'update' : 'add'} an Player, please enter the following
-            fields here. We will send data after clicking the submit button.
+            To {id ? 'update' : 'add'} an Music Track, please enter the
+            following fields here. We will send data after clicking the submit
+            button.
           </DialogContentText>
 
           <TextField
