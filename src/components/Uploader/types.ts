@@ -22,7 +22,6 @@ export interface Props {
     | 'OPTIONS'
     | 'TRACE'
     | 'PATCH'
-  disabled?: boolean
   name?: string
   defaultFile?: string
   onChange: Function

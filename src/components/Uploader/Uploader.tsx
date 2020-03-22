@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { Card, CircularProgress, Button } from '@material-ui/core'
 import { Add } from '@material-ui/icons'
 import { useSnackbar } from 'notistack'
+import { getURLPathName } from 'src/shared/utils'
 import { UploaderRes, Props } from './types'
 import styles from './uploader.module.scss'
 
@@ -11,7 +12,6 @@ const Uploader: FC<Props> = ({
   accept = 'image/*',
   action = process.env.REACT_APP_UPLOADER_URL || '',
   method = 'POST',
-  disabled = false,
   name = 'file',
   defaultFile = '',
   onChange,
@@ -72,6 +72,17 @@ const Uploader: FC<Props> = ({
     }
   }
 
+  const simpleContent = () => {
+    if (curFile) {
+      const { url } = curFile
+      return <p className={styles.simpleContent}>{getURLPathName(url)}</p>
+    } else if (defaultFile) {
+      return (
+        <p className={styles.simpleContent}>{getURLPathName(defaultFile)}</p>
+      )
+    }
+  }
+
   return (
     <>
       {type === 'avatar' ? (
@@ -82,17 +93,22 @@ const Uploader: FC<Props> = ({
           <input
             type="file"
             accept={accept}
-            disabled={disabled || uploading}
             onChange={e => onUpload(e)}
             className={styles.customInput}
           />
         </Card>
       ) : (
         <div className={styles.simpleUploader}>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" disabled={uploading}>
             Upload
-            <input type="file" accept={accept} className={styles.customInput} />
+            <input
+              type="file"
+              accept={accept}
+              className={styles.customInput}
+              onChange={e => onUpload(e)}
+            />
           </Button>
+          {simpleContent()}
         </div>
       )}
     </>
