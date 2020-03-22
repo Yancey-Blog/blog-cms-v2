@@ -98,14 +98,8 @@ const PlayerTable: FC<Props> = ({
                   />
                   <Popover
                     {...bindPopover(popupState)}
-                    anchorOrigin={{
-                      vertical: 'bottom',
-                      horizontal: 'left',
-                    }}
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'center',
-                    }}
+                    anchorOrigin={popoverAnchorOrigin}
+                    transformOrigin={popoverTransformOrigin}
                     disableRestoreFocus
                   >
                     <img
