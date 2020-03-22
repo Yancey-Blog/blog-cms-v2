@@ -1,7 +1,7 @@
 import React, { FC, useState, ChangeEvent } from 'react'
 import classNames from 'classnames'
 import { Card, CircularProgress, Button } from '@material-ui/core'
-import { Add } from '@material-ui/icons'
+import { Add, CloudUpload } from '@material-ui/icons'
 import { useSnackbar } from 'notistack'
 import { getURLPathName } from 'src/shared/utils'
 import { UploaderRes, Props } from './types'
@@ -60,15 +60,15 @@ const Uploader: FC<Props> = ({
   const avatarContent = () => {
     if (uploading) {
       return <CircularProgress />
+    }
+
+    if (defaultFile) {
+      return <img src={defaultFile} alt="default" className={styles.img} />
+    } else if (curFile) {
+      const { name, url } = curFile
+      return <img src={url} alt={name} className={styles.img} />
     } else {
-      if (defaultFile) {
-        return <img src={defaultFile} alt="default" className={styles.img} />
-      } else if (curFile) {
-        const { name, url } = curFile
-        return <img src={url} alt={name} className={styles.img} />
-      } else {
-        return <Add className={styles.addBtn} />
-      }
+      return <Add className={styles.addBtn} />
     }
   }
 
@@ -99,7 +99,18 @@ const Uploader: FC<Props> = ({
         </Card>
       ) : (
         <div className={styles.simpleUploader}>
-          <Button variant="contained" color="primary" disabled={uploading}>
+          <Button
+            variant="contained"
+            color="primary"
+            disabled={uploading}
+            startIcon={<CloudUpload />}
+          >
+            {uploading && (
+              <CircularProgress
+                size={24}
+                className={styles.customLoadingCircle}
+              />
+            )}
             Upload
             <input
               type="file"
