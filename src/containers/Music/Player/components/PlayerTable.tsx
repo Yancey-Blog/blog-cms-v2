@@ -7,7 +7,7 @@ import MUIDataTable, {
 } from 'mui-datatables'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
-import { FormControl, Fab, Popover } from '@material-ui/core'
+import { FormControl, Fab, Popover, Switch } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
 import styles from '../player.module.scss'
 import { formatDate, stringfySearch } from 'src/shared/utils'
@@ -45,7 +45,7 @@ const PlayerTable: FC<Props> = ({
     { name: '_id', label: 'Id' },
     { name: 'title', label: 'Title' },
     { name: 'artist', label: 'Artist' },
-    { name: 'lrc', label: 'Lrc' },
+    { name: 'lrc', label: 'LRC' },
     {
       name: 'coverUrl',
       label: 'CoverUrl',
@@ -76,7 +76,7 @@ const PlayerTable: FC<Props> = ({
                   >
                     <img
                       src={value}
-                      style={{ width: '800px', display: 'block' }}
+                      style={{ height: '400px', display: 'block' }}
                       alt={curName}
                     />
                   </Popover>
@@ -103,6 +103,11 @@ const PlayerTable: FC<Props> = ({
     {
       name: 'isPublic',
       label: 'IsPublic',
+      options: {
+        customBodyRender: (value: boolean) => {
+          return <Switch checked={value} />
+        },
+      },
     },
     {
       name: 'createdAt',
