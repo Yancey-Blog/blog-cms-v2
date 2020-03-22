@@ -7,7 +7,14 @@ import MUIDataTable, {
 } from 'mui-datatables'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
-import { FormControl, Fab, Popover, Switch } from '@material-ui/core'
+import {
+  FormControl,
+  Fab,
+  Popover,
+  Switch,
+  Paper,
+  Button,
+} from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
 import styles from '../player.module.scss'
 import { formatDate, stringfySearch } from 'src/shared/utils'
@@ -45,7 +52,43 @@ const PlayerTable: FC<Props> = ({
     { name: '_id', label: 'Id' },
     { name: 'title', label: 'Title' },
     { name: 'artist', label: 'Artist' },
-    { name: 'lrc', label: 'LRC' },
+    {
+      name: 'lrc',
+      label: 'LRC',
+      options: {
+        customBodyRender: (value: string) => {
+          return (
+            <PopupState variant="popover" popupId="lrcPoperOver">
+              {popupState => (
+                <div>
+                  <Button
+                    color="secondary"
+                    variant="contained"
+                    {...bindTrigger(popupState)}
+                  >
+                    Click me!
+                  </Button>
+                  <Popover
+                    {...bindPopover(popupState)}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'center',
+                    }}
+                    disableRestoreFocus
+                  >
+                    <Paper>{value}</Paper>
+                  </Popover>
+                </div>
+              )}
+            </PopupState>
+          )
+        },
+      },
+    },
     {
       name: 'coverUrl',
       label: 'CoverUrl',
