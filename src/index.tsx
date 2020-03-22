@@ -7,7 +7,6 @@ import { ApolloProvider } from '@apollo/react-hooks'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import MomentUtils from '@date-io/moment'
 import { SnackbarProvider } from 'notistack'
-import { SnackbarOrigin } from '@material-ui/core'
 import * as serviceWorker from './serviceWorker'
 import { SnackbarUtilsConfigurator } from './components/Toast/Toast'
 import Login from './pages/Login/Login'
@@ -31,7 +30,7 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     <SnackbarProvider
       maxSnack={snackbarMaxNum}
-      anchorOrigin={snackbarAnchorOrigin as SnackbarOrigin}
+      anchorOrigin={snackbarAnchorOrigin}
       autoHideDuration={snackbarAutoHideDuration}
     >
       <MuiPickersUtilsProvider utils={MomentUtils}>

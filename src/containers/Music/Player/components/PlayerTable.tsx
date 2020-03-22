@@ -14,6 +14,10 @@ import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
+import {
+  popoverAnchorOrigin,
+  popoverTransformOrigin,
+} from 'src/shared/constants'
 import { IPlayer } from '../types'
 
 interface Props {
@@ -63,14 +67,8 @@ const PlayerTable: FC<Props> = ({
                   </Button>
                   <Popover
                     {...bindPopover(popupState)}
-                    anchorOrigin={{
-                      vertical: 'bottom',
-                      horizontal: 'left',
-                    }}
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'center',
-                    }}
+                    anchorOrigin={popoverAnchorOrigin}
+                    transformOrigin={popoverTransformOrigin}
                     disableRestoreFocus
                   >
                     <pre className={styles.lrcTxt}>{value}</pre>
