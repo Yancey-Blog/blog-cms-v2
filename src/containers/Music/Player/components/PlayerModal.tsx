@@ -10,6 +10,7 @@ import {
   DialogContentText,
   TextField,
   FormLabel,
+  Switch,
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import styles from '../player.module.scss'
@@ -109,6 +110,7 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
             To {id ? 'update' : 'add'} an Player, please enter the following
             fields here. We will send data after clicking the submit button.
           </DialogContentText>
+
           <TextField
             error={!!errors.title}
             helperText={errors.title}
@@ -119,6 +121,7 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
             fullWidth
             {...getFieldProps('title')}
           />
+
           <TextField
             error={!!errors.artist}
             helperText={errors.artist}
@@ -128,6 +131,7 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
             fullWidth
             {...getFieldProps('artist')}
           />
+
           <TextField
             error={!!errors.lrc}
             helperText={errors.lrc}
@@ -137,6 +141,7 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
             fullWidth
             {...getFieldProps('lrc')}
           />
+
           <div className={styles.uploaderGroup}>
             <FormLabel required>CoverUrl</FormLabel>
             <TextField
@@ -155,6 +160,7 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
               defaultFile={getFieldProps('coverUrl').value}
             />
           </div>
+
           <div className={styles.uploaderGroup}>
             <FormLabel required>MusicFileUrl</FormLabel>
             <TextField
@@ -170,19 +176,15 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
             />
             <Uploader
               onChange={onChange}
+              accept="audio/*"
               defaultFile={getFieldProps('musicFileUrl').value}
             />
           </div>
 
-          <TextField
-            error={!!errors.isPublic}
-            helperText={errors.isPublic}
-            required
-            id="isPublic"
-            label="IsPublic"
-            fullWidth
-            {...getFieldProps('isPublic')}
-          />
+          <div className={styles.uploaderGroup}>
+            <FormLabel required>IsPublic</FormLabel>
+            <Switch required color="primary" {...getFieldProps('isPublic')} />
+          </div>
         </DialogContent>
         <DialogActions>
           <Button color="primary" onClick={goBack}>
