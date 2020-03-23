@@ -78,7 +78,7 @@
     "husky": "^4.0.7",
     "lint-staged": "^10.0.3",
     "node-sass": "^4.13.1",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.1",
     "source-map-explorer": "^2.4.0",
     "standard-version": "^7.1.0",
     "typescript": "~3.8.3"
