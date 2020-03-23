@@ -29,7 +29,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.45",
     "@material-ui/pickers": "^3.2.10",
-    "@material-ui/styles": "^4.9.0",
+    "@material-ui/styles": "^4.9.6",
     "apollo-cache-inmemory": "^1.6.5",
     "apollo-client": "^2.6.8",
     "apollo-link-batch-http": "^1.2.13",
