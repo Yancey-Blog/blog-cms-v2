@@ -23,8 +23,8 @@ const RecoveryCodes: FC<Props> = ({ recoveryCodes }) => {
         receive two-factor authentication codes.
       </p>
       <p className={styles.tips2}>
-        Download, print, or copy your recovery codes before continuing
-        two-factor authentication setup below.
+        Download or copy your recovery codes before continuing two-factor
+        authentication setup below.
       </p>
       <ul className={styles.recoveryCodesGroup}>
         {recoveryCodes.map(recoveryCodes => (
