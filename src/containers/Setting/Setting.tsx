@@ -4,11 +4,11 @@ import styles from './setting.module.scss'
 
 interface TabPanelProps {
   children?: React.ReactNode
-  index: string
-  value: string
+  index: number
+  value: number
 }
 
-function a11yProps(index: string) {
+function a11yProps(index: number) {
   return {
     id: `vertical-tab-${index}`,
     'aria-controls': `vertical-tabpanel-${index}`,
@@ -33,8 +33,8 @@ function TabPanel(props: TabPanelProps) {
 }
 
 const Security: FC = () => {
-  const [value, setValue] = useState('profile')
-  const handleTabChange = (event: React.ChangeEvent<{}>, newValue: string) => {
+  const [value, setValue] = useState(0)
+  const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
   }
   return (
@@ -47,18 +47,18 @@ const Security: FC = () => {
         aria-label="Vertical tabs example"
         className={styles.tabs}
       >
-        <Tab label="profile" {...a11yProps('profile')} />
-        <Tab label="account" {...a11yProps('account')} />
-        <Tab label="security" {...a11yProps('security')} />
+        <Tab label="profile" {...a11yProps(0)} />
+        <Tab label="account" {...a11yProps(1)} />
+        <Tab label="security" {...a11yProps(2)} />
       </Tabs>
       <section>
-        <TabPanel value={value} index={'profile'}>
+        <TabPanel value={value} index={0}>
           Profile
         </TabPanel>
-        <TabPanel value={value} index={'account'}>
+        <TabPanel value={value} index={1}>
           Account
         </TabPanel>
-        <TabPanel value={value} index={'security'}>
+        <TabPanel value={value} index={2}>
           Security
         </TabPanel>
       </section>
