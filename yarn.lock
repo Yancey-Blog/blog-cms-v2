@@ -13464,10 +13464,10 @@ yaml@^1.7.2:
   dependencies:
     "@babel/runtime" "^7.8.7"
 
-yancey-js-util@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/yancey-js-util/-/yancey-js-util-1.1.1.tgz#3dddb763d571f85ae521729b4880a3469ec0a91c"
-  integrity sha512-fpTkjbzqhrsivet4leT73v/mIRtLf4eMm3hsPEuiklmSvfUK5L+rcmKooP4bYU6XEIvaZGZGJAjpUWseZHRSCQ==
+yancey-js-util@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/yancey-js-util/-/yancey-js-util-2.0.1.tgz#59c3f6656001555c3f56990dfe442224b1d7d19b"
+  integrity sha512-ugAKwxAOqOujEarOHcHapQHOfYbmqN3cJoWTxJ+cBzwFLZ8RuTj4K9KKfAzv2wC1ZoxBi8S72lcufg1ghMai7Q==
 
 yargs-parser@^10.0.0:
   version "10.1.0"

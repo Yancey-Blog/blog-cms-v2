@@ -1,5 +1,7 @@
-import React, { FC, useState, useRef } from 'react'
+import React, { FC, useState } from 'react'
 import { Button } from '@material-ui/core'
+import { generateFile } from 'src/shared/utils'
+import { recoveryCodesFileName } from 'src/shared/constants'
 
 interface Props {
   createTOTP: Function
@@ -27,16 +29,6 @@ const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes }) => {
     )
   }
 
-  const anchorEl = useRef<HTMLAnchorElement>(null)
-  const downloadTxtFile = () => {
-    const element = anchorEl?.current
-    const file = new Blob([recoveryCodes.join('\n')], { type: 'text/plain' })
-    if (element) {
-      element.href = URL.createObjectURL(file)
-      element.download = 'yancey-blog-cms-recovery-codes.txt'
-    }
-  }
-
   return (
     <section>
       {qrcode && <img src={qrcode} alt="qrcode" />}
@@ -49,7 +41,10 @@ const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes }) => {
             ))}
           </ul>
 
-          <a ref={anchorEl} href="/" onClick={downloadTxtFile}>
+          <a
+            href={generateFile(recoveryCodes.join('\n'))}
+            download={recoveryCodesFileName}
+          >
             Download
           </a>
         </>
