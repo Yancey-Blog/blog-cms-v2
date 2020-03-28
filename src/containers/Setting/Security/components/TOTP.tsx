@@ -7,10 +7,14 @@ import styles from './TOTP.module.scss'
 interface Props {
   createTOTP: Function
   createRecoveryCodes: Function
-  validateTOTP: Function
 }
 
-const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes, validateTOTP }) => {
+export const steps = [
+  '1. Download or copy the recovery codes',
+  '2. Scan this barcode with your app.',
+]
+
+const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes }) => {
   const userId = window.localStorage.getItem('userId')
 
   const [qrcode, setQRCode] = useState('')
@@ -35,15 +39,7 @@ const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes, validateTOTP }) => {
     fetchTOTPAndRecoveryCodes()
   }, [createRecoveryCodes, createTOTP, userId])
 
-  function getSteps() {
-    return [
-      '1. Download or copy the recovery codes',
-      '2. Scan this barcode with your app.',
-    ]
-  }
-
   const [activeStep, setActiveStep] = useState(0)
-  const steps = getSteps()
 
   const handleNext = () => {
     setActiveStep(prevActiveStep => prevActiveStep + 1)
@@ -67,14 +63,17 @@ const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes, validateTOTP }) => {
         {activeStep === 0 ? (
           <RecoveryCodes recoveryCodes={recoveryCodes} />
         ) : (
-          <QRCode userId={userId} qrcode={qrcode} validateTOTP={validateTOTP} />
+          <QRCode
+            userId={userId}
+            qrcode={qrcode}
+            handleNext={handleNext}
+            activeStep={activeStep}
+          />
         )}
       </section>
 
       <div className={styles.buttonGroup}>
-        {activeStep === steps.length ? (
-          <div>All steps completed</div>
-        ) : (
+        {activeStep !== steps.length && (
           <>
             <Button
               className={styles.btn}
