@@ -111,7 +111,7 @@ const routes: Route[] = [
   },
   {
     name: 'Setting',
-    path: 'setting',
+    path: 'settings',
     icon: <Settings />,
     component: 'Setting/Setting',
   },

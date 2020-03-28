@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Tabs, Tab, Typography, Box } from '@material-ui/core'
+import Security from './Security/Security'
 import styles from './setting.module.scss'
 
 interface TabPanelProps {
@@ -27,12 +28,12 @@ function TabPanel(props: TabPanelProps) {
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
     >
-      {value === index && <Box p={3}>{children}</Box>}
+      {value === index && children}
     </Typography>
   )
 }
 
-const Security: FC = () => {
+const Setting: FC = () => {
   const [value, setValue] = useState(0)
   const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
@@ -44,7 +45,7 @@ const Security: FC = () => {
         variant="scrollable"
         value={value}
         onChange={handleTabChange}
-        aria-label="Vertical tabs example"
+        aria-label="setting-tabs"
         className={styles.tabs}
       >
         <Tab label="profile" {...a11yProps(0)} />
@@ -59,11 +60,11 @@ const Security: FC = () => {
           Account
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Security
+          <Security />
         </TabPanel>
       </section>
     </section>
   )
 }
 
-export default Security
+export default Setting
