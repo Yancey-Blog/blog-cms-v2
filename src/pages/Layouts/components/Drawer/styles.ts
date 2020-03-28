@@ -131,7 +131,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
     position: 'relative',
     marginTop: '10px',
-    padding: '15px 0 15px 12px',
+    padding: '12px 0 12px 12px',
     cursor: 'pointer',
     transform: 'translateX(0)',
     transition: 'background-color 300ms ease 0ms, transform 300ms ease 0ms',

@@ -1,6 +1,21 @@
 .totpWrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 24px;
+}
+
+.totpContainer {
+  margin-bottom: 20px;
   padding: 16px;
   width: 500px;
+}
+
+.qrcodeWrapper {
+  width: 180px;
+  margin: 50px auto;
+  img {
+    display: block;
+  }
 }
 
 .tips1 {
@@ -17,13 +32,32 @@
   background-color: #fffbdd;
 }
 
+.tips3 {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #586069;
+}
+
+.inputBtn {
+  margin-left: 20px;
+}
+
+.inputTipHeader {
+  margin-bottom: -5px;
+  font-size: 15px;
+}
+
 .buttonGroup {
-  margin-top: 16px;
+  margin: 24px 0;
   text-align: center;
 }
 
 .btn {
   margin: 0 8px;
+}
+
+.tipsBlod {
+  font-weight: bold;
 }
 
 .recoveryCodesGroup {

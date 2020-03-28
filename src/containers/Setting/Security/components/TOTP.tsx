@@ -1,5 +1,7 @@
-import React, { FC, useState } from 'react'
-import { Button, Card, Typography } from '@material-ui/core'
+import React, { FC, useState, useEffect } from 'react'
+import { Button, Card, Typography, TextField } from '@material-ui/core'
+import { GetApp, FileCopy } from '@material-ui/icons'
+import classNames from 'classnames'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { generateFile } from 'src/shared/utils'
 import { recoveryCodesFileName } from 'src/shared/constants'
@@ -14,32 +16,65 @@ const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes }) => {
   const [qrcode, setQRCode] = useState('')
   const [recoveryCodes, setRecoveryCodes] = useState<string[]>([])
 
-  const fetchTOTPAndRecoveryCodes = async () => {
-    const userId = window.localStorage.getItem('userId')
+  useEffect(() => {
+    const fetchTOTPAndRecoveryCodes = async () => {
+      const userId = window.localStorage.getItem('userId')
 
-    const TOTPRes = await createTOTP({
-      variables: { userId },
-    })
+      const TOTPRes = await createTOTP({
+        variables: { userId },
+      })
 
-    const recoveryCodesRequest = await createRecoveryCodes({
-      variables: { userId },
-    })
+      const recoveryCodesRequest = await createRecoveryCodes({
+        variables: { userId },
+      })
 
-    setQRCode(TOTPRes.data.createTOTP.qrcode)
-    setRecoveryCodes(
-      recoveryCodesRequest.data.createRecoveryCodes.recoveryCodes,
-    )
-  }
+      setQRCode(TOTPRes.data.createTOTP.qrcode)
+      setRecoveryCodes(
+        recoveryCodesRequest.data.createRecoveryCodes.recoveryCodes,
+      )
+    }
+
+    fetchTOTPAndRecoveryCodes()
+  }, [createRecoveryCodes, createTOTP])
 
   const [copyTxt, setCopyTxt] = useState('Copy')
 
   return (
-    <section>
-      {qrcode && <img src={qrcode} alt="qrcode" />}
+    <section className={styles.totpWrapper}>
+      {qrcode && (
+        <Card className={styles.totpContainer}>
+          <Typography variant="h5" gutterBottom>
+            Scan this barcode with your app.
+          </Typography>
+          <p className={styles.tips1}>
+            Scan the image above with the two-factor authentication app on your
+            phone.
+          </p>
+          <Card className={styles.qrcodeWrapper}>
+            <img src={qrcode} alt="qrcode" />
+          </Card>
+          <p className={classNames(styles.tipsBlod, styles.inputTipHeader)}>
+            Enter the six-digit code from the application
+          </p>
+          <p className={styles.tips1}>
+            After scanning the barcode image, the app will display a six-digit
+            code that you can enter below.
+          </p>
+          <TextField required placeholder="123456" />
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            className={styles.inputBtn}
+          >
+            Enable
+          </Button>
+        </Card>
+      )}
 
       {recoveryCodes.length !== 0 && (
-        <Card className={styles.totpWrapper}>
-          <Typography variant="h4" gutterBottom>
+        <Card className={styles.totpContainer}>
+          <Typography variant="h5" gutterBottom>
             Recovery codes
           </Typography>
           <p className={styles.tips1}>
@@ -59,34 +94,64 @@ const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes }) => {
           </ul>
           <div className={styles.buttonGroup}>
             <Button
+              size="small"
               className={styles.btn}
-              variant="outlined"
+              variant="contained"
               color="primary"
               href={generateFile(recoveryCodes.join('\n'))}
               download={recoveryCodesFileName}
+              startIcon={<GetApp />}
             >
               Download
             </Button>
-
             <CopyToClipboard
               text={recoveryCodes.join(' ')}
               onCopy={() => setCopyTxt('Copied!')}
             >
-              <Button variant="outlined" color="primary" className={styles.btn}>
+              <Button
+                size="small"
+                variant="contained"
+                color="primary"
+                className={styles.btn}
+                startIcon={<FileCopy />}
+              >
                 {copyTxt}
               </Button>
             </CopyToClipboard>
           </div>
+          <p className={styles.tips3}>
+            <span className={styles.tipsBlod}>
+              Treat your recovery codes with the same level of attention as you
+              would your password!{' '}
+            </span>
+            We recommend saving them with a password manager such as{' '}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://lastpass.com/"
+            >
+              Lastpass
+            </a>
+            ,{' '}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://1password.com/"
+            >
+              1Password
+            </a>
+            , or{' '}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://keepersecurity.com/"
+            >
+              Keeper
+            </a>
+            .
+          </p>
         </Card>
       )}
-
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={fetchTOTPAndRecoveryCodes}
-      >
-        click me
-      </Button>
     </section>
   )
 }
