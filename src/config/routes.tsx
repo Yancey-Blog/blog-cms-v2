@@ -5,7 +5,7 @@ import {
   Headset,
   // PostAdd,
   // LinkedIn,
-  // Settings,
+  Settings,
   Event,
 } from '@material-ui/icons'
 
@@ -103,17 +103,17 @@ const routes: Route[] = [
   //   icon: <LinkedIn />,
   //   component: 'CV/CV',
   // },
-  // {
-  //   name: 'Setting',
-  //   path: 'setting',
-  //   icon: <Settings />,
-  //   component: 'Setting/Setting',
-  // },
   {
     name: 'Agenda',
     path: 'agenda',
     icon: <Event />,
     component: 'Agenda/Agenda',
+  },
+  {
+    name: 'Setting',
+    path: 'setting',
+    icon: <Settings />,
+    component: 'Setting/Setting',
   },
 ]
 
