@@ -41,12 +41,18 @@ const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes }) => {
             ))}
           </ul>
 
-          <a
+          <Button
+            variant="contained"
+            color="primary"
             href={generateFile(recoveryCodes.join('\n'))}
             download={recoveryCodesFileName}
           >
             Download
-          </a>
+          </Button>
+
+          <Button variant="contained" color="primary">
+            Copy
+          </Button>
         </>
       )}
 
