@@ -1,7 +1,9 @@
 import React, { FC, useState } from 'react'
-import { Button } from '@material-ui/core'
+import { Button, Card, Typography } from '@material-ui/core'
+import CopyToClipboard from 'react-copy-to-clipboard'
 import { generateFile } from 'src/shared/utils'
 import { recoveryCodesFileName } from 'src/shared/constants'
+import styles from './TOTP.module.scss'
 
 interface Props {
   createTOTP: Function
@@ -29,31 +31,53 @@ const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes }) => {
     )
   }
 
+  const [copyTxt, setCopyTxt] = useState('Copy')
+
   return (
     <section>
       {qrcode && <img src={qrcode} alt="qrcode" />}
 
       {recoveryCodes.length !== 0 && (
-        <>
-          <ul>
+        <Card className={styles.totpWrapper}>
+          <Typography variant="h4" gutterBottom>
+            Recovery codes
+          </Typography>
+          <p className={styles.tips1}>
+            Recovery codes are used to access your account in the event you
+            cannot receive two-factor authentication codes.
+          </p>
+          <p className={styles.tips2}>
+            Download, print, or copy your recovery codes before continuing
+            two-factor authentication setup below.
+          </p>
+          <ul className={styles.recoveryCodesGroup}>
             {recoveryCodes.map(recoveryCodes => (
-              <li key={recoveryCodes}>{recoveryCodes}</li>
+              <li className={styles.recoveryCodesItem} key={recoveryCodes}>
+                {recoveryCodes}
+              </li>
             ))}
           </ul>
+          <div className={styles.buttonGroup}>
+            <Button
+              className={styles.btn}
+              variant="outlined"
+              color="primary"
+              href={generateFile(recoveryCodes.join('\n'))}
+              download={recoveryCodesFileName}
+            >
+              Download
+            </Button>
 
-          <Button
-            variant="contained"
-            color="primary"
-            href={generateFile(recoveryCodes.join('\n'))}
-            download={recoveryCodesFileName}
-          >
-            Download
-          </Button>
-
-          <Button variant="contained" color="primary">
-            Copy
-          </Button>
-        </>
+            <CopyToClipboard
+              text={recoveryCodes.join(' ')}
+              onCopy={() => setCopyTxt('Copied!')}
+            >
+              <Button variant="outlined" color="primary" className={styles.btn}>
+                {copyTxt}
+              </Button>
+            </CopyToClipboard>
+          </div>
+        </Card>
       )}
 
       <Button

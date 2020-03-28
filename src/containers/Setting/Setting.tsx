@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { Tabs, Tab, Typography, Box } from '@material-ui/core'
+import { Tabs, Tab, Typography } from '@material-ui/core'
 import Security from './Security/Security'
 import styles from './setting.module.scss'
 
@@ -34,7 +34,7 @@ function TabPanel(props: TabPanelProps) {
 }
 
 const Setting: FC = () => {
-  const [value, setValue] = useState(0)
+  const [value, setValue] = useState(2)
   const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
   }
@@ -52,7 +52,7 @@ const Setting: FC = () => {
         <Tab label="account" {...a11yProps(1)} />
         <Tab label="security" {...a11yProps(2)} />
       </Tabs>
-      <section>
+      <section className={styles.tabPanelContainer}>
         <TabPanel value={value} index={0}>
           Profile
         </TabPanel>
