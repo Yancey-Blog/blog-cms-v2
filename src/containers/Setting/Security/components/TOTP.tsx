@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
-import { Stepper, Step, StepLabel } from '@material-ui/core'
+import { Stepper, Step, StepLabel, Button } from '@material-ui/core'
 import QRCode from './QRCode'
 import RecoveryCodes from './RecoveryCodes'
 import styles from './TOTP.module.scss'
@@ -35,11 +35,69 @@ const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes, validateTOTP }) => {
     fetchTOTPAndRecoveryCodes()
   }, [createRecoveryCodes, createTOTP, userId])
 
+  function getSteps() {
+    return [
+      '1. Download or copy the recovery codes',
+      '2. Scan this barcode with your app.',
+    ]
+  }
+
+  const [activeStep, setActiveStep] = useState(0)
+  const steps = getSteps()
+
+  const handleNext = () => {
+    setActiveStep(prevActiveStep => prevActiveStep + 1)
+  }
+
+  const handleBack = () => {
+    setActiveStep(prevActiveStep => prevActiveStep - 1)
+  }
+
   return (
-    <section className={styles.totpWrapper}>
-      <QRCode userId={userId} qrcode={qrcode} validateTOTP={validateTOTP} />
-      <RecoveryCodes recoveryCodes={recoveryCodes} />
-    </section>
+    <>
+      <Stepper activeStep={activeStep} alternativeLabel>
+        {steps.map(label => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+
+      <section className={styles.totpWrapper}>
+        {activeStep === 0 ? (
+          <RecoveryCodes recoveryCodes={recoveryCodes} />
+        ) : (
+          <QRCode userId={userId} qrcode={qrcode} validateTOTP={validateTOTP} />
+        )}
+      </section>
+
+      <div className={styles.buttonGroup}>
+        {activeStep === steps.length ? (
+          <div>All steps completed</div>
+        ) : (
+          <>
+            <Button
+              className={styles.btn}
+              variant="contained"
+              color="secondary"
+              disabled={activeStep === 0}
+              onClick={handleBack}
+            >
+              Back
+            </Button>
+            <Button
+              className={styles.btn}
+              variant="contained"
+              color="primary"
+              onClick={handleNext}
+              disabled={activeStep === steps.length - 1}
+            >
+              Next
+            </Button>
+          </>
+        )}
+      </div>
+    </>
   )
 }
 

@@ -1,13 +1,14 @@
 .totpWrapper {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: 24px;
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+  width: 600px;
 }
 
 .totpContainer {
   margin-bottom: 20px;
   padding: 16px;
-  width: 500px;
+  width: 520px;
 }
 
 .qrcodeWrapper {
