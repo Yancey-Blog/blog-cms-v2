@@ -1,4 +1,6 @@
 import React, { FC, useState, useEffect } from 'react'
+import * as Yup from 'yup'
+import { useFormik } from 'formik'
 import { Button, Card, Typography, TextField } from '@material-ui/core'
 import { GetApp, FileCopy } from '@material-ui/icons'
 import classNames from 'classnames'
@@ -10,16 +12,17 @@ import styles from './TOTP.module.scss'
 interface Props {
   createTOTP: Function
   createRecoveryCodes: Function
+  validateTOTP: Function
 }
 
-const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes }) => {
+const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes, validateTOTP }) => {
+  const userId = window.localStorage.getItem('userId')
+
   const [qrcode, setQRCode] = useState('')
   const [recoveryCodes, setRecoveryCodes] = useState<string[]>([])
 
   useEffect(() => {
     const fetchTOTPAndRecoveryCodes = async () => {
-      const userId = window.localStorage.getItem('userId')
-
       const TOTPRes = await createTOTP({
         variables: { userId },
       })
@@ -35,43 +38,39 @@ const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes }) => {
     }
 
     fetchTOTPAndRecoveryCodes()
-  }, [createRecoveryCodes, createTOTP])
+  }, [createRecoveryCodes, createTOTP, userId])
 
   const [copyTxt, setCopyTxt] = useState('Copy')
 
+  const validationSchema = Yup.object().shape({
+    token: Yup.string()
+      .matches(/^\d{6}$/, 'token must be a six-digit code.')
+      .required('token should not be empty'),
+  })
+
+  const initialValues = {
+    token: '',
+  }
+
+  const {
+    handleSubmit,
+    getFieldProps,
+    resetForm,
+    isSubmitting,
+    errors,
+  } = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: async values => {
+      await validateTOTP({
+        variables: { input: { ...values, userId } },
+      })
+      resetForm()
+    },
+  })
+
   return (
     <section className={styles.totpWrapper}>
-      {qrcode && (
-        <Card className={styles.totpContainer}>
-          <Typography variant="h5" gutterBottom>
-            Scan this barcode with your app.
-          </Typography>
-          <p className={styles.tips1}>
-            Scan the image above with the two-factor authentication app on your
-            phone.
-          </p>
-          <Card className={styles.qrcodeWrapper}>
-            <img src={qrcode} alt="qrcode" />
-          </Card>
-          <p className={classNames(styles.tipsBlod, styles.inputTipHeader)}>
-            Enter the six-digit code from the application
-          </p>
-          <p className={styles.tips1}>
-            After scanning the barcode image, the app will display a six-digit
-            code that you can enter below.
-          </p>
-          <TextField required placeholder="123456" />
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            className={styles.inputBtn}
-          >
-            Enable
-          </Button>
-        </Card>
-      )}
-
       {recoveryCodes.length !== 0 && (
         <Card className={styles.totpContainer}>
           <Typography variant="h5" gutterBottom>
@@ -150,6 +149,47 @@ const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes }) => {
             </a>
             .
           </p>
+        </Card>
+      )}
+
+      {qrcode && (
+        <Card className={styles.totpContainer}>
+          <Typography variant="h5" gutterBottom>
+            Scan this barcode with your app.
+          </Typography>
+          <p className={styles.tips1}>
+            Scan the image above with the two-factor authentication app on your
+            phone.
+          </p>
+          <Card className={styles.qrcodeWrapper}>
+            <img src={qrcode} alt="qrcode" />
+          </Card>
+          <p className={classNames(styles.tipsBlod, styles.inputTipHeader)}>
+            Enter the six-digit code from the application
+          </p>
+          <p className={styles.tips1}>
+            After scanning the barcode image, the app will display a six-digit
+            code that you can enter below.
+          </p>
+          <form className={styles.customForm} onSubmit={handleSubmit}>
+            <TextField
+              error={!!errors.token}
+              helperText={errors.token}
+              autoFocus
+              {...getFieldProps('token')}
+            />
+
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              size="small"
+              className={styles.inputBtn}
+              disabled={isSubmitting}
+            >
+              Enable
+            </Button>
+          </form>
         </Card>
       )}
     </section>

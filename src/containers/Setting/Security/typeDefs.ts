@@ -15,3 +15,11 @@ export const CREATE_RECOVERY_CODES = gql`
     }
   }
 `
+
+export const VALIDATE_TOTP = gql`
+  mutation ValidateTOTP($input: ValidateTOTPInput!) {
+    validateTOTP(input: $input) {
+      isTOTP
+    }
+  }
+`
