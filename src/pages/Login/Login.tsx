@@ -20,6 +20,7 @@ const Login: FC = () => {
     notifyOnNetworkStatusChange: true,
     onCompleted(data) {
       window.localStorage.setItem('token', data.login.authorization)
+      window.localStorage.setItem('userId', data.login._id)
       history.push('/')
     },
   })
