@@ -1,15 +1,53 @@
 .settingContainer {
   display: flex;
   flex: 1;
+  margin: 0 -24px;
 }
 
 .tabs {
-  border-right: 1px solid rgba(#000000, 0.12);
+  min-width: 280px;
+
+  :global(.MuiTabs-indicator) {
+    z-index: -1;
+    background: #e8f0fe;
+    border-radius: 0 50px 50px 0;
+  }
+
+  :global(.MuiTab-root) {
+    min-width: 280px;
+    padding: 10px 16px 10px 24px;
+    border-radius: 0 50px 50px 0;
+    text-transform: none;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.039);
+      transition: background 15ms;
+    }
+  }
+
+  :global(.MuiTab-wrapper) {
+    align-items: flex-start;
+  }
+
+  :global(.MuiSvgIcon-root) {
+    margin-right: 16px;
+  }
+
+  :global(.Mui-selected) {
+    color: #1a73e8;
+    &:hover {
+      background-color: transparent;
+      transition: background 15ms;
+    }
+  }
+}
+
+.tabLabel {
+  display: flex;
+  align-items: center;
 }
 
 .tabPanelContainer {
   display: flex;
-  align-items: center;
   justify-content: center;
   width: 100%;
 }

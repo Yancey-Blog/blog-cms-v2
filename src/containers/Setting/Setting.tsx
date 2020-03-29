@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Tabs, Tab, Typography } from '@material-ui/core'
+import { AccountCircle, Lock } from '@material-ui/icons'
 import Security from './Security/Security'
 import styles from './setting.module.scss'
 
@@ -48,9 +49,36 @@ const Setting: FC = () => {
         aria-label="setting-tabs"
         className={styles.tabs}
       >
-        <Tab label="profile" {...a11yProps(0)} />
-        <Tab label="account" {...a11yProps(1)} />
-        <Tab label="security" {...a11yProps(2)} />
+        <Tab
+          disableRipple={true}
+          label={
+            <span className={styles.tabLabel}>
+              <AccountCircle />
+              Profile
+            </span>
+          }
+          {...a11yProps(0)}
+        />
+        <Tab
+          disableRipple={true}
+          label={
+            <span className={styles.tabLabel}>
+              <AccountCircle />
+              Account
+            </span>
+          }
+          {...a11yProps(1)}
+        />
+        <Tab
+          disableRipple={true}
+          label={
+            <span className={styles.tabLabel}>
+              <Lock />
+              Security
+            </span>
+          }
+          {...a11yProps(2)}
+        />
       </Tabs>
       <section className={styles.tabPanelContainer}>
         <TabPanel value={value} index={0}>

@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   margin: 40px 0;
-  width: 600px;
+  width: 1000px;
 }
 
 .totpContainer {
@@ -25,7 +25,7 @@
 }
 
 .tips2 {
-  margin: 0 -16px 16px;
+  margin: 16px -16px;
   padding: 16px;
   font-size: 14px;
   line-height: 1.5;
@@ -44,7 +44,7 @@
 }
 
 .inputTipHeader {
-  margin-bottom: -5px;
+  margin-bottom: 10px;
   font-size: 15px;
 }
 
@@ -75,4 +75,7 @@
   font-size: 21px;
   font-weight: bold;
   line-height: 1.8;
+}
+.customForm{
+  margin-top: 20px;
 }
