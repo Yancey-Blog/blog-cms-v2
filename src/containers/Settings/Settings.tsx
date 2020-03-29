@@ -39,7 +39,7 @@ function TabPanel(props: TabPanelProps) {
 }
 
 const Settings: FC = () => {
-  const [value, setValue] = useState(0)
+  const [value, setValue] = useState(2)
   const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
   }
