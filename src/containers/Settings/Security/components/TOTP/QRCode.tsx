@@ -5,8 +5,8 @@ import { useFormik } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
 import { Button, Card, Typography, TextField } from '@material-ui/core'
 import classNames from 'classnames'
-import { VALIDATE_TOTP } from '../typeDefs'
-import styles from './TOTP.module.scss'
+import { VALIDATE_TOTP } from '../../typeDefs'
+import styles from './totp.module.scss'
 
 interface Props {
   userId: string | null

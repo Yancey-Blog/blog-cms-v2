@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { TextField, Button } from '@material-ui/core'
-import SettingItemWrapper from './SettingItemWrapper'
+import SettingItemWrapper from '../../../components/SettingItemWrapper/SettingItemWrapper'
 import styles from './changePassword.module.scss'
 
 const ChangePassword: FC = () => {
@@ -76,7 +76,7 @@ const ChangePassword: FC = () => {
           type="submit"
           disabled={isSubmitting}
         >
-          Submit
+          update password
         </Button>
       </form>
     </SettingItemWrapper>

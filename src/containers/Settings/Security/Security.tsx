@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
-import ChangePassword from './components/ChangePassword'
-import TwoFactor from './components/TwoFactor'
+import ChangePassword from './components/ChangePassword/ChangePassword'
+import TwoFactors from './components/TwoFactors/TwoFactors'
 
 const Security: FC = () => {
   return (
     <section>
       <ChangePassword />
-      <TwoFactor />
+      <TwoFactors />
     </section>
   )
 }

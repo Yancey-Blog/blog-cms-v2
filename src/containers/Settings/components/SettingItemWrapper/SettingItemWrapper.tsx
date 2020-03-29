@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import styles from './changePassword.module.scss'
+import styles from './settingItemWrapper.module.scss'
 
 interface Props {
   title: string

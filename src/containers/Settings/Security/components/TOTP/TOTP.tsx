@@ -1,9 +1,9 @@
 import React, { FC, useState, useEffect } from 'react'
 import { useMutation } from '@apollo/react-hooks'
-import { CREATE_RECOVERY_CODES, CREATE_TOTP } from '../typeDefs'
+import { CREATE_RECOVERY_CODES, CREATE_TOTP } from '../../typeDefs'
 import QRCode from './QRCode'
 import RecoveryCodes from './RecoveryCodes'
-import styles from './TOTP.module.scss'
+import styles from './totp.module.scss'
 
 const TOTP: FC = () => {
   const userId = window.localStorage.getItem('userId')

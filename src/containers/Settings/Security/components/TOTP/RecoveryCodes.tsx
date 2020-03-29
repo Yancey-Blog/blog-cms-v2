@@ -4,7 +4,7 @@ import { GetApp, FileCopy } from '@material-ui/icons'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { generateFile } from 'src/shared/utils'
 import { recoveryCodesFileName } from 'src/shared/constants'
-import styles from './TOTP.module.scss'
+import styles from './totp.module.scss'
 
 interface Props {
   recoveryCodes: string[]
