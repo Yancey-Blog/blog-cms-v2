@@ -110,10 +110,10 @@ const routes: Route[] = [
     component: 'Agenda/Agenda',
   },
   {
-    name: 'Setting',
+    name: 'Settings',
     path: 'settings',
     icon: <Settings />,
-    component: 'Setting/Setting',
+    component: 'Settings/Settings',
   },
 ]
 
