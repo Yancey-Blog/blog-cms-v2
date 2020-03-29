@@ -2,3 +2,37 @@
   width: 16px;
   height: 16px;
 }
+
+.listGroup {
+  margin: 24px -24px -32px;
+
+  :global(.MuiListItem-root) {
+    padding: 16px 0;
+  }
+}
+
+.title {
+  margin-left: 24px;
+  width: 16%;
+}
+
+.isUseTOTP {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #1a73e8;
+
+  svg {
+    width: 20px;
+    margin-right: 8px;
+  }
+}
+
+.txt {
+  color: #202124;
+}
+
+.phone {
+  font-size: 14px;
+  color: #5f6368;
+}
