@@ -1,19 +1,18 @@
 import React, { FC, useState, useEffect } from 'react'
-import SettingItemWrapper from './SettingItemWrapper'
+import { useMutation } from '@apollo/react-hooks'
+import { CREATE_RECOVERY_CODES, CREATE_TOTP } from '../typeDefs'
 import QRCode from './QRCode'
 import RecoveryCodes from './RecoveryCodes'
 import styles from './TOTP.module.scss'
 
-interface Props {
-  createTOTP: Function
-  createRecoveryCodes: Function
-}
-
-const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes }) => {
+const TOTP: FC = () => {
   const userId = window.localStorage.getItem('userId')
 
   const [qrcode, setQRCode] = useState('')
   const [recoveryCodes, setRecoveryCodes] = useState<string[]>([])
+
+  const [createTOTP] = useMutation(CREATE_TOTP)
+  const [createRecoveryCodes] = useMutation(CREATE_RECOVERY_CODES)
 
   useEffect(() => {
     const fetchTOTPAndRecoveryCodes = async () => {
@@ -35,15 +34,10 @@ const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes }) => {
   }, [createRecoveryCodes, createTOTP, userId])
 
   return (
-    <SettingItemWrapper
-      title="Two-factor Authentication"
-      imageUrl="https://www.gstatic.com/identity/boq/accountsettingsmobile/recovery_scene_1264x448_b9db53ca75b4e63d28b6944fcaa24ce7.png"
-    >
-      <section className={styles.totpWrapper}>
-        {/* <RecoveryCodes recoveryCodes={recoveryCodes} /> */}
-        {/* <QRCode userId={userId} qrcode={qrcode} /> */}
-      </section>
-    </SettingItemWrapper>
+    <section className={styles.totpWrapper}>
+      <RecoveryCodes recoveryCodes={recoveryCodes} />
+      {/* <QRCode userId={userId} qrcode={qrcode} /> */}
+    </section>
   )
 }
 
