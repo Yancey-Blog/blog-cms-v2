@@ -6,8 +6,8 @@
 
 .tabs {
   min-width: 280px;
-
   :global(.MuiTabs-indicator) {
+    width: 100%;
     z-index: -1;
     background: #e8f0fe;
     border-radius: 0 50px 50px 0;

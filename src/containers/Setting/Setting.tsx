@@ -35,7 +35,7 @@ function TabPanel(props: TabPanelProps) {
 }
 
 const Setting: FC = () => {
-  const [value, setValue] = useState(2)
+  const [value, setValue] = useState(0)
   const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
   }
@@ -63,21 +63,11 @@ const Setting: FC = () => {
           disableRipple={true}
           label={
             <span className={styles.tabLabel}>
-              <AccountCircle />
-              Account
-            </span>
-          }
-          {...a11yProps(1)}
-        />
-        <Tab
-          disableRipple={true}
-          label={
-            <span className={styles.tabLabel}>
               <Lock />
               Security
             </span>
           }
-          {...a11yProps(2)}
+          {...a11yProps(1)}
         />
       </Tabs>
       <section className={styles.tabPanelContainer}>
@@ -85,9 +75,6 @@ const Setting: FC = () => {
           Profile
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Account
-        </TabPanel>
-        <TabPanel value={value} index={2}>
           <Security />
         </TabPanel>
       </section>
