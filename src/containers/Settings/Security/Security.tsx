@@ -11,7 +11,7 @@ const Security: FC = () => {
   return (
     <section>
       <ChangePassword />
-      {/* <TOTP createTOTP={createTOTP} createRecoveryCodes={createRecoveryCodes} /> */}
+      <TOTP createTOTP={createTOTP} createRecoveryCodes={createRecoveryCodes} />
     </section>
   )
 }

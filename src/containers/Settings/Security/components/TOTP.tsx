@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react'
 import { Stepper, Step, StepLabel, Button } from '@material-ui/core'
+import SettingItemWrapper from './SettingItemWrapper'
 import QRCode from './QRCode'
 import RecoveryCodes from './RecoveryCodes'
 import styles from './TOTP.module.scss'
@@ -50,7 +51,10 @@ const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes }) => {
   }
 
   return (
-    <>
+    <SettingItemWrapper
+      title="Two-factor Authentication"
+      imageUrl="https://www.gstatic.com/identity/boq/accountsettingsmobile/recovery_scene_1264x448_b9db53ca75b4e63d28b6944fcaa24ce7.png"
+    >
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map(label => (
           <Step key={label}>
@@ -96,7 +100,7 @@ const TOTP: FC<Props> = ({ createTOTP, createRecoveryCodes }) => {
           </>
         )}
       </div>
-    </>
+    </SettingItemWrapper>
   )
 }
 
