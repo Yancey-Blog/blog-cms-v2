@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Tabs, Tab, Typography } from '@material-ui/core'
-import { AccountCircle, Lock } from '@material-ui/icons'
+import { AccountCircle, Lock, Face } from '@material-ui/icons'
 import Security from './Security/Security'
 import styles from './settings.module.scss'
 
@@ -53,7 +53,7 @@ const Settings: FC = () => {
           disableRipple={true}
           label={
             <span className={styles.tabLabel}>
-              <AccountCircle />
+              <Face />
               Profile
             </span>
           }
@@ -63,11 +63,21 @@ const Settings: FC = () => {
           disableRipple={true}
           label={
             <span className={styles.tabLabel}>
+              <AccountCircle />
+              Account
+            </span>
+          }
+          {...a11yProps(1)}
+        />
+        <Tab
+          disableRipple={true}
+          label={
+            <span className={styles.tabLabel}>
               <Lock />
               Security
             </span>
           }
-          {...a11yProps(1)}
+          {...a11yProps(2)}
         />
       </Tabs>
       <section className={styles.tabPanelContainer}>
@@ -75,6 +85,9 @@ const Settings: FC = () => {
           Profile
         </TabPanel>
         <TabPanel value={value} index={1}>
+          Account
+        </TabPanel>
+        <TabPanel value={value} index={2}>
           <Security />
         </TabPanel>
       </section>
