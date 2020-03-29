@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { TextField, Button } from '@material-ui/core'
+import SettingItemWrapper from './SettingItemWrapper'
 import styles from './changePassword.module.scss'
 
 const ChangePassword: FC = () => {
@@ -35,16 +36,10 @@ const ChangePassword: FC = () => {
   })
 
   return (
-    <article className={styles.paper}>
-      <header className={styles.header}>
-        <h2>Change Password</h2>
-        <figure className={styles.img}>
-          <img
-            src="https://www.gstatic.com/identity/boq/accountsettingsmobile/signin_scene_1264x448_759b470ee2277f22a1907452a1522774.png"
-            alt="Change Password"
-          />
-        </figure>
-      </header>
+    <SettingItemWrapper
+      title="Change Password"
+      imageUrl="https://www.gstatic.com/identity/boq/accountsettingsmobile/signin_scene_1264x448_759b470ee2277f22a1907452a1522774.png"
+    >
       <form className={styles.customForm} onSubmit={handleSubmit}>
         <TextField
           className={styles.input}
@@ -84,7 +79,7 @@ const ChangePassword: FC = () => {
           Submit
         </Button>
       </form>
-    </article>
+    </SettingItemWrapper>
   )
 }
 
