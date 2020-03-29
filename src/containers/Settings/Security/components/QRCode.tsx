@@ -5,18 +5,15 @@ import { useFormik } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
 import { Button, Card, Typography, TextField } from '@material-ui/core'
 import classNames from 'classnames'
-import { steps } from './TOTP'
 import { VALIDATE_TOTP } from '../typeDefs'
 import styles from './TOTP.module.scss'
 
 interface Props {
   userId: string | null
   qrcode: string
-  activeStep: number
-  handleNext: Function
 }
 
-const QRCode: FC<Props> = ({ userId, qrcode, handleNext, activeStep }) => {
+const QRCode: FC<Props> = ({ userId, qrcode }) => {
   const { enqueueSnackbar } = useSnackbar()
 
   const validationSchema = Yup.object().shape({
@@ -51,7 +48,6 @@ const QRCode: FC<Props> = ({ userId, qrcode, handleNext, activeStep }) => {
       enqueueSnackbar('Two-factor authentication is available now!', {
         variant: 'success',
       })
-      handleNext()
     },
   })
 
@@ -88,7 +84,7 @@ const QRCode: FC<Props> = ({ userId, qrcode, handleNext, activeStep }) => {
           color="primary"
           size="small"
           className={styles.inputBtn}
-          disabled={isSubmitting || activeStep === steps.length}
+          disabled={isSubmitting}
         >
           Enable
         </Button>
