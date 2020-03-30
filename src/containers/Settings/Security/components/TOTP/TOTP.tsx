@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { Dialog, DialogContent, DialogTitle } from '@material-ui/core'
 import { CREATE_RECOVERY_CODES, CREATE_TOTP } from '../../typeDefs'
 import QRCode from './QRCode'
-import RecoveryCodes from './RecoveryCodes'
+import RecoveryCodes from '../RecoveryCode/RecoveryCodes'
 import { goBack } from 'src/shared/utils'
 import styles from './totp.module.scss'
 

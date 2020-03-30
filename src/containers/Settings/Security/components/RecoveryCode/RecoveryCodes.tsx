@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react'
-import { Button, Typography } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import { GetApp, FileCopy } from '@material-ui/icons'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { generateFile } from 'src/shared/utils'
 import { recoveryCodesFileName } from 'src/shared/constants'
-import styles from './totp.module.scss'
+import styles from '../TOTP/totp.module.scss'
 
 interface Props {
   recoveryCodes: string[]
