@@ -71,6 +71,7 @@ const ChangePassword: FC = () => {
         </p>
 
         <Button
+          disableElevation={true}
           variant="contained"
           color="primary"
           type="submit"

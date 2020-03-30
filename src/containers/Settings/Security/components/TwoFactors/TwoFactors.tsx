@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import {
   List,
   ListItem,
@@ -14,12 +15,19 @@ import {
 import SettingItemWrapper from '../../../components/SettingItemWrapper/SettingItemWrapper'
 import TOTP from '../TOTP/TOTP'
 import styles from './twoFactors.module.scss'
+import { stringfySearch } from 'src/shared/utils'
 
 interface Props {
   isTOTP: boolean
 }
 
 const TwoFactors: FC<Props> = ({ isTOTP }) => {
+  const history = useHistory()
+  const { pathname } = useLocation()
+
+  const showModal = () =>
+    history.push({ pathname, search: stringfySearch({ showModal: true }) })
+
   return (
     <>
       <SettingItemWrapper
@@ -31,7 +39,7 @@ const TwoFactors: FC<Props> = ({ isTOTP }) => {
           aria-label="two-factor-nav"
           className={styles.listGroup}
         >
-          <ListItem button>
+          <ListItem button onClick={showModal}>
             <ListItemText
               primary="Authenticator app"
               className={styles.title}
@@ -85,7 +93,7 @@ const TwoFactors: FC<Props> = ({ isTOTP }) => {
         </List>
       </SettingItemWrapper>
 
-      <TOTP showModal={true} />
+      <TOTP />
     </>
   )
 }

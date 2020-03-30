@@ -1,4 +1,5 @@
 import React, { FC, useState, useEffect, ChangeEvent } from 'react'
+import { useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 import { useSnackbar } from 'notistack'
 import { useFormik } from 'formik'
@@ -19,14 +20,13 @@ import {
 } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
 import { CREATE_TOTP, VALIDATE_TOTP } from '../../typeDefs'
-import { goBack } from 'src/shared/utils'
+import { goBack, parseSearch } from 'src/shared/utils'
 import styles from './totp.module.scss'
 
-interface Props {
-  showModal: boolean
-}
+const TOTP: FC = () => {
+  const { search } = useLocation()
+  const { showModal } = parseSearch(search)
 
-const TOTP: FC<Props> = ({ showModal }) => {
   const userId = window.localStorage.getItem('userId')
   const email = window.localStorage.getItem('email')
 
@@ -56,20 +56,14 @@ const TOTP: FC<Props> = ({ showModal }) => {
     },
   })
 
-  const {
-    handleSubmit,
-    getFieldProps,
-    resetForm,
-    isSubmitting,
-    errors,
-  } = useFormik({
+  const { handleSubmit, getFieldProps, isSubmitting, errors } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async values => {
       await validateTOTP({
         variables: { input: { ...values, userId } },
       })
-      resetForm()
+      goBack()
     },
   })
 

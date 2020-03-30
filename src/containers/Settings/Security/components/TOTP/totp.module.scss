@@ -59,10 +59,11 @@
   padding-left: 20px;
   color: #3c4043;
   font-size: 14px;
+  line-height: 1.6;
   &::before {
     position: absolute;
     content: '';
-    top: 7px;
+    top: 9px;
     left: 0;
     width: 4px;
     height: 4px;
