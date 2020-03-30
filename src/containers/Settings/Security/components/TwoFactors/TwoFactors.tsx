@@ -15,7 +15,11 @@ import SettingItemWrapper from '../../../components/SettingItemWrapper/SettingIt
 import TOTP from '../TOTP/TOTP'
 import styles from './twoFactors.module.scss'
 
-const TwoFactors: FC = () => {
+interface Props {
+  isTOTP: boolean
+}
+
+const TwoFactors: FC<Props> = ({ isTOTP }) => {
   return (
     <>
       <SettingItemWrapper
@@ -36,8 +40,15 @@ const TwoFactors: FC = () => {
               className={styles.title}
               primary={
                 <div className={styles.isUseTOTP}>
-                  <SentimentVerySatisfied />
-                  <span className={styles.txt}>Enable</span>
+                  {isTOTP ? (
+                    <SentimentVerySatisfied />
+                  ) : (
+                    <SentimentDissatisfied />
+                  )}
+
+                  <span className={styles.txt}>
+                    {isTOTP ? 'Enable' : 'Disable'}
+                  </span>
                 </div>
               }
             />

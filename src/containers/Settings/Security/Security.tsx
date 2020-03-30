@@ -4,10 +4,10 @@ import TwoFactors from './components/TwoFactors/TwoFactors'
 
 const Security: FC = () => {
   return (
-    <section>
+    <>
       <ChangePassword />
-      <TwoFactors />
-    </section>
+      <TwoFactors isTOTP={true} />
+    </>
   )
 }
 
