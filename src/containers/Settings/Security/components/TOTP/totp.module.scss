@@ -1,78 +1,3 @@
-.totpWrapper {
-  display: flex;
-  justify-content: center;
-  margin: 40px 0;
-}
-
-.totpContainer {
-  margin-bottom: 20px;
-  padding: 16px;
-  width: 520px;
-}
-
-.tips1 {
-  font-size: 13px;
-  color: #586069;
-}
-
-.tips2 {
-  margin: 16px -16px;
-  padding: 16px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #735c0f;
-  background-color: #fffbdd;
-}
-
-.tips3 {
-  font-size: 12px;
-  line-height: 1.5;
-  color: #586069;
-}
-
-.inputBtn {
-  margin-left: 20px;
-}
-
-.inputTipHeader {
-  margin-bottom: 10px;
-  font-size: 15px;
-}
-
-.buttonGroup {
-  margin: 24px 0;
-  text-align: center;
-}
-
-.btn {
-  margin: 0 8px;
-}
-
-.tipsBlod {
-  font-weight: bold;
-}
-
-.recoveryCodesGroup {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-
-.recoveryCodesItem {
-  padding: 0;
-  font-family: Consolas, Liberation Mono, Menlo, monospace;
-  font-size: 21px;
-  font-weight: bold;
-  line-height: 1.8;
-}
-.customForm {
-  margin-top: 20px;
-}
-
-// ---------------------
-
 .totpDialog {
   :global(.MuiDialog-paper) {
     width: 480px;
@@ -117,7 +42,7 @@
   justify-content: center;
   width: 180px;
   height: 210px;
-  margin: 0 auto 20px;
+  margin: 32px auto 24px;
   text-align: center;
   img {
     display: block;
@@ -148,4 +73,21 @@
 
 .bold {
   font-weight: bold;
+}
+
+.inputTipHeader {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #3c4043;
+}
+
+.customForm {
+  margin-top: 10px;
+  margin-bottom: 48px;
+}
+
+.question {
+  margin: 20px 0;
+  font-size: 15px;
+  color: #5f6368;
 }

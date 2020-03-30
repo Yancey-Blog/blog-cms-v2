@@ -7,3 +7,11 @@ p {
   margin: 0;
   padding: 0;
 }
+
+a {
+  color: #1a73e8;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
