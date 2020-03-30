@@ -3,7 +3,16 @@ import * as Yup from 'yup'
 import { useSnackbar } from 'notistack'
 import { useFormik } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
-import { Button, Card, Typography, TextField, Dialog } from '@material-ui/core'
+import {
+  Button,
+  Card,
+  Typography,
+  TextField,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from '@material-ui/core'
 import classNames from 'classnames'
 import { CREATE_TOTP, VALIDATE_TOTP } from '../../typeDefs'
 import { goBack } from 'src/shared/utils'
@@ -68,43 +77,73 @@ const TOTP: FC<Props> = ({ showModal }) => {
   }, [createTOTP, userId])
 
   return (
-    <Dialog open={!!showModal} onClose={goBack}>
-      <Typography variant="h5" gutterBottom>
-        Scan this barcode with your app.
-      </Typography>
-      <p className={styles.tips1}>
-        Scan the image above with the two-factor authentication app on your
-        phone.
-      </p>
-      <Card className={styles.qrcodeWrapper}>
-        <img src={qrcode} alt="qrcode" />
-      </Card>
-      <p className={classNames(styles.tipsBlod, styles.inputTipHeader)}>
-        Enter the six-digit code from the application
-      </p>
-      <p className={styles.tips1}>
-        After scanning the barcode image, the app will display a six-digit code
-        that you can enter below.
-      </p>
-      <form className={styles.customForm} onSubmit={handleSubmit}>
-        <TextField
-          error={!!errors.token}
-          helperText={errors.token}
-          autoFocus
-          {...getFieldProps('token')}
-        />
+    <Dialog open={!!showModal} onClose={goBack} className={styles.totpDialog}>
+      <DialogTitle className={styles.title}>
+        <figure className={styles.logoImg}>
+          <img
+            src="https://static.yancey.app/cms-static/Google_Authenticator_41237.png"
+            alt="Google Authenticator Logo"
+          />
+        </figure>
+      </DialogTitle>
+      <DialogContent>
+        <header className={styles.header}>Set up Authenticator</header>
 
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          size="small"
-          className={styles.inputBtn}
-          disabled={isSubmitting}
-        >
-          Enable
+        <ul className={styles.tipGroup}>
+          <li className={styles.tipItem}>
+            Get the Authenticator App from the App Store.
+          </li>
+          <li className={styles.tipItem}>
+            In the App select{' '}
+            <span className={styles.bold}>Set up account</span>.
+          </li>
+          <li className={styles.tipItem}>
+            Choose <span className={styles.bold}>Scan barcode</span>.
+          </li>
+        </ul>
+
+        <figure className={styles.qrcodeWrapper}>
+          <img src={qrcode} alt="qrcode" />
+          <Button color="primary" size="small" onClick={goBack}>
+            Can't scan it?
+          </Button>
+        </figure>
+
+        {/* <p className={classNames(styles.tipsBlod, styles.inputTipHeader)}>
+          Enter the six-digit code from the application
+        </p>
+        <p className={styles.tips1}>
+          After scanning the barcode image, the app will display a six-digit
+          code that you can enter below.
+        </p>
+        <form className={styles.customForm} onSubmit={handleSubmit}>
+          <TextField
+            error={!!errors.token}
+            helperText={errors.token}
+            autoFocus
+            {...getFieldProps('token')}
+          />
+
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            size="small"
+            className={styles.inputBtn}
+            disabled={isSubmitting}
+          >
+            Enable
+          </Button>
+        </form> */}
+      </DialogContent>
+      <DialogActions>
+        <Button color="primary" onClick={goBack}>
+          Cancel
         </Button>
-      </form>
+        <Button color="primary" type="submit" disabled={isSubmitting}>
+          Next
+        </Button>
+      </DialogActions>
     </Dialog>
   )
 }

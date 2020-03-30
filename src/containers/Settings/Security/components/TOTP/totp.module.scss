@@ -10,14 +10,6 @@
   width: 520px;
 }
 
-.qrcodeWrapper {
-  width: 180px;
-  margin: 50px auto;
-  img {
-    display: block;
-  }
-}
-
 .tips1 {
   font-size: 13px;
   color: #586069;
@@ -75,6 +67,75 @@
   font-weight: bold;
   line-height: 1.8;
 }
-.customForm{
+.customForm {
   margin-top: 20px;
+}
+
+// ---------------------
+
+.totpDialog {
+  :global(.MuiDialog-paper) {
+    width: 480px;
+    border-radius: 0;
+  }
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 175px;
+  background-color: #4285f4;
+}
+
+.logoImg {
+  width: 145px;
+  height: 145px;
+
+  img {
+    width: 100%;
+  }
+}
+
+.header {
+  padding-top: 12px;
+  font-size: 20px;
+  color: #202124;
+}
+
+.qrcodeWrapper {
+  width: 180px;
+  margin: 0 auto 20px;
+  text-align: center;
+  img {
+    display: block;
+  }
+}
+
+
+
+.tipGroup {
+  padding: 0;
+}
+
+.tipItem {
+  display: block;
+  position: relative;
+  padding-left: 20px;
+  color: #3c4043;
+  font-size: 14px;
+  &::before {
+    position: absolute;
+    content: '';
+    top: 7px;
+    left: 0;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #000;
+  }
+}
+
+.bold {
+  font-weight: bold;
 }
