@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
 
 export const CREATE_TOTP = gql`
-  mutation CreateTOTP($userId: ID!) {
-    createTOTP(userId: $userId) {
+  mutation CreateTOTP($input: CreateTOTPInput!) {
+    createTOTP(input: $input) {
       qrcode
+      secretKey
     }
   }
 `

@@ -21,6 +21,7 @@ const Login: FC = () => {
     onCompleted(data) {
       window.localStorage.setItem('token', data.login.authorization)
       window.localStorage.setItem('userId', data.login._id)
+      window.localStorage.setItem('email', data.login.email)
       history.push('/')
     },
   })

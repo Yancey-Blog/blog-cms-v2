@@ -5,14 +5,15 @@ import { useFormik } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
 import {
   Button,
-  Card,
-  Typography,
-  TextField,
+  CircularProgress,
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
+  Toolbar,
+  IconButton,
 } from '@material-ui/core'
+import { Close } from '@material-ui/icons'
 import classNames from 'classnames'
 import { CREATE_TOTP, VALIDATE_TOTP } from '../../typeDefs'
 import { goBack } from 'src/shared/utils'
@@ -24,6 +25,8 @@ interface Props {
 
 const TOTP: FC<Props> = ({ showModal }) => {
   const userId = window.localStorage.getItem('userId')
+  const email = window.localStorage.getItem('email')
+
   const [qrcode, setQRCode] = useState('')
   const { enqueueSnackbar } = useSnackbar()
 
@@ -54,7 +57,7 @@ const TOTP: FC<Props> = ({ showModal }) => {
     },
   })
 
-  const [createTOTP] = useMutation(CREATE_TOTP)
+  const [createTOTP, { loading: isFetchingQRcode }] = useMutation(CREATE_TOTP)
 
   const [validateTOTP] = useMutation(VALIDATE_TOTP, {
     onCompleted() {
@@ -65,16 +68,16 @@ const TOTP: FC<Props> = ({ showModal }) => {
   })
 
   useEffect(() => {
-    const fetchTOTPAndRecoveryCodes = async () => {
+    const fetchTOTP = async () => {
       const TOTPRes = await createTOTP({
-        variables: { userId },
+        variables: { input: { userId, email } },
       })
 
       setQRCode(TOTPRes.data.createTOTP.qrcode)
     }
 
-    fetchTOTPAndRecoveryCodes()
-  }, [createTOTP, userId])
+    fetchTOTP()
+  }, [createTOTP, userId, email])
 
   return (
     <Dialog open={!!showModal} onClose={goBack} className={styles.totpDialog}>
@@ -85,6 +88,16 @@ const TOTP: FC<Props> = ({ showModal }) => {
             alt="Google Authenticator Logo"
           />
         </figure>
+
+        <IconButton
+          className={styles.closeBtn}
+          edge="start"
+          color="inherit"
+          onClick={goBack}
+          aria-label="close"
+        >
+          <Close />
+        </IconButton>
       </DialogTitle>
       <DialogContent>
         <header className={styles.header}>Set up Authenticator</header>
@@ -103,10 +116,17 @@ const TOTP: FC<Props> = ({ showModal }) => {
         </ul>
 
         <figure className={styles.qrcodeWrapper}>
-          <img src={qrcode} alt="qrcode" />
-          <Button color="primary" size="small" onClick={goBack}>
-            Can't scan it?
-          </Button>
+          {isFetchingQRcode ? (
+            <CircularProgress />
+          ) : (
+            <div>
+              <img src={qrcode} alt="qrcode" />
+              <Button color="primary" size="small" onClick={goBack}>
+                Can't scan it?
+              </Button>
+            </div>
+          )}
+          {/* <CircularProgress /> */}
         </figure>
 
         {/* <p className={classNames(styles.tipsBlod, styles.inputTipHeader)}>

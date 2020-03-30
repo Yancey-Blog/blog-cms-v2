@@ -89,12 +89,20 @@
 }
 
 .logoImg {
+  position: relative;
   width: 145px;
   height: 145px;
 
   img {
     width: 100%;
   }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  color: rgba(255, 255, 255, 0.749);
 }
 
 .header {
@@ -104,15 +112,17 @@
 }
 
 .qrcodeWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 180px;
+  height: 210px;
   margin: 0 auto 20px;
   text-align: center;
   img {
     display: block;
   }
 }
-
-
 
 .tipGroup {
   padding: 0;
