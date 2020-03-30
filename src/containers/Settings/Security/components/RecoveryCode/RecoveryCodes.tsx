@@ -1,20 +1,39 @@
-import React, { FC, useState } from 'react'
-import { Button } from '@material-ui/core'
+import React, { FC, useState, useEffect } from 'react'
+import { useMutation } from '@apollo/react-hooks'
+import { Dialog, DialogContent, DialogTitle, Button } from '@material-ui/core'
 import { GetApp, FileCopy } from '@material-ui/icons'
 import CopyToClipboard from 'react-copy-to-clipboard'
-import { generateFile } from 'src/shared/utils'
+import { generateFile, goBack } from 'src/shared/utils'
 import { recoveryCodesFileName } from 'src/shared/constants'
+import { CREATE_RECOVERY_CODES } from '../../typeDefs'
 import styles from '../TOTP/totp.module.scss'
 
 interface Props {
-  recoveryCodes: string[]
+  showModal: boolean
 }
 
-const RecoveryCodes: FC<Props> = ({ recoveryCodes }) => {
+const RecoveryCodes: FC<Props> = ({ showModal }) => {
+  const userId = window.localStorage.getItem('userId')
   const [copyTxt, setCopyTxt] = useState('Copy')
+  const [recoveryCodes, setRecoveryCodes] = useState<string[]>([])
+  const [createRecoveryCodes] = useMutation(CREATE_RECOVERY_CODES)
+
+  useEffect(() => {
+    const fetchTOTPAndRecoveryCodes = async () => {
+      const recoveryCodesRequest = await createRecoveryCodes({
+        variables: { userId },
+      })
+
+      setRecoveryCodes(
+        recoveryCodesRequest.data.createRecoveryCodes.recoveryCodes,
+      )
+    }
+
+    fetchTOTPAndRecoveryCodes()
+  }, [createRecoveryCodes, userId])
 
   return (
-    <section>
+    <Dialog open={!!showModal} onClose={goBack}>
       <p className={styles.tips1}>
         Recovery codes are used to access your account in the event you cannot
         receive two-factor authentication codes.
@@ -88,7 +107,7 @@ const RecoveryCodes: FC<Props> = ({ recoveryCodes }) => {
         </a>
         .
       </p>
-    </section>
+    </Dialog>
   )
 }
 
