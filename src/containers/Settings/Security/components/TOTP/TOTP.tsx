@@ -1,11 +1,17 @@
 import React, { FC, useState, useEffect } from 'react'
 import { useMutation } from '@apollo/react-hooks'
+import { Dialog, DialogContent, DialogTitle } from '@material-ui/core'
 import { CREATE_RECOVERY_CODES, CREATE_TOTP } from '../../typeDefs'
 import QRCode from './QRCode'
 import RecoveryCodes from './RecoveryCodes'
+import { goBack } from 'src/shared/utils'
 import styles from './totp.module.scss'
 
-const TOTP: FC = () => {
+interface Props {
+  showModal: boolean
+}
+
+const TOTP: FC<Props> = ({ showModal }) => {
   const userId = window.localStorage.getItem('userId')
 
   const [qrcode, setQRCode] = useState('')
@@ -34,10 +40,13 @@ const TOTP: FC = () => {
   }, [createRecoveryCodes, createTOTP, userId])
 
   return (
-    <section className={styles.totpWrapper}>
-      <RecoveryCodes recoveryCodes={recoveryCodes} />
-      {/* <QRCode userId={userId} qrcode={qrcode} /> */}
-    </section>
+    <Dialog open={!!showModal} onClose={goBack}>
+      <DialogTitle>Recovery codes</DialogTitle>
+      <DialogContent>
+        {/* <RecoveryCodes recoveryCodes={recoveryCodes} /> */}
+        <QRCode userId={userId} qrcode={qrcode} />
+      </DialogContent>
+    </Dialog>
   )
 }
 

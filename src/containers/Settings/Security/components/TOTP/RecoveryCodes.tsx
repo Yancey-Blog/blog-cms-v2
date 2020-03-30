@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { Button, Card, Typography } from '@material-ui/core'
+import { Button, Typography } from '@material-ui/core'
 import { GetApp, FileCopy } from '@material-ui/icons'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { generateFile } from 'src/shared/utils'
@@ -14,10 +14,7 @@ const RecoveryCodes: FC<Props> = ({ recoveryCodes }) => {
   const [copyTxt, setCopyTxt] = useState('Copy')
 
   return (
-    <Card className={styles.totpContainer}>
-      <Typography variant="h5" gutterBottom>
-        Recovery codes
-      </Typography>
+    <section>
       <p className={styles.tips1}>
         Recovery codes are used to access your account in the event you cannot
         receive two-factor authentication codes.
@@ -91,7 +88,7 @@ const RecoveryCodes: FC<Props> = ({ recoveryCodes }) => {
         </a>
         .
       </p>
-    </Card>
+    </section>
   )
 }
 

@@ -52,7 +52,7 @@ const QRCode: FC<Props> = ({ userId, qrcode }) => {
   })
 
   return (
-    <Card className={styles.totpContainer}>
+    <section>
       <Typography variant="h5" gutterBottom>
         Scan this barcode with your app.
       </Typography>
@@ -89,7 +89,7 @@ const QRCode: FC<Props> = ({ userId, qrcode }) => {
           Enable
         </Button>
       </form>
-    </Card>
+    </section>
   )
 }
 
