@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { TextField, Button } from '@material-ui/core'
-import SettingItemWrapper from '../../../components/SettingItemWrapper/SettingItemWrapper'
+import SettingItemWrapper from '../../../../../components/SettingItemWrapper/SettingItemWrapper'
 import styles from './changePassword.module.scss'
 
 const ChangePassword: FC = () => {

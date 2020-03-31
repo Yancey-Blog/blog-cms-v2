@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import SettingItemWrapper from '../../../components/SettingItemWrapper/SettingItemWrapper'
+import SettingItemWrapper from '../../../../../components/SettingItemWrapper/SettingItemWrapper'
 
 const useStyles = makeStyles({
   tip: {

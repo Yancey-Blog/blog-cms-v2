@@ -11,7 +11,7 @@ import {
   SentimentVerySatisfied,
   SentimentDissatisfied,
 } from '@material-ui/icons'
-import SettingItemWrapper from '../../../components/SettingItemWrapper/SettingItemWrapper'
+import SettingItemWrapper from '../../../../../components/SettingItemWrapper/SettingItemWrapper'
 import TOTP from '../TOTP/TOTP'
 import styles from './twoFactors.module.scss'
 
