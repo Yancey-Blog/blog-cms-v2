@@ -11,8 +11,6 @@ export const LOGIN = gql`
       username
       phoneNumber
       isTOTP
-      createdAt
-      updatedAt
     }
   }
 `
