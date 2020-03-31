@@ -1,4 +1,12 @@
-import React, { FC, useState, useEffect, ChangeEvent } from 'react'
+import React, {
+  FC,
+  useState,
+  useEffect,
+  ChangeEvent,
+  forwardRef,
+  Ref,
+  ReactElement,
+} from 'react'
 import { useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 import { useSnackbar } from 'notistack'
@@ -17,11 +25,20 @@ import {
   RadioGroup,
   Radio,
   FormControlLabel,
+  Slide,
 } from '@material-ui/core'
+import { TransitionProps } from '@material-ui/core/transitions'
 import { Close } from '@material-ui/icons'
 import { CREATE_TOTP, VALIDATE_TOTP } from '../../typeDefs'
 import { goBack, parseSearch } from 'src/shared/utils'
 import styles from './totp.module.scss'
+
+const Transition = forwardRef(function Transition(
+  props: TransitionProps & { children?: React.ReactElement<any, any> },
+  ref: Ref<unknown>,
+) {
+  return <Slide direction="up" ref={ref} {...props} />
+})
 
 const TOTP: FC = () => {
   const { search } = useLocation()
@@ -80,7 +97,14 @@ const TOTP: FC = () => {
   }, [createTOTP, userId, email])
 
   return (
-    <Dialog open={!!showModal} onClose={goBack} className={styles.totpDialog}>
+    <Dialog
+      open={!!showModal}
+      onClose={goBack}
+      className={styles.totpDialog}
+      // @ts-ignore
+      TransitionComponent={Transition}
+      keepMounted
+    >
       <DialogTitle className={styles.title}>
         <figure className={styles.logoImg}>
           <img
