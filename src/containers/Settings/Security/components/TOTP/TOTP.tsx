@@ -84,6 +84,16 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
     },
   })
 
+  const onSubmit = () => {
+    handleSubmit()
+    setStep(0)
+  }
+
+  const onClose = () => {
+    setOpen(false)
+    setStep(0)
+  }
+
   useEffect(() => {
     const fetchTOTP = async () => {
       const TOTPRes = await createTOTP({
@@ -93,15 +103,15 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
       setQRCode(TOTPRes.data.createTOTP.qrcode)
     }
 
-    fetchTOTP()
-  }, [createTOTP, userId, email])
+    if (step === 1) {
+      fetchTOTP()
+    }
+  }, [createTOTP, userId, email, step])
 
   return (
     <Dialog
       open={open}
-      onClick={() => {
-        setOpen(false)
-      }}
+      onClose={onClose}
       className={styles.totpDialog}
       // @ts-ignore
       TransitionComponent={Transition}
@@ -119,7 +129,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
           className={styles.closeBtn}
           edge="start"
           color="inherit"
-          onClick={() => setOpen(false)}
+          onClick={onClose}
           aria-label="close"
         >
           <Close />
@@ -196,11 +206,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
               ) : (
                 <div>
                   <img src={qrcode} alt="qrcode" />
-                  <Button
-                    color="primary"
-                    size="small"
-                    onClick={() => setOpen(false)}
-                  >
+                  <Button color="primary" size="small" onClick={onClose}>
                     Can't scan it?
                   </Button>
                 </div>
@@ -227,16 +233,14 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
         )}
       </DialogContent>
       <DialogActions>
-        <Button color="primary" onClick={() => setOpen(false)}>
+        <Button color="primary" onClick={onClose}>
           Cancel
         </Button>
         <Button
           color="primary"
           type="submit"
           disabled={isSubmitting}
-          onClick={
-            step === 2 ? (e: any) => handleSubmit(e) : () => setStep(step + 1)
-          }
+          onClick={step === 2 ? onSubmit : () => setStep(step + 1)}
         >
           {step === 2 ? 'Verify' : 'Next'}
         </Button>
