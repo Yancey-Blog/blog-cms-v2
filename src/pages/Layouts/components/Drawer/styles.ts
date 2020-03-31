@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     boxShadow:
       '0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)',
     userSelect: 'none',
-    zIndex: 9999,
+    zIndex: 1,
     '&::before': {
       position: 'absolute',
       content: '""',
@@ -131,7 +131,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
     position: 'relative',
     marginTop: '10px',
-    padding: '15px 0 15px 12px',
+    padding: '12px 0 12px 12px',
     cursor: 'pointer',
     transform: 'translateX(0)',
     transition: 'background-color 300ms ease 0ms, transform 300ms ease 0ms',
@@ -190,6 +190,10 @@ const useStyles = makeStyles({
   formatArrowTag: {
     color: '#ffffff',
     textDecoration: 'none',
+
+    '&:hover': {
+      textDecoration: 'none',
+    },
   },
 
   active: {

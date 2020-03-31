@@ -1,0 +1,94 @@
+.totpDialog {
+  :global(.MuiDialog-paper) {
+    width: 480px;
+    border-radius: 0;
+  }
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 175px;
+  background-color: #4285f4;
+}
+
+.logoImg {
+  position: relative;
+  width: 145px;
+  height: 145px;
+
+  img {
+    width: 100%;
+  }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  color: rgba(255, 255, 255, 0.749);
+}
+
+.header {
+  padding-top: 12px;
+  font-size: 20px;
+  color: #202124;
+}
+
+.qrcodeWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 210px;
+  margin: 32px auto 24px;
+  text-align: center;
+  img {
+    display: block;
+  }
+}
+
+.tipGroup {
+  padding: 0;
+}
+
+.tipItem {
+  display: block;
+  position: relative;
+  padding-left: 20px;
+  color: #3c4043;
+  font-size: 14px;
+  line-height: 1.6;
+  &::before {
+    position: absolute;
+    content: '';
+    top: 9px;
+    left: 0;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #000;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.inputTipHeader {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #3c4043;
+}
+
+.customForm {
+  margin-top: 10px;
+  margin-bottom: 48px;
+}
+
+.question {
+  margin: 20px 0;
+  font-size: 15px;
+  color: #5f6368;
+}
