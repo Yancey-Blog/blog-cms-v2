@@ -45,3 +45,7 @@ export const logout = () => {
 
 export const getURLPathName = (url: string) =>
   decodeURI(new URL(url).pathname.slice(1))
+
+export const generateFile = (data: string, type = 'text/plain') => {
+  return URL.createObjectURL(new Blob([data], { type }))
+}

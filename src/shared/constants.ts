@@ -20,3 +20,5 @@ export const popoverTransformOrigin: PopoverOrigin = {
   vertical: 'top',
   horizontal: 'center',
 }
+
+export const recoveryCodesFileName = 'yancey-blog-cms-recovery-codes.txt'
