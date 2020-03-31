@@ -1,11 +1,9 @@
-.settingContainer {
-  display: flex;
-  flex: 1;
+.setting {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  grid-column-gap: 96px;
   margin: 0 -24px;
-}
 
-.tabs {
-  min-width: 280px;
   :global(.MuiTabs-indicator) {
     width: 100%;
     z-index: -1;
@@ -15,7 +13,7 @@
 
   :global(.MuiTab-root) {
     min-width: 280px;
-    padding: 10px 16px 10px 24px;
+    padding: 10px 16px 10px 32px;
     border-radius: 0 50px 50px 0;
     text-transform: none;
     &:hover {
@@ -44,10 +42,4 @@
 .tabLabel {
   display: flex;
   align-items: center;
-}
-
-.tabPanelContainer {
-  display: flex;
-  justify-content: center;
-  width: 100%;
 }

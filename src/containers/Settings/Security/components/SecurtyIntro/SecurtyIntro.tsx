@@ -5,7 +5,7 @@ import SettingItemWrapper from '../../../../../components/SettingItemWrapper/Set
 const useStyles = makeStyles({
   tip: {
     position: 'absolute',
-    top: '80px',
+    top: '72px',
     width: '460px',
     fontSize: '14px',
     color: '#5f6368',

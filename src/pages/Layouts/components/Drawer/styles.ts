@@ -190,6 +190,10 @@ const useStyles = makeStyles({
   formatArrowTag: {
     color: '#ffffff',
     textDecoration: 'none',
+
+    '&:hover': {
+      textDecoration: 'none',
+    },
   },
 
   active: {

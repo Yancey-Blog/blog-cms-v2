@@ -46,14 +46,13 @@ const Settings: FC = () => {
     setValue(newValue)
   }
   return (
-    <section className={styles.settingContainer}>
+    <section className={styles.setting}>
       <Tabs
         orientation="vertical"
         variant="scrollable"
         value={value}
         onChange={handleTabChange}
         aria-label="setting-tabs"
-        className={styles.tabs}
       >
         <Tab
           disableRipple={true}
@@ -86,17 +85,15 @@ const Settings: FC = () => {
           {...a11yProps(2)}
         />
       </Tabs>
-      <section className={styles.tabPanelContainer}>
-        <TabPanel value={value} index={0}>
-          <Profile />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <Account />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <Security />
-        </TabPanel>
-      </section>
+      <TabPanel value={value} index={0}>
+        <Profile />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <Account />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <Security />
+      </TabPanel>
     </section>
   )
 }
