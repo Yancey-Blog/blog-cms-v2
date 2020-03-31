@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 const Account: FC = () => {
-  return <div></div>
+  return <div>account</div>
 }
 
 export default Account

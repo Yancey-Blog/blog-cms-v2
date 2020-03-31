@@ -6,6 +6,8 @@ import {
   FaceOutlined,
 } from '@material-ui/icons'
 import Security from './Security/Security'
+import Account from './Account/Account'
+import Profile from './Profile/Profile'
 import styles from './settings.module.scss'
 
 interface TabPanelProps {
@@ -86,10 +88,10 @@ const Settings: FC = () => {
       </Tabs>
       <section className={styles.tabPanelContainer}>
         <TabPanel value={value} index={0}>
-          Profile
+          <Profile />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Account
+          <Account />
         </TabPanel>
         <TabPanel value={value} index={2}>
           <Security />
