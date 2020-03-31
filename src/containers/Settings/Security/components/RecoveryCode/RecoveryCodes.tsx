@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react'
 import { useMutation } from '@apollo/react-hooks'
-import { Dialog, DialogContent, DialogTitle, Button } from '@material-ui/core'
+import { Dialog, Button } from '@material-ui/core'
 import { GetApp, FileCopy } from '@material-ui/icons'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { generateFile, goBack } from 'src/shared/utils'
