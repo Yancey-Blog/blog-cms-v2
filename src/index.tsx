@@ -19,6 +19,7 @@ import {
   snackbarMaxNum,
   snackbarAutoHideDuration,
 } from './shared/constants'
+import './assets/global.scss'
 
 const Layouts = loadable(() => import('./pages/Layouts/Layouts'), {
   fallback: <Loading />,
