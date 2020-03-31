@@ -7,7 +7,6 @@ import React, {
   Ref,
   ReactElement,
 } from 'react'
-import { useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 import { useSnackbar } from 'notistack'
 import { useFormik } from 'formik'
@@ -30,8 +29,12 @@ import {
 import { TransitionProps } from '@material-ui/core/transitions'
 import { Close } from '@material-ui/icons'
 import { CREATE_TOTP, VALIDATE_TOTP } from '../../typeDefs'
-import { goBack, parseSearch } from 'src/shared/utils'
 import styles from './totp.module.scss'
+
+interface Props {
+  setOpen: Function
+  open: boolean
+}
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
@@ -40,10 +43,7 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />
 })
 
-const TOTP: FC = () => {
-  const { search } = useLocation()
-  const { showModal } = parseSearch(search)
-
+const TOTP: FC<Props> = ({ setOpen, open }) => {
   const userId = window.localStorage.getItem('userId')
   const email = window.localStorage.getItem('email')
 
@@ -80,7 +80,7 @@ const TOTP: FC = () => {
       await validateTOTP({
         variables: { input: { ...values, userId } },
       })
-      goBack()
+      setOpen(false)
     },
   })
 
@@ -98,8 +98,10 @@ const TOTP: FC = () => {
 
   return (
     <Dialog
-      open={!!showModal}
-      onClose={goBack}
+      open={open}
+      onClick={() => {
+        setOpen(false)
+      }}
       className={styles.totpDialog}
       // @ts-ignore
       TransitionComponent={Transition}
@@ -117,7 +119,7 @@ const TOTP: FC = () => {
           className={styles.closeBtn}
           edge="start"
           color="inherit"
-          onClick={goBack}
+          onClick={() => setOpen(false)}
           aria-label="close"
         >
           <Close />
@@ -194,7 +196,11 @@ const TOTP: FC = () => {
               ) : (
                 <div>
                   <img src={qrcode} alt="qrcode" />
-                  <Button color="primary" size="small" onClick={goBack}>
+                  <Button
+                    color="primary"
+                    size="small"
+                    onClick={() => setOpen(false)}
+                  >
                     Can't scan it?
                   </Button>
                 </div>
@@ -221,7 +227,7 @@ const TOTP: FC = () => {
         )}
       </DialogContent>
       <DialogActions>
-        <Button color="primary" onClick={goBack}>
+        <Button color="primary" onClick={() => setOpen(false)}>
           Cancel
         </Button>
         <Button
