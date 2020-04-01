@@ -5,7 +5,6 @@ import React, {
   ChangeEvent,
   forwardRef,
   Ref,
-  ReactElement,
 } from 'react'
 import * as Yup from 'yup'
 import { useSnackbar } from 'notistack'
@@ -45,7 +44,8 @@ const Transition = forwardRef(function Transition(
 
 const TOTP: FC<Props> = ({ setOpen, open }) => {
   const userId = window.localStorage.getItem('userId')
-  const email = window.localStorage.getItem('email')
+
+  const [key, setKey] = useState('')
 
   const [step, setStep] = useState(0)
   const [device, serDevice] = useState('iPhone')
@@ -54,13 +54,13 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
   const { enqueueSnackbar } = useSnackbar()
 
   const validationSchema = Yup.object().shape({
-    token: Yup.string()
-      .matches(/^\d{6}$/, 'token must be a six-digit code.')
-      .required('token should not be empty'),
+    code: Yup.string()
+      .matches(/^\d{6}$/, 'Invalid code. Please try again.')
+      .required('Please enter your verification code.'),
   })
 
   const initialValues = {
-    token: '',
+    code: '',
   }
 
   const [createTOTP, { loading: isFetchingQRcode }] = useMutation(CREATE_TOTP)
@@ -76,9 +76,9 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
   const { handleSubmit, getFieldProps, isSubmitting, errors } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       await validateTOTP({
-        variables: { input: { ...values, userId } },
+        variables: { input: { ...values, userId, key } },
       })
       setOpen(false)
     },
@@ -86,7 +86,6 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
 
   const onSubmit = () => {
     handleSubmit()
-    setStep(0)
   }
 
   const onClose = () => {
@@ -96,17 +95,17 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
 
   useEffect(() => {
     const fetchTOTP = async () => {
-      const TOTPRes = await createTOTP({
-        variables: { input: { userId, email } },
-      })
+      const TOTPRes = await createTOTP()
 
+      console.log(TOTPRes)
       setQRCode(TOTPRes.data.createTOTP.qrcode)
+      setKey(TOTPRes.data.createTOTP.key)
     }
 
     if (step === 1) {
       fetchTOTP()
     }
-  }, [createTOTP, userId, email, step])
+  }, [createTOTP, userId, step])
 
   return (
     <Dialog
@@ -223,10 +222,10 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
             <form className={styles.customForm}>
               <TextField
                 label="Enter code"
-                error={!!errors.token}
-                helperText={errors.token}
+                error={!!errors.code}
+                helperText={errors.code}
                 autoFocus
-                {...getFieldProps('token')}
+                {...getFieldProps('code')}
               />
             </form>
           </>
