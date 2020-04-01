@@ -1,11 +1,4 @@
-import React, {
-  FC,
-  useState,
-  useEffect,
-  ChangeEvent,
-  forwardRef,
-  Ref,
-} from 'react'
+import React, { FC, useState, useEffect, forwardRef, Ref } from 'react'
 import * as Yup from 'yup'
 import { useSnackbar } from 'notistack'
 import { useFormik } from 'formik'
@@ -46,6 +39,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
   const onClose = () => {
     setOpen(false)
     setStep(0)
+    resetForm()
   }
 
   const userId = window.localStorage.getItem('userId')
@@ -53,7 +47,6 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
   const [key, setKey] = useState('')
 
   const [step, setStep] = useState(0)
-  const [device, setDevice] = useState('iPhone')
   const [qrcode, setQRCode] = useState('')
 
   const { enqueueSnackbar } = useSnackbar()
@@ -66,9 +59,11 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
 
   const initialValues = {
     code: '',
+    device: 'iPhone',
   }
 
   const {
+    values,
     handleSubmit,
     getFieldProps,
     isSubmitting,
@@ -79,7 +74,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
     validationSchema,
     onSubmit: async (values) => {
       await validateTOTP({
-        variables: { input: { ...values, userId, key } },
+        variables: { input: { code: values.code, userId, key } },
       })
     },
   })
@@ -91,11 +86,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
       enqueueSnackbar('Two-factor authentication is available now!', {
         variant: 'success',
       })
-      resetForm()
       onClose()
-    },
-    onError() {
-      resetForm()
     },
   })
 
@@ -158,10 +149,8 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
               <RadioGroup
                 aria-label="mobile devices"
                 name="mobile-devices"
-                value={device}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setDevice(e.target.value)
-                }
+                value={values.device}
+                {...getFieldProps('device')}
               >
                 <FormControlLabel
                   value="Android"
@@ -186,12 +175,12 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   href={
-                    device === 'iPhone'
+                    values.device === 'iPhone'
                       ? 'https://itunes.apple.com/us/app/google-authenticator/id388497605'
                       : 'https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2'
                   }
                 >
-                  {device === 'iPhone' ? 'App' : 'Play'} Store
+                  {values.device === 'iPhone' ? 'App' : 'Play'} Store
                 </a>
                 .
               </li>
@@ -223,15 +212,14 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
             <p className={styles.inputTipHeader}>
               Enter the 6-digit code you see in the app.
             </p>
-            <form className={styles.customForm}>
-              <TextField
-                label="Enter code"
-                error={!!errors.code}
-                helperText={errors.code}
-                autoFocus
-                {...getFieldProps('code')}
-              />
-            </form>
+            <TextField
+              className={styles.customInput}
+              label="Enter code"
+              error={!!errors.code}
+              helperText={errors.code}
+              autoFocus
+              {...getFieldProps('code')}
+            />
           </>
         )}
       </DialogContent>
