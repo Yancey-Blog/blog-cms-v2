@@ -10,8 +10,8 @@ export const CREATE_TOTP = gql`
 `
 
 export const CREATE_RECOVERY_CODES = gql`
-  mutation CreateRecoveryCodes($userId: ID!) {
-    createRecoveryCodes(userId: $userId) {
+  mutation CreateRecoveryCodes {
+    createRecoveryCodes {
       recoveryCodes
     }
   }

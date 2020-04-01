@@ -23,6 +23,11 @@ import { Close } from '@material-ui/icons'
 import { CREATE_TOTP, VALIDATE_TOTP } from '../../typeDefs'
 import styles from './totp.module.scss'
 
+interface TOTPRes {
+  key: string
+  qrcode: string
+}
+
 interface Props {
   setOpen: Function
   open: boolean
@@ -36,20 +41,14 @@ const Transition = forwardRef(function Transition(
 })
 
 const TOTP: FC<Props> = ({ setOpen, open }) => {
+  const { enqueueSnackbar } = useSnackbar()
+  const [data, setData] = useState<TOTPRes>({ key: '', qrcode: '' })
+  const [step, setStep] = useState(0)
   const onClose = () => {
     setOpen(false)
     setStep(0)
     resetForm()
   }
-
-  const userId = window.localStorage.getItem('userId')
-
-  const [key, setKey] = useState('')
-
-  const [step, setStep] = useState(0)
-  const [qrcode, setQRCode] = useState('')
-
-  const { enqueueSnackbar } = useSnackbar()
 
   const validationSchema = Yup.object().shape({
     code: Yup.string()
@@ -74,7 +73,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
     validationSchema,
     onSubmit: async (values) => {
       await validateTOTP({
-        variables: { input: { code: values.code, userId, key } },
+        variables: { input: { code: values.code, key: data.key } },
       })
     },
   })
@@ -93,14 +92,13 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
   useEffect(() => {
     const fetchTOTP = async () => {
       const TOTPRes = await createTOTP()
-      setQRCode(TOTPRes.data.createTOTP.qrcode)
-      setKey(TOTPRes.data.createTOTP.key)
+      setData(TOTPRes.data.createTOTP)
     }
 
     if (step === 1) {
       fetchTOTP()
     }
-  }, [createTOTP, userId, step])
+  }, [createTOTP, step])
 
   return (
     <Dialog
@@ -197,7 +195,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
                 <CircularProgress />
               ) : (
                 <div>
-                  <img src={qrcode} alt="qrcode" />
+                  <img src={data.qrcode} alt="qrcode" />
                   <Button color="primary" size="small" onClick={onClose}>
                     Can't scan it?
                   </Button>
