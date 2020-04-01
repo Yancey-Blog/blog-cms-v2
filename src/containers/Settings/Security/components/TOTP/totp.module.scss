@@ -72,6 +72,20 @@
   }
 }
 
+.totpKey {
+  margin: 8px 0;
+  padding: 16px 0;
+  font-size: 12px;
+  text-align: center;
+  border: 1px dotted #ccc;
+}
+
+.keyTxt {
+  display: block;
+  cursor: pointer;
+  transform: scale(0.9);
+}
+
 .bold {
   font-weight: bold;
 }

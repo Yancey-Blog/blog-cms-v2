@@ -2,6 +2,7 @@ import React, { FC, useState, useEffect, forwardRef, Ref } from 'react'
 import * as Yup from 'yup'
 import { useSnackbar } from 'notistack'
 import { useFormik } from 'formik'
+import CopyToClipboard from 'react-copy-to-clipboard'
 import { useMutation } from '@apollo/react-hooks'
 import {
   Button,
@@ -42,12 +43,14 @@ const Transition = forwardRef(function Transition(
 
 const TOTP: FC<Props> = ({ setOpen, open }) => {
   const { enqueueSnackbar } = useSnackbar()
+  const [qrcodeMode, setQrcodeMode] = useState(true)
   const [data, setData] = useState<TOTPRes>({ key: '', qrcode: '' })
   const [step, setStep] = useState(0)
   const onClose = () => {
     setOpen(false)
     setStep(0)
     resetForm()
+    setQrcodeMode(true)
   }
 
   const validationSchema = Yup.object().shape({
@@ -131,7 +134,9 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
         <header className={styles.header}>
           {step === 0
             ? 'Get codes from the Authenticator app'
-            : 'Set up Authenticator'}
+            : qrcodeMode
+            ? 'Set up Authenticator'
+            : "Can't scan the barcode?"}
         </header>
 
         {step === 0 && (
@@ -166,42 +171,74 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
         )}
         {step === 1 && (
           <>
-            <ul className={styles.tipGroup}>
-              <li className={styles.tipItem}>
-                Get the Authenticator App from the{' '}
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={
-                    values.device === 'iPhone'
-                      ? 'https://itunes.apple.com/us/app/google-authenticator/id388497605'
-                      : 'https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2'
-                  }
-                >
-                  {values.device === 'iPhone' ? 'App' : 'Play'} Store
-                </a>
-                .
-              </li>
-              <li className={styles.tipItem}>
-                In the App select{' '}
-                <span className={styles.bold}>Set up account</span>.
-              </li>
-              <li className={styles.tipItem}>
-                Choose <span className={styles.bold}>Scan barcode</span>.
-              </li>
-            </ul>
-            <figure className={styles.qrcodeWrapper}>
-              {isFetchingQRcode ? (
-                <CircularProgress />
-              ) : (
-                <div>
-                  <img src={data.qrcode} alt="qrcode" />
-                  <Button color="primary" size="small" onClick={onClose}>
-                    Can't scan it?
-                  </Button>
+            {qrcodeMode ? (
+              <>
+                <ul className={styles.tipGroup}>
+                  <li className={styles.tipItem}>
+                    Get the Authenticator App from the{' '}
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={
+                        values.device === 'iPhone'
+                          ? 'https://itunes.apple.com/us/app/google-authenticator/id388497605'
+                          : 'https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2'
+                      }
+                    >
+                      {values.device === 'iPhone' ? 'App' : 'Play'} Store
+                    </a>
+                    .
+                  </li>
+                  <li className={styles.tipItem}>
+                    In the App select{' '}
+                    <span className={styles.bold}>Set up account</span>.
+                  </li>
+                  <li className={styles.tipItem}>
+                    Choose <span className={styles.bold}>Scan barcode</span>.
+                  </li>
+                </ul>
+                <figure className={styles.qrcodeWrapper}>
+                  {isFetchingQRcode ? (
+                    <CircularProgress />
+                  ) : (
+                    <div>
+                      <img src={data.qrcode} alt="qrcode" />
+                      <Button
+                        color="primary"
+                        size="small"
+                        onClick={() => {
+                          setQrcodeMode(false)
+                        }}
+                      >
+                        Can't scan it?
+                      </Button>
+                    </div>
+                  )}
+                </figure>
+              </>
+            ) : (
+              <ul className={styles.tipGroup}>
+                <li className={styles.tipItem}>
+                  Tap <span className={styles.bold}>Menu</span>, then{' '}
+                  <span className={styles.bold}>Set up account</span>.
+                </li>
+                <li className={styles.tipItem}>
+                  Tap <span className={styles.bold}>Enter provided key</span>.
+                </li>
+                <li className={styles.tipItem}>
+                  Enter your email address and this key:
+                </li>
+                <div className={styles.totpKey}>
+                  <CopyToClipboard text={data.key}>
+                    <span className={styles.keyTxt}>{data.key}</span>
+                  </CopyToClipboard>
                 </div>
-              )}
-            </figure>
+
+                <li className={styles.tipItem}>
+                  Make sure Time based is turned on, and tap Add to finish.
+                </li>
+              </ul>
+            )}
           </>
         )}
 
