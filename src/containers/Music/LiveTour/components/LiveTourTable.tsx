@@ -15,8 +15,8 @@ import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
 import {
-  popoverAnchorOrigin,
-  popoverTransformOrigin,
+  POPOVER_ANCHOR_ORIGIN,
+  POPOVER_TRANSFORM_ORIGIN,
 } from 'src/shared/constants'
 import { ILiveTour } from '../types'
 
@@ -56,7 +56,7 @@ const LiveTourTable: FC<Props> = ({
           const curName = tableMeta.rowData[1]
           return (
             <PopupState variant="popover" popupId="imagePoperOver">
-              {popupState => (
+              {(popupState) => (
                 <div>
                   <img
                     src={value}
@@ -66,8 +66,8 @@ const LiveTourTable: FC<Props> = ({
                   />
                   <Popover
                     {...bindPopover(popupState)}
-                    anchorOrigin={popoverAnchorOrigin}
-                    transformOrigin={popoverTransformOrigin}
+                    anchorOrigin={POPOVER_ANCHOR_ORIGIN}
+                    transformOrigin={POPOVER_TRANSFORM_ORIGIN}
                     disableRestoreFocus
                   >
                     <img

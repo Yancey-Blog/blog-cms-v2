@@ -8,21 +8,19 @@ import { CHANGE_PASSWORD } from '../../typeDefs'
 import SettingItemWrapper from 'src/components/SettingItemWrapper/SettingItemWrapper'
 import styles from './changePassword.module.scss'
 import { logout } from 'src/shared/utils'
+import { PASSWORD_REGEXP } from 'src/shared/constants'
 
 const ChangePassword: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
   const [changePassword] = useMutation(CHANGE_PASSWORD, {
     onCompleted() {
-      enqueueSnackbar(
-        `Your Password has been changed! Please Re-Login after 2s later.`,
-        {
-          variant: 'success',
-        },
-      )
+      enqueueSnackbar(`Your Password has been changed! Please Re-Login.`, {
+        variant: 'success',
+      })
       const timer = setTimeout(() => {
         logout()
         clearTimeout(timer)
-      }, 2000)
+      }, 1000)
     },
   })
 
@@ -36,10 +34,7 @@ const ChangePassword: FC = () => {
     oldPassword: Yup.string().required('Old Password is required.'),
     newPassword: Yup.string()
       .required('New Password is required.')
-      .matches(
-        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/,
-        'Please try a more complex password',
-      ),
+      .matches(PASSWORD_REGEXP, 'Please try a more complex password'),
     confirmNewPassword: Yup.string()
       .oneOf([Yup.ref('newPassword'), null], "Passwords don't match")
       .required('Confirm Password is required'),

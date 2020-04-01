@@ -4,7 +4,7 @@ import { Dialog, Button } from '@material-ui/core'
 import { GetApp, FileCopy } from '@material-ui/icons'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { generateFile, goBack } from 'src/shared/utils'
-import { recoveryCodesFileName } from 'src/shared/constants'
+import { RECOVERY_CODES_FILE_NAME } from 'src/shared/constants'
 import { CREATE_RECOVERY_CODES } from '../../typeDefs'
 import styles from '../TOTP/totp.module.scss'
 
@@ -43,7 +43,7 @@ const RecoveryCodes: FC<Props> = ({ showModal }) => {
         authentication setup below.
       </p>
       <ul className={styles.recoveryCodesGroup}>
-        {recoveryCodes.map(recoveryCodes => (
+        {recoveryCodes.map((recoveryCodes) => (
           <li className={styles.recoveryCodesItem} key={recoveryCodes}>
             {recoveryCodes}
           </li>
@@ -56,7 +56,7 @@ const RecoveryCodes: FC<Props> = ({ showModal }) => {
           variant="contained"
           color="primary"
           href={generateFile(recoveryCodes.join('\n'))}
-          download={recoveryCodesFileName}
+          download={RECOVERY_CODES_FILE_NAME}
           startIcon={<GetApp />}
         >
           Download
