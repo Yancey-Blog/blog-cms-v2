@@ -53,7 +53,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
   const [key, setKey] = useState('')
 
   const [step, setStep] = useState(0)
-  const [device, serDevice] = useState('iPhone')
+  const [device, setDevice] = useState('iPhone')
   const [qrcode, setQRCode] = useState('')
 
   const { enqueueSnackbar } = useSnackbar()
@@ -160,7 +160,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
                 name="mobile-devices"
                 value={device}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  serDevice(e.target.value)
+                  setDevice(e.target.value)
                 }
               >
                 <FormControlLabel
