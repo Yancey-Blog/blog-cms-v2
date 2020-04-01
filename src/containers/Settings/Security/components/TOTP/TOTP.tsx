@@ -43,6 +43,11 @@ const Transition = forwardRef(function Transition(
 })
 
 const TOTP: FC<Props> = ({ setOpen, open }) => {
+  const onClose = () => {
+    setOpen(false)
+    setStep(0)
+  }
+
   const userId = window.localStorage.getItem('userId')
 
   const [key, setKey] = useState('')
@@ -63,6 +68,22 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
     code: '',
   }
 
+  const {
+    handleSubmit,
+    getFieldProps,
+    isSubmitting,
+    errors,
+    resetForm,
+  } = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: async (values) => {
+      await validateTOTP({
+        variables: { input: { ...values, userId, key } },
+      })
+    },
+  })
+
   const [createTOTP, { loading: isFetchingQRcode }] = useMutation(CREATE_TOTP)
 
   const [validateTOTP] = useMutation(VALIDATE_TOTP, {
@@ -70,34 +91,17 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
       enqueueSnackbar('Two-factor authentication is available now!', {
         variant: 'success',
       })
+      resetForm()
+      onClose()
+    },
+    onError() {
+      resetForm()
     },
   })
-
-  const { handleSubmit, getFieldProps, isSubmitting, errors } = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit: async (values) => {
-      await validateTOTP({
-        variables: { input: { ...values, userId, key } },
-      })
-      setOpen(false)
-    },
-  })
-
-  const onSubmit = () => {
-    handleSubmit()
-  }
-
-  const onClose = () => {
-    setOpen(false)
-    setStep(0)
-  }
 
   useEffect(() => {
     const fetchTOTP = async () => {
       const TOTPRes = await createTOTP()
-
-      console.log(TOTPRes)
       setQRCode(TOTPRes.data.createTOTP.qrcode)
       setKey(TOTPRes.data.createTOTP.key)
     }
@@ -238,8 +242,10 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
         <Button
           color="primary"
           type="submit"
-          disabled={isSubmitting}
-          onClick={step === 2 ? onSubmit : () => setStep(step + 1)}
+          disabled={isSubmitting || isFetchingQRcode}
+          onClick={
+            step === 2 ? (e: any) => handleSubmit(e) : () => setStep(step + 1)
+          }
         >
           {step === 2 ? 'Verify' : 'Next'}
         </Button>
