@@ -24,3 +24,11 @@ export const VALIDATE_TOTP = gql`
     }
   }
 `
+
+export const CHANGE_PASSWORD = gql`
+  mutation ChangePassword($input: ChangePasswordInput!) {
+    changePassword(input: $input) {
+      _id
+    }
+  }
+`

@@ -1,11 +1,31 @@
 import React, { FC } from 'react'
 import * as Yup from 'yup'
+import { useSnackbar } from 'notistack'
 import { useFormik } from 'formik'
+import { useMutation } from '@apollo/react-hooks'
 import { TextField, Button } from '@material-ui/core'
-import SettingItemWrapper from '../../../../../components/SettingItemWrapper/SettingItemWrapper'
+import { CHANGE_PASSWORD } from '../../typeDefs'
+import SettingItemWrapper from 'src/components/SettingItemWrapper/SettingItemWrapper'
 import styles from './changePassword.module.scss'
+import { logout } from 'src/shared/utils'
 
 const ChangePassword: FC = () => {
+  const { enqueueSnackbar } = useSnackbar()
+  const [changePassword] = useMutation(CHANGE_PASSWORD, {
+    onCompleted() {
+      enqueueSnackbar(
+        `Your Password has been changed! Please Re-Login after 2s later.`,
+        {
+          variant: 'success',
+        },
+      )
+      const timer = setTimeout(() => {
+        logout()
+        clearTimeout(timer)
+      }, 2000)
+    },
+  })
+
   const initialValues = {
     oldPassword: '',
     newPassword: '',
@@ -14,10 +34,15 @@ const ChangePassword: FC = () => {
 
   const validationSchema = Yup.object().shape({
     oldPassword: Yup.string().required('Old Password is required.'),
-    newPassword: Yup.string().required('New Password is required.'),
-    confirmNewPassword: Yup.string().required(
-      'Confirm New Password is required.',
-    ),
+    newPassword: Yup.string()
+      .required('New Password is required.')
+      .matches(
+        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/,
+        'Please try a more complex password',
+      ),
+    confirmNewPassword: Yup.string()
+      .oneOf([Yup.ref('newPassword'), null], "Passwords don't match")
+      .required('Confirm Password is required'),
   })
 
   const {
@@ -29,8 +54,12 @@ const ChangePassword: FC = () => {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async values => {
-      // TODO:
+    onSubmit: async (values) => {
+      const { confirmNewPassword, ...rest } = values
+      await changePassword({
+        variables: { input: rest },
+      })
+
       resetForm()
     },
   })
@@ -42,6 +71,7 @@ const ChangePassword: FC = () => {
     >
       <form className={styles.customForm} onSubmit={handleSubmit}>
         <TextField
+          type="password"
           className={styles.input}
           error={!!errors.oldPassword}
           helperText={errors.oldPassword}
@@ -50,6 +80,7 @@ const ChangePassword: FC = () => {
           {...getFieldProps('oldPassword')}
         />
         <TextField
+          type="password"
           className={styles.input}
           error={!!errors.newPassword}
           helperText={errors.newPassword}
@@ -58,6 +89,7 @@ const ChangePassword: FC = () => {
           {...getFieldProps('newPassword')}
         />
         <TextField
+          type="password"
           className={styles.input}
           error={!!errors.confirmNewPassword}
           helperText={errors.confirmNewPassword}
@@ -66,8 +98,8 @@ const ChangePassword: FC = () => {
           {...getFieldProps('confirmNewPassword')}
         />
         <p className={styles.tip}>
-          Make sure it's at least 15 characters OR at least 8 characters
-          including a number and a lowercase letter.
+          Make sure it's at least 8 characters and at least including a number,
+          a lowercase letter, a uppercase letter and a punctuation.
         </p>
 
         <Button
