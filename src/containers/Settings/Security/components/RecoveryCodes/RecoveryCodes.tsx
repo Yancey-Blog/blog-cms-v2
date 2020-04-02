@@ -9,6 +9,7 @@ import {
   Slide,
   CircularProgress,
 } from '@material-ui/core'
+import moment from 'moment'
 import { TransitionProps } from '@material-ui/core/transitions'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import { generateFile } from 'src/shared/utils'
@@ -76,7 +77,9 @@ const RecoveryCodes: FC<Props> = ({ setOpen, open }) => {
             </div>
             <ul>
               <li>You can only use each backup code once.</li>
-              <li>These codes were generated on: Apr 2, 2020.</li>
+              <li>
+                These codes were generated on: {moment().format('MMM D, YYYY')}.
+              </li>
             </ul>
           </>
         )}
