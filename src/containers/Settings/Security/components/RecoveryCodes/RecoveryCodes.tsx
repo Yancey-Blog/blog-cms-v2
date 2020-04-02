@@ -85,10 +85,11 @@ const RecoveryCodes: FC<Props> = ({ setOpen, open }) => {
         )}
       </DialogContent>
       <DialogActions>
-        <Button color="primary" onClick={onClose}>
+        <Button size="small" color="primary" onClick={onClose}>
           Close
         </Button>
         <Button
+          size="small"
           color="primary"
           href={generateFile(recoveryCodes.join('\n'))}
           download={RECOVERY_CODES_FILE_NAME}
@@ -100,7 +101,7 @@ const RecoveryCodes: FC<Props> = ({ setOpen, open }) => {
           text={recoveryCodes.join(' ')}
           onCopy={() => setCopyTxt('Copied!')}
         >
-          <Button color="primary" disabled={loading}>
+          <Button size="small" color="primary" disabled={loading}>
             {copyTxt}
           </Button>
         </CopyToClipboard>
