@@ -7,6 +7,7 @@ import {
   DialogContent,
   DialogActions,
   Slide,
+  CircularProgress,
 } from '@material-ui/core'
 import { TransitionProps } from '@material-ui/core/transitions'
 import CopyToClipboard from 'react-copy-to-clipboard'
@@ -28,7 +29,6 @@ const Transition = forwardRef(function Transition(
 })
 
 const RecoveryCodes: FC<Props> = ({ setOpen, open }) => {
-  const userId = window.localStorage.getItem('userId')
   const [copyTxt, setCopyTxt] = useState('Copy')
   const [recoveryCodes, setRecoveryCodes] = useState<string[]>([])
 
@@ -41,12 +41,11 @@ const RecoveryCodes: FC<Props> = ({ setOpen, open }) => {
   useEffect(() => {
     const fetchTOTPAndRecoveryCodes = async () => {
       const res = await createRecoveryCodes()
-
       setRecoveryCodes(res.data.createRecoveryCodes.recoveryCodes)
     }
 
-    fetchTOTPAndRecoveryCodes()
-  }, [createRecoveryCodes, userId])
+    if (open) fetchTOTPAndRecoveryCodes()
+  }, [createRecoveryCodes, open])
 
   return (
     <Dialog
@@ -59,22 +58,33 @@ const RecoveryCodes: FC<Props> = ({ setOpen, open }) => {
     >
       <DialogTitle>Save your backup codes</DialogTitle>
       <DialogContent>
-        <p className={styles.tips}>
-          Keep these backup codes somewhere safe but accessible.
-        </p>
-        <div className={styles.listContainer}>
-          <ul className={styles.recoveryCodesGroup}>
-            {recoveryCodes.map((recoveryCodes) => (
-              <li className={styles.recoveryCodesItem} key={recoveryCodes}>
-                <span className={styles.square} />
-                {recoveryCodes}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {loading ? (
+          <div className={styles.loading}>
+            <CircularProgress />
+          </div>
+        ) : (
+          <>
+            <div className={styles.listContainer}>
+              <ul className={styles.recoveryCodesGroup}>
+                {recoveryCodes.map((recoveryCodes) => (
+                  <li className={styles.recoveryCodesItem} key={recoveryCodes}>
+                    <span className={styles.square} />
+                    {recoveryCodes}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <ul>
+              <li>You can only use each backup code once.</li>
+              <li>These codes were generated on: Apr 2, 2020.</li>
+            </ul>
+          </>
+        )}
       </DialogContent>
       <DialogActions>
-        <Button color="primary">Close</Button>
+        <Button color="primary" onClick={onClose}>
+          Close
+        </Button>
         <Button
           color="primary"
           href={generateFile(recoveryCodes.join('\n'))}

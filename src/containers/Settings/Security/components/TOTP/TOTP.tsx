@@ -81,7 +81,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
     },
   })
 
-  const [createTOTP, { loading: isFetchingQRcode }] = useMutation(CREATE_TOTP)
+  const [createTOTP, { loading }] = useMutation(CREATE_TOTP)
 
   const [validateTOTP] = useMutation(VALIDATE_TOTP, {
     onCompleted() {
@@ -198,7 +198,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
                   </li>
                 </ul>
                 <figure className={styles.qrcodeWrapper}>
-                  {isFetchingQRcode ? (
+                  {loading ? (
                     <CircularProgress />
                   ) : (
                     <div>
@@ -265,7 +265,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
         <Button
           color="primary"
           type="submit"
-          disabled={isSubmitting || isFetchingQRcode}
+          disabled={isSubmitting || loading}
           onClick={
             step === 2 ? (e: any) => handleSubmit(e) : () => setStep(step + 1)
           }

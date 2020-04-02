@@ -1,4 +1,6 @@
 .recoveryCode {
+  color: #3c4043;
+
   :global(.MuiDialog-paper) {
     width: 456px;
   }
@@ -7,7 +9,9 @@
     padding-bottom: 0;
   }
 
-  color: #3c4043;
+  :global(.MuiDialogActions-root) {
+    margin-top: 20px;
+  }
 }
 
 .tips {
@@ -16,11 +20,11 @@
 }
 
 .listContainer {
-  border: 1px dotted #dadce0;
-  margin-top: 24px;
-  padding: 16px 0 16px 0;
   position: relative;
+  margin: 24px 0;
+  padding: 16px 0;
   text-align: center;
+  border: 1px dotted #dadce0;
 }
 
 .recoveryCodesGroup {
@@ -41,4 +45,15 @@
   width: 12px;
   height: 12px;
   border: 1px solid;
+}
+
+.tipGroup {
+  margin-top: 20px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 180px;
 }
