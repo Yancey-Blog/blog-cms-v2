@@ -13,6 +13,7 @@ import {
 } from '@material-ui/icons'
 import SettingItemWrapper from '../../../../../components/SettingItemWrapper/SettingItemWrapper'
 import TOTP from '../TOTP/TOTP'
+import RecoveryCodes from '../RecoveryCodes/RecoveryCodes'
 import styles from './twoFactors.module.scss'
 
 interface Props {
@@ -74,7 +75,7 @@ const TwoFactors: FC<Props> = ({ isTOTP }) => {
 
           <Divider />
 
-          <ListItem button>
+          <ListItem button onClick={() => setOpen(true)}>
             <ListItemText primary="Recovery codes" className={styles.title} />
             <ListItemText
               primary={<p className={styles.phone}>Printed yesterday</p>}
@@ -87,7 +88,8 @@ const TwoFactors: FC<Props> = ({ isTOTP }) => {
         </List>
       </SettingItemWrapper>
 
-      <TOTP setOpen={setOpen} open={open} />
+      {/* <TOTP setOpen={setOpen} open={open} /> */}
+      <RecoveryCodes setOpen={setOpen} open={open} />
     </>
   )
 }
