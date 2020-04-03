@@ -3,8 +3,7 @@ import {
   // Dashboard,
   Home,
   Headset,
-  // PostAdd,
-  // LinkedIn,
+  PostAdd,
   Settings,
   Event,
 } from '@material-ui/icons'
@@ -83,26 +82,20 @@ const routes: Route[] = [
       },
     ],
   },
-  // {
-  //   name: 'Article',
-  //   path: 'article-list',
-  //   icon: <PostAdd />,
-  //   component: 'Article/ArticleList/ArticleList',
-  //   routes: [
-  //     {
-  //       name: 'Article Detail',
-  //       path: 'article-detail',
-  //       component: 'Article/ArticleDetail/ArticleDetail',
-  //       hideInMenu: true,
-  //     },
-  //   ],
-  // },
-  // {
-  //   name: 'CV',
-  //   path: 'cv',
-  //   icon: <LinkedIn />,
-  //   component: 'CV/CV',
-  // },
+  {
+    name: 'Post',
+    path: 'post-list',
+    icon: <PostAdd />,
+    component: 'Post/PostList',
+    routes: [
+      {
+        name: 'Post Config',
+        path: 'post-config',
+        component: 'Post/PostConfig',
+        hideInMenu: true,
+      },
+    ],
+  },
   {
     name: 'Agenda',
     path: 'agenda',
