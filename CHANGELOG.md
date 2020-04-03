@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.15.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.14.0...v0.15.0) (2020-04-03)
+
+
+### Features
+
+* code opyimization ([5f0fb83](https://github.com/Yancey-Blog/blog-cms-v2/commit/5f0fb83e08b4b8b73ad5e3024305115fe8e80f01))
+* delete useless code ([b587b81](https://github.com/Yancey-Blog/blog-cms-v2/commit/b587b812099814d16cbfbad479bd5ce0572967d5))
+* finish changepassword ([009bb3f](https://github.com/Yancey-Blog/blog-cms-v2/commit/009bb3f2a44ccf71f6cc96820bedb3caae102fd4))
+* finish TOTP ([427f939](https://github.com/Yancey-Blog/blog-cms-v2/commit/427f9395da46aa9cacb9f00dbe21e09c9ff01aa8))
+* make constants to uppercase ([f1ca8ec](https://github.com/Yancey-Blog/blog-cms-v2/commit/f1ca8ece5d1763eb9e293b517046b18e3ea601b8))
+* support secretKey for TOTP ([963bb88](https://github.com/Yancey-Blog/blog-cms-v2/commit/963bb88152996de2c938b7be8ad28deb701c0b6c))
+* update createdAt of RecoveryCodes ([2db453a](https://github.com/Yancey-Blog/blog-cms-v2/commit/2db453acce5fce45a664efcf4a826bad23a8b162))
+* update Footer.module.scss ([6a6ba4a](https://github.com/Yancey-Blog/blog-cms-v2/commit/6a6ba4a724f69f8978f744cc9eafa2e58dd87fd3))
+* update RecoveryCodes ([aabadf8](https://github.com/Yancey-Blog/blog-cms-v2/commit/aabadf822fa907801b768ef2b0eca50fa56e4664))
+* update RecoveryCodes ([d4ccdb8](https://github.com/Yancey-Blog/blog-cms-v2/commit/d4ccdb87eba99180554df604adddf02fcabf6236))
+* update styles of totpKey ([4a247b7](https://github.com/Yancey-Blog/blog-cms-v2/commit/4a247b7510d1323f844f1b31a0f972748a3722b2))
+* update TOTP ([453d8fa](https://github.com/Yancey-Blog/blog-cms-v2/commit/453d8fa4819338ef0ef4ec662a235f0a31c7637d))
+* updateTOTP ([5a62f64](https://github.com/Yancey-Blog/blog-cms-v2/commit/5a62f64e5c5aec2a5bbedbe72c7f4a9a841aab22))
+* use size="small" for Button ([9f6f5c4](https://github.com/Yancey-Blog/blog-cms-v2/commit/9f6f5c4e6f010279f1831adcc416e6d1f8134075))
+
 ## [0.14.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.13.0...v0.14.0) (2020-03-31)
 
 
