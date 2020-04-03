@@ -15,9 +15,9 @@ import Loading from './components/Loading/InstagramLoading'
 import client from './shared/apolloClient'
 import history from './shared/history'
 import {
-  snackbarAnchorOrigin,
-  snackbarMaxNum,
-  snackbarAutoHideDuration,
+  SNACKBAR_ANCHOR_ORIGIN,
+  SNACKBAR_MAX_NUM,
+  SNACKBAR_AUTO_HIDE_DURATION,
 } from './shared/constants'
 import './assets/global.scss'
 
@@ -30,9 +30,9 @@ serviceWorker.unregister()
 ReactDOM.render(
   <ApolloProvider client={client}>
     <SnackbarProvider
-      maxSnack={snackbarMaxNum}
-      anchorOrigin={snackbarAnchorOrigin}
-      autoHideDuration={snackbarAutoHideDuration}
+      maxSnack={SNACKBAR_MAX_NUM}
+      anchorOrigin={SNACKBAR_ANCHOR_ORIGIN}
+      autoHideDuration={SNACKBAR_AUTO_HIDE_DURATION}
     >
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <SnackbarUtilsConfigurator />

@@ -27,16 +27,14 @@ const Login: FC = () => {
   })
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email()
-      .required('This field is required.'),
+    email: Yup.string().email().required('This field is required.'),
     password: Yup.string().required('This field is required.'),
   })
 
   const { handleSubmit, getFieldProps, resetForm, errors } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       login({
         variables: { input: values },
       })
@@ -45,7 +43,7 @@ const Login: FC = () => {
   })
 
   return (
-    <main className={styles.loginWrapper} id="xxxx">
+    <main className={styles.loginWrapper}>
       <form className={styles.loginForm} onSubmit={handleSubmit}>
         <div className={styles.header}>Welcome back!</div>
         <div className={styles.headerExtra}>

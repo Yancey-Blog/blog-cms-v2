@@ -1,15 +1,8 @@
-import React, {
-  FC,
-  useState,
-  useEffect,
-  ChangeEvent,
-  forwardRef,
-  Ref,
-  ReactElement,
-} from 'react'
+import React, { FC, useState, useEffect, forwardRef, Ref } from 'react'
 import * as Yup from 'yup'
 import { useSnackbar } from 'notistack'
 import { useFormik } from 'formik'
+import CopyToClipboard from 'react-copy-to-clipboard'
 import { useMutation } from '@apollo/react-hooks'
 import {
   Button,
@@ -31,6 +24,11 @@ import { Close } from '@material-ui/icons'
 import { CREATE_TOTP, VALIDATE_TOTP } from '../../typeDefs'
 import styles from './totp.module.scss'
 
+interface TOTPRes {
+  key: string
+  qrcode: string
+}
+
 interface Props {
   setOpen: Function
   open: boolean
@@ -44,69 +42,66 @@ const Transition = forwardRef(function Transition(
 })
 
 const TOTP: FC<Props> = ({ setOpen, open }) => {
-  const userId = window.localStorage.getItem('userId')
-  const email = window.localStorage.getItem('email')
-
-  const [step, setStep] = useState(0)
-  const [device, serDevice] = useState('iPhone')
-  const [qrcode, setQRCode] = useState('')
-
   const { enqueueSnackbar } = useSnackbar()
+  const [qrcodeMode, setQrcodeMode] = useState(true)
+  const [data, setData] = useState<TOTPRes>({ key: '', qrcode: '' })
+  const [step, setStep] = useState(0)
+  const onClose = () => {
+    setOpen(false)
+    setStep(0)
+    resetForm()
+    setQrcodeMode(true)
+  }
 
   const validationSchema = Yup.object().shape({
-    token: Yup.string()
-      .matches(/^\d{6}$/, 'token must be a six-digit code.')
-      .required('token should not be empty'),
+    code: Yup.string()
+      .matches(/^\d{6}$/, 'Invalid code. Please try again.')
+      .required('Please enter your verification code.'),
   })
 
   const initialValues = {
-    token: '',
+    code: '',
+    device: 'iPhone',
   }
 
-  const [createTOTP, { loading: isFetchingQRcode }] = useMutation(CREATE_TOTP)
+  const {
+    values,
+    handleSubmit,
+    getFieldProps,
+    isSubmitting,
+    errors,
+    resetForm,
+  } = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: async (values) => {
+      await validateTOTP({
+        variables: { input: { code: values.code, key: data.key } },
+      })
+    },
+  })
+
+  const [createTOTP, { loading }] = useMutation(CREATE_TOTP)
 
   const [validateTOTP] = useMutation(VALIDATE_TOTP, {
     onCompleted() {
       enqueueSnackbar('Two-factor authentication is available now!', {
         variant: 'success',
       })
+      onClose()
     },
   })
-
-  const { handleSubmit, getFieldProps, isSubmitting, errors } = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit: async values => {
-      await validateTOTP({
-        variables: { input: { ...values, userId } },
-      })
-      setOpen(false)
-    },
-  })
-
-  const onSubmit = () => {
-    handleSubmit()
-    setStep(0)
-  }
-
-  const onClose = () => {
-    setOpen(false)
-    setStep(0)
-  }
 
   useEffect(() => {
     const fetchTOTP = async () => {
-      const TOTPRes = await createTOTP({
-        variables: { input: { userId, email } },
-      })
-
-      setQRCode(TOTPRes.data.createTOTP.qrcode)
+      const TOTPRes = await createTOTP()
+      setData(TOTPRes.data.createTOTP)
     }
 
     if (step === 1) {
       fetchTOTP()
     }
-  }, [createTOTP, userId, email, step])
+  }, [createTOTP, step])
 
   return (
     <Dialog
@@ -139,7 +134,9 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
         <header className={styles.header}>
           {step === 0
             ? 'Get codes from the Authenticator app'
-            : 'Set up Authenticator'}
+            : qrcodeMode
+            ? 'Set up Authenticator'
+            : "Can't scan the barcode?"}
         </header>
 
         {step === 0 && (
@@ -155,10 +152,8 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
               <RadioGroup
                 aria-label="mobile devices"
                 name="mobile-devices"
-                value={device}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  serDevice(e.target.value)
-                }
+                value={values.device}
+                {...getFieldProps('device')}
               >
                 <FormControlLabel
                   value="Android"
@@ -176,42 +171,74 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
         )}
         {step === 1 && (
           <>
-            <ul className={styles.tipGroup}>
-              <li className={styles.tipItem}>
-                Get the Authenticator App from the{' '}
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={
-                    device === 'iPhone'
-                      ? 'https://itunes.apple.com/us/app/google-authenticator/id388497605'
-                      : 'https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2'
-                  }
-                >
-                  {device === 'iPhone' ? 'App' : 'Play'} Store
-                </a>
-                .
-              </li>
-              <li className={styles.tipItem}>
-                In the App select{' '}
-                <span className={styles.bold}>Set up account</span>.
-              </li>
-              <li className={styles.tipItem}>
-                Choose <span className={styles.bold}>Scan barcode</span>.
-              </li>
-            </ul>
-            <figure className={styles.qrcodeWrapper}>
-              {isFetchingQRcode ? (
-                <CircularProgress />
-              ) : (
-                <div>
-                  <img src={qrcode} alt="qrcode" />
-                  <Button color="primary" size="small" onClick={onClose}>
-                    Can't scan it?
-                  </Button>
+            {qrcodeMode ? (
+              <>
+                <ul className={styles.tipGroup}>
+                  <li className={styles.tipItem}>
+                    Get the Authenticator App from the{' '}
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={
+                        values.device === 'iPhone'
+                          ? 'https://itunes.apple.com/us/app/google-authenticator/id388497605'
+                          : 'https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2'
+                      }
+                    >
+                      {values.device === 'iPhone' ? 'App' : 'Play'} Store
+                    </a>
+                    .
+                  </li>
+                  <li className={styles.tipItem}>
+                    In the App select{' '}
+                    <span className={styles.bold}>Set up account</span>.
+                  </li>
+                  <li className={styles.tipItem}>
+                    Choose <span className={styles.bold}>Scan barcode</span>.
+                  </li>
+                </ul>
+                <figure className={styles.qrcodeWrapper}>
+                  {loading ? (
+                    <CircularProgress />
+                  ) : (
+                    <div>
+                      <img src={data.qrcode} alt="qrcode" />
+                      <Button
+                        color="primary"
+                        size="small"
+                        onClick={() => {
+                          setQrcodeMode(false)
+                        }}
+                      >
+                        Can't scan it?
+                      </Button>
+                    </div>
+                  )}
+                </figure>
+              </>
+            ) : (
+              <ul className={styles.tipGroup}>
+                <li className={styles.tipItem}>
+                  Tap <span className={styles.bold}>Menu</span>, then{' '}
+                  <span className={styles.bold}>Set up account</span>.
+                </li>
+                <li className={styles.tipItem}>
+                  Tap <span className={styles.bold}>Enter provided key</span>.
+                </li>
+                <li className={styles.tipItem}>
+                  Enter your email address and this key:
+                </li>
+                <div className={styles.totpKey}>
+                  <CopyToClipboard text={data.key}>
+                    <span className={styles.keyTxt}>{data.key}</span>
+                  </CopyToClipboard>
                 </div>
-              )}
-            </figure>
+
+                <li className={styles.tipItem}>
+                  Make sure Time based is turned on, and tap Add to finish.
+                </li>
+              </ul>
+            )}
           </>
         )}
 
@@ -220,15 +247,14 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
             <p className={styles.inputTipHeader}>
               Enter the 6-digit code you see in the app.
             </p>
-            <form className={styles.customForm}>
-              <TextField
-                label="Enter code"
-                error={!!errors.token}
-                helperText={errors.token}
-                autoFocus
-                {...getFieldProps('token')}
-              />
-            </form>
+            <TextField
+              className={styles.customInput}
+              label="Enter code"
+              error={!!errors.code}
+              helperText={errors.code}
+              autoFocus
+              {...getFieldProps('code')}
+            />
           </>
         )}
       </DialogContent>
@@ -239,8 +265,10 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
         <Button
           color="primary"
           type="submit"
-          disabled={isSubmitting}
-          onClick={step === 2 ? onSubmit : () => setStep(step + 1)}
+          disabled={isSubmitting || loading}
+          onClick={
+            step === 2 ? (e: any) => handleSubmit(e) : () => setStep(step + 1)
+          }
         >
           {step === 2 ? 'Verify' : 'Next'}
         </Button>

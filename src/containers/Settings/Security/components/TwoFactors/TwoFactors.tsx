@@ -13,6 +13,7 @@ import {
 } from '@material-ui/icons'
 import SettingItemWrapper from '../../../../../components/SettingItemWrapper/SettingItemWrapper'
 import TOTP from '../TOTP/TOTP'
+import RecoveryCodes from '../RecoveryCodes/RecoveryCodes'
 import styles from './twoFactors.module.scss'
 
 interface Props {
@@ -20,7 +21,8 @@ interface Props {
 }
 
 const TwoFactors: FC<Props> = ({ isTOTP }) => {
-  const [open, setOpen] = useState(false)
+  const [openTOTP, setOpenTOTP] = useState(false)
+  const [openRecoveryCodes, setOpenRecoveryCodes] = useState(false)
 
   return (
     <>
@@ -33,7 +35,7 @@ const TwoFactors: FC<Props> = ({ isTOTP }) => {
           aria-label="two-factor-nav"
           className={styles.listGroup}
         >
-          <ListItem button onClick={() => setOpen(true)}>
+          <ListItem button onClick={() => setOpenTOTP(true)}>
             <ListItemText
               primary="Authenticator app"
               className={styles.title}
@@ -74,7 +76,7 @@ const TwoFactors: FC<Props> = ({ isTOTP }) => {
 
           <Divider />
 
-          <ListItem button>
+          <ListItem button onClick={() => setOpenRecoveryCodes(true)}>
             <ListItemText primary="Recovery codes" className={styles.title} />
             <ListItemText
               primary={<p className={styles.phone}>Printed yesterday</p>}
@@ -87,7 +89,8 @@ const TwoFactors: FC<Props> = ({ isTOTP }) => {
         </List>
       </SettingItemWrapper>
 
-      <TOTP setOpen={setOpen} open={open} />
+      <TOTP setOpen={setOpenTOTP} open={openTOTP} />
+      <RecoveryCodes setOpen={setOpenRecoveryCodes} open={openRecoveryCodes} />
     </>
   )
 }
