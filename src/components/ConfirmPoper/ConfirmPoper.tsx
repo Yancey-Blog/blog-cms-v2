@@ -8,8 +8,8 @@ import {
   DialogTitle,
 } from '@material-ui/core'
 import {
-  popoverAnchorOrigin,
-  popoverTransformOrigin,
+  POPOVER_ANCHOR_ORIGIN,
+  POPOVER_TRANSFORM_ORIGIN,
 } from 'src/shared/constants'
 
 interface Props {
@@ -20,15 +20,15 @@ interface Props {
 const ConfirmPoper: FC<Props> = ({ children, onOk, title }) => {
   return (
     <PopupState variant="popover" popupId="deleteOnePoperOver">
-      {popupState => (
+      {(popupState) => (
         <>
           <div style={{ cursor: 'pointer' }} {...bindTrigger(popupState)}>
             {children}
           </div>
           <Popover
             {...bindPopover(popupState)}
-            anchorOrigin={popoverAnchorOrigin}
-            transformOrigin={popoverTransformOrigin}
+            anchorOrigin={POPOVER_ANCHOR_ORIGIN}
+            transformOrigin={POPOVER_TRANSFORM_ORIGIN}
             disableRestoreFocus
           >
             <Paper>

@@ -1,0 +1,59 @@
+.recoveryCode {
+  color: #3c4043;
+
+  :global(.MuiDialog-paper) {
+    width: 456px;
+  }
+
+  :global(.MuiDialogTitle-root) {
+    padding-bottom: 0;
+  }
+
+  :global(.MuiDialogActions-root) {
+    margin-top: 20px;
+  }
+}
+
+.tips {
+  color: #3c4043;
+  font-size: 14px;
+}
+
+.listContainer {
+  position: relative;
+  margin: 24px 0;
+  padding: 16px 0;
+  text-align: center;
+  border: 1px dotted #dadce0;
+}
+
+.recoveryCodesGroup {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.recoveryCodesItem {
+  font-size: 20px;
+  color: #5f6368;
+}
+
+.square {
+  position: relative;
+  top: -1px;
+  display: inline-block;
+  margin-right: 10px;
+  width: 12px;
+  height: 12px;
+  border: 1px solid;
+}
+
+.tipGroup {
+  margin-top: 20px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 180px;
+}

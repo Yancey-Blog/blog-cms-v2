@@ -72,6 +72,20 @@
   }
 }
 
+.totpKey {
+  margin: 16px 0;
+  padding: 16px 0;
+  font-size: 12px;
+  text-align: center;
+  border: 1px dotted #ccc;
+}
+
+.keyTxt {
+  display: block;
+  cursor: pointer;
+  transform: scale(0.9);
+}
+
 .bold {
   font-weight: bold;
 }
@@ -82,7 +96,7 @@
   color: #3c4043;
 }
 
-.customForm {
+.customInput {
   margin-top: 10px;
   margin-bottom: 48px;
 }
