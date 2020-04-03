@@ -17,16 +17,23 @@ const PostConfig: FC = () => {
   const classes = useStyles()
   const editorRef = useRef<Editor>(null)
 
-  const foo = () => {
+  const enhanceMarkdownEditor = () => {
     if (editorRef.current) {
-      const editorEl = editorRef.current
-      const toolbar = editorEl.getInstance().getUI().getToolbar()
+      const instance = editorRef.current.getInstance()
+      const toolbar = instance.getUI().getToolbar()
 
       //@ts-ignore
-      editorEl.editorInst.eventManager.addEventType('uploadImg')
+      instance.eventManager.addEventType('uploadImg')
       //@ts-ignore
-      editorEl.editorInst.eventManager.listen('uploadImg', function () {
+      instance.eventManager.listen('uploadImg', () => {
         alert('Click!')
+      })
+
+      //@ts-ignore
+      instance.eventManager.addEventType('insertEmbeded')
+      //@ts-ignore
+      instance.eventManager.listen('insertEmbeded', () => {
+        instance.insertText('```embeded\n\n```')
       })
 
       toolbar.insertItem(16, {
@@ -37,11 +44,21 @@ const PostConfig: FC = () => {
           tooltip: 'Insert Image',
         },
       })
+
+      toolbar.insertItem(21, {
+        type: 'button',
+        options: {
+          className: 'tui-emebed-icon',
+          event: 'insertEmbeded',
+          tooltip: 'Insert Embeded Block',
+          text: 'EB',
+        },
+      })
     }
   }
 
   useEffect(() => {
-    foo()
+    enhanceMarkdownEditor()
   }, [])
 
   return (
@@ -70,7 +87,6 @@ const PostConfig: FC = () => {
           'outdent',
           'divider',
           'table',
-          // 'image',
           'link',
           'divider',
           'code',
