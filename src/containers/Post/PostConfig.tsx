@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useRef, useEffect } from 'react'
 import { Paper } from '@material-ui/core'
 import 'tui-editor/dist/tui-editor.min.css'
 import 'tui-editor/dist/tui-editor-contents.min.css'
@@ -15,17 +15,67 @@ import useStyles from './styles'
 
 const PostConfig: FC = () => {
   const classes = useStyles()
+  const editorRef = useRef<Editor>(null)
+
+  const foo = () => {
+    if (editorRef.current) {
+      const editorEl = editorRef.current
+      const toolbar = editorEl.getInstance().getUI().getToolbar()
+
+      //@ts-ignore
+      editorEl.editorInst.eventManager.addEventType('uploadImg')
+      //@ts-ignore
+      editorEl.editorInst.eventManager.listen('uploadImg', function () {
+        alert('Click!')
+      })
+
+      toolbar.insertItem(16, {
+        type: 'button',
+        options: {
+          className: 'tui-image',
+          event: 'uploadImg',
+          tooltip: 'Insert Image',
+        },
+      })
+    }
+  }
+
+  useEffect(() => {
+    foo()
+  }, [])
 
   return (
     <Paper className={classes.editorWrapper}>
       <Editor
+        hideModeSwitch={true}
+        useCommandShortcut={true}
         usageStatistics={false}
         initialValue=""
         previewStyle="vertical"
         height="100%"
         initialEditType="markdown"
-        hideModeSwitch={true}
-        useCommandShortcut={true}
+        toolbarItems={[
+          'heading',
+          'bold',
+          'italic',
+          'strike',
+          'divider',
+          'hr',
+          'quote',
+          'divider',
+          'ul',
+          'ol',
+          'task',
+          'indent',
+          'outdent',
+          'divider',
+          'table',
+          // 'image',
+          'link',
+          'divider',
+          'code',
+          'codeblock',
+        ]}
         plugins={[
           chartPlugin,
           tableMergedCellPlugin,
@@ -33,6 +83,7 @@ const PostConfig: FC = () => {
           colorSyntaxPlugin,
           embededPlugin,
         ]}
+        ref={editorRef}
       />
     </Paper>
   )
