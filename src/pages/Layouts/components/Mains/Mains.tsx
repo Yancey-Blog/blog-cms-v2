@@ -43,7 +43,7 @@ const Mains: FC = () => {
         <Route
           exact
           key={route.path}
-          path={`/${route.path}`}
+          path={route.path}
           component={loadable(
             () => import(`src/containers/${route.component}`),
             {
