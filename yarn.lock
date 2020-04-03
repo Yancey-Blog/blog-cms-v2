@@ -1906,6 +1906,32 @@
   resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-10.0.0.tgz#68dc84111c882cbf595d6bafa3691e4daa375fbd"
   integrity sha512-ygQ1SaX3AzWDGPer5e2LF7FvWwLPG+XYViHvpW4ObseOkqmJI2ruawp9iLmEwxQW88jNCCExvonh0jBAwwiYZw==
 
+"@toast-ui/editor-plugin-chart@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/@toast-ui/editor-plugin-chart/-/editor-plugin-chart-1.0.0.tgz#0767c7d8b5b28465de7c8e54c91f7a1f68af8eb4"
+  integrity sha512-LyAL1kEpHujVDQB23SjbJZ0nCp1/RZlBGhDCHfuDlqqR03y7/7VfGJZ+b+ePZ4xSg9P3F4bOe86xdYHRK/6BNQ==
+  dependencies:
+    tui-chart "^3.10.1"
+
+"@toast-ui/editor-plugin-color-syntax@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/@toast-ui/editor-plugin-color-syntax/-/editor-plugin-color-syntax-1.0.0.tgz#cd81221ade41901567dea55726c1bff20292396a"
+  integrity sha512-iUYF6Ygw8733OQ7RPBqAIkrxmf0lHaBixrnlzYR2csFsdKjtsLFQ08HZ1LMNRLBzygC7LkZ9yrjBsXwi1enBzg==
+  dependencies:
+    tui-color-picker "^2.2.6"
+
+"@toast-ui/editor-plugin-table-merged-cell@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/@toast-ui/editor-plugin-table-merged-cell/-/editor-plugin-table-merged-cell-1.0.0.tgz#b307d06d247d63e1ce4b69fb11d02ac743321935"
+  integrity sha512-mkn667x5+0KYmfFxkK/JN1DsDcIieKaFnRMMlY/byBgTpV8GCYAvEnlwPe70GjeyeoGalahEhGtJq/B4WI4T5Q==
+
+"@toast-ui/editor-plugin-uml@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/@toast-ui/editor-plugin-uml/-/editor-plugin-uml-1.0.0.tgz#11182b3562ea0aa40059f4ff92a44decd789232a"
+  integrity sha512-Z5edquefCrAHnatHiu+tnd4XrkrWSR5+c099clWf2Vzdou/ACyuc0R5kqwUF+qFHq6JFKYYlFtH1gaGs0q9kSg==
+  dependencies:
+    plantuml-encoder "^1.4.0"
+
 "@toast-ui/editor@^2.0.1":
   version "2.0.1"
   resolved "https://registry.npmjs.org/@toast-ui/editor/-/editor-2.0.1.tgz#749e5be1f02f42ded51488d1575ab1c19ca59952"
@@ -10085,7 +10111,7 @@ pkg-up@3.1.0, pkg-up@^3.1.0:
   dependencies:
     find-up "^3.0.0"
 
-plantuml-encoder@^1.2.5:
+plantuml-encoder@^1.2.5, plantuml-encoder@^1.4.0:
   version "1.4.0"
   resolved "https://registry.npmjs.org/plantuml-encoder/-/plantuml-encoder-1.4.0.tgz#7899302cf785de956bf1a167e15420feee5975f7"
   integrity sha512-sxMwpDw/ySY1WB2CE3+IdMuEcWibJ72DDOsXLkSmEaSzwEUaYBT6DWgOfBiHGCux4q433X6+OEFWjlVqp7gL6g==
@@ -11050,9 +11076,9 @@ range-parser@^1.2.1, range-parser@~1.2.1:
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
 
-"raphael@git+https://github.com/nhn/raphael.git#2.2.0-c":
+"raphael@https://github.com/nhn/raphael.git#2.2.0-c":
   version "2.2.0-c"
-  resolved "git+https://github.com/nhn/raphael.git#78a6ed3ec269f33b6457b0ec66f8c3d1f2ed70e0"
+  resolved "https://github.com/nhn/raphael.git#78a6ed3ec269f33b6457b0ec66f8c3d1f2ed70e0"
   dependencies:
     eve "git://github.com/adobe-webplatform/eve.git#eef80ed"
 
@@ -13077,7 +13103,7 @@ tty-browserify@0.0.0:
   resolved "https://registry.yarnpkg.com/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
   integrity sha1-oVe6QC2iTpv5V/mqadUk7tQpAaY=
 
-tui-chart@^3.7.0:
+tui-chart@^3.10.1, tui-chart@^3.7.0:
   version "3.11.1"
   resolved "https://registry.npmjs.org/tui-chart/-/tui-chart-3.11.1.tgz#079b6a7e2dcac0530fe6e0480ea5db4a43aa43a7"
   integrity sha512-4/06kogBXuawPlMh6TsLMhvfgKWOfKO0FW6Z7CceAt/NyFj9fFT06MgsIR7AU92VzpLiv15O29L/fv2Go4N4fA==
@@ -13096,7 +13122,7 @@ tui-code-snippet@^2.2.0, tui-code-snippet@^2.3.1:
   resolved "https://registry.npmjs.org/tui-code-snippet/-/tui-code-snippet-2.3.1.tgz#d11d9838c90a2e14decb10deba595758731c66de"
   integrity sha512-HopmhYTLLHAF0aUnGN+ICQzX0j6T2dXhLeW+oupH58MktsWes19vW5BbUgFjONsq2gDT8+B1lOKdRliRAqnKXg==
 
-tui-color-picker@^2.2.1:
+tui-color-picker@^2.2.1, tui-color-picker@^2.2.6:
   version "2.2.6"
   resolved "https://registry.npmjs.org/tui-color-picker/-/tui-color-picker-2.2.6.tgz#bab54e47380e550bb3ac8ae974021b3cc2518aa9"
   integrity sha512-+GBTUFGOkDaFiyYt/4IJTKA68Oj7fC9lU+RHs56luyFHYSO3gWuvsZntxAvFFeCGiZFFhu9XQQaZ0rVS5TUOmA==
