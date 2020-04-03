@@ -10,7 +10,7 @@ import umlPlugin from '@toast-ui/editor-plugin-uml'
 import tableMergedCellPlugin from '@toast-ui/editor-plugin-table-merged-cell'
 import chartPlugin from '@toast-ui/editor-plugin-chart'
 import colorSyntaxPlugin from '@toast-ui/editor-plugin-color-syntax'
-import embededPlugin from 'src/shared/editor-plugin-embeded'
+import embededPlugin from 'src/shared/editorEmbededPlugin'
 import useStyles from './styles'
 
 const PostConfig: FC = () => {
