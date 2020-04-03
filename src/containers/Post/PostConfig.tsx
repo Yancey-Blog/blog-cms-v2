@@ -5,11 +5,11 @@ import 'tui-editor/dist/tui-editor-contents.min.css'
 import 'codemirror/lib/codemirror.css'
 import 'tui-chart/dist/tui-chart.css'
 import 'tui-color-picker/dist/tui-color-picker.css'
-import uml from '@toast-ui/editor-plugin-uml'
-import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell'
-import chart from '@toast-ui/editor-plugin-chart'
-import colorSyntax from '@toast-ui/editor-plugin-color-syntax'
 import { Editor } from '@toast-ui/react-editor'
+import umlPlugin from '@toast-ui/editor-plugin-uml'
+import tableMergedCellPlugin from '@toast-ui/editor-plugin-table-merged-cell'
+import chartPlugin from '@toast-ui/editor-plugin-chart'
+import colorSyntaxPlugin from '@toast-ui/editor-plugin-color-syntax'
 import embededPlugin from 'src/shared/editor-plugin-embeded'
 import useStyles from './styles'
 
@@ -26,7 +26,13 @@ const PostConfig: FC = () => {
         initialEditType="markdown"
         hideModeSwitch={true}
         useCommandShortcut={true}
-        plugins={[chart, tableMergedCell, uml, colorSyntax, embededPlugin]}
+        plugins={[
+          chartPlugin,
+          tableMergedCellPlugin,
+          umlPlugin,
+          colorSyntaxPlugin,
+          embededPlugin,
+        ]}
       />
     </Paper>
   )
