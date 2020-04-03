@@ -11,6 +11,7 @@ import tableMergedCellPlugin from '@toast-ui/editor-plugin-table-merged-cell'
 import chartPlugin from '@toast-ui/editor-plugin-chart'
 import colorSyntaxPlugin from '@toast-ui/editor-plugin-color-syntax'
 import embededPlugin from 'src/shared/editorEmbededPlugin'
+import enhanceEditor from 'src/shared/enhanceEditor'
 import UploaderModal from 'src/components/UploaderModal/UploaderModal'
 import { UploaderRes } from 'src/components/Uploader/types'
 import useStyles from './styles'
@@ -33,48 +34,8 @@ const PostConfig: FC = () => {
     }
   }
 
-  const enhanceMarkdownEditor = () => {
-    if (editorRef.current) {
-      const instance = editorRef.current.getInstance()
-      const toolbar = instance.getUI().getToolbar()
-
-      //@ts-ignore
-      instance.eventManager.addEventType('uploadImg')
-      //@ts-ignore
-      instance.eventManager.listen('uploadImg', () => {
-        setOpen(true)
-      })
-
-      //@ts-ignore
-      instance.eventManager.addEventType('insertEmbeded')
-      //@ts-ignore
-      instance.eventManager.listen('insertEmbeded', () => {
-        instance.insertText('```embeded\n\n```')
-      })
-
-      toolbar.insertItem(16, {
-        type: 'button',
-        options: {
-          className: 'tui-image',
-          event: 'uploadImg',
-          tooltip: 'Insert Image',
-        },
-      })
-
-      toolbar.insertItem(21, {
-        type: 'button',
-        options: {
-          className: 'tui-emebed-icon',
-          event: 'insertEmbeded',
-          tooltip: 'Insert Embeded Block',
-          text: 'EB',
-        },
-      })
-    }
-  }
-
   useEffect(() => {
-    enhanceMarkdownEditor()
+    enhanceEditor(editorRef, setOpen)
   }, [])
 
   return (
