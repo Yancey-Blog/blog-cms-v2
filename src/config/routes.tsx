@@ -84,13 +84,13 @@ const routes: Route[] = [
   },
   {
     name: 'Post',
-    path: 'post-list',
+    path: 'post',
     icon: <PostAdd />,
     component: 'Post/PostList',
     routes: [
       {
         name: 'Post Config',
-        path: 'post-config',
+        path: 'post/config',
         component: 'Post/PostConfig',
         hideInMenu: true,
       },
