@@ -1,4 +1,4 @@
-import React, { FC, useRef, useEffect } from 'react'
+import React, { FC, useRef, useEffect, useState } from 'react'
 import { Paper } from '@material-ui/core'
 import 'tui-editor/dist/tui-editor.min.css'
 import 'tui-editor/dist/tui-editor-contents.min.css'
@@ -11,11 +11,27 @@ import tableMergedCellPlugin from '@toast-ui/editor-plugin-table-merged-cell'
 import chartPlugin from '@toast-ui/editor-plugin-chart'
 import colorSyntaxPlugin from '@toast-ui/editor-plugin-color-syntax'
 import embededPlugin from 'src/shared/editorEmbededPlugin'
+import UploaderModal from 'src/components/UploaderModal/UploaderModal'
+import { UploaderRes } from 'src/components/Uploader/types'
 import useStyles from './styles'
 
 const PostConfig: FC = () => {
   const classes = useStyles()
   const editorRef = useRef<Editor>(null)
+
+  const [open, setOpen] = useState(false)
+  const [image, setImage] = useState<UploaderRes>({ name: '', url: '' })
+
+  const handleChange = (file: UploaderRes) => {
+    setImage(file)
+  }
+
+  const onOk = () => {
+    if (editorRef.current) {
+      const instance = editorRef.current.getInstance()
+      instance.insertText(`\n\n![${image.name}](${image.url})`)
+    }
+  }
 
   const enhanceMarkdownEditor = () => {
     if (editorRef.current) {
@@ -26,7 +42,7 @@ const PostConfig: FC = () => {
       instance.eventManager.addEventType('uploadImg')
       //@ts-ignore
       instance.eventManager.listen('uploadImg', () => {
-        alert('Click!')
+        setOpen(true)
       })
 
       //@ts-ignore
@@ -100,6 +116,13 @@ const PostConfig: FC = () => {
           embededPlugin,
         ]}
         ref={editorRef}
+      />
+
+      <UploaderModal
+        open={open}
+        onClose={setOpen}
+        onChange={handleChange}
+        onOk={onOk}
       />
     </Paper>
   )

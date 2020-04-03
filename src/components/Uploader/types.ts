@@ -24,5 +24,6 @@ export interface Props {
     | 'PATCH'
   name?: string
   defaultFile?: string
+  needMarginLeft?: boolean
   onChange: Function
 }

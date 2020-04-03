@@ -14,6 +14,7 @@ const Uploader: FC<Props> = ({
   method = 'POST',
   name = 'file',
   defaultFile = '',
+  needMarginLeft = true,
   onChange,
 }) => {
   const { enqueueSnackbar } = useSnackbar()
@@ -87,18 +88,20 @@ const Uploader: FC<Props> = ({
     <>
       {type === 'avatar' ? (
         <Card
-          className={classNames(styles.avatarUploader, styles.simpleUploader)}
+          className={classNames(styles.avatarUploader, {
+            [styles.simpleUploader]: needMarginLeft,
+          })}
         >
           {avatarContent()}
           <input
             type="file"
             accept={accept}
-            onChange={e => onUpload(e)}
+            onChange={(e) => onUpload(e)}
             className={styles.customInput}
           />
         </Card>
       ) : (
-        <div className={styles.simpleUploader}>
+        <div className={needMarginLeft ? styles.simpleUploader : undefined}>
           <Button
             variant="contained"
             color="primary"
@@ -116,7 +119,7 @@ const Uploader: FC<Props> = ({
               type="file"
               accept={accept}
               className={styles.customInput}
-              onChange={e => onUpload(e)}
+              onChange={(e) => onUpload(e)}
             />
           </Button>
           {simpleContent()}
