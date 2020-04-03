@@ -41,12 +41,8 @@ const OpenSourceModal: FC<Props> = ({
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required.'),
     description: Yup.string().required('Description is required.'),
-    url: Yup.string()
-      .url()
-      .required('URL is required.'),
-    posterUrl: Yup.string()
-      .url()
-      .required('PostUrl is required.'),
+    url: Yup.string().url().required('URL is required.'),
+    posterUrl: Yup.string().url().required('PostUrl is required.'),
   })
 
   const {
@@ -60,7 +56,7 @@ const OpenSourceModal: FC<Props> = ({
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       if (id) {
         await updateOpenSourceById({
           variables: { input: { ...values, id } },
@@ -115,7 +111,6 @@ const OpenSourceModal: FC<Props> = ({
             error={!!errors.description}
             helperText={errors.description}
             required
-            id="description"
             label="Description"
             fullWidth
             {...getFieldProps('description')}
@@ -124,7 +119,6 @@ const OpenSourceModal: FC<Props> = ({
             error={!!errors.url}
             helperText={errors.url}
             required
-            id="url"
             label="Url"
             fullWidth
             {...getFieldProps('url')}
@@ -136,7 +130,6 @@ const OpenSourceModal: FC<Props> = ({
               helperText={errors.posterUrl}
               style={{ display: 'none' }}
               required
-              id="posterUrl"
               label="PosterUrl"
               fullWidth
               disabled={true}

@@ -42,12 +42,8 @@ const YanceyMusicModal: FC<Props> = ({
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required.'),
     releaseDate: Yup.string().required('ReleaseDate is required.'),
-    soundCloudUrl: Yup.string()
-      .url()
-      .required('SoundCloudUrl is required.'),
-    posterUrl: Yup.string()
-      .url()
-      .required('PostUrl is required.'),
+    soundCloudUrl: Yup.string().url().required('SoundCloudUrl is required.'),
+    posterUrl: Yup.string().url().required('PostUrl is required.'),
   })
 
   const {
@@ -62,7 +58,7 @@ const YanceyMusicModal: FC<Props> = ({
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       if (id) {
         await updateYanceyMusicById({
           variables: { input: { ...values, id } },
@@ -116,7 +112,6 @@ const YanceyMusicModal: FC<Props> = ({
             helperText={errors.title}
             autoFocus
             required
-            id="title"
             label="Title"
             fullWidth
             {...getFieldProps('title')}
@@ -126,7 +121,6 @@ const YanceyMusicModal: FC<Props> = ({
             error={!!errors.soundCloudUrl}
             helperText={errors.soundCloudUrl}
             required
-            id="soundCloudUrl"
             label="SoundCloudUrl"
             fullWidth
             {...getFieldProps('soundCloudUrl')}
@@ -139,7 +133,7 @@ const YanceyMusicModal: FC<Props> = ({
             helperText={errors.releaseDate}
             showTodayButton={true}
             ampm={false}
-            onChange={date => setFieldValue('releaseDate', date, true)}
+            onChange={(date) => setFieldValue('releaseDate', date, true)}
             format="YYYY/MM/DD HH:mm:ss"
           />
 
@@ -150,7 +144,6 @@ const YanceyMusicModal: FC<Props> = ({
               helperText={errors.posterUrl}
               style={{ display: 'none' }}
               required
-              id="posterUrl"
               label="PosterUrl"
               fullWidth
               disabled={true}

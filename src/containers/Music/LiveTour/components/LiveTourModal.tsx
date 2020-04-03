@@ -38,9 +38,7 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required.'),
     showTime: Yup.string().required('ShowTime is required.'),
-    posterUrl: Yup.string()
-      .url()
-      .required('PostUrl is required.'),
+    posterUrl: Yup.string().url().required('PostUrl is required.'),
   })
 
   const {
@@ -55,7 +53,7 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       if (id) {
         await updateLiveTourById({
           variables: { input: { ...values, id } },
@@ -104,7 +102,6 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
             helperText={errors.title}
             autoFocus
             required
-            id="title"
             label="Title"
             fullWidth
             {...getFieldProps('title')}
@@ -118,7 +115,7 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
             helperText={errors.showTime}
             showTodayButton={true}
             ampm={false}
-            onChange={date => setFieldValue('showTime', date, true)}
+            onChange={(date) => setFieldValue('showTime', date, true)}
             format="YYYY/MM/DD HH:mm:ss"
           />
 
@@ -129,7 +126,6 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
               helperText={errors.posterUrl}
               style={{ display: 'none' }}
               required
-              id="posterUrl"
               label="PosterUrl"
               fullWidth
               disabled={true}

@@ -60,7 +60,7 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       if (id) {
         await updatePlayerById({
           variables: { input: { ...values, id } },
@@ -123,7 +123,6 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
             helperText={errors.title}
             autoFocus
             required
-            id="title"
             label="Title"
             fullWidth
             {...getFieldProps('title')}
@@ -133,7 +132,6 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
             error={!!errors.artist}
             helperText={errors.artist}
             required
-            id="artist"
             label="Artist"
             fullWidth
             {...getFieldProps('artist')}
@@ -143,7 +141,6 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
             error={!!errors.lrc}
             helperText={errors.lrc}
             required
-            id="lrc"
             label="LRC"
             fullWidth
             multiline
@@ -158,7 +155,6 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
               helperText={errors.coverUrl}
               style={{ display: 'none' }}
               required
-              id="coverUrl"
               label="CoverUrl"
               fullWidth
               disabled={true}
@@ -182,7 +178,6 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
               helperText={errors.musicFileUrl}
               style={{ display: 'none' }}
               required
-              id="musicFileUrl"
               label="MusicFileUrl"
               fullWidth
               disabled={true}
@@ -201,7 +196,9 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
             <Switch
               color="primary"
               defaultChecked={values.isPublic || true}
-              onChange={e => setFieldValue('isPublic', e.target.checked, true)}
+              onChange={(e) =>
+                setFieldValue('isPublic', e.target.checked, true)
+              }
             />
           </div>
         </DialogContent>

@@ -43,13 +43,9 @@ const BestAlbumModal: FC<Props> = ({
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required.'),
     artist: Yup.string().required('Artist is required.'),
-    mvUrl: Yup.string()
-      .url()
-      .required('MvUrl is required.'),
+    mvUrl: Yup.string().url().required('MvUrl is required.'),
     releaseDate: Yup.string().required('ReleaseDate is required.'),
-    coverUrl: Yup.string()
-      .url()
-      .required('PostUrl is required.'),
+    coverUrl: Yup.string().url().required('PostUrl is required.'),
   })
 
   const {
@@ -64,7 +60,7 @@ const BestAlbumModal: FC<Props> = ({
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       if (id) {
         await updateBestAlbumById({
           variables: { input: { ...values, id } },
@@ -123,7 +119,6 @@ const BestAlbumModal: FC<Props> = ({
             helperText={errors.title}
             autoFocus
             required
-            id="title"
             label="Title"
             fullWidth
             {...getFieldProps('title')}
@@ -133,7 +128,6 @@ const BestAlbumModal: FC<Props> = ({
             error={!!errors.artist}
             helperText={errors.artist}
             required
-            id="artist"
             label="Artist"
             fullWidth
             {...getFieldProps('artist')}
@@ -143,7 +137,6 @@ const BestAlbumModal: FC<Props> = ({
             error={!!errors.mvUrl}
             helperText={errors.mvUrl}
             required
-            id="mvUrl"
             label="MvUrl"
             fullWidth
             {...getFieldProps('mvUrl')}
@@ -156,7 +149,7 @@ const BestAlbumModal: FC<Props> = ({
             helperText={errors.releaseDate}
             showTodayButton={true}
             ampm={false}
-            onChange={date => setFieldValue('releaseDate', date, true)}
+            onChange={(date) => setFieldValue('releaseDate', date, true)}
             format="YYYY/MM/DD HH:mm:ss"
           />
 
@@ -167,7 +160,6 @@ const BestAlbumModal: FC<Props> = ({
               helperText={errors.coverUrl}
               style={{ display: 'none' }}
               required
-              id="coverUrl"
               label="CoverUrl"
               fullWidth
               disabled={true}

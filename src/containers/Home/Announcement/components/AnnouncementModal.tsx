@@ -46,7 +46,7 @@ const AnnouncementModal: FC<Props> = ({
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       if (id) {
         await updateAnnouncementById({
           variables: { input: { ...values, id } },
@@ -86,7 +86,6 @@ const AnnouncementModal: FC<Props> = ({
             helperText={errors.content}
             autoFocus
             required
-            id="content"
             label="Content"
             fullWidth
             {...getFieldProps('content')}
