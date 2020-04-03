@@ -50,3 +50,5 @@ export const MARKDOWN_EDITOR_TOOLBAR_ITEMS = [
 export const DRAWER_WIDTH = 260
 
 export const FOLDER_DRAWER_WIDTH = 80
+
+export const VIEW_DATE = ['Day', 'Week', 'Month']

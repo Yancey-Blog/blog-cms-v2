@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Button, ButtonGroup } from '@material-ui/core'
-import { viewDate } from '../../constants'
+import { VIEW_DATE } from 'src/shared/constants'
 import useStyles from '../../styles'
 
 interface IExternalViewSwitcher {
@@ -18,7 +18,7 @@ const ExternalViewSwitcher: FC<IExternalViewSwitcher> = ({ onChange }) => {
       color="primary"
       className={classes.viewSwitcher}
     >
-      {viewDate.map(val => (
+      {VIEW_DATE.map((val) => (
         <Button
           key={val}
           onClick={() => onChange(val)}

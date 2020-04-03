@@ -13,6 +13,7 @@ import umlPlugin from '@toast-ui/editor-plugin-uml'
 import tableMergedCellPlugin from '@toast-ui/editor-plugin-table-merged-cell'
 import chartPlugin from '@toast-ui/editor-plugin-chart'
 import colorSyntaxPlugin from '@toast-ui/editor-plugin-color-syntax'
+import Uploader from 'src/components/Uploader/Uploader'
 import UploaderModal from 'src/components/UploaderModal/UploaderModal'
 import { UploaderRes } from 'src/components/Uploader/types'
 import embededPlugin from 'src/shared/editorEmbededPlugin'
@@ -54,9 +55,9 @@ const PostConfig: FC = () => {
 
   /* formik */
   const initialValues = {
-    title: '',
-    showTime: new Date(),
     posterUrl: '',
+    title: '',
+    summary: '',
   }
 
   const validationSchema = Yup.object().shape({
@@ -90,6 +91,40 @@ const PostConfig: FC = () => {
 
   return (
     <Paper className={classes.editorWrapper}>
+      <form onSubmit={handleSubmit}>
+        <FormLabel required>PosterUrl</FormLabel>
+        <Uploader
+          onChange={handlePosterImageChange}
+          defaultFile={getFieldProps('posterUrl').value}
+        />
+
+        <TextField
+          error={!!errors.posterUrl}
+          helperText={errors.posterUrl}
+          style={{ display: 'none' }}
+          required
+          label="PosterUrl"
+          disabled={true}
+          {...getFieldProps('posterUrl')}
+        />
+
+        <TextField
+          error={!!errors.title}
+          helperText={errors.title}
+          required
+          label="Title"
+          {...getFieldProps('title')}
+        />
+
+        <TextField
+          error={!!errors.summary}
+          helperText={errors.summary}
+          required
+          label="Summary"
+          {...getFieldProps('summary')}
+        />
+      </form>
+
       <Editor
         hideModeSwitch={true}
         useCommandShortcut={true}
