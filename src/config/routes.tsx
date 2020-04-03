@@ -107,26 +107,26 @@ const routes: Route[] = [
     path: '/settings',
     icon: <Settings />,
     component: 'Settings/Settings',
-    routes: [
-      {
-        name: 'Profile',
-        path: '/settings/profile',
-        component: 'Settings/Profile/Profile',
-        hideInMenu: true,
-      },
-      {
-        name: 'Account',
-        path: '/settings/account',
-        component: 'Settings/Account/Account',
-        hideInMenu: true,
-      },
-      {
-        name: 'Security',
-        path: '/settings/security',
-        component: 'Settings/Security/Security',
-        hideInMenu: true,
-      },
-    ],
+    // routes: [
+    //   {
+    //     name: 'Profile',
+    //     path: '/settings/profile',
+    //     component: 'Settings/Profile/Profile',
+    //     hideInMenu: true,
+    //   },
+    //   {
+    //     name: 'Account',
+    //     path: '/settings/account',
+    //     component: 'Settings/Account/Account',
+    //     hideInMenu: true,
+    //   },
+    //   {
+    //     name: 'Security',
+    //     path: '/settings/security',
+    //     component: 'Settings/Security/Security',
+    //     hideInMenu: true,
+    //   },
+    // ],
   },
 ]
 
