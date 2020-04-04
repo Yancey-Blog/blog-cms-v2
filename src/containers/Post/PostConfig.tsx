@@ -32,7 +32,6 @@ import {
   POPOVER_TRANSFORM_ORIGIN,
 } from 'src/shared/constants'
 import { goBack, parseSearch } from 'src/shared/utils'
-
 import useStyles from './styles'
 
 const PostConfig: FC = () => {
