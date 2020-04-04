@@ -45,7 +45,6 @@ const PostTable: FC<Props> = ({
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
     { name: 'title', label: 'Title' },
-    { name: 'content', label: 'Content' },
     { name: 'summary', label: 'Summary' },
     {
       name: 'tags',
@@ -58,15 +57,15 @@ const PostTable: FC<Props> = ({
     { name: 'pv', label: 'PV' },
     { name: 'isPublic', label: 'IsPublic' },
     {
-      name: 'lastModifiedDate',
-      label: 'Last Modified Date',
+      name: 'createdAt',
+      label: 'CreatedAt',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
     },
     {
-      name: 'createdAt',
-      label: 'CreatedAt',
+      name: 'lastModifiedDate',
+      label: 'Last Modified Date',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
