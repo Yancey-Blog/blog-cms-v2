@@ -5,7 +5,15 @@ import MUIDataTable, {
   MUIDataTableColumn,
   MUIDataTableMeta,
 } from 'mui-datatables'
-import { FormControl, Fab, Switch, Tooltip, Chip } from '@material-ui/core'
+import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
+import {
+  FormControl,
+  Fab,
+  Switch,
+  Tooltip,
+  Chip,
+  Popover,
+} from '@material-ui/core'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { sortBy } from 'yancey-js-util'
 import styles from '../post.module.scss'
@@ -13,6 +21,10 @@ import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
+import {
+  POPOVER_ANCHOR_ORIGIN,
+  POPOVER_TRANSFORM_ORIGIN,
+} from 'src/shared/constants'
 import { IPost } from '../types'
 import useStyles from '../styles'
 
@@ -76,6 +88,41 @@ const PostTable: FC<Props> = ({
             ))}
           </>
         ),
+      },
+    },
+    {
+      name: 'posterUrl',
+      label: 'Poster Url',
+      options: {
+        customBodyRender: (value: string, tableMeta: MUIDataTableMeta) => {
+          const curTitle = tableMeta.rowData[1]
+          return (
+            <PopupState variant="popover" popupId="imagePoperOver">
+              {(popupState) => (
+                <div>
+                  <img
+                    src={value}
+                    style={{ width: '150px' }}
+                    alt={curTitle}
+                    {...bindTrigger(popupState)}
+                  />
+                  <Popover
+                    {...bindPopover(popupState)}
+                    anchorOrigin={POPOVER_ANCHOR_ORIGIN}
+                    transformOrigin={POPOVER_TRANSFORM_ORIGIN}
+                    disableRestoreFocus
+                  >
+                    <img
+                      src={value}
+                      style={{ height: '400px', display: 'block' }}
+                      alt={curTitle}
+                    />
+                  </Popover>
+                </div>
+              )}
+            </PopupState>
+          )
+        },
       },
     },
     {
