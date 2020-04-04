@@ -80,6 +80,7 @@ const PostTable: FC<Props> = ({
           <>
             {value.map((tag) => (
               <Chip
+                key={tag}
                 className={classes.btn}
                 label={tag}
                 clickable

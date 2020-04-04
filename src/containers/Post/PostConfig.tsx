@@ -128,6 +128,7 @@ const PostConfig: FC = () => {
     setFieldValue,
     getFieldProps,
     setValues,
+    values,
     resetForm,
     isSubmitting,
     errors,
@@ -169,7 +170,7 @@ const PostConfig: FC = () => {
       setValues({
         title,
         summary,
-        tags,
+        tags: tags.json,
         posterUrl,
       })
 
@@ -262,6 +263,7 @@ const PostConfig: FC = () => {
             error={!!errors.tags}
             helperText={errors.tags}
             label="Tags"
+            defaultValue={values.tags}
             fullWidth
             onChange={(chips) => handleTagChange(chips)}
           />

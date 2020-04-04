@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: '24px',
     },
 
-    btn: { marginLeft: theme.spacing(1) },
+    btn: { marginLeft: theme.spacing(1), marginBottom: theme.spacing(1) },
   }),
 )
 
