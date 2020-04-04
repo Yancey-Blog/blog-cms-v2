@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import classNames from 'classnames'
 import { Button } from '@material-ui/core'
 import { DateNavigator } from '@devexpress/dx-react-scheduler-material-ui'
-import useStyles from '../../styles'
+import useStyles from '../styles'
 
 const CustomNavigationButton: FC<DateNavigator.NavigationButtonProps> = ({
   type,

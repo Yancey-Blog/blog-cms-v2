@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Button, ButtonGroup } from '@material-ui/core'
 import { VIEW_DATE } from 'src/shared/constants'
-import useStyles from '../../styles'
+import useStyles from '../styles'
 
 interface IExternalViewSwitcher {
   currentViewName: string
