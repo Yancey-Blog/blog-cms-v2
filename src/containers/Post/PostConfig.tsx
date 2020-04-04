@@ -135,15 +135,15 @@ const PostConfig: FC = () => {
     validationSchema,
     onSubmit: async (values) => {
       const content = getMarkdown()
-      console.log({ ...values, content })
+      const lastModifiedDate = new Date().toISOString()
       if (id) {
         await updatePostById({
-          variables: { input: { ...values, id } },
+          variables: { input: { ...values, id, content, lastModifiedDate } },
         })
       } else {
         await createPost({
           variables: {
-            input: { ...values },
+            input: { ...values, content, lastModifiedDate },
           },
         })
       }
