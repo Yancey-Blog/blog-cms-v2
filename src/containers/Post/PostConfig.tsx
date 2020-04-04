@@ -35,8 +35,10 @@ import { goBack, parseSearch } from 'src/shared/utils'
 import useStyles from './styles'
 
 const PostConfig: FC = () => {
+  /* message bar */
   const { enqueueSnackbar } = useSnackbar()
 
+  /* graphql */
   const [createPost] = useMutation(CREATE_ONE_POST, {
     update(proxy, { data: { createPost } }) {
       const data = proxy.readQuery<Query>({ query: POSTS })
@@ -79,9 +81,21 @@ const PostConfig: FC = () => {
     setImage(file)
   }
 
-  useEffect(() => {
-    enhanceUpload(editorRef, setOpen)
-  }, [])
+  const getMarkdown = () => {
+    if (editorRef.current) {
+      return editorRef.current.getInstance().getMarkdown()
+    }
+
+    return ''
+  }
+
+  const setMarkdown = (content: string) => {
+    if (editorRef.current) {
+      return editorRef.current.getInstance().setMarkdown(content)
+    }
+
+    return ''
+  }
 
   /* posterUrl */
   const handlePosterImageChange = (data: UploaderRes) => {
@@ -112,7 +126,7 @@ const PostConfig: FC = () => {
     handleSubmit,
     setFieldValue,
     getFieldProps,
-    // setValues,
+    setValues,
     resetForm,
     isSubmitting,
     errors,
@@ -120,6 +134,8 @@ const PostConfig: FC = () => {
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
+      const content = getMarkdown()
+      console.log({ ...values, content })
       if (id) {
         await updatePostById({
           variables: { input: { ...values, id } },
@@ -135,6 +151,34 @@ const PostConfig: FC = () => {
       resetForm()
     },
   })
+
+  useEffect(() => {
+    enhanceUpload(editorRef, setOpen)
+
+    if (id) {
+      const {
+        title,
+        content,
+        summary,
+        tags,
+        posterUrl,
+        // @ts-ignore
+      } = client.cache.data.get(`PostModel:${id}`)
+
+      setValues({
+        title,
+        summary,
+        tags,
+        posterUrl,
+      })
+
+      setMarkdown(content)
+    }
+
+    return () => {
+      resetForm()
+    }
+  }, [id, resetForm, setValues])
 
   return (
     <section className={classes.editorWrapper}>
@@ -224,7 +268,6 @@ const PostConfig: FC = () => {
       </form>
 
       <Editor
-        hideModeSwitch={true}
         useCommandShortcut={true}
         usageStatistics={false}
         initialValue=""
