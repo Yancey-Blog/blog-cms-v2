@@ -2,6 +2,23 @@ import { RefObject } from 'react'
 import { Editor } from '@toast-ui/react-editor'
 import { UploaderRes } from 'src/components/Uploader/types'
 
+export const insertImage = (
+  editorRef: RefObject<Editor>,
+  image: UploaderRes,
+) => {
+  if (editorRef.current) {
+    const instance = editorRef.current.getInstance()
+    instance.insertText(`\n\n![${image.name}](${image.url})`)
+  }
+}
+
+export const insertEmbeded = (editorRef: RefObject<Editor>) => {
+  if (editorRef.current) {
+    const instance = editorRef.current.getInstance()
+    instance.insertText('```embeded\n\n```')
+  }
+}
+
 export const enhanceUpload = (
   editorRef: RefObject<Editor>,
   setOpen: Function,
@@ -21,7 +38,7 @@ export const enhanceUpload = (
     instance.eventManager.addEventType('insertEmbeded')
     //@ts-ignore
     instance.eventManager.listen('insertEmbeded', () => {
-      instance.insertText('```embeded\n\n```')
+      insertEmbeded(editorRef)
     })
 
     toolbar.insertItem(16, {
@@ -42,15 +59,5 @@ export const enhanceUpload = (
         text: 'EB',
       },
     })
-  }
-}
-
-export const insertImage = (
-  editorRef: RefObject<Editor>,
-  image: UploaderRes,
-) => {
-  if (editorRef.current) {
-    const instance = editorRef.current.getInstance()
-    instance.insertText(`\n\n![${image.name}](${image.url})`)
   }
 }
