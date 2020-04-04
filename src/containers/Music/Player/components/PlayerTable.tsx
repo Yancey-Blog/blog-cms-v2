@@ -9,7 +9,6 @@ import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab, Popover, Switch, Button } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
-import styles from '../player.module.scss'
 import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
@@ -18,6 +17,8 @@ import {
   POPOVER_ANCHOR_ORIGIN,
   POPOVER_TRANSFORM_ORIGIN,
 } from 'src/shared/constants'
+import globalUseStyles from 'src/assets/styles'
+import useStyles from '../styles'
 import { IPlayer } from '../types'
 
 interface Props {
@@ -40,12 +41,13 @@ const PlayerTable: FC<Props> = ({
   isBatchDeleting,
 }) => {
   const history = useHistory()
-
   const { pathname } = useLocation()
-
   const showModal = (id?: string) => {
     history.push({ pathname, search: stringfySearch({ id, showModal: true }) })
   }
+
+  const classes = useStyles()
+  const globalClasses = globalUseStyles()
 
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
@@ -73,7 +75,7 @@ const PlayerTable: FC<Props> = ({
                     transformOrigin={POPOVER_TRANSFORM_ORIGIN}
                     disableRestoreFocus
                   >
-                    <pre className={styles.lrcTxt}>{value}</pre>
+                    <pre className={classes.lrcTxt}>{value}</pre>
                   </Popover>
                 </div>
               )}
@@ -183,7 +185,7 @@ const PlayerTable: FC<Props> = ({
                 <ConfirmPoper
                   onOk={() => deletePlayerById({ variables: { id: curId } })}
                 >
-                  <DeleteOutline className={styles.addIcon} />
+                  <DeleteOutline />
                 </ConfirmPoper>
               </FormControl>
             </>
@@ -200,8 +202,8 @@ const PlayerTable: FC<Props> = ({
     searchPlaceholder: 'Search...',
     customToolbar() {
       return (
-        <Fab size="medium" className={styles.addIconFab}>
-          <AddBox className={styles.addIcon} onClick={() => showModal()} />
+        <Fab size="medium" className={globalClasses.addIconFab}>
+          <AddBox onClick={() => showModal()} />
         </Fab>
       )
     },
@@ -211,9 +213,9 @@ const PlayerTable: FC<Props> = ({
           dataSource[row.index]._id,
       )
       return (
-        <Fab size="medium" className={styles.addIconFab}>
+        <Fab size="medium" className={globalClasses.addIconFab}>
           <ConfirmPoper onOk={() => deletePlayers({ variables: { ids } })}>
-            <DeleteOutline className={styles.addIcon} />
+            <DeleteOutline />
           </ConfirmPoper>
         </Fab>
       )

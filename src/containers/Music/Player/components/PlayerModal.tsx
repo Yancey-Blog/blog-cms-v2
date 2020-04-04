@@ -14,11 +14,12 @@ import {
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
-import styles from '../player.module.scss'
 import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
+import globalUseStyles from 'src/assets/styles'
+import useStyles from '../styles'
 
 interface Props {
   createPlayer: Function
@@ -27,8 +28,10 @@ interface Props {
 
 const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
   const { search } = useLocation()
-
   const { showModal, id } = parseSearch(search)
+
+  const globalClasses = globalUseStyles()
+  const classes = useStyles()
 
   const initialValues = {
     title: '',
@@ -110,7 +113,7 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
   return (
     <Dialog open={!!showModal} onClose={goBack}>
       <DialogTitle>{id ? 'Update' : 'Add'} an Music Track</DialogTitle>
-      <form className={styles.customForm} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
             To {id ? 'update' : 'add'} an Music Track, please enter the
@@ -119,6 +122,7 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
           </DialogContentText>
 
           <TextField
+            className={globalClasses.textFieldSpace}
             error={!!errors.title}
             helperText={errors.title}
             autoFocus
@@ -129,6 +133,7 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
           />
 
           <TextField
+            className={globalClasses.textFieldSpace}
             error={!!errors.artist}
             helperText={errors.artist}
             required
@@ -138,6 +143,7 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
           />
 
           <TextField
+            className={globalClasses.textFieldSpace}
             error={!!errors.lrc}
             helperText={errors.lrc}
             required
@@ -148,14 +154,14 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
             {...getFieldProps('lrc')}
           />
 
-          <div className={styles.uploaderGroup}>
+          <div className={globalClasses.uploaderGroup}>
             <FormLabel required>CoverUrl</FormLabel>
             <TextField
               error={!!errors.coverUrl}
               helperText={errors.coverUrl}
               style={{ display: 'none' }}
               required
-              label="CoverUrl"
+              label="Cover Url"
               fullWidth
               disabled={true}
               {...getFieldProps('coverUrl')}
@@ -168,8 +174,8 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
 
           <div
             className={classNames(
-              styles.uploaderGroup,
-              styles.btnUploaderGroup,
+              globalClasses.uploaderGroup,
+              classes.btnUploaderGroup,
             )}
           >
             <FormLabel required>MusicFileUrl</FormLabel>
@@ -191,8 +197,8 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
             />
           </div>
 
-          <div className={styles.uploaderGroup}>
-            <FormLabel required>IsPublic</FormLabel>
+          <div className={globalClasses.uploaderGroup}>
+            <FormLabel required>Is Public</FormLabel>
             <Switch
               color="primary"
               defaultChecked={values.isPublic || true}
