@@ -27,12 +27,14 @@ interface Props {
   isBatchDeleting: boolean
   deletePlayerById: Function
   deletePlayers: Function
+  updatePlayerById: Function
 }
 
 const PlayerTable: FC<Props> = ({
   dataSource,
   deletePlayerById,
   deletePlayers,
+  updatePlayerById,
   isFetching,
   isDeleting,
   isBatchDeleting,
@@ -132,8 +134,19 @@ const PlayerTable: FC<Props> = ({
       name: 'isPublic',
       label: 'IsPublic',
       options: {
-        customBodyRender: (value: boolean) => {
-          return <Switch checked={value} />
+        customBodyRender: (value: boolean, tableMeta: MUIDataTableMeta) => {
+          const id = tableMeta.rowData[0]
+
+          return (
+            <Switch
+              checked={value}
+              onChange={(e) => {
+                updatePlayerById({
+                  variables: { input: { isPublic: e.target.checked, id } },
+                })
+              }}
+            />
+          )
         },
       },
     },
