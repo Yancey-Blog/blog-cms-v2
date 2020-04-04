@@ -9,7 +9,6 @@ import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab, Button, Popover } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
-import styles from '../openSource.module.scss'
 import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
@@ -18,6 +17,7 @@ import {
   POPOVER_ANCHOR_ORIGIN,
   POPOVER_TRANSFORM_ORIGIN,
 } from 'src/shared/constants'
+import useStyles from 'src/assets/styles'
 import { IOpenSource } from '../types'
 
 interface Props {
@@ -38,12 +38,12 @@ const OpenSourceTable: FC<Props> = ({
   isBatchDeleting,
 }) => {
   const history = useHistory()
-
   const { pathname } = useLocation()
-
   const showModal = (id?: string) => {
     history.push({ pathname, search: stringfySearch({ id, showModal: true }) })
   }
+
+  const classes = useStyles()
 
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
@@ -135,7 +135,7 @@ const OpenSourceTable: FC<Props> = ({
                     deleteOpenSourceById({ variables: { id: curId } })
                   }
                 >
-                  <DeleteOutline className={styles.addIcon} />
+                  <DeleteOutline />
                 </ConfirmPoper>
               </FormControl>
             </>
@@ -152,8 +152,8 @@ const OpenSourceTable: FC<Props> = ({
     searchPlaceholder: 'Search...',
     customToolbar() {
       return (
-        <Fab size="medium" className={styles.addIconFab}>
-          <AddBox className={styles.addIcon} onClick={() => showModal()} />
+        <Fab size="medium" className={classes.addIconFab}>
+          <AddBox onClick={() => showModal()} />
         </Fab>
       )
     },
@@ -163,9 +163,9 @@ const OpenSourceTable: FC<Props> = ({
           dataSource[row.index]._id,
       )
       return (
-        <Fab size="medium" className={styles.addIconFab}>
+        <Fab size="medium" className={classes.addIconFab}>
           <ConfirmPoper onOk={() => deleteOpenSources({ variables: { ids } })}>
-            <DeleteOutline className={styles.addIcon} />
+            <DeleteOutline />
           </ConfirmPoper>
         </Fab>
       )

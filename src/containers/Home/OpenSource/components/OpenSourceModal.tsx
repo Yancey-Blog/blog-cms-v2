@@ -12,11 +12,11 @@ import {
   FormLabel,
 } from '@material-ui/core'
 import { useFormik } from 'formik'
-import styles from '../openSource.module.scss'
 import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
+import useStyles from 'src/assets/styles'
 
 interface Props {
   createOpenSource: Function
@@ -28,8 +28,9 @@ const OpenSourceModal: FC<Props> = ({
   updateOpenSourceById,
 }) => {
   const { search } = useLocation()
-
   const { showModal, id } = parseSearch(search)
+
+  const classes = useStyles()
 
   const initialValues = {
     title: '',
@@ -90,7 +91,7 @@ const OpenSourceModal: FC<Props> = ({
   return (
     <Dialog open={!!showModal} onClose={goBack}>
       <DialogTitle>{id ? 'Update' : 'Add'} an Open Source</DialogTitle>
-      <form className={styles.customForm} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
             To {id ? 'update' : 'add'} an Open Source, please enter the
@@ -98,6 +99,7 @@ const OpenSourceModal: FC<Props> = ({
             button.
           </DialogContentText>
           <TextField
+            className={classes.textFieldSpace}
             error={!!errors.title}
             helperText={errors.title}
             autoFocus
@@ -108,6 +110,7 @@ const OpenSourceModal: FC<Props> = ({
             {...getFieldProps('title')}
           />
           <TextField
+            className={classes.textFieldSpace}
             error={!!errors.description}
             helperText={errors.description}
             required
@@ -116,6 +119,7 @@ const OpenSourceModal: FC<Props> = ({
             {...getFieldProps('description')}
           />
           <TextField
+            className={classes.textFieldSpace}
             error={!!errors.url}
             helperText={errors.url}
             required
@@ -123,7 +127,7 @@ const OpenSourceModal: FC<Props> = ({
             fullWidth
             {...getFieldProps('url')}
           />
-          <div className={styles.uploaderGroup}>
+          <div className={classes.uploaderGroup}>
             <FormLabel required>PosterUrl</FormLabel>
             <TextField
               error={!!errors.posterUrl}
