@@ -4,11 +4,15 @@ export const CREATE_ONE_POST = gql`
   mutation CreatePost($input: CreatePostInput!) {
     createPost(input: $input) {
       _id
+      posterUrl
       title
-      artist
-      coverUrl
-      mvUrl
-      releaseDate
+      summary
+      content
+      tags
+      lastModifiedDate
+      like
+      pv
+      isPublic
       createdAt
       updatedAt
     }
@@ -19,11 +23,15 @@ export const UPDATE_ONE_POST = gql`
   mutation UpdatePostById($input: UpdatePostInput!) {
     updatePostById(input: $input) {
       _id
+      posterUrl
       title
-      artist
-      coverUrl
-      mvUrl
-      releaseDate
+      summary
+      content
+      tags
+      lastModifiedDate
+      like
+      pv
+      isPublic
       createdAt
       updatedAt
     }
@@ -34,11 +42,15 @@ export const POSTS = gql`
   query GetPosts {
     getPosts {
       _id
+      posterUrl
       title
-      artist
-      coverUrl
-      mvUrl
-      releaseDate
+      summary
+      content
+      tags
+      lastModifiedDate
+      like
+      pv
+      isPublic
       createdAt
       updatedAt
     }
@@ -49,11 +61,15 @@ export const DELETE_ONE_POST = gql`
   mutation DeletePostById($id: ID!) {
     deletePostById(id: $id) {
       _id
+      posterUrl
       title
-      artist
-      coverUrl
-      mvUrl
-      releaseDate
+      summary
+      content
+      tags
+      lastModifiedDate
+      like
+      pv
+      isPublic
       createdAt
       updatedAt
     }
