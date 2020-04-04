@@ -1,7 +1,9 @@
 import React, { FC, useRef, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { TextField, Button } from '@material-ui/core'
+import { TextField, Button, IconButton, Popover } from '@material-ui/core'
 import ChipInput from 'material-ui-chip-input'
+import { PhotoCamera } from '@material-ui/icons'
+import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import 'tui-editor/dist/tui-editor.min.css'
@@ -19,7 +21,11 @@ import UploaderModal from 'src/components/UploaderModal/UploaderModal'
 import { UploaderRes } from 'src/components/Uploader/types'
 import embededPlugin from 'src/shared/editorEmbededPlugin'
 import { enhanceUpload, insertImage } from 'src/shared/enhanceEditor'
-import { MARKDOWN_EDITOR_TOOLBAR_ITEMS } from 'src/shared/constants'
+import {
+  MARKDOWN_EDITOR_TOOLBAR_ITEMS,
+  POPOVER_ANCHOR_ORIGIN,
+  POPOVER_TRANSFORM_ORIGIN,
+} from 'src/shared/constants'
 import { goBack, parseSearch } from 'src/shared/utils'
 
 import useStyles from './styles'
@@ -94,56 +100,89 @@ const PostConfig: FC = () => {
 
   return (
     <section className={classes.editorWrapper}>
-      <form onSubmit={handleSubmit} className={classes.customForm}>
-        <Uploader
-          needMarginLeft={false}
-          onChange={handlePosterImageChange}
-          defaultFile={getFieldProps('posterUrl').value}
-        />
+      <form onSubmit={handleSubmit}>
+        <div className={classes.header}>
+          <TextField
+            error={!!errors.title}
+            helperText={errors.title}
+            required
+            fullWidth
+            label="Title"
+            {...getFieldProps('title')}
+          />
 
-        <TextField
-          error={!!errors.posterUrl}
-          helperText={errors.posterUrl}
-          style={{ display: 'none' }}
-          required
-          label="PosterUrl"
-          disabled={true}
-          {...getFieldProps('posterUrl')}
-        />
+          <div className={classes.publishTools}>
+            <TextField
+              error={!!errors.posterUrl}
+              helperText={errors.posterUrl}
+              style={{ display: 'none' }}
+              required
+              label="PosterUrl"
+              disabled={true}
+              {...getFieldProps('posterUrl')}
+            />
+            <PopupState variant="popover" popupId="lrcPoperOver">
+              {(popupState) => (
+                <div>
+                  <IconButton
+                    aria-label="upload-image"
+                    {...bindTrigger(popupState)}
+                  >
+                    <PhotoCamera />
+                  </IconButton>
 
-        <TextField
-          className={classes.txtField}
-          error={!!errors.title}
-          helperText={errors.title}
-          required
-          fullWidth
-          variant="outlined"
-          label="Title"
-          {...getFieldProps('title')}
-        />
+                  <Popover
+                    {...bindPopover(popupState)}
+                    anchorOrigin={POPOVER_ANCHOR_ORIGIN}
+                    transformOrigin={POPOVER_TRANSFORM_ORIGIN}
+                    disableRestoreFocus
+                  >
+                    <Uploader
+                      needMarginLeft={false}
+                      onChange={handlePosterImageChange}
+                      defaultFile={getFieldProps('posterUrl').value}
+                    />
+                  </Popover>
+                </div>
+              )}
+            </PopupState>
 
-        <TextField
-          className={classes.txtField}
-          error={!!errors.summary}
-          helperText={errors.summary}
-          required
-          variant="outlined"
-          label="Summary"
-          fullWidth
-          multiline
-          rows="5"
-          {...getFieldProps('summary')}
-        />
+            <Button
+              className={classes.btn}
+              color="primary"
+              disabled={isSubmitting}
+              type="submit"
+            >
+              Publish
+            </Button>
 
-        <ChipInput
-          error={!!errors.tags}
-          helperText={errors.tags}
-          label="Tags"
-          className={classes.txtField}
-          variant="outlined"
-          {...getFieldProps('tags')}
-          onChange={(chips) => handleTagChange(chips)}
-        />
+            <Button className={classes.btn} onClick={goBack}>
+              Back
+            </Button>
+          </div>
+        </div>
+
+        <div className={classes.summary}>
+          <TextField
+            className={classes.summaryTxtFiled}
+            error={!!errors.summary}
+            helperText={errors.summary}
+            required
+            label="Summary"
+            fullWidth
+            multiline
+            rows="5"
+            {...getFieldProps('summary')}
+          />
+
+          <ChipInput
+            error={!!errors.tags}
+            helperText={errors.tags}
+            label="Tags"
+            fullWidth
+            onChange={(chips) => handleTagChange(chips)}
+          />
+        </div>
       </form>
 
       <Editor
@@ -152,7 +191,7 @@ const PostConfig: FC = () => {
         usageStatistics={false}
         initialValue=""
         previewStyle="vertical"
-        height="800px"
+        height="1000px"
         initialEditType="markdown"
         toolbarItems={MARKDOWN_EDITOR_TOOLBAR_ITEMS}
         plugins={[
@@ -171,30 +210,6 @@ const PostConfig: FC = () => {
         onChange={handleEditorImageChange}
         onOk={() => insertImage(editorRef, image)}
       />
-
-      <div className={classes.btnGroup}>
-        <Button className={classes.btn} variant="contained">
-          Back
-        </Button>
-        <Button
-          className={classes.btn}
-          color="primary"
-          variant="contained"
-          disabled={isSubmitting}
-          type="submit"
-        >
-          Save and continue editing
-        </Button>
-        <Button
-          className={classes.btn}
-          color="primary"
-          variant="contained"
-          disabled={isSubmitting}
-          type="submit"
-        >
-          Save
-        </Button>
-      </div>
     </section>
   )
 }

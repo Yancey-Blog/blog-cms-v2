@@ -6,18 +6,21 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '100%',
     },
 
-    customForm: {
-      width: '600px',
+    header: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(2, 1fr)',
     },
 
-    txtField: {
-      display: 'block',
-      margin: '24px 0',
+    publishTools: {
+      display: 'flex',
+      justifyContent: 'flex-end',
+      alignItems: 'center',
     },
 
-    btnGroup: {
-      margin: '24px 0',
-      textAlign: 'right',
+    summary: { width: '50%', margin: '24px 0 48px' },
+
+    summaryTxtFiled: {
+      marginBottom: '24px',
     },
 
     btn: { marginLeft: theme.spacing(1) },
