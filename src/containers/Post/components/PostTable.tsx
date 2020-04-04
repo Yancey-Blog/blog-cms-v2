@@ -139,6 +139,14 @@ const PostTable: FC<Props> = ({
               onChange={(e) => {
                 updatePostById({
                   variables: { input: { isPublic: e.target.checked, id } },
+                  optimisticResponse: {
+                    __typename: 'Mutation',
+                    updatePostById: {
+                      id,
+                      __typename: 'PostModel',
+                      isPublic: e.target.checked,
+                    },
+                  },
                 })
               }}
             />
