@@ -12,3 +12,7 @@ export interface IPost {
   readonly createdAt: string
   readonly updatedAt: string
 }
+
+export interface Query {
+  getPosts: IPost[]
+}

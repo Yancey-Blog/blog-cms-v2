@@ -6,6 +6,8 @@ import { PhotoCamera } from '@material-ui/icons'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
+import { useMutation } from '@apollo/react-hooks'
+import { useSnackbar } from 'notistack'
 import 'tui-editor/dist/tui-editor.min.css'
 import 'tui-editor/dist/tui-editor-contents.min.css'
 import 'codemirror/lib/codemirror.css'
@@ -16,6 +18,8 @@ import umlPlugin from '@toast-ui/editor-plugin-uml'
 import tableMergedCellPlugin from '@toast-ui/editor-plugin-table-merged-cell'
 import chartPlugin from '@toast-ui/editor-plugin-chart'
 import colorSyntaxPlugin from '@toast-ui/editor-plugin-color-syntax'
+import { POSTS, CREATE_ONE_POST, UPDATE_ONE_POST } from './typeDefs'
+import { Query } from './types'
 import Uploader from 'src/components/Uploader/Uploader'
 import UploaderModal from 'src/components/UploaderModal/UploaderModal'
 import { UploaderRes } from 'src/components/Uploader/types'
@@ -31,6 +35,35 @@ import { goBack, parseSearch } from 'src/shared/utils'
 import useStyles from './styles'
 
 const PostConfig: FC = () => {
+  const { enqueueSnackbar } = useSnackbar()
+
+  const [createPost] = useMutation(CREATE_ONE_POST, {
+    update(proxy, { data: { createPost } }) {
+      const data = proxy.readQuery<Query>({ query: POSTS })
+
+      if (data) {
+        proxy.writeQuery({
+          query: POSTS,
+          data: {
+            ...data,
+            getPosts: [createPost, ...data.getPosts],
+          },
+        })
+      }
+    },
+
+    onCompleted() {
+      enqueueSnackbar('Create success!', { variant: 'success' })
+    },
+    onError() {},
+  })
+
+  const [updatePostById] = useMutation(UPDATE_ONE_POST, {
+    onCompleted() {
+      enqueueSnackbar('Update success!', { variant: 'success' })
+    },
+  })
+
   /* query */
   const { search } = useLocation()
   const { id } = parseSearch(search)
@@ -87,11 +120,16 @@ const PostConfig: FC = () => {
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      console.log(values)
       if (id) {
-        // TODO:
+        await updatePostById({
+          variables: { input: { ...values, id } },
+        })
       } else {
-        // TODO:
+        await createPost({
+          variables: {
+            input: { ...values },
+          },
+        })
       }
       goBack()
       resetForm()
