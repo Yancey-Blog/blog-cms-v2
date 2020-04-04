@@ -5,8 +5,8 @@ import MUIDataTable, {
   MUIDataTableColumn,
   MUIDataTableMeta,
 } from 'mui-datatables'
+import { FormControl, Fab, Switch, Tooltip, Chip } from '@material-ui/core'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
-import { FormControl, Fab, Switch } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
 import styles from '../post.module.scss'
 import { formatDate, stringfySearch } from 'src/shared/utils'
@@ -14,6 +14,7 @@ import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
 import { IPost } from '../types'
+import useStyles from '../styles'
 
 interface Props {
   dataSource: IPost[]
@@ -35,9 +36,7 @@ const PostTable: FC<Props> = ({
   isBatchDeleting,
 }) => {
   const history = useHistory()
-
   const { pathname } = useLocation()
-
   const toEditPage = (id?: string) => {
     history.push({
       pathname: `${pathname}/config`,
@@ -45,19 +44,40 @@ const PostTable: FC<Props> = ({
     })
   }
 
+  const classes = useStyles()
+
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
     { name: 'title', label: 'Title' },
-    { name: 'summary', label: 'Summary' },
+    {
+      name: 'summary',
+      label: 'Summary',
+      options: {
+        customBodyRender: (value: string) => (
+          <Tooltip title={value} placement="top">
+            <span>{value.slice(0, 15)}...</span>
+          </Tooltip>
+        ),
+      },
+    },
     {
       name: 'tags',
       label: 'Tags',
       options: {
-        customBodyRender: (value: string[]) => <span>{value.join('; ')}</span>,
+        customBodyRender: (value: string[]) => (
+          <>
+            {value.map((tag) => (
+              <Chip
+                className={classes.btn}
+                label={tag}
+                clickable
+                color="primary"
+              />
+            ))}
+          </>
+        ),
       },
     },
-    { name: 'like', label: 'Like' },
-    { name: 'pv', label: 'PV' },
     {
       name: 'isPublic',
       label: 'IsPublic',
@@ -78,6 +98,8 @@ const PostTable: FC<Props> = ({
         },
       },
     },
+    { name: 'like', label: 'Like' },
+    { name: 'pv', label: 'PV' },
     {
       name: 'createdAt',
       label: 'CreatedAt',

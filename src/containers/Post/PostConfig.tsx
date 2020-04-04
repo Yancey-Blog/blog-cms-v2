@@ -23,6 +23,7 @@ import { Query } from './types'
 import Uploader from 'src/components/Uploader/Uploader'
 import UploaderModal from 'src/components/UploaderModal/UploaderModal'
 import { UploaderRes } from 'src/components/Uploader/types'
+import client from 'src/shared/apolloClient'
 import embededPlugin from 'src/shared/editorEmbededPlugin'
 import { enhanceUpload, insertImage } from 'src/shared/enhanceEditor'
 import {
