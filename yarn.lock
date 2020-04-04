@@ -8773,6 +8773,14 @@ markdown-it@^9.0.0:
     mdurl "^1.0.1"
     uc.micro "^1.0.5"
 
+material-ui-chip-input@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/material-ui-chip-input/-/material-ui-chip-input-1.1.0.tgz#46550074da358fcfe075350181c315c9a405dc7d"
+  integrity sha512-95JsxYtzBFUyvzLC0Ae8qo1h8heu9wcSgnGjF/Sy9QQ9pL/ufLVUyjS8uFULW4kEyeNZbZurux3KZKC3FLnoqg==
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.6.1"
+
 material-ui-popup-state@^1.5.3:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/material-ui-popup-state/-/material-ui-popup-state-1.5.3.tgz#782f6914e491d5e5c519e57427a5528307f0b4ba"
@@ -10903,7 +10911,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.4"
 
-prop-types@^15.0.0, prop-types@^15.5.0, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.0.0, prop-types@^15.5.0, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==

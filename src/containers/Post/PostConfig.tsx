@@ -1,6 +1,7 @@
 import React, { FC, useRef, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { Paper, TextField, FormLabel } from '@material-ui/core'
+import { TextField, Button } from '@material-ui/core'
+import ChipInput from 'material-ui-chip-input'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import 'tui-editor/dist/tui-editor.min.css'
@@ -17,7 +18,7 @@ import Uploader from 'src/components/Uploader/Uploader'
 import UploaderModal from 'src/components/UploaderModal/UploaderModal'
 import { UploaderRes } from 'src/components/Uploader/types'
 import embededPlugin from 'src/shared/editorEmbededPlugin'
-import enhanceEditor from 'src/shared/enhanceEditor'
+import { enhanceUpload, insertImage } from 'src/shared/enhanceEditor'
 import { MARKDOWN_EDITOR_TOOLBAR_ITEMS } from 'src/shared/constants'
 import { goBack, parseSearch } from 'src/shared/utils'
 
@@ -38,14 +39,9 @@ const PostConfig: FC = () => {
   const handleEditorImageChange = (file: UploaderRes) => {
     setImage(file)
   }
-  const onOk = () => {
-    if (editorRef.current) {
-      const instance = editorRef.current.getInstance()
-      instance.insertText(`\n\n![${image.name}](${image.url})`)
-    }
-  }
+
   useEffect(() => {
-    enhanceEditor(editorRef, setOpen)
+    enhanceUpload(editorRef, setOpen)
   }, [])
 
   /* posterUrl */
@@ -53,32 +49,39 @@ const PostConfig: FC = () => {
     setFieldValue('posterUrl', data.url)
   }
 
+  /* tags */
+  const handleTagChange = (chips: string[]) => {
+    setFieldValue('tags', chips)
+  }
+
   /* formik */
   const initialValues = {
     posterUrl: '',
     title: '',
     summary: '',
+    tags: [],
   }
 
   const validationSchema = Yup.object().shape({
     posterUrl: Yup.string().url().required('PostUrl is required.'),
     title: Yup.string().required('Title is required.'),
     summary: Yup.string().required('Summary is required.'),
+    tags: Yup.array().required('Tags is required.'),
   })
 
   const {
     handleSubmit,
     setFieldValue,
     getFieldProps,
-    setValues,
+    // setValues,
     resetForm,
     isSubmitting,
     errors,
-    values,
   } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
+      console.log(values)
       if (id) {
         // TODO:
       } else {
@@ -90,10 +93,10 @@ const PostConfig: FC = () => {
   })
 
   return (
-    <Paper className={classes.editorWrapper}>
-      <form onSubmit={handleSubmit}>
-        <FormLabel required>PosterUrl</FormLabel>
+    <section className={classes.editorWrapper}>
+      <form onSubmit={handleSubmit} className={classes.customForm}>
         <Uploader
+          needMarginLeft={false}
           onChange={handlePosterImageChange}
           defaultFile={getFieldProps('posterUrl').value}
         />
@@ -109,19 +112,37 @@ const PostConfig: FC = () => {
         />
 
         <TextField
+          className={classes.txtField}
           error={!!errors.title}
           helperText={errors.title}
           required
+          fullWidth
+          variant="outlined"
           label="Title"
           {...getFieldProps('title')}
         />
 
         <TextField
+          className={classes.txtField}
           error={!!errors.summary}
           helperText={errors.summary}
           required
+          variant="outlined"
           label="Summary"
+          fullWidth
+          multiline
+          rows="5"
           {...getFieldProps('summary')}
+        />
+
+        <ChipInput
+          error={!!errors.tags}
+          helperText={errors.tags}
+          label="Tags"
+          className={classes.txtField}
+          variant="outlined"
+          {...getFieldProps('tags')}
+          onChange={(chips) => handleTagChange(chips)}
         />
       </form>
 
@@ -131,7 +152,7 @@ const PostConfig: FC = () => {
         usageStatistics={false}
         initialValue=""
         previewStyle="vertical"
-        height="100%"
+        height="800px"
         initialEditType="markdown"
         toolbarItems={MARKDOWN_EDITOR_TOOLBAR_ITEMS}
         plugins={[
@@ -148,9 +169,33 @@ const PostConfig: FC = () => {
         open={open}
         onClose={setOpen}
         onChange={handleEditorImageChange}
-        onOk={onOk}
+        onOk={() => insertImage(editorRef, image)}
       />
-    </Paper>
+
+      <div className={classes.btnGroup}>
+        <Button className={classes.btn} variant="contained">
+          Back
+        </Button>
+        <Button
+          className={classes.btn}
+          color="primary"
+          variant="contained"
+          disabled={isSubmitting}
+          type="submit"
+        >
+          Save and continue editing
+        </Button>
+        <Button
+          className={classes.btn}
+          color="primary"
+          variant="contained"
+          disabled={isSubmitting}
+          type="submit"
+        >
+          Save
+        </Button>
+      </div>
+    </section>
   )
 }
 
