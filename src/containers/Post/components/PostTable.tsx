@@ -46,16 +46,27 @@ const PostTable: FC<Props> = ({
     { name: '_id', label: 'Id' },
     { name: 'title', label: 'Title' },
     { name: 'content', label: 'Content' },
+    { name: 'summary', label: 'Summary' },
     {
-      name: 'createdAt',
-      label: 'CreatedAt',
+      name: 'tags',
+      label: 'Tags',
+      options: {
+        customBodyRender: (value: string[]) => <span>{value.join('; ')}</span>,
+      },
+    },
+    { name: 'like', label: 'Like' },
+    { name: 'pv', label: 'PV' },
+    { name: 'isPublic', label: 'IsPublic' },
+    {
+      name: 'lastModifiedDate',
+      label: 'Last Modified Date',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
     },
     {
-      name: 'updatedAt',
-      label: 'UpdatedAt',
+      name: 'createdAt',
+      label: 'CreatedAt',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
