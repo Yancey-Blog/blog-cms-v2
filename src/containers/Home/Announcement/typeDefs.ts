@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { BATCH_DELETE_FRAGMENT } from 'src/shared/graphqlFragment'
 
 const ANNOUNCEMENT_FRAGMENT = gql`
   fragment AnnouncementFragment on AnnouncementModel {
@@ -48,10 +49,8 @@ export const DELETE_ONE_ANNOUNCEMENT = gql`
 export const BATCH_DELETE_ANNOUNCEMENT = gql`
   mutation DeleteAnnouncements($ids: [ID!]!) {
     deleteAnnouncements(ids: $ids) {
-      n
-      ok
-      deletedCount
-      ids
+      ...BatchDeleteFragment
     }
   }
+  ${BATCH_DELETE_FRAGMENT}
 `
