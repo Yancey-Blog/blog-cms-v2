@@ -1,7 +1,12 @@
 import React, { FC } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { useSnackbar } from 'notistack'
-import { POSTS, DELETE_ONE_POST, BATCH_DELETE_POSTS } from './typeDefs'
+import {
+  POSTS,
+  DELETE_ONE_POST,
+  BATCH_DELETE_POSTS,
+  UPDATE_ONE_POST,
+} from './typeDefs'
 import { IPost, Query } from './types'
 import PostTable from './components/PostTable'
 
@@ -10,6 +15,12 @@ const Post: FC = () => {
 
   const { loading: isFetching, data } = useQuery<Query>(POSTS, {
     notifyOnNetworkStatusChange: true,
+  })
+
+  const [updatePostById] = useMutation(UPDATE_ONE_POST, {
+    onCompleted() {
+      enqueueSnackbar('Update success!', { variant: 'success' })
+    },
   })
 
   const [deletePostById, { loading: isDeleting }] = useMutation(
@@ -68,6 +79,7 @@ const Post: FC = () => {
       isBatchDeleting={isBatchDeleting}
       deletePostById={deletePostById}
       deletePosts={deletePosts}
+      updatePostById={updatePostById}
     />
   )
 }

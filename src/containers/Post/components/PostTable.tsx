@@ -3,9 +3,10 @@ import { useHistory, useLocation } from 'react-router-dom'
 import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
+  MUIDataTableMeta,
 } from 'mui-datatables'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
-import { FormControl, Fab } from '@material-ui/core'
+import { FormControl, Fab, Switch } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
 import styles from '../post.module.scss'
 import { formatDate, stringfySearch } from 'src/shared/utils'
@@ -21,12 +22,14 @@ interface Props {
   isBatchDeleting: boolean
   deletePostById: Function
   deletePosts: Function
+  updatePostById: Function
 }
 
 const PostTable: FC<Props> = ({
   dataSource,
   deletePostById,
   deletePosts,
+  updatePostById,
   isFetching,
   isDeleting,
   isBatchDeleting,
@@ -55,7 +58,26 @@ const PostTable: FC<Props> = ({
     },
     { name: 'like', label: 'Like' },
     { name: 'pv', label: 'PV' },
-    { name: 'isPublic', label: 'IsPublic' },
+    {
+      name: 'isPublic',
+      label: 'IsPublic',
+      options: {
+        customBodyRender: (value: boolean, tableMeta: MUIDataTableMeta) => {
+          const id = tableMeta.rowData[0]
+
+          return (
+            <Switch
+              checked={value}
+              onChange={(e) => {
+                updatePostById({
+                  variables: { input: { isPublic: e.target.checked, id } },
+                })
+              }}
+            />
+          )
+        },
+      },
+    },
     {
       name: 'createdAt',
       label: 'CreatedAt',
