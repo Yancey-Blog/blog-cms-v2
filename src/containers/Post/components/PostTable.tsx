@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import MUIDataTable, {
-  MUIDataTableOptions,
   MUIDataTableColumn,
   MUIDataTableMeta,
 } from 'mui-datatables'
@@ -13,10 +12,11 @@ import {
   Tooltip,
   Chip,
   Popover,
+  Select,
+  MenuItem,
 } from '@material-ui/core'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { Pagination } from '@material-ui/lab'
-import { sortBy } from 'yancey-js-util'
 import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
@@ -74,6 +74,17 @@ const PostTable: FC<Props> = ({
         input: {
           page: currentPage,
           pageSize,
+        },
+      },
+    })
+  }
+
+  const onChangePageSize = (e: React.ChangeEvent<{ value: unknown }>) => {
+    fetchPostsByPage({
+      variables: {
+        input: {
+          page,
+          pageSize: e.target.value,
         },
       },
     })
@@ -220,49 +231,53 @@ const PostTable: FC<Props> = ({
     },
   ]
 
-  const options: MUIDataTableOptions = {
-    search: false,
-    pagination: false,
-    filterType: 'textField',
-    searchPlaceholder: 'Search...',
-    customToolbar() {
-      return (
-        <Fab size="medium" className={globalClasses.addIconFab}>
-          <AddBox onClick={() => toEditPage()} />
-        </Fab>
-      )
-    },
-    customToolbarSelect(selectedRows) {
-      const ids = selectedRows.data.map(
-        (row: { index: number; dataIndex: number }) =>
-          dataSource[row.index]._id,
-      )
-      return (
-        <Fab size="medium" className={globalClasses.addIconFab}>
-          <ConfirmPoper onOk={() => deletePosts({ variables: { ids } })}>
-            <DeleteOutline />
-          </ConfirmPoper>
-        </Fab>
-      )
-    },
-  }
-
   return (
     <TableWrapper tableName="Post" icon="save">
       <MUIDataTable
         title=""
-        data={dataSource.sort(sortBy('updatedAt')).reverse()}
+        data={dataSource}
         columns={columns}
-        options={options}
+        options={{
+          search: false,
+          pagination: false,
+          filterType: 'textField',
+          searchPlaceholder: 'Search...',
+          customToolbar() {
+            return (
+              <Fab size="medium" className={globalClasses.addIconFab}>
+                <AddBox onClick={() => toEditPage()} />
+              </Fab>
+            )
+          },
+          customToolbarSelect(selectedRows) {
+            const ids = selectedRows.data.map(
+              (row: { index: number; dataIndex: number }) =>
+                dataSource[row.index]._id,
+            )
+            return (
+              <Fab size="medium" className={globalClasses.addIconFab}>
+                <ConfirmPoper onOk={() => deletePosts({ variables: { ids } })}>
+                  <DeleteOutline />
+                </ConfirmPoper>
+              </Fab>
+            )
+          },
+        }}
       />
 
       {total === 0 || (
-        <Pagination
-          className={classes.pagination}
-          count={Math.ceil(total / 10)}
-          color="primary"
-          onChange={(e, page) => onChangePage(page)}
-        />
+        <div className={classes.pagination}>
+          <Select value={pageSize} onChange={onChangePageSize}>
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={20}>20</MenuItem>
+            <MenuItem value={50}>50</MenuItem>
+          </Select>
+          <Pagination
+            count={Math.ceil(total / 10)}
+            color="primary"
+            onChange={(e, page) => onChangePage(page)}
+          />
+        </div>
       )}
 
       {(isFetching || isDeleting || isBatchDeleting) && <Loading />}

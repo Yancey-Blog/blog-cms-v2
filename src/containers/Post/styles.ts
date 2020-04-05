@@ -27,8 +27,9 @@ const useStyles = makeStyles((theme: Theme) =>
     btn: { marginLeft: theme.spacing(1), marginBottom: theme.spacing(1) },
 
     pagination: {
+      display: 'flex',
+      justifyContent: 'flex-end',
       marginTop: '24px',
-      float: 'right',
     },
 
     uploadImageIcon: {
