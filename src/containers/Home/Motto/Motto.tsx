@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
-import { useQuery, useMutation } from '@apollo/react-hooks'
+import React, { FC, useEffect } from 'react'
+import { useLazyQuery, useMutation } from '@apollo/react-hooks'
 import { useSnackbar } from 'notistack'
 import {
   MOTTOS,
@@ -7,6 +7,7 @@ import {
   UPDATE_ONE_MOTTO,
   DELETE_ONE_MOTTO,
   BATCH_DELETE_MOTTO,
+  EXCHANGE_POSITION,
 } from './typeDefs'
 import { IMotto, Query } from './types'
 import MottoTable from './components/MottoTable'
@@ -15,9 +16,13 @@ import MottoModal from './components/MottoModal'
 const Motto: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
 
-  const { loading: isFetching, data } = useQuery<Query>(MOTTOS, {
-    notifyOnNetworkStatusChange: true,
-  })
+  const [fetchMottos, { loading: isFetching, data }] = useLazyQuery<Query>(
+    MOTTOS,
+    {
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: 'cache-and-network',
+    },
+  )
 
   const [createMotto] = useMutation(CREATE_ONE_MOTTO, {
     errorPolicy: 'all',
@@ -48,6 +53,18 @@ const Motto: FC = () => {
     },
     onError() {},
   })
+
+  const [exchangePosition, { loading: isExchanging }] = useMutation(
+    EXCHANGE_POSITION,
+    {
+      errorPolicy: 'all',
+      onCompleted() {
+        enqueueSnackbar('Update success!', { variant: 'success' })
+        fetchMottos()
+      },
+      onError() {},
+    },
+  )
 
   const [deleteMottoById, { loading: isDeleting }] = useMutation(
     DELETE_ONE_MOTTO,
@@ -101,15 +118,21 @@ const Motto: FC = () => {
     },
   )
 
+  useEffect(() => {
+    fetchMottos()
+  }, [fetchMottos])
+
   return (
     <>
       <MottoTable
         dataSource={data ? data.getMottos : []}
         isFetching={isFetching}
         isDeleting={isDeleting}
+        isExchanging={isExchanging}
         isBatchDeleting={isBatchDeleting}
         deleteMottoById={deleteMottoById}
         deleteMottos={deleteMottos}
+        exchangePosition={exchangePosition}
       />
 
       <MottoModal createMotto={createMotto} updateMottoById={updateMottoById} />

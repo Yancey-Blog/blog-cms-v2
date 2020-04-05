@@ -5,6 +5,7 @@ const MOTTO_FRAGMENT = gql`
   fragment MottoFragment on MottoModel {
     _id
     content
+    weight
     createdAt
     updatedAt
   }
@@ -22,6 +23,15 @@ export const CREATE_ONE_MOTTO = gql`
 export const UPDATE_ONE_MOTTO = gql`
   mutation UpdateMottoById($input: UpdateMottoInput!) {
     updateMottoById(input: $input) {
+      ...MottoFragment
+    }
+  }
+  ${MOTTO_FRAGMENT}
+`
+
+export const EXCHANGE_POSITION = gql`
+  mutation ExchangePosition($input: ExchangePositionInput!) {
+    exchangePosition(input: $input) {
       ...MottoFragment
     }
   }

@@ -4,9 +4,9 @@ import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
 } from 'mui-datatables'
-import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
-import { FormControl, Fab } from '@material-ui/core'
-import { sortBy } from 'yancey-js-util'
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state'
+import { DeleteOutline, Edit, AddBox, MoreVert } from '@material-ui/icons'
+import { FormControl, Fab, Menu, MenuItem } from '@material-ui/core'
 import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
@@ -18,17 +18,21 @@ interface Props {
   dataSource: IMotto[]
   isFetching: boolean
   isDeleting: boolean
+  isExchanging: boolean
   isBatchDeleting: boolean
   deleteMottoById: Function
   deleteMottos: Function
+  exchangePosition: Function
 }
 
 const MottoTable: FC<Props> = ({
   dataSource,
   deleteMottoById,
   deleteMottos,
+  exchangePosition,
   isFetching,
   isDeleting,
+  isExchanging,
   isBatchDeleting,
 }) => {
   const history = useHistory()
@@ -39,8 +43,30 @@ const MottoTable: FC<Props> = ({
 
   const classes = useStyles()
 
+  const move = (
+    curId: string,
+    nextId: string,
+    curWright: number,
+    nextWeight: number,
+    closePoper: Function,
+  ) => {
+    closePoper()
+
+    exchangePosition({
+      variables: {
+        input: {
+          id: curId,
+          exchangedId: nextId,
+          weight: curWright,
+          exchangedWeight: nextWeight,
+        },
+      },
+    })
+  }
+
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
+    { name: 'weight', label: 'Weight' },
     { name: 'content', label: 'Content' },
     {
       name: 'createdAt',
@@ -63,6 +89,27 @@ const MottoTable: FC<Props> = ({
         filter: false,
         customBodyRender(value, tableMeta) {
           const curId = tableMeta.rowData[0]
+          const curWright = tableMeta.rowData[1]
+
+          const prev = tableMeta.tableData[dataSource.length - curWright - 1]
+          const next = tableMeta.tableData[dataSource.length - curWright + 1]
+          const top = tableMeta.tableData[0]
+
+          // @ts-ignore
+          const prevId = prev && prev[0]
+          // @ts-ignore
+          const prevWeight = prev && prev[1]
+
+          // @ts-ignore
+          const nextId = next && next[0]
+          // @ts-ignore
+          const nextWeight = next && next[1]
+
+          // @ts-ignore
+          const topId = top[0]
+          // @ts-ignore
+          const topWeight = top[1]
+
           return (
             <>
               <FormControl>
@@ -75,9 +122,72 @@ const MottoTable: FC<Props> = ({
                 <ConfirmPoper
                   onOk={() => deleteMottoById({ variables: { id: curId } })}
                 >
-                  <DeleteOutline />
+                  <DeleteOutline className={classes.editIcon} />
                 </ConfirmPoper>
               </FormControl>
+
+              {dataSource.length < 2 || (
+                <PopupState variant="popover" popupId="movePoperOver">
+                  {(popupState) => (
+                    <>
+                      <MoreVert
+                        style={{ cursor: 'pointer' }}
+                        {...bindTrigger(popupState)}
+                      />
+
+                      <Menu {...bindMenu(popupState)}>
+                        {curWright !== dataSource.length ? (
+                          <MenuItem
+                            onClick={() =>
+                              move(
+                                curId,
+                                topId,
+                                curWright,
+                                topWeight,
+                                popupState.close,
+                              )
+                            }
+                          >
+                            Move to the top
+                          </MenuItem>
+                        ) : null}
+
+                        {curWright !== dataSource.length ? (
+                          <MenuItem
+                            onClick={() =>
+                              move(
+                                curId,
+                                prevId,
+                                curWright,
+                                prevWeight,
+                                popupState.close,
+                              )
+                            }
+                          >
+                            Move up
+                          </MenuItem>
+                        ) : null}
+
+                        {curWright !== 1 ? (
+                          <MenuItem
+                            onClick={() =>
+                              move(
+                                curId,
+                                nextId,
+                                curWright,
+                                nextWeight,
+                                popupState.close,
+                              )
+                            }
+                          >
+                            Move down
+                          </MenuItem>
+                        ) : null}
+                      </Menu>
+                    </>
+                  )}
+                </PopupState>
+              )}
             </>
           )
         },
@@ -116,11 +226,13 @@ const MottoTable: FC<Props> = ({
     <TableWrapper tableName="Motto" icon="save">
       <MUIDataTable
         title=""
-        data={dataSource.sort(sortBy('updatedAt')).reverse()}
+        data={dataSource}
         columns={columns}
         options={options}
       />
-      {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
+      {(isFetching || isDeleting || isBatchDeleting || isExchanging) && (
+        <Loading />
+      )}
     </TableWrapper>
   )
 }
