@@ -18,8 +18,7 @@ import umlPlugin from '@toast-ui/editor-plugin-uml'
 import tableMergedCellPlugin from '@toast-ui/editor-plugin-table-merged-cell'
 import chartPlugin from '@toast-ui/editor-plugin-chart'
 import colorSyntaxPlugin from '@toast-ui/editor-plugin-color-syntax'
-import { POSTS, CREATE_ONE_POST, UPDATE_ONE_POST } from './typeDefs'
-import { Query } from './types'
+import { CREATE_ONE_POST, UPDATE_ONE_POST } from './typeDefs'
 import Uploader from 'src/components/Uploader/Uploader'
 import UploaderModal from 'src/components/UploaderModal/UploaderModal'
 import { UploaderRes } from 'src/components/Uploader/types'
@@ -40,20 +39,6 @@ const PostConfig: FC = () => {
 
   /* graphql */
   const [createPost] = useMutation(CREATE_ONE_POST, {
-    update(proxy, { data: { createPost } }) {
-      const data = proxy.readQuery<Query>({ query: POSTS })
-
-      if (data) {
-        proxy.writeQuery({
-          query: POSTS,
-          data: {
-            ...data,
-            items: [createPost, ...data.getPosts.items],
-          },
-        })
-      }
-    },
-
     onCompleted() {
       enqueueSnackbar('Create success!', { variant: 'success' })
     },
@@ -164,7 +149,7 @@ const PostConfig: FC = () => {
         tags,
         posterUrl,
         // @ts-ignore
-      } = client.cache.data.get(`PostModel:${id}`)
+      } = client.cache.data.get(`PostItemModel:${id}`)
 
       setValues({
         title,

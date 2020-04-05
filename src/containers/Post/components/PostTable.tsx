@@ -164,7 +164,7 @@ const PostTable: FC<Props> = ({
                     __typename: 'Mutation',
                     updatePostById: {
                       id,
-                      __typename: 'PostModel',
+                      __typename: 'PostItemModel',
                       isPublic: e.target.checked,
                     },
                   },

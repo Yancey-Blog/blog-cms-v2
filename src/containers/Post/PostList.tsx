@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useCallback } from 'react'
 import { useLazyQuery, useMutation } from '@apollo/react-hooks'
 import { useSnackbar } from 'notistack'
 import {
@@ -7,7 +7,7 @@ import {
   BATCH_DELETE_POSTS,
   UPDATE_ONE_POST,
 } from './typeDefs'
-import { IPostItem, Query } from './types'
+import { Query } from './types'
 import PostTable from './components/PostTable'
 
 const Post: FC = () => {
@@ -21,61 +21,7 @@ const Post: FC = () => {
     },
   )
 
-  const [updatePostById] = useMutation(UPDATE_ONE_POST, {
-    onCompleted() {
-      enqueueSnackbar('Update success!', { variant: 'success' })
-    },
-  })
-
-  const [deletePostById, { loading: isDeleting }] = useMutation(
-    DELETE_ONE_POST,
-    {
-      update(proxy, { data: { deletePostById } }) {
-        const data = proxy.readQuery<Query>({ query: POSTS })
-
-        if (data) {
-          proxy.writeQuery({
-            query: POSTS,
-            data: {
-              getPosts: data.getPosts.items.filter(
-                (post: IPostItem) => post._id !== deletePostById._id,
-              ),
-            },
-          })
-        }
-      },
-      onCompleted() {
-        enqueueSnackbar('Delete success!', { variant: 'success' })
-      },
-      onError() {},
-    },
-  )
-
-  const [deletePosts, { loading: isBatchDeleting }] = useMutation(
-    BATCH_DELETE_POSTS,
-    {
-      update(proxy, { data: { deletePosts } }) {
-        const data = proxy.readQuery<Query>({ query: POSTS })
-
-        if (data) {
-          proxy.writeQuery({
-            query: POSTS,
-            data: {
-              getPosts: data.getPosts.items.filter(
-                (post: IPostItem) => !deletePosts.ids.includes(post._id),
-              ),
-            },
-          })
-        }
-      },
-      onCompleted() {
-        enqueueSnackbar('Delete success!', { variant: 'success' })
-      },
-      onError() {},
-    },
-  )
-
-  useEffect(() => {
+  const fetchFirstData = useCallback(() => {
     fetchPostsByPage({
       variables: {
         input: {
@@ -85,6 +31,38 @@ const Post: FC = () => {
       },
     })
   }, [fetchPostsByPage])
+
+  const [updatePostById] = useMutation(UPDATE_ONE_POST, {
+    onCompleted() {
+      enqueueSnackbar('Update success!', { variant: 'success' })
+    },
+  })
+
+  const [deletePostById, { loading: isDeleting }] = useMutation(
+    DELETE_ONE_POST,
+    {
+      onCompleted() {
+        enqueueSnackbar('Delete success!', { variant: 'success' })
+        fetchFirstData()
+      },
+      onError() {},
+    },
+  )
+
+  const [deletePosts, { loading: isBatchDeleting }] = useMutation(
+    BATCH_DELETE_POSTS,
+    {
+      onCompleted() {
+        enqueueSnackbar('Delete success!', { variant: 'success' })
+        fetchFirstData()
+      },
+      onError() {},
+    },
+  )
+
+  useEffect(() => {
+    fetchFirstData()
+  }, [fetchFirstData])
 
   return (
     <PostTable

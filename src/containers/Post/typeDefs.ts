@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { BATCH_DELETE_FRAGMENT } from 'src/shared/graphqlFragment'
 
 const POST_FRAGMENT = gql`
-  fragment PostFragment on PostModel {
+  fragment PostFragment on PostItemModel {
     _id
     posterUrl
     title
@@ -43,21 +43,11 @@ export const POSTS = gql`
       page
       pageSize
       items {
-        _id
-        posterUrl
-        title
-        summary
-        content
-        tags
-        lastModifiedDate
-        like
-        pv
-        isPublic
-        createdAt
-        updatedAt
+        ...PostFragment
       }
     }
   }
+  ${POST_FRAGMENT}
 `
 
 export const DELETE_ONE_POST = gql`
