@@ -48,7 +48,7 @@ const PostConfig: FC = () => {
           query: POSTS,
           data: {
             ...data,
-            getPosts: [createPost, ...data.getPosts],
+            items: [createPost, ...data.getPosts.items],
           },
         })
       }

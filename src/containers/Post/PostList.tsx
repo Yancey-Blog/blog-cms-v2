@@ -7,14 +7,22 @@ import {
   BATCH_DELETE_POSTS,
   UPDATE_ONE_POST,
 } from './typeDefs'
-import { IPost, Query } from './types'
+import { IPostItem, Query } from './types'
 import PostTable from './components/PostTable'
 
 const Post: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
 
-  const { loading: isFetching, data } = useQuery<Query>(POSTS, {
+  const { loading: isFetching, data, fetchMore } = useQuery<Query>(POSTS, {
+    variables: {
+      input: {
+        page: 1,
+        pageSize: 10,
+      },
+    },
+
     notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'cache-and-network',
   })
 
   const [updatePostById] = useMutation(UPDATE_ONE_POST, {
@@ -33,8 +41,8 @@ const Post: FC = () => {
           proxy.writeQuery({
             query: POSTS,
             data: {
-              getPosts: data.getPosts.filter(
-                (post: IPost) => post._id !== deletePostById._id,
+              getPosts: data.getPosts.items.filter(
+                (post: IPostItem) => post._id !== deletePostById._id,
               ),
             },
           })
@@ -57,8 +65,8 @@ const Post: FC = () => {
           proxy.writeQuery({
             query: POSTS,
             data: {
-              getPosts: data.getPosts.filter(
-                (post: IPost) => !deletePosts.ids.includes(post._id),
+              getPosts: data.getPosts.items.filter(
+                (post: IPostItem) => !deletePosts.ids.includes(post._id),
               ),
             },
           })
@@ -73,7 +81,7 @@ const Post: FC = () => {
 
   return (
     <PostTable
-      dataSource={data ? data.getPosts : []}
+      dataSource={data ? data.getPosts.items : []}
       isFetching={isFetching}
       isDeleting={isDeleting}
       isBatchDeleting={isBatchDeleting}

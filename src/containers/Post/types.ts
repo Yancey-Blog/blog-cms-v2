@@ -1,4 +1,11 @@
 export interface IPost {
+  readonly page: number
+  readonly pageSize: number
+  readonly total: number
+  readonly items: IPostItem[]
+}
+
+export interface IPostItem {
   readonly _id: string
   readonly posterUrl: string
   readonly title: string
@@ -14,5 +21,5 @@ export interface IPost {
 }
 
 export interface Query {
-  getPosts: IPost[]
+  getPosts: IPost
 }

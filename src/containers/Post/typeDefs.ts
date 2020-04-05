@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { BATCH_DELETE_FRAGMENT } from 'src/shared/graphqlFragment'
 
 const POST_FRAGMENT = gql`
   fragment PostFragment on PostModel {
@@ -36,12 +37,27 @@ export const UPDATE_ONE_POST = gql`
 `
 
 export const POSTS = gql`
-  query GetPosts {
-    getPosts {
-      ...PostFragment
+  query GetPosts($input: PaginationInput!) {
+    getPosts(input: $input) {
+      total
+      page
+      pageSize
+      items {
+        _id
+        posterUrl
+        title
+        summary
+        content
+        tags
+        lastModifiedDate
+        like
+        pv
+        isPublic
+        createdAt
+        updatedAt
+      }
     }
   }
-  ${POST_FRAGMENT}
 `
 
 export const DELETE_ONE_POST = gql`
@@ -56,10 +72,8 @@ export const DELETE_ONE_POST = gql`
 export const BATCH_DELETE_POSTS = gql`
   mutation DeletePosts($ids: [ID!]!) {
     deletePosts(ids: $ids) {
-      n
-      ok
-      deletedCount
-      ids
+      ...BatchDeleteFragment
     }
   }
+  ${BATCH_DELETE_FRAGMENT}
 `

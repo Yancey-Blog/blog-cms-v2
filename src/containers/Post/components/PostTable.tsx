@@ -25,11 +25,11 @@ import {
   POPOVER_TRANSFORM_ORIGIN,
 } from 'src/shared/constants'
 import globalUseStyles from 'src/shared/styles'
-import { IPost } from '../types'
+import { IPostItem } from '../types'
 import useStyles from '../styles'
 
 interface Props {
-  dataSource: IPost[]
+  dataSource: IPostItem[]
   isFetching: boolean
   isDeleting: boolean
   isBatchDeleting: boolean
