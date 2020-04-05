@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import { KeyboardDateTimePicker } from '@material-ui/pickers'
-import styles from '../liveTour.module.scss'
+import useStyles from 'src/assets/styles'
 import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
@@ -26,8 +26,9 @@ interface Props {
 
 const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
   const { search } = useLocation()
-
   const { showModal, id } = parseSearch(search)
+
+  const classes = useStyles()
 
   const initialValues = {
     title: '',
@@ -91,13 +92,14 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
   return (
     <Dialog open={!!showModal} onClose={goBack}>
       <DialogTitle>{id ? 'Update' : 'Add'} an Live Tour</DialogTitle>
-      <form className={styles.customForm} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
             To {id ? 'update' : 'add'} an Live Tour, please enter the following
             fields here. We will send data after clicking the submit button.
           </DialogContentText>
           <TextField
+            className={classes.textFieldSpace}
             error={!!errors.title}
             helperText={errors.title}
             autoFocus
@@ -108,7 +110,8 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
           />
 
           <KeyboardDateTimePicker
-            label="ShowTime"
+            className={classes.textFieldSpace}
+            label="Show Time"
             required
             value={values.showTime}
             error={!!errors.showTime}
@@ -119,7 +122,7 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
             format="YYYY/MM/DD HH:mm:ss"
           />
 
-          <div className={styles.uploaderGroup}>
+          <div className={classes.uploaderGroup}>
             <FormLabel required>PosterUrl</FormLabel>
             <TextField
               error={!!errors.posterUrl}
