@@ -209,6 +209,7 @@ const PostConfig: FC = () => {
               {(popupState) => (
                 <div>
                   <IconButton
+                    className={classes.uploadImageIcon}
                     aria-label="upload-image"
                     {...bindTrigger(popupState)}
                   >

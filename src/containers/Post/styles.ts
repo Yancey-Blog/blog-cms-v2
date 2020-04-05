@@ -3,6 +3,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     editorWrapper: {
+      marginTop: '8px',
       width: '100%',
     },
 
@@ -28,6 +29,11 @@ const useStyles = makeStyles((theme: Theme) =>
     pagination: {
       marginTop: '24px',
       float: 'right',
+    },
+
+    uploadImageIcon: {
+      position: 'relative',
+      top: '-4px',
     },
   }),
 )

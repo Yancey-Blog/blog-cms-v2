@@ -255,12 +255,16 @@ const PostTable: FC<Props> = ({
         columns={columns}
         options={options}
       />
-      <Pagination
-        className={classes.pagination}
-        count={Math.ceil(total / 10)}
-        color="primary"
-        onChange={(e, page) => onChangePage(page)}
-      />
+
+      {total === 0 || (
+        <Pagination
+          className={classes.pagination}
+          count={Math.ceil(total / 10)}
+          color="primary"
+          onChange={(e, page) => onChangePage(page)}
+        />
+      )}
+
       {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
     </TableWrapper>
   )
