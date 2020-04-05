@@ -17,7 +17,7 @@ import {
   POPOVER_ANCHOR_ORIGIN,
   POPOVER_TRANSFORM_ORIGIN,
 } from 'src/shared/constants'
-import globalUseStyles from 'src/assets/styles'
+import globalUseStyles from 'src/shared/styles'
 import useStyles from '../styles'
 import { IPlayer } from '../types'
 

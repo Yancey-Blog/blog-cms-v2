@@ -18,7 +18,7 @@ import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
-import globalUseStyles from 'src/assets/styles'
+import globalUseStyles from 'src/shared/styles'
 import useStyles from '../styles'
 
 interface Props {

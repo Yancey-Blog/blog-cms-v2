@@ -17,7 +17,7 @@ import {
   POPOVER_ANCHOR_ORIGIN,
   POPOVER_TRANSFORM_ORIGIN,
 } from 'src/shared/constants'
-import useStyles from 'src/assets/styles'
+import useStyles from 'src/shared/styles'
 import { IYanceyMusic } from '../types'
 
 interface Props {

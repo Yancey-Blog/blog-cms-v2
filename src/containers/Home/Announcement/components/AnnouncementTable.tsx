@@ -11,7 +11,7 @@ import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
-import useStyles from 'src/assets/styles'
+import useStyles from 'src/shared/styles'
 import { IAnnouncement } from '../types'
 
 interface Props {

@@ -16,7 +16,7 @@ import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
-import useStyles from 'src/assets/styles'
+import useStyles from 'src/shared/styles'
 
 interface Props {
   createOpenSource: Function
