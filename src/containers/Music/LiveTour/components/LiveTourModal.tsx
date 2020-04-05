@@ -123,7 +123,7 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
           />
 
           <div className={classes.uploaderGroup}>
-            <FormLabel required>PosterUrl</FormLabel>
+            <FormLabel required>Poster Url</FormLabel>
             <TextField
               error={!!errors.posterUrl}
               helperText={errors.posterUrl}
