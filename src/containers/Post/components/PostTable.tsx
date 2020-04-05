@@ -15,6 +15,7 @@ import {
   Popover,
 } from '@material-ui/core'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
+import { Pagination } from '@material-ui/lab'
 import { sortBy } from 'yancey-js-util'
 import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
@@ -29,20 +30,28 @@ import { IPostItem } from '../types'
 import useStyles from '../styles'
 
 interface Props {
+  page: number
+  pageSize: number
+  total: number
   dataSource: IPostItem[]
   isFetching: boolean
   isDeleting: boolean
   isBatchDeleting: boolean
+  fetchPostsByPage: Function
   deletePostById: Function
   deletePosts: Function
   updatePostById: Function
 }
 
 const PostTable: FC<Props> = ({
+  page,
+  pageSize,
+  total,
   dataSource,
   deletePostById,
   deletePosts,
   updatePostById,
+  fetchPostsByPage,
   isFetching,
   isDeleting,
   isBatchDeleting,
@@ -58,6 +67,17 @@ const PostTable: FC<Props> = ({
 
   const classes = useStyles()
   const globalClasses = globalUseStyles()
+
+  const onChangePage = (currentPage: number) => {
+    fetchPostsByPage({
+      variables: {
+        input: {
+          page: currentPage,
+          pageSize,
+        },
+      },
+    })
+  }
 
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
@@ -201,9 +221,9 @@ const PostTable: FC<Props> = ({
   ]
 
   const options: MUIDataTableOptions = {
+    search: false,
+    pagination: false,
     filterType: 'textField',
-    rowsPerPage: 10,
-    rowsPerPageOptions: [10, 20, 50],
     searchPlaceholder: 'Search...',
     customToolbar() {
       return (
@@ -234,6 +254,12 @@ const PostTable: FC<Props> = ({
         data={dataSource.sort(sortBy('updatedAt')).reverse()}
         columns={columns}
         options={options}
+      />
+      <Pagination
+        className={classes.pagination}
+        count={Math.ceil(total / 10)}
+        color="primary"
+        onChange={(e, page) => onChangePage(page)}
       />
       {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
     </TableWrapper>

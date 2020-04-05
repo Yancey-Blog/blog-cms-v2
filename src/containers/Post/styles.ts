@@ -24,6 +24,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     btn: { marginLeft: theme.spacing(1), marginBottom: theme.spacing(1) },
+
+    pagination: {
+      marginTop: '24px',
+      float: 'right',
+    },
   }),
 )
 

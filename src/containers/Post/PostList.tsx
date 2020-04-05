@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
-import { useQuery, useMutation } from '@apollo/react-hooks'
+import React, { FC, useEffect } from 'react'
+import { useLazyQuery, useMutation } from '@apollo/react-hooks'
 import { useSnackbar } from 'notistack'
 import {
   POSTS,
@@ -13,17 +13,13 @@ import PostTable from './components/PostTable'
 const Post: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
 
-  const { loading: isFetching, data, fetchMore } = useQuery<Query>(POSTS, {
-    variables: {
-      input: {
-        page: 1,
-        pageSize: 10,
-      },
+  const [fetchPostsByPage, { loading: isFetching, data }] = useLazyQuery<Query>(
+    POSTS,
+    {
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: 'cache-and-network',
     },
-
-    notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'cache-and-network',
-  })
+  )
 
   const [updatePostById] = useMutation(UPDATE_ONE_POST, {
     onCompleted() {
@@ -79,9 +75,24 @@ const Post: FC = () => {
     },
   )
 
+  useEffect(() => {
+    fetchPostsByPage({
+      variables: {
+        input: {
+          page: 1,
+          pageSize: 10,
+        },
+      },
+    })
+  }, [fetchPostsByPage])
+
   return (
     <PostTable
+      total={data ? data.getPosts.total : 0}
+      page={data ? data.getPosts.page : 0}
+      pageSize={data ? data.getPosts.pageSize : 0}
       dataSource={data ? data.getPosts.items : []}
+      fetchPostsByPage={fetchPostsByPage}
       isFetching={isFetching}
       isDeleting={isDeleting}
       isBatchDeleting={isBatchDeleting}
