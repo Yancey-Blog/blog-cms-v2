@@ -20,7 +20,6 @@ const Motto: FC = () => {
     MOTTOS,
     {
       notifyOnNetworkStatusChange: true,
-      fetchPolicy: 'cache-and-network',
     },
   )
 
