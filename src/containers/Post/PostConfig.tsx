@@ -1,4 +1,4 @@
-import React, { FC, useRef, useEffect, useState, FormEvent } from 'react'
+import React, { FC, useRef, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { TextField, Button, IconButton, Popover } from '@material-ui/core'
 import ChipInput from 'material-ui-chip-input'
@@ -31,6 +31,7 @@ import {
   POPOVER_TRANSFORM_ORIGIN,
 } from 'src/shared/constants'
 import { goBack, parseSearch } from 'src/shared/utils'
+import { SaveType } from './types'
 import useStyles from './styles'
 
 const PostConfig: FC = () => {
@@ -108,7 +109,6 @@ const PostConfig: FC = () => {
   })
 
   const {
-    handleSubmit,
     setFieldValue,
     getFieldProps,
     setValues,
@@ -119,28 +119,10 @@ const PostConfig: FC = () => {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async (values) => {
-      const content = getMarkdown()
-      const lastModifiedDate = new Date().toISOString()
-      if (id) {
-        await updatePostById({
-          variables: { input: { ...values, id, content, lastModifiedDate } },
-        })
-      } else {
-        await createPost({
-          variables: {
-            input: { ...values, content, lastModifiedDate },
-          },
-        })
-      }
-      goBack()
-      resetForm()
-    },
+    onSubmit() {},
   })
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
+  const onSubmit = async (type: SaveType) => {
     if (!values.posterUrl) {
       enqueueSnackbar('Please upload a poster.', { variant: 'warning' })
       return
@@ -151,7 +133,29 @@ const PostConfig: FC = () => {
       return
     }
 
-    handleSubmit()
+    const content = getMarkdown()
+    const lastModifiedDate = new Date().toISOString()
+
+    const params = { ...values, content, lastModifiedDate }
+    const _params =
+      type === SaveType.DRAFT
+        ? { ...params, isPublic: false }
+        : { ...params, isPublic: true }
+
+    if (id) {
+      await updatePostById({
+        variables: { input: { ..._params, id } },
+      })
+    } else {
+      await createPost({
+        variables: {
+          input: _params,
+        },
+      })
+    }
+
+    goBack()
+    resetForm()
   }
 
   useEffect(() => {
@@ -184,7 +188,7 @@ const PostConfig: FC = () => {
 
   return (
     <section className={classes.editorWrapper}>
-      <form onSubmit={(e) => onSubmit(e)}>
+      <form>
         <div className={classes.header}>
           <TextField
             error={!!errors.title}
@@ -236,9 +240,18 @@ const PostConfig: FC = () => {
               className={classes.btn}
               color="primary"
               disabled={isSubmitting}
-              type="submit"
+              onClick={() => onSubmit(SaveType.FINALIZE)}
             >
               Publish
+            </Button>
+
+            <Button
+              className={classes.btn}
+              color="secondary"
+              disabled={isSubmitting}
+              onClick={() => onSubmit(SaveType.DRAFT)}
+            >
+              Save as Draft
             </Button>
 
             <Button className={classes.btn} onClick={goBack}>

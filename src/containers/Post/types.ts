@@ -23,3 +23,8 @@ export interface IPostItem {
 export interface Query {
   getPosts: IPost
 }
+
+export enum SaveType {
+  DRAFT,
+  FINALIZE,
+}
