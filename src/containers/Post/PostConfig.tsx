@@ -1,4 +1,4 @@
-import React, { FC, useRef, useEffect, useState } from 'react'
+import React, { FC, useRef, useEffect, useState, FormEvent } from 'react'
 import { useLocation } from 'react-router-dom'
 import { TextField, Button, IconButton, Popover } from '@material-ui/core'
 import ChipInput from 'material-ui-chip-input'
@@ -138,6 +138,22 @@ const PostConfig: FC = () => {
     },
   })
 
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (!values.posterUrl) {
+      enqueueSnackbar('Please upload a poster.', { variant: 'warning' })
+      return
+    }
+
+    if (!getMarkdown()) {
+      enqueueSnackbar('Write something...', { variant: 'warning' })
+      return
+    }
+
+    handleSubmit()
+  }
+
   useEffect(() => {
     enhanceUpload(editorRef, setOpen)
 
@@ -168,7 +184,7 @@ const PostConfig: FC = () => {
 
   return (
     <section className={classes.editorWrapper}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => onSubmit(e)}>
         <div className={classes.header}>
           <TextField
             error={!!errors.title}
