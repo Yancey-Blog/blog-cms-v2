@@ -13,11 +13,11 @@ import {
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import { KeyboardDateTimePicker } from '@material-ui/pickers'
-import styles from '../yanceyMusic.module.scss'
 import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
+import useStyles from 'src/shared/styles'
 
 interface Props {
   createYanceyMusic: Function
@@ -29,8 +29,9 @@ const YanceyMusicModal: FC<Props> = ({
   updateYanceyMusicById,
 }) => {
   const { search } = useLocation()
-
   const { showModal, id } = parseSearch(search)
+
+  const classes = useStyles()
 
   const initialValues = {
     title: '',
@@ -41,13 +42,9 @@ const YanceyMusicModal: FC<Props> = ({
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required.'),
-    releaseDate: Yup.string().required('ReleaseDate is required.'),
-    soundCloudUrl: Yup.string()
-      .url()
-      .required('SoundCloudUrl is required.'),
-    posterUrl: Yup.string()
-      .url()
-      .required('PostUrl is required.'),
+    releaseDate: Yup.string().required('Release Date is required.'),
+    soundCloudUrl: Yup.string().url().required('SoundCloud Url is required.'),
+    posterUrl: Yup.string().url().required('Post Url is required.'),
   })
 
   const {
@@ -62,7 +59,7 @@ const YanceyMusicModal: FC<Props> = ({
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       if (id) {
         await updateYanceyMusicById({
           variables: { input: { ...values, id } },
@@ -104,7 +101,7 @@ const YanceyMusicModal: FC<Props> = ({
   return (
     <Dialog open={!!showModal} onClose={goBack}>
       <DialogTitle>{id ? 'Update' : 'Add'} an Yancey Music</DialogTitle>
-      <form className={styles.customForm} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
             To {id ? 'update' : 'add'} an Yancey Music, please enter the
@@ -112,46 +109,46 @@ const YanceyMusicModal: FC<Props> = ({
             button.
           </DialogContentText>
           <TextField
+            className={classes.textFieldSpace}
             error={!!errors.title}
             helperText={errors.title}
             autoFocus
             required
-            id="title"
             label="Title"
             fullWidth
             {...getFieldProps('title')}
           />
 
           <TextField
+            className={classes.textFieldSpace}
             error={!!errors.soundCloudUrl}
             helperText={errors.soundCloudUrl}
             required
-            id="soundCloudUrl"
-            label="SoundCloudUrl"
+            label="SoundCloud Url"
             fullWidth
             {...getFieldProps('soundCloudUrl')}
           />
 
           <KeyboardDateTimePicker
-            label="ReleaseDate"
+            className={classes.textFieldSpace}
+            label="Release Date"
             value={values.releaseDate}
             error={!!errors.releaseDate}
             helperText={errors.releaseDate}
             showTodayButton={true}
             ampm={false}
-            onChange={date => setFieldValue('releaseDate', date, true)}
+            onChange={(date) => setFieldValue('releaseDate', date, true)}
             format="YYYY/MM/DD HH:mm:ss"
           />
 
-          <div className={styles.uploaderGroup}>
-            <FormLabel required>PosterUrl</FormLabel>
+          <div className={classes.uploaderGroup}>
+            <FormLabel required>Poster Url</FormLabel>
             <TextField
               error={!!errors.posterUrl}
               helperText={errors.posterUrl}
               style={{ display: 'none' }}
               required
-              id="posterUrl"
-              label="PosterUrl"
+              label="Poster Url"
               fullWidth
               disabled={true}
               {...getFieldProps('posterUrl')}

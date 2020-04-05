@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Button } from '@material-ui/core'
 import { TodayButton } from '@devexpress/dx-react-scheduler-material-ui'
-import useStyles from '../../styles'
+import useStyles from '../styles'
 
 const CustomTodayButton: FC<TodayButton.ButtonProps> = ({ setCurrentDate }) => {
   const classes = useStyles()

@@ -7,7 +7,7 @@ ul,
 li,
 p {
   margin: 0;
-  padding: 0 !important;
+  padding: 0;
 }
 
 a {
@@ -16,4 +16,13 @@ a {
   &:hover {
     text-decoration: underline;
   }
+}
+
+.tui-emebed-icon {
+  position: relative;
+  top: -2px;
+  font-size: 14px!important;
+  font-weight: bold!important;
+  background: none !important;
+  color: #000 !important;
 }

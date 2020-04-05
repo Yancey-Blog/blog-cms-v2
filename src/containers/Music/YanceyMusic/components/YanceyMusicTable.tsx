@@ -9,7 +9,6 @@ import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab, Popover } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
-import styles from '../yanceyMusic.module.scss'
 import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
@@ -18,6 +17,7 @@ import {
   POPOVER_ANCHOR_ORIGIN,
   POPOVER_TRANSFORM_ORIGIN,
 } from 'src/shared/constants'
+import useStyles from 'src/shared/styles'
 import { IYanceyMusic } from '../types'
 
 interface Props {
@@ -38,12 +38,12 @@ const YanceyMusicTable: FC<Props> = ({
   isBatchDeleting,
 }) => {
   const history = useHistory()
-
   const { pathname } = useLocation()
-
   const showModal = (id?: string) => {
     history.push({ pathname, search: stringfySearch({ id, showModal: true }) })
   }
+
+  const classes = useStyles()
 
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
@@ -116,7 +116,7 @@ const YanceyMusicTable: FC<Props> = ({
             <>
               <FormControl>
                 <Edit
-                  style={{ marginRight: '12px', cursor: 'pointer' }}
+                  className={classes.editIcon}
                   onClick={() => showModal(curId)}
                 />
               </FormControl>
@@ -126,7 +126,7 @@ const YanceyMusicTable: FC<Props> = ({
                     deleteYanceyMusicById({ variables: { id: curId } })
                   }
                 >
-                  <DeleteOutline className={styles.addIcon} />
+                  <DeleteOutline />
                 </ConfirmPoper>
               </FormControl>
             </>
@@ -143,8 +143,8 @@ const YanceyMusicTable: FC<Props> = ({
     searchPlaceholder: 'Search...',
     customToolbar() {
       return (
-        <Fab size="medium" className={styles.addIconFab}>
-          <AddBox className={styles.addIcon} onClick={() => showModal()} />
+        <Fab size="medium" className={classes.addIconFab}>
+          <AddBox onClick={() => showModal()} />
         </Fab>
       )
     },
@@ -154,9 +154,9 @@ const YanceyMusicTable: FC<Props> = ({
           dataSource[row.index]._id,
       )
       return (
-        <Fab size="medium" className={styles.addIconFab}>
+        <Fab size="medium" className={classes.addIconFab}>
           <ConfirmPoper onOk={() => deleteYanceyMusic({ variables: { ids } })}>
-            <DeleteOutline className={styles.addIcon} />
+            <DeleteOutline />
           </ConfirmPoper>
         </Fab>
       )

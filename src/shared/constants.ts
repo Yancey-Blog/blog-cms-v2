@@ -24,3 +24,31 @@ export const POPOVER_TRANSFORM_ORIGIN: PopoverOrigin = {
 export const RECOVERY_CODES_FILE_NAME = 'yancey-blog-cms-recovery-codes.txt'
 
 export const PASSWORD_REGEXP = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/
+
+export const MARKDOWN_EDITOR_TOOLBAR_ITEMS = [
+  'heading',
+  'bold',
+  'italic',
+  'strike',
+  'divider',
+  'hr',
+  'quote',
+  'divider',
+  'ul',
+  'ol',
+  'task',
+  'indent',
+  'outdent',
+  'divider',
+  'table',
+  'link',
+  'divider',
+  'code',
+  'codeblock',
+]
+
+export const DRAWER_WIDTH = 260
+
+export const FOLDER_DRAWER_WIDTH = 80
+
+export const VIEW_DATE = ['Day', 'Week', 'Month']

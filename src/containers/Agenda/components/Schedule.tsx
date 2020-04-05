@@ -23,14 +23,14 @@ import {
   DragDropProvider,
   CurrentTimeIndicator,
 } from '@devexpress/dx-react-scheduler-material-ui'
-import ExternalViewSwitcher from '../ExternalViewSwitcher/ExternalViewSwitcher'
-import CustomNavigationButton from '../CustomNavigationButton/CustomNavigationButton'
-import CustomTodayButton from '../CustomTodayButton/CustomTodayButton'
-import CustomOpenButton from '../CustomOpenButton/CustomOpenButton'
-import CustomAppointment from '../CustomAppointment/CustomAppointment'
-import useStyles from '../../styles'
-import { ScheduleProps } from '../../types'
-import { formatChangedData } from '../../tools'
+import ExternalViewSwitcher from './ExternalViewSwitcher'
+import CustomNavigationButton from './CustomNavigationButton'
+import CustomTodayButton from './CustomTodayButton'
+import CustomOpenButton from './CustomOpenButton'
+import CustomAppointment from './CustomAppointment'
+import useStyles from '../styles'
+import { ScheduleProps } from '../types'
+import { formatChangedData } from '../tools'
 
 const Schedule: FC<ScheduleProps> = ({
   dataSource,

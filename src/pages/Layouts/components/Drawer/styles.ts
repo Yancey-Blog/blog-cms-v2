@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
-import { drawerWidth, foldDrawerWidth } from '../../constants'
+import { DRAWER_WIDTH, FOLDER_DRAWER_WIDTH } from 'src/shared/constants'
 import { transition } from '../../styles'
 
 const useStyles = makeStyles({
@@ -7,7 +7,7 @@ const useStyles = makeStyles({
     position: 'relative',
     margin: 0,
     padding: '22px 15px',
-    minWidth: `${drawerWidth}px`,
+    minWidth: `${DRAWER_WIDTH}px`,
     minHeight: '100vh',
     color: '#ffffff',
     background:
@@ -53,7 +53,7 @@ const useStyles = makeStyles({
   },
 
   shrink: {
-    transform: `translateX(-${drawerWidth - foldDrawerWidth}px)`,
+    transform: `translateX(-${DRAWER_WIDTH - FOLDER_DRAWER_WIDTH}px)`,
     transition: transition('transform'),
   },
 
@@ -149,13 +149,13 @@ const useStyles = makeStyles({
   hidenItem: {
     width: '48px',
     whiteSpace: 'nowrap',
-    transform: `translateX(${(drawerWidth - foldDrawerWidth) / 2}px)`,
+    transform: `translateX(${(DRAWER_WIDTH - FOLDER_DRAWER_WIDTH) / 2}px)`,
     textAlign: 'center',
     transition: 'transform 300ms ease 0ms',
   },
 
   hidenNotItem: {
-    transform: `translateX(${drawerWidth - foldDrawerWidth}px)`,
+    transform: `translateX(${DRAWER_WIDTH - FOLDER_DRAWER_WIDTH}px)`,
   },
 
   itemIcon: {
@@ -209,7 +209,7 @@ const useStyles = makeStyles({
 
   foldActive: {
     width: '48px',
-    transform: `translateX(${drawerWidth - foldDrawerWidth}px)`,
+    transform: `translateX(${DRAWER_WIDTH - FOLDER_DRAWER_WIDTH}px)`,
 
     '& $hidenItem': {
       transform: 'translateX(0)',

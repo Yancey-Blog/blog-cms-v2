@@ -103,6 +103,7 @@ const Player: FC = () => {
         isBatchDeleting={isBatchDeleting}
         deletePlayerById={deletePlayerById}
         deletePlayers={deletePlayers}
+        updatePlayerById={updatePlayerById}
       />
 
       <PlayerModal

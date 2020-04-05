@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import { KeyboardDateTimePicker } from '@material-ui/pickers'
-import styles from '../liveTour.module.scss'
+import useStyles from 'src/shared/styles'
 import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
@@ -26,8 +26,9 @@ interface Props {
 
 const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
   const { search } = useLocation()
-
   const { showModal, id } = parseSearch(search)
+
+  const classes = useStyles()
 
   const initialValues = {
     title: '',
@@ -38,9 +39,7 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required.'),
     showTime: Yup.string().required('ShowTime is required.'),
-    posterUrl: Yup.string()
-      .url()
-      .required('PostUrl is required.'),
+    posterUrl: Yup.string().url().required('PostUrl is required.'),
   })
 
   const {
@@ -55,7 +54,7 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       if (id) {
         await updateLiveTourById({
           variables: { input: { ...values, id } },
@@ -93,43 +92,43 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
   return (
     <Dialog open={!!showModal} onClose={goBack}>
       <DialogTitle>{id ? 'Update' : 'Add'} an Live Tour</DialogTitle>
-      <form className={styles.customForm} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
             To {id ? 'update' : 'add'} an Live Tour, please enter the following
             fields here. We will send data after clicking the submit button.
           </DialogContentText>
           <TextField
+            className={classes.textFieldSpace}
             error={!!errors.title}
             helperText={errors.title}
             autoFocus
             required
-            id="title"
             label="Title"
             fullWidth
             {...getFieldProps('title')}
           />
 
           <KeyboardDateTimePicker
-            label="ShowTime"
+            className={classes.textFieldSpace}
+            label="Show Time"
             required
             value={values.showTime}
             error={!!errors.showTime}
             helperText={errors.showTime}
             showTodayButton={true}
             ampm={false}
-            onChange={date => setFieldValue('showTime', date, true)}
+            onChange={(date) => setFieldValue('showTime', date, true)}
             format="YYYY/MM/DD HH:mm:ss"
           />
 
-          <div className={styles.uploaderGroup}>
-            <FormLabel required>PosterUrl</FormLabel>
+          <div className={classes.uploaderGroup}>
+            <FormLabel required>Poster Url</FormLabel>
             <TextField
               error={!!errors.posterUrl}
               helperText={errors.posterUrl}
               style={{ display: 'none' }}
               required
-              id="posterUrl"
               label="PosterUrl"
               fullWidth
               disabled={true}
