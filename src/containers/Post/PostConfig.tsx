@@ -153,7 +153,7 @@ const PostConfig: FC = () => {
         },
       })
     }
-
+    window.localStorage.removeItem('post_content')
     goBack()
     resetForm()
   }
@@ -179,12 +179,27 @@ const PostConfig: FC = () => {
       })
 
       setMarkdown(content)
+    } else {
+      const content = window.localStorage.getItem('post_content')
+      if (content) {
+        setMarkdown(content)
+      }
     }
 
     return () => {
       resetForm()
     }
   }, [id, resetForm, setValues])
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      window.localStorage.setItem('post_content', getMarkdown())
+    }, 5000)
+
+    return () => {
+      clearInterval(timer)
+    }
+  }, [])
 
   return (
     <section className={classes.editorWrapper}>
