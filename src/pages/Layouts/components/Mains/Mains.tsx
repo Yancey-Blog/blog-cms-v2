@@ -13,18 +13,18 @@ interface IRoute {
 function getRoutes() {
   const routers: IRoute[] = []
 
-  routes.forEach(route => {
+  routes.forEach((route) => {
+    routers.push({
+      path: route.path,
+      component: route.component as string,
+    })
+
     if (route.routes) {
-      route.routes.forEach(routeChild => {
+      route.routes.forEach((routeChild) => {
         routers.push({
           path: routeChild.path,
           component: routeChild.component,
         })
-      })
-    } else {
-      routers.push({
-        path: route.path,
-        component: route.component as string,
       })
     }
   })
@@ -39,11 +39,11 @@ const Mains: FC = () => {
 
   return (
     <main className={classes.main}>
-      {routeList.map(route => (
+      {routeList.map((route) => (
         <Route
           exact
           key={route.path}
-          path={`/${route.path}`}
+          path={route.path}
           component={loadable(
             () => import(`src/containers/${route.component}`),
             {

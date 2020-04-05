@@ -29,9 +29,9 @@ const Drawer: FC<Props> = ({ open }) => {
   useEffect(() => {
     const matchChilren = (routeList: Route[]) => {
       const curRoute = routeList.find(
-        route =>
+        (route) =>
           route.routes &&
-          route.routes.find(childRoute => pathname.includes(childRoute.path)),
+          route.routes.find((childRoute) => pathname.includes(childRoute.path)),
       )
       curRoute && setfoldName(curRoute.name)
     }
@@ -85,9 +85,10 @@ const Drawer: FC<Props> = ({ open }) => {
         </div>
       </div>
 
-      {routes.map(route => (
+      {routes.map((route) => (
         <Fragment key={route.name}>
-          {route.routes ? (
+          {route.routes &&
+          !route.routes.some((childRoute) => childRoute.hideInMenu === true) ? (
             <div
               className={classNames(classes.item, {
                 [classes.hidenItem]: !open,
@@ -155,7 +156,10 @@ const Drawer: FC<Props> = ({ open }) => {
             }}
           >
             {route.routes &&
-              route.routes.map(childRoute => (
+              !route.routes.some(
+                (childRoute) => childRoute.hideInMenu === true,
+              ) &&
+              route.routes.map((childRoute) => (
                 <NavLink
                   exact
                   activeClassName={classNames(classes.active, {

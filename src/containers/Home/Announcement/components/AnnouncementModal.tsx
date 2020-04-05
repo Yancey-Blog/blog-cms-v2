@@ -11,7 +11,6 @@ import {
   TextField,
 } from '@material-ui/core'
 import { useFormik } from 'formik'
-import styles from '../announcement.module.scss'
 import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 
@@ -46,7 +45,7 @@ const AnnouncementModal: FC<Props> = ({
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       if (id) {
         await updateAnnouncementById({
           variables: { input: { ...values, id } },
@@ -74,7 +73,7 @@ const AnnouncementModal: FC<Props> = ({
   return (
     <Dialog open={!!showModal} onClose={goBack}>
       <DialogTitle>{id ? 'Update' : 'Add'} an Announcement</DialogTitle>
-      <form className={styles.customForm} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
             To {id ? 'update' : 'add'} an Announcement, please enter the
@@ -86,7 +85,6 @@ const AnnouncementModal: FC<Props> = ({
             helperText={errors.content}
             autoFocus
             required
-            id="content"
             label="Content"
             fullWidth
             {...getFieldProps('content')}

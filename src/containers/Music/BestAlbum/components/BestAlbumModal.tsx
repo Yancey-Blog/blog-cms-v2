@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import { KeyboardDateTimePicker } from '@material-ui/pickers'
-import styles from '../bestAlbum.module.scss'
+import useStyles from 'src/shared/styles'
 import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
@@ -29,8 +29,9 @@ const BestAlbumModal: FC<Props> = ({
   updateBestAlbumById,
 }) => {
   const { search } = useLocation()
-
   const { showModal, id } = parseSearch(search)
+
+  const classes = useStyles()
 
   const initialValues = {
     title: '',
@@ -43,13 +44,9 @@ const BestAlbumModal: FC<Props> = ({
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required.'),
     artist: Yup.string().required('Artist is required.'),
-    mvUrl: Yup.string()
-      .url()
-      .required('MvUrl is required.'),
-    releaseDate: Yup.string().required('ReleaseDate is required.'),
-    coverUrl: Yup.string()
-      .url()
-      .required('PostUrl is required.'),
+    mvUrl: Yup.string().url().required('Mv Url is required.'),
+    releaseDate: Yup.string().required('Release Date is required.'),
+    coverUrl: Yup.string().url().required('Post Url is required.'),
   })
 
   const {
@@ -64,7 +61,7 @@ const BestAlbumModal: FC<Props> = ({
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       if (id) {
         await updateBestAlbumById({
           variables: { input: { ...values, id } },
@@ -112,62 +109,62 @@ const BestAlbumModal: FC<Props> = ({
   return (
     <Dialog open={!!showModal} onClose={goBack}>
       <DialogTitle>{id ? 'Update' : 'Add'} an Best Album</DialogTitle>
-      <form className={styles.customForm} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
             To {id ? 'update' : 'add'} an Best Album, please enter the following
             fields here. We will send data after clicking the submit button.
           </DialogContentText>
           <TextField
+            className={classes.textFieldSpace}
             error={!!errors.title}
             helperText={errors.title}
             autoFocus
             required
-            id="title"
             label="Title"
             fullWidth
             {...getFieldProps('title')}
           />
 
           <TextField
+            className={classes.textFieldSpace}
             error={!!errors.artist}
             helperText={errors.artist}
             required
-            id="artist"
             label="Artist"
             fullWidth
             {...getFieldProps('artist')}
           />
 
           <TextField
+            className={classes.textFieldSpace}
             error={!!errors.mvUrl}
             helperText={errors.mvUrl}
             required
-            id="mvUrl"
-            label="MvUrl"
+            label="Mv Url"
             fullWidth
             {...getFieldProps('mvUrl')}
           />
 
           <KeyboardDateTimePicker
-            label="ReleaseDate"
+            className={classes.textFieldSpace}
+            label="Release Date"
             value={values.releaseDate}
             error={!!errors.releaseDate}
             helperText={errors.releaseDate}
             showTodayButton={true}
             ampm={false}
-            onChange={date => setFieldValue('releaseDate', date, true)}
+            onChange={(date) => setFieldValue('releaseDate', date, true)}
             format="YYYY/MM/DD HH:mm:ss"
           />
 
-          <div className={styles.uploaderGroup}>
-            <FormLabel required>CoverUrl</FormLabel>
+          <div className={classes.uploaderGroup}>
+            <FormLabel required>Cover Url</FormLabel>
             <TextField
               error={!!errors.coverUrl}
               helperText={errors.coverUrl}
               style={{ display: 'none' }}
               required
-              id="coverUrl"
               label="CoverUrl"
               fullWidth
               disabled={true}

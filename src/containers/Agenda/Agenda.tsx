@@ -7,7 +7,7 @@ import {
   DELETE_ONE_AGENDA,
 } from './typeDefs'
 import { IAgenda, Query } from './types'
-import Schedule from './components/Schedule/Schedule'
+import Schedule from './components/Schedule'
 import { dateStringToDate } from './tools'
 
 const Agenda: FC = () => {

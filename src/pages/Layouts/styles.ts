@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
-import { drawerWidth, foldDrawerWidth } from './constants'
+import { DRAWER_WIDTH, FOLDER_DRAWER_WIDTH } from 'src/shared/constants'
 
 export const transition = (props: 'margin-left' | 'transform') =>
   `${props} 300ms cubic-bezier(0.4, 0, 0.6, 1) 0ms`
@@ -16,15 +16,15 @@ const useStyles = makeStyles({
   },
 
   shrink: {
-    marginLeft: `-${drawerWidth - foldDrawerWidth}px`,
+    marginLeft: `-${DRAWER_WIDTH - FOLDER_DRAWER_WIDTH}px`,
     transition: transition('margin-left'),
   },
 
   mainWrapper: {
     display: 'flex',
     flexDirection: 'column',
-    minWidth: `calc(100% - ${drawerWidth}px)`,
-    width: `calc(100% - ${foldDrawerWidth}px)`,
+    minWidth: `calc(100% - ${DRAWER_WIDTH}px)`,
+    width: `calc(100% - ${FOLDER_DRAWER_WIDTH}px)`,
   },
 })
 

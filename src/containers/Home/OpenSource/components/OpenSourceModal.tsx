@@ -12,11 +12,11 @@ import {
   FormLabel,
 } from '@material-ui/core'
 import { useFormik } from 'formik'
-import styles from '../openSource.module.scss'
 import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
+import useStyles from 'src/shared/styles'
 
 interface Props {
   createOpenSource: Function
@@ -28,8 +28,9 @@ const OpenSourceModal: FC<Props> = ({
   updateOpenSourceById,
 }) => {
   const { search } = useLocation()
-
   const { showModal, id } = parseSearch(search)
+
+  const classes = useStyles()
 
   const initialValues = {
     title: '',
@@ -41,12 +42,8 @@ const OpenSourceModal: FC<Props> = ({
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required.'),
     description: Yup.string().required('Description is required.'),
-    url: Yup.string()
-      .url()
-      .required('URL is required.'),
-    posterUrl: Yup.string()
-      .url()
-      .required('PostUrl is required.'),
+    url: Yup.string().url().required('URL is required.'),
+    posterUrl: Yup.string().url().required('PostUrl is required.'),
   })
 
   const {
@@ -60,7 +57,7 @@ const OpenSourceModal: FC<Props> = ({
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       if (id) {
         await updateOpenSourceById({
           variables: { input: { ...values, id } },
@@ -94,7 +91,7 @@ const OpenSourceModal: FC<Props> = ({
   return (
     <Dialog open={!!showModal} onClose={goBack}>
       <DialogTitle>{id ? 'Update' : 'Add'} an Open Source</DialogTitle>
-      <form className={styles.customForm} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
             To {id ? 'update' : 'add'} an Open Source, please enter the
@@ -102,6 +99,7 @@ const OpenSourceModal: FC<Props> = ({
             button.
           </DialogContentText>
           <TextField
+            className={classes.textFieldSpace}
             error={!!errors.title}
             helperText={errors.title}
             autoFocus
@@ -112,31 +110,30 @@ const OpenSourceModal: FC<Props> = ({
             {...getFieldProps('title')}
           />
           <TextField
+            className={classes.textFieldSpace}
             error={!!errors.description}
             helperText={errors.description}
             required
-            id="description"
             label="Description"
             fullWidth
             {...getFieldProps('description')}
           />
           <TextField
+            className={classes.textFieldSpace}
             error={!!errors.url}
             helperText={errors.url}
             required
-            id="url"
             label="Url"
             fullWidth
             {...getFieldProps('url')}
           />
-          <div className={styles.uploaderGroup}>
+          <div className={classes.uploaderGroup}>
             <FormLabel required>PosterUrl</FormLabel>
             <TextField
               error={!!errors.posterUrl}
               helperText={errors.posterUrl}
               style={{ display: 'none' }}
               required
-              id="posterUrl"
               label="PosterUrl"
               fullWidth
               disabled={true}
