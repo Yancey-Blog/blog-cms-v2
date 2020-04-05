@@ -5,7 +5,7 @@ import { Add, CloudUpload } from '@material-ui/icons'
 import { useSnackbar } from 'notistack'
 import { getURLPathName } from 'src/shared/utils'
 import { UploaderRes, Props } from './types'
-import styles from './uploader.module.scss'
+import useclasses from './styles'
 
 const Uploader: FC<Props> = ({
   type = 'avatar',
@@ -17,10 +17,9 @@ const Uploader: FC<Props> = ({
   needMarginLeft = true,
   onChange,
 }) => {
+  const classes = useclasses()
   const { enqueueSnackbar } = useSnackbar()
-
   const [uploading, setUploading] = useState(false)
-
   const [curFile, setCurFile] = useState<UploaderRes>()
 
   const onUpload = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -64,22 +63,22 @@ const Uploader: FC<Props> = ({
     }
 
     if (defaultFile) {
-      return <img src={defaultFile} alt="default" className={styles.img} />
+      return <img src={defaultFile} alt="default" className={classes.img} />
     } else if (curFile) {
       const { name, url } = curFile
-      return <img src={url} alt={name} className={styles.img} />
+      return <img src={url} alt={name} className={classes.img} />
     } else {
-      return <Add className={styles.addBtn} />
+      return <Add className={classes.addBtn} />
     }
   }
 
   const simpleContent = () => {
     if (curFile) {
       const { url } = curFile
-      return <p className={styles.simpleContent}>{getURLPathName(url)}</p>
+      return <p className={classes.simpleContent}>{getURLPathName(url)}</p>
     } else if (defaultFile) {
       return (
-        <p className={styles.simpleContent}>{getURLPathName(defaultFile)}</p>
+        <p className={classes.simpleContent}>{getURLPathName(defaultFile)}</p>
       )
     }
   }
@@ -88,8 +87,8 @@ const Uploader: FC<Props> = ({
     <>
       {type === 'avatar' ? (
         <Card
-          className={classNames(styles.avatarUploader, {
-            [styles.simpleUploader]: needMarginLeft,
+          className={classNames(classes.avatarUploader, {
+            [classes.simpleUploader]: needMarginLeft,
           })}
         >
           {avatarContent()}
@@ -97,11 +96,11 @@ const Uploader: FC<Props> = ({
             type="file"
             accept={accept}
             onChange={(e) => onUpload(e)}
-            className={styles.customInput}
+            className={classes.customInput}
           />
         </Card>
       ) : (
-        <div className={needMarginLeft ? styles.simpleUploader : undefined}>
+        <div className={needMarginLeft ? classes.simpleUploader : undefined}>
           <Button
             variant="contained"
             color="primary"
@@ -111,14 +110,14 @@ const Uploader: FC<Props> = ({
             {uploading && (
               <CircularProgress
                 size={24}
-                className={styles.customLoadingCircle}
+                className={classes.customLoadingCircle}
               />
             )}
             Upload
             <input
               type="file"
               accept={accept}
-              className={styles.customInput}
+              className={classes.customInput}
               onChange={(e) => onUpload(e)}
             />
           </Button>
