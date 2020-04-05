@@ -16,7 +16,6 @@ import {
 } from '@material-ui/core'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { sortBy } from 'yancey-js-util'
-import styles from '../post.module.scss'
 import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
@@ -25,6 +24,7 @@ import {
   POPOVER_ANCHOR_ORIGIN,
   POPOVER_TRANSFORM_ORIGIN,
 } from 'src/shared/constants'
+import globalUseStyles from 'src/assets/styles'
 import { IPost } from '../types'
 import useStyles from '../styles'
 
@@ -57,6 +57,7 @@ const PostTable: FC<Props> = ({
   }
 
   const classes = useStyles()
+  const globalClasses = globalUseStyles()
 
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
@@ -189,7 +190,7 @@ const PostTable: FC<Props> = ({
                 <ConfirmPoper
                   onOk={() => deletePostById({ variables: { id: curId } })}
                 >
-                  <DeleteOutline className={styles.addIcon} />
+                  <DeleteOutline />
                 </ConfirmPoper>
               </FormControl>
             </>
@@ -206,8 +207,8 @@ const PostTable: FC<Props> = ({
     searchPlaceholder: 'Search...',
     customToolbar() {
       return (
-        <Fab size="medium" className={styles.addIconFab}>
-          <AddBox className={styles.addIcon} onClick={() => toEditPage()} />
+        <Fab size="medium" className={globalClasses.addIconFab}>
+          <AddBox onClick={() => toEditPage()} />
         </Fab>
       )
     },
@@ -217,9 +218,9 @@ const PostTable: FC<Props> = ({
           dataSource[row.index]._id,
       )
       return (
-        <Fab size="medium" className={styles.addIconFab}>
+        <Fab size="medium" className={globalClasses.addIconFab}>
           <ConfirmPoper onOk={() => deletePosts({ variables: { ids } })}>
-            <DeleteOutline className={styles.addIcon} />
+            <DeleteOutline />
           </ConfirmPoper>
         </Fab>
       )
