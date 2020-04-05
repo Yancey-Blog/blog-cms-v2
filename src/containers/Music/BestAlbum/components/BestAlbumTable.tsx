@@ -9,11 +9,11 @@ import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab, Popover, Button } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
-import styles from '../bestAlbum.module.scss'
 import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
+import useStyles from 'src/assets/styles'
 import {
   POPOVER_ANCHOR_ORIGIN,
   POPOVER_TRANSFORM_ORIGIN,
@@ -38,20 +38,21 @@ const BestAlbumTable: FC<Props> = ({
   isBatchDeleting,
 }) => {
   const history = useHistory()
-
   const { pathname } = useLocation()
+
+  const classes = useStyles()
 
   const showModal = (id?: string) => {
     history.push({ pathname, search: stringfySearch({ id, showModal: true }) })
   }
 
   const columns: MUIDataTableColumn[] = [
-    { name: '_id', label: 'Id' },
+    { name: '_id', label: 'ID' },
     { name: 'title', label: 'Title' },
     { name: 'artist', label: 'Artist' },
     {
       name: 'mvUrl',
-      label: 'mvUrl',
+      label: 'Mv Url',
       options: {
         customBodyRender: (value: string) => (
           <Button
@@ -67,7 +68,7 @@ const BestAlbumTable: FC<Props> = ({
     },
     {
       name: 'coverUrl',
-      label: 'CoverUrl',
+      label: 'Cove rUrl',
       options: {
         customBodyRender: (value: string, tableMeta: MUIDataTableMeta) => {
           const curName = tableMeta.rowData[1]
@@ -102,21 +103,21 @@ const BestAlbumTable: FC<Props> = ({
     },
     {
       name: 'releaseDate',
-      label: 'ReleaseDate',
+      label: 'Release Date',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
     },
     {
       name: 'createdAt',
-      label: 'CreatedAt',
+      label: 'Created At',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
     },
     {
       name: 'updatedAt',
-      label: 'UpdatedAt',
+      label: 'Updated At',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
@@ -140,7 +141,7 @@ const BestAlbumTable: FC<Props> = ({
                 <ConfirmPoper
                   onOk={() => deleteBestAlbumById({ variables: { id: curId } })}
                 >
-                  <DeleteOutline className={styles.addIcon} />
+                  <DeleteOutline />
                 </ConfirmPoper>
               </FormControl>
             </>
@@ -157,8 +158,8 @@ const BestAlbumTable: FC<Props> = ({
     searchPlaceholder: 'Search...',
     customToolbar() {
       return (
-        <Fab size="medium" className={styles.addIconFab}>
-          <AddBox className={styles.addIcon} onClick={() => showModal()} />
+        <Fab size="medium" className={classes.addIconFab}>
+          <AddBox onClick={() => showModal()} />
         </Fab>
       )
     },
@@ -168,9 +169,9 @@ const BestAlbumTable: FC<Props> = ({
           dataSource[row.index]._id,
       )
       return (
-        <Fab size="medium" className={styles.addIconFab}>
+        <Fab size="medium" className={classes.addIconFab}>
           <ConfirmPoper onOk={() => deleteBestAlbums({ variables: { ids } })}>
-            <DeleteOutline className={styles.addIcon} />
+            <DeleteOutline />
           </ConfirmPoper>
         </Fab>
       )
