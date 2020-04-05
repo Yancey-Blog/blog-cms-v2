@@ -176,7 +176,10 @@ const PlayerTable: FC<Props> = ({
           return (
             <>
               <FormControl>
-                <Edit onClick={() => showModal(curId)} />
+                <Edit
+                  className={globalClasses.editIcon}
+                  onClick={() => showModal(curId)}
+                />
               </FormControl>
               <FormControl>
                 <ConfirmPoper

@@ -181,7 +181,10 @@ const PostTable: FC<Props> = ({
           return (
             <>
               <FormControl>
-                <Edit onClick={() => toEditPage(curId)} />
+                <Edit
+                  className={globalClasses.editIcon}
+                  onClick={() => toEditPage(curId)}
+                />
               </FormControl>
               <FormControl>
                 <ConfirmPoper

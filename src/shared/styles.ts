@@ -15,6 +15,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     textFieldSpace: { marginBottom: theme.spacing(2.5) },
+
+    editIcon: {
+      cursor: 'pointer',
+      marginRight: theme.spacing(1),
+    },
   }),
 )
 

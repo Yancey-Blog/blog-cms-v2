@@ -115,7 +115,10 @@ const YanceyMusicTable: FC<Props> = ({
           return (
             <>
               <FormControl>
-                <Edit onClick={() => showModal(curId)} />
+                <Edit
+                  className={classes.editIcon}
+                  onClick={() => showModal(curId)}
+                />
               </FormControl>
               <FormControl>
                 <ConfirmPoper
