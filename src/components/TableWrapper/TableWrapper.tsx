@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme: Theme) =>
     tableWrapper: {
       position: 'relative',
       width: '100%',
+      marginTop: '4px',
     },
 
     tableIconContainer: {

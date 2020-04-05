@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState, ChangeEvent } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import MUIDataTable, {
   MUIDataTableColumn,
@@ -14,8 +14,12 @@ import {
   Popover,
   Select,
   MenuItem,
+  Paper,
+  IconButton,
+  Divider,
+  InputBase,
 } from '@material-ui/core'
-import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
+import { DeleteOutline, Edit, AddBox, Search, Clear } from '@material-ui/icons'
 import { Pagination } from '@material-ui/lab'
 import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
@@ -68,26 +72,30 @@ const PostTable: FC<Props> = ({
   const classes = useStyles()
   const globalClasses = globalUseStyles()
 
-  const onChangePage = (currentPage: number) => {
+  const [searchTitle, setSearchTitle] = useState('')
+
+  const fetchData = (page: number, pageSize: number, title?: string) => {
     fetchPostsByPage({
       variables: {
         input: {
-          page: currentPage,
+          page,
           pageSize,
+          title,
         },
       },
     })
   }
 
-  const onChangePageSize = (e: React.ChangeEvent<{ value: unknown }>) => {
-    fetchPostsByPage({
-      variables: {
-        input: {
-          page,
-          pageSize: e.target.value,
-        },
-      },
-    })
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTitle(e.target.value)
+  }
+
+  const handlePageChange = (currentPage: number) => {
+    fetchData(currentPage, pageSize, searchTitle)
+  }
+
+  const handlePageSizeChange = (e: ChangeEvent<{ value: unknown }>) => {
+    fetchData(page, e.target.value as number, searchTitle)
   }
 
   const columns: MUIDataTableColumn[] = [
@@ -232,56 +240,85 @@ const PostTable: FC<Props> = ({
   ]
 
   return (
-    <TableWrapper tableName="Post" icon="save">
-      <MUIDataTable
-        title=""
-        data={dataSource}
-        columns={columns}
-        options={{
-          search: false,
-          pagination: false,
-          filterType: 'textField',
-          searchPlaceholder: 'Search...',
-          customToolbar() {
-            return (
-              <Fab size="medium" className={globalClasses.addIconFab}>
-                <AddBox onClick={() => toEditPage()} />
-              </Fab>
-            )
-          },
-          customToolbarSelect(selectedRows) {
-            const ids = selectedRows.data.map(
-              (row: { index: number; dataIndex: number }) =>
-                dataSource[row.index]._id,
-            )
-            return (
-              <Fab size="medium" className={globalClasses.addIconFab}>
-                <ConfirmPoper onOk={() => deletePosts({ variables: { ids } })}>
-                  <DeleteOutline />
-                </ConfirmPoper>
-              </Fab>
-            )
-          },
-        }}
-      />
+    <>
+      <Paper className={classes.search}>
+        <InputBase
+          className={classes.input}
+          placeholder="Search Posts by Title"
+          inputProps={{ 'aria-label': 'search post by title' }}
+          onChange={handleInputChange}
+        />
+        <IconButton
+          type="submit"
+          className={classes.iconButton}
+          aria-label="search"
+          onClick={() => fetchData(page, pageSize, searchTitle)}
+        >
+          <Search />
+        </IconButton>
+        <Divider className={classes.divider} orientation="vertical" />
+        <IconButton
+          color="primary"
+          className={classes.iconButton}
+          aria-label="clear"
+          onClick={() => fetchData(page, pageSize, '')}
+        >
+          <Clear />
+        </IconButton>
+      </Paper>
+      <TableWrapper tableName="Post" icon="save">
+        <MUIDataTable
+          title=""
+          data={dataSource}
+          columns={columns}
+          options={{
+            search: false,
+            pagination: false,
+            filterType: 'textField',
+            searchPlaceholder: 'Search...',
+            customToolbar() {
+              return (
+                <Fab size="medium" className={globalClasses.addIconFab}>
+                  <AddBox onClick={() => toEditPage()} />
+                </Fab>
+              )
+            },
+            customToolbarSelect(selectedRows) {
+              const ids = selectedRows.data.map(
+                (row: { index: number; dataIndex: number }) =>
+                  dataSource[row.index]._id,
+              )
+              return (
+                <Fab size="medium" className={globalClasses.addIconFab}>
+                  <ConfirmPoper
+                    onOk={() => deletePosts({ variables: { ids } })}
+                  >
+                    <DeleteOutline />
+                  </ConfirmPoper>
+                </Fab>
+              )
+            },
+          }}
+        />
 
-      {total === 0 || (
-        <div className={classes.pagination}>
-          <Select value={pageSize} onChange={onChangePageSize}>
-            <MenuItem value={10}>10</MenuItem>
-            <MenuItem value={20}>20</MenuItem>
-            <MenuItem value={50}>50</MenuItem>
-          </Select>
-          <Pagination
-            count={Math.ceil(total / 10)}
-            color="primary"
-            onChange={(e, page) => onChangePage(page)}
-          />
-        </div>
-      )}
+        {total === 0 || (
+          <div className={classes.pagination}>
+            <Select value={pageSize} onChange={handlePageSizeChange}>
+              <MenuItem value={10}>10</MenuItem>
+              <MenuItem value={20}>20</MenuItem>
+              <MenuItem value={50}>50</MenuItem>
+            </Select>
+            <Pagination
+              count={Math.ceil(total / 10)}
+              color="primary"
+              onChange={(e, page) => handlePageChange(page)}
+            />
+          </div>
+        )}
 
-      {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
-    </TableWrapper>
+        {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
+      </TableWrapper>
+    </>
   )
 }
 
