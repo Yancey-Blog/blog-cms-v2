@@ -181,10 +181,7 @@ const PostTable: FC<Props> = ({
           return (
             <>
               <FormControl>
-                <Edit
-                  style={{ marginRight: '12px', cursor: 'pointer' }}
-                  onClick={() => toEditPage(curId)}
-                />
+                <Edit onClick={() => toEditPage(curId)} />
               </FormControl>
               <FormControl>
                 <ConfirmPoper

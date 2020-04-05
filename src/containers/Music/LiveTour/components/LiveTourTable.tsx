@@ -114,10 +114,7 @@ const LiveTourTable: FC<Props> = ({
           return (
             <>
               <FormControl>
-                <Edit
-                  style={{ marginRight: '12px', cursor: 'pointer' }}
-                  onClick={() => showModal(curId)}
-                />
+                <Edit onClick={() => showModal(curId)} />
               </FormControl>
               <FormControl>
                 <ConfirmPoper
