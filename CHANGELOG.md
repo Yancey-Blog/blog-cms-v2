@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.17.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.16.0...v0.17.0) (2020-04-06)
+
+
+### Features
+
+* code optimization ([153d52c](https://github.com/Yancey-Blog/blog-cms-v2/commit/153d52cf390021f18fca4f63d58be299195111cd))
+* delete useless codes ([568604f](https://github.com/Yancey-Blog/blog-cms-v2/commit/568604fe1ca0e9c9658c044e0133c8640d81f417))
+* finish Mottos ([d545996](https://github.com/Yancey-Blog/blog-cms-v2/commit/d545996340c33f036834eeea9ee46548ea7c7938))
+* package Move component ([80fb00c](https://github.com/Yancey-Blog/blog-cms-v2/commit/80fb00cfa11d26aae3ff8fa78a85f655396cf907))
+* support exchange position ([c0170d3](https://github.com/Yancey-Blog/blog-cms-v2/commit/c0170d36ff9d870147d61273259a2dc79164c969))
+* update styles of Drawer ([07d0ab6](https://github.com/Yancey-Blog/blog-cms-v2/commit/07d0ab6a5a209309255749f2b71e8bed71e7fcae))
+
 ## [0.16.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.15.0...v0.16.0) (2020-04-05)
 
 
