@@ -34,6 +34,8 @@ const DashBoard: FC = () => {
       <Bandwagon
         serviceInfo={serviceInfo ? serviceInfo.getBanwagonServiceInfo : {}}
         usageStatus={usageStatus ? usageStatus.getBanwagonUsageStats : []}
+        isFechingServiceInfo={isFechingServiceInfo}
+        isFetchingUsageStatus={isFetchingUsageStatus}
       />
     </section>
   )
