@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import {
-  // Dashboard,
+  Dashboard,
   Home,
   Headset,
   PostAdd,
@@ -22,12 +22,12 @@ export interface Route {
 }
 
 const routes: Route[] = [
-  // {
-  //   name: 'Dashboard',
-  //   path: '/dashboard',
-  //   icon: <Dashboard />,
-  //   component: 'DashBoard/DashBoard',
-  // },
+  {
+    name: 'Dashboard',
+    path: '/dashboard',
+    icon: <Dashboard />,
+    component: 'DashBoard/DashBoard',
+  },
   {
     name: 'Home',
     path: '/home',
