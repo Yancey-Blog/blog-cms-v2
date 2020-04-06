@@ -34,25 +34,25 @@ const routes: Route[] = [
     icon: <Home />,
     routes: [
       {
-        name: 'Motto',
-        path: '/motto',
-        component: 'Home/Motto/Motto',
-      },
-      {
         name: 'Announcement',
         path: '/announcement',
         component: 'Home/Announcement/Announcement',
+      },
+      {
+        name: 'Cover',
+        path: '/cover',
+        component: 'Home/Cover/Cover',
+      },
+      {
+        name: 'Motto',
+        path: '/motto',
+        component: 'Home/Motto/Motto',
       },
       {
         name: 'Open Source',
         path: '/open-source',
         component: 'Home/OpenSource/OpenSource',
       },
-      // {
-      //   name: 'Cover',
-      //   path: '/cover',
-      //   component: 'Home/Cover/Cover',
-      // },
     ],
   },
   {
@@ -61,14 +61,14 @@ const routes: Route[] = [
     icon: <Headset />,
     routes: [
       {
-        name: 'Live Tour',
-        path: '/live-tour',
-        component: 'Music/LiveTour/LiveTour',
-      },
-      {
         name: 'Best Album',
         path: '/best-album',
         component: 'Music/BestAlbum/BestAlbum',
+      },
+      {
+        name: 'Live Tour',
+        path: '/live-tour',
+        component: 'Music/LiveTour/LiveTour',
       },
       {
         name: 'Player',
@@ -107,26 +107,6 @@ const routes: Route[] = [
     path: '/settings',
     icon: <Settings />,
     component: 'Settings/Settings',
-    // routes: [
-    //   {
-    //     name: 'Profile',
-    //     path: '/settings/profile',
-    //     component: 'Settings/Profile/Profile',
-    //     hideInMenu: true,
-    //   },
-    //   {
-    //     name: 'Account',
-    //     path: '/settings/account',
-    //     component: 'Settings/Account/Account',
-    //     hideInMenu: true,
-    //   },
-    //   {
-    //     name: 'Security',
-    //     path: '/settings/security',
-    //     component: 'Settings/Security/Security',
-    //     hideInMenu: true,
-    //   },
-    // ],
   },
 ]
 

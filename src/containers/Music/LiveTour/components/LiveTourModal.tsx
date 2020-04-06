@@ -95,7 +95,7 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
-            To {id ? 'update' : 'add'} an Live Tour, please enter the following
+            To {id ? 'update' : 'add'} a Live Tour, please enter the following
             fields here. We will send data after clicking the submit button.
           </DialogContentText>
           <TextField

@@ -112,7 +112,7 @@ const BestAlbumModal: FC<Props> = ({
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
-            To {id ? 'update' : 'add'} an Best Album, please enter the following
+            To {id ? 'update' : 'add'} a Best Album, please enter the following
             fields here. We will send data after clicking the submit button.
           </DialogContentText>
           <TextField

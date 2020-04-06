@@ -73,7 +73,7 @@ const MottoModal: FC<Props> = ({ createMotto, updateMottoById }) => {
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
-            To {id ? 'update' : 'add'} an Motto, please enter the following
+            To {id ? 'update' : 'add'} a Motto, please enter the following
             fields here. We will send data after clicking the submit button.
           </DialogContentText>
           <TextField

@@ -104,7 +104,7 @@ const YanceyMusicModal: FC<Props> = ({
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
-            To {id ? 'update' : 'add'} an Yancey Music, please enter the
+            To {id ? 'update' : 'add'} a Yancey Music, please enter the
             following fields here. We will send data after clicking the submit
             button.
           </DialogContentText>

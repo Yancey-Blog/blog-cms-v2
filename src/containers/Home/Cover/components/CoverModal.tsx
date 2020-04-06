@@ -13,63 +13,54 @@ import {
   Switch,
 } from '@material-ui/core'
 import { useFormik } from 'formik'
-import classNames from 'classnames'
 import client from 'src/shared/apolloClient'
 import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
-import globalUseStyles from 'src/shared/styles'
-import useStyles from '../styles'
+import useStyles from 'src/shared/styles'
 
 interface Props {
-  createPlayer: Function
-  updatePlayerById: Function
+  createCover: Function
+  updateCoverById: Function
 }
 
-const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
+const CoverModal: FC<Props> = ({ createCover, updateCoverById }) => {
   const { search } = useLocation()
   const { showModal, id } = parseSearch(search)
 
-  const globalClasses = globalUseStyles()
   const classes = useStyles()
 
   const initialValues = {
     title: '',
-    artist: '',
-    lrc: '',
     coverUrl: '',
-    musicFileUrl: '',
     isPublic: true,
   }
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required.'),
-    artist: Yup.string().required('Artist is required.'),
-    lrc: Yup.string().required('LRC is required.'),
-    coverUrl: Yup.string().required('CoverUrl is required.'),
-    musicFileUrl: Yup.string().required('MusicFileUrl is required.'),
+    coverUrl: Yup.string().required('Cover Url is required.'),
     isPublic: Yup.boolean().required('IsPublic is required.'),
   })
 
   const {
     handleSubmit,
-    setFieldValue,
     getFieldProps,
     setValues,
     resetForm,
     isSubmitting,
     errors,
+    setFieldValue,
     values,
   } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
       if (id) {
-        await updatePlayerById({
+        await updateCoverById({
           variables: { input: { ...values, id } },
         })
       } else {
-        await createPlayer({ variables: { input: values } })
+        await createCover({ variables: { input: values } })
       }
       goBack()
       resetForm()
@@ -80,29 +71,13 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
     setFieldValue('coverUrl', data.url)
   }
 
-  const onMusicFileUrlChange = (data: UploaderRes) => {
-    setFieldValue('musicFileUrl', data.url)
-  }
-
   useEffect(() => {
     if (id) {
-      const {
-        title,
-        artist,
-        lrc,
-        coverUrl,
-        musicFileUrl,
-        isPublic,
-        // @ts-ignore
-      } = client.cache.data.get(`PlayerModel:${id}`)
-      setValues({
-        title,
-        artist,
-        lrc,
-        coverUrl,
-        musicFileUrl,
-        isPublic,
-      })
+      // @ts-ignore
+      const { title, coverUrl, isPublic } = client.cache.data.get(
+        `CoverModel:${id}`,
+      )
+      setValues({ title, coverUrl, isPublic })
     }
 
     return () => {
@@ -112,16 +87,16 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
 
   return (
     <Dialog open={!!showModal} onClose={goBack}>
-      <DialogTitle>{id ? 'Update' : 'Add'} an Music Track</DialogTitle>
+      <DialogTitle>{id ? 'Update' : 'Add'} an Cover</DialogTitle>
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
-            To {id ? 'update' : 'add'} a Music Track, please enter the following
+            To {id ? 'update' : 'add'} a Cover, please enter the following
             fields here. We will send data after clicking the submit button.
           </DialogContentText>
 
           <TextField
-            className={globalClasses.textFieldSpace}
+            className={classes.textFieldSpace}
             error={!!errors.title}
             helperText={errors.title}
             autoFocus
@@ -131,29 +106,7 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
             {...getFieldProps('title')}
           />
 
-          <TextField
-            className={globalClasses.textFieldSpace}
-            error={!!errors.artist}
-            helperText={errors.artist}
-            required
-            label="Artist"
-            fullWidth
-            {...getFieldProps('artist')}
-          />
-
-          <TextField
-            className={globalClasses.textFieldSpace}
-            error={!!errors.lrc}
-            helperText={errors.lrc}
-            required
-            label="LRC"
-            fullWidth
-            multiline
-            rows="10"
-            {...getFieldProps('lrc')}
-          />
-
-          <div className={globalClasses.uploaderGroup}>
+          <div className={classes.uploaderGroup}>
             <FormLabel required>CoverUrl</FormLabel>
             <TextField
               error={!!errors.coverUrl}
@@ -171,32 +124,7 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
             />
           </div>
 
-          <div
-            className={classNames(
-              globalClasses.uploaderGroup,
-              classes.btnUploaderGroup,
-            )}
-          >
-            <FormLabel required>MusicFileUrl</FormLabel>
-            <TextField
-              error={!!errors.musicFileUrl}
-              helperText={errors.musicFileUrl}
-              style={{ display: 'none' }}
-              required
-              label="MusicFileUrl"
-              fullWidth
-              disabled={true}
-              {...getFieldProps('musicFileUrl')}
-            />
-            <Uploader
-              onChange={onMusicFileUrlChange}
-              type="simple"
-              accept="audio/*"
-              defaultFile={getFieldProps('musicFileUrl').value}
-            />
-          </div>
-
-          <div className={globalClasses.uploaderGroup}>
+          <div className={classes.uploaderGroup}>
             <FormLabel required>Is Public</FormLabel>
             <Switch
               color="primary"
@@ -220,4 +148,4 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
   )
 }
 
-export default PlayerModal
+export default CoverModal

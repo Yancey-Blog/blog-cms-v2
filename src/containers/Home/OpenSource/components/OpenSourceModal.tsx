@@ -94,9 +94,8 @@ const OpenSourceModal: FC<Props> = ({
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
-            To {id ? 'update' : 'add'} an Open Source, please enter the
-            following fields here. We will send data after clicking the submit
-            button.
+            To {id ? 'update' : 'add'} a Open Source, please enter the following
+            fields here. We will send data after clicking the submit button.
           </DialogContentText>
           <TextField
             className={classes.textFieldSpace}
