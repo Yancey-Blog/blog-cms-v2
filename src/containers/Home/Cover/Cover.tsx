@@ -7,7 +7,8 @@ import {
   CREATE_ONE_COVER,
   UPDATE_ONE_COVER,
   DELETE_ONE_COVER,
-  BATCH_DELETE_COVER,
+  BATCH_DELETE_COVERS,
+  BATCH_PUBLIC_COVERS,
   EXCHANGE_POSITION,
 } from './typeDefs'
 import { ICover, Query } from './types'
@@ -62,6 +63,35 @@ const Cover: FC = () => {
     },
   )
 
+  const [publicCovers, { loading: isPublicingCovers }] = useMutation(
+    BATCH_PUBLIC_COVERS,
+    {
+      errorPolicy: 'all',
+      update(proxy, { data: { publicCovers } }) {
+        const data = proxy.readQuery<Query>({ query: COVERS })
+
+        // @ts-ignore
+        const res = data.getCovers.map((cover) =>
+          publicCovers.ids.includes(cover._id) ? (cover.isPublic = true) : null,
+        )
+
+        if (data) {
+          proxy.writeQuery({
+            query: COVERS,
+            data: {
+              ...data,
+              getCovers: [...res],
+            },
+          })
+        }
+      },
+      onCompleted() {
+        enqueueSnackbar('Update success!', { variant: 'success' })
+      },
+      onError() {},
+    },
+  )
+
   const [deleteCoverById, { loading: isDeleting }] = useMutation(
     DELETE_ONE_COVER,
     {
@@ -89,7 +119,7 @@ const Cover: FC = () => {
   )
 
   const [deleteCovers, { loading: isBatchDeleting }] = useMutation(
-    BATCH_DELETE_COVER,
+    BATCH_DELETE_COVERS,
     {
       errorPolicy: 'all',
       update(proxy, { data: { deleteCovers } }) {
@@ -124,10 +154,12 @@ const Cover: FC = () => {
         isDeleting={isDeleting}
         isExchanging={isExchanging}
         isBatchDeleting={isBatchDeleting}
+        isPublicingCovers={isPublicingCovers}
         deleteCoverById={deleteCoverById}
         updateCoverById={updateCoverById}
         deleteCovers={deleteCovers}
         exchangePosition={exchangePosition}
+        publicCovers={publicCovers}
       />
 
       <CoverModal createCover={createCover} updateCoverById={updateCoverById} />

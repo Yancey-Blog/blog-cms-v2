@@ -6,7 +6,7 @@ import MUIDataTable, {
   MUIDataTableColumn,
   MUIDataTableMeta,
 } from 'mui-datatables'
-import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
+import { DeleteOutline, Edit, AddBox, UpdateOutlined } from '@material-ui/icons'
 import { FormControl, Fab, Popover, Switch } from '@material-ui/core'
 import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
@@ -26,10 +26,12 @@ interface Props {
   isDeleting: boolean
   isExchanging: boolean
   isBatchDeleting: boolean
+  isPublicingCovers: boolean
   deleteCoverById: Function
   deleteCovers: Function
   updateCoverById: Function
   exchangePosition: Function
+  publicCovers: Function
 }
 
 const CoverTable: FC<Props> = ({
@@ -38,10 +40,12 @@ const CoverTable: FC<Props> = ({
   deleteCovers,
   updateCoverById,
   exchangePosition,
+  publicCovers,
   isFetching,
   isDeleting,
   isExchanging,
   isBatchDeleting,
+  isPublicingCovers,
 }) => {
   const history = useHistory()
   const { pathname } = useLocation()
@@ -186,11 +190,18 @@ const CoverTable: FC<Props> = ({
           dataSource[row.index]._id,
       )
       return (
-        <Fab size="medium" className={classes.addIconFab}>
-          <ConfirmPoper onOk={() => deleteCovers({ variables: { ids } })}>
-            <DeleteOutline />
-          </ConfirmPoper>
-        </Fab>
+        <div>
+          <Fab size="medium" className={classes.addIconFab}>
+            <ConfirmPoper onOk={() => deleteCovers({ variables: { ids } })}>
+              <DeleteOutline />
+            </ConfirmPoper>
+          </Fab>
+          <Fab size="medium" className={classes.addIconFab}>
+            <UpdateOutlined
+              onClick={() => publicCovers({ variables: { ids } })}
+            />
+          </Fab>
+        </div>
       )
     },
   }
@@ -203,9 +214,11 @@ const CoverTable: FC<Props> = ({
         columns={columns}
         options={options}
       />
-      {(isFetching || isDeleting || isBatchDeleting || isExchanging) && (
-        <Loading />
-      )}
+      {(isFetching ||
+        isDeleting ||
+        isBatchDeleting ||
+        isExchanging ||
+        isPublicingCovers) && <Loading />}
     </TableWrapper>
   )
 }

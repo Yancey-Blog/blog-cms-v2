@@ -1,5 +1,8 @@
 import gql from 'graphql-tag'
-import { BATCH_DELETE_FRAGMENT } from 'src/shared/graphqlFragment'
+import {
+  BATCH_DELETE_FRAGMENT,
+  BATCH_UPDATE_FRAGMENT,
+} from 'src/shared/graphqlFragment'
 
 const COVER_FRAGMENT = gql`
   fragment CoverFragment on CoverModel {
@@ -58,11 +61,20 @@ export const DELETE_ONE_COVER = gql`
   ${COVER_FRAGMENT}
 `
 
-export const BATCH_DELETE_COVER = gql`
+export const BATCH_DELETE_COVERS = gql`
   mutation DeleteCovers($ids: [ID!]!) {
     deleteCovers(ids: $ids) {
       ...BatchDeleteFragment
     }
   }
   ${BATCH_DELETE_FRAGMENT}
+`
+
+export const BATCH_PUBLIC_COVERS = gql`
+  mutation DeleteCovers($ids: [ID!]!) {
+    publicCovers(ids: $ids) {
+      ...BatchUpdateFragment
+    }
+  }
+  ${BATCH_UPDATE_FRAGMENT}
 `
