@@ -44,10 +44,10 @@ const UsageStatus: FC<Props> = ({ usageStatus, children }) => {
       .slice(-30),
     datasets: [
       {
-        label: type1,
+        label: type1.split('_').join(' ').toUpperCase(),
         fill: false,
         lineTension: 0.1,
-        backgroundColor: '#FF6384',
+        backgroundColor: 'rgba(255, 99, 132, .8)',
         borderColor: '#FF6384',
         borderCapStyle: 'butt',
         borderDash: [],
@@ -65,10 +65,10 @@ const UsageStatus: FC<Props> = ({ usageStatus, children }) => {
         data: usageStatus.map((usageStat) => usageStat[type1]).slice(-30),
       },
       type2 && {
-        label: type2,
+        label: type2.split('_').join(' ').toUpperCase(),
         fill: false,
         lineTension: 0.1,
-        backgroundColor: '#36A2EB',
+        backgroundColor: 'rgb(54, 162, 235, .8)',
         borderColor: '#36A2EB',
         borderCapStyle: 'butt',
         borderDash: [],
