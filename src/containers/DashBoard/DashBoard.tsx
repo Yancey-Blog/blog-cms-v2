@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { useQuery } from '@apollo/react-hooks'
-import { GET_BANWAGON_SERVICE_INFO } from './typeDefs'
+import { GET_BANWAGON_SERVICE_INFO, GET_BANWAGON_USAGE_STATS } from './typeDefs'
 import Bandwagon from './components/Bandwagon/Bandwagon'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -15,13 +15,26 @@ const useStyles = makeStyles((theme: Theme) =>
 const DashBoard: FC = () => {
   const classes = useStyles()
 
-  const { loading, data } = useQuery(GET_BANWAGON_SERVICE_INFO, {
-    notifyOnNetworkStatusChange: true,
-  })
+  const { loading: isFechingServiceInfo, data: serviceInfo } = useQuery(
+    GET_BANWAGON_SERVICE_INFO,
+    {
+      notifyOnNetworkStatusChange: true,
+    },
+  )
+
+  const { loading: isFetchingUsageStatus, data: usageStatus } = useQuery(
+    GET_BANWAGON_USAGE_STATS,
+    {
+      notifyOnNetworkStatusChange: true,
+    },
+  )
 
   return (
     <section className={classes.dashboradWrapper}>
-      <Bandwagon dataSource={data ? data.getBanwagonServiceInfo : {}} />
+      <Bandwagon
+        serviceInfo={serviceInfo ? serviceInfo.getBanwagonServiceInfo : {}}
+        usageStatus={usageStatus ? usageStatus.getBanwagonUsageStats : []}
+      />
     </section>
   )
 }

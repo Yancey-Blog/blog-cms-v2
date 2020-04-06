@@ -14,3 +14,16 @@ export const GET_BANWAGON_SERVICE_INFO = gql`
     }
   }
 `
+
+export const GET_BANWAGON_USAGE_STATS = gql`
+  query GetBanwagonUsageStats {
+    getBanwagonUsageStats {
+      timestamp
+      network_in_bytes
+      network_out_bytes
+      disk_read_bytes
+      disk_write_bytes
+      cpu_usage
+    }
+  }
+`

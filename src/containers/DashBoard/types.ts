@@ -8,3 +8,12 @@ export interface IBandwagonServiceInfo {
   swap_total_kb: number
   swap_available_kb: number
 }
+
+export interface IBandwagonUsageStatus {
+  timestamp: string
+  network_in_bytes: string
+  network_out_bytes: string
+  disk_read_bytes: string
+  disk_write_bytes: string
+  cpu_usage: string
+}
