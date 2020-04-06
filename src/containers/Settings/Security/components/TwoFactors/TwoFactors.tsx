@@ -66,7 +66,7 @@ const TwoFactors: FC<Props> = ({ isTOTP }) => {
           <ListItem button>
             <ListItemText primary="SMS number" className={styles.title} />
             <ListItemText
-              primary={<p className={styles.phone}>150 4338 9539</p>}
+              primary={<p className={styles.phone}>150 xxxx xxxx</p>}
               className={styles.title}
             />
             <ListItemAvatar>

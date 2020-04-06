@@ -56,7 +56,7 @@ const Schedule: FC<ScheduleProps> = ({
 
   return (
     <Paper className={classes.customPaper}>
-      <Scheduler data={dataSource as AppointmentModel[]} height={691}>
+      <Scheduler data={dataSource as AppointmentModel[]}>
         <ExternalViewSwitcher
           currentViewName={currentViewName}
           onChange={(val: string) => setCurrentViewName(val)}
