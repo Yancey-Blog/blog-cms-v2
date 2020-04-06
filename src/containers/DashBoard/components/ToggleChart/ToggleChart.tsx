@@ -19,6 +19,11 @@ const useStyles = makeStyles((theme: Theme) =>
       top: 4,
       right: 16,
     },
+
+    toggleBtn: {
+      padding: '0 4px',
+      border: 'none',
+    },
   }),
 )
 
@@ -34,13 +39,25 @@ const ToggleChart: FC<Props> = ({ children, handleToggleChange }) => {
         onChange={(e, value) => handleToggleChange(value)}
         aria-label="chart-date-picker"
       >
-        <ToggleButton value={288} aria-label="24 hours">
+        <ToggleButton
+          value={288}
+          aria-label="24 hours"
+          className={classes.toggleBtn}
+        >
           24H
         </ToggleButton>
-        <ToggleButton value={144} aria-label="12 hours">
+        <ToggleButton
+          value={144}
+          aria-label="12 hours"
+          className={classes.toggleBtn}
+        >
           12H
         </ToggleButton>
-        <ToggleButton value={12} aria-label="1 hour">
+        <ToggleButton
+          value={12}
+          aria-label="1 hour"
+          className={classes.toggleBtn}
+        >
           1H
         </ToggleButton>
       </ToggleButtonGroup>
