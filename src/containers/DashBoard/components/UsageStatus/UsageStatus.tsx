@@ -6,12 +6,18 @@ import chartConfig from 'src/shared/chartjsConfig'
 import useStyles from './styles'
 import { IBandwagonUsageStatus } from '../../types'
 import ToggleChart from '../ToggleChart/ToggleChart'
+import UsageStatusSkeleton from '../UsageStatusSkeleton/UsageStatusSkeleton'
 
 interface Props {
   usageStatus: IBandwagonUsageStatus[]
+  isFetchingUsageStatus: boolean
 }
 
-const UsageStatus: FC<Props> = ({ usageStatus, children }) => {
+const UsageStatus: FC<Props> = ({
+  usageStatus,
+  children,
+  isFetchingUsageStatus,
+}) => {
   const classes = useStyles()
 
   const [diskLimit, setDiskLimit] = useState(12)
@@ -21,48 +27,64 @@ const UsageStatus: FC<Props> = ({ usageStatus, children }) => {
   return (
     <>
       <section className={classes.usageStatusContainer}>
-        <ToggleChart
-          handleToggleChange={(value: number) => setDiskLimit(value)}
-        >
-          <Bar
-            data={chartConfig(
-              usageStatus,
-              diskLimit,
-              'disk_read_bytes',
-              'disk_write_bytes',
-            )}
-            options={{
-              maintainAspectRatio: false,
-            }}
-            height={375}
-          />
-        </ToggleChart>
-        <ToggleChart
-          handleToggleChange={(value: number) => setNetworkLimit(value)}
-        >
-          <Bar
-            data={chartConfig(
-              usageStatus,
-              networkLimit,
-              'network_in_bytes',
-              'network_out_bytes',
-            )}
-            options={{ maintainAspectRatio: false }}
-            height={375}
-          />
-        </ToggleChart>
+        {isFetchingUsageStatus ? (
+          <UsageStatusSkeleton />
+        ) : (
+          <ToggleChart
+            handleToggleChange={(value: number) => setDiskLimit(value)}
+          >
+            <Bar
+              data={chartConfig(
+                usageStatus,
+                diskLimit,
+                'disk_read_bytes',
+                'disk_write_bytes',
+              )}
+              options={{
+                maintainAspectRatio: false,
+              }}
+              height={375}
+            />
+          </ToggleChart>
+        )}
+
+        {isFetchingUsageStatus ? (
+          <UsageStatusSkeleton />
+        ) : (
+          <ToggleChart
+            handleToggleChange={(value: number) => setNetworkLimit(value)}
+          >
+            <Bar
+              data={chartConfig(
+                usageStatus,
+                networkLimit,
+                'network_in_bytes',
+                'network_out_bytes',
+              )}
+              options={{ maintainAspectRatio: false }}
+              height={375}
+            />
+          </ToggleChart>
+        )}
       </section>
 
       <section
         className={classNames(classes.cpuWrapper, classes.usageStatusContainer)}
       >
-        <ToggleChart handleToggleChange={(value: number) => setCPULimit(value)}>
-          <Line
-            data={chartConfig(usageStatus, cpuLimit, 'cpu_usage')}
-            options={{ maintainAspectRatio: false }}
-            height={375}
-          />
-        </ToggleChart>
+        {isFetchingUsageStatus ? (
+          <UsageStatusSkeleton />
+        ) : (
+          <ToggleChart
+            handleToggleChange={(value: number) => setCPULimit(value)}
+          >
+            <Line
+              data={chartConfig(usageStatus, cpuLimit, 'cpu_usage')}
+              options={{ maintainAspectRatio: false }}
+              height={375}
+            />
+          </ToggleChart>
+        )}
+
         <Paper className={classes.paper}>{children}</Paper>
       </section>
     </>

@@ -86,7 +86,10 @@ const Bandwagon: FC<Props> = ({
               />
             ))}
       </section>
-      <UsageStatus usageStatus={usageStatus} />
+      <UsageStatus
+        usageStatus={usageStatus}
+        isFetchingUsageStatus={isFetchingUsageStatus}
+      />
     </>
   )
 }

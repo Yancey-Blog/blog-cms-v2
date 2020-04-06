@@ -12,6 +12,14 @@ const useStyles = makeStyles((theme: Theme) =>
     skeleton: {
       margin: '8px 0 36px',
     },
+
+    firstSkeleton: {
+      float: 'right',
+    },
+
+    secondSkeleton: {
+      margin: '0 auto 12px',
+    },
   }),
 )
 
@@ -20,9 +28,19 @@ const UsageStatusSkeleton: FC = () => {
 
   return (
     <Card className={classes.card}>
-      <Skeleton variant="text" animation="wave" width={100} />
-      <Skeleton variant="rect" animation="wave" className={classes.skeleton} />
-      <Skeleton variant="text" animation="wave" width={200} />
+      <Skeleton
+        variant="text"
+        animation="wave"
+        width={100}
+        className={classes.firstSkeleton}
+      />
+      <Skeleton
+        variant="text"
+        animation="wave"
+        width={240}
+        className={classes.secondSkeleton}
+      />
+      <Skeleton variant="rect" animation="wave" height={310} />
     </Card>
   )
 }
