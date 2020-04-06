@@ -6,11 +6,11 @@ import MUIDataTable, {
 } from 'mui-datatables'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab } from '@material-ui/core'
-import { sortBy } from 'yancey-js-util'
 import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
+import Move from 'src/components/Move/Move'
 import useStyles from 'src/shared/styles'
 import { IAnnouncement } from '../types'
 
@@ -18,17 +18,21 @@ interface Props {
   dataSource: IAnnouncement[]
   isFetching: boolean
   isDeleting: boolean
+  isExchanging: boolean
   isBatchDeleting: boolean
   deleteAnnouncementById: Function
   deleteAnnouncements: Function
+  exchangePosition: Function
 }
 
 const AnnouncementTable: FC<Props> = ({
   dataSource,
   deleteAnnouncementById,
   deleteAnnouncements,
+  exchangePosition,
   isFetching,
   isDeleting,
+  isExchanging,
   isBatchDeleting,
 }) => {
   const history = useHistory()
@@ -41,6 +45,7 @@ const AnnouncementTable: FC<Props> = ({
 
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
+    { name: 'weight', label: 'Weight' },
     { name: 'content', label: 'Content' },
     {
       name: 'createdAt',
@@ -63,6 +68,7 @@ const AnnouncementTable: FC<Props> = ({
         filter: false,
         customBodyRender(value, tableMeta) {
           const curId = tableMeta.rowData[0]
+
           return (
             <>
               <FormControl>
@@ -80,6 +86,12 @@ const AnnouncementTable: FC<Props> = ({
                   <DeleteOutline />
                 </ConfirmPoper>
               </FormControl>
+
+              <Move
+                dataSource={dataSource}
+                tableMeta={tableMeta}
+                exchangePosition={exchangePosition}
+              />
             </>
           )
         },
@@ -120,11 +132,13 @@ const AnnouncementTable: FC<Props> = ({
     <TableWrapper tableName="Announcement" icon="save">
       <MUIDataTable
         title=""
-        data={dataSource.sort(sortBy('updatedAt')).reverse()}
+        data={dataSource}
         columns={columns}
         options={options}
       />
-      {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
+      {(isFetching || isDeleting || isBatchDeleting || isExchanging) && (
+        <Loading />
+      )}
     </TableWrapper>
   )
 }

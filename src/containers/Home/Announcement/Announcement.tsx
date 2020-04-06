@@ -1,12 +1,14 @@
 import React, { FC } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { useSnackbar } from 'notistack'
+import { sortBy } from 'yancey-js-util'
 import {
   ANNOUNCEMENTS,
   CREATE_ONE_ANNOUNCEMENT,
   UPDATE_ONE_ANNOUNCEMENT,
   DELETE_ONE_ANNOUNCEMENT,
   BATCH_DELETE_ANNOUNCEMENT,
+  EXCHANGE_POSITION,
 } from './typeDefs'
 import { IAnnouncement, Query } from './types'
 import AnnouncementTable from './components/AnnouncementTable'
@@ -48,6 +50,17 @@ const Announcement: FC = () => {
     },
     onError() {},
   })
+
+  const [exchangePosition, { loading: isExchanging }] = useMutation(
+    EXCHANGE_POSITION,
+    {
+      errorPolicy: 'all',
+      onCompleted() {
+        enqueueSnackbar('Update success!', { variant: 'success' })
+      },
+      onError() {},
+    },
+  )
 
   const [deleteAnnouncementById, { loading: isDeleting }] = useMutation(
     DELETE_ONE_ANNOUNCEMENT,
@@ -104,12 +117,16 @@ const Announcement: FC = () => {
   return (
     <>
       <AnnouncementTable
-        dataSource={data ? data.getAnnouncements : []}
+        dataSource={
+          data ? data.getAnnouncements.sort(sortBy('weight', 'descend')) : []
+        }
         isFetching={isFetching}
         isDeleting={isDeleting}
+        isExchanging={isExchanging}
         isBatchDeleting={isBatchDeleting}
         deleteAnnouncementById={deleteAnnouncementById}
         deleteAnnouncements={deleteAnnouncements}
+        exchangePosition={exchangePosition}
       />
 
       <AnnouncementModal
