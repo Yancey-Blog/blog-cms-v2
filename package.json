@@ -61,6 +61,7 @@
     "react-google-recaptcha": "^2.0.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-swipeable-views": "^0.13.9",
     "tui-editor": "^1.4.10",
     "yancey-js-util": "^2.0.1",
     "yup": "^0.28.3"

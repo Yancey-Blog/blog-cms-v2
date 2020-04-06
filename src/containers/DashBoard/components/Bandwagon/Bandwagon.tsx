@@ -73,7 +73,9 @@ const Bandwagon: FC<Props> = ({
     <>
       <section className={classes.statusCardGrid}>
         {isFechingServiceInfo
-          ? statusCards.map(() => <StatusCardSkeleton />)
+          ? statusCards.map((statusCard) => (
+              <StatusCardSkeleton key={statusCard.title} />
+            ))
           : statusCards.map((statusCard) => (
               <StatusCard
                 key={statusCard.title}
