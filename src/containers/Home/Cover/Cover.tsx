@@ -72,7 +72,9 @@ const Cover: FC = () => {
 
         // @ts-ignore
         const res = data.getCovers.map((cover) =>
-          publicCovers.ids.includes(cover._id) ? (cover.isPublic = true) : null,
+          publicCovers.ids.includes(cover._id)
+            ? (cover.isPublic = false)
+            : null,
         )
 
         if (data) {
