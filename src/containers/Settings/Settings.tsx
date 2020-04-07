@@ -1,12 +1,12 @@
 import React, { FC, useState } from 'react'
 import { Tabs, Tab, Typography } from '@material-ui/core'
 import {
-  AccountCircleOutlined,
   LockOutlined,
   FaceOutlined,
+  PermDataSettingOutlined,
 } from '@material-ui/icons'
 import Security from './Security/Security'
-import Account from './Account/Account'
+import Global from './Global/Global'
 import Profile from './Profile/Profile'
 import styles from './settings.module.scss'
 
@@ -68,8 +68,8 @@ const Settings: FC = () => {
           disableRipple={true}
           label={
             <span className={styles.tabLabel}>
-              <AccountCircleOutlined />
-              Account
+              <PermDataSettingOutlined />
+              Global Settings
             </span>
           }
           {...a11yProps(1)}
@@ -89,7 +89,7 @@ const Settings: FC = () => {
         <Profile />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Account />
+        <Global />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Security />

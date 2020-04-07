@@ -83,7 +83,7 @@ const AnnouncementTable: FC<Props> = ({
                     deleteAnnouncementById({ variables: { id: curId } })
                   }
                 >
-                  <DeleteOutline />
+                  <DeleteOutline className={classes.editIcon} />
                 </ConfirmPoper>
               </FormControl>
 

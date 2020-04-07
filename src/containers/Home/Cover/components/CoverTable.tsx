@@ -156,7 +156,7 @@ const CoverTable: FC<Props> = ({
                 <ConfirmPoper
                   onOk={() => deleteCoverById({ variables: { id: curId } })}
                 >
-                  <DeleteOutline />
+                  <DeleteOutline className={classes.editIcon} />
                 </ConfirmPoper>
               </FormControl>
 
