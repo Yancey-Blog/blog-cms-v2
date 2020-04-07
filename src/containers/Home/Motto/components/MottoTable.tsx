@@ -11,6 +11,7 @@ import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
 import Move from 'src/components/Move/Move'
+import { TABLE_OPTIONS } from 'src/shared/constants'
 import useStyles from 'src/shared/styles'
 import { IMotto } from '../types'
 
@@ -98,10 +99,7 @@ const MottoTable: FC<Props> = ({
   ]
 
   const options: MUIDataTableOptions = {
-    filterType: 'textField',
-    rowsPerPage: 10,
-    rowsPerPageOptions: [10, 20, 50],
-    searchPlaceholder: 'Search...',
+    ...TABLE_OPTIONS,
     customToolbar() {
       return (
         <Fab size="medium" className={classes.addIconFab}>

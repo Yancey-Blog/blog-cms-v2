@@ -17,6 +17,7 @@ import ImagePopup from 'src/components/ImagePopup/ImagePopup'
 import {
   POPOVER_ANCHOR_ORIGIN,
   POPOVER_TRANSFORM_ORIGIN,
+  TABLE_OPTIONS,
 } from 'src/shared/constants'
 import globalUseStyles from 'src/shared/styles'
 import useStyles from '../styles'
@@ -172,10 +173,7 @@ const PlayerTable: FC<Props> = ({
   ]
 
   const options: MUIDataTableOptions = {
-    filterType: 'textField',
-    rowsPerPage: 10,
-    rowsPerPageOptions: [10, 20, 50],
-    searchPlaceholder: 'Search...',
+    ...TABLE_OPTIONS,
     customToolbar() {
       return (
         <Fab size="medium" className={globalClasses.addIconFab}>

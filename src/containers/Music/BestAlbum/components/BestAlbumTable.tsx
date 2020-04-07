@@ -13,6 +13,7 @@ import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
 import ImagePopup from 'src/components/ImagePopup/ImagePopup'
+import { TABLE_OPTIONS } from 'src/shared/constants'
 import useStyles from 'src/shared/styles'
 import { IBestAlbum } from '../types'
 
@@ -123,10 +124,7 @@ const BestAlbumTable: FC<Props> = ({
   ]
 
   const options: MUIDataTableOptions = {
-    filterType: 'textField',
-    rowsPerPage: 10,
-    rowsPerPageOptions: [10, 20, 50],
-    searchPlaceholder: 'Search...',
+    ...TABLE_OPTIONS,
     customToolbar() {
       return (
         <Fab size="medium" className={classes.addIconFab}>
