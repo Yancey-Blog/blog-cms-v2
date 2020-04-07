@@ -1,23 +1,19 @@
 import React, { FC } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
   MUIDataTableMeta,
 } from 'mui-datatables'
 import { DeleteOutline, Edit, AddBox, UpdateOutlined } from '@material-ui/icons'
-import { FormControl, Fab, Popover, Switch } from '@material-ui/core'
+import { FormControl, Fab, Switch } from '@material-ui/core'
 import { formatDate, stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
 import Move from 'src/components/Move/Move'
+import ImagePopup from 'src/components/ImagePopup/ImagePopup'
 import useStyles from 'src/shared/styles'
-import {
-  POPOVER_ANCHOR_ORIGIN,
-  POPOVER_TRANSFORM_ORIGIN,
-} from 'src/shared/constants'
 import { ICover } from '../types'
 
 interface Props {
@@ -65,32 +61,7 @@ const CoverTable: FC<Props> = ({
       options: {
         customBodyRender: (value: string, tableMeta: MUIDataTableMeta) => {
           const curName = tableMeta.rowData[2]
-          return (
-            <PopupState variant="popover" popupId="imagePoperOver">
-              {(popupState) => (
-                <div>
-                  <img
-                    src={value}
-                    style={{ width: '150px' }}
-                    alt={curName}
-                    {...bindTrigger(popupState)}
-                  />
-                  <Popover
-                    {...bindPopover(popupState)}
-                    anchorOrigin={POPOVER_ANCHOR_ORIGIN}
-                    transformOrigin={POPOVER_TRANSFORM_ORIGIN}
-                    disableRestoreFocus
-                  >
-                    <img
-                      src={value}
-                      style={{ width: '400px', display: 'block' }}
-                      alt={curName}
-                    />
-                  </Popover>
-                </div>
-              )}
-            </PopupState>
-          )
+          return <ImagePopup imgName={curName} imgUrl={value} />
         },
       },
     },
