@@ -41,7 +41,7 @@ function TabPanel(props: TabPanelProps) {
 }
 
 const Settings: FC = () => {
-  const [value, setValue] = useState(2)
+  const [value, setValue] = useState(0)
   const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
   }
@@ -68,8 +68,8 @@ const Settings: FC = () => {
           disableRipple={true}
           label={
             <span className={styles.tabLabel}>
-              <PermDataSettingOutlined />
-              Global Settings
+              <LockOutlined />
+              Security
             </span>
           }
           {...a11yProps(1)}
@@ -78,8 +78,8 @@ const Settings: FC = () => {
           disableRipple={true}
           label={
             <span className={styles.tabLabel}>
-              <LockOutlined />
-              Security
+              <PermDataSettingOutlined />
+              Global Settings
             </span>
           }
           {...a11yProps(2)}
@@ -89,10 +89,10 @@ const Settings: FC = () => {
         <Profile />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Global />
+        <Security />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Security />
+        <Global />
       </TabPanel>
     </section>
   )
