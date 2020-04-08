@@ -35,8 +35,8 @@ export const UPDATE_ONE_COVER = gql`
 `
 
 export const EXCHANGE_POSITION = gql`
-  mutation ExchangePosition($input: ExchangePositionInput!) {
-    exchangePosition(input: $input) {
+  mutation ExchangePositionCover($input: ExchangePositionInput!) {
+    exchangePositionCover(input: $input) {
       ...CoverFragment
     }
   }

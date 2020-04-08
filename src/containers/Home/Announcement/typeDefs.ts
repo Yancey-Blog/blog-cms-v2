@@ -30,8 +30,8 @@ export const UPDATE_ONE_ANNOUNCEMENT = gql`
 `
 
 export const EXCHANGE_POSITION = gql`
-  mutation ExchangePosition($input: ExchangePositionInput!) {
-    exchangePosition(input: $input) {
+  mutation ExchangePositionAnnouncement($input: ExchangePositionInput!) {
+    exchangePositionAnnouncement(input: $input) {
       ...AnnouncementFragment
     }
   }
