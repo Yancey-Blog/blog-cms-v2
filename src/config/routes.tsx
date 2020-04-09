@@ -24,7 +24,7 @@ export interface Route {
 const routes: Route[] = [
   {
     name: 'Dashboard',
-    path: '/dashboard',
+    path: '/',
     icon: <Dashboard />,
     component: 'DashBoard/DashBoard',
   },
