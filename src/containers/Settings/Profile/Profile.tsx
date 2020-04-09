@@ -44,7 +44,7 @@ const Profile: FC = () => {
     // const { username, avatarUrl } = client.cache.data.get(`UserModel:${id}`)
     // setValues({ username, avatarUrl })
 
-    console.log(client.cache.data.get(`UserModel:${id}`))
+    // console.log(client.cache.data.get(`UserModel:${id}`))
 
     return () => {
       resetForm()

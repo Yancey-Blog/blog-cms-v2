@@ -36,6 +36,7 @@
     "@toast-ui/editor-plugin-uml": "^1.0.0",
     "@toast-ui/react-editor": "^2.0.1",
     "apollo-cache-inmemory": "^1.6.5",
+    "apollo-cache-persist": "^0.1.1",
     "apollo-client": "^2.6.8",
     "apollo-link-batch-http": "^1.2.13",
     "apollo-link-context": "^1.0.19",
