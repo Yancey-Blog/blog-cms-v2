@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
     cpuWrapper: {
       gridTemplateColumns: '2fr 1fr',
-      marginTop: 60,
+      marginTop: 62,
     },
   }),
 )
