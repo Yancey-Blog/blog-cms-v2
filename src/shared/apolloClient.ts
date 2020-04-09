@@ -22,7 +22,7 @@ const authLink = setContext((_, { headers }) => {
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
-    graphQLErrors.forEach(err => {
+    graphQLErrors.forEach((err) => {
       SnackbarUtils.error(err.message)
 
       if (err.extensions && err.extensions.code === 'UNAUTHENTICATED') {
