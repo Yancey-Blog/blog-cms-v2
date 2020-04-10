@@ -59,7 +59,7 @@ const Account: FC = () => {
     <>
       <SettingsHeader
         title="Account"
-        subTitle="You can change your username, email or delete your account"
+        subTitle="Change your own username, email or delete your account"
       />
 
       <UpdateUserName updateUserName={updateUserName} username={username} />
