@@ -1,5 +1,4 @@
 import React, { FC, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 import {
   Button,
@@ -14,22 +13,25 @@ import {
 import { useFormik } from 'formik'
 import { KeyboardDateTimePicker } from '@material-ui/pickers'
 import client from 'src/shared/apolloClient'
-import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
+import { Open } from 'src/hooks/useOpenModal'
 import useStyles from 'src/shared/styles'
 
 interface Props {
+  open: Open
+  handleOpen: Function
   createYanceyMusic: Function
   updateYanceyMusicById: Function
 }
 
 const YanceyMusicModal: FC<Props> = ({
+  open,
+  handleOpen,
   createYanceyMusic,
   updateYanceyMusicById,
 }) => {
-  const { search } = useLocation()
-  const { showModal, id } = parseSearch(search)
+  const { isOpen, id } = open
 
   const classes = useStyles()
 
@@ -67,8 +69,9 @@ const YanceyMusicModal: FC<Props> = ({
       } else {
         await createYanceyMusic({ variables: { input: values } })
       }
-      goBack()
+
       resetForm()
+      handleOpen()
     },
   })
 
@@ -77,6 +80,8 @@ const YanceyMusicModal: FC<Props> = ({
   }
 
   useEffect(() => {
+    resetForm()
+
     if (id) {
       const {
         title,
@@ -92,15 +97,11 @@ const YanceyMusicModal: FC<Props> = ({
         posterUrl,
       })
     }
-
-    return () => {
-      resetForm()
-    }
   }, [id, resetForm, setValues])
 
   return (
-    <Dialog open={!!showModal} onClose={goBack}>
-      <DialogTitle>{id ? 'Update' : 'Add'} an Yancey Music</DialogTitle>
+    <Dialog open={isOpen} onClose={() => handleOpen()}>
+      <DialogTitle>{id ? 'Update' : 'Add'} a Yancey Music</DialogTitle>
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
@@ -160,7 +161,7 @@ const YanceyMusicModal: FC<Props> = ({
           </div>
         </DialogContent>
         <DialogActions>
-          <Button color="primary" onClick={goBack}>
+          <Button color="primary" onClick={() => handleOpen()}>
             Cancel
           </Button>
           <Button color="primary" type="submit" disabled={isSubmitting}>
