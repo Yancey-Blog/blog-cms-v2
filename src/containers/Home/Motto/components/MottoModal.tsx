@@ -21,10 +21,10 @@ interface Props {
 }
 
 const MottoModal: FC<Props> = ({
-  createMotto,
-  updateMottoById,
   open,
   handleOpen,
+  createMotto,
+  updateMottoById,
 }) => {
   const { isOpen, id } = open
 

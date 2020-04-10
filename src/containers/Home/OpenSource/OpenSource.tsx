@@ -10,7 +10,6 @@ import {
 } from './typeDefs'
 import { IOpenSource, Query } from './types'
 import OpenSourceTable from './components/OpenSourceTable'
-import OpenSourceModal from './components/OpenSourceModal'
 
 const OpenSource: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
@@ -97,21 +96,16 @@ const OpenSource: FC = () => {
   )
 
   return (
-    <>
-      <OpenSourceTable
-        dataSource={data ? data.getOpenSources : []}
-        isFetching={isFetching}
-        isDeleting={isDeleting}
-        isBatchDeleting={isBatchDeleting}
-        deleteOpenSourceById={deleteOpenSourceById}
-        deleteOpenSources={deleteOpenSources}
-      />
-
-      <OpenSourceModal
-        createOpenSource={createOpenSource}
-        updateOpenSourceById={updateOpenSourceById}
-      />
-    </>
+    <OpenSourceTable
+      dataSource={data ? data.getOpenSources : []}
+      isFetching={isFetching}
+      isDeleting={isDeleting}
+      isBatchDeleting={isBatchDeleting}
+      createOpenSource={createOpenSource}
+      updateOpenSourceById={updateOpenSourceById}
+      deleteOpenSourceById={deleteOpenSourceById}
+      deleteOpenSources={deleteOpenSources}
+    />
   )
 }
 

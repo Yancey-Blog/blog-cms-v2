@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
 import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
@@ -8,13 +7,15 @@ import MUIDataTable, {
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab, Button } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
-import { formatDate, stringfySearch } from 'src/shared/utils'
+import useOpenModal from 'src/hooks/useOpenModal'
+import { formatDate } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
 import ImagePopup from 'src/components/ImagePopup/ImagePopup'
 import { TABLE_OPTIONS } from 'src/shared/constants'
 import useStyles from 'src/shared/styles'
+import OpenSourceModal from './OpenSourceModal'
 import { IOpenSource } from '../types'
 
 interface Props {
@@ -22,23 +23,23 @@ interface Props {
   isFetching: boolean
   isDeleting: boolean
   isBatchDeleting: boolean
+  createOpenSource: Function
+  updateOpenSourceById: Function
   deleteOpenSourceById: Function
   deleteOpenSources: Function
 }
 
 const OpenSourceTable: FC<Props> = ({
   dataSource,
+  createOpenSource,
+  updateOpenSourceById,
   deleteOpenSourceById,
   deleteOpenSources,
   isFetching,
   isDeleting,
   isBatchDeleting,
 }) => {
-  const history = useHistory()
-  const { pathname } = useLocation()
-  const showModal = (id?: string) => {
-    history.push({ pathname, search: stringfySearch({ id, showModal: true }) })
-  }
+  const { open, handleOpen } = useOpenModal()
 
   const classes = useStyles()
 
@@ -98,7 +99,7 @@ const OpenSourceTable: FC<Props> = ({
               <FormControl>
                 <Edit
                   className={classes.editIcon}
-                  onClick={() => showModal(curId)}
+                  onClick={() => handleOpen(curId)}
                 />
               </FormControl>
               <FormControl>
@@ -122,7 +123,7 @@ const OpenSourceTable: FC<Props> = ({
     customToolbar() {
       return (
         <Fab size="medium" className={classes.addIconFab}>
-          <AddBox onClick={() => showModal()} />
+          <AddBox onClick={() => handleOpen()} />
         </Fab>
       )
     },
@@ -142,15 +143,24 @@ const OpenSourceTable: FC<Props> = ({
   }
 
   return (
-    <TableWrapper tableName="Open Source" icon="save">
-      <MUIDataTable
-        title=""
-        data={dataSource.sort(sortBy('updatedAt')).reverse()}
-        columns={columns}
-        options={options}
+    <>
+      <TableWrapper tableName="Open Source" icon="save">
+        <MUIDataTable
+          title=""
+          data={dataSource.sort(sortBy('updatedAt')).reverse()}
+          columns={columns}
+          options={options}
+        />
+        {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
+      </TableWrapper>
+
+      <OpenSourceModal
+        open={open}
+        handleOpen={handleOpen}
+        createOpenSource={createOpenSource}
+        updateOpenSourceById={updateOpenSourceById}
       />
-      {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
-    </TableWrapper>
+    </>
   )
 }
 
