@@ -1,5 +1,4 @@
 import React, { FC, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 import {
   Button,
@@ -12,17 +11,22 @@ import {
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import client from 'src/shared/apolloClient'
-import { goBack, parseSearch } from 'src/shared/utils'
+import { Open } from 'src/hooks/useOpenModal'
 
 interface Props {
+  open: Open
+  handleOpen: Function
   createMotto: Function
   updateMottoById: Function
 }
 
-const MottoModal: FC<Props> = ({ createMotto, updateMottoById }) => {
-  const { search } = useLocation()
-
-  const { showModal, id } = parseSearch(search)
+const MottoModal: FC<Props> = ({
+  createMotto,
+  updateMottoById,
+  open,
+  handleOpen,
+}) => {
+  const { isOpen, id } = open
 
   const initialValues = {
     content: '',
@@ -50,25 +54,23 @@ const MottoModal: FC<Props> = ({ createMotto, updateMottoById }) => {
       } else {
         await createMotto({ variables: { input: values } })
       }
-      goBack()
       resetForm()
+      handleOpen()
     },
   })
 
   useEffect(() => {
+    resetForm()
+
     if (id) {
       // @ts-ignore
       const { content } = client.cache.data.get(`MottoModel:${id}`)
       setValues({ content })
     }
-
-    return () => {
-      resetForm()
-    }
   }, [id, resetForm, setValues])
 
   return (
-    <Dialog open={!!showModal} onClose={goBack}>
+    <Dialog open={isOpen} onClose={() => handleOpen()}>
       <DialogTitle>{id ? 'Update' : 'Add'} an Motto</DialogTitle>
       <form onSubmit={handleSubmit}>
         <DialogContent>
@@ -87,7 +89,7 @@ const MottoModal: FC<Props> = ({ createMotto, updateMottoById }) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button color="primary" onClick={goBack}>
+          <Button color="primary" onClick={() => handleOpen()}>
             Cancel
           </Button>
           <Button color="primary" type="submit" disabled={isSubmitting}>

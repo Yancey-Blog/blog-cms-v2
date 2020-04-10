@@ -12,7 +12,6 @@ import {
 } from './typeDefs'
 import { IMotto, Query } from './types'
 import MottoTable from './components/MottoTable'
-import MottoModal from './components/MottoModal'
 
 const Motto: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
@@ -115,22 +114,18 @@ const Motto: FC = () => {
   )
 
   return (
-    <>
-      <MottoTable
-        dataSource={
-          data ? data.getMottos.sort(sortBy('weight', 'descend')) : []
-        }
-        isFetching={isFetching}
-        isDeleting={isDeleting}
-        isExchanging={isExchanging}
-        isBatchDeleting={isBatchDeleting}
-        deleteMottoById={deleteMottoById}
-        deleteMottos={deleteMottos}
-        exchangePosition={exchangePosition}
-      />
-
-      <MottoModal createMotto={createMotto} updateMottoById={updateMottoById} />
-    </>
+    <MottoTable
+      dataSource={data ? data.getMottos.sort(sortBy('weight', 'descend')) : []}
+      isFetching={isFetching}
+      isDeleting={isDeleting}
+      isExchanging={isExchanging}
+      isBatchDeleting={isBatchDeleting}
+      createMotto={createMotto}
+      updateMottoById={updateMottoById}
+      deleteMottoById={deleteMottoById}
+      deleteMottos={deleteMottos}
+      exchangePosition={exchangePosition}
+    />
   )
 }
 
