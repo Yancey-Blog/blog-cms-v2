@@ -10,6 +10,7 @@ export interface UploaderRes {
 
 export interface Props {
   type?: 'avatar' | 'simple'
+  variant?: 'elevation' | 'outlined' | undefined
   accept?: string
   action?: string
   method?:
@@ -25,5 +26,6 @@ export interface Props {
   name?: string
   defaultFile?: string
   needMarginLeft?: boolean
+  className?: any
   onChange: Function
 }

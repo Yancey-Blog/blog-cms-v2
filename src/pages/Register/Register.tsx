@@ -15,7 +15,7 @@ const Register: FC = () => {
     errorPolicy: 'all',
     onCompleted(data) {
       window.localStorage.setItem('token', data.register.authorization)
-      window.localStorage.setItem('token', data.register._id)
+      window.localStorage.setItem('userId', data.register._id)
       history.push('/')
     },
     onError() {},

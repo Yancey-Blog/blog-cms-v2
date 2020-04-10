@@ -1,4 +1,5 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
+import * as Yup from 'yup'
 import { useSnackbar } from 'notistack'
 import { useMutation } from '@apollo/react-hooks'
 import SettingsHeader from '../components/SettingsHeader/SettingsHeader'
@@ -18,10 +19,14 @@ const Profile: FC = () => {
 
   const [updateUser] = useMutation(UPDATE_USER, {
     onCompleted() {
-      enqueueSnackbar(`Your Password has been changed! Please Re-Login.`, {
+      enqueueSnackbar(`Your profile has been updated!`, {
         variant: 'success',
       })
     },
+  })
+
+  const validationSchema = Yup.object().shape({
+    website: Yup.string().url(),
   })
 
   const initialValues = {
@@ -34,8 +39,8 @@ const Profile: FC = () => {
   }
 
   const {
-    handleSubmit,
     setFieldValue,
+    handleSubmit,
     getFieldProps,
     setValues,
     resetForm,
@@ -43,6 +48,7 @@ const Profile: FC = () => {
     errors,
   } = useFormik({
     initialValues,
+    validationSchema,
     onSubmit: async (values) => {
       await updateUser({
         variables: { input: values },
@@ -50,8 +56,11 @@ const Profile: FC = () => {
     },
   })
 
-  const onChange = (data: UploaderRes) => {
+  const onChange = async (data: UploaderRes) => {
     setFieldValue('avatarUrl', data.url)
+    await updateUser({
+      variables: { input: { avatarUrl: data.url } },
+    })
   }
 
   useEffect(() => {
@@ -74,7 +83,7 @@ const Profile: FC = () => {
   }, [resetForm, setValues])
 
   return (
-    <section>
+    <>
       <SettingsHeader
         title="Personal info"
         subTitle="Basic info, like your name and photo, that you use on Yancey Blog CMS services"
@@ -84,73 +93,76 @@ const Profile: FC = () => {
         title="Profile"
         imageUrl="https://www.gstatic.com/identity/boq/accountsettingsmobile/aboutme_scene_1264x448_c62fe60e3bb1b8642822a028568898c4.png"
       >
-        <form onSubmit={handleSubmit}>
-          <TextField
-            className={classes.input}
-            error={!!errors.name}
-            helperText={errors.name}
-            autoFocus
-            required
-            fullWidth
-            label="Name"
-            {...getFieldProps('name')}
-          />
-          <TextField
-            className={classes.input}
-            error={!!errors.location}
-            helperText={errors.location}
-            autoFocus
-            required
-            fullWidth
-            label="Location"
-            {...getFieldProps('location')}
-          />
-          <TextField
-            className={classes.input}
-            error={!!errors.organization}
-            helperText={errors.organization}
-            autoFocus
-            required
-            fullWidth
-            label="Organization"
-            {...getFieldProps('organization')}
-          />
-          <TextField
-            className={classes.input}
-            error={!!errors.website}
-            helperText={errors.website}
-            autoFocus
-            required
-            fullWidth
-            label="Website"
-            {...getFieldProps('website')}
-          />
-          <TextField
-            className={classes.input}
-            error={!!errors.bio}
-            helperText={errors.bio}
-            autoFocus
-            required
-            fullWidth
-            label="Bio"
-            {...getFieldProps('bio')}
-          />
+        <section className={classes.profileContainer}>
+          <form onSubmit={handleSubmit}>
+            <TextField
+              className={classes.input}
+              error={!!errors.name}
+              helperText={errors.name}
+              autoFocus
+              fullWidth
+              label="Name"
+              {...getFieldProps('name')}
+            />
+            <TextField
+              className={classes.input}
+              error={!!errors.location}
+              helperText={errors.location}
+              autoFocus
+              fullWidth
+              label="Location"
+              {...getFieldProps('location')}
+            />
+            <TextField
+              className={classes.input}
+              error={!!errors.organization}
+              helperText={errors.organization}
+              autoFocus
+              fullWidth
+              label="Organization"
+              {...getFieldProps('organization')}
+            />
+            <TextField
+              className={classes.input}
+              error={!!errors.website}
+              helperText={errors.website}
+              autoFocus
+              fullWidth
+              label="Website"
+              {...getFieldProps('website')}
+            />
+            <TextField
+              className={classes.input}
+              error={!!errors.bio}
+              helperText={errors.bio}
+              autoFocus
+              fullWidth
+              multiline
+              rows="5"
+              label="Bio"
+              {...getFieldProps('bio')}
+            />
+
+            <Button
+              color="primary"
+              variant="contained"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              Submit
+            </Button>
+          </form>
 
           <Uploader
+            variant="outlined"
+            className={classes.customUploader}
+            needMarginLeft={false}
             onChange={onChange}
             defaultFile={getFieldProps('avatarUrl').value}
           />
-          <Button
-            color="primary"
-            variant="contained"
-            type="submit"
-            disabled={isSubmitting}
-          >
-            Submit
-          </Button>
-        </form>
+        </section>
       </SettingItemWrapper>
-    </section>
+    </>
   )
 }
 

@@ -58,7 +58,7 @@ const Settings: FC = () => {
           disableRipple={true}
           label={
             <span className={styles.tabLabel}>
-              <FaceOutlined />
+              <FaceOutlined className={styles.tabIcon} />
               Profile
             </span>
           }
@@ -68,7 +68,7 @@ const Settings: FC = () => {
           disableRipple={true}
           label={
             <span className={styles.tabLabel}>
-              <LockOutlined />
+              <LockOutlined className={styles.tabIcon} />
               Security
             </span>
           }
@@ -78,7 +78,7 @@ const Settings: FC = () => {
           disableRipple={true}
           label={
             <span className={styles.tabLabel}>
-              <PermDataSettingOutlined />
+              <PermDataSettingOutlined className={styles.tabIcon} />
               Global Settings
             </span>
           }
