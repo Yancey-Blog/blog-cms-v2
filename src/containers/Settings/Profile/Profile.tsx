@@ -43,7 +43,6 @@ const Profile: FC = () => {
     handleSubmit,
     getFieldProps,
     setValues,
-    resetForm,
     isSubmitting,
     errors,
   } = useFormik({
@@ -76,7 +75,7 @@ const Profile: FC = () => {
       `UserModel:${window.localStorage.getItem('userId')}`,
     )
     setValues({ name, location, organization, website, bio, avatarUrl })
-  }, [resetForm, setValues])
+  }, [setValues])
 
   return (
     <>
@@ -87,7 +86,7 @@ const Profile: FC = () => {
 
       <SettingItemWrapper
         title="Profile"
-        imageUrl="https://www.gstatic.com/identity/boq/accountsettingsmobile/aboutme_scene_1264x448_c62fe60e3bb1b8642822a028568898c4.png"
+        // imageUrl="https://www.gstatic.com/identity/boq/accountsettingsmobile/aboutme_scene_1264x448_c62fe60e3bb1b8642822a028568898c4.png"
       >
         <section className={classes.profileContainer}>
           <form onSubmit={handleSubmit}>

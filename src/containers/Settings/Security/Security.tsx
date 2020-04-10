@@ -13,7 +13,7 @@ const Security: FC = () => {
       />
       <SecurtyIntro />
       <ChangePassword />
-      <TwoFactors isTOTP={true} />
+      <TwoFactors />
     </section>
   )
 }

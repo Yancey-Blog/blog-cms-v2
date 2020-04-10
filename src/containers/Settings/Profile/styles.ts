@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     customUploader: {
-      margin: 44,
+      marginLeft: 60,
       width: 180,
       height: 180,
       borderRadius: '50%',
