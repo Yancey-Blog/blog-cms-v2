@@ -16,10 +16,7 @@ export const formatDate = (ISOString: string) =>
   moment(ISOString).format('YYYY-MM-DD HH:mm:ss')
 
 export const getType = (type: any) =>
-  Object.prototype.toString
-    .call(type)
-    .slice(8, -1)
-    .toLowerCase()
+  Object.prototype.toString.call(type).slice(8, -1).toLowerCase()
 
 export const goBack = () => history.goBack()
 
@@ -39,8 +36,8 @@ export const isBoolean = (type: any) => getType(type) === 'boolean'
 export const isArray = (type: any) => Array.isArray(type)
 
 export const logout = () => {
+  window.localStorage.clear()
   history.replace('/login')
-  window.localStorage.removeItem('token')
 }
 
 export const getURLPathName = (url: string) =>

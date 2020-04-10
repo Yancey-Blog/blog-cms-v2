@@ -5,14 +5,16 @@ import { useMutation } from '@apollo/react-hooks'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
+import { CircularProgress } from '@material-ui/core'
 import { REGISTER } from './typeDefs'
 import styles from '../Login/Login.module.scss'
 
 const Register: FC = () => {
   const history = useHistory()
 
-  const [register] = useMutation(REGISTER, {
+  const [register, { loading }] = useMutation(REGISTER, {
     errorPolicy: 'all',
+
     onCompleted(data) {
       window.localStorage.setItem('token', data.register.authorization)
       window.localStorage.setItem('userId', data.register._id)
@@ -103,7 +105,7 @@ const Register: FC = () => {
           />
         </label>
         <button className={styles.submitBtn} type="submit">
-          Register
+          {loading ? <CircularProgress size={30} /> : 'Register'}
         </button>
 
         <p className={styles.link}>
