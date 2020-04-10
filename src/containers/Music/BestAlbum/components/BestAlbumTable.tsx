@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
 import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
@@ -8,13 +7,15 @@ import MUIDataTable, {
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab, Button } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
-import { formatDate, stringfySearch } from 'src/shared/utils'
+import useOpenModal from 'src/hooks/useOpenModal'
+import { formatDate } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
 import ImagePopup from 'src/components/ImagePopup/ImagePopup'
 import { TABLE_OPTIONS } from 'src/shared/constants'
 import useStyles from 'src/shared/styles'
+import BestAlbumModal from './BestAlbumModal'
 import { IBestAlbum } from '../types'
 
 interface Props {
@@ -34,14 +35,9 @@ const BestAlbumTable: FC<Props> = ({
   isDeleting,
   isBatchDeleting,
 }) => {
-  const history = useHistory()
-  const { pathname } = useLocation()
+  const { open, handleOpen } = useOpenModal()
 
   const classes = useStyles()
-
-  const showModal = (id?: string) => {
-    history.push({ pathname, search: stringfySearch({ id, showModal: true }) })
-  }
 
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'ID' },
@@ -106,7 +102,7 @@ const BestAlbumTable: FC<Props> = ({
               <FormControl>
                 <Edit
                   className={classes.editIcon}
-                  onClick={() => showModal(curId)}
+                  onClick={() => handleOpen(curId)}
                 />
               </FormControl>
               <FormControl>
@@ -128,7 +124,7 @@ const BestAlbumTable: FC<Props> = ({
     customToolbar() {
       return (
         <Fab size="medium" className={classes.addIconFab}>
-          <AddBox onClick={() => showModal()} />
+          <AddBox onClick={() => handleOpen()} />
         </Fab>
       )
     },
@@ -148,15 +144,24 @@ const BestAlbumTable: FC<Props> = ({
   }
 
   return (
-    <TableWrapper tableName="Best Album" icon="save">
-      <MUIDataTable
-        title=""
-        data={dataSource.sort(sortBy('updatedAt')).reverse()}
-        columns={columns}
-        options={options}
+    <>
+      <TableWrapper tableName="Best Album" icon="save">
+        <MUIDataTable
+          title=""
+          data={dataSource.sort(sortBy('updatedAt')).reverse()}
+          columns={columns}
+          options={options}
+        />
+        {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
+      </TableWrapper>
+
+      <BestAlbumModal
+        open={open}
+        handleOpen={handleOpen}
+        createBestAlbum={createBestAlbum}
+        updateBestAlbumById={updateBestAlbumById}
       />
-      {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
-    </TableWrapper>
+    </>
   )
 }
 

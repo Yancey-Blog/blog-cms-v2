@@ -1,5 +1,4 @@
 import React, { FC, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 import {
   Button,
@@ -15,21 +14,24 @@ import { useFormik } from 'formik'
 import { KeyboardDateTimePicker } from '@material-ui/pickers'
 import useStyles from 'src/shared/styles'
 import client from 'src/shared/apolloClient'
-import { goBack, parseSearch } from 'src/shared/utils'
+import { Open } from 'src/hooks/useOpenModal'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
 
 interface Props {
+  open: Open
+  handleOpen: Function
   createBestAlbum: Function
   updateBestAlbumById: Function
 }
 
 const BestAlbumModal: FC<Props> = ({
+  open,
+  handleOpen,
   createBestAlbum,
   updateBestAlbumById,
 }) => {
-  const { search } = useLocation()
-  const { showModal, id } = parseSearch(search)
+  const { isOpen, id } = open
 
   const classes = useStyles()
 
@@ -73,8 +75,9 @@ const BestAlbumModal: FC<Props> = ({
           },
         })
       }
-      goBack()
+
       resetForm()
+      handleOpen()
     },
   })
 
@@ -83,6 +86,8 @@ const BestAlbumModal: FC<Props> = ({
   }
 
   useEffect(() => {
+    resetForm()
+
     if (id) {
       const {
         title,
@@ -100,14 +105,10 @@ const BestAlbumModal: FC<Props> = ({
         coverUrl,
       })
     }
-
-    return () => {
-      resetForm()
-    }
   }, [id, resetForm, setValues])
 
   return (
-    <Dialog open={!!showModal} onClose={goBack}>
+    <Dialog open={isOpen} onClose={() => handleOpen()}>
       <DialogTitle>{id ? 'Update' : 'Add'} an Best Album</DialogTitle>
       <form onSubmit={handleSubmit}>
         <DialogContent>
@@ -177,7 +178,7 @@ const BestAlbumModal: FC<Props> = ({
           </div>
         </DialogContent>
         <DialogActions>
-          <Button color="primary" onClick={goBack}>
+          <Button color="primary" onClick={() => handleOpen()}>
             Cancel
           </Button>
           <Button color="primary" type="submit" disabled={isSubmitting}>
