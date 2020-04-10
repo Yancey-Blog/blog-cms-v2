@@ -10,7 +10,6 @@ import {
 } from './typeDefs'
 import { IPlayer, Query } from './types'
 import PlayerTable from './components/PlayerTable'
-import PlayerModal from './components/PlayerModal'
 
 const Player: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
@@ -95,22 +94,16 @@ const Player: FC = () => {
   )
 
   return (
-    <>
-      <PlayerTable
-        dataSource={data ? data.getPlayers : []}
-        isFetching={isFetching}
-        isDeleting={isDeleting}
-        isBatchDeleting={isBatchDeleting}
-        deletePlayerById={deletePlayerById}
-        deletePlayers={deletePlayers}
-        updatePlayerById={updatePlayerById}
-      />
-
-      <PlayerModal
-        createPlayer={createPlayer}
-        updatePlayerById={updatePlayerById}
-      />
-    </>
+    <PlayerTable
+      dataSource={data ? data.getPlayers : []}
+      isFetching={isFetching}
+      isDeleting={isDeleting}
+      isBatchDeleting={isBatchDeleting}
+      createPlayer={createPlayer}
+      updatePlayerById={updatePlayerById}
+      deletePlayerById={deletePlayerById}
+      deletePlayers={deletePlayers}
+    />
   )
 }
 
