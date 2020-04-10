@@ -30,8 +30,8 @@ export const UPDATE_ONE_MOTTO = gql`
 `
 
 export const EXCHANGE_POSITION = gql`
-  mutation ExchangePosition($input: ExchangePositionInput!) {
-    exchangePosition(input: $input) {
+  mutation ExchangePositionMotto($input: ExchangePositionInput!) {
+    exchangePositionMotto(input: $input) {
       ...MottoFragment
     }
   }

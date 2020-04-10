@@ -5,7 +5,6 @@ const useStyles = makeStyles({
     display: 'flex',
     flex: 1,
     padding: '0 24px 24px',
-    overflowY: 'scroll',
   },
 })
 

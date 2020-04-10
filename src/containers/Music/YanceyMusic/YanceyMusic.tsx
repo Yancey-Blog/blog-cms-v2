@@ -10,7 +10,6 @@ import {
 } from './typeDefs'
 import { IYanceyMusic, Query } from './types'
 import YanceyMusicTable from './components/YanceyMusicTable'
-import YanceyMusicModal from './components/YanceyMusicModal'
 
 const YanceyMusic: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
@@ -97,21 +96,16 @@ const YanceyMusic: FC = () => {
   )
 
   return (
-    <>
-      <YanceyMusicTable
-        dataSource={data ? data.getYanceyMusic : []}
-        isFetching={isFetching}
-        isDeleting={isDeleting}
-        isBatchDeleting={isBatchDeleting}
-        deleteYanceyMusicById={deleteYanceyMusicById}
-        deleteYanceyMusic={deleteYanceyMusic}
-      />
-
-      <YanceyMusicModal
-        createYanceyMusic={createYanceyMusic}
-        updateYanceyMusicById={updateYanceyMusicById}
-      />
-    </>
+    <YanceyMusicTable
+      dataSource={data ? data.getYanceyMusic : []}
+      isFetching={isFetching}
+      isDeleting={isDeleting}
+      isBatchDeleting={isBatchDeleting}
+      createYanceyMusic={createYanceyMusic}
+      updateYanceyMusicById={updateYanceyMusicById}
+      deleteYanceyMusicById={deleteYanceyMusicById}
+      deleteYanceyMusic={deleteYanceyMusic}
+    />
   )
 }
 

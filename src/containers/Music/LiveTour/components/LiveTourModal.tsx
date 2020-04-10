@@ -1,5 +1,4 @@
 import React, { FC, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 import {
   Button,
@@ -15,18 +14,24 @@ import { useFormik } from 'formik'
 import { KeyboardDateTimePicker } from '@material-ui/pickers'
 import useStyles from 'src/shared/styles'
 import client from 'src/shared/apolloClient'
-import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
+import { Open } from 'src/hooks/useOpenModal'
 
 interface Props {
+  open: Open
+  handleOpen: Function
   createLiveTour: Function
   updateLiveTourById: Function
 }
 
-const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
-  const { search } = useLocation()
-  const { showModal, id } = parseSearch(search)
+const LiveTourModal: FC<Props> = ({
+  open,
+  handleOpen,
+  createLiveTour,
+  updateLiveTourById,
+}) => {
+  const { isOpen, id } = open
 
   const classes = useStyles()
 
@@ -62,8 +67,9 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
       } else {
         await createLiveTour({ variables: { input: values } })
       }
-      goBack()
+
       resetForm()
+      handleOpen()
     },
   })
 
@@ -72,6 +78,8 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
   }
 
   useEffect(() => {
+    resetForm()
+
     if (id) {
       // @ts-ignore
       const { title, showTime, posterUrl } = client.cache.data.get(
@@ -83,19 +91,15 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
         posterUrl,
       })
     }
-
-    return () => {
-      resetForm()
-    }
   }, [id, resetForm, setValues])
 
   return (
-    <Dialog open={!!showModal} onClose={goBack}>
-      <DialogTitle>{id ? 'Update' : 'Add'} an Live Tour</DialogTitle>
+    <Dialog open={isOpen} onClose={() => handleOpen()}>
+      <DialogTitle>{id ? 'Update' : 'Add'} a Live Tour</DialogTitle>
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
-            To {id ? 'update' : 'add'} an Live Tour, please enter the following
+            To {id ? 'update' : 'add'} a Live Tour, please enter the following
             fields here. We will send data after clicking the submit button.
           </DialogContentText>
           <TextField
@@ -129,7 +133,7 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
               helperText={errors.posterUrl}
               style={{ display: 'none' }}
               required
-              label="PosterUrl"
+              label="Poster Url"
               fullWidth
               disabled={true}
               {...getFieldProps('posterUrl')}
@@ -141,7 +145,7 @@ const LiveTourModal: FC<Props> = ({ createLiveTour, updateLiveTourById }) => {
           </div>
         </DialogContent>
         <DialogActions>
-          <Button color="primary" onClick={goBack}>
+          <Button color="primary" onClick={() => handleOpen()}>
             Cancel
           </Button>
           <Button color="primary" type="submit" disabled={isSubmitting}>

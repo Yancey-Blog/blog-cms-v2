@@ -8,3 +8,12 @@ export const BATCH_DELETE_FRAGMENT = gql`
     ids
   }
 `
+
+export const BATCH_UPDATE_FRAGMENT = gql`
+  fragment BatchUpdateFragment on BatchUpdateModel {
+    n
+    ok
+    nModified
+    ids
+  }
+`

@@ -1,4 +1,5 @@
 import { PopoverOrigin, SnackbarOrigin } from '@material-ui/core'
+import { MUIDataTableOptions } from 'mui-datatables'
 
 export const RECAPTCHA_KEY = '6LdLTDgUAAAAAPq-N2YNVoqcYPLyDTypJ8SMvCEj'
 
@@ -52,3 +53,10 @@ export const DRAWER_WIDTH = 260
 export const FOLDER_DRAWER_WIDTH = 80
 
 export const VIEW_DATE = ['Day', 'Week', 'Month']
+
+export const TABLE_OPTIONS: MUIDataTableOptions = {
+  filterType: 'textField',
+  rowsPerPage: 10,
+  rowsPerPageOptions: [10, 20, 50],
+  searchPlaceholder: 'Search...',
+}

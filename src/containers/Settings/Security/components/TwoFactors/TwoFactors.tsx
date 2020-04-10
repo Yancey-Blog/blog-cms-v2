@@ -11,7 +11,7 @@ import {
   SentimentVerySatisfied,
   SentimentDissatisfied,
 } from '@material-ui/icons'
-import SettingItemWrapper from '../../../../../components/SettingItemWrapper/SettingItemWrapper'
+import SettingItemWrapper from '../../../components/SettingItemWrapper/SettingItemWrapper'
 import TOTP from '../TOTP/TOTP'
 import RecoveryCodes from '../RecoveryCodes/RecoveryCodes'
 import styles from './twoFactors.module.scss'
@@ -66,7 +66,7 @@ const TwoFactors: FC<Props> = ({ isTOTP }) => {
           <ListItem button>
             <ListItemText primary="SMS number" className={styles.title} />
             <ListItemText
-              primary={<p className={styles.phone}>150 4338 9539</p>}
+              primary={<p className={styles.phone}>150 xxxx xxxx</p>}
               className={styles.title}
             />
             <ListItemAvatar>

@@ -11,12 +11,12 @@ const useStyles = makeStyles({
   },
 
   expand: {
-    marginLeft: 0,
+    marginLeft: `${DRAWER_WIDTH}px`,
     transition: transition('margin-left'),
   },
 
   shrink: {
-    marginLeft: `-${DRAWER_WIDTH - FOLDER_DRAWER_WIDTH}px`,
+    marginLeft: `${FOLDER_DRAWER_WIDTH}px`,
     transition: transition('margin-left'),
   },
 
@@ -25,6 +25,7 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     minWidth: `calc(100% - ${DRAWER_WIDTH}px)`,
     width: `calc(100% - ${FOLDER_DRAWER_WIDTH}px)`,
+    minHeight: '100vh',
   },
 })
 

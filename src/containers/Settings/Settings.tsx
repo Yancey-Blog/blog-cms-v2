@@ -1,12 +1,12 @@
 import React, { FC, useState } from 'react'
 import { Tabs, Tab, Typography } from '@material-ui/core'
 import {
-  AccountCircleOutlined,
   LockOutlined,
   FaceOutlined,
+  PermDataSettingOutlined,
 } from '@material-ui/icons'
 import Security from './Security/Security'
-import Account from './Account/Account'
+import Global from './Global/Global'
 import Profile from './Profile/Profile'
 import styles from './settings.module.scss'
 
@@ -41,7 +41,7 @@ function TabPanel(props: TabPanelProps) {
 }
 
 const Settings: FC = () => {
-  const [value, setValue] = useState(2)
+  const [value, setValue] = useState(0)
   const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
   }
@@ -68,8 +68,8 @@ const Settings: FC = () => {
           disableRipple={true}
           label={
             <span className={styles.tabLabel}>
-              <AccountCircleOutlined />
-              Account
+              <LockOutlined />
+              Security
             </span>
           }
           {...a11yProps(1)}
@@ -78,8 +78,8 @@ const Settings: FC = () => {
           disableRipple={true}
           label={
             <span className={styles.tabLabel}>
-              <LockOutlined />
-              Security
+              <PermDataSettingOutlined />
+              Global Settings
             </span>
           }
           {...a11yProps(2)}
@@ -89,10 +89,10 @@ const Settings: FC = () => {
         <Profile />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Account />
+        <Security />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Security />
+        <Global />
       </TabPanel>
     </section>
   )

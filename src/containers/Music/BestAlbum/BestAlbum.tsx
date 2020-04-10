@@ -10,7 +10,6 @@ import {
 } from './typeDefs'
 import { IBestAlbum, Query } from './types'
 import BestAlbumTable from './components/BestAlbumTable'
-import BestAlbumModal from './components/BestAlbumModal'
 
 const BestAlbum: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
@@ -97,21 +96,16 @@ const BestAlbum: FC = () => {
   )
 
   return (
-    <>
-      <BestAlbumTable
-        dataSource={data ? data.getBestAlbums : []}
-        isFetching={isFetching}
-        isDeleting={isDeleting}
-        isBatchDeleting={isBatchDeleting}
-        deleteBestAlbumById={deleteBestAlbumById}
-        deleteBestAlbums={deleteBestAlbums}
-      />
-
-      <BestAlbumModal
-        createBestAlbum={createBestAlbum}
-        updateBestAlbumById={updateBestAlbumById}
-      />
-    </>
+    <BestAlbumTable
+      dataSource={data ? data.getBestAlbums : []}
+      isFetching={isFetching}
+      isDeleting={isDeleting}
+      isBatchDeleting={isBatchDeleting}
+      createBestAlbum={createBestAlbum}
+      updateBestAlbumById={updateBestAlbumById}
+      deleteBestAlbumById={deleteBestAlbumById}
+      deleteBestAlbums={deleteBestAlbums}
+    />
   )
 }
 
