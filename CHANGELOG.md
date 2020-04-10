@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.18.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.17.0...v0.18.0) (2020-04-10)
+
+
+### Features
+
+* add dashboard ([0bf577a](https://github.com/Yancey-Blog/blog-cms-v2/commit/0bf577a351107962b8b742f22b5e48695a092df2))
+* add StatusCardSkeleton ([fd5a2b9](https://github.com/Yancey-Blog/blog-cms-v2/commit/fd5a2b94c0cf46f2d4d4b5893d3759fa44d69bf1))
+* finish cover ([4398748](https://github.com/Yancey-Blog/blog-cms-v2/commit/439874816b5873b8d823406bd5cef69d339a4e10))
+* finish customToolbarSelect ([7bb66f5](https://github.com/Yancey-Blog/blog-cms-v2/commit/7bb66f5af91d0f3054b1b11071d17363a54ab39c))
+* finish StatusCard ([8cb6e66](https://github.com/Yancey-Blog/blog-cms-v2/commit/8cb6e660825d09ede436817a8f338607e4b5b352))
+* package ImagePopup component ([806ff56](https://github.com/Yancey-Blog/blog-cms-v2/commit/806ff56c31a42b7b0fcb9f803e1e410eaf9db4c4))
+* package TABLE_OPTIONS ([71fb2a2](https://github.com/Yancey-Blog/blog-cms-v2/commit/71fb2a263560d1e92742877d5e8713d1fcf9f00b))
+* package ToggleChart ([f33369a](https://github.com/Yancey-Blog/blog-cms-v2/commit/f33369a3fb507ccf10700312a6cce91cd19dcac9))
+* support Card ([968003f](https://github.com/Yancey-Blog/blog-cms-v2/commit/968003fa3d7ee4ec41adce774200ae01fc51d30b))
+* support persistCache ([068ef15](https://github.com/Yancey-Blog/blog-cms-v2/commit/068ef15e13a48d786b9f520586f952be75b6e5ef))
+* support useOpenModal ([f7cb117](https://github.com/Yancey-Blog/blog-cms-v2/commit/f7cb117488c051cf37b73528a83e48a5a61f6d94))
+* update batchUpdate ([fadf110](https://github.com/Yancey-Blog/blog-cms-v2/commit/fadf110776c8f23099086d7ebbfec3525de26978))
+* update BestAlbum ([8d31928](https://github.com/Yancey-Blog/blog-cms-v2/commit/8d31928d223b7aa4cfc0c26b3e0fde40648a6ea6))
+* update Drawer style ([edca1fa](https://github.com/Yancey-Blog/blog-cms-v2/commit/edca1faaa91caecc423b0d9155c61fc61d562ae1))
+* update Line ([6dafb85](https://github.com/Yancey-Blog/blog-cms-v2/commit/6dafb85db211bbd732518ccbee360fa4583d4672))
+* update LiveTour ([2f9fb4b](https://github.com/Yancey-Blog/blog-cms-v2/commit/2f9fb4b5da2d7777233c00b5bd545f707a8f56d1))
+* update Motto ([23025ea](https://github.com/Yancey-Blog/blog-cms-v2/commit/23025eaa1df5be4b2fbd4d58e0b76bb1b2b7f549))
+* update Move component ([4821d72](https://github.com/Yancey-Blog/blog-cms-v2/commit/4821d72b400eb4c023d818ae565b49462e935318))
+* update OpenSource ([6db5acb](https://github.com/Yancey-Blog/blog-cms-v2/commit/6db5acb8f65662b0b8c8e9b827a34bae361f0c99))
+* update Player ([127185b](https://github.com/Yancey-Blog/blog-cms-v2/commit/127185b3b9ef6edfb7bb5b6d3a08b143e3d38eb5))
+* update PopupState ([eb3b8e2](https://github.com/Yancey-Blog/blog-cms-v2/commit/eb3b8e2369ca4772b9530392a6c4201fd920892c))
+* update Profile ([a0e831a](https://github.com/Yancey-Blog/blog-cms-v2/commit/a0e831a23dd106b4b6e4b2febb94fa3e7e91e31f))
+* update route of dashboard ([e20dda6](https://github.com/Yancey-Blog/blog-cms-v2/commit/e20dda6e96f604d417e26381e0eab9e99fca27d7))
+* update Settings order ([fd3f7b6](https://github.com/Yancey-Blog/blog-cms-v2/commit/fd3f7b6849525b774468ef57ec54ff81f79de49c))
+* update styles ([fba9188](https://github.com/Yancey-Blog/blog-cms-v2/commit/fba9188aaf85ea31d2fa7b2fe84cf00585560785))
+* update styles of cupWrapper ([b161fa1](https://github.com/Yancey-Blog/blog-cms-v2/commit/b161fa12ed8bef37e7cc5efed7c4f5c8cc9dcdda))
+* update styles of ToggleButtonGroup ([3aafab1](https://github.com/Yancey-Blog/blog-cms-v2/commit/3aafab1dc7a1c7e68822cd96ba77fd6b9c93294c))
+* update typeDefs ([fa45570](https://github.com/Yancey-Blog/blog-cms-v2/commit/fa45570e30679c549daeedd3fc1e12729ef9870d))
+* update UsageStatus ([43331bf](https://github.com/Yancey-Blog/blog-cms-v2/commit/43331bfe84458a79d8879a0415a0cc8204606d2f))
+* update YanceyMusic ([dc563e6](https://github.com/Yancey-Blog/blog-cms-v2/commit/dc563e68926ce09ee0641de0fb1d930ebaadca99))
+
 ## [0.17.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.16.0...v0.17.0) (2020-04-06)
 
 
