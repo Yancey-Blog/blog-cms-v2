@@ -22,11 +22,11 @@ interface Props {
   isDeleting: boolean
   isExchanging: boolean
   isBatchDeleting: boolean
+  createAnnouncement: Function
+  updateAnnouncementById: Function
   deleteAnnouncementById: Function
   deleteAnnouncements: Function
   exchangePosition: Function
-  createAnnouncement: Function
-  updateAnnouncementById: Function
 }
 
 const AnnouncementTable: FC<Props> = ({

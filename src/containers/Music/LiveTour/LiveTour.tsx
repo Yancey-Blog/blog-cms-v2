@@ -10,7 +10,6 @@ import {
 } from './typeDefs'
 import { ILiveTour, Query } from './types'
 import LiveTourTable from './components/LiveTourTable'
-import LiveTourModal from './components/LiveTourModal'
 
 const LiveTour: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
@@ -97,21 +96,16 @@ const LiveTour: FC = () => {
   )
 
   return (
-    <>
-      <LiveTourTable
-        dataSource={data ? data.getLiveTours : []}
-        isFetching={isFetching}
-        isDeleting={isDeleting}
-        isBatchDeleting={isBatchDeleting}
-        deleteLiveTourById={deleteLiveTourById}
-        deleteLiveTours={deleteLiveTours}
-      />
-
-      <LiveTourModal
-        createLiveTour={createLiveTour}
-        updateLiveTourById={updateLiveTourById}
-      />
-    </>
+    <LiveTourTable
+      dataSource={data ? data.getLiveTours : []}
+      isFetching={isFetching}
+      isDeleting={isDeleting}
+      isBatchDeleting={isBatchDeleting}
+      createLiveTour={createLiveTour}
+      updateLiveTourById={updateLiveTourById}
+      deleteLiveTourById={deleteLiveTourById}
+      deleteLiveTours={deleteLiveTours}
+    />
   )
 }
 
