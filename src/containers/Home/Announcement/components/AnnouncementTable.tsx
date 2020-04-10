@@ -1,18 +1,19 @@
 import React, { FC } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
 import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
 } from 'mui-datatables'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab } from '@material-ui/core'
-import { formatDate, stringfySearch } from 'src/shared/utils'
+import useOpenModal from 'src/hooks/useOpenModal'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
 import Move from 'src/components/Move/Move'
 import useStyles from 'src/shared/styles'
 import { TABLE_OPTIONS } from 'src/shared/constants'
+import { formatDate } from 'src/shared/utils'
+import AnnouncementModal from './AnnouncementModal'
 import { IAnnouncement } from '../types'
 
 interface Props {
@@ -24,6 +25,8 @@ interface Props {
   deleteAnnouncementById: Function
   deleteAnnouncements: Function
   exchangePosition: Function
+  createAnnouncement: Function
+  updateAnnouncementById: Function
 }
 
 const AnnouncementTable: FC<Props> = ({
@@ -31,16 +34,14 @@ const AnnouncementTable: FC<Props> = ({
   deleteAnnouncementById,
   deleteAnnouncements,
   exchangePosition,
+  createAnnouncement,
+  updateAnnouncementById,
   isFetching,
   isDeleting,
   isExchanging,
   isBatchDeleting,
 }) => {
-  const history = useHistory()
-  const { pathname } = useLocation()
-  const showModal = (id?: string) => {
-    history.push({ pathname, search: stringfySearch({ id, showModal: true }) })
-  }
+  const { open, handleOpen } = useOpenModal()
 
   const classes = useStyles()
 
@@ -75,7 +76,7 @@ const AnnouncementTable: FC<Props> = ({
               <FormControl>
                 <Edit
                   className={classes.editIcon}
-                  onClick={() => showModal(curId)}
+                  onClick={() => handleOpen(curId)}
                 />
               </FormControl>
               <FormControl>
@@ -105,7 +106,7 @@ const AnnouncementTable: FC<Props> = ({
     customToolbar() {
       return (
         <Fab size="medium" className={classes.addIconFab}>
-          <AddBox onClick={() => showModal()} />
+          <AddBox onClick={() => handleOpen()} />
         </Fab>
       )
     },
@@ -127,17 +128,26 @@ const AnnouncementTable: FC<Props> = ({
   }
 
   return (
-    <TableWrapper tableName="Announcement" icon="save">
-      <MUIDataTable
-        title=""
-        data={dataSource}
-        columns={columns}
-        options={options}
+    <>
+      <TableWrapper tableName="Announcement" icon="save">
+        <MUIDataTable
+          title=""
+          data={dataSource}
+          columns={columns}
+          options={options}
+        />
+        {(isFetching || isDeleting || isBatchDeleting || isExchanging) && (
+          <Loading />
+        )}
+      </TableWrapper>
+
+      <AnnouncementModal
+        open={open}
+        handleOpen={handleOpen}
+        createAnnouncement={createAnnouncement}
+        updateAnnouncementById={updateAnnouncementById}
       />
-      {(isFetching || isDeleting || isBatchDeleting || isExchanging) && (
-        <Loading />
-      )}
-    </TableWrapper>
+    </>
   )
 }
 

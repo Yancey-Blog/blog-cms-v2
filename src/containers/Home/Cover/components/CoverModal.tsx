@@ -1,5 +1,4 @@
 import React, { FC, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 import {
   Button,
@@ -14,21 +13,27 @@ import {
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import client from 'src/shared/apolloClient'
-import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
 import useStyles from 'src/shared/styles'
+import { Open } from 'src/hooks/useOpenModal'
 
 interface Props {
+  open: Open
+  handleOpen: Function
   createCover: Function
   updateCoverById: Function
 }
 
-const CoverModal: FC<Props> = ({ createCover, updateCoverById }) => {
-  const { search } = useLocation()
-  const { showModal, id } = parseSearch(search)
-
+const CoverModal: FC<Props> = ({
+  open,
+  handleOpen,
+  createCover,
+  updateCoverById,
+}) => {
   const classes = useStyles()
+
+  const { isOpen, id } = open
 
   const initialValues = {
     title: '',
@@ -62,8 +67,9 @@ const CoverModal: FC<Props> = ({ createCover, updateCoverById }) => {
       } else {
         await createCover({ variables: { input: values } })
       }
-      goBack()
+
       resetForm()
+      handleOpen()
     },
   })
 
@@ -72,6 +78,8 @@ const CoverModal: FC<Props> = ({ createCover, updateCoverById }) => {
   }
 
   useEffect(() => {
+    resetForm()
+
     if (id) {
       // @ts-ignore
       const { title, coverUrl, isPublic } = client.cache.data.get(
@@ -79,14 +87,10 @@ const CoverModal: FC<Props> = ({ createCover, updateCoverById }) => {
       )
       setValues({ title, coverUrl, isPublic })
     }
-
-    return () => {
-      resetForm()
-    }
   }, [id, resetForm, setValues])
 
   return (
-    <Dialog open={!!showModal} onClose={goBack}>
+    <Dialog open={isOpen} onClose={() => handleOpen()}>
       <DialogTitle>{id ? 'Update' : 'Add'} an Cover</DialogTitle>
       <form onSubmit={handleSubmit}>
         <DialogContent>
@@ -136,7 +140,7 @@ const CoverModal: FC<Props> = ({ createCover, updateCoverById }) => {
           </div>
         </DialogContent>
         <DialogActions>
-          <Button color="primary" onClick={goBack}>
+          <Button color="primary" onClick={() => handleOpen()}>
             Cancel
           </Button>
           <Button color="primary" type="submit" disabled={isSubmitting}>

@@ -12,13 +12,13 @@ import {
 } from './typeDefs'
 import { IAnnouncement, Query } from './types'
 import AnnouncementTable from './components/AnnouncementTable'
-import AnnouncementModal from './components/AnnouncementModal'
 
 const Announcement: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
 
   const { loading: isFetching, data } = useQuery<Query>(ANNOUNCEMENTS, {
     notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'cache-and-network',
   })
 
   const [createAnnouncement] = useMutation(CREATE_ONE_ANNOUNCEMENT, {
@@ -115,25 +115,20 @@ const Announcement: FC = () => {
   )
 
   return (
-    <>
-      <AnnouncementTable
-        dataSource={
-          data ? data.getAnnouncements.sort(sortBy('weight', 'descend')) : []
-        }
-        isFetching={isFetching}
-        isDeleting={isDeleting}
-        isExchanging={isExchanging}
-        isBatchDeleting={isBatchDeleting}
-        deleteAnnouncementById={deleteAnnouncementById}
-        deleteAnnouncements={deleteAnnouncements}
-        exchangePosition={exchangePosition}
-      />
-
-      <AnnouncementModal
-        createAnnouncement={createAnnouncement}
-        updateAnnouncementById={updateAnnouncementById}
-      />
-    </>
+    <AnnouncementTable
+      dataSource={
+        data ? data.getAnnouncements.sort(sortBy('weight', 'descend')) : []
+      }
+      isFetching={isFetching}
+      isDeleting={isDeleting}
+      isExchanging={isExchanging}
+      isBatchDeleting={isBatchDeleting}
+      deleteAnnouncementById={deleteAnnouncementById}
+      deleteAnnouncements={deleteAnnouncements}
+      exchangePosition={exchangePosition}
+      createAnnouncement={createAnnouncement}
+      updateAnnouncementById={updateAnnouncementById}
+    />
   )
 }
 

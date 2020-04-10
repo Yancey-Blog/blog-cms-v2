@@ -13,7 +13,6 @@ import {
 } from './typeDefs'
 import { ICover, Query } from './types'
 import CoverTable from './components/CoverTable'
-import CoverModal from './components/CoverModal'
 
 const Cover: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
@@ -147,25 +146,20 @@ const Cover: FC = () => {
   )
 
   return (
-    <>
-      <CoverTable
-        dataSource={
-          data ? data.getCovers.sort(sortBy('weight', 'descend')) : []
-        }
-        isFetching={isFetching}
-        isDeleting={isDeleting}
-        isExchanging={isExchanging}
-        isBatchDeleting={isBatchDeleting}
-        isPublicingCovers={isPublicingCovers}
-        deleteCoverById={deleteCoverById}
-        updateCoverById={updateCoverById}
-        deleteCovers={deleteCovers}
-        exchangePosition={exchangePosition}
-        publicCovers={publicCovers}
-      />
-
-      <CoverModal createCover={createCover} updateCoverById={updateCoverById} />
-    </>
+    <CoverTable
+      dataSource={data ? data.getCovers.sort(sortBy('weight', 'descend')) : []}
+      isFetching={isFetching}
+      isDeleting={isDeleting}
+      isExchanging={isExchanging}
+      isBatchDeleting={isBatchDeleting}
+      isPublicingCovers={isPublicingCovers}
+      deleteCoverById={deleteCoverById}
+      createCover={createCover}
+      updateCoverById={updateCoverById}
+      deleteCovers={deleteCovers}
+      exchangePosition={exchangePosition}
+      publicCovers={publicCovers}
+    />
   )
 }
 

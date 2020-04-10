@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
 import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
@@ -7,7 +6,8 @@ import MUIDataTable, {
 } from 'mui-datatables'
 import { DeleteOutline, Edit, AddBox, UpdateOutlined } from '@material-ui/icons'
 import { FormControl, Fab, Switch } from '@material-ui/core'
-import { formatDate, stringfySearch } from 'src/shared/utils'
+import useOpenModal from 'src/hooks/useOpenModal'
+import { formatDate } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
@@ -15,6 +15,7 @@ import Move from 'src/components/Move/Move'
 import ImagePopup from 'src/components/ImagePopup/ImagePopup'
 import useStyles from 'src/shared/styles'
 import { TABLE_OPTIONS } from 'src/shared/constants'
+import CoverModal from './CoverModal'
 import { ICover } from '../types'
 
 interface Props {
@@ -26,6 +27,7 @@ interface Props {
   isPublicingCovers: boolean
   deleteCoverById: Function
   deleteCovers: Function
+  createCover: Function
   updateCoverById: Function
   exchangePosition: Function
   publicCovers: Function
@@ -35,6 +37,7 @@ const CoverTable: FC<Props> = ({
   dataSource,
   deleteCoverById,
   deleteCovers,
+  createCover,
   updateCoverById,
   exchangePosition,
   publicCovers,
@@ -44,11 +47,7 @@ const CoverTable: FC<Props> = ({
   isBatchDeleting,
   isPublicingCovers,
 }) => {
-  const history = useHistory()
-  const { pathname } = useLocation()
-  const showModal = (id?: string) => {
-    history.push({ pathname, search: stringfySearch({ id, showModal: true }) })
-  }
+  const { open, handleOpen } = useOpenModal()
 
   const classes = useStyles()
 
@@ -121,7 +120,7 @@ const CoverTable: FC<Props> = ({
               <FormControl>
                 <Edit
                   className={classes.editIcon}
-                  onClick={() => showModal(curId)}
+                  onClick={() => handleOpen(curId)}
                 />
               </FormControl>
               <FormControl>
@@ -149,7 +148,7 @@ const CoverTable: FC<Props> = ({
     customToolbar() {
       return (
         <Fab size="medium" className={classes.addIconFab}>
-          <AddBox onClick={() => showModal()} />
+          <AddBox onClick={() => handleOpen()} />
         </Fab>
       )
     },
@@ -176,19 +175,28 @@ const CoverTable: FC<Props> = ({
   }
 
   return (
-    <TableWrapper tableName="Cover" icon="save">
-      <MUIDataTable
-        title=""
-        data={dataSource}
-        columns={columns}
-        options={options}
+    <>
+      <TableWrapper tableName="Cover" icon="save">
+        <MUIDataTable
+          title=""
+          data={dataSource}
+          columns={columns}
+          options={options}
+        />
+        {(isFetching ||
+          isDeleting ||
+          isBatchDeleting ||
+          isExchanging ||
+          isPublicingCovers) && <Loading />}
+      </TableWrapper>
+
+      <CoverModal
+        open={open}
+        handleOpen={handleOpen}
+        createCover={createCover}
+        updateCoverById={updateCoverById}
       />
-      {(isFetching ||
-        isDeleting ||
-        isBatchDeleting ||
-        isExchanging ||
-        isPublicingCovers) && <Loading />}
-    </TableWrapper>
+    </>
   )
 }
 
