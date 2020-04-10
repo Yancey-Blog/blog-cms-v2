@@ -4,7 +4,7 @@ import { transition } from '../../styles'
 
 const useStyles = makeStyles({
   menu: {
-    position: 'relative',
+    position: 'fixed',
     margin: 0,
     padding: '22px 15px',
     minWidth: `${DRAWER_WIDTH}px`,

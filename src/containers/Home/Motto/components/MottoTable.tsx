@@ -1,16 +1,18 @@
 import React, { FC } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
 import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
 } from 'mui-datatables'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab } from '@material-ui/core'
-import { formatDate, stringfySearch } from 'src/shared/utils'
+import useOpenModal from 'src/hooks/useOpenModal'
+import { formatDate } from 'src/shared/utils'
+import MottoModal from './MottoModal'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
 import Move from 'src/components/Move/Move'
+import { TABLE_OPTIONS } from 'src/shared/constants'
 import useStyles from 'src/shared/styles'
 import { IMotto } from '../types'
 
@@ -20,6 +22,8 @@ interface Props {
   isDeleting: boolean
   isExchanging: boolean
   isBatchDeleting: boolean
+  createMotto: Function
+  updateMottoById: Function
   deleteMottoById: Function
   deleteMottos: Function
   exchangePosition: Function
@@ -27,19 +31,17 @@ interface Props {
 
 const MottoTable: FC<Props> = ({
   dataSource,
-  deleteMottoById,
+  createMotto,
   deleteMottos,
+  deleteMottoById,
+  updateMottoById,
   exchangePosition,
   isFetching,
   isDeleting,
   isExchanging,
   isBatchDeleting,
 }) => {
-  const history = useHistory()
-  const { pathname } = useLocation()
-  const showModal = (id?: string) => {
-    history.push({ pathname, search: stringfySearch({ id, showModal: true }) })
-  }
+  const { open, handleOpen } = useOpenModal()
 
   const classes = useStyles()
 
@@ -74,7 +76,7 @@ const MottoTable: FC<Props> = ({
               <FormControl>
                 <Edit
                   className={classes.editIcon}
-                  onClick={() => showModal(curId)}
+                  onClick={() => handleOpen(curId)}
                 />
               </FormControl>
               <FormControl>
@@ -98,14 +100,11 @@ const MottoTable: FC<Props> = ({
   ]
 
   const options: MUIDataTableOptions = {
-    filterType: 'textField',
-    rowsPerPage: 10,
-    rowsPerPageOptions: [10, 20, 50],
-    searchPlaceholder: 'Search...',
+    ...TABLE_OPTIONS,
     customToolbar() {
       return (
         <Fab size="medium" className={classes.addIconFab}>
-          <AddBox onClick={() => showModal()} />
+          <AddBox onClick={() => handleOpen()} />
         </Fab>
       )
     },
@@ -125,17 +124,26 @@ const MottoTable: FC<Props> = ({
   }
 
   return (
-    <TableWrapper tableName="Motto" icon="save">
-      <MUIDataTable
-        title=""
-        data={dataSource}
-        columns={columns}
-        options={options}
+    <>
+      <TableWrapper tableName="Motto" icon="save">
+        <MUIDataTable
+          title=""
+          data={dataSource}
+          columns={columns}
+          options={options}
+        />
+        {(isFetching || isDeleting || isBatchDeleting || isExchanging) && (
+          <Loading />
+        )}
+      </TableWrapper>
+
+      <MottoModal
+        open={open}
+        handleOpen={handleOpen}
+        createMotto={createMotto}
+        updateMottoById={updateMottoById}
       />
-      {(isFetching || isDeleting || isBatchDeleting || isExchanging) && (
-        <Loading />
-      )}
-    </TableWrapper>
+    </>
   )
 }
 

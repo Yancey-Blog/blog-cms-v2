@@ -14,7 +14,7 @@ const Move: FC<Props> = ({ dataSource, tableMeta, exchangePosition }) => {
   const move = (
     curId: string,
     nextId: string,
-    curWright: number,
+    curWeight: number,
     nextWeight: number,
     closePoper: Function,
   ) => {
@@ -25,7 +25,7 @@ const Move: FC<Props> = ({ dataSource, tableMeta, exchangePosition }) => {
         input: {
           id: curId,
           exchangedId: nextId,
-          weight: curWright,
+          weight: curWeight,
           exchangedWeight: nextWeight,
         },
       },
@@ -33,10 +33,10 @@ const Move: FC<Props> = ({ dataSource, tableMeta, exchangePosition }) => {
   }
 
   const curId = tableMeta.rowData[0]
-  const curWright = tableMeta.rowData[1]
+  const curWeight = tableMeta.rowData[1]
 
-  const prev = tableMeta.tableData[dataSource.length - curWright - 1]
-  const next = tableMeta.tableData[dataSource.length - curWright + 1]
+  const prev = tableMeta.tableData[dataSource.length - curWeight - 1]
+  const next = tableMeta.tableData[dataSource.length - curWeight + 1]
   const top = tableMeta.tableData[0]
 
   // @ts-ignore
@@ -66,23 +66,23 @@ const Move: FC<Props> = ({ dataSource, tableMeta, exchangePosition }) => {
               />
 
               <Menu {...bindMenu(popupState)}>
-                {curWright !== dataSource.length ? (
+                {curWeight !== dataSource[0].weight ? (
                   <MenuItem
                     onClick={() =>
-                      move(curId, topId, curWright, topWeight, popupState.close)
+                      move(curId, topId, curWeight, topWeight, popupState.close)
                     }
                   >
                     Move to the top
                   </MenuItem>
                 ) : null}
 
-                {curWright !== dataSource.length ? (
+                {curWeight !== dataSource[0].weight ? (
                   <MenuItem
                     onClick={() =>
                       move(
                         curId,
                         prevId,
-                        curWright,
+                        curWeight,
                         prevWeight,
                         popupState.close,
                       )
@@ -92,13 +92,13 @@ const Move: FC<Props> = ({ dataSource, tableMeta, exchangePosition }) => {
                   </MenuItem>
                 ) : null}
 
-                {curWright !== 1 ? (
+                {curWeight !== 1 ? (
                   <MenuItem
                     onClick={() =>
                       move(
                         curId,
                         nextId,
-                        curWright,
+                        curWeight,
                         nextWeight,
                         popupState.close,
                       )

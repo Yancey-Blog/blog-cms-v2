@@ -1,5 +1,4 @@
 import React, { FC, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 import {
   Button,
@@ -15,20 +14,26 @@ import {
 import { useFormik } from 'formik'
 import classNames from 'classnames'
 import client from 'src/shared/apolloClient'
-import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
 import globalUseStyles from 'src/shared/styles'
+import { Open } from 'src/hooks/useOpenModal'
 import useStyles from '../styles'
 
 interface Props {
+  open: Open
+  handleOpen: Function
   createPlayer: Function
   updatePlayerById: Function
 }
 
-const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
-  const { search } = useLocation()
-  const { showModal, id } = parseSearch(search)
+const PlayerModal: FC<Props> = ({
+  open,
+  handleOpen,
+  createPlayer,
+  updatePlayerById,
+}) => {
+  const { isOpen, id } = open
 
   const globalClasses = globalUseStyles()
   const classes = useStyles()
@@ -71,8 +76,9 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
       } else {
         await createPlayer({ variables: { input: values } })
       }
-      goBack()
+
       resetForm()
+      handleOpen()
     },
   })
 
@@ -85,6 +91,8 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
   }
 
   useEffect(() => {
+    resetForm()
+
     if (id) {
       const {
         title,
@@ -104,21 +112,16 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
         isPublic,
       })
     }
-
-    return () => {
-      resetForm()
-    }
   }, [id, resetForm, setValues])
 
   return (
-    <Dialog open={!!showModal} onClose={goBack}>
-      <DialogTitle>{id ? 'Update' : 'Add'} an Music Track</DialogTitle>
+    <Dialog open={isOpen} onClose={() => handleOpen()}>
+      <DialogTitle>{id ? 'Update' : 'Add'} a Music Track</DialogTitle>
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
-            To {id ? 'update' : 'add'} an Music Track, please enter the
-            following fields here. We will send data after clicking the submit
-            button.
+            To {id ? 'update' : 'add'} a Music Track, please enter the following
+            fields here. We will send data after clicking the submit button.
           </DialogContentText>
 
           <TextField
@@ -178,13 +181,13 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
               classes.btnUploaderGroup,
             )}
           >
-            <FormLabel required>MusicFileUrl</FormLabel>
+            <FormLabel required>Music File Url</FormLabel>
             <TextField
               error={!!errors.musicFileUrl}
               helperText={errors.musicFileUrl}
               style={{ display: 'none' }}
               required
-              label="MusicFileUrl"
+              label="Music File Url"
               fullWidth
               disabled={true}
               {...getFieldProps('musicFileUrl')}
@@ -209,7 +212,7 @@ const PlayerModal: FC<Props> = ({ createPlayer, updatePlayerById }) => {
           </div>
         </DialogContent>
         <DialogActions>
-          <Button color="primary" onClick={goBack}>
+          <Button color="primary" onClick={() => handleOpen()}>
             Cancel
           </Button>
           <Button color="primary" type="submit" disabled={isSubmitting}>

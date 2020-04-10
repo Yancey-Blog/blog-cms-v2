@@ -1,5 +1,4 @@
 import React, { FC, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 import {
   Button,
@@ -12,20 +11,22 @@ import {
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import client from 'src/shared/apolloClient'
-import { goBack, parseSearch } from 'src/shared/utils'
+import { Open } from 'src/hooks/useOpenModal'
 
 interface Props {
+  open: Open
+  handleOpen: Function
   createAnnouncement: Function
   updateAnnouncementById: Function
 }
 
 const AnnouncementModal: FC<Props> = ({
+  open,
+  handleOpen,
   createAnnouncement,
   updateAnnouncementById,
 }) => {
-  const { search } = useLocation()
-
-  const { showModal, id } = parseSearch(search)
+  const { isOpen, id } = open
 
   const initialValues = {
     content: '',
@@ -53,25 +54,24 @@ const AnnouncementModal: FC<Props> = ({
       } else {
         await createAnnouncement({ variables: { input: values } })
       }
-      goBack()
+
       resetForm()
+      handleOpen()
     },
   })
 
   useEffect(() => {
+    resetForm()
+
     if (id) {
       // @ts-ignore
       const { content } = client.cache.data.get(`AnnouncementModel:${id}`)
       setValues({ content })
     }
-
-    return () => {
-      resetForm()
-    }
   }, [id, resetForm, setValues])
 
   return (
-    <Dialog open={!!showModal} onClose={goBack}>
+    <Dialog open={isOpen} onClose={() => handleOpen()}>
       <DialogTitle>{id ? 'Update' : 'Add'} an Announcement</DialogTitle>
       <form onSubmit={handleSubmit}>
         <DialogContent>
@@ -91,7 +91,7 @@ const AnnouncementModal: FC<Props> = ({
           />
         </DialogContent>
         <DialogActions>
-          <Button color="primary" onClick={goBack}>
+          <Button color="primary" onClick={() => handleOpen()}>
             Cancel
           </Button>
           <Button color="primary" type="submit" disabled={isSubmitting}>

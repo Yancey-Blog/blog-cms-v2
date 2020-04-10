@@ -5,6 +5,7 @@ const ANNOUNCEMENT_FRAGMENT = gql`
   fragment AnnouncementFragment on AnnouncementModel {
     _id
     content
+    weight
     createdAt
     updatedAt
   }
@@ -22,6 +23,15 @@ export const CREATE_ONE_ANNOUNCEMENT = gql`
 export const UPDATE_ONE_ANNOUNCEMENT = gql`
   mutation UpdateAnnouncementById($input: UpdateAnnouncementInput!) {
     updateAnnouncementById(input: $input) {
+      ...AnnouncementFragment
+    }
+  }
+  ${ANNOUNCEMENT_FRAGMENT}
+`
+
+export const EXCHANGE_POSITION = gql`
+  mutation ExchangePositionAnnouncement($input: ExchangePositionInput!) {
+    exchangePositionAnnouncement(input: $input) {
       ...AnnouncementFragment
     }
   }

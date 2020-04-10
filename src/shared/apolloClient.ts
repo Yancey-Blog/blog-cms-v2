@@ -3,6 +3,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { BatchHttpLink } from 'apollo-link-batch-http'
 import { onError } from 'apollo-link-error'
 import { setContext } from 'apollo-link-context'
+import { persistCache } from 'apollo-cache-persist'
 import SnackbarUtils from 'src/components/Toast/Toast'
 import { logout } from 'src/shared/utils'
 
@@ -22,7 +23,7 @@ const authLink = setContext((_, { headers }) => {
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
-    graphQLErrors.forEach(err => {
+    graphQLErrors.forEach((err) => {
       SnackbarUtils.error(err.message)
 
       if (err.extensions && err.extensions.code === 'UNAUTHENTICATED') {
@@ -36,8 +37,20 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
 })
 
+const cache = new InMemoryCache()
+
+async function handlePersistCache() {
+  await persistCache({
+    cache,
+    // @ts-ignore
+    storage: window.localStorage,
+  })
+}
+
+handlePersistCache()
+
 const client = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache,
   resolvers: {},
   link: errorLink.concat(authLink).concat(httpLink),
 })

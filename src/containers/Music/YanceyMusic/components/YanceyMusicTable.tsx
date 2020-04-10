@@ -1,23 +1,21 @@
 import React, { FC } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
 import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
   MUIDataTableMeta,
 } from 'mui-datatables'
-import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
-import { FormControl, Fab, Popover } from '@material-ui/core'
+import { FormControl, Fab } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
-import { formatDate, stringfySearch } from 'src/shared/utils'
+import useOpenModal from 'src/hooks/useOpenModal'
+import { formatDate } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
-import {
-  POPOVER_ANCHOR_ORIGIN,
-  POPOVER_TRANSFORM_ORIGIN,
-} from 'src/shared/constants'
+import ImagePopup from 'src/components/ImagePopup/ImagePopup'
+import { TABLE_OPTIONS } from 'src/shared/constants'
 import useStyles from 'src/shared/styles'
+import YanceyMusicModal from './YanceyMusicModal'
 import { IYanceyMusic } from '../types'
 
 interface Props {
@@ -25,23 +23,23 @@ interface Props {
   isFetching: boolean
   isDeleting: boolean
   isBatchDeleting: boolean
+  createYanceyMusic: Function
+  updateYanceyMusicById: Function
   deleteYanceyMusicById: Function
   deleteYanceyMusic: Function
 }
 
 const YanceyMusicTable: FC<Props> = ({
   dataSource,
+  createYanceyMusic,
+  updateYanceyMusicById,
   deleteYanceyMusicById,
   deleteYanceyMusic,
   isFetching,
   isDeleting,
   isBatchDeleting,
 }) => {
-  const history = useHistory()
-  const { pathname } = useLocation()
-  const showModal = (id?: string) => {
-    history.push({ pathname, search: stringfySearch({ id, showModal: true }) })
-  }
+  const { open, handleOpen } = useOpenModal()
 
   const classes = useStyles()
 
@@ -55,32 +53,7 @@ const YanceyMusicTable: FC<Props> = ({
       options: {
         customBodyRender: (value: string, tableMeta: MUIDataTableMeta) => {
           const curName = tableMeta.rowData[1]
-          return (
-            <PopupState variant="popover" popupId="imagePoperOver">
-              {(popupState) => (
-                <div>
-                  <img
-                    src={value}
-                    style={{ width: '150px' }}
-                    alt={curName}
-                    {...bindTrigger(popupState)}
-                  />
-                  <Popover
-                    {...bindPopover(popupState)}
-                    anchorOrigin={POPOVER_ANCHOR_ORIGIN}
-                    transformOrigin={POPOVER_TRANSFORM_ORIGIN}
-                    disableRestoreFocus
-                  >
-                    <img
-                      src={value}
-                      style={{ width: '800px', display: 'block' }}
-                      alt={curName}
-                    />
-                  </Popover>
-                </div>
-              )}
-            </PopupState>
-          )
+          return <ImagePopup imgName={curName} imgUrl={value} />
         },
       },
     },
@@ -117,7 +90,7 @@ const YanceyMusicTable: FC<Props> = ({
               <FormControl>
                 <Edit
                   className={classes.editIcon}
-                  onClick={() => showModal(curId)}
+                  onClick={() => handleOpen(curId)}
                 />
               </FormControl>
               <FormControl>
@@ -137,14 +110,11 @@ const YanceyMusicTable: FC<Props> = ({
   ]
 
   const options: MUIDataTableOptions = {
-    filterType: 'textField',
-    rowsPerPage: 10,
-    rowsPerPageOptions: [10, 20, 50],
-    searchPlaceholder: 'Search...',
+    ...TABLE_OPTIONS,
     customToolbar() {
       return (
         <Fab size="medium" className={classes.addIconFab}>
-          <AddBox onClick={() => showModal()} />
+          <AddBox onClick={() => handleOpen()} />
         </Fab>
       )
     },
@@ -164,15 +134,24 @@ const YanceyMusicTable: FC<Props> = ({
   }
 
   return (
-    <TableWrapper tableName="Yancey Music" icon="save">
-      <MUIDataTable
-        title=""
-        data={dataSource.sort(sortBy('updatedAt')).reverse()}
-        columns={columns}
-        options={options}
+    <>
+      <TableWrapper tableName="Yancey Music" icon="save">
+        <MUIDataTable
+          title=""
+          data={dataSource.sort(sortBy('updatedAt')).reverse()}
+          columns={columns}
+          options={options}
+        />
+        {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
+      </TableWrapper>
+
+      <YanceyMusicModal
+        open={open}
+        handleOpen={handleOpen}
+        createYanceyMusic={createYanceyMusic}
+        updateYanceyMusicById={updateYanceyMusicById}
       />
-      {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
-    </TableWrapper>
+    </>
   )
 }
 

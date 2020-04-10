@@ -1,5 +1,4 @@
 import React, { FC, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 import {
   Button,
@@ -13,22 +12,25 @@ import {
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import client from 'src/shared/apolloClient'
-import { goBack, parseSearch } from 'src/shared/utils'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
 import useStyles from 'src/shared/styles'
+import { Open } from 'src/hooks/useOpenModal'
 
 interface Props {
+  open: Open
+  handleOpen: Function
   createOpenSource: Function
   updateOpenSourceById: Function
 }
 
 const OpenSourceModal: FC<Props> = ({
+  open,
+  handleOpen,
   createOpenSource,
   updateOpenSourceById,
 }) => {
-  const { search } = useLocation()
-  const { showModal, id } = parseSearch(search)
+  const { isOpen, id } = open
 
   const classes = useStyles()
 
@@ -65,8 +67,8 @@ const OpenSourceModal: FC<Props> = ({
       } else {
         await createOpenSource({ variables: { input: values } })
       }
-      goBack()
       resetForm()
+      handleOpen()
     },
   })
 
@@ -75,6 +77,8 @@ const OpenSourceModal: FC<Props> = ({
   }
 
   useEffect(() => {
+    resetForm()
+
     if (id) {
       // @ts-ignore
       const { title, description, url, posterUrl } = client.cache.data.get(
@@ -82,21 +86,16 @@ const OpenSourceModal: FC<Props> = ({
       )
       setValues({ title, description, url, posterUrl })
     }
-
-    return () => {
-      resetForm()
-    }
   }, [id, resetForm, setValues])
 
   return (
-    <Dialog open={!!showModal} onClose={goBack}>
+    <Dialog open={isOpen} onClose={() => handleOpen()}>
       <DialogTitle>{id ? 'Update' : 'Add'} an Open Source</DialogTitle>
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
-            To {id ? 'update' : 'add'} an Open Source, please enter the
-            following fields here. We will send data after clicking the submit
-            button.
+            To {id ? 'update' : 'add'} a Open Source, please enter the following
+            fields here. We will send data after clicking the submit button.
           </DialogContentText>
           <TextField
             className={classes.textFieldSpace}
@@ -146,7 +145,7 @@ const OpenSourceModal: FC<Props> = ({
           </div>
         </DialogContent>
         <DialogActions>
-          <Button color="primary" onClick={goBack}>
+          <Button color="primary" onClick={() => handleOpen()}>
             Cancel
           </Button>
           <Button color="primary" type="submit" disabled={isSubmitting}>

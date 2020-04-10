@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
 import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
@@ -9,15 +8,19 @@ import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab, Popover, Switch, Button } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
-import { formatDate, stringfySearch } from 'src/shared/utils'
+import useOpenModal from 'src/hooks/useOpenModal'
+import { formatDate } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
+import ImagePopup from 'src/components/ImagePopup/ImagePopup'
 import {
   POPOVER_ANCHOR_ORIGIN,
   POPOVER_TRANSFORM_ORIGIN,
+  TABLE_OPTIONS,
 } from 'src/shared/constants'
 import globalUseStyles from 'src/shared/styles'
+import PlayerModal from './PlayerModal'
 import useStyles from '../styles'
 import { IPlayer } from '../types'
 
@@ -26,25 +29,23 @@ interface Props {
   isFetching: boolean
   isDeleting: boolean
   isBatchDeleting: boolean
+  createPlayer: Function
+  updatePlayerById: Function
   deletePlayerById: Function
   deletePlayers: Function
-  updatePlayerById: Function
 }
 
 const PlayerTable: FC<Props> = ({
   dataSource,
+  createPlayer,
+  updatePlayerById,
   deletePlayerById,
   deletePlayers,
-  updatePlayerById,
   isFetching,
   isDeleting,
   isBatchDeleting,
 }) => {
-  const history = useHistory()
-  const { pathname } = useLocation()
-  const showModal = (id?: string) => {
-    history.push({ pathname, search: stringfySearch({ id, showModal: true }) })
-  }
+  const { open, handleOpen } = useOpenModal()
 
   const classes = useStyles()
   const globalClasses = globalUseStyles()
@@ -90,32 +91,7 @@ const PlayerTable: FC<Props> = ({
       options: {
         customBodyRender: (value: string, tableMeta: MUIDataTableMeta) => {
           const curName = tableMeta.rowData[1]
-          return (
-            <PopupState variant="popover" popupId="imagePoperOver">
-              {(popupState) => (
-                <div>
-                  <img
-                    src={value}
-                    style={{ width: '150px' }}
-                    alt={curName}
-                    {...bindTrigger(popupState)}
-                  />
-                  <Popover
-                    {...bindPopover(popupState)}
-                    anchorOrigin={POPOVER_ANCHOR_ORIGIN}
-                    transformOrigin={POPOVER_TRANSFORM_ORIGIN}
-                    disableRestoreFocus
-                  >
-                    <img
-                      src={value}
-                      style={{ height: '400px', display: 'block' }}
-                      alt={curName}
-                    />
-                  </Popover>
-                </div>
-              )}
-            </PopupState>
-          )
+          return <ImagePopup imgName={curName} imgUrl={value} />
         },
       },
     },
@@ -178,7 +154,7 @@ const PlayerTable: FC<Props> = ({
               <FormControl>
                 <Edit
                   className={globalClasses.editIcon}
-                  onClick={() => showModal(curId)}
+                  onClick={() => handleOpen(curId)}
                 />
               </FormControl>
               <FormControl>
@@ -196,14 +172,11 @@ const PlayerTable: FC<Props> = ({
   ]
 
   const options: MUIDataTableOptions = {
-    filterType: 'textField',
-    rowsPerPage: 10,
-    rowsPerPageOptions: [10, 20, 50],
-    searchPlaceholder: 'Search...',
+    ...TABLE_OPTIONS,
     customToolbar() {
       return (
         <Fab size="medium" className={globalClasses.addIconFab}>
-          <AddBox onClick={() => showModal()} />
+          <AddBox onClick={() => handleOpen()} />
         </Fab>
       )
     },
@@ -223,15 +196,24 @@ const PlayerTable: FC<Props> = ({
   }
 
   return (
-    <TableWrapper tableName="Player" icon="save">
-      <MUIDataTable
-        title=""
-        data={dataSource.sort(sortBy('updatedAt')).reverse()}
-        columns={columns}
-        options={options}
+    <>
+      <TableWrapper tableName="Player" icon="save">
+        <MUIDataTable
+          title=""
+          data={dataSource.sort(sortBy('updatedAt')).reverse()}
+          columns={columns}
+          options={options}
+        />
+        {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
+      </TableWrapper>
+
+      <PlayerModal
+        open={open}
+        handleOpen={handleOpen}
+        createPlayer={createPlayer}
+        updatePlayerById={updatePlayerById}
       />
-      {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
-    </TableWrapper>
+    </>
   )
 }
 
