@@ -76,10 +76,6 @@ const Profile: FC = () => {
       `UserModel:${window.localStorage.getItem('userId')}`,
     )
     setValues({ name, location, organization, website, bio, avatarUrl })
-
-    return () => {
-      resetForm()
-    }
   }, [resetForm, setValues])
 
   return (
