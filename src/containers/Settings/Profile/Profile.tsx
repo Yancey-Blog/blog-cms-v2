@@ -1,18 +1,35 @@
 import React, { FC, useEffect } from 'react'
+import { useSnackbar } from 'notistack'
+import { useMutation } from '@apollo/react-hooks'
 import SettingsHeader from '../components/SettingsHeader/SettingsHeader'
 import SettingItemWrapper from '../components/SettingItemWrapper/SettingItemWrapper'
-import { Button, FormLabel, TextField } from '@material-ui/core'
+import { Button, TextField } from '@material-ui/core'
 import { useFormik } from 'formik'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
-import useStyles from 'src/shared/styles'
+import client from 'src/shared/apolloClient'
+import { UPDATE_USER } from './typeDefs'
+import useStyles from './styles'
 
 const Profile: FC = () => {
   const classes = useStyles()
-  const id = window.localStorage.getItem('id')
+
+  const { enqueueSnackbar } = useSnackbar()
+
+  const [updateUser] = useMutation(UPDATE_USER, {
+    onCompleted() {
+      enqueueSnackbar(`Your Password has been changed! Please Re-Login.`, {
+        variant: 'success',
+      })
+    },
+  })
 
   const initialValues = {
-    username: '',
+    name: '',
+    location: '',
+    organization: '',
+    website: '',
+    bio: '',
     avatarUrl: '',
   }
 
@@ -27,10 +44,9 @@ const Profile: FC = () => {
   } = useFormik({
     initialValues,
     onSubmit: async (values) => {
-      // await updateOpenSourceById({
-      //   variables: { input: { ...values, id } },
-      // })
-      resetForm()
+      await updateUser({
+        variables: { input: values },
+      })
     },
   })
 
@@ -39,16 +55,23 @@ const Profile: FC = () => {
   }
 
   useEffect(() => {
-    // @ts-ignore
-    // const { username, avatarUrl } = client.cache.data.get(`UserModel:${id}`)
-    // setValues({ username, avatarUrl })
-
-    // console.log(client.cache.data.get(`UserModel:${id}`))
+    const {
+      name,
+      location,
+      organization,
+      website,
+      bio,
+      avatarUrl,
+      // @ts-ignore
+    } = client.cache.data.get(
+      `UserModel:${window.localStorage.getItem('userId')}`,
+    )
+    setValues({ name, location, organization, website, bio, avatarUrl })
 
     return () => {
       resetForm()
     }
-  }, [id, resetForm, setValues])
+  }, [resetForm, setValues])
 
   return (
     <section>
@@ -63,84 +86,60 @@ const Profile: FC = () => {
       >
         <form onSubmit={handleSubmit}>
           <TextField
-            className={classes.textFieldSpace}
-            error={!!errors.username}
-            helperText={errors.username}
+            className={classes.input}
+            error={!!errors.name}
+            helperText={errors.name}
             autoFocus
             required
             fullWidth
-            label="User Name"
-            {...getFieldProps('username')}
+            label="Name"
+            {...getFieldProps('name')}
           />
           <TextField
-            className={classes.textFieldSpace}
-            error={!!errors.username}
-            helperText={errors.username}
+            className={classes.input}
+            error={!!errors.location}
+            helperText={errors.location}
             autoFocus
             required
             fullWidth
-            label="Title"
-            {...getFieldProps('username')}
+            label="Location"
+            {...getFieldProps('location')}
           />
           <TextField
-            className={classes.textFieldSpace}
-            error={!!errors.username}
-            helperText={errors.username}
-            autoFocus
-            required
-            fullWidth
-            label="City"
-            {...getFieldProps('username')}
-          />
-          <TextField
-            className={classes.textFieldSpace}
-            error={!!errors.username}
-            helperText={errors.username}
+            className={classes.input}
+            error={!!errors.organization}
+            helperText={errors.organization}
             autoFocus
             required
             fullWidth
             label="Organization"
-            {...getFieldProps('username')}
+            {...getFieldProps('organization')}
           />
           <TextField
-            className={classes.textFieldSpace}
-            error={!!errors.username}
-            helperText={errors.username}
+            className={classes.input}
+            error={!!errors.website}
+            helperText={errors.website}
             autoFocus
             required
             fullWidth
             label="Website"
-            {...getFieldProps('username')}
+            {...getFieldProps('website')}
           />
           <TextField
-            className={classes.textFieldSpace}
-            error={!!errors.username}
-            helperText={errors.username}
+            className={classes.input}
+            error={!!errors.bio}
+            helperText={errors.bio}
             autoFocus
             required
             fullWidth
             label="Bio"
-            {...getFieldProps('username')}
+            {...getFieldProps('bio')}
           />
-          <div className={classes.uploaderGroup}>
-            <FormLabel required>Avatar Url</FormLabel>
-            <TextField
-              error={!!errors.avatarUrl}
-              helperText={errors.avatarUrl}
-              style={{ display: 'none' }}
-              required
-              label="Avatar Url"
-              disabled={true}
-              {...getFieldProps('avatarUrl')}
-            />
-            <Uploader
-              onChange={onChange}
-              defaultFile={getFieldProps('avatarUrl').value}
-            />
-          </div>
-          {/* <Button color="primary" onClick={goBack}>
-          Cancel
-        </Button> */}
+
+          <Uploader
+            onChange={onChange}
+            defaultFile={getFieldProps('avatarUrl').value}
+          />
           <Button
             color="primary"
             variant="contained"

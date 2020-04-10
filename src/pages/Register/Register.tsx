@@ -15,6 +15,7 @@ const Register: FC = () => {
     errorPolicy: 'all',
     onCompleted(data) {
       window.localStorage.setItem('token', data.register.authorization)
+      window.localStorage.setItem('token', data.register._id)
       history.push('/')
     },
     onError() {},
@@ -27,9 +28,7 @@ const Register: FC = () => {
   }
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email()
-      .required('This field is required.'),
+    email: Yup.string().email().required('This field is required.'),
     username: Yup.string().required('This field is required.'),
     password: Yup.string().required('This field is required.'),
   })
@@ -37,7 +36,7 @@ const Register: FC = () => {
   const { handleSubmit, getFieldProps, resetForm, errors } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       register({ variables: { input: values } })
       resetForm()
     },
