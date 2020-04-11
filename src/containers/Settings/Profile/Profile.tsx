@@ -92,10 +92,7 @@ const Profile: FC = () => {
         subTitle="Basic info, like your name and photo, that you use on Yancey Blog CMS services"
       />
 
-      <SettingItemWrapper
-        title="Profile"
-        // imageUrl="https://www.gstatic.com/identity/boq/accountsettingsmobile/aboutme_scene_1264x448_c62fe60e3bb1b8642822a028568898c4.png"
-      >
+      <SettingItemWrapper title="Profile">
         <section className={classes.profileContainer}>
           <form onSubmit={handleSubmit}>
             <TextField

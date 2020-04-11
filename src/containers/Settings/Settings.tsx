@@ -7,7 +7,7 @@ import {
   AccountBalanceOutlined,
 } from '@material-ui/icons'
 import Security from './Security/Security'
-import Global from './Global/Global'
+import GlobalConfig from './GlobalConfig/GlobalConfig'
 import Profile from './Profile/Profile'
 import Account from './Account/Account'
 import styles from './settings.module.scss'
@@ -43,7 +43,7 @@ function TabPanel(props: TabPanelProps) {
 }
 
 const Settings: FC = () => {
-  const [value, setValue] = useState(0)
+  const [value, setValue] = useState(3)
   const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue)
   }
@@ -91,7 +91,7 @@ const Settings: FC = () => {
           label={
             <span className={styles.tabLabel}>
               <PermDataSettingOutlined className={styles.tabIcon} />
-              Global Settings
+              Global Config
             </span>
           }
           {...a11yProps(3)}
@@ -107,7 +107,7 @@ const Settings: FC = () => {
         <Security />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <Global />
+        <GlobalConfig />
       </TabPanel>
     </section>
   )
