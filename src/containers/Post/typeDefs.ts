@@ -82,6 +82,7 @@ export const GET_TOP_PV_POSTS = gql`
 const POST_STATISTICS_FRAGMENT = gql`
   fragment PostStatisticsFragment on PostStatisticsModel {
     _id
+    postId
     postName
     scenes
     createdAt
