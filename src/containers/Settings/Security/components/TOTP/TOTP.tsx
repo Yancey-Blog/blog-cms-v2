@@ -21,7 +21,6 @@ import {
 } from '@material-ui/core'
 import { TransitionProps } from '@material-ui/core/transitions'
 import { Close } from '@material-ui/icons'
-import client from 'src/shared/apolloClient'
 import { CREATE_TOTP, VALIDATE_TOTP } from '../../typeDefs'
 import styles from './totp.module.scss'
 
