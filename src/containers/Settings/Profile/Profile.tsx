@@ -1,4 +1,5 @@
 import React, { FC, useEffect } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 import { useSnackbar } from 'notistack'
 import { useMutation } from '@apollo/react-hooks'
@@ -13,6 +14,9 @@ import { UPDATE_USER } from './typeDefs'
 import useStyles from './styles'
 
 const Profile: FC = () => {
+  const history = useHistory()
+  const { pathname } = useLocation()
+
   const classes = useStyles()
 
   const { enqueueSnackbar } = useSnackbar()
@@ -52,6 +56,8 @@ const Profile: FC = () => {
       await updateUser({
         variables: { input: values },
       })
+
+      history.push(pathname)
     },
   })
 
@@ -60,6 +66,8 @@ const Profile: FC = () => {
     await updateUser({
       variables: { input: { avatarUrl: data.url } },
     })
+
+    history.push(pathname)
   }
 
   useEffect(() => {
