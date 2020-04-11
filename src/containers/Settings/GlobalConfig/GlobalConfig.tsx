@@ -9,6 +9,7 @@ import { GLOBAL_SETTING, UPDATE_GLOBAL_SETTING_BY_ID } from './typeDefs'
 import { Query } from './types'
 import ReleasePicker from './components/ReleasePicker'
 import CVPicker from './components/CVPicker'
+import GrayTheme from './components/GrayTheme'
 
 const GlobalConfig: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
@@ -56,7 +57,7 @@ const GlobalConfig: FC = () => {
         <>
           <SettingsHeader
             title="Global Config"
-            subTitle="Basic info, like your name and photo, that you use on Yancey Blog CMS services"
+            subTitle="Global config for Yancey Blog pc and mobile"
           />
 
           <ReleasePicker
@@ -76,6 +77,12 @@ const GlobalConfig: FC = () => {
             isSubmitting={isSubmitting}
             fetchPosts={fetchPosts}
             posts={postsData ? postsData.getPosts.items : []}
+          />
+          <GrayTheme
+            id={data ? data.getGlobalSetting._id : ''}
+            updateGlobalSettingById={updateGlobalSettingById}
+            isSubmitting={isSubmitting}
+            isGrayTheme={data ? data.getGlobalSetting.isGrayTheme : false}
           />
         </>
       )}
