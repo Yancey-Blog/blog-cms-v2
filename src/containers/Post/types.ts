@@ -20,6 +20,44 @@ export interface IPostItem {
   readonly updatedAt: string
 }
 
+export interface Query {
+  getPosts: IPost
+}
+
+export interface Mutation {
+  updatePostById: IPostItem
+}
+
+export interface CreatePostVars {
+  input: {
+    posterUrl: string
+    title: string
+    summary: string
+    content: string
+    tags: string[]
+    lastModifiedDate: string
+    isPublic: boolean
+  }
+}
+
+export interface UpdatePostVars {
+  input: {
+    id: string
+    posterUrl: string
+    title: string
+    summary: string
+    content: string
+    tags: string[]
+    lastModifiedDate: string
+    isPublic: boolean
+  }
+}
+
+export enum SaveType {
+  DRAFT,
+  FINALIZE,
+}
+
 export interface IPostStatistics {
   readonly _id: string
   readonly postId: string
@@ -29,11 +67,14 @@ export interface IPostStatistics {
   readonly updatedAt: string
 }
 
-export interface Query {
-  getPosts: IPost
+export interface PostStatisticsVars {
+  input: {
+    postId: string
+    postName: string
+    scenes: string
+  }
 }
 
-export enum SaveType {
-  DRAFT,
-  FINALIZE,
+export interface CreatePostStatisticsMutation {
+  createPostStatistics: IPostStatistics
 }

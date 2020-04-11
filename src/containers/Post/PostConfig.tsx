@@ -18,7 +18,11 @@ import umlPlugin from '@toast-ui/editor-plugin-uml'
 import tableMergedCellPlugin from '@toast-ui/editor-plugin-table-merged-cell'
 import chartPlugin from '@toast-ui/editor-plugin-chart'
 import colorSyntaxPlugin from '@toast-ui/editor-plugin-color-syntax'
-import { CREATE_ONE_POST, UPDATE_ONE_POST } from './typeDefs'
+import {
+  CREATE_ONE_POST,
+  UPDATE_ONE_POST,
+  CREATE_POST_STATISTICS,
+} from './typeDefs'
 import Uploader from 'src/components/Uploader/Uploader'
 import UploaderModal from 'src/components/UploaderModal/UploaderModal'
 import { UploaderRes } from 'src/components/Uploader/types'
@@ -31,7 +35,14 @@ import {
   POPOVER_TRANSFORM_ORIGIN,
 } from 'src/shared/constants'
 import { goBack, parseSearch } from 'src/shared/utils'
-import { SaveType } from './types'
+import {
+  SaveType,
+  PostStatisticsVars,
+  CreatePostStatisticsMutation,
+  Mutation,
+  CreatePostVars,
+  UpdatePostVars,
+} from './types'
 import useStyles from './styles'
 
 const PostConfig: FC = () => {
@@ -39,18 +50,47 @@ const PostConfig: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
 
   /* graphql */
-  const [createPost] = useMutation(CREATE_ONE_POST, {
-    onCompleted() {
+  const [createPostStatistics] = useMutation<
+    CreatePostStatisticsMutation,
+    PostStatisticsVars
+  >(CREATE_POST_STATISTICS)
+
+  const [createPost] = useMutation<Mutation, CreatePostVars>(CREATE_ONE_POST, {
+    onCompleted(data) {
+      const { _id, title, isPublic } = data.updatePostById
       enqueueSnackbar('Create success!', { variant: 'success' })
+
+      createPostStatistics({
+        variables: {
+          input: {
+            postId: _id,
+            postName: title,
+            scenes: `create post and ${isPublic ? 'public' : 'hide'}`,
+          },
+        },
+      })
     },
-    onError() {},
   })
 
-  const [updatePostById] = useMutation(UPDATE_ONE_POST, {
-    onCompleted() {
-      enqueueSnackbar('Update success!', { variant: 'success' })
+  const [updatePostById] = useMutation<Mutation, UpdatePostVars>(
+    UPDATE_ONE_POST,
+    {
+      onCompleted(data) {
+        const { _id, title, isPublic } = data.updatePostById
+        enqueueSnackbar('Update success!', { variant: 'success' })
+
+        createPostStatistics({
+          variables: {
+            input: {
+              postId: _id,
+              postName: title,
+              scenes: `update Post and ${isPublic ? 'public' : 'hide'}`,
+            },
+          },
+        })
+      },
     },
-  })
+  )
 
   /* query */
   const { search } = useLocation()
@@ -144,7 +184,7 @@ const PostConfig: FC = () => {
 
     if (id) {
       await updatePostById({
-        variables: { input: { ..._params, id } },
+        variables: { input: { ..._params, id } } as UpdatePostVars,
       })
     } else {
       await createPost({
