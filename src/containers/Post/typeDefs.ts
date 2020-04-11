@@ -69,9 +69,12 @@ export const BATCH_DELETE_POSTS = gql`
 `
 
 export const GET_TOP_PV_POSTS = gql`
-  query GetTopPVPosts($limit: Number!) {
+  query GetTopPVPosts($limit: Int!) {
     getTopPVPosts(limit: $limit) {
+      _id
       title
+      posterUrl
+      pv
     }
   }
 `

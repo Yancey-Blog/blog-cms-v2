@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react'
 import classNames from 'classnames'
-import { Paper } from '@material-ui/core'
 import { Line, Bar } from 'react-chartjs-2'
 import chartConfig from 'src/shared/chartjsConfig'
 import useStyles from './styles'
