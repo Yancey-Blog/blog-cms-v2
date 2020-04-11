@@ -1,4 +1,7 @@
 import React, { FC } from 'react'
+import classNames from 'classnames'
+import CalendarHeatmap from 'react-calendar-heatmap'
+import 'react-calendar-heatmap/dist/styles.css'
 import {
   Paper,
   List,
@@ -31,7 +34,18 @@ const PostStatistics: FC<Props> = ({ isFetchingTopPVPosts, topPVPosts }) => {
 
   return (
     <section className={classes.postStatistics}>
-      <Paper className={classes.paper}>ddd</Paper>
+      <Paper className={classNames(classes.paper, classes.heatmapPaper)}>
+        <CalendarHeatmap
+          startDate={new Date('2020-01-01')}
+          endDate={new Date('2020-12-31')}
+          values={[
+            { date: '2020-04-12', count: 12 },
+            { date: '2020-04-13', count: 122 },
+            { date: '2020-04-14', count: 38 },
+            // ...and so on
+          ]}
+        />
+      </Paper>
       <Paper className={classes.paper}>
         <List className={classes.list}>
           {topPVPosts.map((post, index) => (
@@ -39,7 +53,7 @@ const PostStatistics: FC<Props> = ({ isFetchingTopPVPosts, topPVPosts }) => {
               <ListItemAvatar>
                 <Avatar src={post.posterUrl} />
               </ListItemAvatar>
-              <ListItemText primary={post.title} />
+              <ListItemText primary={`${post.title} (PV: ${post.pv})`} />
               <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="number">
                   {numbersIcon[index]}

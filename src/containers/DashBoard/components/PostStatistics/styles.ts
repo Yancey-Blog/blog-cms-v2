@@ -13,7 +13,14 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: 16,
+    },
+
+    heatmapPaper: {
+      padding: '0 16px',
+      '& svg': {
+        width: '100%',
+        height: '100%',
+      },
     },
 
     list: {
