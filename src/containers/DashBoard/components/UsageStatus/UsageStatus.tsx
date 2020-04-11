@@ -13,11 +13,7 @@ interface Props {
   isFetchingUsageStatus: boolean
 }
 
-const UsageStatus: FC<Props> = ({
-  usageStatus,
-  children,
-  isFetchingUsageStatus,
-}) => {
+const UsageStatus: FC<Props> = ({ usageStatus, isFetchingUsageStatus }) => {
   const classes = useStyles()
 
   const [diskLimit, setDiskLimit] = useState(12)
@@ -84,8 +80,6 @@ const UsageStatus: FC<Props> = ({
             />
           </ToggleChart>
         )}
-
-        <Paper className={classes.paper}>{children}</Paper>
       </section>
     </>
   )

@@ -67,3 +67,11 @@ export const BATCH_DELETE_POSTS = gql`
   }
   ${BATCH_DELETE_FRAGMENT}
 `
+
+export const GET_TOP_PV_POSTS = gql`
+  query GetTopPVPosts($limit: Number!) {
+    getTopPVPosts(limit: $limit) {
+      title
+    }
+  }
+`
