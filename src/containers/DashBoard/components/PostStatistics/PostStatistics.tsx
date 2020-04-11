@@ -13,12 +13,14 @@ import {
   Avatar,
 } from '@material-ui/core'
 import { LooksOne, LooksTwo, Looks3, Looks4, Looks5 } from '@material-ui/icons'
-import { IPostItem } from 'src/containers/Post/types'
+import { IPostItem, IPostStatistics } from 'src/containers/Post/types'
 import useStyles from './styles'
 
 interface Props {
   isFetchingTopPVPosts: boolean
+  isFechingPostStatistics: boolean
   topPVPosts: IPostItem[]
+  postStatistics: IPostStatistics[]
 }
 
 const numbersIcon = [

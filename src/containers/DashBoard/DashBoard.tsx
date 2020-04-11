@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { useQuery } from '@apollo/react-hooks'
 import { GET_BANWAGON_SERVICE_INFO, GET_BANWAGON_USAGE_STATS } from './typeDefs'
-import { GET_TOP_PV_POSTS } from '../Post/typeDefs'
+import { GET_TOP_PV_POSTS, GET_POST_STATISTICS } from '../Post/typeDefs'
 import Bandwagon from './components/Bandwagon/Bandwagon'
 import PostStatistics from './components/PostStatistics/PostStatistics'
 
@@ -42,6 +42,14 @@ const DashBoard: FC = () => {
     },
   )
 
+  const { loading: isFechingPostStatistics, data: postStatistics } = useQuery(
+    GET_POST_STATISTICS,
+    {
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: 'cache-and-network',
+    },
+  )
+
   return (
     <section className={classes.dashboradWrapper}>
       <Bandwagon
@@ -52,7 +60,9 @@ const DashBoard: FC = () => {
       />
       <PostStatistics
         isFetchingTopPVPosts={isFetchingTopPVPosts}
+        isFechingPostStatistics={isFechingPostStatistics}
         topPVPosts={topPVPosts ? topPVPosts.getTopPVPosts : []}
+        postStatistics={postStatistics ? postStatistics.getPostStatistics : []}
       />
     </section>
   )

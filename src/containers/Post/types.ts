@@ -20,6 +20,15 @@ export interface IPostItem {
   readonly updatedAt: string
 }
 
+export interface IPostStatistics {
+  readonly _id: string
+  readonly postId: string
+  readonly postName: string
+  readonly scenes: string
+  readonly createdAt: string
+  readonly updatedAt: string
+}
+
 export interface Query {
   getPosts: IPost
 }
