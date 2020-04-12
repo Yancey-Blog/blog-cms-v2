@@ -39,7 +39,7 @@ import {
   SaveType,
   PostStatisticsVars,
   CreatePostStatisticsMutation,
-  Mutation,
+  UpdatePostByIdMutation,
   CreatePostVars,
   UpdatePostVars,
   CreatePostMutation,
@@ -76,7 +76,7 @@ const PostConfig: FC = () => {
     },
   )
 
-  const [updatePostById] = useMutation<Mutation, UpdatePostVars>(
+  const [updatePostById] = useMutation<UpdatePostByIdMutation, UpdatePostVars>(
     UPDATE_ONE_POST,
     {
       onCompleted(data) {

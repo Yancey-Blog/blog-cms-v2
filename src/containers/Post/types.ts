@@ -1,3 +1,4 @@
+/* Post */
 export interface IPost {
   readonly page: number
   readonly pageSize: number
@@ -28,7 +29,7 @@ export interface CreatePostMutation {
   createPost: IPostItem
 }
 
-export interface Mutation {
+export interface UpdatePostByIdMutation {
   updatePostById: IPostItem
 }
 
@@ -61,6 +62,8 @@ export enum SaveType {
   DRAFT,
   FINALIZE,
 }
+
+/* PostStatistics */
 
 export interface IPostStatisticsGroupItem {
   readonly _id: string

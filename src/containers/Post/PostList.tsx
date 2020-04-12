@@ -10,7 +10,7 @@ import {
 } from './typeDefs'
 import {
   Query,
-  Mutation,
+  UpdatePostByIdMutation,
   PostStatisticsVars,
   CreatePostStatisticsMutation,
 } from './types'
@@ -43,24 +43,27 @@ const Post: FC = () => {
     PostStatisticsVars
   >(CREATE_POST_STATISTICS)
 
-  const [updatePostById] = useMutation<Mutation>(UPDATE_ONE_POST, {
-    onCompleted(data) {
-      const { _id, title, isPublic } = data.updatePostById
-      enqueueSnackbar(`「${title}」 is ${isPublic ? 'public' : 'hide'}.`, {
-        variant: 'success',
-      })
+  const [updatePostById] = useMutation<UpdatePostByIdMutation>(
+    UPDATE_ONE_POST,
+    {
+      onCompleted(data) {
+        const { _id, title, isPublic } = data.updatePostById
+        enqueueSnackbar(`「${title}」 is ${isPublic ? 'public' : 'hide'}.`, {
+          variant: 'success',
+        })
 
-      createPostStatistics({
-        variables: {
-          input: {
-            postId: _id,
-            postName: title,
-            scenes: `switched to ${isPublic ? 'public' : 'hide'}`,
+        createPostStatistics({
+          variables: {
+            input: {
+              postId: _id,
+              postName: title,
+              scenes: `switched to ${isPublic ? 'public' : 'hide'}`,
+            },
           },
-        },
-      })
+        })
+      },
     },
-  })
+  )
 
   const [deletePostById, { loading: isDeleting }] = useMutation(
     DELETE_ONE_POST,
