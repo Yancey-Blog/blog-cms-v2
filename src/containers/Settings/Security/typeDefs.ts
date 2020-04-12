@@ -33,3 +33,19 @@ export const CHANGE_PASSWORD = gql`
     }
   }
 `
+
+export const SEND_SMS = gql`
+  mutation SendSMS($input: SendSMSInput!) {
+    sendSMS(input: $input) {
+      verificationCode
+    }
+  }
+`
+
+export const VALIDATE_SMS = gql`
+  mutation ValidateSMS($input: ValidateSMSInput!) {
+    validateSMS(input: $input) {
+      success
+    }
+  }
+`
