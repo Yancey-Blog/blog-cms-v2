@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.19.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.18.0...v0.19.0) (2020-04-12)
+
+
+### Features
+
+* add cursor:pointer for ImagePopup ([415eeae](https://github.com/Yancey-Blog/blog-cms-v2/commit/415eeae39d4b92ec8d7d28f1bec556c315e8a200))
+* adjust txt of TwoFactors components ([a22e9a7](https://github.com/Yancey-Blog/blog-cms-v2/commit/a22e9a73dfed82b0be986632ab2bb017c2aee2ee))
+* delete useless codes ([ed62675](https://github.com/Yancey-Blog/blog-cms-v2/commit/ed62675614644ee68185dd0f927e99dd6eac7724))
+* delete useless codes ([53dadb0](https://github.com/Yancey-Blog/blog-cms-v2/commit/53dadb08d8d53651781c8bee634791133fbae225))
+* drawer component support UserModel ([f4cc06c](https://github.com/Yancey-Blog/blog-cms-v2/commit/f4cc06c7b7f2d287247d0a149bd9c780b8157924))
+* finish Account ([7c147ea](https://github.com/Yancey-Blog/blog-cms-v2/commit/7c147ea60185a290d51ca635c4f67bc973e5c866))
+* finish CalendarHeatmap ([ba498d1](https://github.com/Yancey-Blog/blog-cms-v2/commit/ba498d138d8264779daaf340c3bddb2cab713d07))
+* finish PostStatistics component ([27e9f65](https://github.com/Yancey-Blog/blog-cms-v2/commit/27e9f6553a002803e62fbfa0e2fbfc62adf9be0a))
+* finish Profile ([67f6001](https://github.com/Yancey-Blog/blog-cms-v2/commit/67f600113dcf7c9984ec7f414f0e683bbbe198e0))
+* finsih RelaeasePick component ([ea69484](https://github.com/Yancey-Blog/blog-cms-v2/commit/ea69484f2f2f1a8ef6f6c971390e9429eb6b56c8))
+* integrate post statistics for post ([cc58bef](https://github.com/Yancey-Blog/blog-cms-v2/commit/cc58bef4191afdd062cf9ebe28241e2508719023))
+* listen data change automatic ([14a3852](https://github.com/Yancey-Blog/blog-cms-v2/commit/14a385286cf90e7017b44e716f9b0bcbeccbb553))
+* profile change can update Drawer's display ([7a2007f](https://github.com/Yancey-Blog/blog-cms-v2/commit/7a2007f5aa6af9554c913d644f1a7d12be2ddf60))
+* register Account for Settings ([1964925](https://github.com/Yancey-Blog/blog-cms-v2/commit/1964925a62ad197a64d01cc8e3faa29a5b8bbfce))
+* reset tab's position ([6b93338](https://github.com/Yancey-Blog/blog-cms-v2/commit/6b933381cac5382262717fb00cb726ec0ffbb2b5))
+* update account txt ([40323ed](https://github.com/Yancey-Blog/blog-cms-v2/commit/40323ed0b7973ea19c825e725ed245ba77308dd2))
+* update DashBoard ([b132bd6](https://github.com/Yancey-Blog/blog-cms-v2/commit/b132bd642abcfec3321204f6a2c9e60637526c0f))
+* update GET_POST_STATISTICS ([90741b5](https://github.com/Yancey-Blog/blog-cms-v2/commit/90741b511a6044fd6439df86be98d8b3ed83c15f))
+* update GlobalSetting ([8a1ea37](https://github.com/Yancey-Blog/blog-cms-v2/commit/8a1ea373de8481ae34df4627e665d9296ef155e3))
+* update Login ([83dedb2](https://github.com/Yancey-Blog/blog-cms-v2/commit/83dedb292ccba58048e9884d6f0715af343b96de))
+* update PostStatistics ([2bc2dc2](https://github.com/Yancey-Blog/blog-cms-v2/commit/2bc2dc2db058f40ad22a06e431fe2dc0f44b657f))
+* update PostStatistics ([87d359f](https://github.com/Yancey-Blog/blog-cms-v2/commit/87d359fad0855e4656547d08c93e009b3e31baf2))
+* update Setting ([a3613b9](https://github.com/Yancey-Blog/blog-cms-v2/commit/a3613b9be2d93e0727512ee2de79dd7b3309d42d))
+* update TOTP ([dd3418c](https://github.com/Yancey-Blog/blog-cms-v2/commit/dd3418cccb7bd04af8910d57ff18049d2aaa0c94))
+* update typeDefs of Post ([44f3609](https://github.com/Yancey-Blog/blog-cms-v2/commit/44f3609835839bbf3938a85d6330a313a768047d))
+* update UpdatePostByIdMutation ([e312b2c](https://github.com/Yancey-Blog/blog-cms-v2/commit/e312b2c8f0d1db62b85121054018cff4170b5e51))
+* update UsageStatus ([c68b654](https://github.com/Yancey-Blog/blog-cms-v2/commit/c68b654d65e6cb22d823c3f888512c9b8176481a))
+* update utils ([bc389ed](https://github.com/Yancey-Blog/blog-cms-v2/commit/bc389ede9a830df0a93c449ecc6fbaa3da55bdc6))
+
 ## [0.18.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.17.0...v0.18.0) (2020-04-10)
 
 
