@@ -1,12 +1,15 @@
 import gql from 'graphql-tag'
 
 export const UPDATE_USER = gql`
-  mutation UpdateUser {
-    updateUser {
+  mutation UpdateUser($input: UpdateUserInput!) {
+    updateUser(input: $input) {
       _id
-      username
-      role
-      avaterUrl
+      name
+      location
+      organization
+      website
+      bio
+      avatarUrl
     }
   }
 `

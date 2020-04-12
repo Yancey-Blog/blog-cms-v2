@@ -9,17 +9,14 @@ interface Dict {
 export const getInitials = (txt: string) =>
   txt
     .split(' ')
-    .map((v: string) => v[0])
+    .map((val: string) => val[0])
     .join('')
 
 export const formatDate = (ISOString: string) =>
   moment(ISOString).format('YYYY-MM-DD HH:mm:ss')
 
-export const getType = (type: any) =>
-  Object.prototype.toString
-    .call(type)
-    .slice(8, -1)
-    .toLowerCase()
+export const getType = <T>(type: T) =>
+  Object.prototype.toString.call(type).slice(8, -1).toLowerCase()
 
 export const goBack = () => history.goBack()
 
@@ -30,17 +27,17 @@ export const stringfySearch = (searchObj: Dict) => qs.stringify(searchObj)
 
 export const noop = () => {}
 
-export const isNumber = (type: any) => getType(type) === 'number'
+export const isNumber = <T>(type: T) => getType(type) === 'number'
 
-export const isString = (type: any) => getType(type) === 'string'
+export const isString = <T>(type: T) => getType(type) === 'string'
 
-export const isBoolean = (type: any) => getType(type) === 'boolean'
+export const isBoolean = <T>(type: T) => getType(type) === 'boolean'
 
-export const isArray = (type: any) => Array.isArray(type)
+export const isArray = <T>(type: T) => Array.isArray(type)
 
 export const logout = () => {
+  window.localStorage.clear()
   history.replace('/login')
-  window.localStorage.removeItem('token')
 }
 
 export const getURLPathName = (url: string) =>

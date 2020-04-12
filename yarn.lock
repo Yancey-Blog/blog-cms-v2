@@ -1352,19 +1352,7 @@
   resolved "https://registry.yarnpkg.com/@date-io/core/-/core-1.3.13.tgz#90c71da493f20204b7a972929cc5c482d078b3fa"
   integrity sha512-AlEKV7TxjeK+jxWVKcCFrfYAk8spX9aCyiToFIiLPtfQbsjmRGLIhb5VZgptQcJdHtLXo7+m0DuurwFgUToQuA==
 
-"@date-io/core@^2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@date-io/core/-/core-2.5.0.tgz#afb3a82e989a925755cba139b71f95b6b396dce2"
-  integrity sha512-GifWlc0hyLdYwivltV8KVwE+OOVgYoHF4DvvKn6VOA73iVvqxbXXeL18PVFjMw8r0JUHmuhP6S+4TD8INBzXZA==
-
-"@date-io/moment@2.x":
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/@date-io/moment/-/moment-2.5.1.tgz#6f2c4437f718a51dc0675a97ea2d1d435e9d4b76"
-  integrity sha512-B7IF8yfEf6dnKX3bFml18IQ8cpToYrkQQPKjscSjVZS72xO5gXW5pRqYZx0pbZbHnpw/WS5Fy/lnHPwTyIWCWA==
-  dependencies:
-    "@date-io/core" "^2.5.0"
-
-"@date-io/moment@^1.3.11":
+"@date-io/moment@1.x", "@date-io/moment@^1.3.11":
   version "1.3.13"
   resolved "https://registry.npmjs.org/@date-io/moment/-/moment-1.3.13.tgz#56c2772bc4f6675fc6970257e6033e7a7c2960f0"
   integrity sha512-3kJYusJtQuOIxq6byZlzAHoW/18iExJer9qfRF5DyyzdAk074seTuJfdofjz4RFfTd/Idk8WylOQpWtERqvFuQ==
@@ -2136,6 +2124,13 @@
   dependencies:
     ts-toolbelt "^6.3.3"
 
+"@types/react-calendar-heatmap@^1.6.2":
+  version "1.6.2"
+  resolved "https://registry.npmjs.org/@types/react-calendar-heatmap/-/react-calendar-heatmap-1.6.2.tgz#739bdec0ebc4d5f8af5fa4987fb76ebfdb3bc456"
+  integrity sha512-5sbvToPXLN4RSQBSNvxV971nkn6Obb6gCWxn1cqkcMFfn3/VjG72krvJuI6/c95JQjFa/zItVkmaKSn4i2Xoqg==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-copy-to-clipboard@^4.3.0":
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/@types/react-copy-to-clipboard/-/react-copy-to-clipboard-4.3.0.tgz#8e07becb4f11cfced4bd36038cb5bdf5c2658be5"
@@ -2165,6 +2160,13 @@
   integrity sha512-PZtnBuyfL07sqCJvGg3z+0+kt6fobc/xmle08jBiezLS8FrmGeiGkJnuxL/8Zgy9L83ypUhniV5atZn/L8n9MQ==
   dependencies:
     "@types/history" "*"
+    "@types/react" "*"
+
+"@types/react-tooltip@^3.11.0":
+  version "3.11.0"
+  resolved "https://registry.npmjs.org/@types/react-tooltip/-/react-tooltip-3.11.0.tgz#e7e7e9c67629f2b6f75ea67752922c9de0b64468"
+  integrity sha512-TkXMgkZ5aAKkFE9Wvt8OlOiPtF9ufgBOL9xWlRSzLBaoL12qSOBiyMcU4/8TyED1fuWkm5VTVarScwOPLSArYw==
+  dependencies:
     "@types/react" "*"
 
 "@types/react-transition-group@^4.2.0":
@@ -8844,6 +8846,11 @@ mem@^4.0.0:
     mimic-fn "^2.0.0"
     p-is-promise "^2.0.0"
 
+memoize-one@^5.0.0:
+  version "5.1.1"
+  resolved "https://registry.npmjs.org/memoize-one/-/memoize-one-5.1.1.tgz#047b6e3199b508eaec03504de71229b8eb1d75c0"
+  integrity sha512-HKeeBpWvqiVJD57ZUAsJNm71eHTykffzcLZVYWiVfQeI1rJtuEaS7hQiEpWfVVk18donPwJEcFKIkCmPJNOhHA==
+
 memory-fs@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/memory-fs/-/memory-fs-0.4.1.tgz#3a9a20b8462523e447cfbc7e8bb80ed667bfc552"
@@ -11132,6 +11139,14 @@ react-app-polyfill@^1.0.6:
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
 
+react-calendar-heatmap@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.npmjs.org/react-calendar-heatmap/-/react-calendar-heatmap-1.8.1.tgz#8370151f6cf7477d49cb3459596d6d046bdfc704"
+  integrity sha512-4Hbq/pDMJoCPzZnyIWFfHgokLlLXzKyGsDcMgNhYpi7zcKHcvsK9soLEPvhW2dBBqgDrQOSp/uG4wtifaDg4eQ==
+  dependencies:
+    memoize-one "^5.0.0"
+    prop-types "^15.6.2"
+
 react-chartjs-2@^2.9.0:
   version "2.9.0"
   resolved "https://registry.npmjs.org/react-chartjs-2/-/react-chartjs-2-2.9.0.tgz#d054dbdd763fbe9a76296a4ae0752ea549b76d9e"
@@ -11298,6 +11313,14 @@ react-to-print@^2.0.0-alpha.7:
   integrity sha512-+4NNaO5E0DaFOgPAR5mm8uT0lS45w6Wzfq8dSJicvn6SghWwgI7/TKrrt59vasjtey8s5rBK6V3q4XPo08fTRA==
   dependencies:
     prop-types "^15.7.2"
+
+react-tooltip@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.npmjs.org/react-tooltip/-/react-tooltip-4.2.2.tgz#326ec757d966303d3b62cc1a551b54b2c0242ab0"
+  integrity sha512-bd/nQQFQByzqNz1W1Lni3qzvMHqZCuKUNvhApk29WZ5JlEFEsitFp2SxugVM53JQ6hNaocdGwwtCEzk5wQo64g==
+  dependencies:
+    prop-types "^15.7.2"
+    uuid "^7.0.3"
 
 react-transition-group@^4.0.0, react-transition-group@^4.3.0:
   version "4.3.0"
@@ -13417,6 +13440,11 @@ uuid@^3.0.1, uuid@^3.3.2:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
+
+uuid@^7.0.3:
+  version "7.0.3"
+  resolved "https://registry.npmjs.org/uuid/-/uuid-7.0.3.tgz#c5c9f2c8cf25dc0a372c4df1441c41f5bd0c680b"
+  integrity sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==
 
 v8-compile-cache@^2.0.3:
   version "2.1.0"

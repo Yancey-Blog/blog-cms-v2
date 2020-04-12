@@ -67,3 +67,42 @@ export const BATCH_DELETE_POSTS = gql`
   }
   ${BATCH_DELETE_FRAGMENT}
 `
+
+export const GET_TOP_PV_POSTS = gql`
+  query GetTopPVPosts($limit: Int!) {
+    getTopPVPosts(limit: $limit) {
+      _id
+      title
+      posterUrl
+      pv
+    }
+  }
+`
+
+export const GET_POST_STATISTICS = gql`
+  query GetPostStatistics {
+    getPostStatistics {
+      _id
+      count
+      items {
+        postId
+        postName
+        scenes
+        operatedAt
+      }
+    }
+  }
+`
+
+export const CREATE_POST_STATISTICS = gql`
+  mutation CreatePostStatistics($input: CreatePostStatisticsInput!) {
+    createPostStatistics(input: $input) {
+      _id
+      postId
+      postName
+      scenes
+      createdAt
+      updatedAt
+    }
+  }
+`

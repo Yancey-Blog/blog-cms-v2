@@ -11,18 +11,23 @@ import {
   SentimentVerySatisfied,
   SentimentDissatisfied,
 } from '@material-ui/icons'
-import SettingItemWrapper from '../../../components/SettingItemWrapper/SettingItemWrapper'
+import client from 'src/shared/apolloClient'
+import SettingItemWrapper from 'src/containers/Settings/components/SettingItemWrapper/SettingItemWrapper'
 import TOTP from '../TOTP/TOTP'
 import RecoveryCodes from '../RecoveryCodes/RecoveryCodes'
 import styles from './twoFactors.module.scss'
 
-interface Props {
-  isTOTP: boolean
-}
-
-const TwoFactors: FC<Props> = ({ isTOTP }) => {
+const TwoFactors: FC = () => {
   const [openTOTP, setOpenTOTP] = useState(false)
   const [openRecoveryCodes, setOpenRecoveryCodes] = useState(false)
+
+  const {
+    isTOTP,
+    phoneNumber,
+    // @ts-ignore
+  } = client.cache.data.get(
+    `UserModel:${window.localStorage.getItem('userId')}`,
+  )
 
   return (
     <>
@@ -50,7 +55,7 @@ const TwoFactors: FC<Props> = ({ isTOTP }) => {
                     <SentimentDissatisfied />
                   )}
 
-                  <span className={styles.txt}>
+                  <span className={styles.phone}>
                     {isTOTP ? 'Enable' : 'Disable'}
                   </span>
                 </div>
@@ -66,7 +71,14 @@ const TwoFactors: FC<Props> = ({ isTOTP }) => {
           <ListItem button>
             <ListItemText primary="SMS number" className={styles.title} />
             <ListItemText
-              primary={<p className={styles.phone}>150 xxxx xxxx</p>}
+              primary={
+                <div className={styles.isUseTOTP}>
+                  {phoneNumber ? null : <SentimentDissatisfied />}
+                  <p className={styles.phone}>
+                    {phoneNumber ? phoneNumber : 'Disable'}
+                  </p>
+                </div>
+              }
               className={styles.title}
             />
             <ListItemAvatar>
@@ -79,7 +91,7 @@ const TwoFactors: FC<Props> = ({ isTOTP }) => {
           <ListItem button onClick={() => setOpenRecoveryCodes(true)}>
             <ListItemText primary="Recovery codes" className={styles.title} />
             <ListItemText
-              primary={<p className={styles.phone}>Printed yesterday</p>}
+              primary={<p className={styles.phone}>Click to generate</p>}
               className={styles.title}
             />
             <ListItemAvatar>

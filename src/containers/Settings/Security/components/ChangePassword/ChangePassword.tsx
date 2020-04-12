@@ -12,6 +12,7 @@ import { PASSWORD_REGEXP } from 'src/shared/constants'
 
 const ChangePassword: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
+
   const [changePassword] = useMutation(CHANGE_PASSWORD, {
     onCompleted() {
       enqueueSnackbar(`Your Password has been changed! Please Re-Login.`, {
@@ -64,7 +65,7 @@ const ChangePassword: FC = () => {
       title="Change Password"
       imageUrl="https://www.gstatic.com/identity/boq/accountsettingsmobile/signin_scene_1264x448_759b470ee2277f22a1907452a1522774.png"
     >
-      <form className={styles.customForm} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <TextField
           type="password"
           className={styles.input}

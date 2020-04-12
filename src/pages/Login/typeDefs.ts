@@ -1,16 +1,31 @@
 import gql from 'graphql-tag'
 
+export const USER_FRAGMENT = gql`
+  fragment UserFragment on UserModel {
+    _id
+    authorization
+    username
+    email
+    role
+    name
+    location
+    organization
+    website
+    bio
+    avatarUrl
+    phoneNumber
+    isTOTP
+    createdAt
+    createdAt
+    updatedAt
+  }
+`
+
 export const LOGIN = gql`
   query Login($input: LoginInput!) {
     login(input: $input) {
-      _id
-      email
-      authorization
-      role
-      avaterUrl
-      username
-      phoneNumber
-      isTOTP
+      ...UserFragment
     }
   }
+  ${USER_FRAGMENT}
 `

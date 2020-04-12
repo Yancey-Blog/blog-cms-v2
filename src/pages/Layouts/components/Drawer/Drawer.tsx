@@ -1,17 +1,27 @@
 import React, { FC, Fragment, useState, useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { Avatar } from '@material-ui/core'
-import { Home } from '@material-ui/icons'
+import { Home, Face } from '@material-ui/icons'
 import classNames from 'classnames'
-import useStyles from './styles'
 import routes, { Route } from 'src/config/routes'
 import { getInitials } from 'src/shared/utils'
+import client from 'src/shared/apolloClient'
+import useStyles from './styles'
 
 interface Props {
   open: boolean
 }
 
 const Drawer: FC<Props> = ({ open }) => {
+  const {
+    username,
+    name,
+    avatarUrl,
+    // @ts-ignore
+  } = client.cache.data.get(
+    `UserModel:${window.localStorage.getItem('userId')}`,
+  )
+
   const classes = useStyles()
 
   const { pathname } = useLocation()
@@ -69,18 +79,24 @@ const Drawer: FC<Props> = ({ open }) => {
           [classes.hidenNotItem]: !open,
         })}
       >
-        <Avatar
-          alt="Yancey Official Logo"
-          src="http://yancey-assets.oss-cn-beijing.aliyuncs.com/_Users_licaifan_Desktop_11532336786_.pic_hd.jpg"
-          className={classes.avater}
-        />
+        {avatarUrl ? (
+          <Avatar
+            alt="user-avatar"
+            src={avatarUrl}
+            className={classes.avatar}
+          />
+        ) : (
+          <Avatar className={classes.avatar}>
+            <Face />
+          </Avatar>
+        )}
 
         <div
           className={classNames(classes.detail, {
             [classes.hideDetail]: !open,
           })}
         >
-          <span className={classes.userName}>Yancey Leo</span>
+          <span className={classes.userName}>{name ? name : username}</span>
           <span className={classes.arrow} />
         </div>
       </div>

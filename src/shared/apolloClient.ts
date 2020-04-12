@@ -44,6 +44,7 @@ async function handlePersistCache() {
     cache,
     // @ts-ignore
     storage: window.localStorage,
+    maxSize: false,
   })
 }
 

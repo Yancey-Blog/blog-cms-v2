@@ -5,16 +5,19 @@ import { useMutation } from '@apollo/react-hooks'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
+import { CircularProgress } from '@material-ui/core'
 import { REGISTER } from './typeDefs'
 import styles from '../Login/Login.module.scss'
 
 const Register: FC = () => {
   const history = useHistory()
 
-  const [register] = useMutation(REGISTER, {
+  const [register, { loading }] = useMutation(REGISTER, {
     errorPolicy: 'all',
+
     onCompleted(data) {
       window.localStorage.setItem('token', data.register.authorization)
+      window.localStorage.setItem('userId', data.register._id)
       history.push('/')
     },
     onError() {},
@@ -27,9 +30,7 @@ const Register: FC = () => {
   }
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email()
-      .required('This field is required.'),
+    email: Yup.string().email().required('This field is required.'),
     username: Yup.string().required('This field is required.'),
     password: Yup.string().required('This field is required.'),
   })
@@ -37,7 +38,7 @@ const Register: FC = () => {
   const { handleSubmit, getFieldProps, resetForm, errors } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       register({ variables: { input: values } })
       resetForm()
     },
@@ -104,7 +105,7 @@ const Register: FC = () => {
           />
         </label>
         <button className={styles.submitBtn} type="submit">
-          Register
+          {loading ? <CircularProgress size={30} /> : 'Register'}
         </button>
 
         <p className={styles.link}>

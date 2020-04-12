@@ -53,6 +53,17 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
     setQrcodeMode(true)
   }
 
+  const [createTOTP, { loading }] = useMutation(CREATE_TOTP)
+
+  const [validateTOTP] = useMutation(VALIDATE_TOTP, {
+    onCompleted() {
+      enqueueSnackbar('Two-factor authentication is available now!', {
+        variant: 'success',
+      })
+      onClose()
+    },
+  })
+
   const validationSchema = Yup.object().shape({
     code: Yup.string()
       .matches(/^\d{6}$/, 'Invalid code. Please try again.')
@@ -78,17 +89,6 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
       await validateTOTP({
         variables: { input: { code: values.code, key: data.key } },
       })
-    },
-  })
-
-  const [createTOTP, { loading }] = useMutation(CREATE_TOTP)
-
-  const [validateTOTP] = useMutation(VALIDATE_TOTP, {
-    onCompleted() {
-      enqueueSnackbar('Two-factor authentication is available now!', {
-        variant: 'success',
-      })
-      onClose()
     },
   })
 
