@@ -55,7 +55,7 @@ const Post: FC = () => {
           input: {
             postId: _id,
             postName: title,
-            scenes: `switch to ${isPublic ? 'public' : 'hide'}`,
+            scenes: `switched to ${isPublic ? 'public' : 'hide'}`,
           },
         },
       })

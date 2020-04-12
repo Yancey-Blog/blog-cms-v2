@@ -42,6 +42,7 @@ import {
   Mutation,
   CreatePostVars,
   UpdatePostVars,
+  CreatePostMutation,
 } from './types'
 import useStyles from './styles'
 
@@ -55,22 +56,25 @@ const PostConfig: FC = () => {
     PostStatisticsVars
   >(CREATE_POST_STATISTICS)
 
-  const [createPost] = useMutation<Mutation, CreatePostVars>(CREATE_ONE_POST, {
-    onCompleted(data) {
-      const { _id, title, isPublic } = data.updatePostById
-      enqueueSnackbar('Create success!', { variant: 'success' })
+  const [createPost] = useMutation<CreatePostMutation, CreatePostVars>(
+    CREATE_ONE_POST,
+    {
+      onCompleted(data) {
+        const { _id, title, isPublic } = data.createPost
+        enqueueSnackbar('Create success!', { variant: 'success' })
 
-      createPostStatistics({
-        variables: {
-          input: {
-            postId: _id,
-            postName: title,
-            scenes: `create post and ${isPublic ? 'public' : 'hide'}`,
+        createPostStatistics({
+          variables: {
+            input: {
+              postId: _id,
+              postName: title,
+              scenes: `created and ${isPublic ? 'public' : 'hide'}`,
+            },
           },
-        },
-      })
+        })
+      },
     },
-  })
+  )
 
   const [updatePostById] = useMutation<Mutation, UpdatePostVars>(
     UPDATE_ONE_POST,
@@ -84,7 +88,7 @@ const PostConfig: FC = () => {
             input: {
               postId: _id,
               postName: title,
-              scenes: `update Post and ${isPublic ? 'public' : 'hide'}`,
+              scenes: `updated and ${isPublic ? 'public' : 'hide'}`,
             },
           },
         })

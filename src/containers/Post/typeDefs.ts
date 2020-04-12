@@ -79,31 +79,30 @@ export const GET_TOP_PV_POSTS = gql`
   }
 `
 
-const POST_STATISTICS_FRAGMENT = gql`
-  fragment PostStatisticsFragment on PostStatisticsModel {
-    _id
-    postId
-    postName
-    scenes
-    createdAt
-    updatedAt
-  }
-`
-
 export const GET_POST_STATISTICS = gql`
   query GetPostStatistics {
     getPostStatistics {
-      ...PostStatisticsFragment
+      _id
+      count
+      items {
+        postId
+        postName
+        scenes
+        operatedAt
+      }
     }
   }
-  ${POST_STATISTICS_FRAGMENT}
 `
 
 export const CREATE_POST_STATISTICS = gql`
   mutation CreatePostStatistics($input: CreatePostStatisticsInput!) {
     createPostStatistics(input: $input) {
-      ...PostStatisticsFragment
+      _id
+      postId
+      postName
+      scenes
+      createdAt
+      updatedAt
     }
   }
-  ${POST_STATISTICS_FRAGMENT}
 `

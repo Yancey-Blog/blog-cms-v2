@@ -1,5 +1,7 @@
 import React, { FC } from 'react'
+import moment from 'moment'
 import classNames from 'classnames'
+import ReactTooltip from 'react-tooltip'
 import CalendarHeatmap from 'react-calendar-heatmap'
 import 'react-calendar-heatmap/dist/styles.css'
 import {
@@ -13,7 +15,12 @@ import {
   Avatar,
 } from '@material-ui/core'
 import { LooksOne, LooksTwo, Looks3, Looks4, Looks5 } from '@material-ui/icons'
-import { IPostItem, IPostStatistics } from 'src/containers/Post/types'
+import { formatDate } from 'src/shared/utils'
+import {
+  IPostItem,
+  IPostStatistics,
+  IPostStatisticsGroupItem,
+} from 'src/containers/Post/types'
 import useStyles from './styles'
 
 interface Props {
@@ -31,22 +38,47 @@ const numbersIcon = [
   <Looks5 />,
 ]
 
-const PostStatistics: FC<Props> = ({ isFetchingTopPVPosts, topPVPosts }) => {
+const PostStatistics: FC<Props> = ({
+  isFetchingTopPVPosts,
+  isFechingPostStatistics,
+  topPVPosts,
+  postStatistics,
+}) => {
   const classes = useStyles()
 
   return (
     <section className={classes.postStatistics}>
       <Paper className={classNames(classes.paper, classes.heatmapPaper)}>
         <CalendarHeatmap
-          startDate={new Date('2020-01-01')}
-          endDate={new Date('2020-12-31')}
-          values={[
-            { date: '2020-04-12', count: 12 },
-            { date: '2020-04-13', count: 122 },
-            { date: '2020-04-14', count: 38 },
-            // ...and so on
-          ]}
+          startDate={new Date(moment().subtract(1, 'y').format('YYYY-MM-DD'))}
+          endDate={new Date(moment().format('YYYY-MM-DD'))}
+          values={postStatistics.map((postStatisticsItem) => ({
+            date: postStatisticsItem._id,
+            ...postStatisticsItem,
+          }))}
+          classForValue={(value: IPostStatisticsGroupItem) => {
+            if (!value) {
+              return 'color-empty'
+            }
+            return `color-gitlab-${value.count}`
+          }}
+          tooltipDataAttrs={(value: IPostStatisticsGroupItem) => ({
+            'data-tip': value.date
+              ? `
+                ${value.items
+                  .map(
+                    (item) =>
+                      `「${item.postName}」 is ${item.scenes} at ${formatDate(
+                        item.operatedAt,
+                      )}`,
+                  )
+                  .join('<br/>')}
+              `
+              : `No contributions on the day.`,
+          })}
+          showWeekdayLabels
         />
+        <ReactTooltip multiline />
       </Paper>
       <Paper className={classes.paper}>
         <List className={classes.list}>

@@ -24,6 +24,10 @@ export interface Query {
   getPosts: IPost
 }
 
+export interface CreatePostMutation {
+  createPost: IPostItem
+}
+
 export interface Mutation {
   updatePostById: IPostItem
 }
@@ -56,6 +60,18 @@ export interface UpdatePostVars {
 export enum SaveType {
   DRAFT,
   FINALIZE,
+}
+
+export interface IPostStatisticsGroupItem {
+  readonly _id: string
+  readonly date: string
+  readonly count: number
+  readonly items: Array<{
+    readonly postId: string
+    readonly postName: string
+    readonly scenes: string
+    readonly operatedAt: string
+  }>
 }
 
 export interface IPostStatistics {
