@@ -6,8 +6,14 @@ import {
   DELETE_ONE_POST,
   BATCH_DELETE_POSTS,
   UPDATE_ONE_POST,
+  CREATE_POST_STATISTICS,
 } from './typeDefs'
-import { Query } from './types'
+import {
+  Query,
+  UpdatePostByIdMutation,
+  PostStatisticsVars,
+  CreatePostStatisticsMutation,
+} from './types'
 import PostTable from './components/PostTable'
 
 const Post: FC = () => {
@@ -32,11 +38,32 @@ const Post: FC = () => {
     })
   }, [fetchPostsByPage])
 
-  const [updatePostById] = useMutation(UPDATE_ONE_POST, {
-    onCompleted() {
-      enqueueSnackbar('Update success!', { variant: 'success' })
+  const [createPostStatistics] = useMutation<
+    CreatePostStatisticsMutation,
+    PostStatisticsVars
+  >(CREATE_POST_STATISTICS)
+
+  const [updatePostById] = useMutation<UpdatePostByIdMutation>(
+    UPDATE_ONE_POST,
+    {
+      onCompleted(data) {
+        const { _id, title, isPublic } = data.updatePostById
+        enqueueSnackbar(`「${title}」 is ${isPublic ? 'public' : 'hide'}.`, {
+          variant: 'success',
+        })
+
+        createPostStatistics({
+          variables: {
+            input: {
+              postId: _id,
+              postName: title,
+              scenes: `switched to ${isPublic ? 'public' : 'hide'}`,
+            },
+          },
+        })
+      },
     },
-  })
+  )
 
   const [deletePostById, { loading: isDeleting }] = useMutation(
     DELETE_ONE_POST,
@@ -45,7 +72,6 @@ const Post: FC = () => {
         enqueueSnackbar('Delete success!', { variant: 'success' })
         fetchFirstData()
       },
-      onError() {},
     },
   )
 
@@ -56,7 +82,6 @@ const Post: FC = () => {
         enqueueSnackbar('Delete success!', { variant: 'success' })
         fetchFirstData()
       },
-      onError() {},
     },
   )
 

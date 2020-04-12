@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     thumb: {
       width: 150,
+      cursor: 'pointer',
     },
     full: {
       display: 'block',

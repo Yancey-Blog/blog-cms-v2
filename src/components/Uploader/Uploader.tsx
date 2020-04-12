@@ -9,6 +9,7 @@ import useclasses from './styles'
 
 const Uploader: FC<Props> = ({
   type = 'avatar',
+  variant = 'elevation',
   accept = 'image/*',
   action = process.env.REACT_APP_UPLOADER_URL || '',
   method = 'POST',
@@ -16,6 +17,7 @@ const Uploader: FC<Props> = ({
   defaultFile = '',
   needMarginLeft = true,
   onChange,
+  className,
 }) => {
   const classes = useclasses()
   const { enqueueSnackbar } = useSnackbar()
@@ -87,7 +89,8 @@ const Uploader: FC<Props> = ({
     <>
       {type === 'avatar' ? (
         <Card
-          className={classNames(classes.avatarUploader, {
+          variant={variant}
+          className={classNames(classes.avatarUploader, className, {
             [classes.simpleUploader]: needMarginLeft,
           })}
         >

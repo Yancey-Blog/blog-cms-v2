@@ -4,10 +4,12 @@ import {
   LockOutlined,
   FaceOutlined,
   PermDataSettingOutlined,
+  AccountBalanceOutlined,
 } from '@material-ui/icons'
 import Security from './Security/Security'
-import Global from './Global/Global'
+import GlobalConfig from './GlobalConfig/GlobalConfig'
 import Profile from './Profile/Profile'
+import Account from './Account/Account'
 import styles from './settings.module.scss'
 
 interface TabPanelProps {
@@ -58,7 +60,7 @@ const Settings: FC = () => {
           disableRipple={true}
           label={
             <span className={styles.tabLabel}>
-              <FaceOutlined />
+              <FaceOutlined className={styles.tabIcon} />
               Profile
             </span>
           }
@@ -68,8 +70,8 @@ const Settings: FC = () => {
           disableRipple={true}
           label={
             <span className={styles.tabLabel}>
-              <LockOutlined />
-              Security
+              <AccountBalanceOutlined className={styles.tabIcon} />
+              Account
             </span>
           }
           {...a11yProps(1)}
@@ -78,21 +80,34 @@ const Settings: FC = () => {
           disableRipple={true}
           label={
             <span className={styles.tabLabel}>
-              <PermDataSettingOutlined />
-              Global Settings
+              <LockOutlined className={styles.tabIcon} />
+              Security
             </span>
           }
           {...a11yProps(2)}
+        />
+        <Tab
+          disableRipple={true}
+          label={
+            <span className={styles.tabLabel}>
+              <PermDataSettingOutlined className={styles.tabIcon} />
+              Global Config
+            </span>
+          }
+          {...a11yProps(3)}
         />
       </Tabs>
       <TabPanel value={value} index={0}>
         <Profile />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Security />
+        <Account />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Global />
+        <Security />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <GlobalConfig />
       </TabPanel>
     </section>
   )

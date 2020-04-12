@@ -96,7 +96,7 @@ const useStyles = makeStyles({
     },
   },
 
-  avater: {
+  avatar: {
     width: '34px',
     height: '34px',
     marginLeft: '8px',

@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react'
 import classNames from 'classnames'
-import { Paper } from '@material-ui/core'
 import { Line, Bar } from 'react-chartjs-2'
 import chartConfig from 'src/shared/chartjsConfig'
 import useStyles from './styles'
@@ -13,11 +12,7 @@ interface Props {
   isFetchingUsageStatus: boolean
 }
 
-const UsageStatus: FC<Props> = ({
-  usageStatus,
-  children,
-  isFetchingUsageStatus,
-}) => {
+const UsageStatus: FC<Props> = ({ usageStatus, isFetchingUsageStatus }) => {
   const classes = useStyles()
 
   const [diskLimit, setDiskLimit] = useState(12)
@@ -84,8 +79,6 @@ const UsageStatus: FC<Props> = ({
             />
           </ToggleChart>
         )}
-
-        <Paper className={classes.paper}>{children}</Paper>
       </section>
     </>
   )
