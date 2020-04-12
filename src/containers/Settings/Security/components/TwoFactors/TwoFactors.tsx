@@ -15,11 +15,13 @@ import client from 'src/shared/apolloClient'
 import SettingItemWrapper from 'src/containers/Settings/components/SettingItemWrapper/SettingItemWrapper'
 import TOTP from '../TOTP/TOTP'
 import RecoveryCodes from '../RecoveryCodes/RecoveryCodes'
+import BindPhoneNumber from '../BindPhoneNumber/BindPhoneNumber'
 import styles from './twoFactors.module.scss'
 
 const TwoFactors: FC = () => {
   const [openTOTP, setOpenTOTP] = useState(false)
   const [openRecoveryCodes, setOpenRecoveryCodes] = useState(false)
+  const [openBindPhoneNumber, setOpenBindPhoneNumber] = useState(false)
 
   const {
     isTOTP,
@@ -68,7 +70,7 @@ const TwoFactors: FC = () => {
 
           <Divider />
 
-          <ListItem button>
+          <ListItem button onClick={() => setOpenBindPhoneNumber(true)}>
             <ListItemText primary="SMS number" className={styles.title} />
             <ListItemText
               primary={
@@ -103,6 +105,10 @@ const TwoFactors: FC = () => {
 
       <TOTP setOpen={setOpenTOTP} open={openTOTP} />
       <RecoveryCodes setOpen={setOpenRecoveryCodes} open={openRecoveryCodes} />
+      <BindPhoneNumber
+        setOpen={setOpenBindPhoneNumber}
+        open={openBindPhoneNumber}
+      />
     </>
   )
 }

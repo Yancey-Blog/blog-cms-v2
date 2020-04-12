@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, forwardRef, Ref } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import * as Yup from 'yup'
 import { useSnackbar } from 'notistack'
 import { useFormik } from 'formik'
@@ -17,10 +17,9 @@ import {
   RadioGroup,
   Radio,
   FormControlLabel,
-  Slide,
 } from '@material-ui/core'
-import { TransitionProps } from '@material-ui/core/transitions'
 import { Close } from '@material-ui/icons'
+import Transition from 'src/components/Transition/Transition'
 import { CREATE_TOTP, VALIDATE_TOTP } from '../../typeDefs'
 import styles from './totp.module.scss'
 
@@ -33,13 +32,6 @@ interface Props {
   setOpen: Function
   open: boolean
 }
-
-const Transition = forwardRef(function Transition(
-  props: TransitionProps & { children?: React.ReactElement<any, any> },
-  ref: Ref<unknown>,
-) {
-  return <Slide direction="up" ref={ref} {...props} />
-})
 
 const TOTP: FC<Props> = ({ setOpen, open }) => {
   const { enqueueSnackbar } = useSnackbar()
