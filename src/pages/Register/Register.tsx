@@ -37,7 +37,7 @@ const Register: FC = () => {
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      register({ variables: { input: values } })
+      await register({ variables: { input: values } })
       resetForm()
     },
   })

@@ -22,21 +22,25 @@ const Account: FC = () => {
   )
 
   const [updateUserName] = useMutation(UPDATE_USERNAME, {
-    onCompleted() {
-      enqueueSnackbar(`Your username has been updated! Please Re-Login.`, {
-        variant: 'success',
-      })
+    onCompleted(data) {
+      if (data.updateUserName) {
+        enqueueSnackbar(`Your username has been updated! Please Re-Login.`, {
+          variant: 'success',
+        })
 
-      logout()
+        logout()
+      }
     },
   })
 
   const [updateEmail] = useMutation(UPDATE_EMAIL, {
-    onCompleted() {
-      enqueueSnackbar(`Your email has been updated! Please Re-Login.`, {
-        variant: 'success',
-      })
-      logout()
+    onCompleted(data) {
+      if (data.updateEmail) {
+        enqueueSnackbar(`Your email has been updated! Please Re-Login.`, {
+          variant: 'success',
+        })
+        logout()
+      }
     },
   })
 

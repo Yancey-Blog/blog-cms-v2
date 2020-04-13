@@ -32,14 +32,13 @@ const Login: FC = () => {
     password: Yup.string().required('This field is required.'),
   })
 
-  const { handleSubmit, getFieldProps, resetForm, errors } = useFormik({
+  const { handleSubmit, getFieldProps, errors } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
       login({
         variables: { input: values },
       })
-      resetForm()
     },
   })
 
