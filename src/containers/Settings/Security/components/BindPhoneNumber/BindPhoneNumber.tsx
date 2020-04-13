@@ -16,15 +16,21 @@ import { SEND_SMS, VALIDATE_SMS } from '../../typeDefs'
 import useStyles from './styles'
 
 interface Props {
+  isPhoneNumber: boolean
   setOpen: Function
   open: boolean
 }
 
-const BindPhoneNumber: FC<Props> = ({ setOpen, open }) => {
+const BindPhoneNumber: FC<Props> = ({ isPhoneNumber, setOpen, open }) => {
   const classes = useStyles()
   const { enqueueSnackbar } = useSnackbar()
   const [count, setCount] = useState(10)
   const [isClick, setIsClick] = useState(false)
+
+  const onClose = () => {
+    setOpen(false)
+    resetForm()
+  }
 
   const [sendSMS] = useMutation(SEND_SMS)
   const [validateSMS, { loading }] = useMutation(VALIDATE_SMS, {
@@ -66,10 +72,12 @@ const BindPhoneNumber: FC<Props> = ({ setOpen, open }) => {
         variables: {
           input: {
             phoneNumber: values.phoneNumber,
-            verificationCode: values.smsCode,
+            smsCode: values.smsCode,
           },
         },
       })
+
+      onClose()
     },
   })
 
@@ -78,16 +86,9 @@ const BindPhoneNumber: FC<Props> = ({ setOpen, open }) => {
 
     await sendSMS({
       variables: {
-        input: {
-          phoneNumber: values.phoneNumber,
-        },
+        phoneNumber: values.phoneNumber,
       },
     })
-  }
-
-  const onClose = () => {
-    setOpen(false)
-    resetForm()
   }
 
   useEffect(() => {
@@ -112,7 +113,7 @@ const BindPhoneNumber: FC<Props> = ({ setOpen, open }) => {
       TransitionComponent={Transition}
       keepMounted
     >
-      <DialogTitle>Add Phone Number</DialogTitle>
+      <DialogTitle>{isPhoneNumber ? 'Update' : 'Add'} Phone Number</DialogTitle>
 
       <form onSubmit={handleSubmit}>
         <DialogContent>
@@ -134,7 +135,7 @@ const BindPhoneNumber: FC<Props> = ({ setOpen, open }) => {
                 isClick || !!errors.phoneNumber || values.phoneNumber === ''
               }
             >
-              {!isClick ? 'get SMS Code' : `get SMS Code after ${count}s again`}
+              {!isClick ? 'get SMS code' : `get SMS code after ${count}s`}
             </Button>
           </div>
 

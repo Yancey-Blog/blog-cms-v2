@@ -106,6 +106,7 @@ const TwoFactors: FC = () => {
       <TOTP setOpen={setOpenTOTP} open={openTOTP} />
       <RecoveryCodes setOpen={setOpenRecoveryCodes} open={openRecoveryCodes} />
       <BindPhoneNumber
+        isPhoneNumber={!!phoneNumber}
         setOpen={setOpenBindPhoneNumber}
         open={openBindPhoneNumber}
       />
