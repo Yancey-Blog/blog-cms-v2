@@ -21,7 +21,6 @@ const DashBoard: FC = () => {
     GET_BANWAGON_SERVICE_INFO,
     {
       notifyOnNetworkStatusChange: true,
-      fetchPolicy: 'cache-and-network',
     },
   )
 
@@ -29,7 +28,6 @@ const DashBoard: FC = () => {
     GET_BANWAGON_USAGE_STATS,
     {
       notifyOnNetworkStatusChange: true,
-      fetchPolicy: 'cache-and-network',
     },
   )
 
@@ -38,7 +36,6 @@ const DashBoard: FC = () => {
     {
       variables: { limit: 5 },
       notifyOnNetworkStatusChange: true,
-      fetchPolicy: 'cache-and-network',
     },
   )
 
@@ -46,7 +43,6 @@ const DashBoard: FC = () => {
     GET_POST_STATISTICS,
     {
       notifyOnNetworkStatusChange: true,
-      fetchPolicy: 'cache-and-network',
     },
   )
 

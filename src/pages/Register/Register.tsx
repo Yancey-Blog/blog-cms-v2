@@ -13,8 +13,6 @@ const Register: FC = () => {
   const history = useHistory()
 
   const [register, { loading }] = useMutation(REGISTER, {
-    errorPolicy: 'all',
-
     onCompleted(data) {
       window.localStorage.setItem('token', data.register.authorization)
       window.localStorage.setItem('userId', data.register._id)

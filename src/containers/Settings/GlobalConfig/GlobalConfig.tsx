@@ -35,13 +35,11 @@ const GlobalConfig: FC = () => {
 
   const { loading: isFetching, data } = useQuery<Query>(GLOBAL_SETTING, {
     notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'cache-and-network',
   })
 
   const [updateGlobalSettingById, { loading: isSubmitting }] = useMutation(
     UPDATE_GLOBAL_SETTING_BY_ID,
     {
-      errorPolicy: 'all',
       onCompleted() {
         enqueueSnackbar('Update success!', { variant: 'success' })
       },

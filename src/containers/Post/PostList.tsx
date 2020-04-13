@@ -23,7 +23,6 @@ const Post: FC = () => {
     POSTS,
     {
       notifyOnNetworkStatusChange: true,
-      fetchPolicy: 'cache-and-network',
     },
   )
 
