@@ -60,3 +60,7 @@ export const TABLE_OPTIONS: MUIDataTableOptions = {
   rowsPerPageOptions: [10, 20, 50],
   searchPlaceholder: 'Search...',
 }
+
+export const OSS_BASE_URL = 'https://static.yancey.app'
+
+export const OSS_CMS_PATH = `${OSS_BASE_URL}/cms-static`

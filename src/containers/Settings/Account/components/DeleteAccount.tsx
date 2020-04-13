@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
-
-import SettingItemWrapper from '../../components/SettingItemWrapper/SettingItemWrapper'
 import { Button, Checkbox, FormControlLabel } from '@material-ui/core'
+import { OSS_CMS_PATH } from 'src/shared/constants'
+import SettingItemWrapper from '../../components/SettingItemWrapper/SettingItemWrapper'
 import useStyles from '../styles'
 
 interface Props {
@@ -17,7 +17,7 @@ const DeleteAccount: FC<Props> = ({ isDeletingAccount, deleteAccount }) => {
   return (
     <SettingItemWrapper
       title="Delete Account"
-      imageUrl="https://www.gstatic.com/identity/boq/accountsettingsmobile/activitycontrols_scene_1264x448_6a8a39b472ed14fb4daae2d20a9c735d.png"
+      imageUrl={`${OSS_CMS_PATH}/activitycontrols_scene.png`}
     >
       <p className={classes.tip}>
         You’re trying to delete your Account, which provides access to various

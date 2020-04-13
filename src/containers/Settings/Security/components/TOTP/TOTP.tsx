@@ -19,6 +19,7 @@ import {
   FormControlLabel,
 } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
+import { OSS_CMS_PATH } from 'src/shared/constants'
 import Transition from 'src/components/Transition/Transition'
 import { CREATE_TOTP, VALIDATE_TOTP } from '../../typeDefs'
 import styles from './totp.module.scss'
@@ -107,7 +108,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
       <DialogTitle className={styles.title}>
         <figure className={styles.logoImg}>
           <img
-            src="https://static.yancey.app/cms-static/Google_Authenticator_41237.png"
+            src={`${OSS_CMS_PATH}/Google_Authenticator_41237.png`}
             alt="Google Authenticator Logo"
           />
         </figure>

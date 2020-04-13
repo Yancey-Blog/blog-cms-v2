@@ -4,11 +4,11 @@ import { useSnackbar } from 'notistack'
 import { useFormik } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
 import { TextField, Button } from '@material-ui/core'
-import { CHANGE_PASSWORD } from '../../typeDefs'
+import { logout } from 'src/shared/utils'
+import { PASSWORD_REGEXP, OSS_CMS_PATH } from 'src/shared/constants'
 import SettingItemWrapper from 'src/containers/Settings/components/SettingItemWrapper/SettingItemWrapper'
 import styles from './changePassword.module.scss'
-import { logout } from 'src/shared/utils'
-import { PASSWORD_REGEXP } from 'src/shared/constants'
+import { CHANGE_PASSWORD } from '../../typeDefs'
 
 const ChangePassword: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
@@ -63,7 +63,7 @@ const ChangePassword: FC = () => {
   return (
     <SettingItemWrapper
       title="Change Password"
-      imageUrl="https://www.gstatic.com/identity/boq/accountsettingsmobile/signin_scene_1264x448_759b470ee2277f22a1907452a1522774.png"
+      imageUrl={`${OSS_CMS_PATH}/signin_scene.png`}
     >
       <form onSubmit={handleSubmit}>
         <TextField

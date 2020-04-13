@@ -11,6 +11,7 @@ import {
   SentimentVerySatisfied,
   SentimentDissatisfied,
 } from '@material-ui/icons'
+import { OSS_CMS_PATH } from 'src/shared/constants'
 import client from 'src/shared/apolloClient'
 import SettingItemWrapper from 'src/containers/Settings/components/SettingItemWrapper/SettingItemWrapper'
 import TOTP from '../TOTP/TOTP'
@@ -35,7 +36,7 @@ const TwoFactors: FC = () => {
     <>
       <SettingItemWrapper
         title="Two-factor Authentication"
-        imageUrl="https://www.gstatic.com/identity/boq/accountsettingsmobile/recovery_scene_1264x448_b9db53ca75b4e63d28b6944fcaa24ce7.png"
+        imageUrl={`${OSS_CMS_PATH}/recovery_scene.png`}
       >
         <List
           component="nav"
