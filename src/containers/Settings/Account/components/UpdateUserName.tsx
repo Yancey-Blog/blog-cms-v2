@@ -22,7 +22,13 @@ const UpdateUserName: FC<Props> = ({ username, updateUserName }) => {
     username,
   }
 
-  const { handleSubmit, getFieldProps, isSubmitting, errors } = useFormik({
+  const {
+    handleSubmit,
+    getFieldProps,
+    isSubmitting,
+    errors,
+    values,
+  } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
@@ -51,7 +57,7 @@ const UpdateUserName: FC<Props> = ({ username, updateUserName }) => {
           color="primary"
           variant="contained"
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || values.username === username}
         >
           Update UserName
         </Button>
