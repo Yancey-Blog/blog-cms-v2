@@ -22,7 +22,13 @@ const UpdateEmail: FC<Props> = ({ email, updateEmail }) => {
     email,
   }
 
-  const { handleSubmit, getFieldProps, isSubmitting, errors } = useFormik({
+  const {
+    handleSubmit,
+    getFieldProps,
+    isSubmitting,
+    errors,
+    values,
+  } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
@@ -51,7 +57,7 @@ const UpdateEmail: FC<Props> = ({ email, updateEmail }) => {
           color="primary"
           variant="contained"
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || values.email === email}
         >
           Update Email
         </Button>
