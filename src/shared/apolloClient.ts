@@ -23,17 +23,20 @@ const authLink = setContext((_, { headers }) => {
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
-    graphQLErrors.forEach((err) => {
-      SnackbarUtils.error(err.message)
+    graphQLErrors.forEach((graphQLError) => {
+      SnackbarUtils.error(`[GraphQL error]: ${graphQLError.message}`)
 
-      if (err.extensions && err.extensions.code === 'UNAUTHENTICATED') {
+      if (
+        graphQLError.extensions &&
+        graphQLError.extensions.code === 'UNAUTHENTICATED'
+      ) {
         logout()
       }
     })
   }
 
   if (networkError) {
-    SnackbarUtils.error(networkError.message)
+    SnackbarUtils.error(`[Network error]: ${networkError.message}`)
   }
 })
 
@@ -54,6 +57,18 @@ const client = new ApolloClient({
   cache,
   resolvers: {},
   link: errorLink.concat(authLink).concat(httpLink),
+  defaultOptions: {
+    watchQuery: {
+      fetchPolicy: 'cache-and-network',
+    },
+    query: {
+      fetchPolicy: 'network-only',
+      errorPolicy: 'all',
+    },
+    mutate: {
+      errorPolicy: 'all',
+    },
+  },
 })
 
 export default client
