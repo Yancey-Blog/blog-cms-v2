@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'absolute',
       top: 14,
       right: 0,
+      textTransform: 'capitalize',
     },
   }),
 )

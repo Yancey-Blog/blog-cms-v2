@@ -134,7 +134,7 @@ const BindPhoneNumber: FC<Props> = ({ setOpen, open }) => {
                 isClick || !!errors.phoneNumber || values.phoneNumber === ''
               }
             >
-              {!isClick ? 'get SMS code' : `get SMS code after ${count}s again`}
+              {!isClick ? 'get SMS Code' : `get SMS Code after ${count}s again`}
             </Button>
           </div>
 
