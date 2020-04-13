@@ -19,7 +19,11 @@ import {
   FormControlLabel,
 } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
-import { OSS_CMS_PATH } from 'src/shared/constants'
+import {
+  OSS_CMS_PATH,
+  GOOGLE_AUTHENTICATOR_FOR_IOS,
+  GOOGLE_AUTHENTICATOR_FOR_ANDROID,
+} from 'src/shared/constants'
 import Transition from 'src/components/Transition/Transition'
 import { CREATE_TOTP, VALIDATE_TOTP } from '../../typeDefs'
 import styles from './totp.module.scss'
@@ -174,8 +178,8 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
                       rel="noopener noreferrer"
                       href={
                         values.device === 'iPhone'
-                          ? 'https://itunes.apple.com/us/app/google-authenticator/id388497605'
-                          : 'https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2'
+                          ? GOOGLE_AUTHENTICATOR_FOR_IOS
+                          : GOOGLE_AUTHENTICATOR_FOR_ANDROID
                       }
                     >
                       {values.device === 'iPhone' ? 'App' : 'Play'} Store

@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { Link } from 'react-router-dom'
 import { Menu, MenuItem, Divider } from '@material-ui/core'
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state'
 import classNames from 'classnames'
@@ -53,17 +54,20 @@ const Header: FC<Props> = ({ open, handleDrawerChange }) => {
         >
           <Search fontSize="small" />
         </Fab>
+        <Link to="/">
+          <IconButton>
+            <Dashboard fontSize="small" />
+          </IconButton>
+        </Link>
+
         <IconButton>
-          <Dashboard fontSize="small" />
-        </IconButton>
-        <IconButton>
-          <Badge badgeContent={4} color="secondary">
+          <Badge color="secondary">
             <Notifications fontSize="small" />
           </Badge>
         </IconButton>
 
         <PopupState variant="popover" popupId="deleteOnePoperOver">
-          {popupState => (
+          {(popupState) => (
             <>
               <IconButton
                 style={{ cursor: 'pointer' }}
@@ -72,7 +76,10 @@ const Header: FC<Props> = ({ open, handleDrawerChange }) => {
                 <Person fontSize="small" />
               </IconButton>
               <Menu {...bindMenu(popupState)}>
-                <MenuItem onClick={popupState.close}>Profile</MenuItem>
+                <MenuItem onClick={popupState.close}>
+                  <Link to="/settings">Profile</Link>
+                </MenuItem>
+
                 <MenuItem onClick={popupState.close}>Setting</MenuItem>
                 <Divider />
                 <MenuItem onClick={popupState.close && logout}>Logout</MenuItem>
