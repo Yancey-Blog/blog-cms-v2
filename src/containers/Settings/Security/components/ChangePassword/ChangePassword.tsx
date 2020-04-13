@@ -35,7 +35,7 @@ const ChangePassword: FC = () => {
     oldPassword: Yup.string().required('Old Password is required.'),
     newPassword: Yup.string()
       .required('New Password is required.')
-      .matches(PASSWORD_REGEXP, 'Please try a more complex password'),
+      .matches(PASSWORD_REGEXP, 'Please enter a more complex password'),
     confirmNewPassword: Yup.string()
       .oneOf([Yup.ref('newPassword'), null], "Passwords don't match")
       .required('Confirm Password is required'),
