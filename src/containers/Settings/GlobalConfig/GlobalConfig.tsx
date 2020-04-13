@@ -4,6 +4,7 @@ import { useSnackbar } from 'notistack'
 import Loading from 'src/components/Loading/Loading'
 import { POSTS } from 'src/containers/Post/typeDefs'
 import { Query as PostsQuery } from 'src/containers/Post/types'
+import SettingWrapper from '../components/SettingWrapper/SettingWrapper'
 import SettingsHeader from '../components/SettingsHeader/SettingsHeader'
 import { GLOBAL_SETTING, UPDATE_GLOBAL_SETTING_BY_ID } from './typeDefs'
 import { Query } from './types'
@@ -48,7 +49,7 @@ const GlobalConfig: FC = () => {
   )
 
   return (
-    <>
+    <SettingWrapper>
       {isFetching ? (
         <Loading />
       ) : (
@@ -84,7 +85,7 @@ const GlobalConfig: FC = () => {
           />
         </>
       )}
-    </>
+    </SettingWrapper>
   )
 }
 

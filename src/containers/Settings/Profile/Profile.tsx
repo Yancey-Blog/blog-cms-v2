@@ -4,6 +4,7 @@ import * as Yup from 'yup'
 import { useSnackbar } from 'notistack'
 import { useMutation } from '@apollo/react-hooks'
 import SettingsHeader from '../components/SettingsHeader/SettingsHeader'
+import SettingWrapper from '../components/SettingWrapper/SettingWrapper'
 import SettingItemWrapper from '../components/SettingItemWrapper/SettingItemWrapper'
 import { Button, TextField } from '@material-ui/core'
 import { useFormik } from 'formik'
@@ -86,7 +87,7 @@ const Profile: FC = () => {
   }, [setValues])
 
   return (
-    <>
+    <SettingWrapper>
       <SettingsHeader
         title="Personal info"
         subTitle="Basic info, like your name and photo, that you use on Yancey Blog CMS services"
@@ -162,7 +163,7 @@ const Profile: FC = () => {
           />
         </section>
       </SettingItemWrapper>
-    </>
+    </SettingWrapper>
   )
 }
 

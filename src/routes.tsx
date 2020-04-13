@@ -106,7 +106,28 @@ const routes: Route[] = [
     name: 'Settings',
     path: '/settings',
     icon: <Settings />,
-    component: 'Settings/Settings',
+    routes: [
+      {
+        name: 'Profile',
+        path: '/settings/profile',
+        component: 'Settings/Profile/Profile',
+      },
+      {
+        name: 'Account',
+        path: '/settings/account',
+        component: 'Settings/Account/Account',
+      },
+      {
+        name: 'Security',
+        path: '/settings/security',
+        component: 'Settings/Security/Security',
+      },
+      {
+        name: 'Global Config',
+        path: '/settings/global-config',
+        component: 'Settings/GlobalConfig/GlobalConfig',
+      },
+    ],
   },
 ]
 
