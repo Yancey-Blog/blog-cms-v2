@@ -158,7 +158,7 @@ const PlayerModal: FC<Props> = ({
           />
 
           <div className={globalClasses.uploaderGroup}>
-            <FormLabel required>CoverUrl</FormLabel>
+            <FormLabel required>Cover Url</FormLabel>
             <TextField
               error={!!errors.coverUrl}
               helperText={errors.coverUrl}
