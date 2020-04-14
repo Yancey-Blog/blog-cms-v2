@@ -65,7 +65,7 @@ const PlayerTable: FC<Props> = ({
                 <div>
                   <Button
                     color="secondary"
-                    variant="contained"
+                    variant="outlined"
                     {...bindTrigger(popupState)}
                   >
                     Click me!
@@ -87,7 +87,7 @@ const PlayerTable: FC<Props> = ({
     },
     {
       name: 'coverUrl',
-      label: 'CoverUrl',
+      label: 'Cover Url',
       options: {
         customBodyRender: (value: string, tableMeta: MUIDataTableMeta) => {
           const curName = tableMeta.rowData[1]
@@ -97,7 +97,7 @@ const PlayerTable: FC<Props> = ({
     },
     {
       name: 'musicFileUrl',
-      label: 'MusicFileUrl',
+      label: 'Music File Url',
       options: {
         customBodyRender: (value: string) => {
           return (
@@ -110,7 +110,7 @@ const PlayerTable: FC<Props> = ({
     },
     {
       name: 'isPublic',
-      label: 'IsPublic',
+      label: 'Is Public',
       options: {
         customBodyRender: (value: boolean, tableMeta: MUIDataTableMeta) => {
           const id = tableMeta.rowData[0]
@@ -121,6 +121,14 @@ const PlayerTable: FC<Props> = ({
               onChange={(e) => {
                 updatePlayerById({
                   variables: { input: { isPublic: e.target.checked, id } },
+                  optimisticResponse: {
+                    __typename: 'Mutation',
+                    updatePlayerById: {
+                      id,
+                      __typename: 'PlayerModel',
+                      isPublic: e.target.checked,
+                    },
+                  },
                 })
               }}
             />
@@ -130,14 +138,14 @@ const PlayerTable: FC<Props> = ({
     },
     {
       name: 'createdAt',
-      label: 'CreatedAt',
+      label: 'Created At',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
     },
     {
       name: 'updatedAt',
-      label: 'UpdatedAt',
+      label: 'Updated At',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
