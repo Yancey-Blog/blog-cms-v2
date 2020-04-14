@@ -109,7 +109,7 @@ const BestAlbumModal: FC<Props> = ({
 
   return (
     <Dialog open={isOpen} onClose={() => handleOpen()}>
-      <DialogTitle>{id ? 'Update' : 'Add'} an Best Album</DialogTitle>
+      <DialogTitle>{id ? 'Update' : 'Add'} a Best Album</DialogTitle>
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
