@@ -7,6 +7,7 @@ import {
   UPDATE_ONE_PLAYER,
   DELETE_ONE_PLAYER,
   BATCH_DELETE_PLAYER,
+  EXCHANGE_POSITION,
 } from './typeDefs'
 import { IPlayer, Query } from './types'
 import PlayerTable from './components/PlayerTable'
@@ -44,6 +45,16 @@ const Player: FC = () => {
       enqueueSnackbar('Update success!', { variant: 'success' })
     },
   })
+
+  const [exchangePosition, { loading: isExchanging }] = useMutation(
+    EXCHANGE_POSITION,
+    {
+      onCompleted() {
+        enqueueSnackbar('Update success!', { variant: 'success' })
+      },
+      onError() {},
+    },
+  )
 
   const [deletePlayerById, { loading: isDeleting }] = useMutation(
     DELETE_ONE_PLAYER,
@@ -97,12 +108,14 @@ const Player: FC = () => {
     <PlayerTable
       dataSource={data ? data.getPlayers : []}
       isFetching={isFetching}
+      isExchanging={isExchanging}
       isDeleting={isDeleting}
       isBatchDeleting={isBatchDeleting}
       createPlayer={createPlayer}
       updatePlayerById={updatePlayerById}
       deletePlayerById={deletePlayerById}
       deletePlayers={deletePlayers}
+      exchangePosition={exchangePosition}
     />
   )
 }

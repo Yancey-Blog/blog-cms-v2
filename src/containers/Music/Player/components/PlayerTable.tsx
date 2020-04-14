@@ -10,6 +10,7 @@ import { FormControl, Fab, Popover, Switch, Button } from '@material-ui/core'
 import { sortBy } from 'yancey-js-util'
 import useOpenModal from 'src/hooks/useOpenModal'
 import { formatDate } from 'src/shared/utils'
+import Move from 'src/components/Move/Move'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
@@ -27,12 +28,14 @@ import { IPlayer } from '../types'
 interface Props {
   dataSource: IPlayer[]
   isFetching: boolean
+  isExchanging: boolean
   isDeleting: boolean
   isBatchDeleting: boolean
   createPlayer: Function
   updatePlayerById: Function
   deletePlayerById: Function
   deletePlayers: Function
+  exchangePosition: Function
 }
 
 const PlayerTable: FC<Props> = ({
@@ -41,7 +44,9 @@ const PlayerTable: FC<Props> = ({
   updatePlayerById,
   deletePlayerById,
   deletePlayers,
+  exchangePosition,
   isFetching,
+  isExchanging,
   isDeleting,
   isBatchDeleting,
 }) => {
@@ -172,6 +177,12 @@ const PlayerTable: FC<Props> = ({
                   <DeleteOutline />
                 </ConfirmPoper>
               </FormControl>
+
+              <Move
+                dataSource={dataSource}
+                tableMeta={tableMeta}
+                exchangePosition={exchangePosition}
+              />
             </>
           )
         },
@@ -212,7 +223,9 @@ const PlayerTable: FC<Props> = ({
           columns={columns}
           options={options}
         />
-        {(isFetching || isDeleting || isBatchDeleting) && <Loading />}
+        {(isFetching || isDeleting || isBatchDeleting || isExchanging) && (
+          <Loading />
+        )}
       </TableWrapper>
 
       <PlayerModal
