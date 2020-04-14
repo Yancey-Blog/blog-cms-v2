@@ -51,14 +51,14 @@ const MottoTable: FC<Props> = ({
     { name: 'content', label: 'Content' },
     {
       name: 'createdAt',
-      label: 'CreatedAt',
+      label: 'Created At',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
     },
     {
       name: 'updatedAt',
-      label: 'UpdatedAt',
+      label: 'Updated At',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
