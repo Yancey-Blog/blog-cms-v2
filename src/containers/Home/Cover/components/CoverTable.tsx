@@ -57,7 +57,7 @@ const CoverTable: FC<Props> = ({
     { name: 'title', label: 'title' },
     {
       name: 'coverUrl',
-      label: 'Cove rUrl',
+      label: 'Cover Url',
       options: {
         customBodyRender: (value: string, tableMeta: MUIDataTableMeta) => {
           const curName = tableMeta.rowData[2]
@@ -67,7 +67,7 @@ const CoverTable: FC<Props> = ({
     },
     {
       name: 'isPublic',
-      label: 'IsPublic',
+      label: 'Is Public',
       options: {
         customBodyRender: (value: boolean, tableMeta: MUIDataTableMeta) => {
           const id = tableMeta.rowData[0]
@@ -95,14 +95,14 @@ const CoverTable: FC<Props> = ({
     },
     {
       name: 'createdAt',
-      label: 'CreatedAt',
+      label: 'Created At',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
     },
     {
       name: 'updatedAt',
-      label: 'UpdatedAt',
+      label: 'Updated At',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },

@@ -91,7 +91,7 @@ const CoverModal: FC<Props> = ({
 
   return (
     <Dialog open={isOpen} onClose={() => handleOpen()}>
-      <DialogTitle>{id ? 'Update' : 'Add'} an Cover</DialogTitle>
+      <DialogTitle>{id ? 'Update' : 'Add'} a Cover</DialogTitle>
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
@@ -111,7 +111,7 @@ const CoverModal: FC<Props> = ({
           />
 
           <div className={classes.uploaderGroup}>
-            <FormLabel required>CoverUrl</FormLabel>
+            <FormLabel required>Cover Url</FormLabel>
             <TextField
               error={!!errors.coverUrl}
               helperText={errors.coverUrl}
