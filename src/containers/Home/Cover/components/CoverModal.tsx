@@ -44,7 +44,7 @@ const CoverModal: FC<Props> = ({
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required.'),
     coverUrl: Yup.string().required('Cover Url is required.'),
-    isPublic: Yup.boolean().required('IsPublic is required.'),
+    isPublic: Yup.boolean().required('Is Public is required.'),
   })
 
   const {
