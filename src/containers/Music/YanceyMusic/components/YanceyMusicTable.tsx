@@ -46,10 +46,10 @@ const YanceyMusicTable: FC<Props> = ({
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
     { name: 'title', label: 'Title' },
-    { name: 'soundCloudUrl', label: 'SoundCloudUrl' },
+    { name: 'soundCloudUrl', label: 'SoundCloud Url' },
     {
       name: 'posterUrl',
-      label: 'PosterUrl',
+      label: 'Poster Url',
       options: {
         customBodyRender: (value: string, tableMeta: MUIDataTableMeta) => {
           const curName = tableMeta.rowData[1]
@@ -59,21 +59,21 @@ const YanceyMusicTable: FC<Props> = ({
     },
     {
       name: 'releaseDate',
-      label: 'ReleaseDate',
+      label: 'Release Date',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
     },
     {
       name: 'createdAt',
-      label: 'CreatedAt',
+      label: 'Created At',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
     },
     {
       name: 'updatedAt',
-      label: 'UpdatedAt',
+      label: 'Updated At',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
