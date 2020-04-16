@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-
 import { useQuery } from '@apollo/react-hooks'
 import { GET_BANWAGON_SERVICE_INFO, GET_BANWAGON_USAGE_STATS } from './typeDefs'
 import {
