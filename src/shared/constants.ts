@@ -60,3 +60,19 @@ export const TABLE_OPTIONS: MUIDataTableOptions = {
   rowsPerPageOptions: [10, 20, 50],
   searchPlaceholder: 'Search...',
 }
+
+export const OSS_BASE_URL = 'https://static.yancey.app'
+
+export const OSS_CMS_PATH = `${OSS_BASE_URL}/cms-static`
+
+export const GOOGLE_AUTHENTICATOR_FOR_IOS =
+  'https://itunes.apple.com/us/app/google-authenticator/id388497605'
+
+export const GOOGLE_AUTHENTICATOR_FOR_ANDROID =
+  'https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2'
+
+export const YANCEY_BLOG_URL = 'https://www.yanceyleo.com'
+
+export const YANCEY_GITHUB_URL = 'https://www.github.com/YanceyOfficial'
+
+export const YANCEY_EMAIL_URL = 'yanceyofficial@gmail.com'

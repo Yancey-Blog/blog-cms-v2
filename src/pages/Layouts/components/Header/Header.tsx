@@ -1,5 +1,20 @@
 import React, { FC } from 'react'
-import { Menu, MenuItem, Divider } from '@material-ui/core'
+import { Link } from 'react-router-dom'
+import {
+  Menu,
+  MenuItem,
+  Divider,
+  Fade,
+  ListItemIcon,
+  ListItemText,
+} from '@material-ui/core'
+import {
+  LockOutlined,
+  FaceOutlined,
+  PermDataSettingOutlined,
+  AccountBalanceOutlined,
+  ExitToAppOutlined,
+} from '@material-ui/icons'
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state'
 import classNames from 'classnames'
 import {
@@ -38,7 +53,7 @@ const Header: FC<Props> = ({ open, handleDrawerChange }) => {
           onClick={() => handleDrawerChange()}
           className={classes.fabIcon}
         >
-          {open ? <MoreVert fontSize="small" /> : <ViewList fontSize="small" />}
+          {open ? <MoreVert /> : <ViewList />}
         </Fab>
         <Typography variant="h6" noWrap className={classes.title}>
           CMS
@@ -51,31 +66,73 @@ const Header: FC<Props> = ({ open, handleDrawerChange }) => {
           aria-label="search"
           className={classNames(classes.fabIcon, classes.marginRight)}
         >
-          <Search fontSize="small" />
+          <Search />
         </Fab>
+        <Link to="/">
+          <IconButton>
+            <Dashboard />
+          </IconButton>
+        </Link>
+
         <IconButton>
-          <Dashboard fontSize="small" />
-        </IconButton>
-        <IconButton>
-          <Badge badgeContent={4} color="secondary">
-            <Notifications fontSize="small" />
+          <Badge showZero badgeContent={0} color="secondary">
+            <Notifications />
           </Badge>
         </IconButton>
 
         <PopupState variant="popover" popupId="deleteOnePoperOver">
-          {popupState => (
+          {(popupState) => (
             <>
               <IconButton
                 style={{ cursor: 'pointer' }}
                 {...bindTrigger(popupState)}
               >
-                <Person fontSize="small" />
+                <Person />
               </IconButton>
-              <Menu {...bindMenu(popupState)}>
-                <MenuItem onClick={popupState.close}>Profile</MenuItem>
-                <MenuItem onClick={popupState.close}>Setting</MenuItem>
+              <Menu
+                {...bindMenu(popupState)}
+                TransitionComponent={Fade}
+                className={classes.menu}
+              >
+                <Link to="/settings/profile" className={classes.anchor}>
+                  <MenuItem onClick={popupState.close}>
+                    <ListItemIcon>
+                      <FaceOutlined />
+                    </ListItemIcon>
+                    <ListItemText primary="Profile" />
+                  </MenuItem>
+                </Link>
+                <Link to="/settings/account" className={classes.anchor}>
+                  <MenuItem onClick={popupState.close}>
+                    <ListItemIcon>
+                      <AccountBalanceOutlined />
+                    </ListItemIcon>
+                    <ListItemText primary="Account" />
+                  </MenuItem>
+                </Link>
+                <Link to="/settings/security" className={classes.anchor}>
+                  <MenuItem onClick={popupState.close}>
+                    <ListItemIcon>
+                      <LockOutlined />
+                    </ListItemIcon>
+                    <ListItemText primary="Security" />
+                  </MenuItem>
+                </Link>
+                <Link to="/settings/global-config" className={classes.anchor}>
+                  <MenuItem onClick={popupState.close}>
+                    <ListItemIcon>
+                      <PermDataSettingOutlined />
+                    </ListItemIcon>
+                    <ListItemText primary="Global Config" />
+                  </MenuItem>
+                </Link>
                 <Divider />
-                <MenuItem onClick={popupState.close && logout}>Logout</MenuItem>
+                <MenuItem onClick={popupState.close && logout}>
+                  <ListItemIcon>
+                    <ExitToAppOutlined />
+                  </ListItemIcon>
+                  <ListItemText primary="Logout" />
+                </MenuItem>
               </Menu>
             </>
           )}

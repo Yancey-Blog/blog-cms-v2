@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import { OSS_CMS_PATH } from 'src/shared/constants'
 import SettingItemWrapper from '../../../components/SettingItemWrapper/SettingItemWrapper'
 
 const useStyles = makeStyles({
@@ -18,7 +19,7 @@ const SecurtyIntro: FC = () => {
   return (
     <SettingItemWrapper
       title="We keep your account protected"
-      imageUrl="https://www.gstatic.com/identity/boq/accountsettingsmobile/securitycheckup_scene_green_1264x448_6d867072cd36d3c6f4c9f0b8d82837ff.png"
+      imageUrl={`${OSS_CMS_PATH}/securitycheckup_scene.png`}
     >
       <p className={classes.tip}>
         The Security Checkup gives you personalized recommendations to secure

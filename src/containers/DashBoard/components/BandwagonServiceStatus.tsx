@@ -1,15 +1,12 @@
 import React, { FC } from 'react'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
-import { IBandwagonServiceInfo, IBandwagonUsageStatus } from '../../types'
-import StatusCard from '../StatusCard/StatusCard'
-import UsageStatus from '../UsageStatus/UsageStatus'
-import StatusCardSkeleton from '../StatusCardSkeleton/StatusCardSkeleton'
+import { IBandwagonServiceInfo } from '../types'
+import StatusCard from './StatusCard'
+import StatusCardSkeleton from './StatusCardSkeleton'
 
 interface Props {
   serviceInfo: IBandwagonServiceInfo
-  usageStatus: IBandwagonUsageStatus[]
   isFechingServiceInfo: boolean
-  isFetchingUsageStatus: boolean
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -23,11 +20,9 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 )
 
-const Bandwagon: FC<Props> = ({
+const BandwagonServiceStatus: FC<Props> = ({
   serviceInfo,
-  usageStatus,
   isFechingServiceInfo,
-  isFetchingUsageStatus,
 }) => {
   const classes = useStyles()
 
@@ -70,28 +65,22 @@ const Bandwagon: FC<Props> = ({
   ]
 
   return (
-    <>
-      <section className={classes.statusCardGrid}>
-        {isFechingServiceInfo
-          ? statusCards.map((statusCard) => (
-              <StatusCardSkeleton key={statusCard.title} />
-            ))
-          : statusCards.map((statusCard) => (
-              <StatusCard
-                key={statusCard.title}
-                total={statusCard.total}
-                used={statusCard.used}
-                unit={statusCard.unit}
-                title={statusCard.title}
-              />
-            ))}
-      </section>
-      <UsageStatus
-        usageStatus={usageStatus}
-        isFetchingUsageStatus={isFetchingUsageStatus}
-      />
-    </>
+    <section className={classes.statusCardGrid}>
+      {isFechingServiceInfo
+        ? statusCards.map((statusCard) => (
+            <StatusCardSkeleton key={statusCard.title} />
+          ))
+        : statusCards.map((statusCard) => (
+            <StatusCard
+              key={statusCard.title}
+              total={statusCard.total}
+              used={statusCard.used}
+              unit={statusCard.unit}
+              title={statusCard.title}
+            />
+          ))}
+    </section>
   )
 }
 
-export default Bandwagon
+export default BandwagonServiceStatus

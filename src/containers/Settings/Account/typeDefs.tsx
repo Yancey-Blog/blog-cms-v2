@@ -10,7 +10,7 @@ export const UPDATE_USERNAME = gql`
 `
 
 export const UPDATE_EMAIL = gql`
-  mutation UpdateUserName($email: String!) {
+  mutation UpdateEmail($email: String!) {
     updateEmail(email: $email) {
       _id
       email

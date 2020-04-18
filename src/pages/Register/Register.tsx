@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
 import { CircularProgress } from '@material-ui/core'
+import { PASSWORD_REGEXP } from 'src/shared/constants'
 import { REGISTER } from './typeDefs'
 import styles from '../Login/Login.module.scss'
 
@@ -13,8 +14,6 @@ const Register: FC = () => {
   const history = useHistory()
 
   const [register, { loading }] = useMutation(REGISTER, {
-    errorPolicy: 'all',
-
     onCompleted(data) {
       window.localStorage.setItem('token', data.register.authorization)
       window.localStorage.setItem('userId', data.register._id)
@@ -30,16 +29,18 @@ const Register: FC = () => {
   }
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email().required('This field is required.'),
-    username: Yup.string().required('This field is required.'),
-    password: Yup.string().required('This field is required.'),
+    email: Yup.string().email().required('Email is required.'),
+    username: Yup.string().required('UserName is required.'),
+    password: Yup.string()
+      .matches(PASSWORD_REGEXP, 'Please enter a more complex password')
+      .required('Password is required.'),
   })
 
   const { handleSubmit, getFieldProps, resetForm, errors } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      register({ variables: { input: values } })
+      await register({ variables: { input: values } })
       resetForm()
     },
   })

@@ -22,7 +22,6 @@ const Cover: FC = () => {
   })
 
   const [createCover] = useMutation(CREATE_ONE_COVER, {
-    errorPolicy: 'all',
     update(proxy, { data: { createCover } }) {
       const data = proxy.readQuery<Query>({ query: COVERS })
 
@@ -44,7 +43,6 @@ const Cover: FC = () => {
   })
 
   const [updateCoverById] = useMutation(UPDATE_ONE_COVER, {
-    errorPolicy: 'all',
     onCompleted() {
       enqueueSnackbar('Update success!', { variant: 'success' })
     },
@@ -54,7 +52,6 @@ const Cover: FC = () => {
   const [exchangePosition, { loading: isExchanging }] = useMutation(
     EXCHANGE_POSITION,
     {
-      errorPolicy: 'all',
       onCompleted() {
         enqueueSnackbar('Update success!', { variant: 'success' })
       },
@@ -65,7 +62,6 @@ const Cover: FC = () => {
   const [publicCovers, { loading: isPublicingCovers }] = useMutation(
     BATCH_PUBLIC_COVERS,
     {
-      errorPolicy: 'all',
       update(proxy, { data: { publicCovers } }) {
         const data = proxy.readQuery<Query>({ query: COVERS })
 
@@ -96,7 +92,6 @@ const Cover: FC = () => {
   const [deleteCoverById, { loading: isDeleting }] = useMutation(
     DELETE_ONE_COVER,
     {
-      errorPolicy: 'all',
       update(proxy, { data: { deleteCoverById } }) {
         const data = proxy.readQuery<Query>({ query: COVERS })
 
@@ -122,7 +117,6 @@ const Cover: FC = () => {
   const [deleteCovers, { loading: isBatchDeleting }] = useMutation(
     BATCH_DELETE_COVERS,
     {
-      errorPolicy: 'all',
       update(proxy, { data: { deleteCovers } }) {
         const data = proxy.readQuery<Query>({ query: COVERS })
 

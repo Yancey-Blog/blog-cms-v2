@@ -71,7 +71,7 @@ const MottoModal: FC<Props> = ({
 
   return (
     <Dialog open={isOpen} onClose={() => handleOpen()}>
-      <DialogTitle>{id ? 'Update' : 'Add'} an Motto</DialogTitle>
+      <DialogTitle>{id ? 'Update' : 'Add'} a Motto</DialogTitle>
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>

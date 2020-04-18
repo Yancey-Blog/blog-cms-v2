@@ -17,3 +17,8 @@ export interface IBandwagonUsageStatus {
   disk_write_bytes: string
   cpu_usage: string
 }
+
+export enum PostRankListType {
+  PV,
+  LIKE,
+}

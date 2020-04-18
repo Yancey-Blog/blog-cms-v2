@@ -11,15 +11,18 @@ import {
   SentimentVerySatisfied,
   SentimentDissatisfied,
 } from '@material-ui/icons'
+import { OSS_CMS_PATH } from 'src/shared/constants'
 import client from 'src/shared/apolloClient'
 import SettingItemWrapper from 'src/containers/Settings/components/SettingItemWrapper/SettingItemWrapper'
 import TOTP from '../TOTP/TOTP'
 import RecoveryCodes from '../RecoveryCodes/RecoveryCodes'
+import BindPhoneNumber from '../BindPhoneNumber/BindPhoneNumber'
 import styles from './twoFactors.module.scss'
 
 const TwoFactors: FC = () => {
   const [openTOTP, setOpenTOTP] = useState(false)
   const [openRecoveryCodes, setOpenRecoveryCodes] = useState(false)
+  const [openBindPhoneNumber, setOpenBindPhoneNumber] = useState(false)
 
   const {
     isTOTP,
@@ -33,7 +36,7 @@ const TwoFactors: FC = () => {
     <>
       <SettingItemWrapper
         title="Two-factor Authentication"
-        imageUrl="https://www.gstatic.com/identity/boq/accountsettingsmobile/recovery_scene_1264x448_b9db53ca75b4e63d28b6944fcaa24ce7.png"
+        imageUrl={`${OSS_CMS_PATH}/recovery_scene.png`}
       >
         <List
           component="nav"
@@ -68,7 +71,7 @@ const TwoFactors: FC = () => {
 
           <Divider />
 
-          <ListItem button>
+          <ListItem button onClick={() => setOpenBindPhoneNumber(true)}>
             <ListItemText primary="SMS number" className={styles.title} />
             <ListItemText
               primary={
@@ -103,6 +106,11 @@ const TwoFactors: FC = () => {
 
       <TOTP setOpen={setOpenTOTP} open={openTOTP} />
       <RecoveryCodes setOpen={setOpenRecoveryCodes} open={openRecoveryCodes} />
+      <BindPhoneNumber
+        isPhoneNumber={!!phoneNumber}
+        setOpen={setOpenBindPhoneNumber}
+        open={openBindPhoneNumber}
+      />
     </>
   )
 }

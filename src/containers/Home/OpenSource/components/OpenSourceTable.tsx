@@ -65,7 +65,7 @@ const OpenSourceTable: FC<Props> = ({
     },
     {
       name: 'posterUrl',
-      label: 'PosterUrl',
+      label: 'Poster Url',
       options: {
         customBodyRender: (value: string, tableMeta: MUIDataTableMeta) => {
           const curName = tableMeta.rowData[1]
@@ -75,14 +75,14 @@ const OpenSourceTable: FC<Props> = ({
     },
     {
       name: 'createdAt',
-      label: 'CreatedAt',
+      label: 'Created At',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
     },
     {
       name: 'updatedAt',
-      label: 'UpdatedAt',
+      label: 'Updated At',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
