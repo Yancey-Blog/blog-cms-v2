@@ -5,6 +5,7 @@ import { logout } from 'src/shared/utils'
 import client from 'src/shared/apolloClient'
 import { UPDATE_USERNAME, UPDATE_EMAIL, DELETE_ACCOUNT } from './typeDefs'
 import SettingsHeader from '../components/SettingsHeader/SettingsHeader'
+import SettingWrapper from '../components/SettingWrapper/SettingWrapper'
 import UpdateUserName from './components/UpdateUserName'
 import UpdateEmail from './components/UpdateEmail'
 import DeleteAccount from './components/DeleteAccount'
@@ -21,21 +22,25 @@ const Account: FC = () => {
   )
 
   const [updateUserName] = useMutation(UPDATE_USERNAME, {
-    onCompleted() {
-      enqueueSnackbar(`Your username has been updated! Please Re-Login.`, {
-        variant: 'success',
-      })
+    onCompleted(data) {
+      if (data.updateUserName) {
+        enqueueSnackbar(`Your username has been updated! Please Re-Login.`, {
+          variant: 'success',
+        })
 
-      logout()
+        logout()
+      }
     },
   })
 
   const [updateEmail] = useMutation(UPDATE_EMAIL, {
-    onCompleted() {
-      enqueueSnackbar(`Your email has been updated! Please Re-Login.`, {
-        variant: 'success',
-      })
-      logout()
+    onCompleted(data) {
+      if (data.updateEmail) {
+        enqueueSnackbar(`Your email has been updated! Please Re-Login.`, {
+          variant: 'success',
+        })
+        logout()
+      }
     },
   })
 
@@ -56,7 +61,7 @@ const Account: FC = () => {
   )
 
   return (
-    <>
+    <SettingWrapper>
       <SettingsHeader
         title="Account"
         subTitle="Change your own username, email or delete your account"
@@ -68,7 +73,7 @@ const Account: FC = () => {
         deleteAccount={deleteAccount}
         isDeletingAccount={isDeletingAccount}
       />
-    </>
+    </SettingWrapper>
   )
 }
 

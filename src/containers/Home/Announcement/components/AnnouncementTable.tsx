@@ -14,20 +14,7 @@ import useStyles from 'src/shared/styles'
 import { TABLE_OPTIONS } from 'src/shared/constants'
 import { formatDate } from 'src/shared/utils'
 import AnnouncementModal from './AnnouncementModal'
-import { IAnnouncement } from '../types'
-
-interface Props {
-  dataSource: IAnnouncement[]
-  isFetching: boolean
-  isDeleting: boolean
-  isExchanging: boolean
-  isBatchDeleting: boolean
-  createAnnouncement: Function
-  updateAnnouncementById: Function
-  deleteAnnouncementById: Function
-  deleteAnnouncements: Function
-  exchangePosition: Function
-}
+import { AnnouncementTableProps as Props } from '../types'
 
 const AnnouncementTable: FC<Props> = ({
   dataSource,
@@ -51,14 +38,14 @@ const AnnouncementTable: FC<Props> = ({
     { name: 'content', label: 'Content' },
     {
       name: 'createdAt',
-      label: 'CreatedAt',
+      label: 'Created At',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
     },
     {
       name: 'updatedAt',
-      label: 'UpdatedAt',
+      label: 'Updated At',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },

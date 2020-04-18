@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, forwardRef, Ref } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import * as Yup from 'yup'
 import { useSnackbar } from 'notistack'
 import { useFormik } from 'formik'
@@ -17,10 +17,14 @@ import {
   RadioGroup,
   Radio,
   FormControlLabel,
-  Slide,
 } from '@material-ui/core'
-import { TransitionProps } from '@material-ui/core/transitions'
 import { Close } from '@material-ui/icons'
+import {
+  OSS_CMS_PATH,
+  GOOGLE_AUTHENTICATOR_FOR_IOS,
+  GOOGLE_AUTHENTICATOR_FOR_ANDROID,
+} from 'src/shared/constants'
+import Transition from 'src/components/Transition/Transition'
 import { CREATE_TOTP, VALIDATE_TOTP } from '../../typeDefs'
 import styles from './totp.module.scss'
 
@@ -33,13 +37,6 @@ interface Props {
   setOpen: Function
   open: boolean
 }
-
-const Transition = forwardRef(function Transition(
-  props: TransitionProps & { children?: React.ReactElement<any, any> },
-  ref: Ref<unknown>,
-) {
-  return <Slide direction="up" ref={ref} {...props} />
-})
 
 const TOTP: FC<Props> = ({ setOpen, open }) => {
   const { enqueueSnackbar } = useSnackbar()
@@ -115,7 +112,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
       <DialogTitle className={styles.title}>
         <figure className={styles.logoImg}>
           <img
-            src="https://static.yancey.app/cms-static/Google_Authenticator_41237.png"
+            src={`${OSS_CMS_PATH}/Google_Authenticator_41237.png`}
             alt="Google Authenticator Logo"
           />
         </figure>
@@ -181,8 +178,8 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
                       rel="noopener noreferrer"
                       href={
                         values.device === 'iPhone'
-                          ? 'https://itunes.apple.com/us/app/google-authenticator/id388497605'
-                          : 'https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2'
+                          ? GOOGLE_AUTHENTICATOR_FOR_IOS
+                          : GOOGLE_AUTHENTICATOR_FOR_ANDROID
                       }
                     >
                       {values.device === 'iPhone' ? 'App' : 'Play'} Store

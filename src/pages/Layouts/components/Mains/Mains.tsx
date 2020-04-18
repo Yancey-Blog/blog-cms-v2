@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import loadable from '@loadable/component'
-import routes from 'src/config/routes'
+import routes from 'src/routes'
 import Loading from 'src/components/Loading/InstagramLoading'
+import NotFound from 'src/components/NotFound/NotFound'
 import useStyles from './styles'
 
 interface IRoute {
@@ -39,19 +40,24 @@ const Mains: FC = () => {
 
   return (
     <main className={classes.main}>
-      {routeList.map((route) => (
-        <Route
-          exact
-          key={route.path}
-          path={route.path}
-          component={loadable(
-            () => import(`src/containers/${route.component}`),
-            {
-              fallback: <Loading />,
-            },
-          )}
-        />
-      ))}
+      <Switch>
+        {routeList.map((route) => (
+          <Route
+            exact
+            key={route.path}
+            path={route.path}
+            component={loadable(
+              () => import(`src/containers/${route.component}`),
+              {
+                fallback: <Loading />,
+              },
+            )}
+          />
+        ))}
+        <Route path="*">
+          <NotFound />
+        </Route>
+      </Switch>
     </main>
   )
 }

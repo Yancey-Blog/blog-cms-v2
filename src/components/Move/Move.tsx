@@ -35,8 +35,8 @@ const Move: FC<Props> = ({ dataSource, tableMeta, exchangePosition }) => {
   const curId = tableMeta.rowData[0]
   const curWeight = tableMeta.rowData[1]
 
-  const prev = tableMeta.tableData[dataSource.length - curWeight - 1]
-  const next = tableMeta.tableData[dataSource.length - curWeight + 1]
+  const prev = tableMeta.tableData[tableMeta.rowIndex - 1]
+  const next = tableMeta.tableData[tableMeta.rowIndex + 1]
   const top = tableMeta.tableData[0]
 
   // @ts-ignore

@@ -31,6 +31,20 @@ const useStyles = makeStyles({
   marginRight: {
     marginRight: '24px',
   },
+
+  anchor: {
+    color: '#000',
+
+    '&:hover': {
+      textDecoration: 'none',
+    },
+  },
+
+  menu: {
+    '& .MuiListItemIcon-root': {
+      minWidth: 42,
+    },
+  },
 })
 
 export default useStyles

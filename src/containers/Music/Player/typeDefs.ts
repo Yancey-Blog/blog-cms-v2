@@ -10,6 +10,7 @@ const PLAYER_FRAGMENT = gql`
     coverUrl
     musicFileUrl
     isPublic
+    weight
     createdAt
     updatedAt
   }
@@ -27,6 +28,15 @@ export const CREATE_ONE_PLAYER = gql`
 export const UPDATE_ONE_PLAYER = gql`
   mutation UpdatePlayerById($input: UpdatePlayerInput!) {
     updatePlayerById(input: $input) {
+      ...PlayerFragment
+    }
+  }
+  ${PLAYER_FRAGMENT}
+`
+
+export const EXCHANGE_POSITION = gql`
+  mutation ExchangePositionPlayer($input: ExchangePositionInput!) {
+    exchangePositionPlayer(input: $input) {
       ...PlayerFragment
     }
   }

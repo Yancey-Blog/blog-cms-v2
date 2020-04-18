@@ -79,6 +79,25 @@ export const GET_TOP_PV_POSTS = gql`
   }
 `
 
+export const GET_TOP_LIKE_POSTS = gql`
+  query GetTopLikePosts($limit: Int!) {
+    getTopLikePosts(limit: $limit) {
+      _id
+      title
+      posterUrl
+      like
+    }
+  }
+`
+
+export const GET_ALL_TAGS = gql`
+  query GetAllTags {
+    getAllTags {
+      tags
+    }
+  }
+`
+
 export const GET_POST_STATISTICS = gql`
   query GetPostStatistics {
     getPostStatistics {
