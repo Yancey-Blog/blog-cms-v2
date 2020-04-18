@@ -11,14 +11,7 @@ import {
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import client from 'src/shared/apolloClient'
-import { Open } from 'src/hooks/useOpenModal'
-
-interface Props {
-  open: Open
-  handleOpen: Function
-  createAnnouncement: Function
-  updateAnnouncementById: Function
-}
+import { AnnouncementModalProps as Props } from '../types'
 
 const AnnouncementModal: FC<Props> = ({
   open,

@@ -43,8 +43,8 @@ const LiveTourModal: FC<Props> = ({
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required.'),
-    showTime: Yup.string().required('ShowTime is required.'),
-    posterUrl: Yup.string().url().required('PostUrl is required.'),
+    showTime: Yup.string().required('Show Time is required.'),
+    posterUrl: Yup.string().url().required('Post Url is required.'),
   })
 
   const {
