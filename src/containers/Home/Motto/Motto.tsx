@@ -21,7 +21,6 @@ const Motto: FC = () => {
   })
 
   const [createMotto] = useMutation(CREATE_ONE_MOTTO, {
-    errorPolicy: 'all',
     update(proxy, { data: { createMotto } }) {
       const data = proxy.readQuery<Query>({ query: MOTTOS })
 
@@ -43,7 +42,6 @@ const Motto: FC = () => {
   })
 
   const [updateMottoById] = useMutation(UPDATE_ONE_MOTTO, {
-    errorPolicy: 'all',
     onCompleted() {
       enqueueSnackbar('Update success!', { variant: 'success' })
     },
@@ -53,7 +51,6 @@ const Motto: FC = () => {
   const [exchangePosition, { loading: isExchanging }] = useMutation(
     EXCHANGE_POSITION,
     {
-      errorPolicy: 'all',
       onCompleted() {
         enqueueSnackbar('Update success!', { variant: 'success' })
       },
@@ -64,7 +61,6 @@ const Motto: FC = () => {
   const [deleteMottoById, { loading: isDeleting }] = useMutation(
     DELETE_ONE_MOTTO,
     {
-      errorPolicy: 'all',
       update(proxy, { data: { deleteMottoById } }) {
         const data = proxy.readQuery<Query>({ query: MOTTOS })
 
@@ -90,7 +86,6 @@ const Motto: FC = () => {
   const [deleteMottos, { loading: isBatchDeleting }] = useMutation(
     BATCH_DELETE_MOTTO,
     {
-      errorPolicy: 'all',
       update(proxy, { data: { deleteMottos } }) {
         const data = proxy.readQuery<Query>({ query: MOTTOS })
 

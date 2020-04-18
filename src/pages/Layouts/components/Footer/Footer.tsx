@@ -1,5 +1,14 @@
 import React, { FC } from 'react'
+import { Link } from '@material-ui/core'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import { useQuery } from '@apollo/react-hooks'
+import {
+  YANCEY_BLOG_URL,
+  YANCEY_GITHUB_URL,
+  YANCEY_EMAIL_URL,
+} from 'src/shared/constants'
+import { GLOBAL_SETTING } from 'src/containers/Settings/GlobalConfig/typeDefs'
+import { Query } from 'src/containers/Settings/GlobalConfig/types'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,12 +41,62 @@ const useStyles = makeStyles((theme: Theme) =>
 const Footer: FC = () => {
   const classes = useStyles()
 
+  const { data } = useQuery<Query>(GLOBAL_SETTING, {
+    notifyOnNetworkStatusChange: true,
+  })
+
   return (
     <footer className={classes.footer}>
       <ul className={classes.footerList}>
-        <li className={classes.footerItem}>HOME</li>
-        <li className={classes.footerItem}>BLOG</li>
-        <li className={classes.footerItem}>GITHUB</li>
+        <li className={classes.footerItem}>
+          <Link
+            href={YANCEY_BLOG_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            BLOG
+          </Link>
+        </li>
+        <li className={classes.footerItem}>
+          <Link
+            href={`${YANCEY_BLOG_URL}/p/${
+              data ? data.getGlobalSetting.cvPostId : ''
+            }`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ABOUT ME
+          </Link>
+        </li>
+        <li className={classes.footerItem}>
+          <Link
+            href={`${YANCEY_BLOG_URL}/p/${
+              data ? data.getGlobalSetting.releasePostId : ''
+            }`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            RELEASE LOG
+          </Link>
+        </li>
+        <li className={classes.footerItem}>
+          <Link
+            href={`mailto:${YANCEY_EMAIL_URL}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            EMAIL
+          </Link>
+        </li>
+        <li className={classes.footerItem}>
+          <Link
+            href={YANCEY_GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GITHUB
+          </Link>
+        </li>
       </ul>
       <p>
         {`Copyright © ${new Date().getFullYear()} Yancey Inc. and its affiliates.`}

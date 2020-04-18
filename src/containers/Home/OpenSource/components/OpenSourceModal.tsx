@@ -45,7 +45,7 @@ const OpenSourceModal: FC<Props> = ({
     title: Yup.string().required('Title is required.'),
     description: Yup.string().required('Description is required.'),
     url: Yup.string().url().required('URL is required.'),
-    posterUrl: Yup.string().url().required('PostUrl is required.'),
+    posterUrl: Yup.string().url().required('Post Url is required.'),
   })
 
   const {
@@ -90,7 +90,7 @@ const OpenSourceModal: FC<Props> = ({
 
   return (
     <Dialog open={isOpen} onClose={() => handleOpen()}>
-      <DialogTitle>{id ? 'Update' : 'Add'} an Open Source</DialogTitle>
+      <DialogTitle>{id ? 'Update' : 'Add'} s Open Source</DialogTitle>
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
@@ -127,13 +127,13 @@ const OpenSourceModal: FC<Props> = ({
             {...getFieldProps('url')}
           />
           <div className={classes.uploaderGroup}>
-            <FormLabel required>PosterUrl</FormLabel>
+            <FormLabel required>Poster Url</FormLabel>
             <TextField
               error={!!errors.posterUrl}
               helperText={errors.posterUrl}
               style={{ display: 'none' }}
               required
-              label="PosterUrl"
+              label="Poster Url"
               fullWidth
               disabled={true}
               {...getFieldProps('posterUrl')}

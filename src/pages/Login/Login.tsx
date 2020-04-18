@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { useSnackbar } from 'notistack'
+import { useHistory } from 'react-router-dom'
 import { useLazyQuery } from '@apollo/react-hooks'
 import { CircularProgress } from '@material-ui/core'
 import * as Yup from 'yup'
@@ -10,6 +11,14 @@ import styles from './Login.module.scss'
 
 const Login: FC = () => {
   const history = useHistory()
+  const { enqueueSnackbar } = useSnackbar()
+
+  const toRegister = () => {
+    // history.push('/register')
+    enqueueSnackbar('暂不开放注册功能, 敬请谅解! (权限管理还没写呢)', {
+      variant: 'error',
+    })
+  }
 
   const initialValues = {
     email: '',
@@ -32,14 +41,13 @@ const Login: FC = () => {
     password: Yup.string().required('This field is required.'),
   })
 
-  const { handleSubmit, getFieldProps, resetForm, errors } = useFormik({
+  const { handleSubmit, getFieldProps, errors } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
       login({
         variables: { input: values },
       })
-      resetForm()
     },
   })
 
@@ -100,9 +108,8 @@ const Login: FC = () => {
 
         <>
           <span className={styles.registerTip}>Need an account?</span>
-
-          <span className={styles.link}>
-            <Link to="/register"> Register</Link>
+          <span className={styles.link} onClick={toRegister}>
+            Register
           </span>
         </>
       </form>

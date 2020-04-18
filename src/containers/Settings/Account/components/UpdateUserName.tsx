@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { Button, TextField } from '@material-ui/core'
+import { OSS_CMS_PATH } from 'src/shared/constants'
 import SettingItemWrapper from '../../components/SettingItemWrapper/SettingItemWrapper'
 import useStyles from '../styles'
 
@@ -21,7 +22,13 @@ const UpdateUserName: FC<Props> = ({ username, updateUserName }) => {
     username,
   }
 
-  const { handleSubmit, getFieldProps, isSubmitting, errors } = useFormik({
+  const {
+    handleSubmit,
+    getFieldProps,
+    isSubmitting,
+    errors,
+    values,
+  } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
@@ -34,7 +41,7 @@ const UpdateUserName: FC<Props> = ({ username, updateUserName }) => {
   return (
     <SettingItemWrapper
       title="Change UserName"
-      imageUrl="https://www.gstatic.com/identity/boq/accountsettingsmobile/privacycheckup_scene_1264x448_e11496d496d0f3433f240aef3907d086.png"
+      imageUrl={`${OSS_CMS_PATH}/privacycheckup_scene.png`}
     >
       <form onSubmit={handleSubmit}>
         <TextField
@@ -50,7 +57,7 @@ const UpdateUserName: FC<Props> = ({ username, updateUserName }) => {
           color="primary"
           variant="contained"
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || values.username === username}
         >
           Update UserName
         </Button>

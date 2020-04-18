@@ -4,6 +4,7 @@ import { useSnackbar } from 'notistack'
 import Loading from 'src/components/Loading/Loading'
 import { POSTS } from 'src/containers/Post/typeDefs'
 import { Query as PostsQuery } from 'src/containers/Post/types'
+import SettingWrapper from '../components/SettingWrapper/SettingWrapper'
 import SettingsHeader from '../components/SettingsHeader/SettingsHeader'
 import { GLOBAL_SETTING, UPDATE_GLOBAL_SETTING_BY_ID } from './typeDefs'
 import { Query } from './types'
@@ -35,13 +36,11 @@ const GlobalConfig: FC = () => {
 
   const { loading: isFetching, data } = useQuery<Query>(GLOBAL_SETTING, {
     notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'cache-and-network',
   })
 
   const [updateGlobalSettingById, { loading: isSubmitting }] = useMutation(
     UPDATE_GLOBAL_SETTING_BY_ID,
     {
-      errorPolicy: 'all',
       onCompleted() {
         enqueueSnackbar('Update success!', { variant: 'success' })
       },
@@ -50,7 +49,7 @@ const GlobalConfig: FC = () => {
   )
 
   return (
-    <>
+    <SettingWrapper>
       {isFetching ? (
         <Loading />
       ) : (
@@ -86,7 +85,7 @@ const GlobalConfig: FC = () => {
           />
         </>
       )}
-    </>
+    </SettingWrapper>
   )
 }
 

@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { Button, TextField } from '@material-ui/core'
+import { OSS_CMS_PATH } from 'src/shared/constants'
 import SettingItemWrapper from '../../components/SettingItemWrapper/SettingItemWrapper'
 import useStyles from '../styles'
 
@@ -21,7 +22,13 @@ const UpdateEmail: FC<Props> = ({ email, updateEmail }) => {
     email,
   }
 
-  const { handleSubmit, getFieldProps, isSubmitting, errors } = useFormik({
+  const {
+    handleSubmit,
+    getFieldProps,
+    isSubmitting,
+    errors,
+    values,
+  } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
@@ -34,7 +41,7 @@ const UpdateEmail: FC<Props> = ({ email, updateEmail }) => {
   return (
     <SettingItemWrapper
       title="Change Email"
-      imageUrl="https://www.gstatic.com/identity/boq/accountsettingsmobile/reservations_scene_1264x448_2b0e35c410fd05bca7b2e2703811e2aa.png"
+      imageUrl={`${OSS_CMS_PATH}/reservations_scene.png`}
     >
       <form onSubmit={handleSubmit}>
         <TextField
@@ -50,7 +57,7 @@ const UpdateEmail: FC<Props> = ({ email, updateEmail }) => {
           color="primary"
           variant="contained"
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || values.email === email}
         >
           Update Email
         </Button>

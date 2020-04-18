@@ -65,7 +65,7 @@ const BestAlbumTable: FC<Props> = ({
     },
     {
       name: 'coverUrl',
-      label: 'Cove rUrl',
+      label: 'Cover Url',
       options: {
         customBodyRender: (value: string, tableMeta: MUIDataTableMeta) => {
           const curName = tableMeta.rowData[1]

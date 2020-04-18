@@ -48,7 +48,7 @@ const LiveTourTable: FC<Props> = ({
     { name: 'title', label: 'Title' },
     {
       name: 'posterUrl',
-      label: 'PosterUrl',
+      label: 'Poster Url',
       options: {
         customBodyRender: (value: string, tableMeta: MUIDataTableMeta) => {
           const curName = tableMeta.rowData[1]
@@ -58,21 +58,21 @@ const LiveTourTable: FC<Props> = ({
     },
     {
       name: 'showTime',
-      label: 'ShowTime',
+      label: 'Show Time',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
     },
     {
       name: 'createdAt',
-      label: 'CreatedAt',
+      label: 'Created At',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },
     },
     {
       name: 'updatedAt',
-      label: 'UpdatedAt',
+      label: 'Updated At',
       options: {
         customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
       },

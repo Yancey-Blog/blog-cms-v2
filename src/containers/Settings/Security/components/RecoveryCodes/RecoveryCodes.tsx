@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, forwardRef, Ref } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import {
   Dialog,
@@ -6,12 +6,11 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  Slide,
   CircularProgress,
 } from '@material-ui/core'
 import moment from 'moment'
-import { TransitionProps } from '@material-ui/core/transitions'
 import CopyToClipboard from 'react-copy-to-clipboard'
+import Transition from 'src/components/Transition/Transition'
 import { generateFile } from 'src/shared/utils'
 import { RECOVERY_CODES_FILE_NAME } from 'src/shared/constants'
 import { CREATE_RECOVERY_CODES } from '../../typeDefs'
@@ -21,13 +20,6 @@ interface Props {
   setOpen: Function
   open: boolean
 }
-
-const Transition = forwardRef(function Transition(
-  props: TransitionProps & { children?: React.ReactElement<any, any> },
-  ref: Ref<unknown>,
-) {
-  return <Slide direction="up" ref={ref} {...props} />
-})
 
 const RecoveryCodes: FC<Props> = ({ setOpen, open }) => {
   const [copyTxt, setCopyTxt] = useState('Copy')

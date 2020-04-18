@@ -1,18 +1,21 @@
 import React, { FC } from 'react'
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { useQuery } from '@apollo/react-hooks'
 import { GET_BANWAGON_SERVICE_INFO, GET_BANWAGON_USAGE_STATS } from './typeDefs'
-import { GET_TOP_PV_POSTS, GET_POST_STATISTICS } from '../Post/typeDefs'
-import Bandwagon from './components/Bandwagon/Bandwagon'
-import PostStatistics from './components/PostStatistics/PostStatistics'
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    dashboradWrapper: {
-      width: '100%',
-    },
-  }),
-)
+import {
+  GET_TOP_PV_POSTS,
+  GET_TOP_LIKE_POSTS,
+  GET_ALL_TAGS,
+  GET_POST_STATISTICS,
+} from '../Post/typeDefs'
+import { PostRankListType } from './types'
+import useStyles from './styles'
+import BandwagonServiceStatus from './components/BandwagonServiceStatus'
+import DiskChart from './components/DiskChart'
+import NetWorkChart from './components/NetWorkChart'
+import CPUChart from './components/CPUChart'
+import PostRankList from './components/PostRankList'
+import PostStatistics from './components/PostStatistics'
+import TagsCloud from './components/TagsCloud'
 
 const DashBoard: FC = () => {
   const classes = useStyles()
@@ -21,7 +24,6 @@ const DashBoard: FC = () => {
     GET_BANWAGON_SERVICE_INFO,
     {
       notifyOnNetworkStatusChange: true,
-      fetchPolicy: 'cache-and-network',
     },
   )
 
@@ -29,7 +31,6 @@ const DashBoard: FC = () => {
     GET_BANWAGON_USAGE_STATS,
     {
       notifyOnNetworkStatusChange: true,
-      fetchPolicy: 'cache-and-network',
     },
   )
 
@@ -38,31 +39,72 @@ const DashBoard: FC = () => {
     {
       variables: { limit: 5 },
       notifyOnNetworkStatusChange: true,
-      fetchPolicy: 'cache-and-network',
     },
   )
+
+  const { loading: isFetchingTopLikePosts, data: topLikePosts } = useQuery(
+    GET_TOP_LIKE_POSTS,
+    {
+      variables: { limit: 5 },
+      notifyOnNetworkStatusChange: true,
+    },
+  )
+
+  const { loading: isFetchingAllTags, data: allTags } = useQuery(GET_ALL_TAGS, {
+    notifyOnNetworkStatusChange: true,
+  })
 
   const { loading: isFechingPostStatistics, data: postStatistics } = useQuery(
     GET_POST_STATISTICS,
     {
       notifyOnNetworkStatusChange: true,
-      fetchPolicy: 'cache-and-network',
     },
   )
 
   return (
     <section className={classes.dashboradWrapper}>
-      <Bandwagon
+      <BandwagonServiceStatus
         serviceInfo={serviceInfo ? serviceInfo.getBanwagonServiceInfo : {}}
-        usageStatus={usageStatus ? usageStatus.getBanwagonUsageStats : []}
         isFechingServiceInfo={isFechingServiceInfo}
-        isFetchingUsageStatus={isFetchingUsageStatus}
       />
+
+      <div className={classes.group}>
+        <DiskChart
+          usageStatus={usageStatus ? usageStatus.getBanwagonUsageStats : []}
+          isFetchingUsageStatus={isFetchingUsageStatus}
+        />
+
+        <PostRankList
+          type={PostRankListType.PV}
+          topPosts={topPVPosts ? topPVPosts.getTopPVPosts : []}
+          loading={isFetchingTopPVPosts}
+        />
+
+        <NetWorkChart
+          usageStatus={usageStatus ? usageStatus.getBanwagonUsageStats : []}
+          isFetchingUsageStatus={isFetchingUsageStatus}
+        />
+
+        <PostRankList
+          type={PostRankListType.LIKE}
+          topPosts={topLikePosts ? topLikePosts.getTopLikePosts : []}
+          loading={isFetchingTopLikePosts}
+        />
+
+        <CPUChart
+          usageStatus={usageStatus ? usageStatus.getBanwagonUsageStats : []}
+          isFetchingUsageStatus={isFetchingUsageStatus}
+        />
+
+        <TagsCloud
+          tags={allTags ? allTags.getAllTags.tags : []}
+          loading={isFetchingAllTags}
+        />
+      </div>
+
       <PostStatistics
-        isFetchingTopPVPosts={isFetchingTopPVPosts}
-        isFechingPostStatistics={isFechingPostStatistics}
-        topPVPosts={topPVPosts ? topPVPosts.getTopPVPosts : []}
-        postStatistics={postStatistics ? postStatistics.getPostStatistics : []}
+        loading={isFechingPostStatistics}
+        data={postStatistics ? postStatistics.getPostStatistics : []}
       />
     </section>
   )
