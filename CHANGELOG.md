@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.20.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.19.0...v0.20.0) (2020-04-18)
+
+
+### Features
+
+* code optmization ([d5139d9](https://github.com/Yancey-Blog/blog-cms-v2/commit/d5139d949983faf0f435da8a1e50cc472a3b81af))
+* delete unused line ([775ff2e](https://github.com/Yancey-Blog/blog-cms-v2/commit/775ff2efe964bac8687a25c74318f7f506dae331))
+* finish 404 page ([36d62e8](https://github.com/Yancey-Blog/blog-cms-v2/commit/36d62e886ae619d3562a7fd00cf05b1bb4b96875))
+* finish BindPhoneNumber component ([8d4088c](https://github.com/Yancey-Blog/blog-cms-v2/commit/8d4088cfb7c2f04af6691b00aeb7ea7254673a72))
+* finish SMS ([1901a8c](https://github.com/Yancey-Blog/blog-cms-v2/commit/1901a8ccc1009202c8dc62402b119f8e04a7fe2a))
+* init sms modal ([fb97334](https://github.com/Yancey-Blog/blog-cms-v2/commit/fb973347d2b2799a83253f177bbbb9e51b87ef66))
+* pause to register ([9d30433](https://github.com/Yancey-Blog/blog-cms-v2/commit/9d3043394d2426372626d182bc061977b69b6da4))
+* refactor DashBoard styles ([0ef12e0](https://github.com/Yancey-Blog/blog-cms-v2/commit/0ef12e06ccfa6be89cd350a1a0922de6013ca2e4))
+* support optimistic ui for Player component ([df9d27b](https://github.com/Yancey-Blog/blog-cms-v2/commit/df9d27bc212f278e1f1505b0b5661f467e55d62d))
+* the submit btn will be disabled when `email` is not changing ([42433e2](https://github.com/Yancey-Blog/blog-cms-v2/commit/42433e2e5795c73b5db2aa7f17d29acd1c81861c))
+* the submit btn will be disabled when `username` is not changing ([72a2716](https://github.com/Yancey-Blog/blog-cms-v2/commit/72a27169547bd9b9a2e55c46404929507825a70d))
+* update appollClient ([545a227](https://github.com/Yancey-Blog/blog-cms-v2/commit/545a227c53ee66181d24796c8c4f42fa61b8d994))
+* update fetchPolicy ([341d2d3](https://github.com/Yancey-Blog/blog-cms-v2/commit/341d2d312d731d945f00e1d70f68d34cc35d05b0))
+* update Footer component ([356335f](https://github.com/Yancey-Blog/blog-cms-v2/commit/356335ffe1a8dfb83803e633cee3d69c4b887cbf))
+* update GrayTheme component;s style ([33f2479](https://github.com/Yancey-Blog/blog-cms-v2/commit/33f24791b268a19e7a47ea760ce38dc439972c1d))
+* update handleTabChange ([74187b3](https://github.com/Yancey-Blog/blog-cms-v2/commit/74187b3faa2b1a92ef01c132e961a2ed3907639f))
+* update Header ([2a74c45](https://github.com/Yancey-Blog/blog-cms-v2/commit/2a74c45054ed8f2b0c403ee8c7ae1761078727b7))
+* update image path ([8b4042d](https://github.com/Yancey-Blog/blog-cms-v2/commit/8b4042d72b2d9647a5be790e43cc09cce4f23c47))
+* update LiveTourTable ([8f879a7](https://github.com/Yancey-Blog/blog-cms-v2/commit/8f879a7d66924c99054faf4c24ba42057857fb7d))
+* update Player for supporting exchange position ([e740934](https://github.com/Yancey-Blog/blog-cms-v2/commit/e74093447cd5a5571cdf3fa6004c04cf384173d4))
+* update PlayerModal's txt ([67b17ac](https://github.com/Yancey-Blog/blog-cms-v2/commit/67b17ac7950169ba79345d9c78bc8942c62e9877))
+* update Setting component ([9f9268e](https://github.com/Yancey-Blog/blog-cms-v2/commit/9f9268e52ea891b3606b553da82349bf2b5cff3e))
+* update SMS typeDefs ([6121ce2](https://github.com/Yancey-Blog/blog-cms-v2/commit/6121ce2d41ff5a002c984d532feea0d9bacf46d8))
+* update txt for BestAluum component ([fb7574a](https://github.com/Yancey-Blog/blog-cms-v2/commit/fb7574a9cd8a4bf88da2659003c9a85c36c50bd6))
+* update txt of Cover components ([303f7f9](https://github.com/Yancey-Blog/blog-cms-v2/commit/303f7f9608a16f07aa25b2d942c0155a193d0fea))
+* update txt of Home container ([1e547fa](https://github.com/Yancey-Blog/blog-cms-v2/commit/1e547fadb4a7d0fb5fb18eb307e86cdb11627561))
+* update txt of Motto ([7c29034](https://github.com/Yancey-Blog/blog-cms-v2/commit/7c2903434742a896fa14da0b6be7fa7536f0b745))
+* update types of Announcement ([e3fdcc4](https://github.com/Yancey-Blog/blog-cms-v2/commit/e3fdcc4bb77b0ed614f0ef950b54e644599061fd))
+* update updateUserName and updateEmail ([2c0f608](https://github.com/Yancey-Blog/blog-cms-v2/commit/2c0f6084a92797eb8d6c996019e7f9e483424cc0))
+* update validationSchema at register ([12c12d2](https://github.com/Yancey-Blog/blog-cms-v2/commit/12c12d20ff595cb2ba644a10d1b691e7f5a64b5d))
+* update YanceyMusic Table ([c20be9f](https://github.com/Yancey-Blog/blog-cms-v2/commit/c20be9f0ed281b873204a2c633bdfaffc9bf67dc))
+
 ## [0.19.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.18.0...v0.19.0) (2020-04-12)
 
 
