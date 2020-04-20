@@ -1690,7 +1690,7 @@
     react-transition-group "^4.0.0"
     rifm "^0.7.0"
 
-"@material-ui/styles@^4.9.10", "@material-ui/styles@^4.9.6":
+"@material-ui/styles@^4.9.10":
   version "4.9.10"
   resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.9.10.tgz#182ccdd0bc8525a459486499bbaebcd92b0db3ab"
   integrity sha512-EXIXlqVyFDnjXF6tj72y6ZxiSy+mHtrsCo3Srkm3XUeu3Z01aftDBy7ZSr3TQ02gXHTvDSBvegp3Le6p/tl7eA==
@@ -2090,10 +2090,10 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
-"@types/mui-datatables@^2.13.4":
-  version "2.13.4"
-  resolved "https://registry.yarnpkg.com/@types/mui-datatables/-/mui-datatables-2.13.4.tgz#671e1f2b945c06458796efdea87b29702c8d78d2"
-  integrity sha512-TTQoUptN7qUvBLmyYQp/3DJ71yCratYT0tX8o81YrXIULi18O8rIsW4bHrmhBs/oKF+FuB5rpYp8zqojcHHlCw==
+"@types/mui-datatables@^2.13.7":
+  version "2.13.7"
+  resolved "https://registry.yarnpkg.com/@types/mui-datatables/-/mui-datatables-2.13.7.tgz#59e833d5f469cded726c73a67bb8223bbea2c2e1"
+  integrity sha512-4S9YPdgTJ8XSmgV6GzEZK4JqPmEbO4bist8h5wlITDhwf7hLMzMm8IlxqWIhgkymA7Wckfn5oSClTf7G60w8KQ==
   dependencies:
     "@types/react" "*"
 
