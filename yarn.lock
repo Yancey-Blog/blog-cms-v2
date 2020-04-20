@@ -1690,7 +1690,7 @@
     react-transition-group "^4.0.0"
     rifm "^0.7.0"
 
-"@material-ui/styles@^4.9.10", "@material-ui/styles@^4.9.6":
+"@material-ui/styles@^4.9.10":
   version "4.9.10"
   resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.9.10.tgz#182ccdd0bc8525a459486499bbaebcd92b0db3ab"
   integrity sha512-EXIXlqVyFDnjXF6tj72y6ZxiSy+mHtrsCo3Srkm3XUeu3Z01aftDBy7ZSr3TQ02gXHTvDSBvegp3Le6p/tl7eA==
@@ -1901,10 +1901,10 @@
     "@testing-library/dom" "^7.1.0"
     "@types/testing-library__react" "^10.0.0"
 
-"@testing-library/user-event@^10.0.1":
-  version "10.0.1"
-  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-10.0.1.tgz#9a02dbbc813135f25778b17f92a63933a58e8af5"
-  integrity sha512-M63ftowo1QpAGMnWyz7df0ygqnu4XyF68Sty7mivMAz2HLcY1uLoN3qcen6WMobdY0MoZUi4+BLsziSDAP62Vg==
+"@testing-library/user-event@^10.0.2":
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-10.0.2.tgz#c44197998a9b7a8d60ff66bb9d41635d9648f064"
+  integrity sha512-fVeP4U37BIYdp9nBRKEITFSLPqgCSS7Og6LHvxoQ2JSOTJ1NJI4Dfesv4uNXxvNNcJgBS88V+Tc6h8vbDsa2iA==
 
 "@toast-ui/editor-plugin-chart@^1.0.0":
   version "1.0.0"
