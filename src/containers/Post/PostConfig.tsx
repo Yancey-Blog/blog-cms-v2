@@ -73,6 +73,7 @@ const PostConfig: FC = () => {
           },
         })
       },
+      onError() {},
     },
   )
 
@@ -93,6 +94,7 @@ const PostConfig: FC = () => {
           },
         })
       },
+      onError() {},
     },
   )
 
@@ -172,10 +174,19 @@ const PostConfig: FC = () => {
       return
     }
 
+    if (values.tags.length === 0) {
+      enqueueSnackbar('Please specify at least one tag.', {
+        variant: 'warning',
+      })
+      return
+    }
+
     if (!getMarkdown()) {
       enqueueSnackbar('Write something...', { variant: 'warning' })
       return
     }
+
+    console.log(values.tags)
 
     const content = getMarkdown()
     const lastModifiedDate = new Date().toISOString()
