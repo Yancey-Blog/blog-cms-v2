@@ -175,7 +175,7 @@ const PostConfig: FC = () => {
     }
 
     if (values.tags.length === 0) {
-      enqueueSnackbar('Please specify at least one tag.', {
+      enqueueSnackbar('Please specify at least one tag for the post.', {
         variant: 'warning',
       })
       return
