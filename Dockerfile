@@ -6,6 +6,9 @@ LABEL com.yanceyleo.maintainer="Yancey Inc. <yanceyofficial@gmail.com>" \
 
 WORKDIR /usr/src/cms
 
+RUN apk update && \
+    apk add git
+
 COPY package*.json ./
 
 RUN yarn install
