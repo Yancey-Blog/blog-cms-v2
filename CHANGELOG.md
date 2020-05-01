@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.20.0...v1.0.0) (2020-05-01)
+
+
+### Features
+
+* please specify at least one tag ([073c97c](https://github.com/Yancey-Blog/blog-cms-v2/commit/073c97ca1448f0da0d4e98cfa73b65ac050ebb29))
+* resolve conflict ([73c927d](https://github.com/Yancey-Blog/blog-cms-v2/commit/73c927d2f791d411d02816be058ab0fc28450eba))
+* unseal register ([f74a5f1](https://github.com/Yancey-Blog/blog-cms-v2/commit/f74a5f1f9422fe5baa11692f2e1d4afd9666ef3e))
+* user master input at least one tag ([1d7b746](https://github.com/Yancey-Blog/blog-cms-v2/commit/1d7b7464218c2de81cc839ea93d8811dbf66cfd8))
+
 ## [0.20.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.19.0...v0.20.0) (2020-04-18)
 
 
