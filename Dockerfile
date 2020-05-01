@@ -8,6 +8,8 @@ WORKDIR /usr/src/cms
 
 COPY package*.json ./
 
+RUN apt install git
+
 RUN yarn install
 
 COPY . ./usr/src/cms
