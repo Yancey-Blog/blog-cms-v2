@@ -8,7 +8,7 @@ WORKDIR /usr/src/cms
 
 COPY package*.json ./
 
-RUN yarn
+RUN npm install
 
 COPY . ./usr/src/cms
 
