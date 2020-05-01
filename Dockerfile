@@ -16,8 +16,12 @@ RUN yarn install
 RUN yarn build
 
 
-FROM node:12-alpine
+FROM abiosoft/caddy:latest
 
 WORKDIR /usr/src/cms
 
 COPY --from=builder /usr/src/cms /usr/src/cms
+
+VOLUME [ "/etc/caddy/.caddy:/root/.caddy", "/etc/caddy/.caddy:/root/.caddy", "/etc/caddy/log:/root/log" ]
+
+EXPOSE 80 443
