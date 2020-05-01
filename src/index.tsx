@@ -10,7 +10,7 @@ import { SnackbarProvider } from 'notistack'
 import * as serviceWorker from './serviceWorker'
 import { SnackbarUtilsConfigurator } from './components/Toast/Toast'
 import Login from './pages/Login/Login'
-// import Register from './pages/Register/Register'
+import Register from './pages/Register/Register'
 import Loading from './components/Loading/InstagramLoading'
 import client from './shared/apolloClient'
 import history from './shared/history'
@@ -42,9 +42,9 @@ ReactDOM.render(
             <Route path="/login">
               <Login />
             </Route>
-            {/* <Route path="/register">
+            <Route path="/register">
               <Register />
-            </Route> */}
+            </Route>
             <Route
               path="/"
               render={({ location }) =>
