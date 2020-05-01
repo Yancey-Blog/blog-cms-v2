@@ -1,9 +1,17 @@
 FROM node:12-alpine as builder
 
-WORKDIR /app
+LABEL com.yanceyleo.maintainer="Yancey Inc. <yanceyofficial@gmail.com>" \
+    com.yanceyleo.version="1.0.0" \
+    com.yanceyleo.release-date="2020-05-02"
 
-COPY ../blog-cms-v2 .
+WORKDIR /usr/src/app
 
-RUN npm install
+COPY package*.json ./
+
+RUN yarn start
+
+COPY . ./usr/src/app
 
 RUN npm run build
+
+COPY . ./usr/src/app
