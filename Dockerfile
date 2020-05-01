@@ -6,15 +6,18 @@ LABEL com.yanceyleo.maintainer="Yancey Inc. <yanceyofficial@gmail.com>" \
 
 WORKDIR /usr/src/cms
 
+COPY . /usr/src/cms
+
 RUN apk update && \
     apk add git
 
-COPY package*.json ./
-
 RUN yarn install
-
-COPY . ./usr/src/cms
 
 RUN yarn build
 
-COPY . ./usr/src/cms
+
+FROM node:12-alpine
+
+WORKDIR /usr/src/cms
+
+COPY --from=builder /usr/src/cms /usr/src/cms
