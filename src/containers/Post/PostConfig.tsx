@@ -56,47 +56,47 @@ const PostConfig: FC = () => {
     PostStatisticsVars
   >(CREATE_POST_STATISTICS)
 
-  const [createPost] = useMutation<CreatePostMutation, CreatePostVars>(
-    CREATE_ONE_POST,
-    {
-      onCompleted(data) {
-        const { _id, title, isPublic } = data.createPost
-        enqueueSnackbar('Create success!', { variant: 'success' })
+  const [createPost, { loading: isCreatingPost }] = useMutation<
+    CreatePostMutation,
+    CreatePostVars
+  >(CREATE_ONE_POST, {
+    onCompleted(data) {
+      const { _id, title, isPublic } = data.createPost
+      enqueueSnackbar('Create success!', { variant: 'success' })
 
-        createPostStatistics({
-          variables: {
-            input: {
-              postId: _id,
-              postName: title,
-              scenes: `created and ${isPublic ? 'public' : 'hide'}`,
-            },
+      createPostStatistics({
+        variables: {
+          input: {
+            postId: _id,
+            postName: title,
+            scenes: `created and ${isPublic ? 'public' : 'hide'}`,
           },
-        })
-      },
-      onError() {},
+        },
+      })
     },
-  )
+    onError() {},
+  })
 
-  const [updatePostById] = useMutation<UpdatePostByIdMutation, UpdatePostVars>(
-    UPDATE_ONE_POST,
-    {
-      onCompleted(data) {
-        const { _id, title, isPublic } = data.updatePostById
-        enqueueSnackbar('Update success!', { variant: 'success' })
+  const [updatePostById, { loading: isUpdatingPost }] = useMutation<
+    UpdatePostByIdMutation,
+    UpdatePostVars
+  >(UPDATE_ONE_POST, {
+    onCompleted(data) {
+      const { _id, title, isPublic } = data.updatePostById
+      enqueueSnackbar('Update success!', { variant: 'success' })
 
-        createPostStatistics({
-          variables: {
-            input: {
-              postId: _id,
-              postName: title,
-              scenes: `updated and ${isPublic ? 'public' : 'hide'}`,
-            },
+      createPostStatistics({
+        variables: {
+          input: {
+            postId: _id,
+            postName: title,
+            scenes: `updated and ${isPublic ? 'public' : 'hide'}`,
           },
-        })
-      },
-      onError() {},
+        },
+      })
     },
-  )
+    onError() {},
+  })
 
   /* query */
   const { search } = useLocation()
@@ -160,7 +160,6 @@ const PostConfig: FC = () => {
     setValues,
     values,
     resetForm,
-    isSubmitting,
     errors,
   } = useFormik({
     initialValues,
@@ -185,8 +184,6 @@ const PostConfig: FC = () => {
       enqueueSnackbar('Write something...', { variant: 'warning' })
       return
     }
-
-    console.log(values.tags)
 
     const content = getMarkdown()
     const lastModifiedDate = new Date().toISOString()
@@ -309,7 +306,7 @@ const PostConfig: FC = () => {
             <Button
               className={classes.btn}
               color="primary"
-              disabled={isSubmitting}
+              disabled={isCreatingPost || isUpdatingPost}
               onClick={() => onSubmit(SaveType.FINALIZE)}
             >
               Publish
@@ -318,7 +315,7 @@ const PostConfig: FC = () => {
             <Button
               className={classes.btn}
               color="secondary"
-              disabled={isSubmitting}
+              disabled={isCreatingPost || isUpdatingPost}
               onClick={() => onSubmit(SaveType.DRAFT)}
             >
               Save as Draft
