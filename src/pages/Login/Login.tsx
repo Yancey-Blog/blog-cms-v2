@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-// import { useSnackbar } from 'notistack'
+import { useSnackbar } from 'notistack'
 import { useHistory } from 'react-router-dom'
 import { useLazyQuery } from '@apollo/react-hooks'
 import { CircularProgress } from '@material-ui/core'
@@ -11,13 +11,13 @@ import styles from './Login.module.scss'
 
 const Login: FC = () => {
   const history = useHistory()
-  // const { enqueueSnackbar } = useSnackbar()
+  const { enqueueSnackbar } = useSnackbar()
 
   const toRegister = () => {
-    history.push('/register')
-    // enqueueSnackbar('暂不开放注册功能, 敬请谅解! (权限管理还没写呢)', {
-    //   variant: 'error',
-    // })
+    // history.push('/register')
+    enqueueSnackbar('暂不开放注册功能, 敬请谅解! (权限管理还没写呢)', {
+      variant: 'error',
+    })
   }
 
   const initialValues = {
