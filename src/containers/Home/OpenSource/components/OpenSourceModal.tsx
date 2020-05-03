@@ -90,12 +90,13 @@ const OpenSourceModal: FC<Props> = ({
 
   return (
     <Dialog open={isOpen} onClose={() => handleOpen()}>
-      <DialogTitle>{id ? 'Update' : 'Add'} s Open Source</DialogTitle>
+      <DialogTitle>{id ? 'Update' : 'Add'} an Open Source</DialogTitle>
       <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
-            To {id ? 'update' : 'add'} a Open Source, please enter the following
-            fields here. We will send data after clicking the submit button.
+            To {id ? 'update' : 'add'} an Open Source, please enter the
+            following fields here. We will send data after clicking the submit
+            button.
           </DialogContentText>
           <TextField
             className={classes.textFieldSpace}
