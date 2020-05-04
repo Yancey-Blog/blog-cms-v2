@@ -64,7 +64,7 @@
     "react-tooltip": "^4.2.5",
     "tui-editor": "^1.4.10",
     "yancey-js-util": "^2.0.1",
-    "yup": "^0.28.3"
+    "yup": "^0.28.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
