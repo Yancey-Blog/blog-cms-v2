@@ -57,6 +57,7 @@ const PlayerTable: FC<Props> = ({
 
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },
+    { name: 'weight', label: 'Weight' },
     { name: 'title', label: 'Title' },
     { name: 'artist', label: 'Artist' },
     {
