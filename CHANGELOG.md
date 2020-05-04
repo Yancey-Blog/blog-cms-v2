@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v1.0.0...v1.1.0) (2020-05-04)
+
+
+### Features
+
+* add travis ci ([4ccd42d](https://github.com/Yancey-Blog/blog-cms-v2/commit/4ccd42d411fe4923ce134fec9fe620228a93851d))
+* delete useless file ([192d1c5](https://github.com/Yancey-Blog/blog-cms-v2/commit/192d1c5b4d63ef71fcbb286d022b034209aeafd2))
+* disable submit button on isSubmitting or isUpdatingPost ([293288f](https://github.com/Yancey-Blog/blog-cms-v2/commit/293288f149237671af197be6b281d65f4c36a49d))
+* pause Register ([6327174](https://github.com/Yancey-Blog/blog-cms-v2/commit/63271748d88a635e2518252db376b26d60292c60))
+* update .travis ([a6e2607](https://github.com/Yancey-Blog/blog-cms-v2/commit/a6e26073a8b8d94e8b3390a133434b0f1c4eca84))
+* update Open Source txt ([4f130fd](https://github.com/Yancey-Blog/blog-cms-v2/commit/4f130fd9325ab420f45e43b07f729ce62d698055))
+* update RUN apt install git ([931d3b9](https://github.com/Yancey-Blog/blog-cms-v2/commit/931d3b9a966e3f2081eb722f79abd9143ab2fb0d))
+
 ## [1.0.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.20.0...v1.0.0) (2020-05-01)
 
 
