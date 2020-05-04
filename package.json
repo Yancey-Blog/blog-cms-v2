@@ -83,7 +83,7 @@
     "@types/react-calendar-heatmap": "^1.6.2",
     "@types/react-copy-to-clipboard": "^4.3.0",
     "@types/react-dom": "^16.9.6",
-    "@types/react-router-dom": "^5.1.4",
+    "@types/react-router-dom": "^5.1.5",
     "@types/react-tooltip": "^3.11.0",
     "@types/yup": "^0.26.37",
     "babel-plugin-transform-imports": "^2.0.0",
