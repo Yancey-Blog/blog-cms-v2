@@ -27,7 +27,6 @@ import ExternalViewSwitcher from './ExternalViewSwitcher'
 import CustomNavigationButton from './CustomNavigationButton'
 import CustomTodayButton from './CustomTodayButton'
 import CustomOpenButton from './CustomOpenButton'
-import CustomAppointment from './CustomAppointment'
 import useStyles from '../styles'
 import { ScheduleProps } from '../types'
 import { formatChangedData } from '../tools'
@@ -74,7 +73,7 @@ const Schedule: FC<ScheduleProps> = ({
         />
         <TodayButton buttonComponent={CustomTodayButton} />
         <ConfirmationDialog />
-        <Appointments appointmentComponent={CustomAppointment} />
+        <Appointments />
         <AppointmentTooltip showCloseButton showOpenButton showDeleteButton />
         <AppointmentForm />
         <AllDayPanel />
