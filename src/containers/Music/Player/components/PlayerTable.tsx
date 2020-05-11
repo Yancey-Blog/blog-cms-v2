@@ -20,7 +20,7 @@ import {
   POPOVER_TRANSFORM_ORIGIN,
   TABLE_OPTIONS,
 } from 'src/shared/constants'
-import globalUseStyles from 'src/shared/styles'
+import globalUseStyles from 'src/shared/globalStyles'
 import PlayerModal from './PlayerModal'
 import useStyles from '../styles'
 import { IPlayer } from '../types'

@@ -16,7 +16,7 @@ import client from 'src/shared/apolloClient'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
 import { Open } from 'src/hooks/useOpenModal'
-import useStyles from 'src/shared/styles'
+import useStyles from 'src/shared/globalStyles'
 
 interface Props {
   open: Open

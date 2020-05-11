@@ -24,7 +24,7 @@ import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
 import ImagePopup from 'src/components/ImagePopup/ImagePopup'
-import globalUseStyles from 'src/shared/styles'
+import globalUseStyles from 'src/shared/globalStyles'
 import { IPostItem } from '../types'
 import useStyles from '../styles'
 

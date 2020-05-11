@@ -13,7 +13,7 @@ import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
 import Move from 'src/components/Move/Move'
 import { TABLE_OPTIONS } from 'src/shared/constants'
-import useStyles from 'src/shared/styles'
+import useStyles from 'src/shared/globalStyles'
 import { IMotto } from '../types'
 
 interface Props {

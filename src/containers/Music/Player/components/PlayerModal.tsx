@@ -16,7 +16,7 @@ import classNames from 'classnames'
 import client from 'src/shared/apolloClient'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
-import globalUseStyles from 'src/shared/styles'
+import globalUseStyles from 'src/shared/globalStyles'
 import { Open } from 'src/hooks/useOpenModal'
 import useStyles from '../styles'
 

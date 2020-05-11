@@ -14,7 +14,7 @@ import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
 import ImagePopup from 'src/components/ImagePopup/ImagePopup'
 import { TABLE_OPTIONS } from 'src/shared/constants'
-import useStyles from 'src/shared/styles'
+import useStyles from 'src/shared/globalStyles'
 import YanceyMusicModal from './YanceyMusicModal'
 import { IYanceyMusic } from '../types'
 

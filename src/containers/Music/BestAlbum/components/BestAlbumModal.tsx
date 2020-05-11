@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core'
 import { useFormik } from 'formik'
 import { KeyboardDateTimePicker } from '@material-ui/pickers'
-import useStyles from 'src/shared/styles'
+import useStyles from 'src/shared/globalStyles'
 import client from 'src/shared/apolloClient'
 import { Open } from 'src/hooks/useOpenModal'
 import Uploader from 'src/components/Uploader/Uploader'
