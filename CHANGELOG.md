@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.20.0...v1.2.0) (2020-05-11)
+
+
+### Features
+
+* add travis ci ([4ccd42d](https://github.com/Yancey-Blog/blog-cms-v2/commit/4ccd42d411fe4923ce134fec9fe620228a93851d))
+* delete useless file ([192d1c5](https://github.com/Yancey-Blog/blog-cms-v2/commit/192d1c5b4d63ef71fcbb286d022b034209aeafd2))
+* disable submit button on isSubmitting or isUpdatingPost ([293288f](https://github.com/Yancey-Blog/blog-cms-v2/commit/293288f149237671af197be6b281d65f4c36a49d))
+* migrate chartjsConfig.ts ([a24438b](https://github.com/Yancey-Blog/blog-cms-v2/commit/a24438bfc5ca3f66381b80391bf987c3c0c5ce2b))
+* migrate enhanceEditor to bussiness menu ([fc26fad](https://github.com/Yancey-Blog/blog-cms-v2/commit/fc26fad4ff7176c23f9ec2bf3c830303a6c4e6ad))
+* migrate graphql config file to graphql file folder ([fceb72e](https://github.com/Yancey-Blog/blog-cms-v2/commit/fceb72eef974718eb9e181a476893f8994a94dbc))
+* pause Register ([6327174](https://github.com/Yancey-Blog/blog-cms-v2/commit/63271748d88a635e2518252db376b26d60292c60))
+* please specify at least one tag ([073c97c](https://github.com/Yancey-Blog/blog-cms-v2/commit/073c97ca1448f0da0d4e98cfa73b65ac050ebb29))
+* resolve conflict ([73c927d](https://github.com/Yancey-Blog/blog-cms-v2/commit/73c927d2f791d411d02816be058ab0fc28450eba))
+* unseal register ([f74a5f1](https://github.com/Yancey-Blog/blog-cms-v2/commit/f74a5f1f9422fe5baa11692f2e1d4afd9666ef3e))
+* update .travis ([a6e2607](https://github.com/Yancey-Blog/blog-cms-v2/commit/a6e26073a8b8d94e8b3390a133434b0f1c4eca84))
+* update globalStyles name ([3914226](https://github.com/Yancey-Blog/blog-cms-v2/commit/39142269c98587e06ff64921414c5a2a2af2dfeb))
+* update logout in production mode ([17f3a5f](https://github.com/Yancey-Blog/blog-cms-v2/commit/17f3a5f79682a71be2ca9d44397faf6517e0b19b))
+* update Open Source txt ([4f130fd](https://github.com/Yancey-Blog/blog-cms-v2/commit/4f130fd9325ab420f45e43b07f729ce62d698055))
+* update RUN apt install git ([931d3b9](https://github.com/Yancey-Blog/blog-cms-v2/commit/931d3b9a966e3f2081eb722f79abd9143ab2fb0d))
+* user master input at least one tag ([1d7b746](https://github.com/Yancey-Blog/blog-cms-v2/commit/1d7b7464218c2de81cc839ea93d8811dbf66cfd8))
+
+
+### Bug Fixes
+
+* support weight for PlayerTable ([a680875](https://github.com/Yancey-Blog/blog-cms-v2/commit/a68087512616c8f6e0d2cdba3f8118cfb2452f55))
+
 ### [1.1.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v1.1.0...v1.1.1) (2020-05-04)
 
 
