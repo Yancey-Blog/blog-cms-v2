@@ -5,7 +5,7 @@ import { Home, Face } from '@material-ui/icons'
 import classNames from 'classnames'
 import routes, { Route } from 'src/routes'
 import { getInitials } from 'src/shared/utils'
-import client from 'src/shared/apolloClient'
+import client from 'src/graphql/apolloClient'
 import useStyles from './styles'
 
 interface Props {

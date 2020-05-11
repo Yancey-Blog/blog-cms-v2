@@ -26,7 +26,7 @@ import {
 import Uploader from 'src/components/Uploader/Uploader'
 import UploaderModal from 'src/components/UploaderModal/UploaderModal'
 import { UploaderRes } from 'src/components/Uploader/types'
-import client from 'src/shared/apolloClient'
+import client from 'src/graphql/apolloClient'
 import embededPlugin from './editorEmbededPlugin'
 import { enhanceUpload, insertImage } from './enhanceEditor'
 import {

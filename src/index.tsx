@@ -12,7 +12,7 @@ import { SnackbarUtilsConfigurator } from './components/Toast/Toast'
 import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
 import Loading from './components/Loading/InstagramLoading'
-import client from './shared/apolloClient'
+import client from './graphql/apolloClient'
 import history from './shared/history'
 import {
   SNACKBAR_ANCHOR_ORIGIN,

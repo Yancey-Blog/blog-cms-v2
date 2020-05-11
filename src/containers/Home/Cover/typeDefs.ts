@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import {
   BATCH_DELETE_FRAGMENT,
   BATCH_UPDATE_FRAGMENT,
-} from 'src/shared/graphqlFragment'
+} from 'src/graphql/graphqlFragment'
 
 const COVER_FRAGMENT = gql`
   fragment CoverFragment on CoverModel {

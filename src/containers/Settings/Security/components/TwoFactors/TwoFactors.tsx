@@ -12,7 +12,7 @@ import {
   SentimentDissatisfied,
 } from '@material-ui/icons'
 import { OSS_CMS_PATH } from 'src/shared/constants'
-import client from 'src/shared/apolloClient'
+import client from 'src/graphql/apolloClient'
 import SettingItemWrapper from 'src/containers/Settings/components/SettingItemWrapper/SettingItemWrapper'
 import TOTP from '../TOTP/TOTP'
 import RecoveryCodes from '../RecoveryCodes/RecoveryCodes'

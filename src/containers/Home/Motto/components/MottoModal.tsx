@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@material-ui/core'
 import { useFormik } from 'formik'
-import client from 'src/shared/apolloClient'
+import client from 'src/graphql/apolloClient'
 import { Open } from 'src/hooks/useOpenModal'
 
 interface Props {

@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@material-ui/core'
 import { useFormik } from 'formik'
-import client from 'src/shared/apolloClient'
+import client from 'src/graphql/apolloClient'
 import { AnnouncementModalProps as Props } from '../types'
 
 const AnnouncementModal: FC<Props> = ({

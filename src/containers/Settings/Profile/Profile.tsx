@@ -10,7 +10,7 @@ import { Button, TextField } from '@material-ui/core'
 import { useFormik } from 'formik'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderRes } from 'src/components/Uploader/types'
-import client from 'src/shared/apolloClient'
+import client from 'src/graphql/apolloClient'
 import { UPDATE_USER } from './typeDefs'
 import useStyles from './styles'
 

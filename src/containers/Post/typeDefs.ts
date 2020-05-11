@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { BATCH_DELETE_FRAGMENT } from 'src/shared/graphqlFragment'
+import { BATCH_DELETE_FRAGMENT } from 'src/graphql/graphqlFragment'
 
 const POST_FRAGMENT = gql`
   fragment PostFragment on PostItemModel {
