@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v1.2.0...v1.2.1) (2020-05-11)
+
+
+### Bug Fixes
+
+* **schedule.tsx:** delete custom Appointments component ([96b2b59](https://github.com/Yancey-Blog/blog-cms-v2/commit/96b2b59ec13ea4cb7013148b0df1f0d20dd6a027))
+
 ## [1.2.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v0.20.0...v1.2.0) (2020-05-11)
 
 
