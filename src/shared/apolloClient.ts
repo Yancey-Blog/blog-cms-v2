@@ -7,6 +7,14 @@ import { persistCache } from 'apollo-cache-persist'
 import SnackbarUtils from 'src/components/Toast/Toast'
 import { logout } from 'src/shared/utils'
 
+interface CustomGraphQLError {
+  timestamp: string
+  code: string
+  message: string
+}
+
+const isEnvProduction = process.env.NODE_ENV
+
 const httpLink = new BatchHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_URL,
 })
@@ -26,6 +34,18 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
     graphQLErrors.forEach((graphQLError) => {
       SnackbarUtils.error(`[GraphQL error]: ${graphQLError.message}`)
 
+      // In production environment, the error structure
+      // was formatted as `CustomGraphQLError`.
+      if (
+        isEnvProduction &&
+        ((graphQLError as unknown) as CustomGraphQLError).code ===
+          'UNAUTHENTICATED'
+      ) {
+        logout()
+      }
+
+      // In non-production environment, the error structure
+      // uses the native `GraphQLError`.
       if (
         graphQLError.extensions &&
         graphQLError.extensions.code === 'UNAUTHENTICATED'
