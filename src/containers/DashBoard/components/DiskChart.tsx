@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Bar } from 'react-chartjs-2'
-import chartConfig from 'src/shared/chartjsConfig'
+import chartConfig from '../chartjsConfig'
 import { IBandwagonUsageStatus } from '../types'
 import ToggleChart from './ToggleChart'
 import UsageStatusSkeleton from './UsageStatusSkeleton'
