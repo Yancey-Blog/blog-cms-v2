@@ -281,6 +281,7 @@ const PostTable: FC<Props> = ({
             <Pagination
               count={Math.ceil(total / 10)}
               color="primary"
+              page={page}
               onChange={(e, page) => handlePageChange(page)}
             />
           </div>
