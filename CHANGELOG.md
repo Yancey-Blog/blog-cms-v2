@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.2](https://github.com/Yancey-Blog/blog-cms-v2/compare/v1.2.1...v1.2.2) (2020-05-16)
+
+
+### Bug Fixes
+
+* fix the bug that switching page numbers does not change the style ([be36934](https://github.com/Yancey-Blog/blog-cms-v2/commit/be36934721de6d56749eee9128775e43c9f5533c))
+
 ### [1.2.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v1.2.0...v1.2.1) (2020-05-11)
 
 
