@@ -68,7 +68,7 @@ An optional way to use `git cz` if you don't want to install `commitizen` global
 
 ### Move up / Move down / Move Top
 
-Moves one items order by weight.
+Moves one item's order by weight.
 
 ![Move up / Move down / Move Top](https://static.yancey.app/Jietu20200505-043729.jpg)
 
