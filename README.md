@@ -43,10 +43,6 @@ In the project directory, you can run:
 
 Runs the app in the development mode. Open [http://localhost:3001](http://localhost:3001) to view it in the browser. The page will reload if you make edits. You will also see any lint errors in the console.
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode. See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `yarn build`
 
 Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes. Your app is ready to be deployed! See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
@@ -85,23 +81,27 @@ Changes your nikename, region, organization, website, Bio, avatar and so on. The
 
 ![Profile](https://static.yancey.app/Jietu20200505-044712.jpg)
 
-Account 模块: 支持修改用户名/密码/删除账号
+### Account
+
+The account module allows you to update **username** and **email** or delete your account.
 
 ![Account](https://static.yancey.app/Jietu20200505-044725.jpg)
 
-Security 模块做的较多, 支持修改密码, 二步验证, 绑定手机号, 还可以申请 Recovery Codes 等.
+### Security
 
-![修改密码](https://static.yancey.app/Jietu20200505-045200.jpg)
+The security module allows you to update **password** and supports two-factor authentication base on **TOTP** and **SMS verification code**. You can also apply and use **recovery codes** if you cannot use the above two verification methods.
 
-![二步验证 - 选择手机系统](https://static.yancey.app/Jietu20200505-045213.jpg)
+![change password](https://static.yancey.app/Jietu20200505-045200.jpg)
 
-![二步验证 - 扫码](https://static.yancey.app/Jietu20200505-045226.jpg)
+![TOTP - choose mobile phone system](https://static.yancey.app/Jietu20200505-045213.jpg)
 
-![二步验证 - 手动录入](https://static.yancey.app/Jietu20200505-045520.jpg)
+![TOTP - scan qrcode](https://static.yancey.app/Jietu20200505-045226.jpg)
 
-![二步验证 - code 验证](https://static.yancey.app/Jietu20200505-045231.jpg)
+![TOTP - input totp secret code by hand](https://static.yancey.app/Jietu20200505-045520.jpg)
 
-![绑定手机号](https://static.yancey.app/Jietu20200505-045242.jpg)
+![TOTP - code verification](https://static.yancey.app/Jietu20200505-045231.jpg)
+
+![Bind phone number](https://static.yancey.app/Jietu20200505-045242.jpg)
 
 ![Recovery Codes](https://static.yancey.app/Jietu20200505-045251.jpg)
 
