@@ -59,6 +59,72 @@ Checks the codes by eslint, we will lint them before commit automatically.
 
 An optional way to use `git cz` if you don't want to install `commitizen` globally.
 
+## Modules & Features
+
+### Dashboard
+
+![Dashbord](https://static.yancey.app/Jietu20200505-043334.jpg)
+
+### Move up / Move down / Move Top
+
+![Move up / Move down / Move Top](https://static.yancey.app/Jietu20200505-043729.jpg)
+
+### Blog Statistics
+
+![blog statistics](https://static.yancey.app/Jietu20200505-044146.jpg)
+
+### Agenda
+
+Manages your agenda quickly.
+
+![Agenda](https://static.yancey.app/Jietu20200505-044045.jpg)
+
+### Profile
+
+Changes your nikename, region, organization, website, Bio, avatar and so on. The drawer on the left will be updated in real time.
+
+![Profile](https://static.yancey.app/Jietu20200505-044712.jpg)
+
+Account 模块: 支持修改用户名/密码/删除账号
+
+![Account](https://static.yancey.app/Jietu20200505-044725.jpg)
+
+Security 模块做的较多, 支持修改密码, 二步验证, 绑定手机号, 还可以申请 Recovery Codes 等.
+
+![修改密码](https://static.yancey.app/Jietu20200505-045200.jpg)
+
+![二步验证 - 选择手机系统](https://static.yancey.app/Jietu20200505-045213.jpg)
+
+![二步验证 - 扫码](https://static.yancey.app/Jietu20200505-045226.jpg)
+
+![二步验证 - 手动录入](https://static.yancey.app/Jietu20200505-045520.jpg)
+
+![二步验证 - code 验证](https://static.yancey.app/Jietu20200505-045231.jpg)
+
+![绑定手机号](https://static.yancey.app/Jietu20200505-045242.jpg)
+
+![Recovery Codes](https://static.yancey.app/Jietu20200505-045251.jpg)
+
+## Contributing
+
+The main purpose of this repository is to continue to evolve BPG (Blog Project Group), making it faster and easier to use. Development of Blog BE Next happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Blog BE Next.
+
+### [Code of Conduct](./CODE_OF_CONDUCT.md)
+
+[BPG](https://github.com/Yancey-Blog) has adopted a Code of Conduct that we expect project participants to adhere to. Please read [the full text](./CODE_OF_CONDUCT.md) so that you can understand what actions will and will not be tolerated.
+
+### [Contributing Guide](./CONTRIBUTING.md)
+
+Read our [contributing guide](./CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to Blog BE Next.
+
+### Good Issues
+
+Please make sure to read the [Issue Reporting Checklist](./.github/ISSUE_TEMPLATE/bug_report.md) before opening an issue. Issues not conforming to the guidelines may be closed immediately.
+
+### Uses Commitizen
+
+This app follows the [Angular Team's Commit Message Guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit), your commit will be checked by commitlint, please use `git cz` instead of `git commit`. For this reason, you should install `commitizen` globally or use `yarn commit` instead.
+
 ## License
 
 Blog CMS v2 is licensed under the terms of the [MIT licensed](https://opensource.org/licenses/MIT).
