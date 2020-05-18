@@ -48,7 +48,7 @@ Builds the app for production to the `build` folder. It correctly bundles React 
 
 Checks the codes by eslint, we will lint them before commit automatically.
 
-### yarn commit
+### `yarn commit`
 
 An optional way to use `git cz` if you don't want to install `commitizen` globally.
 
