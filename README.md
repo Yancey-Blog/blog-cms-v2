@@ -58,13 +58,27 @@ An optional way to use `git cz` if you don't want to install `commitizen` global
 
 ![Dashbord](https://static.yancey.app/Jietu20200505-043334.jpg)
 
-### Move up / Move down / Move Top
-
-![Move up / Move down / Move Top](https://static.yancey.app/Jietu20200505-043729.jpg)
-
 ### Blog Statistics
 
 ![blog statistics](https://static.yancey.app/Jietu20200505-044146.jpg)
+
+### Create or update an item
+
+![Create or Update an item](https://static.yancey.app/Jietu20200518-225144.jpg)
+
+### Move up / Move down / Move Top
+
+Moves one items order by weight.
+
+![Move up / Move down / Move Top](https://static.yancey.app/Jietu20200505-043729.jpg)
+
+### Post list
+
+![Post list](https://static.yancey.app/Jietu20200518-225154.jpg)
+
+### Post editor
+
+![Post editor](https://static.yancey.app/Jietu20200518-225230.jpg)
 
 ### Agenda
 
