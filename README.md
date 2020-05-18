@@ -142,13 +142,13 @@ Creates `.env.development.local` file or other env files to cover the default en
 
 ## TODOs
 
-- [ ] support multi-roles management
+- [ ] Support multi-roles management
 
-- [ ] support forget password
+- [ ] Support forget password
 
-- [ ] login with 2FA
+- [ ] Login with 2FA
 
-- [ ] support notification and full-site search
+- [ ] Support notification and full-site search
 
 ## License
 
