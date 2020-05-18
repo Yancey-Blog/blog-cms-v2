@@ -104,7 +104,7 @@ The security module allows you to update **password** and supports two-factor au
 
 ## Contributing
 
-The main purpose of this repository is to continue to evolve BPG (Blog Project Group), making it faster and easier to use. Development of Blog BE Next happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Blog BE Next.
+The main purpose of this repository is to continue to evolve BPG (Blog Project Group), making it faster and easier to use. Development of Blog CMS v2 happens in the open on GitHub, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Blog CMS v2.
 
 ### [Code of Conduct](./CODE_OF_CONDUCT.md)
 
@@ -112,7 +112,7 @@ The main purpose of this repository is to continue to evolve BPG (Blog Project G
 
 ### [Contributing Guide](./CONTRIBUTING.md)
 
-Read our [contributing guide](./CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to Blog BE Next.
+Read our [contributing guide](./CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to Blog CMS v2.
 
 ### Good Issues
 
