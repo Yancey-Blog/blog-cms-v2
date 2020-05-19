@@ -94,7 +94,7 @@
     "prettier": "^2.0.4",
     "source-map-explorer": "^2.4.2",
     "standard-version": "^8.0.0",
-    "typescript": "~3.8.3"
+    "typescript": "~3.9.2"
   },
   "eslintConfig": {
     "extends": "react-app"
