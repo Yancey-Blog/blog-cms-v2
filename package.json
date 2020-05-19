@@ -72,7 +72,7 @@
     "@testing-library/react": "^10.0.3",
     "@testing-library/user-event": "^10.1.0",
     "@types/classnames": "^2.2.10",
-    "@types/jest": "^25.2.1",
+    "@types/jest": "^25.2.3",
     "@types/loadable__component": "^5.10.0",
     "@types/mui-datatables": "^2.13.7",
     "@types/node": "^13.9.5",
