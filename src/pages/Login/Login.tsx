@@ -14,7 +14,7 @@ const Login: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
 
   const toRegister = () => {
-    history.push('/register')
+    // history.push('/register')
     enqueueSnackbar('暂不开放注册功能, 敬请谅解! (权限管理还没写呢)', {
       variant: 'error',
     })
