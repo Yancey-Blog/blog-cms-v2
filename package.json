@@ -89,7 +89,7 @@
     "cz-conventional-changelog": "^3.0.2",
     "graphql": "^15.0.0",
     "husky": "^4.2.5",
-    "lint-staged": "^10.1.7",
+    "lint-staged": "^10.2.6",
     "node-sass": "^4.13.1",
     "prettier": "^2.0.4",
     "source-map-explorer": "^2.4.2",
