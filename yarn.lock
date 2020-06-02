@@ -1954,10 +1954,10 @@
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.0.tgz#69a23a3ad29caf0097f06eda59b361ee2f0639f6"
   integrity sha1-aaI6OtKcrwCX8G7aWbNh7i8GOfY=
 
-"@types/mui-datatables@^2.13.7":
-  version "2.13.7"
-  resolved "https://registry.yarnpkg.com/@types/mui-datatables/-/mui-datatables-2.13.7.tgz#59e833d5f469cded726c73a67bb8223bbea2c2e1"
-  integrity sha512-4S9YPdgTJ8XSmgV6GzEZK4JqPmEbO4bist8h5wlITDhwf7hLMzMm8IlxqWIhgkymA7Wckfn5oSClTf7G60w8KQ==
+"@types/mui-datatables@^2.14.2":
+  version "2.14.2"
+  resolved "https://registry.yarnpkg.com/@types/mui-datatables/-/mui-datatables-2.14.2.tgz#622c6407e22c6dfecbf7d0e5d304151b3aa3017d"
+  integrity sha512-imRqoAaGre7Xd95dv1UlBgcIDKftwW/25/DwjQIhfHsW72SHfDncWCa3X12WfTC4DEWi4NCu/XGz8D8dOnsNyw==
   dependencies:
     "@types/react" "*"
 
