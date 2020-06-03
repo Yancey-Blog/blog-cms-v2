@@ -37,7 +37,12 @@ const ChangePassword: FC = () => {
       .required('New Password is required.')
       .matches(PASSWORD_REGEXP, 'Please enter a more complex password'),
     confirmNewPassword: Yup.string()
-      .oneOf([Yup.ref('newPassword'), null], "Passwords don't match")
+      // @ts-ignore
+      // FIXME: oneOf's first parameter is an array, and the
+      // second element of the array is assignable to type
+      // 'string | Ref | undefined', but `@types/yup` has not
+      // been updated.
+      .oneOf([Yup.ref('newPassword'), undefined], "Passwords don't match")
       .required('Confirm Password is required'),
   })
 
