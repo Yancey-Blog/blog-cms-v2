@@ -148,8 +148,6 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
             <FormControl component="fieldset">
               <RadioGroup
                 aria-label="mobile devices"
-                name="mobile-devices"
-                value={values.device}
                 {...getFieldProps('device')}
               >
                 <FormControlLabel
