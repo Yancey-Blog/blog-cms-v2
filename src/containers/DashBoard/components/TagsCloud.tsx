@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
       padding: 16,
+      overflowY: 'scroll',
     },
 
     chip: {
