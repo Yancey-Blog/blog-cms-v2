@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.3](https://github.com/Yancey-Blog/blog-cms-v2/compare/v1.2.2...v1.2.3) (2020-06-06)
+
+
+### Features
+
+* @types/yup's oneOf is not updated ([eb4f8cf](https://github.com/Yancey-Blog/blog-cms-v2/commit/eb4f8cf353626c29fcc7436b59a691d69a11e091))
+* delete name and value properties for TOTP Radio component ([4dc7f70](https://github.com/Yancey-Blog/blog-cms-v2/commit/4dc7f70fcf80456f2feed5704a7636db5730751d))
+* update login ([29e0a6f](https://github.com/Yancey-Blog/blog-cms-v2/commit/29e0a6fe6859cd92bad9089db1b0006638680f54))
+* update Login ([a5cc0a0](https://github.com/Yancey-Blog/blog-cms-v2/commit/a5cc0a0f6e1ebd5189dd3e234de0f44af2c67a25))
+
+
+### Bug Fixes
+
+* **tagscloud.tsx:** set `overflow-y: scroll` for TagCloud component ([600b2d0](https://github.com/Yancey-Blog/blog-cms-v2/commit/600b2d0b5a586447a535560d71080f21c5ed5746))
+
 ### [1.2.2](https://github.com/Yancey-Blog/blog-cms-v2/compare/v1.2.1...v1.2.2) (2020-05-16)
 
 
