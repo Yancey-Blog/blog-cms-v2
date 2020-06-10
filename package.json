@@ -62,7 +62,7 @@
     "react-scripts": "3.4.1",
     "react-tooltip": "^4.2.5",
     "tui-editor": "^1.4.10",
-    "yancey-js-util": "^2.0.1",
+    "yancey-js-util": "^3.0.0",
     "yup": "^0.28.3"
   },
   "devDependencies": {
