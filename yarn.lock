@@ -1709,10 +1709,10 @@
     dom-accessibility-api "^0.4.5"
     pretty-format "^25.5.0"
 
-"@testing-library/jest-dom@^5.5.0":
-  version "5.7.0"
-  resolved "https://registry.yarnpkg.com/@testing-library/jest-dom/-/jest-dom-5.7.0.tgz#b2e2acb4c088a293d52ba2cd1674b526282a2f87"
-  integrity sha512-ZV0OtBXmTDEDxrIbqJXiOcXCZ6aIMpmDlmfHj0hGNsSuQ/nX0qPAs9HWmCzXvPfTrhufTiH2nJLvDJu/LgHzwQ==
+"@testing-library/jest-dom@^5.9.0":
+  version "5.9.0"
+  resolved "https://registry.yarnpkg.com/@testing-library/jest-dom/-/jest-dom-5.9.0.tgz#86464c66cbe75e632b8adb636f539bfd0efc2c9c"
+  integrity sha512-uZ68dyILuM2VL13lGz4ehFEAgxzvLKRu8wQxyAZfejWnyMhmipJ60w4eG81NQikJHBfaYXx+Or8EaPQTDwGfPA==
   dependencies:
     "@babel/runtime" "^7.9.2"
     "@types/testing-library__jest-dom" "^5.0.2"
@@ -1732,10 +1732,10 @@
     "@babel/runtime" "^7.10.2"
     "@testing-library/dom" "^7.9.0"
 
-"@testing-library/user-event@^11.3.1":
-  version "11.3.1"
-  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-11.3.1.tgz#a5388cfff2c578825144a6665942124a26852aa3"
-  integrity sha512-kiilTC/B48wmEfRunCsU20ndyJmLoFnsxIv9et/s2+tVmNSfErzkVKxhcPKtO5ktM205+qzy6dyR55JiKXIzqQ==
+"@testing-library/user-event@^11.3.2":
+  version "11.3.2"
+  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-11.3.2.tgz#015232ed88a54deb4664afec4b9e65a74c268f2a"
+  integrity sha512-2QBLj/nuIUf2vV5kpoix8nnIcePsyjCiALOs9ooF11HynHkrShmPL8Nxo94SIXSGIovTWYVYJpN4VaLO2fjKbQ==
   dependencies:
     "@babel/runtime" "^7.10.2"
 
@@ -8985,10 +8985,10 @@ modify-values@^1.0.0:
   resolved "https://registry.yarnpkg.com/modify-values/-/modify-values-1.0.1.tgz#b3939fa605546474e3e3e3c63d64bd43b4ee6022"
   integrity sha512-xV2bxeN6F7oYjZWTe/YPAy6MN2M+sL4u/Rlm2AHCIVGfo2p1yGmBHQ6vHehl4bRTZBdHu3TSkWdYgkwpYzAGSw==
 
-moment@^2.10.2, moment@^2.24.0:
-  version "2.25.3"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.25.3.tgz#252ff41319cf41e47761a1a88cab30edfe9808c0"
-  integrity sha512-PuYv0PHxZvzc15Sp8ybUCoQ+xpyPWvjOuK72a5ovzp2LI32rJXOiIfyoFoYvG3s6EwwrdkMyWuRiEHSZRLJNdg==
+moment@^2.10.2, moment@^2.24.0, moment@^2.26.0:
+  version "2.26.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.26.0.tgz#5e1f82c6bafca6e83e808b30c8705eed0dcbd39a"
+  integrity sha512-oIixUO+OamkUkwjhAVE18rAMfRJNsNe/Stid/gwHSOfHrOtw9EhAY2AHvdKZ/k/MggcYELFCJz/Sn2pL8b8JMw==
 
 move-concurrently@^1.0.1:
   version "1.0.1"
