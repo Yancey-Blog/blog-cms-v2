@@ -51,7 +51,7 @@
     "material-ui-popup-state": "^1.5.4",
     "moment": "^2.26.0",
     "mui-datatables": "^3.0.1",
-    "notistack": "^0.9.16",
+    "notistack": "^0.9.17",
     "ramda": "^0.27.0",
     "react": "^16.13.1",
     "react-calendar-heatmap": "^1.8.1",
