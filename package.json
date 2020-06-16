@@ -34,7 +34,7 @@
     "@toast-ui/editor-plugin-color-syntax": "^1.0.0",
     "@toast-ui/editor-plugin-table-merged-cell": "^1.0.0",
     "@toast-ui/editor-plugin-uml": "^1.0.0",
-    "@toast-ui/react-editor": "^2.0.1",
+    "@toast-ui/react-editor": "^2.1.2",
     "apollo-cache-inmemory": "^1.6.5",
     "apollo-cache-persist": "^0.1.1",
     "apollo-client": "^2.6.10",
