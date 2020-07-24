@@ -50,7 +50,7 @@
     "material-ui-chip-input": "^1.1.0",
     "material-ui-popup-state": "^1.5.4",
     "moment": "^2.26.0",
-    "mui-datatables": "^3.0.1",
+    "mui-datatables": "^3.2.0",
     "notistack": "^0.9.17",
     "ramda": "^0.27.0",
     "react": "^16.13.1",
