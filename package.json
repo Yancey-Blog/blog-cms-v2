@@ -43,7 +43,7 @@
     "apollo-link-error": "^1.1.13",
     "chart.js": "^2.9.3",
     "classnames": "^2.2.6",
-    "codemirror": "^5.52.2",
+    "codemirror": "^5.56.0",
     "formik": "^2.1.4",
     "graphql-tag": "^2.10.3",
     "history": "^5.0.0",
