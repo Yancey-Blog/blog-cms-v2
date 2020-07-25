@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { useSnackbar } from 'notistack'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { logout } from 'src/shared/utils'
 import client from 'src/graphql/apolloClient'
 import { UPDATE_USERNAME, UPDATE_EMAIL, DELETE_ACCOUNT } from './typeDefs'

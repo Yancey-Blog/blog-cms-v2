@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { useQuery, useMutation } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/client'
 import {
   AGENDAS,
   CREATE_ONE_AGENDA,

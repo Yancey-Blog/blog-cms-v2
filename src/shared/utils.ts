@@ -18,7 +18,7 @@ export const formatDate = (ISOString: string) =>
 export const getType = <T>(type: T) =>
   Object.prototype.toString.call(type).slice(8, -1).toLowerCase()
 
-export const goBack = () => history.goBack()
+export const goBack = () => history.back()
 
 export const parseSearch = (search: string) =>
   qs.parse(search, { parseBooleans: true })
