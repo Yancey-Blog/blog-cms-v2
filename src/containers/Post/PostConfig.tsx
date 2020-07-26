@@ -226,7 +226,7 @@ const PostConfig: FC = () => {
       setValues({
         title,
         summary,
-        tags: tags.json,
+        tags,
         posterUrl,
       })
 
