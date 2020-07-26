@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v1.2.3...v2.0.0) (2020-07-26)
+
+
+### Features
+
+* default display `week` for schedule module ([0c74357](https://github.com/Yancey-Blog/blog-cms-v2/commit/0c74357a5c91e3f837bec4720bcfde8fa524cbd2))
+* enhance apollo/client ([94042b4](https://github.com/Yancey-Blog/blog-cms-v2/commit/94042b4742f06d6011b2e19a83cd590aa6185927))
+* graphql-tag is merged to @apollo/client ([88b8fb5](https://github.com/Yancey-Blog/blog-cms-v2/commit/88b8fb5ff3450a5e2b47defbc84977ce1029e1ee))
+* migrate @apollo/client to v3.x.x ([af52656](https://github.com/Yancey-Blog/blog-cms-v2/commit/af52656b045a394e3e44db2c7848efda2cebeef0))
+* use new version of [@toast-ui](https://github.com/toast-ui) ([194298c](https://github.com/Yancey-Blog/blog-cms-v2/commit/194298c38d8f006ee5bb96c5529ee7da11740374))
+
 ### [1.2.3](https://github.com/Yancey-Blog/blog-cms-v2/compare/v1.2.2...v1.2.3) (2020-06-06)
 
 
