@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import classNames from 'classnames'

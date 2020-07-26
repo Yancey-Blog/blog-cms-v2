@@ -81,9 +81,10 @@ const OpenSourceModal: FC<Props> = ({
 
     if (id) {
       // @ts-ignore
-      const { title, description, url, posterUrl } = client.cache.data.get(
-        `OpenSourceModel:${id}`,
-      )
+      const { title, description, url, posterUrl } = client.cache.data.data[
+        `OpenSourceModel:${id}`
+      ]
+
       setValues({ title, description, url, posterUrl })
     }
   }, [id, resetForm, setValues])

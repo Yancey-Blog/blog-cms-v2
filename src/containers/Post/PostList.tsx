@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useCallback } from 'react'
-import { useLazyQuery, useMutation } from '@apollo/react-hooks'
+import { useLazyQuery, useMutation } from '@apollo/client'
 import { useSnackbar } from 'notistack'
 import {
   POSTS,

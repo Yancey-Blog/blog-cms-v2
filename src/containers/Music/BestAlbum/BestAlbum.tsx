@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { useQuery, useMutation } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/client'
 import { useSnackbar } from 'notistack'
 import {
   BEST_ALBUMS,

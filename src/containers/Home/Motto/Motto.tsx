@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
-import { useQuery, useMutation } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/client'
 import { useSnackbar } from 'notistack'
-import { sortBy } from 'yancey-js-util'
 import {
   MOTTOS,
   CREATE_ONE_MOTTO,
@@ -110,7 +109,7 @@ const Motto: FC = () => {
 
   return (
     <MottoTable
-      dataSource={data ? data.getMottos.sort(sortBy('weight', 'descend')) : []}
+      dataSource={data ? data.getMottos : []}
       isFetching={isFetching}
       isDeleting={isDeleting}
       isExchanging={isExchanging}

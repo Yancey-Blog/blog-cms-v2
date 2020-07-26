@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import * as Yup from 'yup'
 import { useSnackbar } from 'notistack'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import SettingsHeader from '../components/SettingsHeader/SettingsHeader'
 import SettingWrapper from '../components/SettingWrapper/SettingWrapper'
 import SettingItemWrapper from '../components/SettingItemWrapper/SettingItemWrapper'
@@ -80,9 +80,10 @@ const Profile: FC = () => {
       bio,
       avatarUrl,
       // @ts-ignore
-    } = client.cache.data.get(
-      `UserModel:${window.localStorage.getItem('userId')}`,
-    )
+    } = client.cache.data.data[
+      `UserModel:${window.localStorage.getItem('userId')}`
+    ]
+
     setValues({ name, location, organization, website, bio, avatarUrl })
   }, [setValues])
 

@@ -3,7 +3,7 @@ import * as Yup from 'yup'
 import { useSnackbar } from 'notistack'
 import { useFormik } from 'formik'
 import CopyToClipboard from 'react-copy-to-clipboard'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import {
   Button,
   CircularProgress,

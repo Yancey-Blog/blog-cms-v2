@@ -96,7 +96,8 @@ const BestAlbumModal: FC<Props> = ({
         releaseDate,
         coverUrl,
         // @ts-ignore
-      } = client.cache.data.get(`BestAlbumModel:${id}`)
+      } = client.cache.data.data[`BestAlbumModel:${id}`]
+
       setValues({
         title,
         artist,

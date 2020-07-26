@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { useSnackbar } from 'notistack'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
