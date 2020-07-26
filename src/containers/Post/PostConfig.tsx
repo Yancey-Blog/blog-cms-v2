@@ -361,6 +361,7 @@ const PostConfig: FC = () => {
         toolbarItems={MARKDOWN_EDITOR_TOOLBAR_ITEMS}
         plugins={[
           chartPlugin,
+          // @ts-ignore
           tableMergedCellPlugin,
           umlPlugin,
           colorSyntaxPlugin,
