@@ -4,7 +4,6 @@ import { VIEW_DATE } from 'src/shared/constants'
 import useStyles from '../styles'
 
 interface IExternalViewSwitcher {
-  currentViewName: string
   onChange: (val: string) => void
 }
 
