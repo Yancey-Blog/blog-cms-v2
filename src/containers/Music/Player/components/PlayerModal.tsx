@@ -102,7 +102,7 @@ const PlayerModal: FC<Props> = ({
         musicFileUrl,
         isPublic,
         // @ts-ignore
-      } = client.cache.data.get(`PlayerModel:${id}`)
+      } = client.cache.data.data[`PlayerModel:${id}`]
       setValues({
         title,
         artist,

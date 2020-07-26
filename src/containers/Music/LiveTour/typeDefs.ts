@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import { BATCH_DELETE_FRAGMENT } from 'src/graphql/graphqlFragment'
 
 const LIVE_TOUR_FRAGMENT = gql`

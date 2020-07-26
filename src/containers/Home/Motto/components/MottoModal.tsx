@@ -64,7 +64,8 @@ const MottoModal: FC<Props> = ({
 
     if (id) {
       // @ts-ignore
-      const { content } = client.cache.data.get(`MottoModel:${id}`)
+      const { content } = client.cache.data.data[`MottoModel:${id}`]
+
       setValues({ content })
     }
   }, [id, resetForm, setValues])

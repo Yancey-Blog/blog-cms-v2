@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Link } from '@material-ui/core'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import {
   YANCEY_BLOG_URL,
   YANCEY_GITHUB_URL,

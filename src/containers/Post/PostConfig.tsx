@@ -6,7 +6,7 @@ import { PhotoCamera } from '@material-ui/icons'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { useSnackbar } from 'notistack'
 import 'tui-editor/dist/tui-editor.min.css'
 import 'tui-editor/dist/tui-editor-contents.min.css'
@@ -221,12 +221,12 @@ const PostConfig: FC = () => {
         tags,
         posterUrl,
         // @ts-ignore
-      } = client.cache.data.get(`PostItemModel:${id}`)
+      } = client.cache.data.data[`PostItemModel:${id}`]
 
       setValues({
         title,
         summary,
-        tags: tags.json,
+        tags,
         posterUrl,
       })
 
@@ -361,6 +361,7 @@ const PostConfig: FC = () => {
         toolbarItems={MARKDOWN_EDITOR_TOOLBAR_ITEMS}
         plugins={[
           chartPlugin,
+          // @ts-ignore
           tableMergedCellPlugin,
           umlPlugin,
           colorSyntaxPlugin,

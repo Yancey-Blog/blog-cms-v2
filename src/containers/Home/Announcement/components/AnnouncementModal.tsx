@@ -58,7 +58,8 @@ const AnnouncementModal: FC<Props> = ({
 
     if (id) {
       // @ts-ignore
-      const { content } = client.cache.data.get(`AnnouncementModel:${id}`)
+      const { content } = client.cache.data.data[`AnnouncementModel:${id}`]
+
       setValues({ content })
     }
   }, [id, resetForm, setValues])

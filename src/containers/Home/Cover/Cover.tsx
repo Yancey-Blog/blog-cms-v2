@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
-import { useQuery, useMutation } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/client'
 import { useSnackbar } from 'notistack'
-import { sortBy } from 'yancey-js-util'
 import {
   COVERS,
   CREATE_ONE_COVER,
@@ -141,7 +140,7 @@ const Cover: FC = () => {
 
   return (
     <CoverTable
-      dataSource={data ? data.getCovers.sort(sortBy('weight', 'descend')) : []}
+      dataSource={data ? data.getCovers : []}
       isFetching={isFetching}
       isDeleting={isDeleting}
       isExchanging={isExchanging}

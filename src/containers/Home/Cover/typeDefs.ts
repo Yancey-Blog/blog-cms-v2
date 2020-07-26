@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import {
   BATCH_DELETE_FRAGMENT,
   BATCH_UPDATE_FRAGMENT,

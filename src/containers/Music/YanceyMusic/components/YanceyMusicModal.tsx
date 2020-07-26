@@ -89,7 +89,7 @@ const YanceyMusicModal: FC<Props> = ({
         releaseDate,
         posterUrl,
         // @ts-ignore
-      } = client.cache.data.get(`YanceyMusicModel:${id}`)
+      } = client.cache.data.data[`YanceyMusicModel:${id}`]
       setValues({
         title,
         soundCloudUrl,

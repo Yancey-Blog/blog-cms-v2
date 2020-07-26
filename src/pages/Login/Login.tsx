@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { useSnackbar } from 'notistack'
 import { useHistory } from 'react-router-dom'
-import { useLazyQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/client'
 import { CircularProgress } from '@material-ui/core'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
@@ -27,7 +27,6 @@ const Login: FC = () => {
 
   const [login, { called, loading }] = useLazyQuery(LOGIN, {
     notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'cache-and-network',
 
     onCompleted(data) {
       window.localStorage.setItem('token', data.login.authorization)

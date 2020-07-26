@@ -18,9 +18,9 @@ const Drawer: FC<Props> = ({ open }) => {
     name,
     avatarUrl,
     // @ts-ignore
-  } = client.cache.data.get(
-    `UserModel:${window.localStorage.getItem('userId')}`,
-  )
+  } = client.cache.data.data[
+    `UserModel:${window.localStorage.getItem('userId')}`
+  ]
 
   const classes = useStyles()
 

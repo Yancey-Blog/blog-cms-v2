@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 const GLOBAL_SETTING_FRAGMENT = gql`
   fragment GlobalSettingFragment on GlobalSettingModel {
