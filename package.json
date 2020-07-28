@@ -72,7 +72,7 @@
     "@types/mui-datatables": "^3.1.1",
     "@types/node": "^14.0.26",
     "@types/query-string": "^6.3.0",
-    "@types/ramda": "^0.27.11",
+    "@types/ramda": "^0.27.12",
     "@types/react": "^16.9.43",
     "@types/react-calendar-heatmap": "^1.6.2",
     "@types/react-copy-to-clipboard": "^4.3.0",
