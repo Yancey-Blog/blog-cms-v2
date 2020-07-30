@@ -59,7 +59,7 @@ const BandwagonServiceStatus: FC<Props> = ({
     {
       total: swap_total_kb,
       used: swap_total_kb - swap_available_kb,
-      unit: 'KB',
+      unit: 'MB',
       title: 'SWAP Usage',
     },
   ]
