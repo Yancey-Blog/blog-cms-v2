@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v2.0.0...v2.1.0) (2020-07-30)
+
+
+### Features
+
+* **bandwagonservicestatus:** update swap to 8GB and update the display of `SWAP Usage` ([1dacb99](https://github.com/Yancey-Blog/blog-cms-v2/commit/1dacb9968f158888381e44b39e393dee4870bf4f))
+
 ## [2.0.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v1.2.3...v2.0.0) (2020-07-26)
 
 
