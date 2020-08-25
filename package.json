@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.0.2",
-    "@date-io/moment": "1.x",
+    "@date-io/moment": "2.x",
     "@devexpress/dx-react-chart": "^2.7.0",
     "@devexpress/dx-react-chart-material-ui": "^2.7.0",
     "@devexpress/dx-react-core": "^2.7.0",

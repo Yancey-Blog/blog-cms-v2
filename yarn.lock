@@ -1284,7 +1284,19 @@
   resolved "https://registry.npmjs.org/@date-io/core/-/core-1.3.13.tgz#90c71da493f20204b7a972929cc5c482d078b3fa"
   integrity sha512-AlEKV7TxjeK+jxWVKcCFrfYAk8spX9aCyiToFIiLPtfQbsjmRGLIhb5VZgptQcJdHtLXo7+m0DuurwFgUToQuA==
 
-"@date-io/moment@1.x", "@date-io/moment@^1.3.11":
+"@date-io/core@^2.9.0":
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/@date-io/core/-/core-2.9.0.tgz#5f36e259b6438e456ca0fc177b57f68772b4b7b2"
+  integrity sha512-OhPFn+mnVHzfF/zJNUTV1CeUCL51ngXo9sG458cwwsORTgc1Pw7Dx9dS1wqPsq+CcMQ5Sh1MsUIXi1zclFbHTQ==
+
+"@date-io/moment@2.x":
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/@date-io/moment/-/moment-2.9.0.tgz#d1254489ff919051f40dea01d14d025ca42acd63"
+  integrity sha512-czblvCzxV3vIkVN+JZjtF4GUOL8WGxyiTZETRzt+FQtHHzg+fo0eeQg2X/mDiBqrBnY6CdVNwYSIHPAW4lxOIg==
+  dependencies:
+    "@date-io/core" "^2.9.0"
+
+"@date-io/moment@^1.3.11":
   version "1.3.13"
   resolved "https://registry.npmjs.org/@date-io/moment/-/moment-1.3.13.tgz#56c2772bc4f6675fc6970257e6033e7a7c2960f0"
   integrity sha512-3kJYusJtQuOIxq6byZlzAHoW/18iExJer9qfRF5DyyzdAk074seTuJfdofjz4RFfTd/Idk8WylOQpWtERqvFuQ==
@@ -10959,9 +10971,10 @@ range-parser@^1.2.1, range-parser@~1.2.1:
   resolved "https://registry.npmjs.org/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
 
-"raphael@git+https://github.com/nhn/raphael.git#2.2.0-c":
+"raphael@https://github.com/nhn/raphael.git#2.2.0-c":
   version "2.2.0-c"
-  resolved "git+https://github.com/nhn/raphael.git#78a6ed3ec269f33b6457b0ec66f8c3d1f2ed70e0"
+  uid "78a6ed3ec269f33b6457b0ec66f8c3d1f2ed70e0"
+  resolved "https://github.com/nhn/raphael.git#78a6ed3ec269f33b6457b0ec66f8c3d1f2ed70e0"
   dependencies:
     eve "git://github.com/adobe-webplatform/eve.git#eef80ed"
 
