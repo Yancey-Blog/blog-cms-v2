@@ -221,12 +221,12 @@ const PostConfig: FC = () => {
         tags,
         posterUrl,
         // @ts-ignore
-      } = client.cache.data.get(`PostItemModel:${id}`)
+      } = client.cache.data.data[`PostItemModel:${id}`]
 
       setValues({
         title,
         summary,
-        tags: tags.json,
+        tags,
         posterUrl,
       })
 
@@ -361,6 +361,7 @@ const PostConfig: FC = () => {
         toolbarItems={MARKDOWN_EDITOR_TOOLBAR_ITEMS}
         plugins={[
           chartPlugin,
+          // @ts-ignore
           tableMergedCellPlugin,
           umlPlugin,
           colorSyntaxPlugin,

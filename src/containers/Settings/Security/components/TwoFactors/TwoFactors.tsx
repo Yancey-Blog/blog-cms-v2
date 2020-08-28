@@ -28,9 +28,9 @@ const TwoFactors: FC = () => {
     isTOTP,
     phoneNumber,
     // @ts-ignore
-  } = client.cache.data.get(
-    `UserModel:${window.localStorage.getItem('userId')}`,
-  )
+  } = client.cache.data.data[
+    `UserModel:${window.localStorage.getItem('userId')}`
+  ]
 
   return (
     <>

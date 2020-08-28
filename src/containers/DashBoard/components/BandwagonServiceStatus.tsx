@@ -57,9 +57,9 @@ const BandwagonServiceStatus: FC<Props> = ({
       title: 'RAM Usage',
     },
     {
-      total: swap_total_kb,
-      used: swap_total_kb - swap_available_kb,
-      unit: 'KB',
+      total: swap_total_kb * 1024,
+      used: (swap_total_kb - swap_available_kb) * 1024,
+      unit: 'MB',
       title: 'SWAP Usage',
     },
   ]

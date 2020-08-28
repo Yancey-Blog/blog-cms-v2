@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 export const BATCH_DELETE_FRAGMENT = gql`
   fragment BatchDeleteFragment on BatchDeleteModel {

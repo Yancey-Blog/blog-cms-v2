@@ -17,9 +17,9 @@ const Account: FC = () => {
     username,
     email,
     // @ts-ignore
-  } = client.cache.data.get(
-    `UserModel:${window.localStorage.getItem('userId')}`,
-  )
+  } = client.cache.data.data[
+    `UserModel:${window.localStorage.getItem('userId')}`
+  ]
 
   const [updateUserName] = useMutation(UPDATE_USERNAME, {
     onCompleted(data) {

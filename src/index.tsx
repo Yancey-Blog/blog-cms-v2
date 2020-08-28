@@ -28,6 +28,7 @@ const Layouts = loadable(() => import('./pages/Layouts/Layouts'), {
 serviceWorker.unregister()
 
 ReactDOM.render(
+  // @ts-ignore
   <ApolloProvider client={client}>
     <SnackbarProvider
       maxSnack={SNACKBAR_MAX_NUM}

@@ -82,9 +82,10 @@ const CoverModal: FC<Props> = ({
 
     if (id) {
       // @ts-ignore
-      const { title, coverUrl, isPublic } = client.cache.data.get(
-        `CoverModel:${id}`,
-      )
+      const { title, coverUrl, isPublic } = client.cache.data.data[
+        `CoverModel:${id}`
+      ]
+
       setValues({ title, coverUrl, isPublic })
     }
   }, [id, resetForm, setValues])

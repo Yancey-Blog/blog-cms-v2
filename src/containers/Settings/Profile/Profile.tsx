@@ -80,9 +80,10 @@ const Profile: FC = () => {
       bio,
       avatarUrl,
       // @ts-ignore
-    } = client.cache.data.get(
-      `UserModel:${window.localStorage.getItem('userId')}`,
-    )
+    } = client.cache.data.data[
+      `UserModel:${window.localStorage.getItem('userId')}`
+    ]
+
     setValues({ name, location, organization, website, bio, avatarUrl })
   }, [setValues])
 

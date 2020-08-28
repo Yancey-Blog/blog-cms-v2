@@ -27,7 +27,6 @@ const Login: FC = () => {
 
   const [login, { called, loading }] = useLazyQuery(LOGIN, {
     notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'cache-and-network',
 
     onCompleted(data) {
       window.localStorage.setItem('token', data.login.authorization)

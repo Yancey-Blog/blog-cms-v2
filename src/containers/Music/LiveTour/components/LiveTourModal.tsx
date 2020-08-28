@@ -82,9 +82,10 @@ const LiveTourModal: FC<Props> = ({
 
     if (id) {
       // @ts-ignore
-      const { title, showTime, posterUrl } = client.cache.data.get(
-        `LiveTourModel:${id}`,
-      )
+      const { title, showTime, posterUrl } = client.cache.data.data[
+        `LiveTourModel:${id}`
+      ]
+
       setValues({
         title,
         showTime,

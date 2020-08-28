@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 const AGENDA_FRAGMENT = gql`
   fragment AgendaFragment on AgendaModel {

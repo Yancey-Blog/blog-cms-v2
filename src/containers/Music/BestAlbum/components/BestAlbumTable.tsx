@@ -6,7 +6,6 @@ import MUIDataTable, {
 } from 'mui-datatables'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab, Button } from '@material-ui/core'
-import { sortBy } from 'yancey-js-util'
 import useOpenModal from 'src/hooks/useOpenModal'
 import { formatDate } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
@@ -152,7 +151,7 @@ const BestAlbumTable: FC<Props> = ({
       <TableWrapper tableName="Best Album" icon="save">
         <MUIDataTable
           title=""
-          data={dataSource.sort(sortBy('updatedAt')).reverse()}
+          data={dataSource}
           columns={columns}
           options={options}
         />

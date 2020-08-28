@@ -39,7 +39,7 @@ const Schedule: FC<ScheduleProps> = ({
 }) => {
   const classes = useStyles()
 
-  const [currentViewName, setCurrentViewName] = useState('Month')
+  const [currentViewName, setCurrentViewName] = useState('Week')
 
   const commitChanges = ({ added, changed, deleted }: ChangeSet) => {
     if (added) {
@@ -57,7 +57,6 @@ const Schedule: FC<ScheduleProps> = ({
     <Paper className={classes.customPaper}>
       <Scheduler data={dataSource as AppointmentModel[]}>
         <ExternalViewSwitcher
-          currentViewName={currentViewName}
           onChange={(val: string) => setCurrentViewName(val)}
         />
         <ViewState currentViewName={currentViewName} />

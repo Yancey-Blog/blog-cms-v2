@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import { useSnackbar } from 'notistack'
-import { sortBy } from 'yancey-js-util'
 import {
   ANNOUNCEMENTS,
   CREATE_ONE_ANNOUNCEMENT,
@@ -129,9 +128,7 @@ const Announcement: FC = () => {
 
   return (
     <AnnouncementTable
-      dataSource={
-        data ? data.getAnnouncements.sort(sortBy('weight', 'descend')) : []
-      }
+      dataSource={data ? data.getAnnouncements : []}
       isFetching={isFetching}
       isDeleting={isDeleting}
       isExchanging={isExchanging}

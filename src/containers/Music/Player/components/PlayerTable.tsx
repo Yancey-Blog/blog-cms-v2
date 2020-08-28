@@ -7,7 +7,6 @@ import MUIDataTable, {
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab, Popover, Switch, Button } from '@material-ui/core'
-import { sortBy } from 'yancey-js-util'
 import useOpenModal from 'src/hooks/useOpenModal'
 import { formatDate } from 'src/shared/utils'
 import Move from 'src/components/Move/Move'
@@ -220,7 +219,7 @@ const PlayerTable: FC<Props> = ({
       <TableWrapper tableName="Player" icon="save">
         <MUIDataTable
           title=""
-          data={dataSource.sort(sortBy('updatedAt')).reverse()}
+          data={dataSource}
           columns={columns}
           options={options}
         />
