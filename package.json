@@ -47,7 +47,7 @@
     "moment": "^2.27.0",
     "mui-datatables": "^3.3.0",
     "notistack": "^0.9.17",
-    "ramda": "^0.27.0",
+    "ramda": "^0.27.1",
     "react": "^16.13.1",
     "react-calendar-heatmap": "^1.8.1",
     "react-chartjs-2": "^2.10.0",
