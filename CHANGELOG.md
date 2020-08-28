@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v2.1.1...v2.2.0) (2020-08-28)
+
+
+### Features
+
+* delete useless code ([b381377](https://github.com/Yancey-Blog/blog-cms-v2/commit/b3813778da9a0234c8de8c53c78b7b9556f45b8f))
+* delete useless code ([ed94d4b](https://github.com/Yancey-Blog/blog-cms-v2/commit/ed94d4b5c2e03774868f134f93e9f2bdad9e4bdf))
+* migrate apollo to v3.0.0 ([c4a8c8a](https://github.com/Yancey-Blog/blog-cms-v2/commit/c4a8c8a442aa14ab7e77422ee04856ec286eebdb))
+* update history ([6f0ab00](https://github.com/Yancey-Blog/blog-cms-v2/commit/6f0ab00d4b094da91d2f8c5efa6d43f68b038c90))
+
 ### [2.1.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v2.1.0...v2.1.1) (2020-07-30)
 
 
