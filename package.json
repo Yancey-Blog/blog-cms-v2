@@ -40,7 +40,7 @@
     "classnames": "^2.2.6",
     "codemirror": "^5.56.0",
     "formik": "^2.1.5",
-    "graphql-tag": "^2.10.4",
+    "graphql-tag": "^2.11.0",
     "history": "^4.10.1",
     "material-ui-chip-input": "^1.1.0",
     "material-ui-popup-state": "^1.6.1",
