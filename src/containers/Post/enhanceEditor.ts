@@ -29,6 +29,7 @@ export const enhanceUpload = (
 
     //@ts-ignore
     instance.eventManager.addEventType('uploadImg')
+
     //@ts-ignore
     instance.eventManager.listen('uploadImg', () => {
       setOpen(true)
@@ -36,6 +37,7 @@ export const enhanceUpload = (
 
     //@ts-ignore
     instance.eventManager.addEventType('insertEmbeded')
+
     //@ts-ignore
     instance.eventManager.listen('insertEmbeded', () => {
       insertEmbeded(editorRef)

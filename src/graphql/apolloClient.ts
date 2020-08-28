@@ -63,7 +63,6 @@ const cache = new InMemoryCache()
 
 async function handlePersistCache() {
   await persistCache({
-    // @ts-ignore
     cache,
     // @ts-ignore
     storage: window.localStorage,
