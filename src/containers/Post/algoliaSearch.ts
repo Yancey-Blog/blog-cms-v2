@@ -18,6 +18,8 @@ export const addPostToAlgolia = async (
   name: string,
   description: string,
   content: string,
+  imageUrl: string,
+  labels: string[],
 ) => {
   try {
     await index.saveObject(
@@ -26,6 +28,8 @@ export const addPostToAlgolia = async (
         name,
         description,
         content,
+        imageUrl,
+        labels,
       },
       { autoGenerateObjectIDIfNotExist: true },
     )

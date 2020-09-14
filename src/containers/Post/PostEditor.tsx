@@ -83,7 +83,15 @@ const PostEditor: FC = () => {
     UpdatePostVars
   >(UPDATE_ONE_POST, {
     onCompleted(data) {
-      const { _id, title, content, summary, isPublic } = data.updatePostById
+      const {
+        _id,
+        title,
+        content,
+        summary,
+        isPublic,
+        posterUrl,
+        tags,
+      } = data.updatePostById
       enqueueSnackbar('Update success!', { variant: 'success' })
 
       createPostStatistics({
@@ -97,7 +105,7 @@ const PostEditor: FC = () => {
       })
 
       if (isPublic) {
-        addPostToAlgolia(_id, title, summary, content)
+        addPostToAlgolia(_id, title, summary, content, posterUrl, tags)
       }
     },
     onError() {},
