@@ -15,14 +15,16 @@ const index = client.initIndex(REACT_APP_ALGOLIA_SEARCH_INDEX || '')
 
 export const addPostToAlgolia = async (
   objectID: string,
-  title: string,
+  name: string,
+  description: string,
   content: string,
 ) => {
   try {
     await index.saveObject(
       {
         objectID,
-        title,
+        name,
+        description,
         content,
       },
       { autoGenerateObjectIDIfNotExist: true },

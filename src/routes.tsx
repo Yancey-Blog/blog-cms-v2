@@ -90,7 +90,7 @@ const routes: Route[] = [
     routes: [
       {
         name: 'Post Editor',
-        path: '/post/editor',
+        path: '/post/edit',
         component: 'Post/PostEditor',
         hideInMenu: true,
       },
