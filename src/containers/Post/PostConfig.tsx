@@ -29,6 +29,7 @@ import { UploaderRes } from 'src/components/Uploader/types'
 import client from 'src/graphql/apolloClient'
 import embededPlugin from './editorEmbededPlugin'
 import { enhanceUpload, insertImage } from './enhanceEditor'
+import { addPostToAlgolia } from './algoliaSearch'
 import {
   MARKDOWN_EDITOR_TOOLBAR_ITEMS,
   POPOVER_ANCHOR_ORIGIN,
@@ -82,7 +83,7 @@ const PostConfig: FC = () => {
     UpdatePostVars
   >(UPDATE_ONE_POST, {
     onCompleted(data) {
-      const { _id, title, isPublic } = data.updatePostById
+      const { _id, title, isPublic, content } = data.updatePostById
       enqueueSnackbar('Update success!', { variant: 'success' })
 
       createPostStatistics({
@@ -94,6 +95,8 @@ const PostConfig: FC = () => {
           },
         },
       })
+
+      addPostToAlgolia(_id, title, content)
     },
     onError() {},
   })
