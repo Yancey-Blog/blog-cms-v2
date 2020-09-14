@@ -47,7 +47,7 @@ import {
 } from './types'
 import useStyles from './styles'
 
-const PostConfig: FC = () => {
+const PostEditor: FC = () => {
   /* message bar */
   const { enqueueSnackbar } = useSnackbar()
 
@@ -383,4 +383,4 @@ const PostConfig: FC = () => {
   )
 }
 
-export default PostConfig
+export default PostEditor

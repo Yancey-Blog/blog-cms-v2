@@ -89,9 +89,9 @@ const routes: Route[] = [
     component: 'Post/PostList',
     routes: [
       {
-        name: 'Post Config',
-        path: '/post/config',
-        component: 'Post/PostConfig',
+        name: 'Post Editor',
+        path: '/post/editor',
+        component: 'Post/PostEditor',
         hideInMenu: true,
       },
     ],
