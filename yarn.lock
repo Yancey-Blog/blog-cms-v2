@@ -1912,20 +1912,20 @@
   dependencies:
     plantuml-encoder "^1.4.0"
 
-"@toast-ui/editor@^2.3.1":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@toast-ui/editor/-/editor-2.3.1.tgz#add692840011efcdbd9b4b6de93dda2da12c36a0"
-  integrity sha512-0akQUnyCg24SBBb+weRX6VJ6ZjltxYEivBWOHft0birkrPF0YQgKjebPtFGPB9THBSUY+0qyr6k/KIN2rZqUog==
+"@toast-ui/editor@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@toast-ui/editor/-/editor-2.4.0.tgz#0ed082da7e0160162dbc8f69d00ad3ab2adf81bc"
+  integrity sha512-49YCYcDnCjv4mC9VVNlytJ23SA5t6ox540GnmysluJHJ8aGRdWcVoH8hiyCZi9ZVIXi90B/TU+2HUQ7mOCHHRQ==
   dependencies:
     "@types/codemirror" "0.0.71"
     codemirror "^5.48.4"
 
-"@toast-ui/react-editor@^2.3.0":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@toast-ui/react-editor/-/react-editor-2.3.1.tgz#eaf812035236ad5644e78d4f3e3c34e1a3a58889"
-  integrity sha512-BORnjr4CvL8uB4NC0ABDebnJlz9B3M9SZm+JnsutVIGNyUsdNl6wEFx5aUE+F952EVDCtPiLTGlnvkIuQmZc3w==
+"@toast-ui/react-editor@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@toast-ui/react-editor/-/react-editor-2.4.0.tgz#2b353abff4a734f3b484bd68ed16b974b3316fb3"
+  integrity sha512-PhwzIvD6mPoCH6NozrINrv/Us7X47haybSpop8xX8wl0d3eTstSOopUdjboo7x7hbsm8fvqMUOL8YXXNrbvhRw==
   dependencies:
-    "@toast-ui/editor" "^2.3.1"
+    "@toast-ui/editor" "^2.4.0"
 
 "@types/aria-query@^4.2.0":
   version "4.2.0"
