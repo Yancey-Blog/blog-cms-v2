@@ -4,8 +4,9 @@ import { Avatar } from '@material-ui/core'
 import { Home, Face } from '@material-ui/icons'
 import classNames from 'classnames'
 import routes, { Route } from 'src/routes'
-import { getInitials } from 'src/shared/utils'
 import client from 'src/graphql/apolloClient'
+import ChildItem from './components/ChildItem'
+import ParentItem from './components/ParentItem'
 import useStyles from './styles'
 
 interface Props {
@@ -105,28 +106,11 @@ const Drawer: FC<Props> = ({ open }) => {
         <Fragment key={route.name}>
           {route.routes &&
           !route.routes.some((childRoute) => childRoute.hideInMenu === true) ? (
-            <div
-              className={classNames(classes.item, {
-                [classes.hidenItem]: !open,
-              })}
-              onClick={() => handleFoldNameChange(route.name)}
-            >
-              <span
-                className={classNames(classes.itemAbbrTxt, classes.itemIcon, {
-                  [classes.hidenItem]: !open,
-                })}
-              >
-                {route.icon}
-              </span>
-              <div
-                className={classNames(classes.detail, {
-                  [classes.hideDetail]: !open,
-                })}
-              >
-                <span className={classes.itemTxt}>{route.name}</span>
-                <span className={classes.arrow} />
-              </div>
-            </div>
+            <ParentItem
+              open={open}
+              route={route}
+              handleFoldNameChange={handleFoldNameChange}
+            />
           ) : (
             <NavLink
               exact
@@ -136,26 +120,7 @@ const Drawer: FC<Props> = ({ open }) => {
               className={classes.formatArrowTag}
               to={route.path}
             >
-              <div
-                className={classNames(classes.item, {
-                  [classes.hidenItem]: !open,
-                })}
-              >
-                <span
-                  className={classNames(classes.itemAbbrTxt, classes.itemIcon, {
-                    [classes.hidenItem]: !open,
-                  })}
-                >
-                  {route.icon}
-                </span>
-                <div
-                  className={classNames(classes.detail, {
-                    [classes.hideDetail]: !open,
-                  })}
-                >
-                  <span className={classes.itemTxt}>{route.name}</span>
-                </div>
-              </div>
+              <ParentItem open={open} route={route} />
             </NavLink>
           )}
 
@@ -175,38 +140,30 @@ const Drawer: FC<Props> = ({ open }) => {
               !route.routes.some(
                 (childRoute) => childRoute.hideInMenu === true,
               ) &&
-              route.routes.map((childRoute) => (
-                <NavLink
-                  exact
-                  activeClassName={classNames(classes.active, {
-                    [classes.foldActive]: !open,
-                  })}
-                  className={classes.formatArrowTag}
-                  to={childRoute.path}
-                  key={childRoute.name}
-                >
-                  <div
-                    className={classNames(classes.item, classes.childItem, {
-                      [classes.hidenItem]: !open,
-                    })}
+              route.routes.map((childRoute) =>
+                childRoute.isExternalLink ? (
+                  <a
+                    className={classes.formatArrowTag}
+                    href={childRoute.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <span
-                      className={classNames(classes.itemAbbrTxt, {
-                        [classes.hidenItem]: !open,
-                      })}
-                    >
-                      {getInitials(childRoute.name)}
-                    </span>
-                    <div
-                      className={classNames(classes.detail, {
-                        [classes.hideDetail]: !open,
-                      })}
-                    >
-                      <span className={classes.itemTxt}>{childRoute.name}</span>
-                    </div>
-                  </div>
-                </NavLink>
-              ))}
+                    <ChildItem open={open} childRoute={childRoute} />
+                  </a>
+                ) : (
+                  <NavLink
+                    exact
+                    activeClassName={classNames(classes.active, {
+                      [classes.foldActive]: !open,
+                    })}
+                    className={classes.formatArrowTag}
+                    to={childRoute.path}
+                    key={childRoute.name}
+                  >
+                    <ChildItem open={open} childRoute={childRoute} />
+                  </NavLink>
+                ),
+              )}
           </div>
         </Fragment>
       ))}

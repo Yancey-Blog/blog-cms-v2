@@ -8,17 +8,26 @@ import {
   Event,
 } from '@material-ui/icons'
 
+export interface RouteChildren {
+  hideInMenu?: boolean
+  name: string
+  path: string
+  component?: string
+  isExternalLink?: boolean
+}
+
 export interface Route {
   name: string
   path: string
   icon: ReactElement
   component?: string
-  routes?: Array<{
-    hideInMenu?: boolean
-    name: string
-    path: string
-    component: string
-  }>
+  isExternalLink?: boolean
+  routes?: RouteChildren[]
+}
+
+interface MappedRoute {
+  path: string
+  component: string
 }
 
 const routes: Route[] = [
@@ -97,10 +106,21 @@ const routes: Route[] = [
     ],
   },
   {
-    name: 'Agenda',
-    path: '/agenda',
+    name: 'Events',
+    path: '/events',
     icon: <Event />,
-    component: 'Agenda/Agenda',
+    routes: [
+      {
+        name: 'Agenda',
+        path: '/events/agenda',
+        component: 'Events/Agenda',
+      },
+      {
+        name: 'Jira',
+        path: 'https://jira.yancey.app/',
+        isExternalLink: true,
+      },
+    ],
   },
   {
     name: 'Settings',
@@ -130,5 +150,29 @@ const routes: Route[] = [
     ],
   },
 ]
+
+export function mapRoutes() {
+  const routers: MappedRoute[] = []
+
+  routes.forEach((route) => {
+    routers.push({
+      path: route.path,
+      component: route.component as string,
+    })
+
+    if (route.routes) {
+      route.routes.forEach((routeChild) => {
+        if (!routeChild.isExternalLink) {
+          routers.push({
+            path: routeChild.path,
+            component: routeChild.component as string,
+          })
+        }
+      })
+    }
+  })
+
+  return routers
+}
 
 export default routes
