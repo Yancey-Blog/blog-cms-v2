@@ -54,7 +54,7 @@
     "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "3.4.3",
     "react-tooltip": "^4.2.7",
     "tui-editor": "^1.4.10",
     "yancey-js-util": "^3.0.0",
