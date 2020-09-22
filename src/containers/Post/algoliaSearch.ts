@@ -13,7 +13,7 @@ const client = algoliasearch(
 )
 const index = client.initIndex(REACT_APP_ALGOLIA_SEARCH_INDEX || '')
 
-export const addPostToAlgolia = async (
+export const addOrUpdatePostToAlgolia = async (
   objectID: string,
   name: string,
   description: string,
@@ -25,6 +25,7 @@ export const addPostToAlgolia = async (
     await index.saveObject(
       {
         objectID,
+        url: `https://yanceyleo.com/post/${objectID}`,
         name,
         description,
         content,
