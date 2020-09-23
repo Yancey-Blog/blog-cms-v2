@@ -6,6 +6,8 @@ import { CircularProgress } from '@material-ui/core'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
+import { GOOGLE_RECAPTCHA_URL } from 'src/shared/constants'
+import { useScriptUrl } from 'src/hooks/useScript'
 import { LOGIN } from './typeDefs'
 import { getBackgroundUrl } from './utils'
 import styles from './Auth.module.scss'
@@ -13,6 +15,7 @@ import styles from './Auth.module.scss'
 const Login: FC = () => {
   const history = useHistory()
   const { enqueueSnackbar } = useSnackbar()
+  useScriptUrl(GOOGLE_RECAPTCHA_URL)
 
   const toRegister = () => {
     // history.push('/register')
@@ -45,9 +48,18 @@ const Login: FC = () => {
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      login({
-        variables: { input: values },
-      })
+      if (window.grecaptcha) {
+        window.grecaptcha.ready(async () => {
+          const token = await window.grecaptcha.execute(
+            process.env.REACT_APP_RECAPTCHA_KEY,
+            { action: 'submit' },
+          )
+
+          login({
+            variables: { input: { ...values, token } },
+          })
+        })
+      }
     },
   })
 
@@ -99,6 +111,7 @@ const Login: FC = () => {
             {...getFieldProps('password')}
           />
         </label>
+
         <p className={styles.link}>Forgot your password?</p>
 
         <button
