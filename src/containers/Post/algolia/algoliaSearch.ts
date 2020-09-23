@@ -25,7 +25,6 @@ export const sendPostToAlgolia = async (
     await index.saveObject(
       {
         objectID,
-        url: `https://yanceyleo.com/post/${objectID}`,
         name,
         description,
         content,
