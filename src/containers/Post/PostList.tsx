@@ -15,6 +15,10 @@ import {
   CreatePostStatisticsMutation,
 } from './types'
 import PostTable from './components/PostTable'
+import {
+  deletePostOnAlgolia,
+  deletePostsOnAlgolia,
+} from './algolia/algoliaSearch'
 
 const Post: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
@@ -67,9 +71,11 @@ const Post: FC = () => {
   const [deletePostById, { loading: isDeleting }] = useMutation(
     DELETE_ONE_POST,
     {
-      onCompleted() {
+      onCompleted(data) {
+        const { _id } = data.deletePostById
         enqueueSnackbar('Delete success!', { variant: 'success' })
         fetchFirstData()
+        deletePostOnAlgolia(_id)
       },
     },
   )
@@ -77,9 +83,11 @@ const Post: FC = () => {
   const [deletePosts, { loading: isBatchDeleting }] = useMutation(
     BATCH_DELETE_POSTS,
     {
-      onCompleted() {
+      onCompleted(data) {
+        const { ids } = data.deletePosts
         enqueueSnackbar('Delete success!', { variant: 'success' })
         fetchFirstData()
+        deletePostsOnAlgolia(ids)
       },
     },
   )

@@ -36,7 +36,7 @@ import { goBack, parseSearch } from 'src/shared/utils'
 import embededPlugin from './editors/editorEmbededPlugin'
 import { enhanceUpload, insertImage } from './editors/enhanceEditor'
 import { getMarkdown, getHTML, setMarkdown } from './editors/editorIO'
-import { addOrUpdatePostToAlgolia } from './algoliaSearch'
+import { sendPostToAlgolia } from './algolia/algoliaSearch'
 import {
   SaveType,
   PostStatisticsVars,
@@ -63,15 +63,7 @@ const PostEditor: FC = () => {
     CreatePostVars
   >(CREATE_ONE_POST, {
     onCompleted(data) {
-      const {
-        _id,
-        title,
-        isPublic,
-        summary,
-        content,
-        posterUrl,
-        tags,
-      } = data.createPost
+      const { _id, title, isPublic, summary, posterUrl, tags } = data.createPost
       enqueueSnackbar('Create success!', { variant: 'success' })
 
       createPostStatistics({
@@ -85,7 +77,14 @@ const PostEditor: FC = () => {
       })
 
       if (isPublic) {
-        addOrUpdatePostToAlgolia(_id, title, summary, content, posterUrl, tags)
+        sendPostToAlgolia(
+          _id,
+          title,
+          summary,
+          getHTML(editorRef),
+          posterUrl,
+          tags,
+        )
       }
     },
     onError() {},
@@ -99,7 +98,6 @@ const PostEditor: FC = () => {
       const {
         _id,
         title,
-        content,
         summary,
         isPublic,
         posterUrl,
@@ -118,7 +116,14 @@ const PostEditor: FC = () => {
       })
 
       if (isPublic) {
-        addOrUpdatePostToAlgolia(_id, title, summary, content, posterUrl, tags)
+        sendPostToAlgolia(
+          _id,
+          title,
+          summary,
+          getHTML(editorRef),
+          posterUrl,
+          tags,
+        )
       }
     },
     onError() {},
@@ -149,7 +154,8 @@ const PostEditor: FC = () => {
 
   /* formik */
   const initialValues = {
-    posterUrl: '',
+    posterUrl:
+      'https://static.yancey.app/como-usar-imagens-webp-no-wordpress.jpg',
     title: '',
     summary: '',
     tags: [],
