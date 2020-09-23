@@ -129,6 +129,11 @@ const Login: FC = () => {
           </span>
         </>
       </form>
+
+      <p className={styles.copyright}>
+        Copyright &copy; {new Date().getFullYear()} Yancey Inc. and its
+        affiliates.
+      </p>
     </main>
   )
 }
