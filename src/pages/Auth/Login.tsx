@@ -8,7 +8,7 @@ import { useFormik } from 'formik'
 import classNames from 'classnames'
 import { LOGIN } from './typeDefs'
 import { getBackgroundUrl } from './utils'
-import styles from './Login.module.scss'
+import styles from './Auth.module.scss'
 
 const Login: FC = () => {
   const history = useHistory()

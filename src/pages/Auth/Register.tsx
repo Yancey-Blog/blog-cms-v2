@@ -1,18 +1,21 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { useSnackbar } from 'notistack'
 import { useMutation } from '@apollo/client'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
 import { CircularProgress } from '@material-ui/core'
 import { PASSWORD_REGEXP } from 'src/shared/constants'
-import { getBackgroundUrl } from '../Login/utils'
+import { getBackgroundUrl } from './utils'
 import { REGISTER } from './typeDefs'
-import styles from '../Login/Login.module.scss'
+import styles from './Auth.module.scss'
 
 const Register: FC = () => {
   const history = useHistory()
+
+  const { enqueueSnackbar } = useSnackbar()
 
   const [register, { loading }] = useMutation(REGISTER, {
     onCompleted(data) {
@@ -45,6 +48,17 @@ const Register: FC = () => {
       resetForm()
     },
   })
+
+  // TODO: support register.
+  useEffect(() => {
+    enqueueSnackbar('暂不开放注册, 敬请谅解!', {
+      variant: 'error',
+    })
+
+    setTimeout(() => {
+      history.push('/login')
+    }, 500)
+  }, [enqueueSnackbar, history])
 
   return (
     <main
