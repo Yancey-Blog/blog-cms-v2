@@ -7,6 +7,7 @@ import { useFormik } from 'formik'
 import classNames from 'classnames'
 import { CircularProgress } from '@material-ui/core'
 import { PASSWORD_REGEXP } from 'src/shared/constants'
+import { getBackgroundUrl } from '../Login/utils'
 import { REGISTER } from './typeDefs'
 import styles from '../Login/Login.module.scss'
 
@@ -46,7 +47,10 @@ const Register: FC = () => {
   })
 
   return (
-    <main className={styles.loginWrapper}>
+    <main
+      className={styles.loginWrapper}
+      style={{ backgroundImage: `url(${getBackgroundUrl()})` }}
+    >
       <form className={styles.loginForm} onSubmit={handleSubmit}>
         <div className={styles.header}>Create an Account</div>
         <label htmlFor="email" className={styles.label}>

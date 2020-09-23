@@ -1,8 +1,6 @@
 import { PopoverOrigin, SnackbarOrigin } from '@material-ui/core'
 import { MUIDataTableOptions } from 'mui-datatables'
 
-export const RECAPTCHA_KEY = '6LdLTDgUAAAAAPq-N2YNVoqcYPLyDTypJ8SMvCEj'
-
 export const SNACKBAR_ANCHOR_ORIGIN: SnackbarOrigin = {
   vertical: 'top',
   horizontal: 'center',

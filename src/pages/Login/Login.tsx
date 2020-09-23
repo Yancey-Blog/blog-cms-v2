@@ -7,6 +7,7 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
 import { LOGIN } from './typeDefs'
+import { getBackgroundUrl } from './utils'
 import styles from './Login.module.scss'
 
 const Login: FC = () => {
@@ -51,7 +52,10 @@ const Login: FC = () => {
   })
 
   return (
-    <main className={styles.loginWrapper}>
+    <main
+      className={styles.loginWrapper}
+      style={{ backgroundImage: `url(${getBackgroundUrl()})` }}
+    >
       <form className={styles.loginForm} onSubmit={handleSubmit}>
         <div className={styles.header}>Welcome back!</div>
         <div className={styles.headerExtra}>
