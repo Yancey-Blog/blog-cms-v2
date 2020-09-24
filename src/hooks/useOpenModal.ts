@@ -10,7 +10,7 @@ const useOpenModal = () => {
 
   const handleOpen = (id?: string) => {
     const params: Open = { isOpen: !open.isOpen }
-    id ? (params.id = id) : (params.id = '')
+    params.id = id ? id : ''
     setOpen(params)
   }
 
