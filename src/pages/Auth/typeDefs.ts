@@ -29,3 +29,12 @@ export const LOGIN = gql`
   }
   ${USER_FRAGMENT}
 `
+
+export const REGISTER = gql`
+  mutation Register($input: RegisterInput!) {
+    register(input: $input) {
+      ...UserFragment
+    }
+  }
+  ${USER_FRAGMENT}
+`
