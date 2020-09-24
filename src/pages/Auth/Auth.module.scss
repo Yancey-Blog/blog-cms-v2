@@ -20,8 +20,8 @@
   width: 100vw;
   height: 100vh;
   font-family: 'Whitney-400';
-  background: url('https://static.yancey.app/cms-static/login-bg-dark.jpg')
-    no-repeat center center;
+  background-repeat: no-repeat;
+  background-position: center center;
   background-size: cover;
   text-rendering: optimizeLegibility;
 }
@@ -157,4 +157,9 @@
   &:focus {
     border-color: #f04747;
   }
+}
+
+.copyright {
+  position: absolute;
+  bottom: 1rem;
 }
