@@ -125,6 +125,7 @@ const Login: FC = () => {
         <>
           <span className={styles.registerTip}>Need an account?</span>
           <span className={styles.link} onClick={toRegister}>
+            {' '}
             Register
           </span>
         </>
