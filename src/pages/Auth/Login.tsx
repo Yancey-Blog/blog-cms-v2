@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { useSnackbar } from 'notistack'
 import { useHistory } from 'react-router-dom'
 import { useLazyQuery } from '@apollo/client'
@@ -14,6 +14,7 @@ import styles from './Auth.module.scss'
 
 const Login: FC = () => {
   const history = useHistory()
+  const [isRecaptchaLoading, setIsRecaptchaLoading] = useState(false)
   const { enqueueSnackbar } = useSnackbar()
   useScriptUrl(GOOGLE_RECAPTCHA_URL)
 
@@ -50,15 +51,34 @@ const Login: FC = () => {
     onSubmit: async (values) => {
       if (window.grecaptcha) {
         window.grecaptcha.ready(async () => {
-          const token = await window.grecaptcha.execute(
-            process.env.REACT_APP_RECAPTCHA_KEY,
-            { action: 'submit' },
-          )
+          try {
+            setIsRecaptchaLoading(true)
+            const token = await window.grecaptcha.execute(
+              process.env.REACT_APP_RECAPTCHA_KEY,
+              { action: 'submit' },
+            )
 
-          login({
-            variables: { input: { ...values, token } },
-          })
+            login({
+              variables: { input: { ...values, token } },
+            })
+          } catch (e) {
+            enqueueSnackbar(
+              'Google reCAPTCHA is not effective. Please refresh the page.',
+              {
+                variant: 'error',
+              },
+            )
+          } finally {
+            setIsRecaptchaLoading(false)
+          }
         })
+      } else {
+        enqueueSnackbar(
+          'Please make sure your network environment supports Google reCAPTCHA',
+          {
+            variant: 'error',
+          },
+        )
       }
     },
   })
@@ -117,9 +137,13 @@ const Login: FC = () => {
         <button
           className={styles.submitBtn}
           type="submit"
-          disabled={called && loading}
+          disabled={(called && loading) || isRecaptchaLoading}
         >
-          {called && loading ? <CircularProgress size={30} /> : 'Login'}
+          {(called && loading) || isRecaptchaLoading ? (
+            <CircularProgress size={30} />
+          ) : (
+            'Login'
+          )}
         </button>
 
         <>
