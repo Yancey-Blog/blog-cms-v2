@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v2.4.0...v2.5.0) (2020-09-25)
+
+
+### Features
+
+* logic optimization of logining with Google reCAPTCHA ([5d5e6fe](https://github.com/Yancey-Blog/blog-cms-v2/commit/5d5e6fee9b7b96af44c4bcd19375697c061f3155))
+
 ## [2.4.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v2.3.0...v2.4.0) (2020-09-24)
 
 
