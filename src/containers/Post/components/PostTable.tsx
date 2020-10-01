@@ -111,6 +111,7 @@ const PostTable: FC<Props> = ({
       name: 'tags',
       label: 'Tags',
       options: {
+        // @ts-ignore
         customBodyRender: (value: string[]) => (
           <>
             {value.map((tag) => (
@@ -140,6 +141,7 @@ const PostTable: FC<Props> = ({
       name: 'isPublic',
       label: 'IsPublic',
       options: {
+        // @ts-ignore
         customBodyRender: (value: boolean, tableMeta: MUIDataTableMeta) => {
           const id = tableMeta.rowData[0]
 
