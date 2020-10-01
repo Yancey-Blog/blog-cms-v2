@@ -117,6 +117,7 @@ const PlayerTable: FC<Props> = ({
       name: 'isPublic',
       label: 'Is Public',
       options: {
+        // @ts-ignore
         customBodyRender: (value: boolean, tableMeta: MUIDataTableMeta) => {
           const id = tableMeta.rowData[0]
 

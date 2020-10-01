@@ -145,6 +145,7 @@ const Drawer: FC<Props> = ({ open }) => {
                   <a
                     className={classes.formatArrowTag}
                     href={childRoute.path}
+                    key={childRoute.name}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
