@@ -12,3 +12,10 @@ declare namespace NodeJS {
     PORT: string
   }
 }
+
+declare interface Window {
+  grecaptcha: {
+    ready: Function
+    execute: Promise
+  }
+}

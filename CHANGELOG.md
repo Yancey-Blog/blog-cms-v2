@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v2.4.0...v2.5.0) (2020-09-25)
+
+
+### Features
+
+* logic optimization of logining with Google reCAPTCHA ([5d5e6fe](https://github.com/Yancey-Blog/blog-cms-v2/commit/5d5e6fee9b7b96af44c4bcd19375697c061f3155))
+
+## [2.4.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v2.3.0...v2.4.0) (2020-09-24)
+
+
+### Features
+
+* add colorful login background image ([4cfee7b](https://github.com/Yancey-Blog/blog-cms-v2/commit/4cfee7be750691b1539fd53ac5e5e6df54b1855d))
+* add colorful login background image ([41b5d2d](https://github.com/Yancey-Blog/blog-cms-v2/commit/41b5d2d7f0899e1495f5be87f8f1596f5d19db34))
+* add copyright style ([b4c873a](https://github.com/Yancey-Blog/blog-cms-v2/commit/b4c873ad9bd98269adf30844c3586ec03b8cb4da))
+* try use Google reCAPTCHA ([0e15642](https://github.com/Yancey-Blog/blog-cms-v2/commit/0e15642a892b1845f3530cb1854c9449a7132882))
+* update env ([c8badc9](https://github.com/Yancey-Blog/blog-cms-v2/commit/c8badc9c56b330bd470f59d55959f91592a0154c))
+* update env ([2be8a92](https://github.com/Yancey-Blog/blog-cms-v2/commit/2be8a922accac4c9c6ef090aece23cc9a0040d55))
+* update style ([1400c61](https://github.com/Yancey-Blog/blog-cms-v2/commit/1400c61ce34ce55c3bc8e4823b2d572d5d4a1219))
+* update the env file ([6e63d4b](https://github.com/Yancey-Blog/blog-cms-v2/commit/6e63d4b00c733f1e71afb310a631e87f24afeb9b))
+
 ## [2.3.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v2.2.0...v2.3.0) (2020-09-22)
 
 

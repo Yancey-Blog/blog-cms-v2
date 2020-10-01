@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { useSnackbar } from 'notistack'
 import { useHistory } from 'react-router-dom'
 import { useLazyQuery } from '@apollo/client'
@@ -6,12 +6,17 @@ import { CircularProgress } from '@material-ui/core'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
+import { GOOGLE_RECAPTCHA_URL } from 'src/shared/constants'
+import { useScriptUrl } from 'src/hooks/useScript'
 import { LOGIN } from './typeDefs'
-import styles from './Login.module.scss'
+import { getBackgroundUrl } from './utils'
+import styles from './Auth.module.scss'
 
 const Login: FC = () => {
   const history = useHistory()
+  const [isRecaptchaLoading, setIsRecaptchaLoading] = useState(false)
   const { enqueueSnackbar } = useSnackbar()
+  useScriptUrl(GOOGLE_RECAPTCHA_URL)
 
   const toRegister = () => {
     // history.push('/register')
@@ -44,14 +49,45 @@ const Login: FC = () => {
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      login({
-        variables: { input: values },
-      })
+      if (window.grecaptcha) {
+        window.grecaptcha.ready(async () => {
+          try {
+            setIsRecaptchaLoading(true)
+            const token = await window.grecaptcha.execute(
+              process.env.REACT_APP_RECAPTCHA_KEY,
+              { action: 'submit' },
+            )
+
+            login({
+              variables: { input: { ...values, token } },
+            })
+          } catch (e) {
+            enqueueSnackbar(
+              'Google reCAPTCHA is not effective. Please refresh the page.',
+              {
+                variant: 'error',
+              },
+            )
+          } finally {
+            setIsRecaptchaLoading(false)
+          }
+        })
+      } else {
+        enqueueSnackbar(
+          'Please make sure your network environment supports Google reCAPTCHA',
+          {
+            variant: 'error',
+          },
+        )
+      }
     },
   })
 
   return (
-    <main className={styles.loginWrapper}>
+    <main
+      className={styles.loginWrapper}
+      style={{ backgroundImage: `url(${getBackgroundUrl()})` }}
+    >
       <form className={styles.loginForm} onSubmit={handleSubmit}>
         <div className={styles.header}>Welcome back!</div>
         <div className={styles.headerExtra}>
@@ -95,23 +131,34 @@ const Login: FC = () => {
             {...getFieldProps('password')}
           />
         </label>
+
         <p className={styles.link}>Forgot your password?</p>
 
         <button
           className={styles.submitBtn}
           type="submit"
-          disabled={called && loading}
+          disabled={(called && loading) || isRecaptchaLoading}
         >
-          {called && loading ? <CircularProgress size={30} /> : 'Login'}
+          {(called && loading) || isRecaptchaLoading ? (
+            <CircularProgress size={30} />
+          ) : (
+            'Login'
+          )}
         </button>
 
         <>
           <span className={styles.registerTip}>Need an account?</span>
           <span className={styles.link} onClick={toRegister}>
+            {' '}
             Register
           </span>
         </>
       </form>
+
+      <p className={styles.copyright}>
+        Copyright &copy; {new Date().getFullYear()} Yancey Inc. and its
+        affiliates.
+      </p>
     </main>
   )
 }
