@@ -154,8 +154,7 @@ const PostEditor: FC = () => {
 
   /* formik */
   const initialValues = {
-    posterUrl:
-      'https://static.yancey.app/como-usar-imagens-webp-no-wordpress.jpg',
+    posterUrl: '',
     title: '',
     summary: '',
     tags: [],

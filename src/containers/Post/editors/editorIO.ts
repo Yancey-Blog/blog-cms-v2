@@ -9,9 +9,13 @@ export const getMarkdown = (editorRef: RefObject<Editor>) => {
   return ''
 }
 
+// TODO: Temporarily block pre tag
 export const getHTML = (editorRef: RefObject<Editor>) => {
   if (editorRef.current) {
-    return editorRef.current.getInstance().getHtml()
+    return editorRef.current
+      .getInstance()
+      .getHtml()
+      .replace(/<pre\b[^>]*>([\s\S]*?)<\/pre>/gi, '')
   }
 
   return ''
