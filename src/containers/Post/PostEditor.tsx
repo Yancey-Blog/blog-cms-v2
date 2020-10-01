@@ -27,15 +27,16 @@ import Uploader from 'src/components/Uploader/Uploader'
 import UploaderModal from 'src/components/UploaderModal/UploaderModal'
 import { UploaderRes } from 'src/components/Uploader/types'
 import client from 'src/graphql/apolloClient'
-import embededPlugin from './editorEmbededPlugin'
-import { enhanceUpload, insertImage } from './enhanceEditor'
-import { addPostToAlgolia } from './algoliaSearch'
 import {
   MARKDOWN_EDITOR_TOOLBAR_ITEMS,
   POPOVER_ANCHOR_ORIGIN,
   POPOVER_TRANSFORM_ORIGIN,
 } from 'src/shared/constants'
 import { goBack, parseSearch } from 'src/shared/utils'
+import embededPlugin from './editors/editorEmbededPlugin'
+import { enhanceUpload, insertImage } from './editors/enhanceEditor'
+import { getMarkdown, getHTML, setMarkdown } from './editors/editorIO'
+import { sendPostToAlgolia } from './algolia/algoliaSearch'
 import {
   SaveType,
   PostStatisticsVars,
@@ -62,7 +63,7 @@ const PostEditor: FC = () => {
     CreatePostVars
   >(CREATE_ONE_POST, {
     onCompleted(data) {
-      const { _id, title, isPublic } = data.createPost
+      const { _id, title, isPublic, summary, posterUrl, tags } = data.createPost
       enqueueSnackbar('Create success!', { variant: 'success' })
 
       createPostStatistics({
@@ -74,6 +75,17 @@ const PostEditor: FC = () => {
           },
         },
       })
+
+      if (isPublic) {
+        sendPostToAlgolia(
+          _id,
+          title,
+          summary,
+          getHTML(editorRef),
+          posterUrl,
+          tags,
+        )
+      }
     },
     onError() {},
   })
@@ -86,7 +98,6 @@ const PostEditor: FC = () => {
       const {
         _id,
         title,
-        content,
         summary,
         isPublic,
         posterUrl,
@@ -105,7 +116,14 @@ const PostEditor: FC = () => {
       })
 
       if (isPublic) {
-        addPostToAlgolia(_id, title, summary, content, posterUrl, tags)
+        sendPostToAlgolia(
+          _id,
+          title,
+          summary,
+          getHTML(editorRef),
+          posterUrl,
+          tags,
+        )
       }
     },
     onError() {},
@@ -122,25 +140,7 @@ const PostEditor: FC = () => {
   const editorRef = useRef<Editor>(null)
   const [open, setOpen] = useState(false)
   const [image, setImage] = useState<UploaderRes>({ name: '', url: '' })
-  const handleEditorImageChange = (file: UploaderRes) => {
-    setImage(file)
-  }
-
-  const getMarkdown = () => {
-    if (editorRef.current) {
-      return editorRef.current.getInstance().getMarkdown()
-    }
-
-    return ''
-  }
-
-  const setMarkdown = (content: string) => {
-    if (editorRef.current) {
-      return editorRef.current.getInstance().setMarkdown(content)
-    }
-
-    return ''
-  }
+  const handleEditorImageChange = (file: UploaderRes) => setImage(file)
 
   /* posterUrl */
   const handlePosterImageChange = (data: UploaderRes) => {
@@ -154,7 +154,8 @@ const PostEditor: FC = () => {
 
   /* formik */
   const initialValues = {
-    posterUrl: '',
+    posterUrl:
+      'https://static.yancey.app/como-usar-imagens-webp-no-wordpress.jpg',
     title: '',
     summary: '',
     tags: [],
@@ -171,8 +172,8 @@ const PostEditor: FC = () => {
     setFieldValue,
     getFieldProps,
     setValues,
-    values,
     resetForm,
+    values,
     errors,
   } = useFormik({
     initialValues,
@@ -181,6 +182,8 @@ const PostEditor: FC = () => {
   })
 
   const onSubmit = async (type: SaveType) => {
+    const content = getMarkdown(editorRef)
+
     if (!values.posterUrl) {
       enqueueSnackbar('Please upload a poster.', { variant: 'warning' })
       return
@@ -193,12 +196,11 @@ const PostEditor: FC = () => {
       return
     }
 
-    if (!getMarkdown()) {
+    if (!content) {
       enqueueSnackbar('Write something...', { variant: 'warning' })
       return
     }
 
-    const content = getMarkdown()
     const lastModifiedDate = new Date().toISOString()
 
     const params = { ...values, content, lastModifiedDate }
@@ -243,11 +245,11 @@ const PostEditor: FC = () => {
         posterUrl,
       })
 
-      setMarkdown(content)
+      setMarkdown(editorRef, content)
     } else {
       const content = window.localStorage.getItem('post_content')
       if (content) {
-        setMarkdown(content)
+        setMarkdown(editorRef, content)
       }
     }
 
@@ -258,7 +260,7 @@ const PostEditor: FC = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      window.localStorage.setItem('post_content', getMarkdown())
+      window.localStorage.setItem('post_content', getMarkdown(editorRef))
     }, 5000)
 
     return () => {
@@ -374,10 +376,10 @@ const PostEditor: FC = () => {
         toolbarItems={MARKDOWN_EDITOR_TOOLBAR_ITEMS}
         plugins={[
           chartPlugin,
-          // @ts-ignore
-          tableMergedCellPlugin,
           umlPlugin,
           colorSyntaxPlugin,
+          // @ts-ignore
+          tableMergedCellPlugin,
           embededPlugin,
         ]}
         ref={editorRef}

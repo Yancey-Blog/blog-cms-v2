@@ -13,7 +13,7 @@ const client = algoliasearch(
 )
 const index = client.initIndex(REACT_APP_ALGOLIA_SEARCH_INDEX)
 
-export const addPostToAlgolia = async (
+export const sendPostToAlgolia = async (
   objectID: string,
   name: string,
   description: string,
@@ -33,6 +33,22 @@ export const addPostToAlgolia = async (
       },
       { autoGenerateObjectIDIfNotExist: true },
     )
+  } catch (e) {
+    SnackbarUtils.error(e.message)
+  }
+}
+
+export const deletePostOnAlgolia = async (objectID: string) => {
+  try {
+    await index.deleteObject(objectID)
+  } catch (e) {
+    SnackbarUtils.error(e.message)
+  }
+}
+
+export const deletePostsOnAlgolia = async (objectIDs: string[]) => {
+  try {
+    await index.deleteObjects(objectIDs)
   } catch (e) {
     SnackbarUtils.error(e.message)
   }
