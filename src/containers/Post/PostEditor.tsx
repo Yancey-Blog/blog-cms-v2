@@ -27,14 +27,16 @@ import Uploader from 'src/components/Uploader/Uploader'
 import UploaderModal from 'src/components/UploaderModal/UploaderModal'
 import { UploaderRes } from 'src/components/Uploader/types'
 import client from 'src/graphql/apolloClient'
-import embededPlugin from './editorEmbededPlugin'
-import { enhanceUpload, insertImage } from './enhanceEditor'
 import {
   MARKDOWN_EDITOR_TOOLBAR_ITEMS,
   POPOVER_ANCHOR_ORIGIN,
   POPOVER_TRANSFORM_ORIGIN,
 } from 'src/shared/constants'
 import { goBack, parseSearch } from 'src/shared/utils'
+import embededPlugin from './editors/editorEmbededPlugin'
+import { enhanceUpload, insertImage } from './editors/enhanceEditor'
+import { getMarkdown, getHTML, setMarkdown } from './editors/editorIO'
+import { sendPostToAlgolia } from './algolia/algoliaSearch'
 import {
   SaveType,
   PostStatisticsVars,
@@ -46,7 +48,7 @@ import {
 } from './types'
 import useStyles from './styles'
 
-const PostConfig: FC = () => {
+const PostEditor: FC = () => {
   /* message bar */
   const { enqueueSnackbar } = useSnackbar()
 
@@ -61,7 +63,7 @@ const PostConfig: FC = () => {
     CreatePostVars
   >(CREATE_ONE_POST, {
     onCompleted(data) {
-      const { _id, title, isPublic } = data.createPost
+      const { _id, title, isPublic, summary, posterUrl, tags } = data.createPost
       enqueueSnackbar('Create success!', { variant: 'success' })
 
       createPostStatistics({
@@ -73,6 +75,17 @@ const PostConfig: FC = () => {
           },
         },
       })
+
+      if (isPublic) {
+        sendPostToAlgolia(
+          _id,
+          title,
+          summary,
+          getHTML(editorRef),
+          posterUrl,
+          tags,
+        )
+      }
     },
     onError() {},
   })
@@ -82,7 +95,14 @@ const PostConfig: FC = () => {
     UpdatePostVars
   >(UPDATE_ONE_POST, {
     onCompleted(data) {
-      const { _id, title, isPublic } = data.updatePostById
+      const {
+        _id,
+        title,
+        summary,
+        isPublic,
+        posterUrl,
+        tags,
+      } = data.updatePostById
       enqueueSnackbar('Update success!', { variant: 'success' })
 
       createPostStatistics({
@@ -94,6 +114,17 @@ const PostConfig: FC = () => {
           },
         },
       })
+
+      if (isPublic) {
+        sendPostToAlgolia(
+          _id,
+          title,
+          summary,
+          getHTML(editorRef),
+          posterUrl,
+          tags,
+        )
+      }
     },
     onError() {},
   })
@@ -109,25 +140,7 @@ const PostConfig: FC = () => {
   const editorRef = useRef<Editor>(null)
   const [open, setOpen] = useState(false)
   const [image, setImage] = useState<UploaderRes>({ name: '', url: '' })
-  const handleEditorImageChange = (file: UploaderRes) => {
-    setImage(file)
-  }
-
-  const getMarkdown = () => {
-    if (editorRef.current) {
-      return editorRef.current.getInstance().getMarkdown()
-    }
-
-    return ''
-  }
-
-  const setMarkdown = (content: string) => {
-    if (editorRef.current) {
-      return editorRef.current.getInstance().setMarkdown(content)
-    }
-
-    return ''
-  }
+  const handleEditorImageChange = (file: UploaderRes) => setImage(file)
 
   /* posterUrl */
   const handlePosterImageChange = (data: UploaderRes) => {
@@ -158,8 +171,8 @@ const PostConfig: FC = () => {
     setFieldValue,
     getFieldProps,
     setValues,
-    values,
     resetForm,
+    values,
     errors,
   } = useFormik({
     initialValues,
@@ -168,6 +181,8 @@ const PostConfig: FC = () => {
   })
 
   const onSubmit = async (type: SaveType) => {
+    const content = getMarkdown(editorRef)
+
     if (!values.posterUrl) {
       enqueueSnackbar('Please upload a poster.', { variant: 'warning' })
       return
@@ -180,12 +195,11 @@ const PostConfig: FC = () => {
       return
     }
 
-    if (!getMarkdown()) {
+    if (!content) {
       enqueueSnackbar('Write something...', { variant: 'warning' })
       return
     }
 
-    const content = getMarkdown()
     const lastModifiedDate = new Date().toISOString()
 
     const params = { ...values, content, lastModifiedDate }
@@ -230,11 +244,11 @@ const PostConfig: FC = () => {
         posterUrl,
       })
 
-      setMarkdown(content)
+      setMarkdown(editorRef, content)
     } else {
       const content = window.localStorage.getItem('post_content')
       if (content) {
-        setMarkdown(content)
+        setMarkdown(editorRef, content)
       }
     }
 
@@ -245,7 +259,7 @@ const PostConfig: FC = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      window.localStorage.setItem('post_content', getMarkdown())
+      window.localStorage.setItem('post_content', getMarkdown(editorRef))
     }, 5000)
 
     return () => {
@@ -361,10 +375,10 @@ const PostConfig: FC = () => {
         toolbarItems={MARKDOWN_EDITOR_TOOLBAR_ITEMS}
         plugins={[
           chartPlugin,
-          // @ts-ignore
-          tableMergedCellPlugin,
           umlPlugin,
           colorSyntaxPlugin,
+          // @ts-ignore
+          tableMergedCellPlugin,
           embededPlugin,
         ]}
         ref={editorRef}
@@ -380,4 +394,4 @@ const PostConfig: FC = () => {
   )
 }
 
-export default PostConfig
+export default PostEditor

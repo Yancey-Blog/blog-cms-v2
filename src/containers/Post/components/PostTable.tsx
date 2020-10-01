@@ -59,7 +59,7 @@ const PostTable: FC<Props> = ({
   const { pathname } = useLocation()
   const toEditPage = (id?: string) => {
     history.push({
-      pathname: `${pathname}/config`,
+      pathname: `${pathname}/edit`,
       search: stringfySearch({ id }),
     })
   }
