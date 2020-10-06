@@ -40,7 +40,7 @@
     "chart.js": "^2.9.3",
     "classnames": "^2.2.6",
     "codemirror": "^5.58.1",
-    "formik": "^2.1.5",
+    "formik": "^2.1.7",
     "graphql-tag": "^2.11.0",
     "history": "^4.10.1",
     "material-ui-chip-input": "^1.1.0",
