@@ -2243,10 +2243,10 @@
   dependencies:
     query-string "*"
 
-"@types/ramda@^0.27.19":
-  version "0.27.19"
-  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.27.19.tgz#20a96954ca63aa42f419f392745dde94fde7dbee"
-  integrity sha512-BAeH07a6pRfFyoTuwhWJeNNHucbMlwh+imkO2BKOTZ6wpAElOAPyhBdyP1hx4W4sCPDnV/5UetcjZ/RT5lcMTA==
+"@types/ramda@^0.27.25":
+  version "0.27.25"
+  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.27.25.tgz#8b9b1910f93d3c3344ccfad1641f9332904f9eb5"
+  integrity sha512-D6gYQumFrGwDa0K2XqUIbktTAnQ/KBnbtL+IpXbpaiJJ1qnmfDZXe0diJC7LRQf7NvjjgxceQmv7YnL/1xjw6A==
   dependencies:
     ts-toolbelt "^6.3.3"
 
