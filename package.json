@@ -74,7 +74,7 @@
     "@types/node": "^14.14.0",
     "@types/query-string": "^6.3.0",
     "@types/ramda": "^0.27.29",
-    "@types/react": "^16.9.49",
+    "@types/react": "^16.9.53",
     "@types/react-calendar-heatmap": "^1.6.2",
     "@types/react-copy-to-clipboard": "^4.3.0",
     "@types/react-dom": "^16.9.6",
