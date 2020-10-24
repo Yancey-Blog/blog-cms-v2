@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import { FC, useState } from 'react'
 import { useSnackbar } from 'notistack'
 import { useHistory } from 'react-router-dom'
 import { useLazyQuery } from '@apollo/client'

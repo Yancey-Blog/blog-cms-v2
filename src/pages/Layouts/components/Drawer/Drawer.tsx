@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useState, useEffect } from 'react'
+import { FC, Fragment, useState, useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { Avatar } from '@material-ui/core'
 import { Home, Face } from '@material-ui/icons'

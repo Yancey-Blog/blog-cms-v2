@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import classNames from 'classnames'
 import { noop } from 'src/shared/utils'
 import { Route } from 'src/routes'

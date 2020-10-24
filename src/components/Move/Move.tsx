@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { MUIDataTableMeta } from 'mui-datatables'
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state'
 import { MoreVert } from '@material-ui/icons'

@@ -1,11 +1,11 @@
-import React from 'react'
+import { FC } from 'react'
 import { useSnackbar, VariantType, WithSnackbarProps } from 'notistack'
 
 interface Props {
   setUseSnackbarRef: (showSnackbar: WithSnackbarProps) => void
 }
 
-const InnerSnackbarUtilsConfigurator: React.FC<Props> = (props: Props) => {
+const InnerSnackbarUtilsConfigurator: FC<Props> = (props: Props) => {
   props.setUseSnackbarRef(useSnackbar())
   return null
 }

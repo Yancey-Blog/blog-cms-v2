@@ -1,4 +1,4 @@
-import React, { FC, useState, ChangeEvent } from 'react'
+import { FC, useState, ChangeEvent } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import MUIDataTable, {
   MUIDataTableColumn,
@@ -81,7 +81,7 @@ const PostTable: FC<Props> = ({
     })
   }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTitle(e.target.value)
   }
 

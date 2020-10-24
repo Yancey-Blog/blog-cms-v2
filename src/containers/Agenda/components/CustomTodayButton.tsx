@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Button } from '@material-ui/core'
 import { TodayButton } from '@devexpress/dx-react-scheduler-material-ui'
 import useStyles from '../styles'

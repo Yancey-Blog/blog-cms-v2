@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { OSS_CMS_PATH } from 'src/shared/constants'
 import SettingItemWrapper from '../../../components/SettingItemWrapper/SettingItemWrapper'
