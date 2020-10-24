@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.6.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v2.5.0...v2.6.0) (2020-10-01)
+
+
+### Features
+
+* add .env.production.example ([63ec2a5](https://github.com/Yancey-Blog/blog-cms-v2/commit/63ec2a52ada1659668daf685c410bc6b863547d5))
+* block pre tag temporarily when uploading to algolia ([b4f13a0](https://github.com/Yancey-Blog/blog-cms-v2/commit/b4f13a0945bb5411ccc2e9d5ff42e837f778d475))
+* compatible with the new version of mui-datatables ([e92679f](https://github.com/Yancey-Blog/blog-cms-v2/commit/e92679fd2dc31df2465b8091d4b2e6c7ba3c98ee))
+* delete useless files ([6fdcab5](https://github.com/Yancey-Blog/blog-cms-v2/commit/6fdcab5ec769895affa2e06445887d6681603182))
+* do not upload .env.production ([ddb6f7d](https://github.com/Yancey-Blog/blog-cms-v2/commit/ddb6f7dc48f37406bd7b89c881c24b3b2514b572))
+* rename PostConfig to PostEditor ([ace840e](https://github.com/Yancey-Blog/blog-cms-v2/commit/ace840ec3c6955ebb4d9e9dbfdc9fa9e5be9183a))
+* rename PostConfig to PostEditor ([37fcf21](https://github.com/Yancey-Blog/blog-cms-v2/commit/37fcf21dbcbe2bd7c05c1c91e8342b7a3e35095d))
+* resolve conflict ([aa9283a](https://github.com/Yancey-Blog/blog-cms-v2/commit/aa9283a43d02717722f7164e933ac2134ca89b69))
+* send data after publishing an article ([5a3e236](https://github.com/Yancey-Blog/blog-cms-v2/commit/5a3e2368df3d5b5c7f0487f783f7358ca52172c4))
+* support algoliaSearch ([bb7acfe](https://github.com/Yancey-Blog/blog-cms-v2/commit/bb7acfe03135759858c01d543bf2ac2649f2a1bf))
+* update algoliasearch ([b7ac483](https://github.com/Yancey-Blog/blog-cms-v2/commit/b7ac4834de407a48fa7db2091da200ee34c41501))
+* use addPostToAlgolia ([4c65428](https://github.com/Yancey-Blog/blog-cms-v2/commit/4c654288351018d941c51dfcfd655a0e8af3bbe3))
+* use algoliaSearch ([74fc190](https://github.com/Yancey-Blog/blog-cms-v2/commit/74fc1908c7d4fe042033cc0b6f88d05f2fb61031))
+
 ## [2.5.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v2.4.0...v2.5.0) (2020-09-25)
 
 
