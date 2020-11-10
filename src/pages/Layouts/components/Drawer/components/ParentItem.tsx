@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import classNames from 'classnames'
+import { Link } from '@material-ui/icons'
 import { noop } from 'src/shared/utils'
 import { Route } from 'src/routes'
 import useStyles from '../styles'
@@ -12,7 +13,7 @@ interface ParentItemProps {
 
 const ParentItem: FC<ParentItemProps> = ({
   open,
-  route,
+  route: { name, icon, isExternalLink },
   handleFoldNameChange,
 }) => {
   const classes = useStyles()
@@ -22,24 +23,22 @@ const ParentItem: FC<ParentItemProps> = ({
       className={classNames(classes.item, {
         [classes.hidenItem]: !open,
       })}
-      onClick={
-        handleFoldNameChange ? () => handleFoldNameChange(route.name) : noop
-      }
+      onClick={handleFoldNameChange ? () => handleFoldNameChange(name) : noop}
     >
       <span
         className={classNames(classes.itemAbbrTxt, classes.itemIcon, {
           [classes.hidenItem]: !open,
         })}
       >
-        {route.icon}
+        {icon}
       </span>
       <div
         className={classNames(classes.detail, {
           [classes.hideDetail]: !open,
         })}
       >
-        <span className={classes.itemTxt}>{route.name}</span>
-
+        <span className={classes.itemTxt}>{name}</span>
+        {isExternalLink && <Link className={classes.linkIcon} />}
         {handleFoldNameChange && <span className={classes.arrow} />}
       </div>
     </div>
