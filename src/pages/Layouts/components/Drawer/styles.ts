@@ -176,6 +176,14 @@ const useStyles = makeStyles({
     fontWeight: 300,
   },
 
+  linkIcon: {
+    position: 'relative',
+    top: '-0.2rem',
+    width: '1rem',
+    height: '1rem',
+    marginLeft: '0.2rem',
+  },
+
   detail: {
     display: 'flex',
     alignItems: 'center',

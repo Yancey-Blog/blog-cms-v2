@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.7.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v2.6.0...v2.7.0) (2020-11-10)
+
+
+### Features
+
+* add Link icon for external link in Drawer component ([33e0edd](https://github.com/Yancey-Blog/blog-cms-v2/commit/33e0edd7ffc03f834dd7af31ff58de58847b437e))
+
 ## [2.6.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v2.5.0...v2.6.0) (2020-10-01)
 
 
