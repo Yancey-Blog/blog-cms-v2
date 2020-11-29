@@ -36,7 +36,7 @@
     "@toast-ui/editor-plugin-uml": "^1.0.0",
     "@toast-ui/react-editor": "^2.4.0",
     "algoliasearch": "^4.8.0",
-    "apollo-cache-persist": "^0.1.1",
+    "apollo3-cache-persist": "^0.9.1",
     "chart.js": "^2.9.3",
     "classnames": "^2.2.6",
     "codemirror": "^5.58.3",

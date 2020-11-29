@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { BatchHttpLink } from '@apollo/client/link/batch-http'
 import { onError } from '@apollo/client/link/error'
 import { setContext } from '@apollo/client/link/context'
-import { persistCache } from 'apollo-cache-persist'
+import { persistCache, LocalStorageWrapper } from 'apollo3-cache-persist'
 import SnackbarUtils from 'src/components/Toast/Toast'
 import { logout } from 'src/shared/utils'
 
@@ -64,12 +64,9 @@ const cache = new InMemoryCache()
 async function handlePersistCache() {
   await persistCache({
     cache,
-    // @ts-ignore
-    storage: window.localStorage,
-    maxSize: false,
+    storage: new LocalStorageWrapper(window.localStorage),
   })
 }
-
 handlePersistCache()
 
 const client = new ApolloClient({
