@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import classNames from 'classnames'
 import { Link } from '@material-ui/icons'
 import { noop } from 'src/shared/utils'

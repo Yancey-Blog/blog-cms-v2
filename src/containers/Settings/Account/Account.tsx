@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { useSnackbar } from 'notistack'
 import { useMutation } from '@apollo/client'
 import { logout } from 'src/shared/utils'

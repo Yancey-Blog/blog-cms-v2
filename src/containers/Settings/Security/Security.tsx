@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import ChangePassword from './components/ChangePassword/ChangePassword'
 import TwoFactors from './components/TwoFactors/TwoFactors'
 import SecurtyIntro from './components/SecurtyIntro/SecurtyIntro'

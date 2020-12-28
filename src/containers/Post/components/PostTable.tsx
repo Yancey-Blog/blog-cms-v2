@@ -1,4 +1,4 @@
-import React, { FC, useState, ChangeEvent } from 'react'
+import { FC, useState, ChangeEvent } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import MUIDataTable, {
   MUIDataTableColumn,

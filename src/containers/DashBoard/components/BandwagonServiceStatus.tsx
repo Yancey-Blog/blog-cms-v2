@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { IBandwagonServiceInfo } from '../types'
 import StatusCard from './StatusCard'
