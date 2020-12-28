@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useCallback } from 'react'
+import { FC, useEffect, useCallback } from 'react'
 import { useLazyQuery, useMutation } from '@apollo/client'
 import { useSnackbar } from 'notistack'
 import {

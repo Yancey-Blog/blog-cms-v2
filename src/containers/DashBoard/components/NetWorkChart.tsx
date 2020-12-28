@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import { FC, useState } from 'react'
 import { Bar } from 'react-chartjs-2'
 import chartConfig from '../chartjsConfig'
 import { IBandwagonUsageStatus } from '../types'

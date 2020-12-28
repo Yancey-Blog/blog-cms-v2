@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Card } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
