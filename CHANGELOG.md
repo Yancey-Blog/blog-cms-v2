@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v2.7.0...v3.0.0) (2020-12-28)
+
+
+### Features
+
+* add reportWebVitals ([50ac056](https://github.com/Yancey-Blog/blog-cms-v2/commit/50ac056e58c9b80dd782854972dfba4daa20d7b2))
+* supports react17 ([1e10ccf](https://github.com/Yancey-Blog/blog-cms-v2/commit/1e10ccfa9deceb20a07bdd96ab10e7e63de528b9))
+* supports reportWebVitals ([e12d298](https://github.com/Yancey-Blog/blog-cms-v2/commit/e12d2983bcb992013d6ec9b7d0ca3fbc83af0ffb))
+* supports service-worker.ts ([d11d49a](https://github.com/Yancey-Blog/blog-cms-v2/commit/d11d49af60eea3c9a5786f0ccbd7f2a486ae2788))
+* update setupTests ([b0757e0](https://github.com/Yancey-Blog/blog-cms-v2/commit/b0757e05265c3c8722c329cf197c943b08ee3407))
+* use new version of jsx-transform ([40ee1d7](https://github.com/Yancey-Blog/blog-cms-v2/commit/40ee1d7b29839e32e5577f0edda188f4b3f2df00))
+
 ## [2.7.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v2.6.0...v2.7.0) (2020-11-10)
 
 
