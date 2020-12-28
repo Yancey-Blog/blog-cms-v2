@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import { useSnackbar } from 'notistack'
 import {

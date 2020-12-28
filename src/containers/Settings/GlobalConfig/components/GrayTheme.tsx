@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent } from 'react'
+import { FC, ChangeEvent } from 'react'
 import { FormControlLabel, Switch } from '@material-ui/core'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import SettingItemWrapper from '../../components/SettingItemWrapper/SettingItemWrapper'

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import classNames from 'classnames'
 import { Button } from '@material-ui/core'
 import { DateNavigator } from '@devexpress/dx-react-scheduler-material-ui'

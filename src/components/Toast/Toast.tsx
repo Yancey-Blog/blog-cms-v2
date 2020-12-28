@@ -1,11 +1,11 @@
-import React from 'react'
+import { FC } from 'react'
 import { useSnackbar, VariantType, WithSnackbarProps } from 'notistack'
 
 interface Props {
   setUseSnackbarRef: (showSnackbar: WithSnackbarProps) => void
 }
 
-const InnerSnackbarUtilsConfigurator: React.FC<Props> = (props: Props) => {
+const InnerSnackbarUtilsConfigurator: FC<Props> = (props: Props) => {
   props.setUseSnackbarRef(useSnackbar())
   return null
 }
@@ -21,7 +21,7 @@ export const SnackbarUtilsConfigurator = () => {
   )
 }
 
-export default {
+const toast = {
   success(msg: string) {
     this.toast(msg, 'success')
   },
@@ -38,3 +38,5 @@ export default {
     useSnackbarRef.enqueueSnackbar(msg, { variant })
   },
 }
+
+export default toast

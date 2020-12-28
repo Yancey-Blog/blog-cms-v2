@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({

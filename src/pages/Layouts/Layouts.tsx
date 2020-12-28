@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import { FC, useState } from 'react'
 import classNames from 'classnames'
 import useStyles from './styles'
 import Header from './components/Header/Header'

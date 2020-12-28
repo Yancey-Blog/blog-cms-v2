@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import {
   Button,
   DialogActions,
@@ -17,8 +17,8 @@ const ConfirmModal: FC<any> = ({ routeState, onSubmit, goBack }) => (
     <DialogTitle>Are you sure delete those items?</DialogTitle>
     <DialogContent>
       <DialogContentText>
-        Let Google help apps determine location. This means sending anonymous location data to
-        Google, even when no apps are running.
+        Let Google help apps determine location. This means sending anonymous
+        location data to Google, even when no apps are running.
       </DialogContentText>
     </DialogContent>
     <DialogActions>
