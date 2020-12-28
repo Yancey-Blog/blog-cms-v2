@@ -13,6 +13,7 @@ import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
 import Loading from './components/Loading/InstagramLoading'
 import client from './graphql/apolloClient'
+import reportWebVitals from './reportWebVitals'
 import history from './shared/history'
 import {
   SNACKBAR_ANCHOR_ORIGIN,
@@ -67,3 +68,8 @@ ReactDOM.render(
   </ApolloProvider>,
   document.getElementById('root'),
 )
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals()
