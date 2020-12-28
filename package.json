@@ -37,7 +37,7 @@
     "@toast-ui/react-editor": "^2.4.0",
     "algoliasearch": "^4.8.3",
     "apollo-cache-persist": "^0.1.1",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "classnames": "^2.2.6",
     "codemirror": "^5.59.0",
     "formik": "^2.2.0",
