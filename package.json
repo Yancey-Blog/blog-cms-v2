@@ -39,7 +39,7 @@
     "apollo-cache-persist": "^0.1.1",
     "chart.js": "^2.9.3",
     "classnames": "^2.2.6",
-    "codemirror": "^5.58.1",
+    "codemirror": "^5.59.0",
     "formik": "^2.2.0",
     "graphql-tag": "^2.11.0",
     "history": "^4.10.1",
