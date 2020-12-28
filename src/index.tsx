@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import { Switch, Route, Redirect, Router } from 'react-router-dom'
 import loadable from '@loadable/component'
@@ -27,43 +27,45 @@ const Layouts = loadable(() => import('./pages/Layouts/Layouts'), {
 })
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <SnackbarProvider
-      maxSnack={SNACKBAR_MAX_NUM}
-      anchorOrigin={SNACKBAR_ANCHOR_ORIGIN}
-      autoHideDuration={SNACKBAR_AUTO_HIDE_DURATION}
-    >
-      <MuiPickersUtilsProvider utils={MomentUtils}>
-        <SnackbarUtilsConfigurator />
-        <CssBaseline />
-        <Router history={history}>
-          <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/register">
-              <Register />
-            </Route>
-            <Route
-              path="/"
-              render={({ location }) =>
-                window.localStorage.getItem('token') ? (
-                  <Layouts />
-                ) : (
-                  <Redirect
-                    to={{
-                      pathname: '/login',
-                      state: { from: location },
-                    }}
-                  />
-                )
-              }
-            />
-          </Switch>
-        </Router>
-      </MuiPickersUtilsProvider>
-    </SnackbarProvider>
-  </ApolloProvider>,
+  <StrictMode>
+    <ApolloProvider client={client}>
+      <SnackbarProvider
+        maxSnack={SNACKBAR_MAX_NUM}
+        anchorOrigin={SNACKBAR_ANCHOR_ORIGIN}
+        autoHideDuration={SNACKBAR_AUTO_HIDE_DURATION}
+      >
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <SnackbarUtilsConfigurator />
+          <CssBaseline />
+          <Router history={history}>
+            <Switch>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Route path="/register">
+                <Register />
+              </Route>
+              <Route
+                path="/"
+                render={({ location }) =>
+                  window.localStorage.getItem('token') ? (
+                    <Layouts />
+                  ) : (
+                    <Redirect
+                      to={{
+                        pathname: '/login',
+                        state: { from: location },
+                      }}
+                    />
+                  )
+                }
+              />
+            </Switch>
+          </Router>
+        </MuiPickersUtilsProvider>
+      </SnackbarProvider>
+    </ApolloProvider>
+  </StrictMode>,
   document.getElementById('root'),
 )
 
