@@ -44,7 +44,7 @@
     "graphql-tag": "^2.11.0",
     "history": "^4.10.1",
     "material-ui-chip-input": "^1.1.0",
-    "material-ui-popup-state": "^1.7.0",
+    "material-ui-popup-state": "^1.7.1",
     "moment": "^2.29.1",
     "mui-datatables": "^3.7.3",
     "notistack": "^1.0.2",
