@@ -41,7 +41,7 @@ const PlayerModal: FC<Props> = ({
   const initialValues = {
     title: '',
     artist: '',
-    lrc: '',
+    lrc: '[00:00.000]此歌曲为没有填词的纯音乐, 请您欣赏',
     coverUrl: '',
     musicFileUrl: '',
     isPublic: true,
