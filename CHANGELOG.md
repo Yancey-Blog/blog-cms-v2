@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.0.0...v3.1.0) (2021-01-02)
+
+
+### Features
+
+* add default lrc ([08cc365](https://github.com/Yancey-Blog/blog-cms-v2/commit/08cc365fa28e79635d2c091ad85d59fd59b2d6bc))
+
 ## [3.0.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v2.7.0...v3.0.0) (2020-12-28)
 
 
