@@ -2343,10 +2343,10 @@
   dependencies:
     tui-color-picker "^2.2.6"
 
-"@toast-ui/editor-plugin-table-merged-cell@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@toast-ui/editor-plugin-table-merged-cell/-/editor-plugin-table-merged-cell-1.3.1.tgz#0e823fb2b6f64d7d5186a6d8e72b32a80bcc273d"
-  integrity sha512-3MbceE25BtJ2T7CHhvx96MTkDvs5tnlJkKq1oHzy/K0AZ7QdnQJkDojZlPU5K8OhDfluIm+hOmmntWQS6Rio8Q==
+"@toast-ui/editor-plugin-table-merged-cell@^1.3.2":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@toast-ui/editor-plugin-table-merged-cell/-/editor-plugin-table-merged-cell-1.3.2.tgz#fa1e49f8591e612ff5b7098369fa2efcd899d9a6"
+  integrity sha512-80bz52MatN3LU9MD2RDkf/FWGhoioI5DQnhsn4CZz92jgnlJZycZOgX7hPycbIQqzNNZsvLlcpL8g+FRAr/4Xw==
 
 "@toast-ui/editor-plugin-uml@^1.0.0":
   version "1.0.0"
