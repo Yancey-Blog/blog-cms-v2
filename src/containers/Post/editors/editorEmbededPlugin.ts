@@ -8,10 +8,12 @@ const renderEmbeded = (wrapperId: string, iframeEl: string) => {
   }
 }
 
-export default () => {
+const addEmbededEl = () => {
   ToastUIEditor.codeBlockManager.setReplacer('embeded', (iframeEl: string) => {
     const wrapperId = `embeded_${randomSeries(6)}`
     setTimeout(renderEmbeded.bind(null, wrapperId, iframeEl), 0)
     return `<div id="${wrapperId}"></div>`
   })
 }
+
+export default addEmbededEl

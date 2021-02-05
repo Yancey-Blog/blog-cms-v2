@@ -1,4 +1,4 @@
-import React, { FC, useRef, useEffect, useState } from 'react'
+import { FC, useRef, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { TextField, Button, IconButton, Popover } from '@material-ui/core'
 import ChipInput from 'material-ui-chip-input'

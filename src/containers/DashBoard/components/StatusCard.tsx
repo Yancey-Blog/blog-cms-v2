@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import classNames from 'classnames'
 import { Card, LinearProgress, Divider } from '@material-ui/core'
 import {

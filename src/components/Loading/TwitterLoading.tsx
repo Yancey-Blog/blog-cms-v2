@@ -1,6 +1,6 @@
-import * as React from 'react'
+import { Component } from 'react'
 
-class TwitterLoading extends React.Component<{}, {}> {
+class TwitterLoading extends Component<{}, {}> {
   constructor(props: {}) {
     super(props)
     this.state = {}
