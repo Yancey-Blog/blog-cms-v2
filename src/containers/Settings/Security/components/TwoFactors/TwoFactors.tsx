@@ -13,6 +13,7 @@ import {
 } from '@material-ui/icons'
 import { OSS_CMS_PATH } from 'src/shared/constants'
 import client from 'src/graphql/apolloClient'
+import SnackbarUtils from 'src/components/Toast/Toast'
 import SettingItemWrapper from 'src/containers/Settings/components/SettingItemWrapper/SettingItemWrapper'
 import TOTP from '../TOTP/TOTP'
 import RecoveryCodes from '../RecoveryCodes/RecoveryCodes'
@@ -31,6 +32,14 @@ const TwoFactors: FC = () => {
   } = client.cache.data.data[
     `UserModel:${window.localStorage.getItem('userId')}`
   ]
+
+  const openRecoveryCodesDialog = () => {
+    if (!isTOTP) {
+      SnackbarUtils.error('Please turn on Authenticator app options first!')
+      return
+    }
+    setOpenRecoveryCodes(true)
+  }
 
   return (
     <>
@@ -91,7 +100,7 @@ const TwoFactors: FC = () => {
 
           <Divider />
 
-          <ListItem button onClick={() => setOpenRecoveryCodes(true)}>
+          <ListItem button onClick={openRecoveryCodesDialog}>
             <ListItemText primary="Recovery codes" className={styles.title} />
             <ListItemText
               primary={<p className={styles.phone}>Click to generate</p>}

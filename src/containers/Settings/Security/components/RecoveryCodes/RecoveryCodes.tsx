@@ -8,7 +8,7 @@ import {
   DialogActions,
   CircularProgress,
 } from '@material-ui/core'
-import moment from 'moment'
+import { DateTime } from 'luxon'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import Transition from 'src/components/Transition/Transition'
 import { generateFile } from 'src/shared/utils'
@@ -70,7 +70,7 @@ const RecoveryCodes: FC<Props> = ({ setOpen, open }) => {
             <ul>
               <li>You can only use each backup code once.</li>
               <li>
-                These codes were generated on: {moment().format('MMM D, YYYY')}.
+                These codes were generated on: {DateTime.now().toFormat('DD')}.
               </li>
             </ul>
           </>

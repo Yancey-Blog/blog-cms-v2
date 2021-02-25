@@ -1,4 +1,4 @@
-import moment from 'moment'
+import { DateTime } from 'luxon'
 import { IBandwagonUsageStatus } from 'src/containers/DashBoard/types'
 
 const chartConfig = (
@@ -8,9 +8,7 @@ const chartConfig = (
   type2?: Exclude<keyof IBandwagonUsageStatus, 'timestamp'>,
 ) => ({
   labels: usageStatus
-    .map((usageStat) =>
-      moment(parseInt(usageStat.timestamp, 10) * 1000).format('HH:mm'),
-    )
+    .map(({ timestamp }) => DateTime.fromSeconds(+timestamp).toFormat('HH:mm'))
     .slice(-limit),
   datasets: [
     {
