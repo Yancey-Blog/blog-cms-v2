@@ -5,8 +5,8 @@ import MUIDataTable, {
 } from 'mui-datatables'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab } from '@material-ui/core'
+import { formatJSONDate } from 'yancey-js-util'
 import useOpenModal from 'src/hooks/useOpenModal'
-import { formatDate } from 'src/shared/utils'
 import MottoModal from './MottoModal'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
@@ -53,14 +53,14 @@ const MottoTable: FC<Props> = ({
       name: 'createdAt',
       label: 'Created At',
       options: {
-        customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
+        customBodyRender: (value: string) => <span>{formatJSONDate(value)}</span>,
       },
     },
     {
       name: 'updatedAt',
       label: 'Updated At',
       options: {
-        customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
+        customBodyRender: (value: string) => <span>{formatJSONDate(value)}</span>,
       },
     },
     {

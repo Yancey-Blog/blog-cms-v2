@@ -19,7 +19,8 @@ import {
 } from '@material-ui/core'
 import { DeleteOutline, Edit, AddBox, Search, Clear } from '@material-ui/icons'
 import { Pagination } from '@material-ui/lab'
-import { formatDate, stringfySearch } from 'src/shared/utils'
+import { formatJSONDate } from 'yancey-js-util'
+import { stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
@@ -172,14 +173,18 @@ const PostTable: FC<Props> = ({
       name: 'createdAt',
       label: 'CreatedAt',
       options: {
-        customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
+        customBodyRender: (value: string) => (
+          <span>{formatJSONDate(value)}</span>
+        ),
       },
     },
     {
       name: 'lastModifiedDate',
       label: 'Last Modified Date',
       options: {
-        customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
+        customBodyRender: (value: string) => (
+          <span>{formatJSONDate(value)}</span>
+        ),
       },
     },
     {

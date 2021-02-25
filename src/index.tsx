@@ -5,7 +5,7 @@ import loadable from '@loadable/component'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ApolloProvider } from '@apollo/client'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
-import MomentUtils from '@date-io/moment'
+import LuxonUtils from '@date-io/luxon'
 import { SnackbarProvider } from 'notistack'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 import { SnackbarUtilsConfigurator } from './components/Toast/Toast'
@@ -34,7 +34,7 @@ ReactDOM.render(
         anchorOrigin={SNACKBAR_ANCHOR_ORIGIN}
         autoHideDuration={SNACKBAR_AUTO_HIDE_DURATION}
       >
-        <MuiPickersUtilsProvider utils={MomentUtils}>
+        <MuiPickersUtilsProvider utils={LuxonUtils}>
           <SnackbarUtilsConfigurator />
           <CssBaseline />
           <Router history={history}>

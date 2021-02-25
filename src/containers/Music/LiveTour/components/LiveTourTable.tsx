@@ -6,8 +6,8 @@ import MUIDataTable, {
 } from 'mui-datatables'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab } from '@material-ui/core'
+import { formatJSONDate } from 'yancey-js-util'
 import useOpenModal from 'src/hooks/useOpenModal'
-import { formatDate } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
@@ -59,21 +59,21 @@ const LiveTourTable: FC<Props> = ({
       name: 'showTime',
       label: 'Show Time',
       options: {
-        customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
+        customBodyRender: (value: string) => <span>{formatJSONDate(value)}</span>,
       },
     },
     {
       name: 'createdAt',
       label: 'Created At',
       options: {
-        customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
+        customBodyRender: (value: string) => <span>{formatJSONDate(value)}</span>,
       },
     },
     {
       name: 'updatedAt',
       label: 'Updated At',
       options: {
-        customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
+        customBodyRender: (value: string) => <span>{formatJSONDate(value)}</span>,
       },
     },
     {

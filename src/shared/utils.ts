@@ -1,4 +1,3 @@
-import moment from 'moment'
 import qs from 'query-string'
 import history from './history'
 
@@ -11,9 +10,6 @@ export const getInitials = (txt: string) =>
     .split(' ')
     .map((val: string) => val[0])
     .join('')
-
-export const formatDate = (ISOString: string) =>
-  moment(ISOString).format('YYYY-MM-DD HH:mm:ss')
 
 export const getType = <T>(type: T) =>
   Object.prototype.toString.call(type).slice(8, -1).toLowerCase()

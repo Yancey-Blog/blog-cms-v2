@@ -7,8 +7,8 @@ import MUIDataTable, {
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
 import { FormControl, Fab, Popover, Switch, Button } from '@material-ui/core'
+import { formatJSONDate } from 'yancey-js-util'
 import useOpenModal from 'src/hooks/useOpenModal'
-import { formatDate } from 'src/shared/utils'
 import Move from 'src/components/Move/Move'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
@@ -146,14 +146,14 @@ const PlayerTable: FC<Props> = ({
       name: 'createdAt',
       label: 'Created At',
       options: {
-        customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
+        customBodyRender: (value: string) => <span>{formatJSONDate(value)}</span>,
       },
     },
     {
       name: 'updatedAt',
       label: 'Updated At',
       options: {
-        customBodyRender: (value: string) => <span>{formatDate(value)}</span>,
+        customBodyRender: (value: string) => <span>{formatJSONDate(value)}</span>,
       },
     },
     {

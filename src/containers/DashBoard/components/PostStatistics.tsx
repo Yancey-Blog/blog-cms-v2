@@ -1,12 +1,12 @@
 import { FC } from 'react'
-import moment from 'moment'
+import { DateTime } from 'luxon'
+import { formatJSONDate } from 'yancey-js-util'
 import classNames from 'classnames'
 import ReactTooltip from 'react-tooltip'
 import CalendarHeatmap from 'react-calendar-heatmap'
 import 'react-calendar-heatmap/dist/styles.css'
 import { Paper } from '@material-ui/core'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
-import { formatDate } from 'src/shared/utils'
 import {
   IPostStatistics,
   IPostStatisticsGroupItem,
@@ -41,8 +41,8 @@ const PostStatistics: FC<Props> = ({ loading, data }) => {
   return (
     <Paper className={classNames(classes.paper, classes.heatmapPaper)}>
       <CalendarHeatmap
-        startDate={new Date(moment().subtract(1, 'y').format('YYYY-MM-DD'))}
-        endDate={new Date(moment().format('YYYY-MM-DD'))}
+        startDate={new Date(DateTime.now().plus({ years: -1 }).toISODate())}
+        endDate={new Date(DateTime.now().toISODate())}
         values={data.map((postStatisticsItem) => ({
           date: postStatisticsItem._id,
           ...postStatisticsItem,
@@ -59,7 +59,7 @@ const PostStatistics: FC<Props> = ({ loading, data }) => {
             ${value.items
               .map(
                 (item) =>
-                  `「${item.postName}」 is ${item.scenes} at ${formatDate(
+                  `「${item.postName}」 is ${item.scenes} at ${formatJSONDate(
                     item.operatedAt,
                   )}`,
               )
