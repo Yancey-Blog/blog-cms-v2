@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.1.0...v3.2.0) (2021-02-25)
+
+
+### Features
+
+* update ([cea328a](https://github.com/Yancey-Blog/blog-cms-v2/commit/cea328ae8f8f7081e704a5a2fecb308168a7cce8))
+* use luxon instead of moment ([dcfcd2a](https://github.com/Yancey-Blog/blog-cms-v2/commit/dcfcd2a620904f468b791e2f5a477f68e6068743))
+
 ## [3.1.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.0.0...v3.1.0) (2021-01-02)
 
 
