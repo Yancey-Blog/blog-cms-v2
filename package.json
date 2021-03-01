@@ -85,7 +85,7 @@
     "babel-plugin-transform-imports": "^2.0.0",
     "cz-conventional-changelog": "^3.0.2",
     "graphql": "^15.4.0",
-    "husky": "^4.3.0",
+    "husky": "^5.1.2",
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
     "sass": "^1.32.8",
