@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.2.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.2.0...v3.2.1) (2021-03-21)
+
+
+### Bug Fixes
+
+* **luxon format:** luxon uses a new format to instead of momentjs ([bf08673](https://github.com/Yancey-Blog/blog-cms-v2/commit/bf08673e99d9e5901f79e4683d75a32de95a2eea))
+
 ## [3.2.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.1.0...v3.2.0) (2021-02-25)
 
 
