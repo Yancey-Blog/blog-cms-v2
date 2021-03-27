@@ -124,7 +124,7 @@ const LiveTourModal: FC<Props> = ({
             showTodayButton={true}
             ampm={false}
             onChange={(date) => setFieldValue('showTime', date, true)}
-            format="YYYY/MM/DD HH:mm:ss"
+            format="yyyy/LL/dd HH:mm:ss"
           />
 
           <div className={classes.uploaderGroup}>
