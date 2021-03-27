@@ -81,61 +81,67 @@ const Header: FC<Props> = ({ open, handleDrawerChange }) => {
         </IconButton>
 
         <PopupState variant="popover" popupId="deleteOnePoperOver">
-          {(popupState) => (
-            <>
-              <IconButton
-                style={{ cursor: 'pointer' }}
-                {...bindTrigger(popupState)}
-              >
-                <Person />
-              </IconButton>
-              <Menu
-                {...bindMenu(popupState)}
-                TransitionComponent={Fade}
-                className={classes.menu}
-              >
-                <Link to="/settings/profile" className={classes.anchor}>
-                  <MenuItem onClick={popupState.close}>
+          {(popupState) => {
+            const handleLogout = () => {
+              popupState.close()
+              logout()
+            }
+            return (
+              <>
+                <IconButton
+                  style={{ cursor: 'pointer' }}
+                  {...bindTrigger(popupState)}
+                >
+                  <Person />
+                </IconButton>
+                <Menu
+                  {...bindMenu(popupState)}
+                  TransitionComponent={Fade}
+                  className={classes.menu}
+                >
+                  <Link to="/settings/profile" className={classes.anchor}>
+                    <MenuItem onClick={popupState.close}>
+                      <ListItemIcon>
+                        <FaceOutlined />
+                      </ListItemIcon>
+                      <ListItemText primary="Profile" />
+                    </MenuItem>
+                  </Link>
+                  <Link to="/settings/account" className={classes.anchor}>
+                    <MenuItem onClick={popupState.close}>
+                      <ListItemIcon>
+                        <AccountBalanceOutlined />
+                      </ListItemIcon>
+                      <ListItemText primary="Account" />
+                    </MenuItem>
+                  </Link>
+                  <Link to="/settings/security" className={classes.anchor}>
+                    <MenuItem onClick={popupState.close}>
+                      <ListItemIcon>
+                        <LockOutlined />
+                      </ListItemIcon>
+                      <ListItemText primary="Security" />
+                    </MenuItem>
+                  </Link>
+                  <Link to="/settings/global-config" className={classes.anchor}>
+                    <MenuItem onClick={popupState.close}>
+                      <ListItemIcon>
+                        <PermDataSettingOutlined />
+                      </ListItemIcon>
+                      <ListItemText primary="Global Config" />
+                    </MenuItem>
+                  </Link>
+                  <Divider />
+                  <MenuItem onClick={handleLogout}>
                     <ListItemIcon>
-                      <FaceOutlined />
+                      <ExitToAppOutlined />
                     </ListItemIcon>
-                    <ListItemText primary="Profile" />
+                    <ListItemText primary="Logout" />
                   </MenuItem>
-                </Link>
-                <Link to="/settings/account" className={classes.anchor}>
-                  <MenuItem onClick={popupState.close}>
-                    <ListItemIcon>
-                      <AccountBalanceOutlined />
-                    </ListItemIcon>
-                    <ListItemText primary="Account" />
-                  </MenuItem>
-                </Link>
-                <Link to="/settings/security" className={classes.anchor}>
-                  <MenuItem onClick={popupState.close}>
-                    <ListItemIcon>
-                      <LockOutlined />
-                    </ListItemIcon>
-                    <ListItemText primary="Security" />
-                  </MenuItem>
-                </Link>
-                <Link to="/settings/global-config" className={classes.anchor}>
-                  <MenuItem onClick={popupState.close}>
-                    <ListItemIcon>
-                      <PermDataSettingOutlined />
-                    </ListItemIcon>
-                    <ListItemText primary="Global Config" />
-                  </MenuItem>
-                </Link>
-                <Divider />
-                <MenuItem onClick={popupState.close && logout}>
-                  <ListItemIcon>
-                    <ExitToAppOutlined />
-                  </ListItemIcon>
-                  <ListItemText primary="Logout" />
-                </MenuItem>
-              </Menu>
-            </>
-          )}
+                </Menu>
+              </>
+            )
+          }}
         </PopupState>
       </section>
     </AppBar>
