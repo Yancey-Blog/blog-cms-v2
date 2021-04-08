@@ -15,7 +15,7 @@ import NetWorkChart from './components/NetWorkChart'
 import CPUChart from './components/CPUChart'
 import PostRankList from './components/PostRankList'
 import PostStatistics from './components/PostStatistics'
-import TagsCloud from './components/TagsCloud'
+import TagClouds from './components/TagClouds'
 
 const DashBoard: FC = () => {
   const classes = useStyles()
@@ -96,7 +96,7 @@ const DashBoard: FC = () => {
           isFetchingUsageStatus={isFetchingUsageStatus}
         />
 
-        <TagsCloud
+        <TagClouds
           tags={allTags ? allTags.getAllTags.tags : []}
           loading={isFetchingAllTags}
         />
