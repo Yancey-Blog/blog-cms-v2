@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.4.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.3.0...v3.4.0) (2021-04-08)
+
+
+### Features
+
+* add header for TagClouds component ([27f6b61](https://github.com/Yancey-Blog/blog-cms-v2/commit/27f6b614fb23e52349e5161838b5a41ab3499f16))
+* supports skeleton for PostRankList component ([5ed933b](https://github.com/Yancey-Blog/blog-cms-v2/commit/5ed933b9621e1d1d9baac553e0e346a003a09b6c))
+
 ## [3.3.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.2.1...v3.3.0) (2021-03-27)
 
 
