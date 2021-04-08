@@ -12,6 +12,7 @@ import {
 import { LooksOne, LooksTwo, Looks3, Looks4, Looks5 } from '@material-ui/icons'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { IPostItem } from 'src/containers/Post/types'
+import PostRankListSkeleton from './PostRankListSkeleton'
 import { PostRankListType } from '../types'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -47,7 +48,7 @@ const numbersIcon = [
   <Looks5 />,
 ]
 
-const PostRankList: FC<Props> = ({ type, topPosts }) => {
+const PostRankList: FC<Props> = ({ type, topPosts, loading }) => {
   const classes = useStyles()
 
   const renderType = (post: IPostItem) => {
@@ -60,24 +61,31 @@ const PostRankList: FC<Props> = ({ type, topPosts }) => {
 
   return (
     <Paper className={classes.paper}>
-      <header className={classes.header}>
-        TOP 5 POSTS BY {type === PostRankListType.PV ? 'PV' : 'LIKE'}
-      </header>
-      <List className={classes.list}>
-        {topPosts.map((post, index) => (
-          <ListItem key={post._id}>
-            <ListItemAvatar>
-              <Avatar src={post.posterUrl} />
-            </ListItemAvatar>
-            <ListItemText primary={`${post.title} ${renderType(post)}`} />
-            <ListItemSecondaryAction>
-              <IconButton edge="end" aria-label="number">
-                {numbersIcon[index]}
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
-        ))}
-      </List>
+      {loading ? (
+        <PostRankListSkeleton />
+      ) : (
+        <>
+          <header className={classes.header}>
+            TOP 5 POSTS BY {type === PostRankListType.PV ? 'PV' : 'LIKE'}
+          </header>
+
+          <List className={classes.list}>
+            {topPosts.map((post, index) => (
+              <ListItem key={post._id}>
+                <ListItemAvatar>
+                  <Avatar src={post.posterUrl} />
+                </ListItemAvatar>
+                <ListItemText primary={`${post.title} ${renderType(post)}`} />
+                <ListItemSecondaryAction>
+                  <IconButton edge="end" aria-label="number">
+                    {numbersIcon[index]}
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            ))}
+          </List>
+        </>
+      )}
     </Paper>
   )
 }
