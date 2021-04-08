@@ -17,14 +17,21 @@ const useStyles = makeStyles((theme: Theme) =>
     chip: {
       margin: 8,
     },
+
+    header: {
+      marginBottom: 16,
+      fontSize: 16,
+      fontWeight: 600,
+    },
   }),
 )
 
-const TagsCloud: FC<Props> = ({ tags }) => {
+const TagClouds: FC<Props> = ({ tags }) => {
   const classes = useStyles()
 
   return (
     <Paper className={classes.paper}>
+      <header className={classes.header}>Tag Clouds</header>
       {tags.map((tag) => (
         <Chip key={tag} label={tag} color="primary" className={classes.chip} />
       ))}
@@ -32,4 +39,4 @@ const TagsCloud: FC<Props> = ({ tags }) => {
   )
 }
 
-export default TagsCloud
+export default TagClouds
