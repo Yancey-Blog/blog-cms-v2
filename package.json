@@ -46,7 +46,7 @@
     "luxon": "^1.26.0",
     "material-ui-chip-input": "^1.1.0",
     "material-ui-popup-state": "^1.7.1",
-    "mui-datatables": "^3.7.3",
+    "mui-datatables": "^3.7.7",
     "notistack": "^1.0.3",
     "ramda": "^0.27.1",
     "react": "^17.0.1",
