@@ -30,7 +30,7 @@ _This library is part of the [BEG (Blog Environment Group)](https://github.com/Y
 
 ---
 
-![shot](https://yancey-assets.oss-cn-beijing.aliyuncs.com/Jietu20200103-115157@2x.jpg)
+![shot](https://static.yancey.app/Jietu20200103-115157@2x.jpg)
 
 ## Available Scripts
 
@@ -132,11 +132,11 @@ Read our [contributing guide](./CONTRIBUTING.md) to learn about our development 
 
 Please make sure to read the [Issue Reporting Checklist](./.github/ISSUE_TEMPLATE/bug_report.md) before opening an issue. Issues not conforming to the guidelines may be closed immediately.
 
-### Uses Commitizen
+### Commitizen
 
 This app follows the [Angular Team's Commit Message Guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit), your commit will be checked by commitlint, please use `git cz` instead of `git commit`. For this reason, you should install `commitizen` globally or use `yarn commit` instead.
 
-### Uses Env File
+### Env File
 
 Creates `.env.development.local` file or other env files to cover the default environment varibles.
 
