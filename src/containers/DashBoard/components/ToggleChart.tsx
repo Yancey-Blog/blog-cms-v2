@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState, MouseEvent } from 'react'
 import { Paper } from '@material-ui/core'
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
@@ -6,6 +6,13 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 interface Props {
   handleToggleChange: Function
 }
+
+// 24 hours, 12 hours, 1 hour
+const duration = [24, 12, 1]
+
+// One data is provided every five minutes,
+// so 12 data are provided every hour.
+const countByHour = 12
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,36 +37,33 @@ const useStyles = makeStyles((theme: Theme) =>
 const ToggleChart: FC<Props> = ({ children, handleToggleChange }) => {
   const classes = useStyles()
 
+  const [value, setValue] = useState(countByHour)
+
+  const handleChange = (e: MouseEvent<HTMLElement>, value: number) => {
+    handleToggleChange(value)
+    setValue(value)
+  }
+
   return (
     <Paper className={classes.paper}>
       <ToggleButtonGroup
+        value={value}
         className={classes.toggleButtonGroup}
         size="small"
         exclusive
-        onChange={(e, value) => handleToggleChange(value)}
+        onChange={handleChange}
         aria-label="chart-date-picker"
       >
-        <ToggleButton
-          value={288}
-          aria-label="24 hours"
-          className={classes.toggleBtn}
-        >
-          24H
-        </ToggleButton>
-        <ToggleButton
-          value={144}
-          aria-label="12 hours"
-          className={classes.toggleBtn}
-        >
-          12H
-        </ToggleButton>
-        <ToggleButton
-          value={12}
-          aria-label="1 hour"
-          className={classes.toggleBtn}
-        >
-          1H
-        </ToggleButton>
+        {duration.map((val) => (
+          <ToggleButton
+            key={val}
+            value={val * countByHour}
+            aria-label={`${val} hours`}
+            className={classes.toggleBtn}
+          >
+            {val}H
+          </ToggleButton>
+        ))}
       </ToggleButtonGroup>
       {children}
     </Paper>

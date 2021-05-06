@@ -6,7 +6,7 @@ The **CMS** for Yancey blog with React, Apollo Client, Material-UI and GraphQL.
 
 _This library is part of the [BEG (Blog Environment Group)](https://github.com/Yancey-Blog)_ ecosystem 📖
 
-[![Build Status](https://travis-ci.com/Yancey-Blog/blog-cms-v2.svg?branch=master)](https://travis-ci.com/Yancey-Blog/blog-cms-v2)
+![Build Status](https://github.com/Yancey-Blog/blog-cms-v2/actions/workflows/github-actions.yml/badge.svg)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8301052718f145cb9be68a6a28717f41)](https://www.codacy.com/app/YanceyOfficial/blog-cms-v2?utm_source=github.com&utm_medium=referral&utm_content=Yancey-Blog/blog-cms-v2&utm_campaign=Badge_Grade)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 ![Code Style](https://camo.githubusercontent.com/c83b8df34339bd302b7fd3fbb631f99ba25f87f8/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f636f64655f7374796c652d70726574746965722d6666363962342e737667)
@@ -30,7 +30,7 @@ _This library is part of the [BEG (Blog Environment Group)](https://github.com/Y
 
 ---
 
-![shot](https://yancey-assets.oss-cn-beijing.aliyuncs.com/Jietu20200103-115157@2x.jpg)
+![shot](https://static.yancey.app/Jietu20200103-115157@2x.jpg)
 
 ## Available Scripts
 
@@ -132,11 +132,11 @@ Read our [contributing guide](./CONTRIBUTING.md) to learn about our development 
 
 Please make sure to read the [Issue Reporting Checklist](./.github/ISSUE_TEMPLATE/bug_report.md) before opening an issue. Issues not conforming to the guidelines may be closed immediately.
 
-### Uses Commitizen
+### Commitizen
 
 This app follows the [Angular Team's Commit Message Guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit), your commit will be checked by commitlint, please use `git cz` instead of `git commit`. For this reason, you should install `commitizen` globally or use `yarn commit` instead.
 
-### Uses Env File
+### Env File
 
 Creates `.env.development.local` file or other env files to cover the default environment varibles.
 

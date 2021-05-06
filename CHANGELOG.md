@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.5.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.4.0...v3.5.0) (2021-04-26)
+
+
+### Features
+
+* highlight for ToggleButton of Bandwagon logs ([4e0aab5](https://github.com/Yancey-Blog/blog-cms-v2/commit/4e0aab59df96df2b1c9a0a232c641125665e66cb))
+
 ## [3.4.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.3.0...v3.4.0) (2021-04-08)
 
 
