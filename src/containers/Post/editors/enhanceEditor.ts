@@ -76,7 +76,7 @@ export const enhancePasteUpload = (editorRef: RefObject<Editor>) => {
     // @ts-ignore
     // Tui.editors listen to `addImageBlobHook` event by default,
     // this event will convert `the pasted image` to base64,
-    // and insert to edit area.
+    // and insert it to edit area.
     instance.eventManager.removeEventHandler('addImageBlobHook')
 
     // @ts-ignore
@@ -92,7 +92,6 @@ export const enhancePasteUpload = (editorRef: RefObject<Editor>) => {
             imageType = type
             return true
           }
-
           return false
         }),
       )
