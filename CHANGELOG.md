@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.6.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.5.0...v3.6.0) (2021-05-11)
+
+
+### Features
+
+* modify filename and add try...catch for uploading ([7757168](https://github.com/Yancey-Blog/blog-cms-v2/commit/7757168e40502bf75a3d5027dea2f5089bf8cf91))
+* supports paste image to tui.editors and upload it to AliOSS ([30356b8](https://github.com/Yancey-Blog/blog-cms-v2/commit/30356b8c04467e304222313d5b2a91e83b10f3c0))
+
 ## [3.5.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.4.0...v3.5.0) (2021-04-26)
 
 
