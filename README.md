@@ -132,13 +132,13 @@ Read our [contributing guide](./CONTRIBUTING.md) to learn about our development 
 
 Please make sure to read the [Issue Reporting Checklist](./.github/ISSUE_TEMPLATE/bug_report.md) before opening an issue. Issues not conforming to the guidelines may be closed immediately.
 
-### Commitizen
+### Semantic Commit
 
 This app follows the [Angular Team's Commit Message Guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit), your commit will be checked by commitlint, please use `git cz` instead of `git commit`. For this reason, you should install `commitizen` globally or use `yarn commit` instead.
 
 ### Env File
 
-Creates `.env.development.local` file or other env files to cover the default environment varibles.
+Creates `.env.development.local` file or other env files to pass environment varibles.
 
 ## TODOs
 
