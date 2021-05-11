@@ -1,6 +1,8 @@
 import { RefObject } from 'react'
 import { Editor } from '@toast-ui/react-editor'
+import { randomSeries } from 'yancey-js-util'
 import { UploaderRes } from 'src/components/Uploader/types'
+import toast from 'src/components/Toast/Toast'
 
 export const insertImage = (
   editorRef: RefObject<Editor>,
@@ -73,15 +75,14 @@ export const enhancePasteUpload = (editorRef: RefObject<Editor>) => {
 
     // @ts-ignore
     // Tui.editors listen to `addImageBlobHook` event by default,
-    // this event leads to pasted image will be converted to base64,
-    // then insert to edit area.
+    // this event will convert `the pasted image` to base64,
+    // and insert to edit area.
     instance.eventManager.removeEventHandler('addImageBlobHook')
 
     // @ts-ignore
     instance.eventManager.listen('paste', async () => {
       // @ts-ignore
-      // FIXME:
-      // Current DOM interface does not support `navigator.clipboard.read`.
+      // FIXME: Current DOM interface does not support `navigator.clipboard.read()`.
       const files = await navigator.clipboard.read()
 
       let imageType = ''
@@ -98,14 +99,20 @@ export const enhancePasteUpload = (editorRef: RefObject<Editor>) => {
 
       const file: Blob = await imageFile.getType(imageType)
       const formData = new FormData()
-      formData.append('file', file)
+      formData.append('file', file, `${randomSeries(10)}-${+new Date()}`)
 
-      const res = await fetch(process.env.REACT_APP_UPLOADER_URL, {
-        method: 'POST',
-        body: formData,
-      })
-      const data = await res.json()
-      insertImage(editorRef, data)
+      try {
+        toast.warning('Uploading...')
+        const res = await fetch(process.env.REACT_APP_UPLOADER_URL, {
+          method: 'POST',
+          body: formData,
+        })
+        const data = await res.json()
+        insertImage(editorRef, data)
+        toast.success('Upload Success')
+      } catch (e) {
+        toast.error('Upload Error')
+      }
     })
   }
 }
