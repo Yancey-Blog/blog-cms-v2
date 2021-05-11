@@ -34,7 +34,11 @@ import {
 } from 'src/shared/constants'
 import { goBack, parseSearch } from 'src/shared/utils'
 import embededPlugin from './editors/editorEmbededPlugin'
-import { enhanceUpload, insertImage } from './editors/enhanceEditor'
+import {
+  enhanceUpload,
+  insertImage,
+  enhancePasteUpload,
+} from './editors/enhanceEditor'
 import { getMarkdown, getHTML, setMarkdown } from './editors/editorIO'
 import { sendPostToAlgolia } from './algolia/algoliaSearch'
 import {
@@ -226,6 +230,7 @@ const PostEditor: FC = () => {
 
   useEffect(() => {
     enhanceUpload(editorRef, setOpen)
+    enhancePasteUpload(editorRef)
 
     if (id) {
       const {

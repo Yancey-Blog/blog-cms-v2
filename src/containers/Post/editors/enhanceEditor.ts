@@ -63,3 +63,49 @@ export const enhanceUpload = (
     })
   }
 }
+
+export const enhancePasteUpload = (editorRef: RefObject<Editor>) => {
+  // @ts-ignore
+  if (!navigator.clipboard || !navigator.clipboard.read) return
+
+  if (editorRef.current) {
+    const instance = editorRef.current.getInstance()
+
+    // @ts-ignore
+    // Tui.editors listen to `addImageBlobHook` event by default,
+    // this event leads to pasted image will be converted to base64,
+    // then insert to edit area.
+    instance.eventManager.removeEventHandler('addImageBlobHook')
+
+    // @ts-ignore
+    instance.eventManager.listen('paste', async () => {
+      // @ts-ignore
+      // FIXME:
+      // Current DOM interface does not support `navigator.clipboard.read`.
+      const files = await navigator.clipboard.read()
+
+      let imageType = ''
+      const imageFile = files.find((file: any) =>
+        file.types.some((type: string) => {
+          if (type.startsWith('image/')) {
+            imageType = type
+            return true
+          }
+
+          return false
+        }),
+      )
+
+      const file: Blob = await imageFile.getType(imageType)
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const res = await fetch(process.env.REACT_APP_UPLOADER_URL, {
+        method: 'POST',
+        body: formData,
+      })
+      const data = await res.json()
+      insertImage(editorRef, data)
+    })
+  }
+}
