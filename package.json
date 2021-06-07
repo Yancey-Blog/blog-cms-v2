@@ -41,7 +41,7 @@
     "classnames": "^2.3.1",
     "codemirror": "^5.60.0",
     "formik": "^2.2.6",
-    "graphql-tag": "^2.11.0",
+    "graphql-tag": "^2.12.4",
     "history": "^4.10.1",
     "luxon": "^1.26.0",
     "material-ui-chip-input": "^1.1.0",
