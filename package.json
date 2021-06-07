@@ -67,7 +67,7 @@
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^13.1.9",
-    "@types/classnames": "^2.2.11",
+    "@types/classnames": "^2.3.1",
     "@types/jest": "^26.0.23",
     "@types/loadable__component": "^5.13.3",
     "@types/luxon": "^1.26.5",
