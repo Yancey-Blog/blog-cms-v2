@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.7.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.6.0...v3.7.0) (2021-06-15)
+
+
+### Features
+
+* display an alerts when session has expired, and redirect to login page after confirming ([fbac481](https://github.com/Yancey-Blog/blog-cms-v2/commit/fbac4818df604be1f15421600d7ed6e642dfc4ce))
+
 ## [3.6.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.5.0...v3.6.0) (2021-05-11)
 
 
