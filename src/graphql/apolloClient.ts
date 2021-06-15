@@ -40,6 +40,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
         ((graphQLError as unknown) as CustomGraphQLError).code ===
           'UNAUTHENTICATED'
       ) {
+        alert('Your session has expired. Please log in.')
         logout()
       }
 
@@ -49,6 +50,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
         graphQLError.extensions &&
         graphQLError.extensions.code === 'UNAUTHENTICATED'
       ) {
+        alert('Your session has expired. Please log in.')
         logout()
       }
     })

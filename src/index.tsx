@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { ApolloProvider } from '@apollo/client'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import LuxonUtils from '@date-io/luxon'
+// @ts-ignore
 import { SnackbarProvider } from 'notistack'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 import { SnackbarUtilsConfigurator } from './components/Toast/Toast'
