@@ -1805,10 +1805,10 @@
   dependencies:
     "@babel/runtime" "^7.4.4"
 
-"@material-ui/lab@^4.0.0-alpha.57":
-  version "4.0.0-alpha.57"
-  resolved "https://registry.npmjs.org/@material-ui/lab/-/lab-4.0.0-alpha.57.tgz#e8961bcf6449e8a8dabe84f2700daacfcafbf83a"
-  integrity sha512-qo/IuIQOmEKtzmRD2E4Aa6DB4A87kmY6h0uYhjUmrrgmEAgbbw9etXpWPVXuRK6AGIQCjFzV6WO2i21m1R4FCw==
+"@material-ui/lab@^4.0.0-alpha.58":
+  version "4.0.0-alpha.58"
+  resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-4.0.0-alpha.58.tgz#c7ebb66f49863c5acbb20817163737caa299fafc"
+  integrity sha512-GKHlJqLxUeHH3L3dGQ48ZavYrqGOTXkFkiEiuYMAnAvXAZP4rhMIqeHOPXSUQan4Bd8QnafDcpovOSLnadDmKw==
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@material-ui/utils" "^4.11.2"
@@ -2217,10 +2217,12 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/classnames@^2.2.11":
-  version "2.2.11"
-  resolved "https://registry.npmjs.org/@types/classnames/-/classnames-2.2.11.tgz#2521cc86f69d15c5b90664e4829d84566052c1cf"
-  integrity sha512-2koNhpWm3DgWRp5tpkiJ8JGc1xTn2q0l+jUNUE7oMKXUf5NpI9AIdC4kbjGNFBdHtcxBD18LAksoudAVhFKCjw==
+"@types/classnames@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@types/classnames/-/classnames-2.3.1.tgz#3c2467aa0f1a93f1f021e3b9bcf938bd5dfdc0dd"
+  integrity sha512-zeOWb0JGBoVmlQoznvqXbE0tEC/HONsnoUNH19Hc96NFsTAwTXbTqb8FMYkru1F/iqp7a18Ws3nWJvtA1sHD1A==
+  dependencies:
+    classnames "*"
 
 "@types/codemirror@0.0.71":
   version "0.0.71"
@@ -4120,7 +4122,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5, classnames@^2.2.6, classnames@^2.3.1:
+classnames@*, classnames@^2.2.5, classnames@^2.2.6, classnames@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
   integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==
@@ -6850,10 +6852,10 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6
   resolved "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.6.tgz#ff040b2b0853b23c3d31027523706f1885d76bee"
   integrity sha512-nTnJ528pbqxYanhpDYsi4Rd8MAeaBA67+RZ10CM1m3bTAVFEDcd5AuA4a6W5YkGZ1iNXHzZz8T6TBKLeBuNriQ==
 
-graphql-tag@^2.11.0, graphql-tag@^2.12.0:
-  version "2.12.3"
-  resolved "https://registry.npmjs.org/graphql-tag/-/graphql-tag-2.12.3.tgz#ac47bf9d51c67c68ada8a33fd527143ed15bb647"
-  integrity sha512-5wJMjSvj30yzdciEuk9dPuUBUR56AqDi3xncoYQl1i42pGdSqOJrJsdb/rz5BDoy+qoGvQwABcBeF0xXY3TrKw==
+graphql-tag@^2.12.0, graphql-tag@^2.12.4:
+  version "2.12.4"
+  resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.12.4.tgz#d34066688a4f09e72d6f4663c74211e9b4b7c4bf"
+  integrity sha512-VV1U4O+9x99EkNpNmCUV5RZwq6MnK4+pGbRYWG+lA/m3uo7TSqJF81OkcOP148gFP6fzdl7JWYBrwWVTS9jXww==
   dependencies:
     tslib "^2.1.0"
 
@@ -14141,12 +14143,12 @@ workbox-broadcast-update@^5.1.4:
   dependencies:
     workbox-core "^5.1.4"
 
-workbox-broadcast-update@^6.1.1:
-  version "6.1.2"
-  resolved "https://registry.npmjs.org/workbox-broadcast-update/-/workbox-broadcast-update-6.1.2.tgz#8a60526fb007a005c4d11381372ed6461276a0cd"
-  integrity sha512-pISOgOMH5pRVBlnvverxoaMgZzxdopzozuyjAt6UcctOjvuISQyTGa28C4qQ6XN20/rb3tk3n94N122wxicGXg==
+workbox-broadcast-update@^6.1.5:
+  version "6.1.5"
+  resolved "https://registry.yarnpkg.com/workbox-broadcast-update/-/workbox-broadcast-update-6.1.5.tgz#49a2a4cc50c7b1cfe86bed6d8f15edf1891d1e79"
+  integrity sha512-zGrTTs+n4wHpYtqYMqBg6kl/x5j1UrczGCQnODSHTxIDV8GXLb/GtA1BCZdysNxpMmdVSeLmTcgIYAAqWFamrA==
   dependencies:
-    workbox-core "^6.1.2"
+    workbox-core "^6.1.5"
 
 workbox-build@^5.1.4:
   version "5.1.4"
