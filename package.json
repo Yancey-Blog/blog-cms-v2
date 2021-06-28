@@ -33,7 +33,7 @@
     "@toast-ui/editor-plugin-chart": "^1.0.0",
     "@toast-ui/editor-plugin-color-syntax": "^1.0.1",
     "@toast-ui/editor-plugin-table-merged-cell": "^1.3.2",
-    "@toast-ui/editor-plugin-uml": "^1.0.0",
+    "@toast-ui/editor-plugin-uml": "^3.0.0",
     "@toast-ui/react-editor": "^2.5.1",
     "algoliasearch": "^4.9.1",
     "apollo-cache-persist": "^0.1.1",
