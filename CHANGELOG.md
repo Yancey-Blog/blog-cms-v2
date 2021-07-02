@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.7.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.7.0...v3.7.1) (2021-07-02)
+
+
+### Bug Fixes
+
+* only need to logout once when the JWT is expired ([3226cfc](https://github.com/Yancey-Blog/blog-cms-v2/commit/3226cfce977bd2d5280f64fd44b5ee879139d23c))
+
 ## [3.7.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.6.0...v3.7.0) (2021-06-15)
 
 
