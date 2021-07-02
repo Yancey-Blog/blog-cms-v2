@@ -28,6 +28,12 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
+const setLogout = () => {
+  alert('Your session has expired. Please log in.')
+  logout()
+  return
+}
+
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach((graphQLError) => {
@@ -40,8 +46,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
         ((graphQLError as unknown) as CustomGraphQLError).code ===
           'UNAUTHENTICATED'
       ) {
-        alert('Your session has expired. Please log in.')
-        logout()
+        setLogout()
       }
 
       // In non-production environment, the error structure
@@ -50,8 +55,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
         graphQLError.extensions &&
         graphQLError.extensions.code === 'UNAUTHENTICATED'
       ) {
-        alert('Your session has expired. Please log in.')
-        logout()
+        setLogout()
       }
     })
   }
