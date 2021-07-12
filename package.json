@@ -43,7 +43,7 @@
     "formik": "^2.2.9",
     "graphql-tag": "^2.12.4",
     "history": "^4.10.1",
-    "luxon": "^1.26.0",
+    "luxon": "^1.28.0",
     "material-ui-chip-input": "^1.1.0",
     "material-ui-popup-state": "^1.8.3",
     "mui-datatables": "^3.7.7",
