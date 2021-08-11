@@ -1,6 +1,6 @@
 {
   "name": "blog-cms-v2",
-  "version": "3.6.0",
+  "version": "3.7.2",
   "private": true,
   "scripts": {
     "start": "react-scripts start",

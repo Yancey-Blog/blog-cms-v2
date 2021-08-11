@@ -30,27 +30,32 @@ const authLink = setContext((_, { headers }) => {
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
-    graphQLErrors.forEach((graphQLError) => {
-      SnackbarUtils.error(`[GraphQL error]: ${graphQLError.message}`)
-
+    const isUnauthenticated = graphQLErrors.some((graphQLError) => {
       // In production environment, the error structure
       // was formatted as `CustomGraphQLError`.
-      if (
+      const isEnvProductionUnauthenticated =
         isEnvProduction &&
-        ((graphQLError as unknown) as CustomGraphQLError).code ===
+        (graphQLError as unknown as CustomGraphQLError).code ===
           'UNAUTHENTICATED'
-      ) {
-        logout()
-      }
 
       // In non-production environment, the error structure
       // uses the native `GraphQLError`.
-      if (
+      const isUnEnvProductionUnauthenticated =
+        !isEnvProduction &&
         graphQLError.extensions &&
         graphQLError.extensions.code === 'UNAUTHENTICATED'
-      ) {
-        logout()
-      }
+
+      return isEnvProductionUnauthenticated || isUnEnvProductionUnauthenticated
+    })
+
+    if (isUnauthenticated) {
+      alert('Your session has expired. Please log in.')
+      logout()
+      return
+    }
+
+    graphQLErrors.forEach((graphQLError) => {
+      SnackbarUtils.error(`[GraphQL error]: ${graphQLError.message}`)
     })
   }
 

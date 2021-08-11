@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.7.2](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.7.1...v3.7.2) (2021-07-08)
+
+
+### Bug Fixes
+
+* should only `one` alert when JWT is expired ([bccab3a](https://github.com/Yancey-Blog/blog-cms-v2/commit/bccab3a1a9266976c493373e8c1f15915016af89))
+
+### [3.7.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.7.0...v3.7.1) (2021-07-02)
+
+
+### Bug Fixes
+
+* only need to logout once when the JWT is expired ([3226cfc](https://github.com/Yancey-Blog/blog-cms-v2/commit/3226cfce977bd2d5280f64fd44b5ee879139d23c))
+
+## [3.7.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.6.0...v3.7.0) (2021-06-15)
+
+
+### Features
+
+* display an alerts when session has expired, and redirect to login page after confirming ([fbac481](https://github.com/Yancey-Blog/blog-cms-v2/commit/fbac4818df604be1f15421600d7ed6e642dfc4ce))
+
 ## [3.6.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.5.0...v3.6.0) (2021-05-11)
 
 
