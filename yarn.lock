@@ -2151,10 +2151,10 @@
   resolved "https://registry.npmjs.org/@toast-ui/editor-plugin-table-merged-cell/-/editor-plugin-table-merged-cell-1.3.2.tgz#fa1e49f8591e612ff5b7098369fa2efcd899d9a6"
   integrity sha512-80bz52MatN3LU9MD2RDkf/FWGhoioI5DQnhsn4CZz92jgnlJZycZOgX7hPycbIQqzNNZsvLlcpL8g+FRAr/4Xw==
 
-"@toast-ui/editor-plugin-uml@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@toast-ui/editor-plugin-uml/-/editor-plugin-uml-1.0.0.tgz#11182b3562ea0aa40059f4ff92a44decd789232a"
-  integrity sha512-Z5edquefCrAHnatHiu+tnd4XrkrWSR5+c099clWf2Vzdou/ACyuc0R5kqwUF+qFHq6JFKYYlFtH1gaGs0q9kSg==
+"@toast-ui/editor-plugin-uml@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@toast-ui/editor-plugin-uml/-/editor-plugin-uml-3.0.1.tgz#a4840733364c5a2a124be6c6400a73ac7aebd808"
+  integrity sha512-KKvTB++lJkogOSBgtgJqli5nW76/fgxh0CvsHqKh5WQu2r6O+BTGPBG6oRy9PBfJvwN1g8YZ4ZLQGXSXDrtm1w==
   dependencies:
     plantuml-encoder "^1.4.0"
 
