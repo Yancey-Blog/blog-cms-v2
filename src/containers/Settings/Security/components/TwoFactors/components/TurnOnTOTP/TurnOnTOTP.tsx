@@ -24,8 +24,12 @@ import {
   GOOGLE_AUTHENTICATOR_FOR_IOS,
   GOOGLE_AUTHENTICATOR_FOR_ANDROID,
 } from 'src/shared/constants'
+import { logout } from 'src/shared/utils'
 import Transition from 'src/components/Transition/Transition'
-import { CREATE_TOTP, VALIDATE_TOTP } from '../../typeDefs'
+import {
+  GENERATE_QRCODE_OF_TOTP,
+  TURN_ON_TOTP,
+} from 'src/containers/Settings/Security/typeDefs'
 import styles from './totp.module.scss'
 
 interface TOTPRes {
@@ -38,26 +42,35 @@ interface Props {
   open: boolean
 }
 
-const TOTP: FC<Props> = ({ setOpen, open }) => {
+const TurnOnTOTP: FC<Props> = ({ setOpen, open }) => {
   const { enqueueSnackbar } = useSnackbar()
-  const [qrcodeMode, setQrcodeMode] = useState(true)
+  const [QRCodeMode, setQRCodeMode] = useState(true)
   const [data, setData] = useState<TOTPRes>({ key: '', qrcode: '' })
   const [step, setStep] = useState(0)
   const onClose = () => {
     setOpen(false)
     setStep(0)
     resetForm()
-    setQrcodeMode(true)
+    setQRCodeMode(true)
   }
 
-  const [createTOTP, { loading }] = useMutation(CREATE_TOTP)
+  const [generateQRCodeOfTOTP, { loading }] = useMutation(
+    GENERATE_QRCODE_OF_TOTP,
+  )
 
-  const [validateTOTP] = useMutation(VALIDATE_TOTP, {
-    onCompleted() {
-      enqueueSnackbar('Two-factor authentication is available now!', {
-        variant: 'success',
-      })
-      onClose()
+  const [turnOnTOTP] = useMutation(TURN_ON_TOTP, {
+    onCompleted(data) {
+      console.log(data)
+      if (data.turnOnTOTP) {
+        enqueueSnackbar(
+          'Two-factor authentication is available now! Redirect to login.',
+          {
+            variant: 'success',
+          },
+        )
+        logout()
+        onClose()
+      }
     },
   })
 
@@ -83,7 +96,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      await validateTOTP({
+      await turnOnTOTP({
         variables: { input: { code: values.code, key: data.key } },
       })
     },
@@ -91,14 +104,14 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
 
   useEffect(() => {
     const fetchTOTP = async () => {
-      const TOTPRes = await createTOTP()
-      setData(TOTPRes.data.createTOTP)
+      const TOTPRes = await generateQRCodeOfTOTP()
+      setData(TOTPRes.data.generateQRCodeOfTOTP)
     }
 
     if (step === 1) {
       fetchTOTP()
     }
-  }, [createTOTP, step])
+  }, [generateQRCodeOfTOTP, step])
 
   return (
     <Dialog
@@ -131,7 +144,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
         <header className={styles.header}>
           {step === 0
             ? 'Get codes from the Authenticator app'
-            : qrcodeMode
+            : QRCodeMode
             ? 'Set up Authenticator'
             : "Can't scan the barcode?"}
         </header>
@@ -166,7 +179,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
         )}
         {step === 1 && (
           <>
-            {qrcodeMode ? (
+            {QRCodeMode ? (
               <>
                 <ul className={styles.tipGroup}>
                   <li className={styles.tipItem}>
@@ -202,7 +215,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
                         color="primary"
                         size="small"
                         onClick={() => {
-                          setQrcodeMode(false)
+                          setQRCodeMode(false)
                         }}
                       >
                         Can't scan it?
@@ -272,4 +285,4 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
   )
 }
 
-export default TOTP
+export default TurnOnTOTP

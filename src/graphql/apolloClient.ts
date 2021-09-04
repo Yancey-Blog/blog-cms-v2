@@ -12,7 +12,7 @@ interface CustomGraphQLError {
   message: string
 }
 
-const isEnvProduction = process.env.NODE_ENV
+const isEnvProduction = process.env.NODE_ENV === 'production'
 
 const httpLink = new BatchHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_URL,
@@ -48,15 +48,16 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
       return isEnvProductionUnauthenticated || isUnEnvProductionUnauthenticated
     })
 
-    if (isUnauthenticated) {
+    if (isUnauthenticated && localStorage.getItem('token')) {
       alert('Your session has expired. Please log in.')
       logout()
-      return
     }
 
-    graphQLErrors.forEach((graphQLError) => {
-      SnackbarUtils.error(`[GraphQL error]: ${graphQLError.message}`)
-    })
+    if (!isUnauthenticated) {
+      graphQLErrors.forEach((graphQLError) => {
+        SnackbarUtils.error(`[GraphQL error]: ${graphQLError.message}`)
+      })
+    }
   }
 
   if (networkError) {

@@ -1,4 +1,6 @@
+import jwtDecode from 'jwt-decode'
 import { OSS_CMS_PATH } from 'src/shared/constants'
+import { Payload } from './types'
 
 export const getBackgroundUrl = () => {
   const backgrounds = [
@@ -19,3 +21,5 @@ export const getBackgroundUrl = () => {
 
   return backgroundUrl
 }
+
+export const decodeJWT = (token: string) => jwtDecode<Payload>(token)

@@ -1,11 +1,23 @@
 import { gql } from '@apollo/client'
 
-export const CREATE_TOTP = gql`
-  mutation CreateTOTP {
-    createTOTP {
+export const GENERATE_QRCODE_OF_TOTP = gql`
+  mutation GenerateQRCodeOfTOTP {
+    generateQRCodeOfTOTP {
       qrcode
       key
     }
+  }
+`
+
+export const TURN_ON_TOTP = gql`
+  mutation TurnOnTOTP($input: ValidateTOTPInput!) {
+    turnOnTOTP(input: $input)
+  }
+`
+
+export const TURN_OFF_TOTP = gql`
+  mutation TurnOffTOTP {
+    turnOffTOTP
   }
 `
 
@@ -17,20 +29,9 @@ export const CREATE_RECOVERY_CODES = gql`
   }
 `
 
-export const VALIDATE_TOTP = gql`
-  mutation ValidateTOTP($input: ValidateTOTPInput!) {
-    validateTOTP(input: $input) {
-      _id
-      isTOTP
-    }
-  }
-`
-
 export const CHANGE_PASSWORD = gql`
   mutation ChangePassword($input: ChangePasswordInput!) {
-    changePassword(input: $input) {
-      _id
-    }
+    changePassword(input: $input)
   }
 `
 

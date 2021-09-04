@@ -12,7 +12,10 @@ import {
   TextField,
 } from '@material-ui/core'
 import Transition from 'src/components/Transition/Transition'
-import { SEND_SMS, VALIDATE_SMS } from '../../typeDefs'
+import {
+  SEND_SMS,
+  VALIDATE_SMS,
+} from 'src/containers/Settings/Security/typeDefs'
 import useStyles from './styles'
 
 interface Props {
@@ -109,7 +112,6 @@ const BindPhoneNumber: FC<Props> = ({ isPhoneNumber, setOpen, open }) => {
     <Dialog
       open={open}
       onClose={onClose}
-      // @ts-ignore
       TransitionComponent={Transition}
       keepMounted
     >

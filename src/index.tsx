@@ -6,12 +6,10 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { ApolloProvider } from '@apollo/client'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import LuxonUtils from '@date-io/luxon'
-// @ts-ignore
 import { SnackbarProvider } from 'notistack'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
+import { pageRoutes } from './routes'
 import { SnackbarUtilsConfigurator } from './components/Toast/Toast'
-import Login from './pages/Auth/Login'
-import Register from './pages/Auth/Register'
 import Loading from './components/Loading/InstagramLoading'
 import client from './graphql/apolloClient'
 import reportWebVitals from './reportWebVitals'
@@ -40,12 +38,14 @@ ReactDOM.render(
           <CssBaseline />
           <Router history={history}>
             <Switch>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/register">
-                <Register />
-              </Route>
+              {pageRoutes.map((route) => {
+                const { path, component: Component } = route
+                return (
+                  <Route path={path} key={path}>
+                    <Component />
+                  </Route>
+                )
+              })}
               <Route
                 path="/"
                 render={({ location }) =>

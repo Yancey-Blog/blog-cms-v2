@@ -13,7 +13,7 @@ import CopyToClipboard from 'react-copy-to-clipboard'
 import Transition from 'src/components/Transition/Transition'
 import { generateFile } from 'src/shared/utils'
 import { RECOVERY_CODES_FILE_NAME } from 'src/shared/constants'
-import { CREATE_RECOVERY_CODES } from '../../typeDefs'
+import { CREATE_RECOVERY_CODES } from 'src/containers/Settings/Security/typeDefs'
 import styles from './recoveryCode.module.scss'
 
 interface Props {
@@ -90,7 +90,7 @@ const RecoveryCodes: FC<Props> = ({ setOpen, open }) => {
           Download
         </Button>
         <CopyToClipboard
-          text={recoveryCodes.join(' ')}
+          text={recoveryCodes.join('\n')}
           onCopy={() => setCopyTxt('Copied!')}
         >
           <Button size="small" color="primary" disabled={loading}>

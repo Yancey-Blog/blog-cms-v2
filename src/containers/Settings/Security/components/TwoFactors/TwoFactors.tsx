@@ -15,9 +15,10 @@ import { OSS_CMS_PATH } from 'src/shared/constants'
 import client from 'src/graphql/apolloClient'
 import SnackbarUtils from 'src/components/Toast/Toast'
 import SettingItemWrapper from 'src/containers/Settings/components/SettingItemWrapper/SettingItemWrapper'
-import TOTP from '../TOTP/TOTP'
-import RecoveryCodes from '../RecoveryCodes/RecoveryCodes'
-import BindPhoneNumber from '../BindPhoneNumber/BindPhoneNumber'
+import TurnOnTOTP from './components/TurnOnTOTP/TurnOnTOTP'
+import RecoveryCodes from './components/RecoveryCodes/RecoveryCodes'
+import BindPhoneNumber from './components/BindPhoneNumber/BindPhoneNumber'
+import TurnOffTwoFactors from './components/TurnOffTwoFactors/TurnOffTwoFactors'
 import styles from './twoFactors.module.scss'
 
 const TwoFactors: FC = () => {
@@ -25,16 +26,12 @@ const TwoFactors: FC = () => {
   const [openRecoveryCodes, setOpenRecoveryCodes] = useState(false)
   const [openBindPhoneNumber, setOpenBindPhoneNumber] = useState(false)
 
-  const {
-    isTOTP,
-    phoneNumber,
+  const { enableTOTP, phoneNumber } =
     // @ts-ignore
-  } = client.cache.data.data[
-    `UserModel:${window.localStorage.getItem('userId')}`
-  ]
+    client.cache.data.data[`UserModel:${window.localStorage.getItem('userId')}`]
 
   const openRecoveryCodesDialog = () => {
-    if (!isTOTP) {
+    if (!enableTOTP) {
       SnackbarUtils.error('Please turn on Authenticator app options first!')
       return
     }
@@ -61,14 +58,14 @@ const TwoFactors: FC = () => {
               className={styles.title}
               primary={
                 <div className={styles.isUseTOTP}>
-                  {isTOTP ? (
+                  {enableTOTP ? (
                     <SentimentVerySatisfied />
                   ) : (
                     <SentimentDissatisfied />
                   )}
 
                   <span className={styles.phone}>
-                    {isTOTP ? 'Enable' : 'Disable'}
+                    {enableTOTP ? 'Enable' : 'Disable'}
                   </span>
                 </div>
               }
@@ -113,13 +110,14 @@ const TwoFactors: FC = () => {
         </List>
       </SettingItemWrapper>
 
-      <TOTP setOpen={setOpenTOTP} open={openTOTP} />
+      <TurnOnTOTP setOpen={setOpenTOTP} open={!enableTOTP && openTOTP} />
       <RecoveryCodes setOpen={setOpenRecoveryCodes} open={openRecoveryCodes} />
       <BindPhoneNumber
         isPhoneNumber={!!phoneNumber}
         setOpen={setOpenBindPhoneNumber}
         open={openBindPhoneNumber}
       />
+      <TurnOffTwoFactors setOpen={setOpenTOTP} open={enableTOTP && openTOTP} />
     </>
   )
 }

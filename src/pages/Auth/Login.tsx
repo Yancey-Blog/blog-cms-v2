@@ -9,7 +9,7 @@ import classNames from 'classnames'
 import { GOOGLE_RECAPTCHA_URL } from 'src/shared/constants'
 import { useScriptUrl } from 'src/hooks/useScript'
 import { LOGIN } from './typeDefs'
-import { getBackgroundUrl } from './utils'
+import { getBackgroundUrl, decodeJWT } from './utils'
 import styles from './Auth.module.scss'
 
 const Login: FC = () => {
@@ -34,9 +34,13 @@ const Login: FC = () => {
     notifyOnNetworkStatusChange: true,
 
     onCompleted(data) {
-      window.localStorage.setItem('token', data.login.authorization)
-      window.localStorage.setItem('userId', data.login._id)
-      history.push('/')
+      const { _id, authorization } = data.login
+      const { isAuthenticated } = decodeJWT(authorization)
+
+      window.localStorage.setItem('token', authorization)
+      window.localStorage.setItem('userId', _id)
+
+      history.push(isAuthenticated ? '/totp' : '/')
     },
   })
 

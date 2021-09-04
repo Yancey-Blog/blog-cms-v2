@@ -7,6 +7,9 @@ import {
   Settings,
   Event,
 } from '@material-ui/icons'
+import Login from './pages/Auth/Login'
+import Register from './pages/Auth/Register'
+import TOTP from './pages/Auth/TOTP'
 
 export interface RouteChildren {
   hideInMenu?: boolean
@@ -174,5 +177,20 @@ export function mapRoutes() {
 
   return routers
 }
+
+export const pageRoutes = [
+  {
+    path: '/login',
+    component: Login,
+  },
+  {
+    path: '/register',
+    component: Register,
+  },
+  {
+    path: '/totp',
+    component: TOTP,
+  },
+]
 
 export default routes

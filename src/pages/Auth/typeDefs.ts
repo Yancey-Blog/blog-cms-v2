@@ -14,8 +14,7 @@ export const USER_FRAGMENT = gql`
     bio
     avatarUrl
     phoneNumber
-    isTOTP
-    createdAt
+    enableTOTP
     createdAt
     updatedAt
   }
@@ -33,6 +32,15 @@ export const LOGIN = gql`
 export const REGISTER = gql`
   mutation Register($input: RegisterInput!) {
     register(input: $input) {
+      ...UserFragment
+    }
+  }
+  ${USER_FRAGMENT}
+`
+
+export const LOGIN_VERIFY_TOTP = gql`
+  query LoginVerifyTOTP($totpCode: String!) {
+    loginVerifyTOTP(totpCode: $totpCode) {
       ...UserFragment
     }
   }
