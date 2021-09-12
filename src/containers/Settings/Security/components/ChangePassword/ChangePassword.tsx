@@ -5,7 +5,7 @@ import { useFormik } from 'formik'
 import { useMutation } from '@apollo/client'
 import { TextField, Button } from '@material-ui/core'
 import { logout } from 'src/shared/utils'
-import { PASSWORD_REGEXP, OSS_CMS_PATH } from 'src/shared/constants'
+import { PASSWORD_REGEXP, AZURE_BLOB_PATH } from 'src/shared/constants'
 import SettingItemWrapper from 'src/containers/Settings/components/SettingItemWrapper/SettingItemWrapper'
 import styles from './changePassword.module.scss'
 import { CHANGE_PASSWORD } from '../../typeDefs'
@@ -46,29 +46,24 @@ const ChangePassword: FC = () => {
       .required('Confirm Password is required'),
   })
 
-  const {
-    handleSubmit,
-    getFieldProps,
-    resetForm,
-    isSubmitting,
-    errors,
-  } = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit: async (values) => {
-      const { confirmNewPassword, ...rest } = values
-      await changePassword({
-        variables: { input: rest },
-      })
+  const { handleSubmit, getFieldProps, resetForm, isSubmitting, errors } =
+    useFormik({
+      initialValues,
+      validationSchema,
+      onSubmit: async (values) => {
+        const { confirmNewPassword, ...rest } = values
+        await changePassword({
+          variables: { input: rest },
+        })
 
-      resetForm()
-    },
-  })
+        resetForm()
+      },
+    })
 
   return (
     <SettingItemWrapper
       title="Change Password"
-      imageUrl={`${OSS_CMS_PATH}/signin_scene.png`}
+      imageUrl={`${AZURE_BLOB_PATH}/signin_scene.png`}
     >
       <form onSubmit={handleSubmit}>
         <TextField

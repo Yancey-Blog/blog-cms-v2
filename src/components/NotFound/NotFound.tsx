@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Button } from '@material-ui/core'
-import { OSS_CMS_PATH } from 'src/shared/constants'
+import { AZURE_BLOB_PATH } from 'src/shared/constants'
 import useStyles from './styles'
 
 const NotFound: FC = () => {
@@ -22,7 +22,7 @@ const NotFound: FC = () => {
         it is, try using the navigation.
       </p>
       <figure className={classes.image}>
-        <img src={`${OSS_CMS_PATH}/404.svg`} alt="404-logo" />
+        <img src={`${AZURE_BLOB_PATH}/404.svg`} alt="404-logo" />
       </figure>
       <Button variant="outlined" color="primary" onClick={toHomePage}>
         Back to Home

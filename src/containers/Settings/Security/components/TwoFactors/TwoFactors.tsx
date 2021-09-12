@@ -11,7 +11,7 @@ import {
   SentimentVerySatisfied,
   SentimentDissatisfied,
 } from '@material-ui/icons'
-import { OSS_CMS_PATH } from 'src/shared/constants'
+import { AZURE_BLOB_PATH } from 'src/shared/constants'
 import client from 'src/graphql/apolloClient'
 import SnackbarUtils from 'src/components/Toast/Toast'
 import SettingItemWrapper from 'src/containers/Settings/components/SettingItemWrapper/SettingItemWrapper'
@@ -42,7 +42,7 @@ const TwoFactors: FC = () => {
     <>
       <SettingItemWrapper
         title="Two-factor Authentication"
-        imageUrl={`${OSS_CMS_PATH}/recovery_scene.png`}
+        imageUrl={`${AZURE_BLOB_PATH}/recovery_scene.png`}
       >
         <List
           component="nav"

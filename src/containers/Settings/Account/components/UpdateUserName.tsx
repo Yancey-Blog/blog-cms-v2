@@ -2,7 +2,7 @@ import { FC } from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { Button, TextField } from '@material-ui/core'
-import { OSS_CMS_PATH } from 'src/shared/constants'
+import { AZURE_BLOB_PATH } from 'src/shared/constants'
 import SettingItemWrapper from '../../components/SettingItemWrapper/SettingItemWrapper'
 import useStyles from '../styles'
 
@@ -22,26 +22,21 @@ const UpdateUserName: FC<Props> = ({ username, updateUserName }) => {
     username,
   }
 
-  const {
-    handleSubmit,
-    getFieldProps,
-    isSubmitting,
-    errors,
-    values,
-  } = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit: async (values) => {
-      await updateUserName({
-        variables: { username: values.username },
-      })
-    },
-  })
+  const { handleSubmit, getFieldProps, isSubmitting, errors, values } =
+    useFormik({
+      initialValues,
+      validationSchema,
+      onSubmit: async (values) => {
+        await updateUserName({
+          variables: { username: values.username },
+        })
+      },
+    })
 
   return (
     <SettingItemWrapper
       title="Change UserName"
-      imageUrl={`${OSS_CMS_PATH}/privacycheckup_scene.png`}
+      imageUrl={`${AZURE_BLOB_PATH}/privacycheckup_scene.png`}
     >
       <form onSubmit={handleSubmit}>
         <TextField

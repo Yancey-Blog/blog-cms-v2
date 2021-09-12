@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.8.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.7.2...v3.8.0) (2021-09-12)
+
+
+### Features
+
+* use azure-blob ([a30fc7b](https://github.com/Yancey-Blog/blog-cms-v2/commit/a30fc7b8ef17271c7e38ff8f0acb7a87566955d2))
+
 ### [3.7.2](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.7.1...v3.7.2) (2021-07-08)
 
 

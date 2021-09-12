@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import { Button, Checkbox, FormControlLabel } from '@material-ui/core'
-import { OSS_CMS_PATH } from 'src/shared/constants'
+import { AZURE_BLOB_PATH } from 'src/shared/constants'
 import SettingItemWrapper from '../../components/SettingItemWrapper/SettingItemWrapper'
 import useStyles from '../styles'
 
@@ -17,7 +17,7 @@ const DeleteAccount: FC<Props> = ({ isDeletingAccount, deleteAccount }) => {
   return (
     <SettingItemWrapper
       title="Delete Account"
-      imageUrl={`${OSS_CMS_PATH}/activitycontrols_scene.png`}
+      imageUrl={`${AZURE_BLOB_PATH}/activitycontrols_scene.png`}
     >
       <p className={classes.tip}>
         You’re trying to delete your Account, which provides access to various

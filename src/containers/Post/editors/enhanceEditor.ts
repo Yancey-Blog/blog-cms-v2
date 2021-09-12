@@ -1,12 +1,11 @@
 import { RefObject } from 'react'
 import { Editor } from '@toast-ui/react-editor'
-import { randomSeries } from 'yancey-js-util'
-import { UploaderRes } from 'src/components/Uploader/types'
+import { UploaderResponse } from 'src/components/Uploader/types'
 import toast from 'src/components/Toast/Toast'
 
 export const insertImage = (
   editorRef: RefObject<Editor>,
-  image: UploaderRes,
+  image: UploaderResponse,
 ) => {
   if (editorRef.current) {
     const instance = editorRef.current.getInstance()
@@ -97,17 +96,24 @@ export const enhancePasteUpload = (editorRef: RefObject<Editor>) => {
       )
 
       const file: Blob = await imageFile.getType(imageType)
-      const formData = new FormData()
-      formData.append('file', file, `${randomSeries(10)}-${+new Date()}`)
 
       try {
         toast.warning('Uploading...')
-        const res = await fetch(process.env.REACT_APP_UPLOADER_URL, {
+        const res = await fetch(process.env.REACT_APP_GRAPHQL_URL, {
           method: 'POST',
-          body: formData,
+          headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+          body: {
+            operations:
+              '{"operationName":"UploadFile","variables":{"file":null},"query":"mutation UploadFile($file: Upload!) {\n  uploadFile(file: $file)\n}\n"}',
+            map: '{ "0": ["variables.file"] }',
+            // @ts-ignore
+            0: file,
+          },
         })
         const data = await res.json()
-        insertImage(editorRef, data)
+        insertImage(editorRef, data.uploadFile)
         toast.success('Upload Success')
       } catch (e) {
         toast.error('Upload Error')
