@@ -9,7 +9,7 @@ import SettingItemWrapper from '../components/SettingItemWrapper/SettingItemWrap
 import { Button, TextField } from '@material-ui/core'
 import { useFormik } from 'formik'
 import Uploader from 'src/components/Uploader/Uploader'
-import { UploaderRes } from 'src/components/Uploader/types'
+import { UploaderResponse } from 'src/components/Uploader/types'
 import client from 'src/graphql/apolloClient'
 import { UPDATE_USER } from './typeDefs'
 import useStyles from './styles'
@@ -62,7 +62,7 @@ const Profile: FC = () => {
     },
   })
 
-  const onChange = async (data: UploaderRes) => {
+  const onChange = async (data: UploaderResponse) => {
     setFieldValue('avatarUrl', data.url)
     await updateUser({
       variables: { input: { avatarUrl: data.url } },
@@ -72,17 +72,11 @@ const Profile: FC = () => {
   }
 
   useEffect(() => {
-    const {
-      name,
-      location,
-      organization,
-      website,
-      bio,
-      avatarUrl,
+    const { name, location, organization, website, bio, avatarUrl } =
       // @ts-ignore
-    } = client.cache.data.data[
-      `UserModel:${window.localStorage.getItem('userId')}`
-    ]
+      client.cache.data.data[
+        `UserModel:${window.localStorage.getItem('userId')}`
+      ]
 
     setValues({ name, location, organization, website, bio, avatarUrl })
   }, [setValues])

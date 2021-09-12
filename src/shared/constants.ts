@@ -24,7 +24,8 @@ export const POPOVER_TRANSFORM_ORIGIN: PopoverOrigin = {
 
 export const RECOVERY_CODES_FILE_NAME = 'yancey-blog-cms-recovery-codes.txt'
 
-export const PASSWORD_REGEXP = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/
+export const PASSWORD_REGEXP =
+  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/
 
 export const MARKDOWN_EDITOR_TOOLBAR_ITEMS = [
   'heading',
@@ -61,9 +62,7 @@ export const TABLE_OPTIONS: MUIDataTableOptions = {
   searchPlaceholder: 'Search...',
 }
 
-export const OSS_BASE_URL = 'https://static.yancey.app'
-
-export const OSS_CMS_PATH = `${OSS_BASE_URL}/cms-static`
+export const AZURE_BLOB_PATH = 'https://edge.yancey.app/beg'
 
 export const GOOGLE_AUTHENTICATOR_FOR_IOS =
   'https://itunes.apple.com/us/app/google-authenticator/id388497605'

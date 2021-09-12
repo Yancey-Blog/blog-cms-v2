@@ -14,14 +14,9 @@ interface Props {
 }
 
 const Drawer: FC<Props> = ({ open }) => {
-  const {
-    username,
-    name,
-    avatarUrl,
+  const { username, name, avatarUrl } =
     // @ts-ignore
-  } = client.cache.data.data[
-    `UserModel:${window.localStorage.getItem('userId')}`
-  ]
+    client.cache.data.data[`UserModel:${window.localStorage.getItem('userId')}`]
 
   const classes = useStyles()
 

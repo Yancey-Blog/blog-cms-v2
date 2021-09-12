@@ -7,7 +7,6 @@ declare module 'react/jsx-runtime' {
 declare namespace NodeJS {
   export interface ProcessEnv {
     REACT_APP_GRAPHQL_URL: string
-    REACT_APP_UPLOADER_URL: string
     REACT_APP_DOMAIN: string
     REACT_APP_ALGOLIA_APPLICATION_ID: string
     REACT_APP_ALGOLIA_ADMIN_API_KEY: string

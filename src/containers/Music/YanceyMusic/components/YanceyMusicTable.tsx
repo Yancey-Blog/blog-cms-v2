@@ -60,21 +60,27 @@ const YanceyMusicTable: FC<Props> = ({
       name: 'releaseDate',
       label: 'Release Date',
       options: {
-        customBodyRender: (value: string) => <span>{formatJSONDate(value)}</span>,
+        customBodyRender: (value: string) => (
+          <span>{formatJSONDate(value)}</span>
+        ),
       },
     },
     {
       name: 'createdAt',
       label: 'Created At',
       options: {
-        customBodyRender: (value: string) => <span>{formatJSONDate(value)}</span>,
+        customBodyRender: (value: string) => (
+          <span>{formatJSONDate(value)}</span>
+        ),
       },
     },
     {
       name: 'updatedAt',
       label: 'Updated At',
       options: {
-        customBodyRender: (value: string) => <span>{formatJSONDate(value)}</span>,
+        customBodyRender: (value: string) => (
+          <span>{formatJSONDate(value)}</span>
+        ),
       },
     },
     {

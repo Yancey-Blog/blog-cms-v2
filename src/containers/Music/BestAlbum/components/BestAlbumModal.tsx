@@ -16,7 +16,7 @@ import useStyles from 'src/shared/globalStyles'
 import client from 'src/graphql/apolloClient'
 import { Open } from 'src/hooks/useOpenModal'
 import Uploader from 'src/components/Uploader/Uploader'
-import { UploaderRes } from 'src/components/Uploader/types'
+import { UploaderResponse } from 'src/components/Uploader/types'
 
 interface Props {
   open: Open
@@ -81,7 +81,7 @@ const BestAlbumModal: FC<Props> = ({
     },
   })
 
-  const onChange = (data: UploaderRes) => {
+  const onChange = (data: UploaderResponse) => {
     setFieldValue('coverUrl', data.url)
   }
 

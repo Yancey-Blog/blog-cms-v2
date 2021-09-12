@@ -13,13 +13,9 @@ import DeleteAccount from './components/DeleteAccount'
 const Account: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
 
-  const {
-    username,
-    email,
+  const { username, email } =
     // @ts-ignore
-  } = client.cache.data.data[
-    `UserModel:${window.localStorage.getItem('userId')}`
-  ]
+    client.cache.data.data[`UserModel:${window.localStorage.getItem('userId')}`]
 
   const [updateUserName] = useMutation(UPDATE_USERNAME, {
     onCompleted(data) {
