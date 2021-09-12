@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import {
   DRAWER_WIDTH,
   FOLDER_DRAWER_WIDTH,
-  OSS_CMS_PATH,
+  AZURE_BLOB_PATH,
 } from 'src/shared/constants'
 import { transition } from '../../styles'
 
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     minWidth: `${DRAWER_WIDTH}px`,
     minHeight: '100vh',
     color: '#ffffff',
-    background: `url(${OSS_CMS_PATH}/sidebar-city.jpg) no-repeat center center`,
+    background: `url(${AZURE_BLOB_PATH}/sidebar-city.jpg) no-repeat center center`,
     boxShadow:
       '0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)',
     userSelect: 'none',
