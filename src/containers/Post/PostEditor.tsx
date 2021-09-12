@@ -25,7 +25,7 @@ import {
 } from './typeDefs'
 import Uploader from 'src/components/Uploader/Uploader'
 import UploaderModal from 'src/components/UploaderModal/UploaderModal'
-import { UploaderRes } from 'src/components/Uploader/types'
+import { UploaderResponse } from 'src/components/Uploader/types'
 import client from 'src/graphql/apolloClient'
 import {
   MARKDOWN_EDITOR_TOOLBAR_ITEMS,
@@ -99,14 +99,8 @@ const PostEditor: FC = () => {
     UpdatePostVars
   >(UPDATE_ONE_POST, {
     onCompleted(data) {
-      const {
-        _id,
-        title,
-        summary,
-        isPublic,
-        posterUrl,
-        tags,
-      } = data.updatePostById
+      const { _id, title, summary, isPublic, posterUrl, tags } =
+        data.updatePostById
       enqueueSnackbar('Update success!', { variant: 'success' })
 
       createPostStatistics({
@@ -143,11 +137,11 @@ const PostEditor: FC = () => {
   /* editor */
   const editorRef = useRef<Editor>(null)
   const [open, setOpen] = useState(false)
-  const [image, setImage] = useState<UploaderRes>({ name: '', url: '' })
-  const handleEditorImageChange = (file: UploaderRes) => setImage(file)
+  const [image, setImage] = useState<UploaderResponse>({ name: '', url: '' })
+  const handleEditorImageChange = (file: UploaderResponse) => setImage(file)
 
   /* posterUrl */
-  const handlePosterImageChange = (data: UploaderRes) => {
+  const handlePosterImageChange = (data: UploaderResponse) => {
     setFieldValue('posterUrl', data.url)
   }
 
@@ -171,18 +165,12 @@ const PostEditor: FC = () => {
     tags: Yup.array().required('Tags is required.'),
   })
 
-  const {
-    setFieldValue,
-    getFieldProps,
-    setValues,
-    resetForm,
-    values,
-    errors,
-  } = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit() {},
-  })
+  const { setFieldValue, getFieldProps, setValues, resetForm, values, errors } =
+    useFormik({
+      initialValues,
+      validationSchema,
+      onSubmit() {},
+    })
 
   const onSubmit = async (type: SaveType) => {
     const content = getMarkdown(editorRef)

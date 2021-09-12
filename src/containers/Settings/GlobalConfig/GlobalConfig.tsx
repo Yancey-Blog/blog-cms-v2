@@ -15,12 +15,10 @@ import GrayTheme from './components/GrayTheme'
 const GlobalConfig: FC = () => {
   const { enqueueSnackbar } = useSnackbar()
 
-  const [
-    fetchPostsByPage,
-    { loading: isFetchingPosts, data: postsData },
-  ] = useLazyQuery<PostsQuery>(POSTS, {
-    notifyOnNetworkStatusChange: true,
-  })
+  const [fetchPostsByPage, { loading: isFetchingPosts, data: postsData }] =
+    useLazyQuery<PostsQuery>(POSTS, {
+      notifyOnNetworkStatusChange: true,
+    })
 
   const fetchPosts = (title: string) => {
     fetchPostsByPage({

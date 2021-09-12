@@ -15,7 +15,7 @@ import { KeyboardDateTimePicker } from '@material-ui/pickers'
 import useStyles from 'src/shared/globalStyles'
 import client from 'src/graphql/apolloClient'
 import Uploader from 'src/components/Uploader/Uploader'
-import { UploaderRes } from 'src/components/Uploader/types'
+import { UploaderResponse } from 'src/components/Uploader/types'
 import { Open } from 'src/hooks/useOpenModal'
 
 interface Props {
@@ -73,7 +73,7 @@ const LiveTourModal: FC<Props> = ({
     },
   })
 
-  const onChange = (data: UploaderRes) => {
+  const onChange = (data: UploaderResponse) => {
     setFieldValue('posterUrl', data.url)
   }
 
@@ -81,10 +81,9 @@ const LiveTourModal: FC<Props> = ({
     resetForm()
 
     if (id) {
-      // @ts-ignore
-      const { title, showTime, posterUrl } = client.cache.data.data[
-        `LiveTourModel:${id}`
-      ]
+      const { title, showTime, posterUrl } =
+        // @ts-ignore
+        client.cache.data.data[`LiveTourModel:${id}`]
 
       setValues({
         title,

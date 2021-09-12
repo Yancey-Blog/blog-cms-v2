@@ -15,7 +15,7 @@ import { useFormik } from 'formik'
 import classNames from 'classnames'
 import client from 'src/graphql/apolloClient'
 import Uploader from 'src/components/Uploader/Uploader'
-import { UploaderRes } from 'src/components/Uploader/types'
+import { UploaderResponse } from 'src/components/Uploader/types'
 import globalUseStyles from 'src/shared/globalStyles'
 import { Open } from 'src/hooks/useOpenModal'
 import useStyles from '../styles'
@@ -82,11 +82,11 @@ const PlayerModal: FC<Props> = ({
     },
   })
 
-  const onCoverUrlChange = (data: UploaderRes) => {
+  const onCoverUrlChange = (data: UploaderResponse) => {
     setFieldValue('coverUrl', data.url)
   }
 
-  const onMusicFileUrlChange = (data: UploaderRes) => {
+  const onMusicFileUrlChange = (data: UploaderResponse) => {
     setFieldValue('musicFileUrl', data.url)
   }
 

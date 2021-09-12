@@ -13,7 +13,7 @@ import {
 import { useFormik } from 'formik'
 import client from 'src/graphql/apolloClient'
 import Uploader from 'src/components/Uploader/Uploader'
-import { UploaderRes } from 'src/components/Uploader/types'
+import { UploaderResponse } from 'src/components/Uploader/types'
 import useStyles from 'src/shared/globalStyles'
 import { Open } from 'src/hooks/useOpenModal'
 
@@ -72,7 +72,7 @@ const OpenSourceModal: FC<Props> = ({
     },
   })
 
-  const onChange = (data: UploaderRes) => {
+  const onChange = (data: UploaderResponse) => {
     setFieldValue('posterUrl', data.url)
   }
 
@@ -80,10 +80,9 @@ const OpenSourceModal: FC<Props> = ({
     resetForm()
 
     if (id) {
-      // @ts-ignore
-      const { title, description, url, posterUrl } = client.cache.data.data[
-        `OpenSourceModel:${id}`
-      ]
+      const { title, description, url, posterUrl } =
+        // @ts-ignore
+        client.cache.data.data[`OpenSourceModel:${id}`]
 
       setValues({ title, description, url, posterUrl })
     }

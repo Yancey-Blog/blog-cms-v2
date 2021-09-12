@@ -9,7 +9,7 @@ export const formatChangedData = (o: Dict) => {
 }
 
 export const dateStringToDate = (agendaList: IAgenda[]) =>
-  agendaList.map(agenda => ({
+  agendaList.map((agenda) => ({
     ...agenda,
     id: agenda._id,
     startDate: new Date(agenda.startDate),

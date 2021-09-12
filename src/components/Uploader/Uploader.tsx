@@ -1,19 +1,18 @@
 import { FC, useState, ChangeEvent } from 'react'
+import { useMutation } from '@apollo/client'
 import classNames from 'classnames'
 import { Card, CircularProgress, Button } from '@material-ui/core'
 import { Add, CloudUpload } from '@material-ui/icons'
 import { useSnackbar } from 'notistack'
 import { getURLPathName } from 'src/shared/utils'
-import { UploaderRes, Props } from './types'
+import { UPLOAD_FILE } from './typeDefs'
+import { UploaderResponse, UploaderMutation, Props } from './types'
 import useclasses from './styles'
 
 const Uploader: FC<Props> = ({
   type = 'avatar',
   variant = 'elevation',
   accept = 'image/*',
-  action = process.env.REACT_APP_UPLOADER_URL || '',
-  method = 'POST',
-  name = 'file',
   defaultFile = '',
   needMarginLeft = true,
   onChange,
@@ -21,53 +20,40 @@ const Uploader: FC<Props> = ({
 }) => {
   const classes = useclasses()
   const { enqueueSnackbar } = useSnackbar()
-  const [uploading, setUploading] = useState(false)
-  const [curFile, setCurFile] = useState<UploaderRes>()
-
-  const onUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-    setUploading(true)
-
-    const formData = new FormData()
-
-    if (e.target.files) {
-      formData.append(name, e.target.files[0])
-    }
-
-    const res = await fetch(action, {
-      method,
-      body: formData,
-    })
-
-    const data = await res.json()
-
-    if (data.code) {
-      enqueueSnackbar(data.code, { variant: 'error' })
-    } else {
-      setCurFile(data)
-      onChange(data)
+  const [currFile, setCurrFile] = useState<UploaderResponse>()
+  const [uploadFile, { loading }] = useMutation<UploaderMutation>(UPLOAD_FILE, {
+    onCompleted(data) {
+      const { uploadFile } = data
+      setCurrFile(uploadFile)
+      onChange(uploadFile)
       enqueueSnackbar(
         <span>
-          <span style={{ fontWeight: 'bold' }}>{data.name}</span> has been
+          <span style={{ fontWeight: 'bold' }}>{uploadFile.name}</span> has been
           uploaded successfully.
         </span>,
         {
           variant: 'success',
         },
       )
-    }
+    },
+    onError() {},
+  })
 
-    setUploading(false)
+  const onUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      uploadFile({ variables: { file: e.target.files[0] } })
+    }
   }
 
   const avatarContent = () => {
-    if (uploading) {
+    if (loading) {
       return <CircularProgress />
     }
 
     if (defaultFile) {
       return <img src={defaultFile} alt="default" className={classes.img} />
-    } else if (curFile) {
-      const { name, url } = curFile
+    } else if (currFile) {
+      const { name, url } = currFile
       return <img src={url} alt={name} className={classes.img} />
     } else {
       return <Add className={classes.addBtn} />
@@ -75,8 +61,8 @@ const Uploader: FC<Props> = ({
   }
 
   const simpleContent = () => {
-    if (curFile) {
-      const { url } = curFile
+    if (currFile) {
+      const { url } = currFile
       return <p className={classes.simpleContent}>{getURLPathName(url)}</p>
     } else if (defaultFile) {
       return (
@@ -107,10 +93,10 @@ const Uploader: FC<Props> = ({
           <Button
             variant="contained"
             color="primary"
-            disabled={uploading}
+            disabled={loading}
             startIcon={<CloudUpload />}
           >
-            {uploading && (
+            {loading && (
               <CircularProgress
                 size={24}
                 className={classes.customLoadingCircle}

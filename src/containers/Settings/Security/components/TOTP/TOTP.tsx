@@ -20,7 +20,7 @@ import {
 } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
 import {
-  OSS_CMS_PATH,
+  AZURE_BLOB_PATH,
   GOOGLE_AUTHENTICATOR_FOR_IOS,
   GOOGLE_AUTHENTICATOR_FOR_ANDROID,
 } from 'src/shared/constants'
@@ -112,7 +112,7 @@ const TOTP: FC<Props> = ({ setOpen, open }) => {
       <DialogTitle className={styles.title}>
         <figure className={styles.logoImg}>
           <img
-            src={`${OSS_CMS_PATH}/Google_Authenticator_41237.png`}
+            src={`${AZURE_BLOB_PATH}/Google_Authenticator_41237.png`}
             alt="Google Authenticator Logo"
           />
         </figure>

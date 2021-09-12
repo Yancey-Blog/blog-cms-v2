@@ -14,7 +14,7 @@ import {
 import { useFormik } from 'formik'
 import client from 'src/graphql/apolloClient'
 import Uploader from 'src/components/Uploader/Uploader'
-import { UploaderRes } from 'src/components/Uploader/types'
+import { UploaderResponse } from 'src/components/Uploader/types'
 import useStyles from 'src/shared/globalStyles'
 import { Open } from 'src/hooks/useOpenModal'
 
@@ -73,7 +73,7 @@ const CoverModal: FC<Props> = ({
     },
   })
 
-  const onCoverUrlChange = (data: UploaderRes) => {
+  const onCoverUrlChange = (data: UploaderResponse) => {
     setFieldValue('coverUrl', data.url)
   }
 
@@ -81,10 +81,9 @@ const CoverModal: FC<Props> = ({
     resetForm()
 
     if (id) {
-      // @ts-ignore
-      const { title, coverUrl, isPublic } = client.cache.data.data[
-        `CoverModel:${id}`
-      ]
+      const { title, coverUrl, isPublic } =
+        // @ts-ignore
+        client.cache.data.data[`CoverModel:${id}`]
 
       setValues({ title, coverUrl, isPublic })
     }

@@ -1,4 +1,4 @@
-import { OSS_CMS_PATH } from 'src/shared/constants'
+import { AZURE_BLOB_PATH } from 'src/shared/constants'
 
 export const getBackgroundUrl = () => {
   const backgrounds = [
@@ -7,7 +7,7 @@ export const getBackgroundUrl = () => {
     'login-bg-deep-dark.png',
   ]
   const hour = new Date().getHours()
-  let backgroundUrl = `${OSS_CMS_PATH}/`
+  let backgroundUrl = `${AZURE_BLOB_PATH}/`
 
   if (hour >= 6 && hour <= 17) {
     backgroundUrl += backgrounds[0]
