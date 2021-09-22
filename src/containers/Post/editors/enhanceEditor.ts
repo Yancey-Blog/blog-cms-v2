@@ -79,38 +79,38 @@ export const enhancePasteUpload = (editorRef: RefObject<Editor>) => {
     instance.eventManager.removeEventHandler('addImageBlobHook')
 
     // @ts-ignore
-    instance.eventManager.listen('paste', async () => {
-      // @ts-ignore
-      // FIXME: Current DOM interface does not support `navigator.clipboard.read()`.
-      const files = await navigator.clipboard.read()
+    instance.eventManager.listen('paste', async (e) => {
+      const items = e.data.clipboardData && e.data.clipboardData.items
+      const token = localStorage.getItem('token')
+      let file = null
 
-      let imageType = ''
-      const imageFile = files.find((file: any) =>
-        file.types.some((type: string) => {
-          if (type.startsWith('image/')) {
-            imageType = type
-            return true
-          }
-          return false
-        }),
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.includes('image')) {
+          file = items[i].getAsFile()
+          break
+        }
+      }
+
+      const formData = new FormData()
+      formData.append(
+        'operations',
+        '{"operationName":"UploadFile","variables":{"file":null},"query":"mutation UploadFile($file: Upload!) {\n  uploadFile(file: $file) {\n    url\n    name\n    __typename\n  }\n}\n"}',
       )
+      formData.append('map', '{ "0": ["variables.file"] }')
+      formData.append('0', file)
 
-      const file: Blob = await imageFile.getType(imageType)
+      if (!file || !token) return
 
       try {
-        toast.warning('Uploading...')
+        toast.info('Uploading...')
+
         const res = await fetch(process.env.REACT_APP_GRAPHQL_URL, {
           method: 'POST',
           headers: {
-            authorization: `Bearer ${localStorage.getItem('token')}`,
+            authorization: `Bearer ${token}`,
+            'content-type': 'multipart/form-data',
           },
-          body: {
-            operations:
-              '{"operationName":"UploadFile","variables":{"file":null},"query":"mutation UploadFile($file: Upload!) {\n  uploadFile(file: $file)\n}\n"}',
-            map: '{ "0": ["variables.file"] }',
-            // @ts-ignore
-            0: file,
-          },
+          body: formData,
         })
         const data = await res.json()
         insertImage(editorRef, data.uploadFile)
