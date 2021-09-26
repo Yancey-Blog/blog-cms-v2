@@ -1,6 +1,6 @@
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import { makeStyles, createStyles } from '@mui/styles'
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     addIconFab: {
       boxShadow: 'none!important',
@@ -11,14 +11,14 @@ const useStyles = makeStyles((theme: Theme) =>
     uploaderGroup: {
       display: 'flex',
       alignItems: 'center',
-      marginTop: theme.spacing(2.5),
+      marginTop: '40px',
     },
 
-    textFieldSpace: { marginBottom: theme.spacing(2.5) },
+    textFieldSpace: { marginBottom: '40px' },
 
     editIcon: {
       cursor: 'pointer',
-      marginRight: theme.spacing(1),
+      marginRight: '16px',
     },
   }),
 )

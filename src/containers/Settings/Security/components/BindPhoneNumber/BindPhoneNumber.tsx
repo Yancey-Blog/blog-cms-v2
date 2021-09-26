@@ -10,7 +10,8 @@ import {
   DialogContent,
   DialogActions,
   TextField,
-} from '@material-ui/core'
+} from '@mui/material'
+import { ClassNameMap } from '@mui/styles'
 import Transition from 'src/components/Transition/Transition'
 import { SEND_SMS, VALIDATE_SMS } from '../../typeDefs'
 import useStyles from './styles'
@@ -22,7 +23,7 @@ interface Props {
 }
 
 const BindPhoneNumber: FC<Props> = ({ isPhoneNumber, setOpen, open }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
   const { enqueueSnackbar } = useSnackbar()
   const [count, setCount] = useState(10)
   const [isClick, setIsClick] = useState(false)

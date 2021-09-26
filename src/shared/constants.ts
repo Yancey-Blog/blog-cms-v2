@@ -1,4 +1,4 @@
-import { PopoverOrigin, SnackbarOrigin } from '@material-ui/core'
+import { PopoverOrigin, SnackbarOrigin } from '@mui/material'
 import { MUIDataTableOptions } from 'mui-datatables'
 
 export const SNACKBAR_ANCHOR_ORIGIN: SnackbarOrigin = {

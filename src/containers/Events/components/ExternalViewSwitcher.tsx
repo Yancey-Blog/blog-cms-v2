@@ -1,5 +1,6 @@
 import { FC } from 'react'
-import { Button, ButtonGroup } from '@material-ui/core'
+import { Button, ButtonGroup } from '@mui/material'
+import { ClassNameMap } from '@mui/styles'
 import { VIEW_DATE } from 'src/shared/constants'
 import useStyles from '../styles'
 
@@ -8,7 +9,7 @@ interface IExternalViewSwitcher {
 }
 
 const ExternalViewSwitcher: FC<IExternalViewSwitcher> = ({ onChange }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   return (
     <ButtonGroup

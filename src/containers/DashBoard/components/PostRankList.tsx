@@ -8,14 +8,14 @@ import {
   ListItemSecondaryAction,
   IconButton,
   Avatar,
-} from '@material-ui/core'
-import { LooksOne, LooksTwo, Looks3, Looks4, Looks5 } from '@material-ui/icons'
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+} from '@mui/material'
+import { LooksOne, LooksTwo, Looks3, Looks4, Looks5 } from '@mui/icons-material'
+import { makeStyles, ClassNameMap, createStyles } from '@mui/styles'
 import { IPostItem } from 'src/containers/Post/types'
 import PostRankListSkeleton from './PostRankListSkeleton'
 import { PostRankListType } from '../types'
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     paper: {
       display: 'grid',
@@ -49,7 +49,7 @@ const numbersIcon = [
 ]
 
 const PostRankList: FC<Props> = ({ type, topPosts, loading }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const renderType = (post: IPostItem) => {
     if (type === PostRankListType.PV) {

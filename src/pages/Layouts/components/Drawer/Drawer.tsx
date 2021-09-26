@@ -1,7 +1,8 @@
 import { FC, Fragment, useState, useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import { Avatar } from '@material-ui/core'
-import { Home, Face } from '@material-ui/icons'
+import { Avatar } from '@mui/material'
+import { Home, Face } from '@mui/icons-material'
+import { ClassNameMap } from '@mui/styles'
 import classNames from 'classnames'
 import routes, { Route } from 'src/routes'
 import client from 'src/graphql/apolloClient'
@@ -18,7 +19,7 @@ const Drawer: FC<Props> = ({ open }) => {
     // @ts-ignore
     client.cache.data.data[`UserModel:${window.localStorage.getItem('userId')}`]
 
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const { pathname } = useLocation()
 

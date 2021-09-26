@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import classNames from 'classnames'
-import { Link } from '@material-ui/icons'
+import { Link } from '@mui/icons-material'
+import { ClassNameMap } from '@mui/styles'
 import { getInitials } from 'src/shared/utils'
 import { RouteChildren } from 'src/routes'
 import useStyles from '../styles'
@@ -14,7 +15,7 @@ const ChildItem: FC<ChildItemProps> = ({
   open,
   childRoute: { name, isExternalLink },
 }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   return (
     <div

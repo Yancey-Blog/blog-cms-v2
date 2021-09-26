@@ -7,24 +7,22 @@ import {
   Fade,
   ListItemIcon,
   ListItemText,
-} from '@material-ui/core'
-import {
-  LockOutlined,
-  FaceOutlined,
-  PermDataSettingOutlined,
-  AccountBalanceOutlined,
-  ExitToAppOutlined,
-} from '@material-ui/icons'
-import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state'
-import classNames from 'classnames'
-import {
   AppBar,
   Input,
   Fab,
   Badge,
   Typography,
   IconButton,
-} from '@material-ui/core'
+} from '@mui/material'
+import {
+  LockOutlined,
+  FaceOutlined,
+  PermDataSettingOutlined,
+  AccountBalanceOutlined,
+  ExitToAppOutlined,
+} from '@mui/icons-material'
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state'
+import classNames from 'classnames'
 import {
   MoreVert,
   Dashboard,
@@ -32,7 +30,8 @@ import {
   Person,
   Search,
   ViewList,
-} from '@material-ui/icons'
+} from '@mui/icons-material'
+import { ClassNameMap } from '@mui/styles'
 import { logout } from 'src/shared/utils'
 import useStyles from './styles'
 
@@ -42,10 +41,10 @@ interface Props {
 }
 
 const Header: FC<Props> = ({ open, handleDrawerChange }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   return (
-    <AppBar position="relative" className={classes.header}>
+    <AppBar position="relative" className={classes.navHeader}>
       <section className={classes.left}>
         <Fab
           size="small"

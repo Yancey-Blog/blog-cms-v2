@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import { MUIDataTableMeta } from 'mui-datatables'
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state'
-import { MoreVert } from '@material-ui/icons'
-import { Menu, MenuItem } from '@material-ui/core'
+import { MoreVert } from '@mui/icons-material'
+import { Menu, MenuItem } from '@mui/material'
 
 interface Props {
   dataSource: any[]

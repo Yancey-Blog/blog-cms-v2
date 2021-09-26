@@ -3,8 +3,9 @@ import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumn,
 } from 'mui-datatables'
-import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
-import { FormControl, Fab } from '@material-ui/core'
+import { DeleteOutline, Edit, AddBox } from '@mui/icons-material'
+import { FormControl, Fab } from '@mui/material'
+import { ClassNameMap } from '@mui/styles'
 import { formatJSONDate } from 'yancey-js-util'
 import useOpenModal from 'src/hooks/useOpenModal'
 import MottoModal from './MottoModal'
@@ -43,7 +44,7 @@ const MottoTable: FC<Props> = ({
 }) => {
   const { open, handleOpen } = useOpenModal()
 
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },

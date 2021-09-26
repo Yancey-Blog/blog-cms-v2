@@ -4,8 +4,9 @@ import MUIDataTable, {
   MUIDataTableColumn,
   MUIDataTableMeta,
 } from 'mui-datatables'
-import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
-import { FormControl, Fab } from '@material-ui/core'
+import { ClassNameMap } from '@mui/styles'
+import { DeleteOutline, Edit, AddBox } from '@mui/icons-material'
+import { FormControl, Fab } from '@mui/material'
 import { formatJSONDate } from 'yancey-js-util'
 import useOpenModal from 'src/hooks/useOpenModal'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
@@ -40,7 +41,7 @@ const LiveTourTable: FC<Props> = ({
 }) => {
   const { open, handleOpen } = useOpenModal()
 
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },

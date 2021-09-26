@@ -4,12 +4,16 @@
     [
       "babel-plugin-transform-imports",
       {
-        "@material-ui/core": {
-          "transform": "@material-ui/core/esm/${member}",
+        "@mui/material": {
+          "transform": "@mui/material/${member}",
           "preventFullImport": true
         },
-        "@material-ui/icons": {
-          "transform": "@material-ui/icons/esm/${member}",
+        "@mui/icons-material": {
+          "transform": "@mui/icons-material/esm/${member}",
+          "preventFullImport": true
+        },
+        "@mui/lab": {
+          "transform": "@mui/lab/${member}",
           "preventFullImport": true
         }
       }

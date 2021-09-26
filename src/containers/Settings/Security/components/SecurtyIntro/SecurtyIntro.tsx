@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, ClassNameMap } from '@mui/styles'
 import { AZURE_BLOB_PATH } from 'src/shared/constants'
 import SettingItemWrapper from '../../../components/SettingItemWrapper/SettingItemWrapper'
 
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 })
 
 const SecurtyIntro: FC = () => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   return (
     <SettingItemWrapper

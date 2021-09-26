@@ -2,11 +2,10 @@ import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import { Switch, Route, Redirect, Router } from 'react-router-dom'
 import loadable from '@loadable/component'
-import CssBaseline from '@material-ui/core/CssBaseline'
+import { CssBaseline } from '@mui/material'
 import { ApolloProvider } from '@apollo/client'
-import { MuiPickersUtilsProvider } from '@material-ui/pickers'
-import LuxonUtils from '@date-io/luxon'
-// @ts-ignore
+import AdapterLuxon from '@mui/lab/AdapterLuxon'
+import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import { SnackbarProvider } from 'notistack'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 import { SnackbarUtilsConfigurator } from './components/Toast/Toast'
@@ -35,7 +34,7 @@ ReactDOM.render(
         anchorOrigin={SNACKBAR_ANCHOR_ORIGIN}
         autoHideDuration={SNACKBAR_AUTO_HIDE_DURATION}
       >
-        <MuiPickersUtilsProvider utils={LuxonUtils}>
+        <LocalizationProvider dateAdapter={AdapterLuxon}>
           <SnackbarUtilsConfigurator />
           <CssBaseline />
           <Router history={history}>
@@ -63,7 +62,7 @@ ReactDOM.render(
               />
             </Switch>
           </Router>
-        </MuiPickersUtilsProvider>
+        </LocalizationProvider>
       </SnackbarProvider>
     </ApolloProvider>
   </StrictMode>,

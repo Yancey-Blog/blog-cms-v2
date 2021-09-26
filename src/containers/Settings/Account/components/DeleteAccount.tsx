@@ -1,5 +1,6 @@
 import { FC, useState } from 'react'
-import { Button, Checkbox, FormControlLabel } from '@material-ui/core'
+import { Button, Checkbox, FormControlLabel } from '@mui/material'
+import { ClassNameMap } from '@mui/styles'
 import { AZURE_BLOB_PATH } from 'src/shared/constants'
 import SettingItemWrapper from '../../components/SettingItemWrapper/SettingItemWrapper'
 import useStyles from '../styles'
@@ -10,7 +11,7 @@ interface Props {
 }
 
 const DeleteAccount: FC<Props> = ({ isDeletingAccount, deleteAccount }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const [checked, setChecked] = useState(false)
 

@@ -4,8 +4,14 @@ import MUIDataTable, {
   MUIDataTableColumn,
   MUIDataTableMeta,
 } from 'mui-datatables'
-import { DeleteOutline, Edit, AddBox, UpdateOutlined } from '@material-ui/icons'
-import { FormControl, Fab, Switch } from '@material-ui/core'
+import { ClassNameMap } from '@mui/styles'
+import {
+  DeleteOutline,
+  Edit,
+  AddBox,
+  UpdateOutlined,
+} from '@mui/icons-material'
+import { FormControl, Fab, Switch } from '@mui/material'
 import { formatJSONDate } from 'yancey-js-util'
 import useOpenModal from 'src/hooks/useOpenModal'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
@@ -49,7 +55,7 @@ const CoverTable: FC<Props> = ({
 }) => {
   const { open, handleOpen } = useOpenModal()
 
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },

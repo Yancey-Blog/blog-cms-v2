@@ -6,7 +6,7 @@ import {
   Paper,
   DialogActions,
   DialogTitle,
-} from '@material-ui/core'
+} from '@mui/material'
 import {
   POPOVER_ANCHOR_ORIGIN,
   POPOVER_TRANSFORM_ORIGIN,

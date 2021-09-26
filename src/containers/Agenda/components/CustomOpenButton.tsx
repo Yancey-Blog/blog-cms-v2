@@ -1,13 +1,14 @@
 import { FC } from 'react'
-import { Button } from '@material-ui/core'
+import { Button } from '@mui/material'
 import { DateNavigator } from '@devexpress/dx-react-scheduler-material-ui'
+import { ClassNameMap } from '@mui/styles'
 import useStyles from '../styles'
 
 const CustomOpenButton: FC<DateNavigator.OpenButtonProps> = ({
   text,
   onVisibilityToggle,
 }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   return (
     <Button

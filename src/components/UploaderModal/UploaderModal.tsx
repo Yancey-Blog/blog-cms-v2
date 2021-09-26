@@ -5,8 +5,8 @@ import {
   Dialog,
   DialogContent,
   Button,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+} from '@mui/material'
+import { makeStyles, ClassNameMap } from '@mui/styles'
 import Uploader from '../Uploader/Uploader'
 
 interface Props {
@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 })
 
 const UploaderModal: FC<Props> = ({ open, onOk, onClose, onChange }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const handleOk = () => {
     onClose(false)

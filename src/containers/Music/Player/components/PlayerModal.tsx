@@ -10,13 +10,14 @@ import {
   TextField,
   FormLabel,
   Switch,
-} from '@material-ui/core'
+} from '@mui/material'
+import { ClassNameMap } from '@mui/styles'
 import { useFormik } from 'formik'
 import classNames from 'classnames'
 import client from 'src/graphql/apolloClient'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderResponse } from 'src/components/Uploader/types'
-import globalUseStyles from 'src/shared/globalStyles'
+import useGlobalStyles from 'src/shared/globalStyles'
 import { Open } from 'src/hooks/useOpenModal'
 import useStyles from '../styles'
 
@@ -35,8 +36,8 @@ const PlayerModal: FC<Props> = ({
 }) => {
   const { isOpen, id } = open
 
-  const globalClasses = globalUseStyles()
-  const classes = useStyles()
+  const globalClasses: ClassNameMap = useGlobalStyles()
+  const classes: ClassNameMap = useStyles()
 
   const initialValues = {
     title: '',

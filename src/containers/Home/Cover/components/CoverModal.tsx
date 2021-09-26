@@ -1,4 +1,5 @@
 import { FC, useEffect } from 'react'
+import { ClassNameMap } from '@mui/styles'
 import * as Yup from 'yup'
 import {
   Button,
@@ -10,7 +11,7 @@ import {
   TextField,
   FormLabel,
   Switch,
-} from '@material-ui/core'
+} from '@mui/material'
 import { useFormik } from 'formik'
 import client from 'src/graphql/apolloClient'
 import Uploader from 'src/components/Uploader/Uploader'
@@ -31,7 +32,7 @@ const CoverModal: FC<Props> = ({
   createCover,
   updateCoverById,
 }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const { isOpen, id } = open
 

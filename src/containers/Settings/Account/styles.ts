@@ -1,6 +1,6 @@
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import { makeStyles, createStyles } from '@mui/styles'
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     tip: {
       top: 72,
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
     input: {
       display: 'block',
-      marginBottom: theme.spacing(2.5),
+      marginBottom: '40px',
       width: 450,
     },
   }),

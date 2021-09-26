@@ -9,9 +9,10 @@ import {
   DialogContentText,
   TextField,
   FormLabel,
-} from '@material-ui/core'
+} from '@mui/material'
+import { ClassNameMap } from '@mui/styles'
 import { useFormik } from 'formik'
-import { KeyboardDateTimePicker } from '@material-ui/pickers'
+import { DateTimePicker } from '@mui/lab'
 import client from 'src/graphql/apolloClient'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderResponse } from 'src/components/Uploader/types'
@@ -33,7 +34,7 @@ const YanceyMusicModal: FC<Props> = ({
 }) => {
   const { isOpen, id } = open
 
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const initialValues = {
     title: '',
@@ -130,16 +131,21 @@ const YanceyMusicModal: FC<Props> = ({
             {...getFieldProps('soundCloudUrl')}
           />
 
-          <KeyboardDateTimePicker
+          <DateTimePicker
             className={classes.textFieldSpace}
             label="Release Date"
             value={values.releaseDate}
-            error={!!errors.releaseDate}
-            helperText={errors.releaseDate}
-            showTodayButton={true}
+            showTodayButton
             ampm={false}
+            renderInput={(props) => (
+              <TextField
+                {...props}
+                error={!!errors.releaseDate}
+                helperText={errors.releaseDate}
+              />
+            )}
             onChange={(date) => setFieldValue('releaseDate', date, true)}
-            format="yyyy/LL/dd HH:mm:ss"
+            inputFormat="yyyy/LL/dd HH:mm:ss"
           />
 
           <div className={classes.uploaderGroup}>

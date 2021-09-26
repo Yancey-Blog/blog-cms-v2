@@ -1,7 +1,7 @@
 import { FC } from 'react'
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import { makeStyles, ClassNameMap, createStyles } from '@mui/styles'
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     settingWrapper: {
       display: 'block',
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const SettingWrapper: FC = ({ children }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   return <section className={classes.settingWrapper}>{children}</section>
 }

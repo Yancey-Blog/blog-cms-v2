@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, ClassNameMap } from '@mui/styles'
 
 interface Props {
   title: string
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 })
 
 const SettingsHeader: FC<Props> = ({ title, subTitle }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   return (
     <header className={classes.header}>

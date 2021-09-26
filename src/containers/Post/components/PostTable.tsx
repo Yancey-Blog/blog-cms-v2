@@ -16,16 +16,18 @@ import {
   IconButton,
   Divider,
   InputBase,
-} from '@material-ui/core'
-import { DeleteOutline, Edit, AddBox, Search, Clear } from '@material-ui/icons'
-import { Pagination } from '@material-ui/lab'
+  Pagination,
+  SelectChangeEvent,
+} from '@mui/material'
+import { ClassNameMap } from '@mui/styles'
+import { DeleteOutline, Edit, AddBox, Search, Clear } from '@mui/icons-material'
 import { formatJSONDate } from 'yancey-js-util'
 import { stringfySearch } from 'src/shared/utils'
 import TableWrapper from 'src/components/TableWrapper/TableWrapper'
 import Loading from 'src/components/Loading/Loading'
 import ConfirmPoper from 'src/components/ConfirmPoper/ConfirmPoper'
 import ImagePopup from 'src/components/ImagePopup/ImagePopup'
-import globalUseStyles from 'src/shared/globalStyles'
+import useGlobalStyles from 'src/shared/globalStyles'
 import { IPostItem } from '../types'
 import useStyles from '../styles'
 
@@ -65,8 +67,8 @@ const PostTable: FC<Props> = ({
     })
   }
 
-  const classes = useStyles()
-  const globalClasses = globalUseStyles()
+  const classes: ClassNameMap = useStyles()
+  const globalClasses: ClassNameMap = useGlobalStyles()
 
   const [searchTitle, setSearchTitle] = useState('')
 
@@ -82,7 +84,7 @@ const PostTable: FC<Props> = ({
     })
   }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTitle(e.target.value)
   }
 
@@ -90,8 +92,8 @@ const PostTable: FC<Props> = ({
     fetchData(currentPage, pageSize, searchTitle)
   }
 
-  const handlePageSizeChange = (e: ChangeEvent<{ value: unknown }>) => {
-    fetchData(page, e.target.value as number, searchTitle)
+  const handlePageSizeChange = (e: SelectChangeEvent) => {
+    fetchData(page, parseInt(e.target.value, 10), searchTitle)
   }
 
   const columns: MUIDataTableColumn[] = [
@@ -280,7 +282,7 @@ const PostTable: FC<Props> = ({
 
         {total === 0 || (
           <div className={classes.pagination}>
-            <Select value={pageSize} onChange={handlePageSizeChange}>
+            <Select value={pageSize.toString()} onChange={handlePageSizeChange}>
               <MenuItem value={10}>10</MenuItem>
               <MenuItem value={20}>20</MenuItem>
               <MenuItem value={50}>50</MenuItem>

@@ -1,5 +1,6 @@
 import { FC, useState } from 'react'
-import { Paper } from '@material-ui/core'
+import { Paper } from '@mui/material'
+import { ClassNameMap } from '@mui/styles'
 import {
   ViewState,
   EditingState,
@@ -37,7 +38,7 @@ const Schedule: FC<ScheduleProps> = ({
   updateAgendaById,
   deleteAgendaById,
 }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const [currentViewName, setCurrentViewName] = useState('Week')
 

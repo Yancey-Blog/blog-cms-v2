@@ -9,7 +9,8 @@ import {
   DialogContentText,
   TextField,
   FormLabel,
-} from '@material-ui/core'
+} from '@mui/material'
+import { ClassNameMap } from '@mui/styles'
 import { useFormik } from 'formik'
 import client from 'src/graphql/apolloClient'
 import Uploader from 'src/components/Uploader/Uploader'
@@ -32,7 +33,7 @@ const OpenSourceModal: FC<Props> = ({
 }) => {
   const { isOpen, id } = open
 
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const initialValues = {
     title: '',

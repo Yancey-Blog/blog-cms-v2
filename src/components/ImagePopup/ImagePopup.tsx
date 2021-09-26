@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
-import { Popover } from '@material-ui/core'
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import { Popover } from '@mui/material'
+import { makeStyles, ClassNameMap, createStyles } from '@mui/styles'
 import {
   POPOVER_ANCHOR_ORIGIN,
   POPOVER_TRANSFORM_ORIGIN,
@@ -12,7 +12,7 @@ interface Props {
   imgName: string
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     thumb: {
       width: 150,
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const ImagePopup: FC<Props> = ({ imgUrl, imgName }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   return (
     <PopupState variant="popover" popupId="imagePoperOver">

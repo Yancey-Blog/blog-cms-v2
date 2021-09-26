@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, ClassNameMap } from '@mui/styles'
 
 const useStyles = makeStyles({
   mask: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 })
 
 const InstagramLoading: FC = () => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   return (
     <section className={classes.mask}>

@@ -1,8 +1,9 @@
 import { FC, useRef, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { TextField, Button, IconButton, Popover } from '@material-ui/core'
+import { TextField, Button, IconButton, Popover } from '@mui/material'
+import { ClassNameMap } from '@mui/styles'
 import ChipInput from 'material-ui-chip-input'
-import { PhotoCamera } from '@material-ui/icons'
+import { PhotoCamera } from '@mui/icons-material'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
@@ -132,7 +133,7 @@ const PostEditor: FC = () => {
   const { id } = parseSearch(search)
 
   /* css styles */
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   /* editor */
   const editorRef = useRef<Editor>(null)

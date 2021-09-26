@@ -1,5 +1,6 @@
 import { FC, useState } from 'react'
 import classNames from 'classnames'
+import { ClassNameMap } from '@mui/styles'
 import useStyles from './styles'
 import Header from './components/Header/Header'
 import Drawer from './components/Drawer/Drawer'
@@ -9,7 +10,7 @@ import Footer from './components/Footer/Footer'
 const Layouts: FC = () => {
   const [open, setOpen] = useState(true)
 
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   function handleDrawerChange() {
     setOpen(!open)

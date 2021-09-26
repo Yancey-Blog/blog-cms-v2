@@ -1,10 +1,9 @@
 import { FC } from 'react'
-import { Card } from '@material-ui/core'
-import { Skeleton } from '@material-ui/lab'
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import { Card, Skeleton } from '@mui/material'
+import { makeStyles, ClassNameMap, createStyles } from '@mui/styles'
 import SkeletonIterator from 'src/components/SkeletonIterator/SkeletonIterator'
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     card: {
       padding: 16,
@@ -35,13 +34,13 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const PostRankListSkeleton: FC = () => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const SkeletonItem = () => (
     <div className={classes.skeletonItem}>
       <div className={classes.skeletonMeta}>
         <Skeleton
-          variant="circle"
+          variant="circular"
           animation="wave"
           width={40}
           height={40}
@@ -49,14 +48,14 @@ const PostRankListSkeleton: FC = () => {
         />
         <Skeleton variant="text" animation="wave" width={240} />
       </div>
-      <Skeleton variant="rect" animation="wave" width={18} height={18} />
+      <Skeleton variant="rectangular" animation="wave" width={18} height={18} />
     </div>
   )
 
   return (
     <Card className={classes.card} elevation={0}>
       <Skeleton
-        variant="rect"
+        variant="rectangular"
         animation="wave"
         width={200}
         className={classes.header}

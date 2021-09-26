@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import { makeStyles, ClassNameMap, createStyles } from '@mui/styles'
 import { IBandwagonServiceInfo } from '../types'
 import StatusCard from './StatusCard'
 import StatusCardSkeleton from './StatusCardSkeleton'
@@ -9,7 +9,7 @@ interface Props {
   isFechingServiceInfo: boolean
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     statusCardGrid: {
       display: 'grid',
@@ -24,7 +24,7 @@ const BandwagonServiceStatus: FC<Props> = ({
   serviceInfo,
   isFechingServiceInfo,
 }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const {
     data_counter,

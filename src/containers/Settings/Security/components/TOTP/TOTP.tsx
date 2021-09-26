@@ -17,8 +17,8 @@ import {
   RadioGroup,
   Radio,
   FormControlLabel,
-} from '@material-ui/core'
-import { Close } from '@material-ui/icons'
+} from '@mui/material'
+import { Close } from '@mui/icons-material'
 import {
   AZURE_BLOB_PATH,
   GOOGLE_AUTHENTICATOR_FOR_IOS,

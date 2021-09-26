@@ -1,13 +1,8 @@
 import { FC } from 'react'
 import classNames from 'classnames'
-import { Card, LinearProgress, Divider } from '@material-ui/core'
-import {
-  makeStyles,
-  Theme,
-  createStyles,
-  withStyles,
-  lighten,
-} from '@material-ui/core/styles'
+import { Card, LinearProgress, Divider } from '@mui/material'
+import { makeStyles, ClassNameMap, withStyles, createStyles } from '@mui/styles'
+import { lighten } from '@mui/material/styles'
 
 interface Props {
   title: string
@@ -29,7 +24,7 @@ const BorderLinearProgress = withStyles({
   },
 })(LinearProgress)
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     card: {
       padding: 16,
@@ -93,7 +88,7 @@ const switchUnit = (unit: string, value: number) => {
 }
 
 const StatusCard: FC<Props> = ({ title, used, total, unit }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
   const percent = (used / total) * 100
 
   return (

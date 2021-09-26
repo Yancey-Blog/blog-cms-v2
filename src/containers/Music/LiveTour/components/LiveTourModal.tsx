@@ -9,9 +9,10 @@ import {
   DialogContentText,
   TextField,
   FormLabel,
-} from '@material-ui/core'
+} from '@mui/material'
+import { ClassNameMap } from '@mui/styles'
 import { useFormik } from 'formik'
-import { KeyboardDateTimePicker } from '@material-ui/pickers'
+import { DateTimePicker } from '@mui/lab'
 import useStyles from 'src/shared/globalStyles'
 import client from 'src/graphql/apolloClient'
 import Uploader from 'src/components/Uploader/Uploader'
@@ -33,7 +34,7 @@ const LiveTourModal: FC<Props> = ({
 }) => {
   const { isOpen, id } = open
 
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const initialValues = {
     title: '',
@@ -113,17 +114,22 @@ const LiveTourModal: FC<Props> = ({
             {...getFieldProps('title')}
           />
 
-          <KeyboardDateTimePicker
+          <DateTimePicker
             className={classes.textFieldSpace}
             label="Show Time"
-            required
             value={values.showTime}
-            error={!!errors.showTime}
-            helperText={errors.showTime}
-            showTodayButton={true}
+            renderInput={(props) => (
+              <TextField
+                {...props}
+                error={!!errors.showTime}
+                helperText={errors.showTime}
+                required
+              />
+            )}
+            showTodayButton
             ampm={false}
             onChange={(date) => setFieldValue('showTime', date, true)}
-            format="yyyy/LL/dd HH:mm:ss"
+            inputFormat="yyyy/LL/dd HH:mm:ss"
           />
 
           <div className={classes.uploaderGroup}>

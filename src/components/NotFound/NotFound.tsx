@@ -1,11 +1,12 @@
 import { FC } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Button } from '@material-ui/core'
+import { Button } from '@mui/material'
+import { ClassNameMap } from '@mui/styles'
 import { AZURE_BLOB_PATH } from 'src/shared/constants'
 import useStyles from './styles'
 
 const NotFound: FC = () => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
   const history = useHistory()
 
   const toHomePage = () => {

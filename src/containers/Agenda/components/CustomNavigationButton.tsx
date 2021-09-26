@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import classNames from 'classnames'
-import { Button } from '@material-ui/core'
+import { Button } from '@mui/material'
+import { ClassNameMap } from '@mui/styles'
 import { DateNavigator } from '@devexpress/dx-react-scheduler-material-ui'
 import useStyles from '../styles'
 
@@ -8,7 +9,7 @@ const CustomNavigationButton: FC<DateNavigator.NavigationButtonProps> = ({
   type,
   onClick,
 }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   return (
     <Button

@@ -7,7 +7,7 @@ import {
   DialogContent,
   DialogActions,
   CircularProgress,
-} from '@material-ui/core'
+} from '@mui/material'
 import { DateTime } from 'luxon'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import Transition from 'src/components/Transition/Transition'

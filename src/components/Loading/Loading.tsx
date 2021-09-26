@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import { makeStyles, ClassNameMap } from '@mui/styles'
+import { CircularProgress } from '@mui/material'
 
 const useStyles = makeStyles({
   mask: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 })
 
 const Loading: FC = () => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   return (
     <section className={classes.mask}>

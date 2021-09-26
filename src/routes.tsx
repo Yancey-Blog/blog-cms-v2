@@ -6,7 +6,7 @@ import {
   PostAdd,
   Settings,
   Event,
-} from '@material-ui/icons'
+} from '@mui/icons-material'
 
 export interface RouteChildren {
   hideInMenu?: boolean

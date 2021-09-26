@@ -5,14 +5,14 @@ import classNames from 'classnames'
 import ReactTooltip from 'react-tooltip'
 import CalendarHeatmap from 'react-calendar-heatmap'
 import 'react-calendar-heatmap/dist/styles.css'
-import { Paper } from '@material-ui/core'
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import { Paper } from '@mui/material'
+import { makeStyles, ClassNameMap, createStyles } from '@mui/styles'
 import {
   IPostStatistics,
   IPostStatisticsGroupItem,
 } from 'src/containers/Post/types'
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     paper: {
       display: 'flex',
@@ -36,7 +36,7 @@ interface Props {
 }
 
 const PostStatistics: FC<Props> = ({ loading, data }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   return (
     <Paper className={classNames(classes.paper, classes.heatmapPaper)}>

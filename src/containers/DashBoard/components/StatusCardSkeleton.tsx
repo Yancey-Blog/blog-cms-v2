@@ -1,9 +1,8 @@
 import { FC } from 'react'
-import { Card } from '@material-ui/core'
-import { Skeleton } from '@material-ui/lab'
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import { Card, Skeleton } from '@mui/material'
+import { makeStyles, ClassNameMap, createStyles } from '@mui/styles'
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     card: {
       padding: 16,
@@ -16,12 +15,16 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const StatusCardSkeleton: FC = () => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   return (
     <Card className={classes.card}>
       <Skeleton variant="text" animation="wave" width={100} />
-      <Skeleton variant="rect" animation="wave" className={classes.skeleton} />
+      <Skeleton
+        variant="rectangular"
+        animation="wave"
+        className={classes.skeleton}
+      />
       <Skeleton variant="text" animation="wave" width={200} />
     </Card>
   )

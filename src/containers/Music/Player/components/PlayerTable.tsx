@@ -5,8 +5,9 @@ import MUIDataTable, {
   MUIDataTableMeta,
 } from 'mui-datatables'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
-import { DeleteOutline, Edit, AddBox } from '@material-ui/icons'
-import { FormControl, Fab, Popover, Switch, Button } from '@material-ui/core'
+import { DeleteOutline, Edit, AddBox } from '@mui/icons-material'
+import { FormControl, Fab, Popover, Switch, Button } from '@mui/material'
+import { ClassNameMap } from '@mui/styles'
 import { formatJSONDate } from 'yancey-js-util'
 import useOpenModal from 'src/hooks/useOpenModal'
 import Move from 'src/components/Move/Move'
@@ -19,7 +20,7 @@ import {
   POPOVER_TRANSFORM_ORIGIN,
   TABLE_OPTIONS,
 } from 'src/shared/constants'
-import globalUseStyles from 'src/shared/globalStyles'
+import useGlobalStyles from 'src/shared/globalStyles'
 import PlayerModal from './PlayerModal'
 import useStyles from '../styles'
 import { IPlayer } from '../types'
@@ -51,8 +52,8 @@ const PlayerTable: FC<Props> = ({
 }) => {
   const { open, handleOpen } = useOpenModal()
 
-  const classes = useStyles()
-  const globalClasses = globalUseStyles()
+  const classes: ClassNameMap = useStyles()
+  const globalClasses: ClassNameMap = useGlobalStyles()
 
   const columns: MUIDataTableColumn[] = [
     { name: '_id', label: 'Id' },

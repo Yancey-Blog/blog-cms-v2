@@ -1,12 +1,13 @@
 import { FC, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
+import { ClassNameMap } from '@mui/styles'
 import * as Yup from 'yup'
 import { useSnackbar } from 'notistack'
 import { useMutation } from '@apollo/client'
 import SettingsHeader from '../components/SettingsHeader/SettingsHeader'
 import SettingWrapper from '../components/SettingWrapper/SettingWrapper'
 import SettingItemWrapper from '../components/SettingItemWrapper/SettingItemWrapper'
-import { Button, TextField } from '@material-ui/core'
+import { Button, TextField } from '@mui/material'
 import { useFormik } from 'formik'
 import Uploader from 'src/components/Uploader/Uploader'
 import { UploaderResponse } from 'src/components/Uploader/types'
@@ -18,7 +19,7 @@ const Profile: FC = () => {
   const history = useHistory()
   const { pathname } = useLocation()
 
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const { enqueueSnackbar } = useSnackbar()
 

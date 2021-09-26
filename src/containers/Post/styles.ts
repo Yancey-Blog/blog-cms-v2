@@ -1,6 +1,6 @@
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import { makeStyles, createStyles } from '@mui/styles'
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     editorWrapper: {
       marginTop: '8px',
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: '24px',
     },
 
-    btn: { marginLeft: theme.spacing(1), marginBottom: theme.spacing(1) },
+    btn: { marginLeft: '16px', marginBottom: '16px' },
 
     pagination: {
       display: 'flex',
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
       zIndex: 1101,
     },
     input: {
-      marginLeft: theme.spacing(1),
+      marginLeft: '16px',
       flex: 1,
     },
     iconButton: {

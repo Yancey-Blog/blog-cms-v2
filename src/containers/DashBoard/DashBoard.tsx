@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { useQuery } from '@apollo/client'
+import { ClassNameMap } from '@mui/styles'
 import { GET_BANWAGON_SERVICE_INFO, GET_BANWAGON_USAGE_STATS } from './typeDefs'
 import {
   GET_TOP_PV_POSTS,
@@ -18,7 +19,7 @@ import PostStatistics from './components/PostStatistics'
 import TagClouds from './components/TagClouds'
 
 const DashBoard: FC = () => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const { loading: isFechingServiceInfo, data: serviceInfo } = useQuery(
     GET_BANWAGON_SERVICE_INFO,

@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@mui/styles'
 import { DRAWER_WIDTH, FOLDER_DRAWER_WIDTH } from 'src/shared/constants'
 
 export const transition = (props: 'margin-left' | 'transform') =>

@@ -1,8 +1,9 @@
 import { FC, useState, ChangeEvent } from 'react'
 import { useMutation } from '@apollo/client'
 import classNames from 'classnames'
-import { Card, CircularProgress, Button } from '@material-ui/core'
-import { Add, CloudUpload } from '@material-ui/icons'
+import { ClassNameMap } from '@mui/styles'
+import { Card, CircularProgress, Button } from '@mui/material'
+import { Add, CloudUpload } from '@mui/icons-material'
 import { useSnackbar } from 'notistack'
 import { getURLPathName } from 'src/shared/utils'
 import { UPLOAD_FILE } from './typeDefs'
@@ -18,7 +19,7 @@ const Uploader: FC<Props> = ({
   onChange,
   className,
 }) => {
-  const classes = useclasses()
+  const classes: ClassNameMap = useclasses()
   const { enqueueSnackbar } = useSnackbar()
   const [currFile, setCurrFile] = useState<UploaderResponse>()
   const [uploadFile, { loading }] = useMutation<UploaderMutation>(UPLOAD_FILE, {

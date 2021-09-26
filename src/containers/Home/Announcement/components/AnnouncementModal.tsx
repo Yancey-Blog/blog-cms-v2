@@ -8,7 +8,7 @@ import {
   DialogContent,
   DialogContentText,
   TextField,
-} from '@material-ui/core'
+} from '@mui/material'
 import { useFormik } from 'formik'
 import client from 'src/graphql/apolloClient'
 import { AnnouncementModalProps as Props } from '../types'

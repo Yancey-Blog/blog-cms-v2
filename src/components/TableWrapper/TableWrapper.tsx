@@ -1,8 +1,8 @@
 import { FC } from 'react'
-import { Save } from '@material-ui/icons'
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import { Save } from '@mui/icons-material'
+import { makeStyles, ClassNameMap, createStyles } from '@mui/styles'
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     tableWrapper: {
       position: 'relative',
@@ -56,8 +56,8 @@ interface Props {
   icon: string
 }
 
-const TableWrapper: FC<Props> = ({ children, tableName, icon }) => {
-  const classes = useStyles()
+const TableWrapper: FC<Props> = ({ children, tableName }) => {
+  const classes: ClassNameMap = useStyles()
 
   return (
     <section className={classes.tableWrapper}>

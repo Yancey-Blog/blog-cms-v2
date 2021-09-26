@@ -1,13 +1,13 @@
 import { FC } from 'react'
-import { Paper, Chip } from '@material-ui/core'
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import { Paper, Chip } from '@mui/material'
+import { makeStyles, ClassNameMap, createStyles } from '@mui/styles'
 
 interface Props {
   tags: string[]
   loading: boolean
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     paper: {
       padding: 16,
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const TagClouds: FC<Props> = ({ tags }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   return (
     <Paper className={classes.paper}>

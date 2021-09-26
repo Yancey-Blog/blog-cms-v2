@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import loadable from '@loadable/component'
+import { ClassNameMap } from '@mui/styles'
 import { mapRoutes } from 'src/routes'
 import Loading from 'src/components/Loading/InstagramLoading'
 import NotFound from 'src/components/NotFound/NotFound'
@@ -9,7 +10,7 @@ import useStyles from './styles'
 const routeList = mapRoutes()
 
 const Mains: FC = () => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   return (
     <main className={classes.main}>

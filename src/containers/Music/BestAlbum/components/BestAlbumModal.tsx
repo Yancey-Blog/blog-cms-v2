@@ -9,9 +9,10 @@ import {
   DialogContentText,
   TextField,
   FormLabel,
-} from '@material-ui/core'
+} from '@mui/material'
+import { ClassNameMap } from '@mui/styles'
 import { useFormik } from 'formik'
-import { KeyboardDateTimePicker } from '@material-ui/pickers'
+import { DateTimePicker } from '@mui/lab'
 import useStyles from 'src/shared/globalStyles'
 import client from 'src/graphql/apolloClient'
 import { Open } from 'src/hooks/useOpenModal'
@@ -33,7 +34,7 @@ const BestAlbumModal: FC<Props> = ({
 }) => {
   const { isOpen, id } = open
 
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const initialValues = {
     title: '',
@@ -148,16 +149,21 @@ const BestAlbumModal: FC<Props> = ({
             {...getFieldProps('mvUrl')}
           />
 
-          <KeyboardDateTimePicker
+          <DateTimePicker
             className={classes.textFieldSpace}
             label="Release Date"
             value={values.releaseDate}
-            error={!!errors.releaseDate}
-            helperText={errors.releaseDate}
-            showTodayButton={true}
+            showTodayButton
             ampm={false}
+            renderInput={(props) => (
+              <TextField
+                {...props}
+                error={!!errors.releaseDate}
+                helperText={errors.releaseDate}
+              />
+            )}
             onChange={(date) => setFieldValue('releaseDate', date, true)}
-            format="yyyy/LL/dd HH:mm:ss"
+            inputFormat="yyyy/LL/dd HH:mm:ss"
           />
 
           <div className={classes.uploaderGroup}>

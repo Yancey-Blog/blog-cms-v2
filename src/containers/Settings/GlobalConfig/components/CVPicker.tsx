@@ -10,7 +10,8 @@ import {
   RadioGroup,
   Radio,
   Card,
-} from '@material-ui/core'
+} from '@mui/material'
+import { ClassNameMap } from '@mui/styles'
 import SettingItemWrapper from '../../components/SettingItemWrapper/SettingItemWrapper'
 import { PostFilterProps } from '../types'
 import useStyles from '../styles'
@@ -26,7 +27,7 @@ const CVPicker: FC<Props> = ({
   cvPostId,
   updateGlobalSettingById,
 }) => {
-  const classes = useStyles()
+  const classes: ClassNameMap = useStyles()
 
   const [searchValue, setSearchValue] = useState('')
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

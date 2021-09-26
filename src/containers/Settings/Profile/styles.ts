@@ -1,9 +1,9 @@
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import { makeStyles, createStyles } from '@mui/styles'
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     input: {
-      marginBottom: theme.spacing(2.5),
+      marginBottom: '40px',
       flex: 1,
     },
 
