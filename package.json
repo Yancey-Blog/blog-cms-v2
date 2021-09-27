@@ -17,7 +17,7 @@
     "lint": "eslint src --ext .ts,.tsx"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.2",
+    "@apollo/client": "^3.4.13",
     "@date-io/luxon": "1.x",
     "@devexpress/dx-react-chart": "^2.7.0",
     "@devexpress/dx-react-chart-material-ui": "^2.7.0",
