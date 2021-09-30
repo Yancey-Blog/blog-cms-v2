@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.9.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.8.0...v3.9.0) (2021-09-30)
+
+
+### Features
+
+* delete BindPhoneNumber module ([adea4ae](https://github.com/Yancey-Blog/blog-cms-v2/commit/adea4aec6fdcebf7b69090a0dab61f0d3417795d))
+
 ## [3.8.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.7.2...v3.8.0) (2021-09-12)
 
 
