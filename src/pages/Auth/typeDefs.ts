@@ -13,7 +13,6 @@ export const USER_FRAGMENT = gql`
     website
     bio
     avatarUrl
-    phoneNumber
     isTOTP
     createdAt
     createdAt
