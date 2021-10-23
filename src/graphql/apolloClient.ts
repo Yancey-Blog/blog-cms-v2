@@ -2,7 +2,6 @@ import { ApolloClient, InMemoryCache, from } from '@apollo/client'
 import { BatchHttpLink } from '@apollo/client/link/batch-http'
 import { onError } from '@apollo/client/link/error'
 import { setContext } from '@apollo/client/link/context'
-import { createUploadLink } from 'apollo-upload-client'
 import { persistCache } from 'apollo-cache-persist'
 import SnackbarUtils from 'src/components/Toast/Toast'
 import { logout } from 'src/shared/utils'
@@ -17,10 +16,6 @@ const isEnvProduction = process.env.NODE_ENV
 const graphqlLink = process.env.REACT_APP_GRAPHQL_URL
 
 const httpLink = new BatchHttpLink({
-  uri: graphqlLink,
-})
-
-const uploadionk = createUploadLink({
   uri: graphqlLink,
 })
 
@@ -71,7 +66,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 })
 
 // @ts-ignore
-const additiveLink = from([errorLink, authLink, uploadionk, httpLink])
+const additiveLink = from([errorLink, authLink, httpLink])
 
 const cache = new InMemoryCache()
 

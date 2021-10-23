@@ -3,10 +3,6 @@ export interface UploaderResponse {
   url: string
 }
 
-export interface UploaderMutation {
-  uploadFile: UploaderResponse
-}
-
 export interface Props {
   type?: 'avatar' | 'simple'
   variant?: 'elevation' | 'outlined' | undefined
