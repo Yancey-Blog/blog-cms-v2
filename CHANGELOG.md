@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.10.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.9.0...v3.10.0) (2021-10-23)
+
+
+### Features
+
+* back to http upload ([712c6a9](https://github.com/Yancey-Blog/blog-cms-v2/commit/712c6a9a328484826f1ce143e42521c95cbf19d7))
+
 ## [3.9.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.8.0...v3.9.0) (2021-09-30)
 
 
