@@ -1,5 +1,6 @@
 import { FC, useState, ChangeEvent } from 'react'
 import classNames from 'classnames'
+import axios from 'axios'
 import { Card, CircularProgress, Button } from '@material-ui/core'
 import { Add, CloudUpload } from '@material-ui/icons'
 import { useSnackbar } from 'notistack'
@@ -30,14 +31,26 @@ const Uploader: FC<Props> = ({
       setLoading(true)
 
       try {
-        const res = await fetch(process.env.REACT_APP_UPLOADER_URL || '', {
-          method: 'POST',
-          headers: {
-            authorization: `Bearer ${localStorage.getItem('token')}`,
+        const { data } = await axios.post<UploaderResponse>(
+          process.env.REACT_APP_UPLOADER_URL || '',
+          formdata,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
           },
-          body: formdata,
-        })
-        const data: UploaderResponse = await res.json()
+        )
+
+        // const res = await fetch(process.env.REACT_APP_UPLOADER_URL || '', {
+        //   method: 'POST',
+        //   headers: {
+        //     authorization: `Bearer ${localStorage.getItem('token')}`,
+        //     'Content-Type': 'multipart/form-data',
+        //   },
+        //   body: formdata,
+        // })
+        // const data: UploaderResponse = await res.json()
         setCurrFile(data)
         onChange(data)
         enqueueSnackbar(
