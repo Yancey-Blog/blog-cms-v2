@@ -34,7 +34,6 @@ const Uploader: FC<Props> = ({
           method: 'POST',
           headers: {
             authorization: `Bearer ${localStorage.getItem('token')}`,
-            contentType: 'multipart/form-data',
           },
           body: formdata,
         })
