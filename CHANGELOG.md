@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.10.2](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.10.1...v3.10.2) (2021-10-24)
+
+
+### Bug Fixes
+
+* delete axios ([84f8a7a](https://github.com/Yancey-Blog/blog-cms-v2/commit/84f8a7a5aeb26da112d85d97ae82eae0e2253808))
+* delete useless header ([01a6bba](https://github.com/Yancey-Blog/blog-cms-v2/commit/01a6bbaad2b9dfc24902d67577280eab4c406eba))
+* try axios ([ed0f3cb](https://github.com/Yancey-Blog/blog-cms-v2/commit/ed0f3cb8ba631b28c7b68380cc9d97351ecdb7e9))
+
 ### [3.10.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.10.0...v3.10.1) (2021-10-23)
 
 
