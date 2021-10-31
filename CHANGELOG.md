@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.11.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.10.2...v3.11.0) (2021-10-31)
+
+
+### Features
+
+* deploy for remote ([c65c2bf](https://github.com/Yancey-Blog/blog-cms-v2/commit/c65c2bfe843816fd14889043a3b687a7da39aae1))
+
 ### [3.10.2](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.10.1...v3.10.2) (2021-10-24)
 
 
