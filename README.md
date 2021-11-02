@@ -30,7 +30,7 @@ _This library is part of the [BEG (Blog Environment Group)](https://github.com/Y
 
 ---
 
-![shot](https://static.yancey.app/Jietu20200103-115157@2x.jpg)
+![shot](https://edge.yancey.app/beg/Jietu20200103-115157@2x.jpg)
 
 ## Available Scripts
 
@@ -56,65 +56,65 @@ An optional way to use `git cz` if you don't want to install `commitizen` global
 
 ### Dashboard
 
-![Dashbord](https://static.yancey.app/Jietu20200505-043334.jpg)
+![Dashbord](https://edge.yancey.app/beg/Jietu20200505-043334.jpg)
 
 ### Blog Statistics
 
-![blog statistics](https://static.yancey.app/Jietu20200505-044146.jpg)
+![blog statistics](https://edge.yancey.app/beg/Jietu20200505-044146.jpg)
 
 ### Create or update an item
 
-![Create or Update an item](https://static.yancey.app/Jietu20200518-225144.jpg)
+![Create or Update an item](https://edge.yancey.app/beg/Jietu20200518-225144.jpg)
 
 ### Move up / Move down / Move Top
 
 Moves one item's order by weight.
 
-![Move up / Move down / Move Top](https://static.yancey.app/Jietu20200505-043729.jpg)
+![Move up / Move down / Move Top](https://edge.yancey.app/beg/Jietu20200505-043729.jpg)
 
 ### Post list
 
-![Post list](https://static.yancey.app/Jietu20200518-225154.jpg)
+![Post list](https://edge.yancey.app/beg/Jietu20200518-225154.jpg)
 
 ### Post editor
 
-![Post editor](https://static.yancey.app/Jietu20200518-225230.jpg)
+![Post editor](https://edge.yancey.app/beg/Jietu20200518-225230.jpg)
 
 ### Agenda
 
 Manages your agenda quickly.
 
-![Agenda](https://static.yancey.app/Jietu20200505-044045.jpg)
+![Agenda](https://edge.yancey.app/beg/Jietu20200505-044045.jpg)
 
 ### Profile
 
 Changes your nikename, region, organization, website, Bio, avatar and so on. The drawer on the left will be updated in real time.
 
-![Profile](https://static.yancey.app/Jietu20200505-044712.jpg)
+![Profile](https://edge.yancey.app/beg/Jietu20200505-044712.jpg)
 
 ### Account
 
 The account module allows you to update **username** and **email** or delete your account.
 
-![Account](https://static.yancey.app/Jietu20200505-044725.jpg)
+![Account](https://edge.yancey.app/beg/Jietu20200505-044725.jpg)
 
 ### Security
 
 The security module allows you to update **password** and supports two-factor authentication base on **TOTP** and **SMS verification code**. You can also apply and use **recovery codes** if you cannot use the above two verification methods.
 
-![change password](https://static.yancey.app/Jietu20200505-045200.jpg)
+![change password](https://edge.yancey.app/beg/Jietu20200505-045200.jpg)
 
-![TOTP - choose mobile phone system](https://static.yancey.app/Jietu20200505-045213.jpg)
+![TOTP - choose mobile phone system](https://edge.yancey.app/beg/Jietu20200505-045213.jpg)
 
-![TOTP - scan qrcode](https://static.yancey.app/Jietu20200505-045226.jpg)
+![TOTP - scan qrcode](https://edge.yancey.app/beg/Jietu20200505-045226.jpg)
 
-![TOTP - input totp secret code by hand](https://static.yancey.app/Jietu20200505-045520.jpg)
+![TOTP - input totp secret code by hand](https://edge.yancey.app/beg/Jietu20200505-045520.jpg)
 
-![TOTP - code verification](https://static.yancey.app/Jietu20200505-045231.jpg)
+![TOTP - code verification](https://edge.yancey.app/beg/Jietu20200505-045231.jpg)
 
-![Bind phone number](https://static.yancey.app/Jietu20200505-045242.jpg)
+![Bind phone number](https://edge.yancey.app/beg/Jietu20200505-045242.jpg)
 
-![Recovery Codes](https://static.yancey.app/Jietu20200505-045251.jpg)
+![Recovery Codes](https://edge.yancey.app/beg/Jietu20200505-045251.jpg)
 
 ## Contributing
 
