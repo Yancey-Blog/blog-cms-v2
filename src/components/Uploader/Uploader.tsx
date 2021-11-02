@@ -1,12 +1,10 @@
 import { FC, useState, ChangeEvent } from 'react'
-import { useMutation } from '@apollo/client'
 import classNames from 'classnames'
 import { Card, CircularProgress, Button } from '@material-ui/core'
 import { Add, CloudUpload } from '@material-ui/icons'
 import { useSnackbar } from 'notistack'
 import { getURLPathName } from 'src/shared/utils'
-import { UPLOAD_FILE } from './typeDefs'
-import { UploaderResponse, UploaderMutation, Props } from './types'
+import { UploaderResponse, Props } from './types'
 import useclasses from './styles'
 
 const Uploader: FC<Props> = ({
@@ -19,29 +17,43 @@ const Uploader: FC<Props> = ({
   className,
 }) => {
   const classes = useclasses()
+  const [loading, setLoading] = useState(false)
   const { enqueueSnackbar } = useSnackbar()
   const [currFile, setCurrFile] = useState<UploaderResponse>()
-  const [uploadFile, { loading }] = useMutation<UploaderMutation>(UPLOAD_FILE, {
-    onCompleted(data) {
-      const { uploadFile } = data
-      setCurrFile(uploadFile)
-      onChange(uploadFile)
-      enqueueSnackbar(
-        <span>
-          <span style={{ fontWeight: 'bold' }}>{uploadFile.name}</span> has been
-          uploaded successfully.
-        </span>,
-        {
-          variant: 'success',
-        },
-      )
-    },
-    onError() {},
-  })
 
   const onUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      uploadFile({ variables: { file: e.target.files[0] } })
+    const files = e.target.files
+    if (files) {
+      const file = files[0]
+      const formdata = new FormData()
+      formdata.append('file', file)
+      setLoading(true)
+
+      try {
+        const res = await fetch(process.env.REACT_APP_UPLOADER_URL || '', {
+          method: 'PUT',
+          headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+          body: formdata,
+        })
+        const data: UploaderResponse = await res.json()
+        setCurrFile(data)
+        onChange(data)
+        enqueueSnackbar(
+          <span>
+            <span style={{ fontWeight: 'bold' }}>{data.name}</span> has been
+            uploaded successfully.
+          </span>,
+          {
+            variant: 'success',
+          },
+        )
+      } catch (e) {
+        enqueueSnackbar('Uppload failed', { variant: 'error' })
+      } finally {
+        setLoading(false)
+      }
     }
   }
 

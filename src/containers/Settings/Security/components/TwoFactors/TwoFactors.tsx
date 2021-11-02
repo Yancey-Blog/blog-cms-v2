@@ -17,15 +17,13 @@ import SnackbarUtils from 'src/components/Toast/Toast'
 import SettingItemWrapper from 'src/containers/Settings/components/SettingItemWrapper/SettingItemWrapper'
 import TOTP from '../TOTP/TOTP'
 import RecoveryCodes from '../RecoveryCodes/RecoveryCodes'
-import BindPhoneNumber from '../BindPhoneNumber/BindPhoneNumber'
 import styles from './twoFactors.module.scss'
 
 const TwoFactors: FC = () => {
   const [openTOTP, setOpenTOTP] = useState(false)
   const [openRecoveryCodes, setOpenRecoveryCodes] = useState(false)
-  const [openBindPhoneNumber, setOpenBindPhoneNumber] = useState(false)
 
-  const { isTOTP, phoneNumber } =
+  const { isTOTP } =
     // @ts-ignore
     client.cache.data.data[`UserModel:${window.localStorage.getItem('userId')}`]
 
@@ -76,26 +74,6 @@ const TwoFactors: FC = () => {
 
           <Divider />
 
-          <ListItem button onClick={() => setOpenBindPhoneNumber(true)}>
-            <ListItemText primary="SMS number" className={styles.title} />
-            <ListItemText
-              primary={
-                <div className={styles.isUseTOTP}>
-                  {phoneNumber ? null : <SentimentDissatisfied />}
-                  <p className={styles.phone}>
-                    {phoneNumber ? phoneNumber : 'Disable'}
-                  </p>
-                </div>
-              }
-              className={styles.title}
-            />
-            <ListItemAvatar>
-              <ArrowForwardIos className={styles.arrowIcon} />
-            </ListItemAvatar>
-          </ListItem>
-
-          <Divider />
-
           <ListItem button onClick={openRecoveryCodesDialog}>
             <ListItemText primary="Recovery codes" className={styles.title} />
             <ListItemText
@@ -111,11 +89,6 @@ const TwoFactors: FC = () => {
 
       <TOTP setOpen={setOpenTOTP} open={openTOTP} />
       <RecoveryCodes setOpen={setOpenRecoveryCodes} open={openRecoveryCodes} />
-      <BindPhoneNumber
-        isPhoneNumber={!!phoneNumber}
-        setOpen={setOpenBindPhoneNumber}
-        open={openBindPhoneNumber}
-      />
     </>
   )
 }

@@ -2,6 +2,50 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.12.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.11.0...v3.12.0) (2021-10-31)
+
+
+### Features
+
+* update ([3244f51](https://github.com/Yancey-Blog/blog-cms-v2/commit/3244f5112076200626d07bc22285510b1e283eef))
+
+## [3.11.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.10.2...v3.11.0) (2021-10-31)
+
+
+### Features
+
+* deploy for remote ([c65c2bf](https://github.com/Yancey-Blog/blog-cms-v2/commit/c65c2bfe843816fd14889043a3b687a7da39aae1))
+
+### [3.10.2](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.10.1...v3.10.2) (2021-10-24)
+
+
+### Bug Fixes
+
+* delete axios ([84f8a7a](https://github.com/Yancey-Blog/blog-cms-v2/commit/84f8a7a5aeb26da112d85d97ae82eae0e2253808))
+* delete useless header ([01a6bba](https://github.com/Yancey-Blog/blog-cms-v2/commit/01a6bbaad2b9dfc24902d67577280eab4c406eba))
+* try axios ([ed0f3cb](https://github.com/Yancey-Blog/blog-cms-v2/commit/ed0f3cb8ba631b28c7b68380cc9d97351ecdb7e9))
+
+### [3.10.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.10.0...v3.10.1) (2021-10-23)
+
+
+### Bug Fixes
+
+* add content-type when uploading ([52d73ef](https://github.com/Yancey-Blog/blog-cms-v2/commit/52d73ef7b34438d67c9597c49b22143393fba987))
+
+## [3.10.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.9.0...v3.10.0) (2021-10-23)
+
+
+### Features
+
+* back to http upload ([712c6a9](https://github.com/Yancey-Blog/blog-cms-v2/commit/712c6a9a328484826f1ce143e42521c95cbf19d7))
+
+## [3.9.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.8.0...v3.9.0) (2021-09-30)
+
+
+### Features
+
+* delete BindPhoneNumber module ([adea4ae](https://github.com/Yancey-Blog/blog-cms-v2/commit/adea4aec6fdcebf7b69090a0dab61f0d3417795d))
+
 ## [3.8.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.7.2...v3.8.0) (2021-09-12)
 
 
