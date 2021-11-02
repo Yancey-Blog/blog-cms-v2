@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.13.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.12.0...v3.13.0) (2021-11-02)
+
+
+### Features
+
+* switch new static url ([d7a9c64](https://github.com/Yancey-Blog/blog-cms-v2/commit/d7a9c64ef2b750c3c373e3c7a29ea61e372f0e38))
+
 ## [3.12.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.11.0...v3.12.0) (2021-10-31)
 
 
