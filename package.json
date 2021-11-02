@@ -17,7 +17,7 @@
     "lint": "eslint src --ext .ts,.tsx"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.2",
+    "@apollo/client": "^3.4.16",
     "@date-io/luxon": "1.x",
     "@devexpress/dx-react-chart": "^2.7.0",
     "@devexpress/dx-react-chart-material-ui": "^2.7.0",
@@ -64,7 +64,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",
-    "@commitlint/config-conventional": "^12.1.1",
+    "@commitlint/config-conventional": "^14.1.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^13.1.9",
@@ -92,7 +92,7 @@
     "prettier": "^2.3.2",
     "sass": "^1.34.0",
     "source-map-explorer": "^2.5.2",
-    "standard-version": "^9.3.0",
+    "standard-version": "^9.3.2",
     "typescript": "^4.2.4",
     "web-vitals": "^1.1.0",
     "workbox-background-sync": "^6.1.5",
