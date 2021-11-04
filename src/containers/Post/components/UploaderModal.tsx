@@ -7,7 +7,7 @@ import {
   Button,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import Uploader from '../Uploader/Uploader'
+import Uploader from '../../../components/Uploader/Uploader'
 
 interface Props {
   open: boolean

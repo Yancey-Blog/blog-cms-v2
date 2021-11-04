@@ -24,7 +24,6 @@ import {
   CREATE_POST_STATISTICS,
 } from './typeDefs'
 import Uploader from 'src/components/Uploader/Uploader'
-import UploaderModal from 'src/components/UploaderModal/UploaderModal'
 import { UploaderResponse } from 'src/components/Uploader/types'
 import client from 'src/graphql/apolloClient'
 import {
@@ -33,6 +32,7 @@ import {
   POPOVER_TRANSFORM_ORIGIN,
 } from 'src/shared/constants'
 import { goBack, parseSearch } from 'src/shared/utils'
+import UploaderModal from './components/UploaderModal'
 import embededPlugin from './editors/editorEmbededPlugin'
 import {
   enhanceUpload,

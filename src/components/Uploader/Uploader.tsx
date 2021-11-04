@@ -25,8 +25,8 @@ const Uploader: FC<Props> = ({
     const files = e.target.files
     if (files) {
       const file = files[0]
-      const formdata = new FormData()
-      formdata.append('file', file)
+      const formData = new FormData()
+      formData.append('file', file)
       setLoading(true)
 
       try {
@@ -34,8 +34,9 @@ const Uploader: FC<Props> = ({
           method: 'PUT',
           headers: {
             authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'multipart/form-data',
           },
-          body: formdata,
+          body: formData,
         })
         const data: UploaderResponse = await res.json()
         setCurrFile(data)
