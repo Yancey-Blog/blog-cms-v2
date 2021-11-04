@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.13.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.13.0...v3.13.1) (2021-11-04)
+
+
+### Bug Fixes
+
+* add multipart/form-data ([ba5e962](https://github.com/Yancey-Blog/blog-cms-v2/commit/ba5e9622d2892337f067714393c3b99b8c8f59f5))
+
 ## [3.13.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.12.0...v3.13.0) (2021-11-02)
 
 
