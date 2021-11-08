@@ -2391,10 +2391,10 @@
   resolved "https://registry.npmjs.org/@types/minimist/-/minimist-1.2.1.tgz#283f669ff76d7b8260df8ab7a4262cc83d988256"
   integrity sha512-fZQQafSREFyuZcdWFAExYjBiCL7AUCdgsk80iO0q4yihYYdcIiH28CcuPTGFgLOCC8RlW49GSQxdHwZP+I7CNg==
 
-"@types/mui-datatables@^3.7.5":
-  version "3.7.5"
-  resolved "https://registry.yarnpkg.com/@types/mui-datatables/-/mui-datatables-3.7.5.tgz#5ae3e6a61626a4d5b6010cb29d6311ed704a7a48"
-  integrity sha512-22FS0x28/w2tIjQK7U2XDoey5/XCfdltGGzr2YGUYAGXddg6/xzO/sPGejWgkEiw7722P6Nowsqbb4sux1LSZg==
+"@types/mui-datatables@^3.7.7":
+  version "3.7.7"
+  resolved "https://registry.yarnpkg.com/@types/mui-datatables/-/mui-datatables-3.7.7.tgz#477a09fe55041dce82a1ff8b1617ce55c8325596"
+  integrity sha512-NRegWPE6gYuT7DK4oDHZcvMuobndAtQyPIGHnEBlTA4nq954ZT40xLZeNzcoIEIrfgsHSjkORvUqX8149a0fwA==
   dependencies:
     "@material-ui/core" "^4.11.3"
     "@material-ui/types" "5.1.0"
