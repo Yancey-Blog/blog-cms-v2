@@ -72,7 +72,7 @@
     "@types/jest": "^26.0.23",
     "@types/loadable__component": "^5.13.3",
     "@types/luxon": "^1.26.5",
-    "@types/mui-datatables": "^3.7.5",
+    "@types/mui-datatables": "^3.7.7",
     "@types/node": "^16.11.6",
     "@types/query-string": "^6.3.0",
     "@types/ramda": "^0.27.40",
