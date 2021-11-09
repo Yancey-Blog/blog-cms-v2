@@ -31,7 +31,7 @@ const Uploader: FC<Props> = ({
 
       try {
         const res = await fetch(process.env.REACT_APP_UPLOADER_URL || '', {
-          method: 'PUT',
+          method: 'POST',
           headers: {
             authorization: `Bearer ${localStorage.getItem('token')}`,
             'Content-Type': 'multipart/form-data',
