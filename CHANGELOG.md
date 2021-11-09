@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.14.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.13.1...v3.14.0) (2021-11-09)
+
+
+### Features
+
+* update api path ([7c504f4](https://github.com/Yancey-Blog/blog-cms-v2/commit/7c504f4f638d29a7d47a75a8541c1cac4c2c4da8))
+
 ### [3.13.1](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.13.0...v3.13.1) (2021-11-04)
 
 
