@@ -13,7 +13,7 @@ interface CustomGraphQLError {
 }
 
 const isEnvProduction = process.env.NODE_ENV
-const graphqlLink = process.env.REACT_APP_GRAPHQL_URL
+const graphqlLink = process.env.REACT_APP_BEG_SERVICE_DOMAIN
 
 const httpLink = new BatchHttpLink({
   uri: graphqlLink,

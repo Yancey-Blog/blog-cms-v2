@@ -66,58 +66,6 @@ export const enhanceUpload = (
 }
 
 export const enhancePasteUpload = (editorRef: RefObject<Editor>) => {
-  // @ts-ignore
-  if (!navigator.clipboard || !navigator.clipboard.read) return
-
-  if (editorRef.current) {
-    const instance = editorRef.current.getInstance()
-
-    // @ts-ignore
-    // Tui.editors listen to `addImageBlobHook` event by default,
-    // this event will convert `the pasted image` to base64,
-    // and insert it to edit area.
-    instance.eventManager.removeEventHandler('addImageBlobHook')
-
-    // @ts-ignore
-    instance.eventManager.listen('paste', async () => {
-      // @ts-ignore
-      // FIXME: Current DOM interface does not support `navigator.clipboard.read()`.
-      const files = await navigator.clipboard.read()
-
-      let imageType = ''
-      const imageFile = files.find((file: any) =>
-        file.types.some((type: string) => {
-          if (type.startsWith('image/')) {
-            imageType = type
-            return true
-          }
-          return false
-        }),
-      )
-
-      const file: Blob = await imageFile.getType(imageType)
-
-      try {
-        toast.warning('Uploading...')
-        const res = await fetch(process.env.REACT_APP_GRAPHQL_URL, {
-          method: 'POST',
-          headers: {
-            authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-          body: {
-            operations:
-              '{"operationName":"UploadFile","variables":{"file":null},"query":"mutation UploadFile($file: Upload!) {\n  uploadFile(file: $file)\n}\n"}',
-            map: '{ "0": ["variables.file"] }',
-            // @ts-ignore
-            0: file,
-          },
-        })
-        const data = await res.json()
-        insertImage(editorRef, data.uploadFile)
-        toast.success('Upload Success')
-      } catch (e) {
-        toast.error('Upload Error')
-      }
-    })
-  }
+  // TODO:
+  toast.error('暂不支持复制上传图片')
 }

@@ -115,11 +115,6 @@ const routes: Route[] = [
         path: '/events/agenda',
         component: 'Events/Agenda',
       },
-      {
-        name: 'Jira',
-        path: 'https://jira.yancey.app/',
-        isExternalLink: true,
-      },
     ],
   },
   {

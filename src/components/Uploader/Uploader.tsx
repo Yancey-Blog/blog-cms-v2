@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { Card, CircularProgress, Button } from '@material-ui/core'
 import { Add, CloudUpload } from '@material-ui/icons'
 import { useSnackbar } from 'notistack'
+import axios from 'axios'
 import { getURLPathName } from 'src/shared/utils'
 import { UploaderResponse, Props } from './types'
 import useclasses from './styles'
@@ -29,32 +30,32 @@ const Uploader: FC<Props> = ({
       formData.append('file', file)
       setLoading(true)
 
-      try {
-        const res = await fetch(process.env.REACT_APP_UPLOADER_URL || '', {
-          method: 'POST',
-          headers: {
-            authorization: `Bearer ${localStorage.getItem('token')}`,
-            'Content-Type': 'multipart/form-data',
-          },
-          body: formData,
+      axios({
+        method: 'post',
+        url: `${process.env.REACT_APP_UPLOADER_SERVICE_DOMAIN}/uploadSingleFile`,
+        data: formData,
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+        .then((res) => {
+          setCurrFile(res.data)
+          onChange(res.data)
+
+          enqueueSnackbar(
+            <span>
+              <span style={{ fontWeight: 'bold' }}>{res.data.name}</span> has
+              been uploaded successfully.
+            </span>,
+            {
+              variant: 'success',
+            },
+          )
         })
-        const data: UploaderResponse = await res.json()
-        setCurrFile(data)
-        onChange(data)
-        enqueueSnackbar(
-          <span>
-            <span style={{ fontWeight: 'bold' }}>{data.name}</span> has been
-            uploaded successfully.
-          </span>,
-          {
-            variant: 'success',
-          },
-        )
-      } catch (e) {
-        enqueueSnackbar('Uppload failed', { variant: 'error' })
-      } finally {
-        setLoading(false)
-      }
+        .catch((e) => {
+          enqueueSnackbar('Upload failed', { variant: 'error' })
+        })
+        .finally(() => {
+          setLoading(false)
+        })
     }
   }
 
