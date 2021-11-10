@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.15.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.14.0...v3.15.0) (2021-11-10)
+
+
+### Features
+
+* update uplaoder component ([291fbbd](https://github.com/Yancey-Blog/blog-cms-v2/commit/291fbbd08a78375a5dc700ac48a0fb3ca4234b57))
+
 ## [3.14.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.13.1...v3.14.0) (2021-11-09)
 
 
