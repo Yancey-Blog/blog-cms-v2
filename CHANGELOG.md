@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.17.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.15.0...v3.17.0) (2021-11-10)
+
+
+### Bug Fixes
+
+* fix yarn.lock ([ebe3bc3](https://github.com/Yancey-Blog/blog-cms-v2/commit/ebe3bc343fdf4041d0b1cff7612a76b91aaa3202))
+
 ## [3.15.0](https://github.com/Yancey-Blog/blog-cms-v2/compare/v3.14.0...v3.15.0) (2021-11-10)
 
 
