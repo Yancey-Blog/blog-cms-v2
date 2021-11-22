@@ -105,7 +105,7 @@
     "workbox-range-requests": "^6.1.5",
     "workbox-routing": "^6.0.2",
     "workbox-strategies": "^6.0.2",
-    "workbox-streams": "^6.1.5"
+    "workbox-streams": "^6.4.1"
   },
   "eslintConfig": {
     "extends": [
